@@ -9,8 +9,8 @@ TEST_CASE("UDouble") {
         }
         SECTION("With Values") { 
             auto value = sigma::UDouble(1.0, 0.1); 
-            REQUIRE(value.nominal == 1.0);
-            REQUIRE(value.stddev == 0.1);
+            REQUIRE(value.nominal() == 1.0);
+            REQUIRE(value.stddev() == 0.1);
         }
     }
 }
