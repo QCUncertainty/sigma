@@ -1,4 +1,4 @@
-#include "sigma/sigma.hpp"
+#include "sigma/uncertain.hpp"
 
 namespace sigma {
 
