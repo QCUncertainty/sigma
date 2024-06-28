@@ -46,7 +46,14 @@ public:
      */
     value_t std() const { return m_std_; }
 
-    deps_map_t m_deps_;
+    /** @brief Get the dependencies of the variable
+     *
+     *  @return The dependencies
+     *
+     *  @throw none No throw guarantee
+     */
+    const deps_map_t& deps() const { return m_deps_; }
+    
 
 private:
     /// Mean value of the variable
@@ -55,30 +62,84 @@ private:
     /// Standard deviation of the variable
     value_t m_std_;
 
+    /** Map of the variables this value is dependent on to their partial
+     *  derivatives with respect to this value
+     */
+    deps_map_t m_deps_ = {};
+
+    Uncertain(value_t mean) : m_mean_(mean) {}
+
+    void update_dependency(ind_var_ptr var, value_t deriv) {
+        if(m_deps_.count(var) != 0) {
+            m_deps_[var] += deriv;
+        } else {
+            m_deps_.emplace(std::make_pair(std::move(var), deriv));
+        }
+    }
+
+    void update_dependencies(const deps_map_t& deps, value_t dydx) {
+        for(const auto& [dep, deriv] : deps) {
+            update_dependency(dep, dydx * deriv);
+        }
+    }
+
+    void calculate_std() {
+        m_std_ = 0.0;
+        for(const auto& [dep, deriv] : m_deps_) {
+            m_std_ += std::pow(dep.get()->std() * deriv, 2.0);
+        }
+        m_std_ = std::sqrt(m_std_);
+    }
+
     template<typename T>
     friend Uncertain<T> operator+(const Uncertain<T>&, const Uncertain<T>&);
+    template<typename T>
+    friend Uncertain<T> operator-(const Uncertain<T>&, const Uncertain<T>&);
+    template<typename T>
+    friend Uncertain<T> operator*(const Uncertain<T>&, const Uncertain<T>&);
+    template<typename T>
+    friend Uncertain<T> operator/(const Uncertain<T>&, const Uncertain<T>&);
 
 }; // class Uncertain
 
 template<typename ValueType>
 Uncertain<ValueType> operator+(const Uncertain<ValueType>& a,
                                const Uncertain<ValueType>& b) {
-    auto rv    = Uncertain<ValueType>();
-    rv.m_mean_ = a.m_mean_ + b.m_mean_;
-    for(const auto& [dep, contrib] : a.m_deps_) {
-        rv.m_std_ += std::pow(dep.get()->std() * contrib, 2.0);
-        rv.m_deps_.emplace(std::make_pair(dep, contrib));
-    }
-    for(const auto& [dep, contrib] : b.m_deps_) {
-        rv.m_std_ += std::pow(dep.get()->std() * contrib, 2.0);
-        if(rv.m_deps_.count(dep) != 0) {
-            rv.m_deps_[dep] += contrib;
-        } else {
-            rv.m_deps_.emplace(std::make_pair(dep, contrib));
-        }
-    }
-    rv.m_std_ = std::sqrt(rv.m_std_);
-    return rv;
+    Uncertain<ValueType> c(a.m_mean_ + b.m_mean_);
+    c.update_dependencies(a.m_deps_, 1.0);
+    c.update_dependencies(b.m_deps_, 1.0);
+    c.calculate_std();
+    return c;
+}
+
+template<typename ValueType>
+Uncertain<ValueType> operator-(const Uncertain<ValueType>& a,
+                               const Uncertain<ValueType>& b) {
+    Uncertain<ValueType> c(a.m_mean_ - b.m_mean_);
+    c.update_dependencies(a.m_deps_, 1.0);
+    c.update_dependencies(b.m_deps_, -1.0);
+    c.calculate_std();
+    return c;
+}
+
+template<typename ValueType>
+Uncertain<ValueType> operator*(const Uncertain<ValueType>& a,
+                               const Uncertain<ValueType>& b) {
+    Uncertain<ValueType> c(a.m_mean_ * b.m_mean_);
+    c.update_dependencies(a.m_deps_, b.m_mean_);
+    c.update_dependencies(b.m_deps_, a.m_mean_);
+    c.calculate_std();
+    return c;
+}
+
+template<typename ValueType>
+Uncertain<ValueType> operator/(const Uncertain<ValueType>& a,
+                               const Uncertain<ValueType>& b) {
+    Uncertain<ValueType> c(a.m_mean_ / b.m_mean_);
+    c.update_dependencies(a.m_deps_, 1.0 / b.m_mean_);
+    c.update_dependencies(b.m_deps_, -a.m_mean_ / std::pow(b.m_mean_, 2.0));
+    c.calculate_std();
+    return c;
 }
 
 /** @relates Uncertain
