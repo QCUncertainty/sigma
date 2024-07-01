@@ -25,6 +25,16 @@ public:
     /// @brief Default ctor
     Uncertain() noexcept = default;
 
+    /** @brief Construct an uncertain value from mean and standard deviation
+     * 
+     *  Effectively, this creates a value that is a function of a single 
+     *  independent variable.
+     *
+     *  @param mean The average value of the variable
+     *  @param std The standard deviation of the variable
+     *
+     *  @throw none No throw guarantee
+     */
     Uncertain(value_t mean, value_t std) : m_mean_(mean), m_std_(std) {
         m_deps_.emplace(
           std::make_pair(std::make_shared<ind_var_t>(mean, std), 1.0));
