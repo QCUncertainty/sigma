@@ -5,11 +5,6 @@
 TEST_CASE("IndependentVariable") {
     using testing_t = sigma::IndependentVariable<double>;
     SECTION("Constructors") {
-        SECTION("Default") {
-            auto value = testing_t();
-            REQUIRE(value.mean() == 0.0);
-            REQUIRE(value.std() == 0.0);
-        }
         SECTION("With Values") {
             auto value = testing_t(1.0, 0.1);
             REQUIRE(value.mean() == 1.0);

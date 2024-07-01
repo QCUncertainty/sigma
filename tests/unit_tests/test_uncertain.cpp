@@ -19,6 +19,30 @@ TEST_CASE("Uncertain") {
             auto value = testing_t(1.0, 0.1);
             test_udouble(value, 1.0, 0.1, 1);
         }
+        SECTION("Copy") {
+            auto first = testing_t(1.0, 0.1);
+            testing_t value(first);
+            test_udouble(value, 1.0, 0.1, 1);
+            test_udouble(first, 1.0, 0.1, 1);
+        }
+        SECTION("Move") {
+            auto first = testing_t(1.0, 0.1);
+            testing_t value(std::move(first));
+            test_udouble(value, 1.0, 0.1, 1);
+            test_udouble(first, 1.0, 0.1, 0);
+        }
+        SECTION("Copy Assignment") {
+            auto first = testing_t(1.0, 0.1);
+            auto value = first;
+            test_udouble(value, 1.0, 0.1, 1);
+            test_udouble(first, 1.0, 0.1, 1);
+        }
+        SECTION("Move Assignment") {
+            auto first = testing_t(1.0, 0.1);
+            auto value = std::move(first);
+            test_udouble(value, 1.0, 0.1, 1);
+            test_udouble(first, 1.0, 0.1, 0);
+        }
     }
     SECTION("Operations") {
         auto a = testing_t(1.0, 0.1);
@@ -26,6 +50,12 @@ TEST_CASE("Uncertain") {
         auto c = testing_t(2.0, 0.2); // Same value, different variable
         auto d = testing_t(3.0, 0.3);
 
+        SECTION("Negation") {
+            auto x = -a;
+            auto y = -(a + b);
+            test_udouble(x, -1.0, 0.1, 1);
+            test_udouble(y, -3.0, 0.2236, 2);
+        }
         SECTION("Addition") {
             auto x = a + b;
             auto y = x + d;

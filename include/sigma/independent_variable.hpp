@@ -3,17 +3,22 @@
 
 namespace sigma {
 
+/** @brief Models an independent variable.
+ * 
+ *  An independent variable is one that is not correlated to any other variable.
+ *  It has a mean value and a standard deviation. 
+ *
+ *  @tparam ValueType The type of the value and standard deviation
+ *                 
+ */
 template<typename ValueType>
 class IndependentVariable {
 public:
-    /// Type of the instance
+    /// Type of this instance
     using my_t = IndependentVariable<ValueType>;
 
     /// The numeric type of the variable
     using value_t = ValueType;
-
-    /// @brief Default ctor
-    IndependentVariable() noexcept = default;
 
     /** @brief Construct an independent variable from mean and standard
      *         deviation
@@ -24,7 +29,7 @@ public:
      *  @throw none No throw guarantee
      */
     IndependentVariable(value_t mean, value_t std) :
-      m_mean_(mean), m_std_(std){};
+      m_mean_(mean), m_std_(std) {};
 
     /** @brief Get the mean value of the variable
      *
