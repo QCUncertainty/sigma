@@ -1,0 +1,22 @@
+name: Pull Request Workflow
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  # Build and test C++ libraries.
+  test_library:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build and Test
+        run:  |
+          cmake -Bbuild -H. -DCMAKE_TOOLCHAIN_FILE=./.github/test_toolchain.cmake
+          cmake --build build --parallel
+          cd build
+          ctest -VV
+        shell: bash

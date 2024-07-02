@@ -6,6 +6,7 @@ project(sigma VERSION "${VERSION}" LANGUAGES CXX)
 
 ## Get CMaize
 include(cmake/get_cmaize.cmake)
+include(cmake/cxx_api_docs.cmake)
 
 ## Paths ##
 set(${PROJECT_NAME}_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -15,6 +16,7 @@ set(${PROJECT_NAME}_TESTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 ## Options ##
 cmaize_option_list(
     BUILD_TESTING OFF "Should the tests be built?"
+    BUILD_DOCS OFF "Should we build the documentation?"
 )
 
 ## Add libraries ##
@@ -24,6 +26,10 @@ cmaize_add_library(
     INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
     # DEPENDS 
 )
+
+if("${BUILD_DOCS}")
+    cxx_api_docs("${${PROJECT_NAME}_SOURCE_DIR}" "${${PROJECT_NAME}_INCLUDE_DIR}") 
+endif()
 
 ## Build tests ##
 if("${BUILD_TESTING}")
