@@ -4,12 +4,12 @@
 namespace sigma {
 
 /** @brief Models an independent variable.
- * 
+ *
  *  An independent variable is one that is not correlated to any other variable.
- *  It has a mean value and a standard deviation. 
+ *  It has a mean value and a standard deviation.
  *
  *  @tparam ValueType The type of the value and standard deviation
- *                 
+ *
  */
 template<typename ValueType>
 class IndependentVariable {
@@ -29,7 +29,7 @@ public:
      *  @throw none No throw guarantee
      */
     IndependentVariable(value_t mean, value_t std) :
-      m_mean_(mean), m_std_(std) {};
+      m_mean_(mean), m_std_(std){};
 
     /** @brief Get the mean value of the variable
      *
@@ -73,6 +73,38 @@ std::ostream& operator<<(std::ostream& os,
                          const IndependentVariable<ValueType>& u) {
     os << u.mean() << "+/-" << u.std();
     return os;
+}
+
+/** @relates IndependentVariable
+ *  @brief Compare two independent Variables
+ *
+ *  @tparam ValueType The numerical type of the variable
+ *  @param lhs The first variable
+ *  @param rhs The second variable
+ *
+ *  @return Whether the instances are equivalent
+ *
+ */
+template<typename ValueType>
+bool operator==(const IndependentVariable<ValueType>& lhs,
+                const IndependentVariable<ValueType>& rhs) {
+    return (lhs.mean() == rhs.mean()) && (lhs.std() == rhs.std());
+}
+
+/** @relates IndependentVariable
+ *  @brief Compare two independent Variables
+ *
+ *  @tparam ValueType The numerical type of the variable
+ *  @param lhs
+ *  @param rhs
+ *
+ *  @return Whether the instances are not equivalent
+ *
+ */
+template<typename ValueType>
+bool operator!=(const IndependentVariable<ValueType>& lhs,
+                const IndependentVariable<ValueType>& rhs) {
+    return !(lhs == rhs);
 }
 
 extern template class IndependentVariable<double>;

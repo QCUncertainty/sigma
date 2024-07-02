@@ -157,13 +157,13 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    // TODO: Work this out
-    // my_t operator*(value_t v) const {
-    //     my_t c(*this);
-    //     c.m_mean_ = v * mean();
-    //     c.update_dependencies(deps(), 1.0 / b.mean());
-    //     return c;
-    // }
+    my_t operator*(value_t v) const {
+        my_t c(*this);
+        c.m_mean_ = v * mean();
+        c.update_dependencies(deps(), 2.0);
+        c.calculate_std();
+        return c;
+    }
 
 private:
     /// Mean value of the variable
@@ -248,6 +248,41 @@ template<typename ValueType>
 std::ostream& operator<<(std::ostream& os, const Uncertain<ValueType>& u) {
     os << u.mean() << "+/-" << u.std();
     return os;
+}
+
+/** @relates Uncertain
+ *  @brief Compare two variables
+ *
+ *  @tparam ValueType The numerical type of the variable
+ *  @param lhs The first variable
+ *  @param rhs The second variable
+ *
+ *  @return Whether the instances are equivalent
+ *
+ */
+template<typename ValueType>
+bool operator==(const Uncertain<ValueType>& lhs,
+                const Uncertain<ValueType>& rhs) {
+    if(lhs.mean() != rhs.mean()) return false;
+    if(lhs.std() != rhs.std()) return false;
+    if(lhs.deps() != rhs.deps()) return false;
+    return true;
+}
+
+/** @relates Uncertain
+ *  @brief Compare two variables
+ *
+ *  @tparam ValueType The numerical type of the variable
+ *  @param lhs The first variable
+ *  @param rhs The second variable
+ *
+ *  @return Whether the instances are not equivalent
+ *
+ */
+template<typename ValueType>
+bool operator!=(const Uncertain<ValueType>& lhs,
+                const Uncertain<ValueType>& rhs) {
+    return !(lhs == rhs);
 }
 
 extern template class Uncertain<double>;

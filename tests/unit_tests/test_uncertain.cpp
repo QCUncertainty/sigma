@@ -2,7 +2,8 @@
 #include <sigma/sigma.hpp>
 #include <sstream>
 
-void test_udouble(sigma::UDouble x, double mean, double std, int n_deps) {
+void test_udouble(sigma::UDouble x, double mean, double std,
+                  std::size_t n_deps) {
     REQUIRE(x.mean() == Approx(mean).margin(1.0e-4));
     REQUIRE(x.std() == Approx(std).margin(1.0e-4));
     REQUIRE(x.deps().size() == n_deps);
@@ -96,5 +97,28 @@ TEST_CASE("Uncertain") {
         ss << value;
         corr << mean << "+/-" << std;
         REQUIRE(ss.str() == corr.str());
+    }
+    SECTION("Comparisons") {
+        SECTION("Same") {
+            auto first  = testing_t(1.0, 0.1);
+            auto second = first;
+            REQUIRE(first == second);
+            REQUIRE_FALSE(first != second);
+        }
+        SECTION("Different Mean") {
+            auto first  = testing_t(1.0, 0.1);
+            auto second = testing_t(1.1, 0.1);
+            REQUIRE_FALSE(first == second);
+        }
+        SECTION("Different Standard Deviation") {
+            auto first  = testing_t(1.0, 0.1);
+            auto second = testing_t(1.0, 0.2);
+            REQUIRE_FALSE(first == second);
+        }
+        SECTION("Different Mean") {
+            auto first  = testing_t(1.0, 0.1);
+            auto second = testing_t(1.0, 0.1);
+            REQUIRE_FALSE(first == second);
+        }
     }
 }
