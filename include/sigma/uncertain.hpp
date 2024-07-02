@@ -50,10 +50,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    Uncertain(value_t mean, value_t std) : m_mean_(mean), m_std_(std) {
-        m_deps_.emplace(
-          std::make_pair(std::make_shared<ind_var_t>(mean, std), 1.0));
-    }
+    Uncertain(value_t mean, value_t std);
 
     /** @brief Get the mean value of the variable
      *
@@ -85,11 +82,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    my_t operator-() const {
-        my_t c(*this);
-        c.m_mean_ = -mean();
-        return c;
-    }
+    my_t operator-() const;
 
     /** @brief Addition Operation
      *
@@ -97,14 +90,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    my_t operator+(const my_t& b) const {
-        my_t c;
-        c.m_mean_ = mean() + b.mean();
-        c.update_dependencies(deps(), 1.0);
-        c.update_dependencies(b.deps(), 1.0);
-        c.calculate_std();
-        return c;
-    }
+    my_t operator+(const my_t& b) const;
 
     /** @brief Subtraction Operation
      *
@@ -112,14 +98,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    my_t operator-(const my_t& b) const {
-        my_t c;
-        c.m_mean_ = mean() - b.mean();
-        c.update_dependencies(deps(), 1.0);
-        c.update_dependencies(b.deps(), -1.0);
-        c.calculate_std();
-        return c;
-    }
+    my_t operator-(const my_t& b) const;
 
     /** @brief Multiplication Operation
      *
@@ -127,14 +106,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    my_t operator*(const my_t& b) const {
-        my_t c;
-        c.m_mean_ = mean() * b.mean();
-        c.update_dependencies(deps(), b.mean());
-        c.update_dependencies(b.deps(), mean());
-        c.calculate_std();
-        return c;
-    }
+    my_t operator*(const my_t& b) const;
 
     /** @brief Division Operation
      *
@@ -142,14 +114,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    my_t operator/(const my_t& b) const {
-        my_t c;
-        c.m_mean_ = mean() / b.mean();
-        c.update_dependencies(deps(), 1.0 / b.mean());
-        c.update_dependencies(b.deps(), -mean() / std::pow(b.mean(), 2.0));
-        c.calculate_std();
-        return c;
-    }
+    my_t operator/(const my_t& b) const;
 
     /** @brief Scale Operation
      *
@@ -157,13 +122,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    my_t operator*(value_t v) const {
-        my_t c(*this);
-        c.m_mean_ = v * mean();
-        c.update_dependencies(deps(), 2.0);
-        c.calculate_std();
-        return c;
-    }
+    my_t operator*(value_t v) const;
 
 private:
     /// Mean value of the variable
@@ -191,13 +150,7 @@ private:
      *
      *  @throw none No throw guarantee
      */
-    void update_dependency(ind_var_ptr var, value_t deriv) {
-        if(m_deps_.count(var) != 0) {
-            m_deps_[var] += deriv;
-        } else {
-            m_deps_.emplace(std::make_pair(std::move(var), deriv));
-        }
-    }
+    void update_dependency(ind_var_ptr var, value_t deriv);
 
     /** @brief Update the partial derivatives of a set of dependencies
      *
@@ -211,26 +164,30 @@ private:
      *
      *  @throw none No throw guarantee
      */
-    void update_dependencies(const deps_map_t& deps, value_t dydx) {
-        for(const auto& [dep, deriv] : deps) {
-            update_dependency(dep, dydx * deriv);
-        }
-    }
+    void update_dependencies(const deps_map_t& deps, value_t dydx);
 
     /** @brief Calculate the standatd deviation of this variables based on the
      *         uncertainty of its dependencies.
      *
      *  @throw none No throw guarantee
      */
-    void calculate_std() {
-        m_std_ = 0.0;
-        for(const auto& [dep, deriv] : m_deps_) {
-            m_std_ += std::pow(dep.get()->std() * deriv, 2.0);
-        }
-        m_std_ = std::sqrt(m_std_);
-    }
+    void calculate_std();
 
 }; // class Uncertain
+
+/** @relates Uncertain
+ *  @brief Scale Operation
+ *
+ *  Handles the case where @p v precedes the variable @p u.
+ *
+ *  @return A variable that is *this scaled by @p v
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename ValueType>
+Uncertain<ValueType> operator*(ValueType v, const Uncertain<ValueType>& u) {
+    return u * v;
+}
 
 /** @relates Uncertain
  *  @brief Overload stream insertion to print uncertain variable

@@ -81,11 +81,21 @@ TEST_CASE("Uncertain") {
             test_udouble(x, 0.5, 0.0707, 2);
             test_udouble(y, 0.1667, 0.0289, 3);
         }
+        SECTION("Scale") {
+            auto x = a * 2.0;
+            auto y = 2.0 * a;
+            auto z = a + a;
+            test_udouble(x, 2.0, 0.2, 1);
+            test_udouble(y, 2.0, 0.2, 1);
+            test_udouble(z, 2.0, 0.2, 1);
+            REQUIRE(x == y);
+            REQUIRE(x == z);
+        }
         SECTION("Mixing Operations") {
-            auto x = a + b + (a * b);
+            auto x = 2.0 * a + b * 2.0 + (a * b);
             auto y = (d * b - a) / b;
             auto z = (d * b - a) / c; // Same mean as y, different std and deps
-            test_udouble(x, 5.0, 0.5000, 2);
+            test_udouble(x, 8.0, 0.7211, 2);
             test_udouble(y, 2.5, 0.3082, 3);
             test_udouble(z, 2.5, 0.4950, 4);
         }
