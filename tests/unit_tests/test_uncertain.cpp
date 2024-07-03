@@ -83,7 +83,7 @@ TEST_CASE("Uncertain") {
         }
         SECTION("Scale") {
             int two = 2;
-            auto x  = a * two; // Works with int
+            auto x  = a * two;         // Works with int
             auto y  = (double)two * a; // Works with float
             auto z  = a + a;
             test_udouble(x, 2.0, 0.2, 1);
@@ -91,6 +91,14 @@ TEST_CASE("Uncertain") {
             test_udouble(z, 2.0, 0.2, 1);
             REQUIRE(x == y);
             REQUIRE(x == z);
+        }
+        SECTION("Exponentiation") {
+            auto x = a.pow(2);
+            auto y = (a + b).pow(-1);
+            auto z = (a + b + a * b).pow(0.5);
+            test_udouble(x, 1.0, 0.2, 1);
+            test_udouble(y, 0.3333, 0.0248, 2);
+            test_udouble(z, 2.2361, 0.1118, 2);
         }
         SECTION("Mixing Operations") {
             auto x = 2.0 * a + b * 2.0 + (a * b);

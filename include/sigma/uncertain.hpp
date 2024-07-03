@@ -1,7 +1,9 @@
 #pragma once
 #include "independent_variable.hpp"
+#include <cmath>
 #include <iostream>
 #include <map>
+#include <memory>
 
 namespace sigma {
 
@@ -133,6 +135,18 @@ public:
     template<typename NumericType>
     my_t operator*(NumericType v) const;
 
+    /** @brief Exponentiation of this variable
+     *
+     *  @tparam NumericType The type of the number @p exp
+     *  @param exp The exponent to raise *this by
+     *
+     *  @return A variable that is *this scaled by @p exp
+     *
+     *  @throw none No throw guarantee
+     */
+    template<typename NumericType>
+    my_t pow(NumericType exp) const;
+
 private:
     /// Mean value of the variable
     value_t m_mean_;
@@ -194,6 +208,17 @@ typename UNCERTAIN::my_t UNCERTAIN::operator*(NumericType v) const {
     my_t c(*this);
     c.m_mean_ = v * mean();
     for(const auto& [dep, deriv] : c.deps()) { c.m_deps_[dep] *= v; }
+    c.calculate_std();
+    return c;
+}
+
+template<typename ValueType>
+template<typename NumericType>
+typename UNCERTAIN::my_t UNCERTAIN::pow(NumericType exp) const {
+    my_t c(*this);
+    c.m_mean_ = std::pow(mean(), exp);
+    auto dydx = exp * std::pow(mean(), exp - 1);
+    for(const auto& [dep, deriv] : c.deps()) { c.m_deps_[dep] *= dydx; }
     c.calculate_std();
     return c;
 }

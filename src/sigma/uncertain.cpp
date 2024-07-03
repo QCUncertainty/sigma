@@ -1,6 +1,4 @@
 #include "sigma/uncertain.hpp"
-#include <cmath>
-#include <memory>
 #include <utility>
 
 namespace sigma {
@@ -15,7 +13,7 @@ UNCERTAIN::Uncertain(value_t mean, value_t std) : m_mean_(mean), m_std_(std) {
       std::make_pair(std::make_shared<ind_var_t>(mean, std), 1.0));
 }
 
-// -- Operators ----------------------------------------------------------------
+// -- Operations ---------------------------------------------------------------
 
 template<typename ValueType>
 typename UNCERTAIN::my_t UNCERTAIN::operator-() const {
