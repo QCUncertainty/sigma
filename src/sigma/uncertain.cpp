@@ -1,14 +1,21 @@
 #include "sigma/uncertain.hpp"
+#include <cmath>
+#include <memory>
+#include <utility>
 
 namespace sigma {
 
 #define UNCERTAIN Uncertain<ValueType>
+
+// -- Ctors --------------------------------------------------------------------
 
 template<typename ValueType>
 UNCERTAIN::Uncertain(value_t mean, value_t std) : m_mean_(mean), m_std_(std) {
     m_deps_.emplace(
       std::make_pair(std::make_shared<ind_var_t>(mean, std), 1.0));
 }
+
+// -- Operators ----------------------------------------------------------------
 
 template<typename ValueType>
 typename UNCERTAIN::my_t UNCERTAIN::operator-() const {
@@ -57,14 +64,7 @@ typename UNCERTAIN::my_t UNCERTAIN::operator/(const my_t& b) const {
     return c;
 }
 
-template<typename ValueType>
-typename UNCERTAIN::my_t UNCERTAIN::operator*(value_t v) const {
-    my_t c(*this);
-    c.m_mean_ = v * mean();
-    for(const auto& [dep, deriv] : c.deps()) { c.m_deps_[dep] *= v; }
-    c.calculate_std();
-    return c;
-}
+// -- Private Functions --------------------------------------------------------
 
 template<typename ValueType>
 void UNCERTAIN::update_dependency(ind_var_ptr var, value_t deriv) {

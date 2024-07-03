@@ -82,9 +82,10 @@ TEST_CASE("Uncertain") {
             test_udouble(y, 0.1667, 0.0289, 3);
         }
         SECTION("Scale") {
-            auto x = a * 2.0;
-            auto y = 2.0 * a;
-            auto z = a + a;
+            int two = 2;
+            auto x  = a * two; // Works with int
+            auto y  = (double)two * a; // Works with float
+            auto z  = a + a;
             test_udouble(x, 2.0, 0.2, 1);
             test_udouble(y, 2.0, 0.2, 1);
             test_udouble(z, 2.0, 0.2, 1);

@@ -1,10 +1,7 @@
 #pragma once
 #include "independent_variable.hpp"
-#include <cmath>
 #include <iostream>
 #include <map>
-#include <memory>
-#include <utility>
 
 namespace sigma {
 
@@ -86,6 +83,8 @@ public:
 
     /** @brief Addition Operation
      *
+     *  @param b The variable being added to *this
+     *
      *  @return A variable that is the sum of *this and @p b
      *
      *  @throw none No throw guarantee
@@ -93,6 +92,8 @@ public:
     my_t operator+(const my_t& b) const;
 
     /** @brief Subtraction Operation
+     *
+     *  @param b The variable being subtract from *this
      *
      *  @return A variable that is the difference of *this and @p b
      *
@@ -102,6 +103,8 @@ public:
 
     /** @brief Multiplication Operation
      *
+     *  @param b The variable *this is being multiplied by
+     *
      *  @return A variable that is the product of *this and @p b
      *
      *  @throw none No throw guarantee
@@ -109,6 +112,8 @@ public:
     my_t operator*(const my_t& b) const;
 
     /** @brief Division Operation
+     *
+     *  @param b The variable *this is being divided by
      *
      *  @return A variable that is the quotient of *this and @p b
      *
@@ -118,11 +123,15 @@ public:
 
     /** @brief Scale Operation
      *
+     *  @tparam NumericType The type of the number @p v
+     *  @param v The number by which to scale the variable
+     *
      *  @return A variable that is *this scaled by @p v
      *
      *  @throw none No throw guarantee
      */
-    my_t operator*(value_t v) const;
+    template<typename NumericType>
+    my_t operator*(NumericType v) const;
 
 private:
     /// Mean value of the variable
@@ -175,6 +184,22 @@ private:
 
 }; // class Uncertain
 
+#define UNCERTAIN Uncertain<ValueType>
+
+// -- Out of line definitions --------------------------------------------------
+
+template<typename ValueType>
+template<typename NumericType>
+typename UNCERTAIN::my_t UNCERTAIN::operator*(NumericType v) const {
+    my_t c(*this);
+    c.m_mean_ = v * mean();
+    for(const auto& [dep, deriv] : c.deps()) { c.m_deps_[dep] *= v; }
+    c.calculate_std();
+    return c;
+}
+
+// -- Utility functions --------------------------------------------------------
+
 /** @relates Uncertain
  *  @brief Scale Operation
  *
@@ -185,7 +210,7 @@ private:
  *  @throw none No throw guarantee
  */
 template<typename ValueType>
-Uncertain<ValueType> operator*(ValueType v, const Uncertain<ValueType>& u) {
+UNCERTAIN operator*(ValueType v, const UNCERTAIN& u) {
     return u * v;
 }
 
@@ -202,7 +227,7 @@ Uncertain<ValueType> operator*(ValueType v, const Uncertain<ValueType>& u) {
  *          Weak throw guarantee.
  */
 template<typename ValueType>
-std::ostream& operator<<(std::ostream& os, const Uncertain<ValueType>& u) {
+std::ostream& operator<<(std::ostream& os, const UNCERTAIN& u) {
     os << u.mean() << "+/-" << u.std();
     return os;
 }
@@ -218,8 +243,7 @@ std::ostream& operator<<(std::ostream& os, const Uncertain<ValueType>& u) {
  *
  */
 template<typename ValueType>
-bool operator==(const Uncertain<ValueType>& lhs,
-                const Uncertain<ValueType>& rhs) {
+bool operator==(const UNCERTAIN& lhs, const UNCERTAIN& rhs) {
     if(lhs.mean() != rhs.mean()) return false;
     if(lhs.std() != rhs.std()) return false;
     if(lhs.deps() != rhs.deps()) return false;
@@ -237,10 +261,11 @@ bool operator==(const Uncertain<ValueType>& lhs,
  *
  */
 template<typename ValueType>
-bool operator!=(const Uncertain<ValueType>& lhs,
-                const Uncertain<ValueType>& rhs) {
+bool operator!=(const UNCERTAIN& lhs, const UNCERTAIN& rhs) {
     return !(lhs == rhs);
 }
+
+#undef UNCERTAIN
 
 extern template class Uncertain<double>;
 
