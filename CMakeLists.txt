@@ -46,7 +46,7 @@ if("${BUILD_TESTING}")
     cmaize_add_tests(
         test_${PROJECT_NAME}
         SOURCE_DIR "${${PROJECT_NAME}_TESTS_DIR}/unit_tests"
-        INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
+        INCLUDE_DIRS "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
         DEPENDS Catch2 ${PROJECT_NAME}
     )
 

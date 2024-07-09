@@ -1,5 +1,5 @@
 #include <catch2/catch.hpp>
-#include <sigma/sigma.hpp>
+#include "sigma/independent_variable.hpp"
 #include <sstream>
 
 TEST_CASE("IndependentVariable") {

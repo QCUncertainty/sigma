@@ -107,6 +107,4 @@ bool operator!=(const IndependentVariable<ValueType>& lhs,
     return !(lhs == rhs);
 }
 
-extern template class IndependentVariable<double>;
-
 } // namespace sigma

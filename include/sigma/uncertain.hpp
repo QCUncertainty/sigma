@@ -1,11 +1,14 @@
 #pragma once
-#include "independent_variable.hpp"
 #include <cmath>
 #include <iostream>
 #include <map>
 #include <memory>
 
 namespace sigma {
+
+// Forward Declaration
+template<typename ValueType>
+class IndependentVariable;
 
 /** @brief Models an unceratin variable.
  *
@@ -292,6 +295,7 @@ bool operator!=(const UNCERTAIN& lhs, const UNCERTAIN& rhs) {
 
 #undef UNCERTAIN
 
+// External instantiations
 extern template class Uncertain<float>;
 extern template class Uncertain<double>;
 

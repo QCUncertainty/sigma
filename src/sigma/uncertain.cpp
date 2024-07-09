@@ -1,3 +1,4 @@
+#include "independent_variable.hpp"
 #include "sigma/uncertain.hpp"
 #include <utility>
 
@@ -91,6 +92,7 @@ void UNCERTAIN::calculate_std() {
 
 #undef UNCERTAIN
 
+// Explicit Instantiation
 template class Uncertain<float>;
 template class Uncertain<double>;
 
