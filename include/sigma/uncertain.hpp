@@ -234,8 +234,8 @@ typename UNCERTAIN::my_t UNCERTAIN::pow(NumericType exp) const {
  *
  *  @throw none No throw guarantee
  */
-template<typename ValueType>
-UNCERTAIN operator*(ValueType v, const UNCERTAIN& u) {
+template<typename ValueType, typename NumericType>
+UNCERTAIN operator*(NumericType v, const UNCERTAIN& u) {
     return u * v;
 }
 
@@ -292,7 +292,11 @@ bool operator!=(const UNCERTAIN& lhs, const UNCERTAIN& rhs) {
 
 #undef UNCERTAIN
 
+extern template class Uncertain<float>;
 extern template class Uncertain<double>;
+
+/// Typedef for an uncertain float
+using UFloat = Uncertain<float>;
 
 /// Typedef for an uncertain double
 using UDouble = Uncertain<double>;

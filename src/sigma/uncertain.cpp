@@ -91,6 +91,7 @@ void UNCERTAIN::calculate_std() {
 
 #undef UNCERTAIN
 
+template class Uncertain<float>;
 template class Uncertain<double>;
 
 } // namespace sigma
