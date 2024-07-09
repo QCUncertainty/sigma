@@ -95,9 +95,9 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             REQUIRE(x == z);
         }
         SECTION("Exponentiation") {
-            auto x = a.pow(2);
-            auto y = (a + b).pow(-1);
-            auto z = (a + b + a * b).pow(0.5);
+            auto x = pow(a, 2);
+            auto y = pow((a + b), -1);
+            auto z = pow((a + b + a * b), 0.5);
             test_uncertain(x, 1.0, 0.2, 1);
             test_uncertain(y, 0.3333, 0.0248, 2);
             test_uncertain(z, 2.2361, 0.1118, 2);
@@ -109,6 +109,17 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             test_uncertain(x, 8.0, 0.7211, 2);
             test_uncertain(y, 2.5, 0.3082, 3);
             test_uncertain(z, 2.5, 0.4950, 4);
+        }
+        SECTION("Square Root") {
+            auto e = testing_t(4.0, 0.4);
+            auto f = testing_t(5.0, 0.5);
+
+            auto x = sigma::sqrt(a);
+            auto y = sigma::sqrt(e);
+            auto z = sigma::sqrt(e + f);
+            test_uncertain(x, 1.0, 0.05, 1);
+            test_uncertain(y, 2.0, 0.1, 1);
+            test_uncertain(z, 3.0, 0.1067, 2);
         }
     }
     SECTION("operator<<(std::ostream, IndependentVariable)") {
