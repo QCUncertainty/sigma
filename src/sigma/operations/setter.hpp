@@ -49,66 +49,10 @@ public:
      */
     void update_mean(value_t mean) { m_u_.m_mean_ = mean; }
 
-    /** @brief Unary update of derivatives
-     *
-     *  @param dxda The partial derivative of the variable
-     *
-     *  @throw none No throw guarantee
-     */
-    void update_derivatives(value_t dxda) {
-        for(const auto& [dep, deriv] : m_u_.m_deps_) {
-            m_u_.m_deps_[dep] *= dxda;
-        }
-        update_std();
-    }
-
-    /** @brief Binary update of derivatives
-     *
-     *  @param a_deps The dependencies of a
-     *  @param dxda The partial derivative of the variable with respect to a
-     *  @param b_deps The dependencies of b
-     *  @param dxdb The partial derivative of the variable with respect to b
-     *
-     *  @throw none No throw guarantee
-     */
-    void update_derivatives(const deps_map_t& a_deps, value_t dxda,
-                            const deps_map_t& b_deps, value_t dxdb) {
-        update_dependencies(a_deps, dxda);
-        update_dependencies(b_deps, dxdb);
-        update_std();
-    }
-
-private:
-    /// The variable being modified
-    uncertain_t& m_u_;
-
-    /** @brief Update the partial derivatives of a set of dependencies
-     *
-     *  Given a map @p deps of dependencies and their partial derivatives,
-     *  updates each dependency of m_u_ with the partial derivatives scaled by
-     *  @p dydx.
-     *
-     *  @param deps The dependencies to update
-     *  @param dydx The partial derivative of this variable with respect to
-     *              the dependency
-     *
-     *  @throw none No throw guarantee
-     */
-    void update_dependencies(const deps_map_t& deps, value_t dydx) {
-        for(const auto& [dep, deriv] : deps) {
-            auto new_deriv = dydx * deriv;
-            if(m_u_.m_deps_.count(dep) != 0) {
-                m_u_.m_deps_[dep] += new_deriv;
-            } else {
-                m_u_.m_deps_.emplace(std::make_pair(std::move(dep), new_deriv));
-            }
-        }
-    }
-
     /** @brief Calculate the standatd deviation of m_u_ based on the
      *         uncertainty of its dependencies.
-     * 
-     *  @param clean Whether or not to remove dependencies with partial 
+     *
+     *  @param clean Whether or not to remove dependencies with partial
      *               derivatives of 0. Default is false.
      *
      *  @throw none No throw guarantee
@@ -124,6 +68,68 @@ private:
         }
         m_u_.m_std_ = std::sqrt(m_u_.m_std_);
     }
+
+    /** @brief Update of existing derivatives
+     *
+     *  @param dxda The partial derivative of the variable
+     *  @param call_update_std Whether or not to update the standard deviation
+     *                         after updating the dependencies. Primarily for
+     *                         minimizing repetitive work when multiple updates 
+     *                         will be performed
+     *
+     *  @throw none No throw guarantee
+     */
+    void update_derivatives(value_t dxda, bool call_update_std = true) {
+        for(const auto& [dep, deriv] : m_u_.m_deps_) {
+            m_u_.m_deps_[dep] *= dxda;
+        }
+        if(call_update_std) update_std();
+    }
+
+    /** @brief Update/addition of derivatives
+     *
+     *  @param deps The dependencies to update
+     *  @param dxda The partial derivative of this variable with respect to
+     *              the dependency
+     *  @param call_update_std Whether or not to update the standard deviation
+     *                         after updating the dependencies. Primarily for
+     *                         minimizing repetitive work when multiple updates 
+     *                         will be performed
+     *
+     *  @throw none No throw guarantee
+     */
+    void update_derivatives(const deps_map_t& deps, value_t dxda,
+                            bool call_update_std = true) {
+        for(const auto& [dep, deriv] : deps) {
+            auto new_deriv = dxda * deriv;
+            if(m_u_.m_deps_.count(dep) != 0) {
+                m_u_.m_deps_[dep] += new_deriv;
+            } else {
+                m_u_.m_deps_.emplace(std::make_pair(std::move(dep), new_deriv));
+            }
+        }
+        if(call_update_std) update_std();
+    }
+
+    /** @brief Binary update/addition of derivatives
+     *
+     *  @param a_deps The dependencies of a
+     *  @param dxda The partial derivative of the variable with respect to a
+     *  @param b_deps The dependencies of b
+     *  @param dxdb The partial derivative of the variable with respect to b
+     *
+     *  @throw none No throw guarantee
+     */
+    void update_derivatives(const deps_map_t& a_deps, value_t dxda,
+                            const deps_map_t& b_deps, value_t dxdb) {
+        update_derivatives(a_deps, dxda, false);
+        update_derivatives(b_deps, dxdb, false);
+        update_std();
+    }
+
+private:
+    /// The variable being modified
+    uncertain_t& m_u_;
 };
 
 } // namespace sigma
