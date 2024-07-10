@@ -119,7 +119,7 @@ std::ostream& operator<<(std::ostream& os, const Uncertain<ValueType>& u) {
 }
 
 /** @relates Uncertain
- *  @brief Compare two variables
+ *  @brief Compare two variables for equality
  *
  *  @tparam ValueType The numerical type of the variable
  *  @param lhs The first variable
@@ -138,7 +138,7 @@ bool operator==(const Uncertain<ValueType>& lhs,
 }
 
 /** @relates Uncertain
- *  @brief Compare two variables
+ *  @brief Compare two variables for inequality
  *
  *  @tparam ValueType The numerical type of the variable
  *  @param lhs The first variable
@@ -151,6 +151,74 @@ template<typename ValueType>
 bool operator!=(const Uncertain<ValueType>& lhs,
                 const Uncertain<ValueType>& rhs) {
     return !(lhs == rhs);
+}
+
+/** @relates Uncertain
+ *  @brief Whether one variable is less than another
+ *
+ *  Compares the mean values of the two variables
+ *
+ *  @tparam ValueType The numerical type of the variable
+ *  @param lhs The first variable
+ *  @param rhs The second variable
+ *
+ *  @return Whether @p lhs is less than @p rhs
+ *
+ */
+template<typename ValueType>
+bool operator<(const Uncertain<ValueType>& lhs,
+               const Uncertain<ValueType>& rhs) {
+    return lhs.mean() < rhs.mean();
+}
+
+/** @relates Uncertain
+ *  @brief Whether one variable is greater than another
+ *
+ *  Compares the mean values of the two variables
+ *
+ *  @tparam ValueType The numerical type of the variable
+ *  @param lhs The first variable
+ *  @param rhs The second variable
+ *
+ *  @return Whether @p lhs is greater than @p rhs
+ *
+ */
+template<typename ValueType>
+bool operator>(const Uncertain<ValueType>& lhs,
+               const Uncertain<ValueType>& rhs) {
+    return rhs < lhs;
+}
+
+/** @relates Uncertain
+ *  @brief Whether one variable is less than or equal to another
+ *
+ *  @tparam ValueType The numerical type of the variable
+ *  @param lhs The first variable
+ *  @param rhs The second variable
+ *
+ *  @return Whether @p lhs is less than or equal to @p rhs
+ *
+ */
+template<typename ValueType>
+bool operator<=(const Uncertain<ValueType>& lhs,
+                const Uncertain<ValueType>& rhs) {
+    return (lhs == rhs) || (lhs < rhs);
+}
+
+/** @relates Uncertain
+ *  @brief Whether one variable is greater than or equal to another
+ *
+ *  @tparam ValueType The numerical type of the variable
+ *  @param lhs The first variable
+ *  @param rhs The second variable
+ *
+ *  @return Whether @p lhs is greater than or equal to @p rhs
+ *
+ */
+template<typename ValueType>
+bool operator>=(const Uncertain<ValueType>& lhs,
+                const Uncertain<ValueType>& rhs) {
+    return (lhs == rhs) || (lhs > rhs);
 }
 
 // External instantiations

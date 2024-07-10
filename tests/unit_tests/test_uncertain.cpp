@@ -51,26 +51,50 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
         REQUIRE(ss.str() == corr.str());
     }
     SECTION("Comparisons") {
+        auto first = testing_t(1.0, 0.1);
         SECTION("Same") {
-            auto first  = testing_t(1.0, 0.1);
             auto second = first;
             REQUIRE(first == second);
             REQUIRE_FALSE(first != second);
         }
         SECTION("Different Mean") {
-            auto first  = testing_t(1.0, 0.1);
             auto second = testing_t(1.1, 0.1);
             REQUIRE_FALSE(first == second);
         }
         SECTION("Different Standard Deviation") {
-            auto first  = testing_t(1.0, 0.1);
             auto second = testing_t(1.0, 0.2);
             REQUIRE_FALSE(first == second);
         }
         SECTION("Different Dependencies") {
-            auto first  = testing_t(1.0, 0.1);
             auto second = testing_t(1.0, 0.1);
             REQUIRE_FALSE(first == second);
+        }
+        SECTION("Relative") {
+            auto second = testing_t(2.0, 0.2);
+            auto third  = testing_t(2.0, 0.2);
+            auto fourth = second;
+            SECTION("Less than") {
+                REQUIRE(first < second);
+                REQUIRE_FALSE(second < first);
+                REQUIRE_FALSE(third < second);
+            }
+            SECTION("Greater than") {
+                REQUIRE(second > first);
+                REQUIRE_FALSE(first > second);
+                REQUIRE_FALSE(third > second);
+            }
+            SECTION("Less than or equal") {
+                REQUIRE(first <= second);
+                REQUIRE(fourth <= second);
+                REQUIRE_FALSE(second <= first);
+                REQUIRE_FALSE(third <= second);
+            }
+            SECTION("Greater than or equal") {
+                REQUIRE(second >= first);
+                REQUIRE(fourth >= second);
+                REQUIRE_FALSE(first >= second);
+                REQUIRE_FALSE(third >= second);
+            }
         }
     }
 }
