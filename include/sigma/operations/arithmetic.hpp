@@ -57,32 +57,8 @@ UncertainType operator-(const UncertainType& lhs, const UncertainType& rhs);
  */
 template<typename UncertainType>
 UncertainType operator*(const UncertainType& lhs, const UncertainType& rhs);
-
-/** @relates Uncertain
- *  @brief Scale Operation
- *
- *  @tparam UncertainType The type of the uncertain variable
- *  @param lhs The uncertain variable
- *  @param rhs The scaling variable
- *
- *  @return A variable that is @p lhs scaled by @p rhs
- *
- *  @throw none No throw guarantee
- */
 template<typename UncertainType>
 UncertainType operator*(const UncertainType& lhs, double rhs);
-
-/** @relates Uncertain
- *  @brief Scale Operation
- *
- *  @tparam UncertainType The type of the uncertain variable
- *  @param lhs The scaling variable
- *  @param rhs The uncertain variable
- *
- *  @return A variable that is @p rhs scaled by @p lhs
- *
- *  @throw none No throw guarantee
- */
 template<typename UncertainType>
 UncertainType operator*(double lhs, const UncertainType& rhs);
 
@@ -99,5 +75,9 @@ UncertainType operator*(double lhs, const UncertainType& rhs);
  */
 template<typename UncertainType>
 UncertainType operator/(const UncertainType& lhs, const UncertainType& rhs);
+template<typename UncertainType>
+UncertainType operator/(double lhs, const UncertainType& rhs);
+template<typename UncertainType>
+UncertainType operator/(const UncertainType& lhs, double rhs);
 
 } // namespace sigma

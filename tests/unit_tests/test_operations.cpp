@@ -32,25 +32,36 @@ TEMPLATE_TEST_CASE("Operations", "", sigma::UFloat, sigma::UDouble) {
         test_uncertain(y, -4.0, 0.3742, 3);
     }
     SECTION("Multiplication") {
-        auto x = a * b;
-        auto y = x * d;
-        test_uncertain(x, 2.0, 0.2828, 2);
-        test_uncertain(y, 6.0, 1.0392, 3);
-    }
-    SECTION("Scale") {
-        int two = 2;
-        auto x  = a * two;         // Works with int
-        auto y  = (double)two * a; // Works with floating point, and reversed
-        test_uncertain(x, 2.0, 0.2, 1);
-        test_uncertain(y, 2.0, 0.2, 1);
-        REQUIRE(x == y);
-        REQUIRE(x == (a + a));
+        SECTION("By Uncertain") {
+            auto x = a * b;
+            auto y = x * d;
+            test_uncertain(x, 2.0, 0.2828, 2);
+            test_uncertain(y, 6.0, 1.0392, 3);
+        }
+        SECTION("By Certain") {
+            int two = 2;
+            auto x  = a * two;        // Works with int
+            auto y = (double)two * a; // Works with floating point, and reversed
+            test_uncertain(x, 2.0, 0.2, 1);
+            test_uncertain(y, 2.0, 0.2, 1);
+            REQUIRE(x == y);
+            REQUIRE(x == (a + a));
+        }
     }
     SECTION("Division") {
-        auto x = a / b;
-        auto y = x / d;
-        test_uncertain(x, 0.5, 0.0707, 2);
-        test_uncertain(y, 0.1667, 0.0289, 3);
+        SECTION("By Uncertain") {
+            auto x = a / b;
+            auto y = x / d;
+            test_uncertain(x, 0.5, 0.0707, 2);
+            test_uncertain(y, 0.1667, 0.0289, 3);
+        }
+        SECTION("By Certain") {
+            int two = 2;
+            auto x  = a / two;        // Works with int
+            auto y = (double)two / a; // Works with floating point, and reversed
+            test_uncertain(x, 0.5, 0.05, 1);
+            test_uncertain(y, 2.0, 0.2, 1);
+        }
     }
     SECTION("Exponentiation") {
         SECTION("Certain exponent") {
