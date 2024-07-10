@@ -101,19 +101,6 @@ template<typename UncertainType>
 UncertainType operator/(const UncertainType& lhs, const UncertainType& rhs);
 
 /** @relates Uncertain
- *  @brief Calculate the square root of an uncertain variable
- *
- *  @tparam UncertainType The type of the variable
- *  @param u The variable whose root is computed
- *
- *  @return A variable whose value is the square root of @p u
- *
- *  @throw none No throw guarantee
- */
-template<typename UncertainType>
-UncertainType sqrt(const UncertainType& u);
-
-/** @relates Uncertain
  *  @brief Exponentiation of this variable
  *
  *  @tparam UncertainType The type of the variable
@@ -126,5 +113,18 @@ UncertainType sqrt(const UncertainType& u);
  */
 template<typename UncertainType>
 UncertainType pow(const UncertainType& u, double exp);
+
+/** @relates Uncertain
+ *  @brief Calculate the square root of an uncertain variable
+ *
+ *  @tparam UncertainType The type of the variable
+ *  @param u The variable whose root is computed
+ *
+ *  @return A variable whose value is the square root of @p u
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename UncertainType>
+UncertainType sqrt(const UncertainType& u);
 
 } // namespace sigma
