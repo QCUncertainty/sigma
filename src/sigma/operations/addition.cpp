@@ -6,10 +6,8 @@ namespace sigma {
 
 template<typename UncertainType>
 UncertainType operator+(const UncertainType& lhs, const UncertainType& rhs) {
-    UncertainType c;
-    Setter<UncertainType> c_setter(c);
-    c_setter.update_mean(lhs.mean() + rhs.mean());
-    c_setter.update_derivatives(lhs.deps(), 1.0, rhs.deps(), 1.0);
+    UncertainType c(lhs);
+    c += rhs;
     return c;
 }
 
