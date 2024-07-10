@@ -107,12 +107,19 @@ private:
 
     /** @brief Calculate the standatd deviation of m_u_ based on the
      *         uncertainty of its dependencies.
+     * 
+     *  @param clean Whether or not to remove dependencies with partial 
+     *               derivatives of 0. Default is false.
      *
      *  @throw none No throw guarantee
      */
-    void update_std() {
+    void update_std(bool clean = false) {
         m_u_.m_std_ = 0.0;
         for(const auto& [dep, deriv] : m_u_.m_deps_) {
+            if(deriv == 0.0) {
+                if(clean) m_u_.m_deps_.erase(dep);
+                continue;
+            }
             m_u_.m_std_ += std::pow(dep.get()->std() * deriv, 2.0);
         }
         m_u_.m_std_ = std::sqrt(m_u_.m_std_);
