@@ -1,13 +1,8 @@
-#include <catch2/catch.hpp>
+#include "testing.hpp"
 #include <sigma/sigma.hpp>
 #include <sstream>
 
-template<typename UncertainType>
-void test_uncertain(UncertainType x, double m, double s, std::size_t n) {
-    REQUIRE(x.mean() == Approx(m).margin(1.0e-4));
-    REQUIRE(x.std() == Approx(s).margin(1.0e-4));
-    REQUIRE(x.deps().size() == n);
-}
+using testing::test_uncertain;
 
 TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
     using testing_t = TestType;
@@ -72,7 +67,7 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             auto second = testing_t(1.0, 0.2);
             REQUIRE_FALSE(first == second);
         }
-        SECTION("Different Mean") {
+        SECTION("Different Dependencies") {
             auto first  = testing_t(1.0, 0.1);
             auto second = testing_t(1.0, 0.1);
             REQUIRE_FALSE(first == second);

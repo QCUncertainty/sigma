@@ -41,27 +41,46 @@ public:
      */
     Setter(uncertain_t& u) : m_u_(u) {}
 
-    /** @brief Update the partial derivative of a dependency
+    /** @brief Update the mean of the wrapped variable
      *
-     *  Updates m_u_'s list of dependencies with the provided values. If
-     *  @p var is already in the list of dependencies, the value of its partial
-     *  derivative is updated with the addition of @p deriv. Otherwise, @p var
-     *  is added to the list of dependencies with @p deriv as its partial
-     *  derivative.
-     *
-     *  @param var The dependency to update
-     *  @param deriv The partial derivative of this variable with respect to
-     *               the dependency
+     *  @param mean The new mean value of the variable
      *
      *  @throw none No throw guarantee
      */
-    void update_dependency(ind_var_ptr var, value_t deriv) {
-        if(m_u_.m_deps_.count(var) != 0) {
-            m_u_.m_deps_[var] += deriv;
-        } else {
-            m_u_.m_deps_.emplace(std::make_pair(std::move(var), deriv));
+    void update_mean(value_t mean) { m_u_.m_mean_ = mean; }
+
+    /** @brief Unary update of derivatives
+     *
+     *  @param dxda The partial derivative of the variable
+     *
+     *  @throw none No throw guarantee
+     */
+    void update_derivatives(value_t dxda) {
+        for(const auto& [dep, deriv] : m_u_.m_deps_) {
+            m_u_.m_deps_[dep] *= dxda;
         }
+        update_std();
     }
+
+    /** @brief Binary update of derivatives
+     *
+     *  @param a_deps The dependencies of a
+     *  @param dxda The partial derivative of the variable with respect to a
+     *  @param b_deps The dependencies of b
+     *  @param dxdb The partial derivative of the variable with respect to b
+     *
+     *  @throw none No throw guarantee
+     */
+    void update_derivatives(const deps_map_t& a_deps, value_t dxda,
+                            const deps_map_t& b_deps, value_t dxdb) {
+        update_dependencies(a_deps, dxda);
+        update_dependencies(b_deps, dxdb);
+        update_std();
+    }
+
+private:
+    /// The variable being modified
+    uncertain_t& m_u_;
 
     /** @brief Update the partial derivatives of a set of dependencies
      *
@@ -77,7 +96,12 @@ public:
      */
     void update_dependencies(const deps_map_t& deps, value_t dydx) {
         for(const auto& [dep, deriv] : deps) {
-            update_dependency(dep, dydx * deriv);
+            auto new_deriv = dydx * deriv;
+            if(m_u_.m_deps_.count(dep) != 0) {
+                m_u_.m_deps_[dep] += new_deriv;
+            } else {
+                m_u_.m_deps_.emplace(std::make_pair(std::move(dep), new_deriv));
+            }
         }
     }
 
@@ -86,28 +110,13 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    void calculate_std() {
+    void update_std() {
         m_u_.m_std_ = 0.0;
         for(const auto& [dep, deriv] : m_u_.m_deps_) {
             m_u_.m_std_ += std::pow(dep.get()->std() * deriv, 2.0);
         }
         m_u_.m_std_ = std::sqrt(m_u_.m_std_);
     }
-
-    /** @brief Access the mean of the wrapped variable
-     *
-     *  @throw none No throw guarantee
-     */
-    value_t& mean() { return m_u_.m_mean_; }
-
-    /** @brief Access the mean of the dependencies of the wrapped variable
-     *
-     *  @throw none No throw guarantee
-     */
-    deps_map_t& deps() { return m_u_.m_deps_; }
-
-private:
-    uncertain_t& m_u_;
 };
 
 } // namespace sigma

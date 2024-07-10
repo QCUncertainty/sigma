@@ -8,7 +8,7 @@ template<typename UncertainType>
 UncertainType operator-(const UncertainType& u) {
     UncertainType c(u);
     Setter<UncertainType> c_setter(c);
-    c_setter.mean() = -u.mean();
+    c_setter.update_mean(-u.mean());
     return c;
 }
 

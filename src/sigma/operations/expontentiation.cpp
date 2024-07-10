@@ -8,11 +8,8 @@ template<typename UncertainType>
 UncertainType pow(const UncertainType& u, double exp) {
     UncertainType c(u);
     Setter<UncertainType> c_setter(c);
-
-    c_setter.mean() = std::pow(u.mean(), exp);
-    auto dydx       = exp * std::pow(u.mean(), exp - 1);
-    for(const auto& [dep, deriv] : c.deps()) { c_setter.deps()[dep] *= dydx; }
-    c_setter.calculate_std();
+    c_setter.update_mean(std::pow(u.mean(), exp));
+    c_setter.update_derivatives(exp * std::pow(u.mean(), exp - 1));
     return c;
 }
 
