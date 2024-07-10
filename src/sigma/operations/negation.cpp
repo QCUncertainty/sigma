@@ -9,6 +9,7 @@ UncertainType operator-(const UncertainType& u) {
     UncertainType c(u);
     Setter<UncertainType> c_setter(c);
     c_setter.update_mean(-u.mean());
+    c_setter.update_derivatives(-1.0);
     return c;
 }
 

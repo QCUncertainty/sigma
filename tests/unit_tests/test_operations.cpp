@@ -16,8 +16,10 @@ TEMPLATE_TEST_CASE("Operations", "", sigma::UFloat, sigma::UDouble) {
     SECTION("Negation") {
         auto x = -a;
         auto y = -(a + b);
+        auto z = a + x;
         test_uncertain(x, -1.0, 0.1, 1);
         test_uncertain(y, -3.0, 0.2236, 2);
+        test_uncertain(z, 0.0, 0.0, 1);
     }
     SECTION("Addition") {
         auto x = a + b;
@@ -28,8 +30,10 @@ TEMPLATE_TEST_CASE("Operations", "", sigma::UFloat, sigma::UDouble) {
     SECTION("Subtraction") {
         auto x = a - b;
         auto y = x - d;
+        auto z = a - a;
         test_uncertain(x, -1.0, 0.2236, 2);
         test_uncertain(y, -4.0, 0.3742, 3);
+        test_uncertain(z, 0.0, 0.0, 1);
     }
     SECTION("Multiplication") {
         SECTION("By Uncertain") {
@@ -52,8 +56,10 @@ TEMPLATE_TEST_CASE("Operations", "", sigma::UFloat, sigma::UDouble) {
         SECTION("By Uncertain") {
             auto x = a / b;
             auto y = x / d;
+            auto z = a / a;
             test_uncertain(x, 0.5, 0.0707, 2);
             test_uncertain(y, 0.1667, 0.0289, 3);
+            test_uncertain(z, 1.0, 0.0, 1);
         }
         SECTION("By Certain") {
             int two = 2;
