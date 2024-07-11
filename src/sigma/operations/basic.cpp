@@ -15,8 +15,47 @@ UncertainType abs(const UncertainType& u) {
     return c;
 }
 
+template<typename UncertainType>
+UncertainType fmod(const UncertainType& a, const UncertainType& b) {
+    auto dxda = 1.0;
+    auto dxdb = -std::floor(a.mean() / b.mean());
+    UncertainType c(a);
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(std::fmod(a.mean(), b.mean()));
+    c_setter.update_derivatives(dxda, false);
+    c_setter.update_derivatives(b.deps(), dxdb);
+    return c;
+}
+
+template<typename UncertainType>
+UncertainType fmod(const UncertainType& a, double b) {
+    UncertainType c(a);
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(std::fmod(a.mean(), b));
+    c_setter.update_derivatives(1.0);
+    return c;
+}
+
+template<typename UncertainType>
+UncertainType fmod(double a, const UncertainType& b) {
+    UncertainType c(b);
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(std::fmod(a, b.mean()));
+    c_setter.update_derivatives(-std::floor(a / b.mean()));
+    return c;
+}
+
 // -- Explicit Instantiation ---------------------------------------------------
 template UFloat abs<UFloat>(const UFloat&);
 template UDouble abs<UDouble>(const UDouble&);
+
+template UFloat fmod<UFloat>(const UFloat& a, const UFloat& b);
+template UDouble fmod<UDouble>(const UDouble& a, const UDouble& b);
+
+template UFloat fmod<UFloat>(const UFloat& a, double b);
+template UDouble fmod<UDouble>(const UDouble& a, double b);
+
+template UFloat fmod<UFloat>(double a, const UFloat& b);
+template UDouble fmod<UDouble>(double a, const UDouble& b);
 
 } // namespace sigma
