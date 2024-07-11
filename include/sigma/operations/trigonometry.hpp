@@ -81,4 +81,22 @@ UncertainType acos(const UncertainType& u);
 template<typename UncertainType>
 UncertainType atan(const UncertainType& u);
 
+/** @relates Uncertain
+ *  @brief Two argument arctangent
+ *
+ *  @tparam UncertainType The type of the variable
+ *  @param y The first variable
+ *  @param x The first variable
+ *
+ *  @return A variable that is the arctangent value of @p u
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename UncertainType>
+UncertainType atan2(const UncertainType& y, const UncertainType& x);
+template<typename UncertainType>
+UncertainType atan2(const UncertainType& y, double x);
+template<typename UncertainType>
+UncertainType atan2(double y, const UncertainType& x);
+
 } // namespace sigma

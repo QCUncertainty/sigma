@@ -59,6 +59,38 @@ UncertainType atan(const UncertainType& u) {
     return c;
 }
 
+template<typename UncertainType>
+UncertainType atan2(const UncertainType& y, const UncertainType& x) {
+    auto dxda = x.mean() / (std::pow(x.mean(), 2) + std::pow(y.mean(), 2));
+    auto dxdb = -y.mean() / (std::pow(x.mean(), 2) + std::pow(y.mean(), 2));
+    UncertainType c(y);
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(std::atan2(y.mean(), x.mean()));
+    c_setter.update_derivatives(dxda, false);
+    c_setter.update_derivatives(x.deps(), dxdb);
+    return c;
+}
+
+template<typename UncertainType>
+UncertainType atan2(const UncertainType& y, double x) {
+    auto dxda = x / (std::pow(x, 2) + std::pow(y.mean(), 2));
+    UncertainType c(y);
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(std::atan2(y.mean(), x));
+    c_setter.update_derivatives(dxda);
+    return c;
+}
+
+template<typename UncertainType>
+UncertainType atan2(double y, const UncertainType& x) {
+    auto dxda = -y / (std::pow(x.mean(), 2) + std::pow(y, 2));
+    UncertainType c(x);
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(std::atan2(y, x.mean()));
+    c_setter.update_derivatives(dxda);
+    return c;
+}
+
 // -- Explicit Instantiation ---------------------------------------------------
 template UFloat sin<UFloat>(const UFloat&);
 template UDouble sin<UDouble>(const UDouble&);
@@ -77,5 +109,14 @@ template UDouble acos<UDouble>(const UDouble&);
 
 template UFloat atan<UFloat>(const UFloat&);
 template UDouble atan<UDouble>(const UDouble&);
+
+template UFloat atan2<UFloat>(const UFloat&, const UFloat&);
+template UDouble atan2<UDouble>(const UDouble&, const UDouble&);
+
+template UFloat atan2<UFloat>(const UFloat&, double);
+template UDouble atan2<UDouble>(const UDouble&, double);
+
+template UFloat atan2<UFloat>(double, const UFloat&);
+template UDouble atan2<UDouble>(double, const UDouble&);
 
 } // namespace sigma
