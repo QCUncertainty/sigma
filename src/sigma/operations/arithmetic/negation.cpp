@@ -1,9 +1,10 @@
-#include "setter.hpp"
+#include "../setter.hpp"
 #include "sigma/operations/operations.hpp"
 #include <cmath>
 
 namespace sigma {
 
+// -- Definitions --------------------------------------------------------------
 template<typename UncertainType>
 UncertainType operator-(const UncertainType& u) {
     UncertainType c(u);
@@ -13,7 +14,7 @@ UncertainType operator-(const UncertainType& u) {
     return c;
 }
 
-// Explicit Instantiation
+// -- Explicit Instantiation ---------------------------------------------------
 template UFloat operator- <UFloat>(const UFloat&);
 template UDouble operator- <UDouble>(const UDouble&);
 
