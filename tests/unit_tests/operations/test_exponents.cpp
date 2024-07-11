@@ -13,48 +13,33 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
 
     SECTION("Exponentiation") {
         SECTION("Certain exponent") {
-            auto x  = pow(a, 2);
-            auto y  = pow((a + b), -1);
-            auto z  = pow((a + b + a * b), 0.5);
-            auto zz = pow((a + b + a * b), 0.0);
-            test_uncertain(x, 1.0, 0.2, 1);
-            test_uncertain(y, 0.3333, 0.0248, 2);
-            test_uncertain(z, 2.2361, 0.1118, 2);
-            test_uncertain(zz, 1.0, 0.0, 2);
+            test_uncertain(sigma::pow(a, 2), 1.0, 0.2, 1);
+            test_uncertain(sigma::pow((a + b), -1), 0.3333, 0.0248, 2);
+            test_uncertain(sigma::pow((a + b + a * b), 0.5), 2.2361, 0.1118, 2);
+            test_uncertain(sigma::pow((a + b + a * b), 0.0), 1.0, 0.0, 2);
         }
         SECTION("Uncertain exponent") {
-            auto x = pow(a, b);
-            auto y = pow(c, -b);
-            auto z = pow(c, a * 0.5);
-            test_uncertain(x, 1.0, 0.2, 2);
-            test_uncertain(y, 0.0625, 0.0214, 2);
-            test_uncertain(z, 2.0, 0.1709, 2);
+            test_uncertain(sigma::pow(a, b), 1.0, 0.2, 2);
+            test_uncertain(sigma::pow(c, -b), 0.0625, 0.0214, 2);
+            test_uncertain(sigma::pow(c, a * 0.5), 2.0, 0.1709, 2);
         }
     }
     SECTION("Square Root") {
-        auto x = sigma::sqrt(a);
-        auto y = sigma::sqrt(c);
-        auto z = sigma::sqrt(c + d);
-        test_uncertain(x, 1.0, 0.05, 1);
-        test_uncertain(y, 2.0, 0.1, 1);
-        test_uncertain(z, 3.0, 0.1067, 2);
+        test_uncertain(sigma::sqrt(a), 1.0, 0.05, 1);
+        test_uncertain(sigma::sqrt(c), 2.0, 0.1, 1);
+        test_uncertain(sigma::sqrt(c + d), 3.0, 0.1067, 2);
     }
     SECTION("Exponential Function") {
-        auto x = sigma::exp(a);
-        test_uncertain(x, 2.7183, 0.2718, 1);
+        test_uncertain(sigma::exp(a), 2.7183, 0.2718, 1);
     }
     SECTION("Logarithms") {
         SECTION("Natural Log") {
-            auto x = sigma::log(a);
-            auto y = sigma::log(b);
-            test_uncertain(x, 0.0, 0.1, 1);
-            test_uncertain(y, 0.6931, 0.1, 1);
+            test_uncertain(sigma::log(a), 0.0, 0.1, 1);
+            test_uncertain(sigma::log(b), 0.6931, 0.1, 1);
         }
         SECTION("Log Base 10") {
-            auto x = sigma::log10(a);
-            auto y = sigma::log10(b);
-            test_uncertain(x, 0.0, 0.0434, 1);
-            test_uncertain(y, 0.3010, 0.0434, 1);
+            test_uncertain(sigma::log10(a), 0.0, 0.0434, 1);
+            test_uncertain(sigma::log10(b), 0.3010, 0.0434, 1);
         }
     }
 }
