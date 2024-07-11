@@ -1,19 +1,19 @@
-#include <catch2/catch.hpp>
 #include "sigma/independent_variable.hpp"
+#include <catch2/catch.hpp>
 #include <sstream>
 
-TEST_CASE("IndependentVariable") {
-    using testing_t = sigma::IndependentVariable<double>;
+TEMPLATE_TEST_CASE("IndependentVariable", "", float, double) {
+    using value_t   = TestType;
+    using testing_t = sigma::IndependentVariable<value_t>;
+
+    value_t mean = 1.0, std = 0.1;
+    auto value = testing_t(mean, std);
+
     SECTION("Constructors") {
-        SECTION("With Values") {
-            auto value = testing_t(1.0, 0.1);
-            REQUIRE(value.mean() == 1.0);
-            REQUIRE(value.std() == 0.1);
-        }
+        REQUIRE(value.mean() == mean);
+        REQUIRE(value.std() == std);
     }
     SECTION("operator<<(std::ostream, IndependentVariable)") {
-        double mean = 1.0, std = 0.1;
-        auto value = testing_t(mean, std);
         std::stringstream ss, corr;
         ss << value;
         corr << mean << "+/-" << std;

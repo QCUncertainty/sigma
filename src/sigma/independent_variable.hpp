@@ -20,6 +20,8 @@ public:
     /// The numeric type of the variable
     using value_t = ValueType;
 
+    IndependentVariable() = delete;
+
     /** @brief Construct an independent variable from mean and standard
      *         deviation
      *
@@ -29,7 +31,7 @@ public:
      *  @throw none No throw guarantee
      */
     IndependentVariable(value_t mean, value_t std) :
-      m_mean_(mean), m_std_(std){};
+      m_mean_(mean), m_std_(std) {};
 
     /** @brief Get the mean value of the variable
      *

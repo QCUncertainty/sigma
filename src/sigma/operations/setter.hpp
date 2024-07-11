@@ -74,7 +74,7 @@ public:
      *  @param dxda The partial derivative of the variable
      *  @param call_update_std Whether or not to update the standard deviation
      *                         after updating the dependencies. Primarily for
-     *                         minimizing repetitive work when multiple updates 
+     *                         minimizing repetitive work when multiple updates
      *                         will be performed
      *
      *  @throw none No throw guarantee
@@ -93,7 +93,7 @@ public:
      *              the dependency
      *  @param call_update_std Whether or not to update the standard deviation
      *                         after updating the dependencies. Primarily for
-     *                         minimizing repetitive work when multiple updates 
+     *                         minimizing repetitive work when multiple updates
      *                         will be performed
      *
      *  @throw none No throw guarantee
