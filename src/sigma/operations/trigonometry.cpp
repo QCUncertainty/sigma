@@ -1,10 +1,31 @@
 #include "setter.hpp"
 #include "sigma/operations/operations.hpp"
 #include <cmath>
+#include <math.h>
 
 namespace sigma {
 
 // -- Definitions --------------------------------------------------------------
+template<typename UncertainType>
+UncertainType degrees(const UncertainType& u) {
+    auto to_degrees = 180.0 / M_PI;
+    UncertainType c(u);
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(u.mean() * to_degrees);
+    c_setter.update_derivatives(to_degrees);
+    return c;
+}
+
+template<typename UncertainType>
+UncertainType radians(const UncertainType& u) {
+    auto to_radians = M_PI / 180.0;
+    UncertainType c(u);
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(u.mean() * to_radians);
+    c_setter.update_derivatives(to_radians);
+    return c;
+}
+
 template<typename UncertainType>
 UncertainType sin(const UncertainType& u) {
     UncertainType c(u);
@@ -92,6 +113,12 @@ UncertainType atan2(double y, const UncertainType& x) {
 }
 
 // -- Explicit Instantiation ---------------------------------------------------
+template UFloat degrees<UFloat>(const UFloat&);
+template UDouble degrees<UDouble>(const UDouble&);
+
+template UFloat radians<UFloat>(const UFloat&);
+template UDouble radians<UDouble>(const UDouble&);
+
 template UFloat sin<UFloat>(const UFloat&);
 template UDouble sin<UDouble>(const UDouble&);
 

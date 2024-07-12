@@ -4,6 +4,32 @@
 namespace sigma {
 
 /** @relates Uncertain
+ *  @brief Convert from radians to degrees
+ *
+ *  @tparam UncertainType The type of the variable
+ *  @param u The variable
+ *
+ *  @return The variable @p u in degrees
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename UncertainType>
+UncertainType degrees(const UncertainType& u);
+
+/** @relates Uncertain
+ *  @brief Convert from degrees to radians
+ *
+ *  @tparam UncertainType The type of the variable
+ *  @param u The variable
+ *
+ *  @return The variable @p u in radians
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename UncertainType>
+UncertainType radians(const UncertainType& u);
+
+/** @relates Uncertain
  *  @brief Sine of the variable
  *
  *  @tparam UncertainType The type of the variable
