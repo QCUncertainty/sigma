@@ -17,6 +17,32 @@ template<typename UncertainType>
 UncertainType abs(const UncertainType& u);
 
 /** @relates Uncertain
+ *  @brief Nearest integer not less than the given value
+ *
+ *  @tparam UncertainType The type of the variable
+ *  @param u The variable
+ *
+ *  @return The nearest integer not greater than @p u
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename UncertainType>
+UncertainType ceil(const UncertainType& u);
+
+/** @relates Uncertain
+ *  @brief Nearest integer not greater than the given value
+ *
+ *  @tparam UncertainType The type of the variable
+ *  @param u The variable
+ *
+ *  @return The nearest integer not greater than @p u
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename UncertainType>
+UncertainType floor(const UncertainType& u);
+
+/** @relates Uncertain
  *  @brief Floating point module
  *
  *  @tparam UncertainType The type of the variable

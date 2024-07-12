@@ -16,6 +16,22 @@ UncertainType abs(const UncertainType& u) {
 }
 
 template<typename UncertainType>
+UncertainType ceil(const UncertainType& u) {
+    UncertainType c;
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(std::ceil(u.mean()));
+    return c;
+}
+
+template<typename UncertainType>
+UncertainType floor(const UncertainType& u) {
+    UncertainType c;
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(std::floor(u.mean()));
+    return c;
+}
+
+template<typename UncertainType>
 UncertainType fmod(const UncertainType& a, const UncertainType& b) {
     auto dxda = 1.0;
     auto dxdb = -std::floor(a.mean() / b.mean());
@@ -48,6 +64,12 @@ UncertainType fmod(double a, const UncertainType& b) {
 // -- Explicit Instantiation ---------------------------------------------------
 template UFloat abs<UFloat>(const UFloat&);
 template UDouble abs<UDouble>(const UDouble&);
+
+template UFloat ceil<UFloat>(const UFloat&);
+template UDouble ceil<UDouble>(const UDouble&);
+
+template UFloat floor<UFloat>(const UFloat&);
+template UDouble floor<UDouble>(const UDouble&);
 
 template UFloat fmod<UFloat>(const UFloat& a, const UFloat& b);
 template UDouble fmod<UDouble>(const UDouble& a, const UDouble& b);
