@@ -42,4 +42,13 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
             test_uncertain(sigma::log10(b), 0.3010, 0.0434, 1);
         }
     }
+    SECTION("Hypotenuse") {
+        SECTION("Two Uncertain Variables") {
+            test_uncertain(sigma::hypot(a, b), 2.2361, 0.1844, 2);
+        }
+        SECTION("One Uncertain Variable") {
+            test_uncertain(sigma::hypot(a, 2.0), 2.2361, 0.0447, 1);
+            test_uncertain(sigma::hypot(2.0, a), 2.2361, 0.0447, 1);
+        }
+    }
 }

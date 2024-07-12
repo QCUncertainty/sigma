@@ -39,7 +39,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    Setter(uncertain_t& u) : m_u_(u) {}
+    Setter(uncertain_t& u) : m_x_(u) {}
 
     /** @brief Update the mean of the wrapped variable
      *
@@ -47,9 +47,9 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    void update_mean(value_t mean) { m_u_.m_mean_ = mean; }
+    void update_mean(value_t mean) { m_x_.m_mean_ = mean; }
 
-    /** @brief Calculate the standatd deviation of m_u_ based on the
+    /** @brief Calculate the standatd deviation of m_x_ based on the
      *         uncertainty of its dependencies.
      *
      *  @param clean Whether or not to remove dependencies with partial
@@ -58,15 +58,15 @@ public:
      *  @throw none No throw guarantee
      */
     void update_std(bool clean = false) {
-        m_u_.m_std_ = 0.0;
-        for(const auto& [dep, deriv] : m_u_.m_deps_) {
+        m_x_.m_std_ = 0.0;
+        for(const auto& [dep, deriv] : m_x_.m_deps_) {
             if(deriv == 0.0) {
-                if(clean) m_u_.m_deps_.erase(dep);
+                if(clean) m_x_.m_deps_.erase(dep);
                 continue;
             }
-            m_u_.m_std_ += std::pow(dep.get()->std() * deriv, 2.0);
+            m_x_.m_std_ += std::pow(dep.get()->std() * deriv, 2.0);
         }
-        m_u_.m_std_ = std::sqrt(m_u_.m_std_);
+        m_x_.m_std_ = std::sqrt(m_x_.m_std_);
     }
 
     /** @brief Update of existing derivatives
@@ -80,8 +80,8 @@ public:
      *  @throw none No throw guarantee
      */
     void update_derivatives(value_t dxda, bool call_update_std = true) {
-        for(const auto& [dep, deriv] : m_u_.m_deps_) {
-            m_u_.m_deps_[dep] *= dxda;
+        for(const auto& [dep, deriv] : m_x_.m_deps_) {
+            m_x_.m_deps_[dep] *= dxda;
         }
         if(call_update_std) update_std();
     }
@@ -102,10 +102,10 @@ public:
                             bool call_update_std = true) {
         for(const auto& [dep, deriv] : deps) {
             auto new_deriv = dxda * deriv;
-            if(m_u_.m_deps_.count(dep) != 0) {
-                m_u_.m_deps_[dep] += new_deriv;
+            if(m_x_.m_deps_.count(dep) != 0) {
+                m_x_.m_deps_[dep] += new_deriv;
             } else {
-                m_u_.m_deps_.emplace(std::make_pair(std::move(dep), new_deriv));
+                m_x_.m_deps_.emplace(std::make_pair(std::move(dep), new_deriv));
             }
         }
         if(call_update_std) update_std();
@@ -129,7 +129,7 @@ public:
 
 private:
     /// The variable being modified
-    uncertain_t& m_u_;
+    uncertain_t& m_x_;
 };
 
 } // namespace sigma

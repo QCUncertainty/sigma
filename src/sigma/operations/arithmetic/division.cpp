@@ -30,12 +30,12 @@ UncertainType operator/(double lhs, const UncertainType& rhs) {
 
 template<typename UncertainType>
 UncertainType& operator/=(UncertainType& lhs, const UncertainType& rhs) {
-    auto dxda = 1.0 / rhs.mean();
-    auto dxdb = -lhs.mean() / std::pow(rhs.mean(), 2.0);
+    auto dcda = 1.0 / rhs.mean();
+    auto dcdb = -lhs.mean() / std::pow(rhs.mean(), 2.0);
     Setter<UncertainType> lhs_setter(lhs);
     lhs_setter.update_mean(lhs.mean() / rhs.mean());
-    lhs_setter.update_derivatives(dxda, false);
-    lhs_setter.update_derivatives(rhs.deps(), dxdb);
+    lhs_setter.update_derivatives(dcda, false);
+    lhs_setter.update_derivatives(rhs.deps(), dcdb);
     return lhs;
 }
 

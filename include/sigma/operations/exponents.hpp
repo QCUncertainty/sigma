@@ -84,4 +84,11 @@ UncertainType log(const UncertainType& u);
 template<typename UncertainType>
 UncertainType log10(const UncertainType& u);
 
+template<typename UncertainType>
+UncertainType hypot(const UncertainType& a, const UncertainType& b);
+template<typename UncertainType>
+UncertainType hypot(const UncertainType& a, double b);
+template<typename UncertainType>
+UncertainType hypot(double a, const UncertainType& b);
+
 } // namespace sigma

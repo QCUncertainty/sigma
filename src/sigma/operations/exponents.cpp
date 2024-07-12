@@ -16,12 +16,12 @@ UncertainType pow(const UncertainType& u, double exp) {
 
 template<typename UncertainType>
 UncertainType pow(const UncertainType& u, const UncertainType& exp) {
-    auto dxda = exp.mean() * std::pow(u.mean(), exp.mean() - 1);
-    auto dxdb = std::log(u.mean()) * std::pow(u.mean(), exp.mean());
+    auto dcda = exp.mean() * std::pow(u.mean(), exp.mean() - 1);
+    auto dcdb = std::log(u.mean()) * std::pow(u.mean(), exp.mean());
     UncertainType c;
     Setter<UncertainType> c_setter(c);
     c_setter.update_mean(std::pow(u.mean(), exp.mean()));
-    c_setter.update_derivatives(u.deps(), dxda, exp.deps(), dxdb);
+    c_setter.update_derivatives(u.deps(), dcda, exp.deps(), dcdb);
     return c;
 }
 
@@ -57,12 +57,38 @@ UncertainType log10(const UncertainType& u) {
     return c;
 }
 
-// -- Explicit Instantiation ---------------------------------------------------
-template UFloat pow<UFloat>(const UFloat&, double);
-template UFloat pow<UFloat>(const UFloat&, const UFloat&);
+template<typename UncertainType>
+UncertainType hypot(const UncertainType& a, const UncertainType& b) {
+    auto dcda = a.mean() / std::hypot(a.mean(), b.mean());
+    auto dcdb = b.mean() / std::hypot(a.mean(), b.mean());
+    UncertainType c;
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(std::hypot(a.mean(), b.mean()));
+    c_setter.update_derivatives(a.deps(), dcda, b.deps(), dcdb);
+    return c;
+}
 
-template UDouble pow<UDouble>(const UDouble&, double);
+template<typename UncertainType>
+UncertainType hypot(const UncertainType& a, double b) {
+    UncertainType c(a);
+    Setter<UncertainType> c_setter(c);
+    c_setter.update_mean(std::hypot(a.mean(), b));
+    c_setter.update_derivatives(a.mean() / std::hypot(a.mean(), b));
+    return c;
+}
+
+template<typename UncertainType>
+UncertainType hypot(double a, const UncertainType& b) {
+    return hypot(b, a);
+}
+
+
+// -- Explicit Instantiation ---------------------------------------------------
+template UFloat pow<UFloat>(const UFloat&, const UFloat&);
 template UDouble pow<UDouble>(const UDouble&, const UDouble&);
+
+template UFloat pow<UFloat>(const UFloat&, double);
+template UDouble pow<UDouble>(const UDouble&, double);
 
 template UFloat sqrt<UFloat>(const UFloat&);
 template UDouble sqrt<UDouble>(const UDouble&);
@@ -75,5 +101,14 @@ template UDouble log<UDouble>(const UDouble&);
 
 template UFloat log10<UFloat>(const UFloat&);
 template UDouble log10<UDouble>(const UDouble&);
+
+template UFloat hypot<UFloat>(const UFloat&, const UFloat&);
+template UDouble hypot<UDouble>(const UDouble&, const UDouble&);
+
+template UFloat hypot<UFloat>(const UFloat&, double);
+template UDouble hypot<UDouble>(const UDouble&, double);
+
+template UFloat hypot<UFloat>(double, const UFloat&);
+template UDouble hypot<UDouble>(double, const UDouble&);
 
 } // namespace sigma
