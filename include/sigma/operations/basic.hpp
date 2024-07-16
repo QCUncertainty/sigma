@@ -19,6 +19,8 @@ UncertainType abs(const UncertainType& u);
 /** @relates Uncertain
  *  @brief Nearest integer not less than the given value
  *
+ *  Note that this returns an UncertainType value with no dependencies
+ *
  *  @tparam UncertainType The type of the variable
  *  @param u The variable
  *
@@ -31,6 +33,8 @@ UncertainType ceil(const UncertainType& u);
 
 /** @relates Uncertain
  *  @brief Nearest integer not greater than the given value
+ * 
+ *  Note that this returns an UncertainType value with no dependencies
  *
  *  @tparam UncertainType The type of the variable
  *  @param u The variable
