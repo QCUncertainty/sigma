@@ -26,12 +26,12 @@ public:
      *         deviation
      *
      *  @param mean The average value of the variable
-     *  @param std The standard deviation of the variable
+     *  @param sd The standard deviation of the variable
      *
      *  @throw none No throw guarantee
      */
-    IndependentVariable(value_t mean, value_t std) :
-      m_mean_(mean), m_std_(std) {};
+    IndependentVariable(value_t mean, value_t sd) :
+      m_mean_(mean), m_sd_(sd) {};
 
     /** @brief Get the mean value of the variable
      *
@@ -47,14 +47,14 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    value_t std() const { return m_std_; }
+    value_t sd() const { return m_sd_; }
 
 private:
     /// Mean value of the variable
     value_t m_mean_;
 
     /// Standard deviation of the variable
-    value_t m_std_;
+    value_t m_sd_;
 
 }; // class IndependentVariable
 
@@ -73,7 +73,7 @@ private:
 template<typename ValueType>
 std::ostream& operator<<(std::ostream& os,
                          const IndependentVariable<ValueType>& u) {
-    os << u.mean() << "+/-" << u.std();
+    os << u.mean() << "+/-" << u.sd();
     return os;
 }
 
@@ -90,7 +90,7 @@ std::ostream& operator<<(std::ostream& os,
 template<typename ValueType>
 bool operator==(const IndependentVariable<ValueType>& lhs,
                 const IndependentVariable<ValueType>& rhs) {
-    return (lhs.mean() == rhs.mean()) && (lhs.std() == rhs.std());
+    return (lhs.mean() == rhs.mean()) && (lhs.sd() == rhs.sd());
 }
 
 /** @relates IndependentVariable

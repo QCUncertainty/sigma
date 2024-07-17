@@ -6,17 +6,17 @@ TEMPLATE_TEST_CASE("IndependentVariable", "", float, double) {
     using value_t   = TestType;
     using testing_t = sigma::IndependentVariable<value_t>;
 
-    value_t mean = 1.0, std = 0.1;
-    auto value = testing_t(mean, std);
+    value_t mean = 1.0, sd = 0.1;
+    auto value = testing_t(mean, sd);
 
     SECTION("Constructors") {
         REQUIRE(value.mean() == mean);
-        REQUIRE(value.std() == std);
+        REQUIRE(value.sd() == sd);
     }
     SECTION("operator<<(std::ostream, IndependentVariable)") {
         std::stringstream ss, corr;
         ss << value;
-        corr << mean << "+/-" << std;
+        corr << mean << "+/-" << sd;
         REQUIRE(ss.str() == corr.str());
     }
     SECTION("Comparisons") {

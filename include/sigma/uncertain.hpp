@@ -47,11 +47,11 @@ public:
      *  independent variable.
      *
      *  @param mean The average value of the variable
-     *  @param std The standard deviation of the variable
+     *  @param sd The standard deviation of the variable
      *
      *  @throw none No throw guarantee
      */
-    Uncertain(value_t mean, value_t std);
+    Uncertain(value_t mean, value_t sd);
 
     /** @brief Get the mean value of the variable
      *
@@ -67,7 +67,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    value_t std() const { return m_std_; }
+    value_t sd() const { return m_sd_; }
 
     /** @brief Get the dependencies of the variable
      *
@@ -82,7 +82,7 @@ private:
     value_t m_mean_;
 
     /// Standard deviation of the variable
-    value_t m_std_;
+    value_t m_sd_;
 
     /** Map of the variables this value is dependent on to their partial
      *  derivatives with respect to this value
@@ -100,10 +100,10 @@ private:
 // -- Out-of-line Definitions --------------------------------------------------
 
 template<typename ValueType>
-Uncertain<ValueType>::Uncertain(value_t mean, value_t std) :
-  m_mean_(mean), m_std_(std) {
+Uncertain<ValueType>::Uncertain(value_t mean, value_t sd) :
+  m_mean_(mean), m_sd_(sd) {
     m_deps_.emplace(
-      std::make_pair(std::make_shared<ind_var_t>(mean, std), 1.0));
+      std::make_pair(std::make_shared<ind_var_t>(mean, sd), 1.0));
 }
 
 // -- Utility functions --------------------------------------------------------
@@ -122,7 +122,7 @@ Uncertain<ValueType>::Uncertain(value_t mean, value_t std) :
  */
 template<typename ValueType>
 std::ostream& operator<<(std::ostream& os, const Uncertain<ValueType>& u) {
-    os << u.mean() << "+/-" << u.std();
+    os << u.mean() << "+/-" << u.sd();
     return os;
 }
 
@@ -143,7 +143,7 @@ bool operator==(const Uncertain<ValueType1>& lhs,
         return false;
     } else {
         if(lhs.mean() != rhs.mean()) return false;
-        if(lhs.std() != rhs.std()) return false;
+        if(lhs.sd() != rhs.sd()) return false;
         if(lhs.deps() != rhs.deps()) return false;
         return true;
     }

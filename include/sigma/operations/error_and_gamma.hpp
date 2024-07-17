@@ -7,53 +7,53 @@ namespace sigma {
  *  @brief Error function
  *
  *  @tparam UncertainType The type of the variable
- *  @param u The variable
+ *  @param a The variable
  *
- *  @return The error function value of @p u
+ *  @return The error function value of @p a
  *
  *  @throw none No throw guarantee
  */
 template<typename UncertainType>
-UncertainType erf(const UncertainType& u);
+UncertainType erf(const UncertainType& a);
 
 /** @relates Uncertain
  *  @brief Complementary error function
  *
  *  @tparam UncertainType The type of the variable
- *  @param u The variable
+ *  @param a The variable
  *
- *  @return The complementary error function value of @p u
+ *  @return The complementary error function value of @p a
  *
  *  @throw none No throw guarantee
  */
 template<typename UncertainType>
-UncertainType erfc(const UncertainType& u);
+UncertainType erfc(const UncertainType& a);
 
 /** @relates Uncertain
  *  @brief Gamma function
  *
  *  @tparam UncertainType The type of the variable
- *  @param u The variable
+ *  @param a The variable
  *
- *  @return The gamma function value of @p u
+ *  @return The gamma function value of @p a
  *
  *  @throw none No throw guarantee
  */
 template<typename UncertainType>
-UncertainType tgamma(const UncertainType& u);
+UncertainType tgamma(const UncertainType& a);
 
 /** @relates Uncertain
  *  @brief Gamma function Natural Logarithm
  *
  *  @tparam UncertainType The type of the variable
- *  @param u The variable
+ *  @param a The variable
  *
- *  @return The natural logarithm of the gamma function value of @p u
+ *  @return The natural logarithm of the gamma function value of @p a
  *
  *  @throw none No throw guarantee
  */
 template<typename UncertainType>
-UncertainType lgamma(const UncertainType& u);
+UncertainType lgamma(const UncertainType& a);
 
 } // namespace sigma
 

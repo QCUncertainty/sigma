@@ -7,14 +7,14 @@ namespace sigma {
  *  @brief Negation Operation
  *
  *  @tparam UncertainType The type of the variable
- *  @param u The variable being negated
+ *  @param a The variable being negated
  *
- *  @return A copy of @p u, but with the sign of the mean reversed
+ *  @return A copy of @p a, but with the sign of the mean reversed
  *
  *  @throw none No throw guarantee
  */
 template<typename UncertainType>
-UncertainType operator-(const UncertainType& u);
+UncertainType operator-(const UncertainType& a);
 
 /** @relates Uncertain
  *  @brief Addition Operation

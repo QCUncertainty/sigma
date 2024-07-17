@@ -57,16 +57,16 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    void update_std(bool clean = false) {
-        m_x_.m_std_ = 0.0;
+    void update_sd(bool clean = false) {
+        m_x_.m_sd_ = 0.0;
         for(const auto& [dep, deriv] : m_x_.m_deps_) {
             if(deriv == 0.0) {
                 if(clean) m_x_.m_deps_.erase(dep);
                 continue;
             }
-            m_x_.m_std_ += std::pow(dep.get()->std() * deriv, 2.0);
+            m_x_.m_sd_ += std::pow(dep.get()->sd() * deriv, 2.0);
         }
-        m_x_.m_std_ = std::sqrt(m_x_.m_std_);
+        m_x_.m_sd_ = std::sqrt(m_x_.m_sd_);
     }
 
     /** @brief Update of existing derivatives
@@ -83,7 +83,7 @@ public:
         for(const auto& [dep, deriv] : m_x_.m_deps_) {
             m_x_.m_deps_[dep] *= dxda;
         }
-        if(call_update_std) update_std();
+        if(call_update_std) update_sd();
     }
 
     /** @brief Update/addition of derivatives
@@ -108,7 +108,7 @@ public:
                 m_x_.m_deps_.emplace(std::make_pair(std::move(dep), new_deriv));
             }
         }
-        if(call_update_std) update_std();
+        if(call_update_std) update_sd();
     }
 
     /** @brief Binary update/addition of derivatives
@@ -124,7 +124,7 @@ public:
                             const deps_map_t& b_deps, value_t dxdb) {
         update_derivatives(a_deps, dxda, false);
         update_derivatives(b_deps, dxdb, false);
-        update_std();
+        update_sd();
     }
 
 private:

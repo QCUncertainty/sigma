@@ -12,50 +12,50 @@ NumericType numeric_derivative(FunctionType f, NumericType a) {
     auto step      = step_size * std::abs(a);
     auto a_plus    = f(a + step);
     auto a_minus   = f(a - step);
-    auto dxda      = (a_plus - a_minus) / (2 * step);
-    return dxda;
+    auto dcda      = (a_plus - a_minus) / (2 * step);
+    return dcda;
 }
 
 // -- Definitions --------------------------------------------------------------
 template<typename UncertainType>
-UncertainType erf(const UncertainType& u) {
-    auto dxda = std::exp(-std::pow(u.mean(), 2)) * (2 / std::sqrt(M_PI));
-    UncertainType c(u);
+UncertainType erf(const UncertainType& a) {
+    auto dcda = std::exp(-std::pow(a.mean(), 2)) * (2 / std::sqrt(M_PI));
+    UncertainType c(a);
     Setter<UncertainType> c_setter(c);
-    c_setter.update_mean(std::erf(u.mean()));
-    c_setter.update_derivatives(dxda);
+    c_setter.update_mean(std::erf(a.mean()));
+    c_setter.update_derivatives(dcda);
     return c;
 }
 
 template<typename UncertainType>
-UncertainType erfc(const UncertainType& u) {
-    auto dxda = -std::exp(-std::pow(u.mean(), 2)) * (2 / std::sqrt(M_PI));
-    UncertainType c(u);
+UncertainType erfc(const UncertainType& a) {
+    auto dcda = -std::exp(-std::pow(a.mean(), 2)) * (2 / std::sqrt(M_PI));
+    UncertainType c(a);
     Setter<UncertainType> c_setter(c);
-    c_setter.update_mean(std::erfc(u.mean()));
-    c_setter.update_derivatives(dxda);
+    c_setter.update_mean(std::erfc(a.mean()));
+    c_setter.update_derivatives(dcda);
     return c;
 }
 
 template<typename UncertainType>
-UncertainType tgamma(const UncertainType& u) {
-    auto func = [](decltype(u.mean()) a) { return std::tgamma(a); };
-    auto dxda = numeric_derivative(func, u.mean());
-    UncertainType c(u);
+UncertainType tgamma(const UncertainType& a) {
+    auto func = [](decltype(a.mean()) x) { return std::tgamma(x); };
+    auto dcda = numeric_derivative(func, a.mean());
+    UncertainType c(a);
     Setter<UncertainType> c_setter(c);
-    c_setter.update_mean(std::tgamma(u.mean()));
-    c_setter.update_derivatives(dxda);
+    c_setter.update_mean(std::tgamma(a.mean()));
+    c_setter.update_derivatives(dcda);
     return c;
 }
 
 template<typename UncertainType>
-UncertainType lgamma(const UncertainType& u) {
-    auto func = [](decltype(u.mean()) a) { return std::lgamma(a); };
-    auto dxda = numeric_derivative(func, u.mean());
-    UncertainType c(u);
+UncertainType lgamma(const UncertainType& a) {
+    auto func = [](decltype(a.mean()) x) { return std::lgamma(x); };
+    auto dcda = numeric_derivative(func, a.mean());
+    UncertainType c(a);
     Setter<UncertainType> c_setter(c);
-    c_setter.update_mean(std::lgamma(u.mean()));
-    c_setter.update_derivatives(dxda);
+    c_setter.update_mean(std::lgamma(a.mean()));
+    c_setter.update_derivatives(dcda);
     return c;
 }
 
