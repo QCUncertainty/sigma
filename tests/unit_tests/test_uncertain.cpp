@@ -28,8 +28,16 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             test_uncertain(value, 0.0, 0.0, 0);
         }
         SECTION("With Values") {
-            auto value = testing_t(1.0, 0.1);
-            test_uncertain(value, 1.0, 0.1, 1);
+            // Mix up the floating point types to check implicit conversions
+            float mean1  = 1.0;
+            double mean2 = 1.0;
+            double std1  = 0.1;
+            float std2   = 0.1;
+
+            auto first  = testing_t(mean1, std1);
+            auto second = testing_t(mean2, std2);
+            test_uncertain(first, 1.0, 0.1, 1);
+            test_uncertain(second, 1.0, 0.1, 1);
         }
         SECTION("Copy") {
             auto first = testing_t(1.0, 0.1);
