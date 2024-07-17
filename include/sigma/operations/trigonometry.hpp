@@ -126,3 +126,5 @@ template<typename UncertainType>
 UncertainType atan2(double y, const UncertainType& x);
 
 } // namespace sigma
+
+#include "trigonometry.ipp"

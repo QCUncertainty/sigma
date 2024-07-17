@@ -92,3 +92,5 @@ template<typename UncertainType>
 UncertainType hypot(double a, const UncertainType& b);
 
 } // namespace sigma
+
+#include "exponents.ipp"

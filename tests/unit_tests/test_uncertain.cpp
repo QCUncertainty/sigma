@@ -4,9 +4,23 @@
 
 using testing::test_uncertain;
 
+template<typename T>
+struct test_traits;
+
+template<>
+struct test_traits<sigma::UFloat> {
+    using other_t = sigma::UDouble;
+};
+
+template<>
+struct test_traits<sigma::UDouble> {
+    using other_t = sigma::UFloat;
+};
+
 TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
     using testing_t = TestType;
     using value_t   = typename testing_t::value_t;
+    using other_t   = typename test_traits<TestType>::other_t;
 
     SECTION("Constructors") {
         SECTION("Default") {
@@ -14,8 +28,16 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             test_uncertain(value, 0.0, 0.0, 0);
         }
         SECTION("With Values") {
-            auto value = testing_t(1.0, 0.1);
-            test_uncertain(value, 1.0, 0.1, 1);
+            // Mix up the floating point types to check implicit conversions
+            float mean1  = 1.0;
+            double mean2 = 1.0;
+            double std1  = 0.1;
+            float std2   = 0.1;
+
+            auto first  = testing_t(mean1, std1);
+            auto second = testing_t(mean2, std2);
+            test_uncertain(first, 1.0, 0.1, 1);
+            test_uncertain(second, 1.0, 0.1, 1);
         }
         SECTION("Copy") {
             auto first = testing_t(1.0, 0.1);
@@ -56,6 +78,10 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             auto second = first;
             REQUIRE(first == second);
             REQUIRE_FALSE(first != second);
+        }
+        SECTION("Different Value Type") {
+            auto second = other_t(1.1, 0.1);
+            REQUIRE_FALSE(first == second);
         }
         SECTION("Different Mean") {
             auto second = testing_t(1.1, 0.1);

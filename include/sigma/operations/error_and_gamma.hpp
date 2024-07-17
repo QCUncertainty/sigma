@@ -56,3 +56,5 @@ template<typename UncertainType>
 UncertainType lgamma(const UncertainType& u);
 
 } // namespace sigma
+
+#include "error_and_gamma.ipp"

@@ -1,10 +1,10 @@
-#include "setter.hpp"
-#include "sigma/operations/operations.hpp"
+#pragma once
+
+#include "sigma/detail_/setter.hpp"
 #include <cmath>
 
 namespace sigma {
 
-// -- Definitions --------------------------------------------------------------
 template<typename UncertainType>
 UncertainType sinh(const UncertainType& u) {
     UncertainType c(u);
@@ -58,24 +58,5 @@ UncertainType atanh(const UncertainType& u) {
     c_setter.update_derivatives(1.0 / (1.0 - std::pow(u.mean(), 2.0)));
     return c;
 }
-
-// -- Explicit Instantiation ---------------------------------------------------
-template UFloat sinh<UFloat>(const UFloat&);
-template UDouble sinh<UDouble>(const UDouble&);
-
-template UFloat cosh<UFloat>(const UFloat&);
-template UDouble cosh<UDouble>(const UDouble&);
-
-template UFloat tanh<UFloat>(const UFloat&);
-template UDouble tanh<UDouble>(const UDouble&);
-
-template UFloat asinh<UFloat>(const UFloat&);
-template UDouble asinh<UDouble>(const UDouble&);
-
-template UFloat acosh<UFloat>(const UFloat&);
-template UDouble acosh<UDouble>(const UDouble&);
-
-template UFloat atanh<UFloat>(const UFloat&);
-template UDouble atanh<UDouble>(const UDouble&);
 
 } // namespace sigma
