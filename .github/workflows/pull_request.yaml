@@ -13,9 +13,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Install Dependencies
+        run:  |
+          sudo apt-get install -y doxygen ninja-build
       - name: Build and Test
         run:  |
-          cmake -Bbuild -H. -DCMAKE_TOOLCHAIN_FILE=./.github/test_toolchain.cmake
+          cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE=./.github/test_toolchain.cmake
           cmake --build build --parallel
           cd build
           ctest -VV
