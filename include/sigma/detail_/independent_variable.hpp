@@ -6,9 +6,10 @@ namespace sigma {
 /** @brief Models an independent variable.
  *
  *  An independent variable is one that is not correlated to any other variable.
- *  It has a mean value and a standard deviation.
+ *  It has a mean value and a standard deviation, though this class only keeps
+ *  track of the standard deviation. 
  *
- *  @tparam ValueType The type of the value and standard deviation
+ *  @tparam ValueType The type of the standard deviation
  *
  */
 template<typename ValueType>
@@ -25,21 +26,11 @@ public:
     /** @brief Construct an independent variable from mean and standard
      *         deviation
      *
-     *  @param mean The average value of the variable
      *  @param sd The standard deviation of the variable
      *
      *  @throw none No throw guarantee
      */
-    IndependentVariable(value_t mean, value_t sd) :
-      m_mean_(mean), m_sd_(sd) {};
-
-    /** @brief Get the mean value of the variable
-     *
-     *  @return The value of the mean
-     *
-     *  @throw none No throw guarantee
-     */
-    value_t mean() const { return m_mean_; }
+    IndependentVariable(value_t sd) : m_sd_(sd) {};
 
     /** @brief Get the standard deviation of the variable
      *
@@ -50,63 +41,10 @@ public:
     value_t sd() const { return m_sd_; }
 
 private:
-    /// Mean value of the variable
-    value_t m_mean_;
 
     /// Standard deviation of the variable
     value_t m_sd_;
 
 }; // class IndependentVariable
-
-/** @relates IndependentVariable
- *  @brief Overload stream insertion to print independent variable
- *
- *  @tparam ValueType The numerical type of the variable
- *  @param os The ostream to write to
- *  @param u The independent variable to write
- *
- *  @return The modified ostream instance
- *
- *  @throws std::ios_base::failure if anything goes wrong while writing.
- *          Weak throw guarantee.
- */
-template<typename ValueType>
-std::ostream& operator<<(std::ostream& os,
-                         const IndependentVariable<ValueType>& u) {
-    os << u.mean() << "+/-" << u.sd();
-    return os;
-}
-
-/** @relates IndependentVariable
- *  @brief Compare two independent Variables
- *
- *  @tparam ValueType The numerical type of the variable
- *  @param lhs The first variable
- *  @param rhs The second variable
- *
- *  @return Whether the instances are equivalent
- *
- */
-template<typename ValueType>
-bool operator==(const IndependentVariable<ValueType>& lhs,
-                const IndependentVariable<ValueType>& rhs) {
-    return (lhs.mean() == rhs.mean()) && (lhs.sd() == rhs.sd());
-}
-
-/** @relates IndependentVariable
- *  @brief Compare two independent Variables
- *
- *  @tparam ValueType The numerical type of the variable
- *  @param lhs
- *  @param rhs
- *
- *  @return Whether the instances are not equivalent
- *
- */
-template<typename ValueType>
-bool operator!=(const IndependentVariable<ValueType>& lhs,
-                const IndependentVariable<ValueType>& rhs) {
-    return !(lhs == rhs);
-}
 
 } // namespace sigma

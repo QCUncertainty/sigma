@@ -102,8 +102,7 @@ private:
 template<typename ValueType>
 Uncertain<ValueType>::Uncertain(value_t mean, value_t sd) :
   m_mean_(mean), m_sd_(sd) {
-    m_deps_.emplace(
-      std::make_pair(std::make_shared<ind_var_t>(mean, sd), 1.0));
+    m_deps_.emplace(std::make_pair(std::make_shared<ind_var_t>(sd), 1.0));
 }
 
 // -- Utility functions --------------------------------------------------------
