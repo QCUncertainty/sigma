@@ -3,7 +3,7 @@ name: Pull Request Workflow
 on:
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   # Build and test C++ libraries.
