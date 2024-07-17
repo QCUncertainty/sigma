@@ -141,3 +141,5 @@ template<typename UncertainType>
 UncertainType& operator/=(UncertainType& lhs, double rhs);
 
 } // namespace sigma
+
+#include "arithmetic.ipp"

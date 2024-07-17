@@ -96,3 +96,5 @@ template<typename UncertainType>
 UncertainType trunc(const UncertainType& a);
 
 } // namespace sigma
+
+#include "basic.ipp"

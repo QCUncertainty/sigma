@@ -1,11 +1,10 @@
-#include "setter.hpp"
-#include "sigma/operations/operations.hpp"
+#pragma once
+
+#include "sigma/detail_/setter.hpp"
 #include <cmath>
-#include <math.h>
 
 namespace sigma {
 
-// -- Definitions --------------------------------------------------------------
 template<typename UncertainType>
 UncertainType degrees(const UncertainType& u) {
     auto to_degrees = 180.0 / M_PI;
@@ -111,39 +110,5 @@ UncertainType atan2(double y, const UncertainType& x) {
     c_setter.update_derivatives(dcda);
     return c;
 }
-
-// -- Explicit Instantiation ---------------------------------------------------
-template UFloat degrees<UFloat>(const UFloat&);
-template UDouble degrees<UDouble>(const UDouble&);
-
-template UFloat radians<UFloat>(const UFloat&);
-template UDouble radians<UDouble>(const UDouble&);
-
-template UFloat sin<UFloat>(const UFloat&);
-template UDouble sin<UDouble>(const UDouble&);
-
-template UFloat cos<UFloat>(const UFloat&);
-template UDouble cos<UDouble>(const UDouble&);
-
-template UFloat tan<UFloat>(const UFloat&);
-template UDouble tan<UDouble>(const UDouble&);
-
-template UFloat asin<UFloat>(const UFloat&);
-template UDouble asin<UDouble>(const UDouble&);
-
-template UFloat acos<UFloat>(const UFloat&);
-template UDouble acos<UDouble>(const UDouble&);
-
-template UFloat atan<UFloat>(const UFloat&);
-template UDouble atan<UDouble>(const UDouble&);
-
-template UFloat atan2<UFloat>(const UFloat&, const UFloat&);
-template UDouble atan2<UDouble>(const UDouble&, const UDouble&);
-
-template UFloat atan2<UFloat>(const UFloat&, double);
-template UDouble atan2<UDouble>(const UDouble&, double);
-
-template UFloat atan2<UFloat>(double, const UFloat&);
-template UDouble atan2<UDouble>(double, const UDouble&);
 
 } // namespace sigma

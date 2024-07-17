@@ -1,11 +1,9 @@
-#include "setter.hpp"
-#include "sigma/operations/operations.hpp"
+#pragma once
+
+#include "sigma/detail_/setter.hpp"
 #include <cmath>
-#include <math.h>
 
 namespace sigma {
-
-// -- Numeric Derivative -------------------------------------------------------
 
 template<typename FunctionType, typename NumericType>
 NumericType numeric_derivative(FunctionType f, NumericType a) {
@@ -60,18 +58,5 @@ UncertainType lgamma(const UncertainType& u) {
     c_setter.update_derivatives(dxda);
     return c;
 }
-
-// -- Explicit Instantiation ---------------------------------------------------
-template UFloat erf<UFloat>(const UFloat&);
-template UDouble erf<UDouble>(const UDouble&);
-
-template UFloat erfc<UFloat>(const UFloat&);
-template UDouble erfc<UDouble>(const UDouble&);
-
-template UFloat tgamma<UFloat>(const UFloat&);
-template UDouble tgamma<UDouble>(const UDouble&);
-
-template UFloat lgamma<UFloat>(const UFloat& u);
-template UDouble lgamma<UDouble>(const UDouble& u);
 
 } // namespace sigma

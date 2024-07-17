@@ -82,3 +82,5 @@ template<typename UncertainType>
 UncertainType atanh(const UncertainType& u);
 
 } // namespace sigma
+
+#include "hyperbolic.ipp"

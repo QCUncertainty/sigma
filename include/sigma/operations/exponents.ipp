@@ -1,10 +1,10 @@
-#include "setter.hpp"
-#include "sigma/operations/operations.hpp"
+#pragma once
+
+#include "sigma/detail_/setter.hpp"
 #include <cmath>
 
 namespace sigma {
 
-// -- Definitions --------------------------------------------------------------
 template<typename UncertainType>
 UncertainType pow(const UncertainType& u, double exp) {
     UncertainType c(u);
@@ -81,34 +81,5 @@ template<typename UncertainType>
 UncertainType hypot(double a, const UncertainType& b) {
     return hypot(b, a);
 }
-
-
-// -- Explicit Instantiation ---------------------------------------------------
-template UFloat pow<UFloat>(const UFloat&, const UFloat&);
-template UDouble pow<UDouble>(const UDouble&, const UDouble&);
-
-template UFloat pow<UFloat>(const UFloat&, double);
-template UDouble pow<UDouble>(const UDouble&, double);
-
-template UFloat sqrt<UFloat>(const UFloat&);
-template UDouble sqrt<UDouble>(const UDouble&);
-
-template UFloat exp<UFloat>(const UFloat&);
-template UDouble exp<UDouble>(const UDouble&);
-
-template UFloat log<UFloat>(const UFloat&);
-template UDouble log<UDouble>(const UDouble&);
-
-template UFloat log10<UFloat>(const UFloat&);
-template UDouble log10<UDouble>(const UDouble&);
-
-template UFloat hypot<UFloat>(const UFloat&, const UFloat&);
-template UDouble hypot<UDouble>(const UDouble&, const UDouble&);
-
-template UFloat hypot<UFloat>(const UFloat&, double);
-template UDouble hypot<UDouble>(const UDouble&, double);
-
-template UFloat hypot<UFloat>(double, const UFloat&);
-template UDouble hypot<UDouble>(double, const UDouble&);
 
 } // namespace sigma

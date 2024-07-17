@@ -1,14 +1,13 @@
 #pragma once
+#include "detail_/independent_variable.hpp"
 #include <cmath>
 #include <iostream>
 #include <map>
 #include <memory>
+#include <type_traits>
+#include <utility>
 
 namespace sigma {
-
-// Forward Declaration
-template<typename ValueType>
-class IndependentVariable;
 
 /** @brief Models an unceratin variable.
  *
@@ -98,6 +97,15 @@ private:
 
 }; // class Uncertain
 
+// -- Out-of-line Definitions --------------------------------------------------
+
+template<typename ValueType>
+Uncertain<ValueType>::Uncertain(value_t mean, value_t std) :
+  m_mean_(mean), m_std_(std) {
+    m_deps_.emplace(
+      std::make_pair(std::make_shared<ind_var_t>(mean, std), 1.0));
+}
+
 // -- Utility functions --------------------------------------------------------
 
 /** @relates Uncertain
@@ -128,13 +136,17 @@ std::ostream& operator<<(std::ostream& os, const Uncertain<ValueType>& u) {
  *  @return Whether the instances are equivalent
  *
  */
-template<typename ValueType>
-bool operator==(const Uncertain<ValueType>& lhs,
-                const Uncertain<ValueType>& rhs) {
-    if(lhs.mean() != rhs.mean()) return false;
-    if(lhs.std() != rhs.std()) return false;
-    if(lhs.deps() != rhs.deps()) return false;
-    return true;
+template<typename ValueType1, typename ValueType2>
+bool operator==(const Uncertain<ValueType1>& lhs,
+                const Uncertain<ValueType2>& rhs) {
+    if constexpr(!std::is_same_v<ValueType1, ValueType2>) {
+        return false;
+    } else {
+        if(lhs.mean() != rhs.mean()) return false;
+        if(lhs.std() != rhs.std()) return false;
+        if(lhs.deps() != rhs.deps()) return false;
+        return true;
+    }
 }
 
 /** @relates Uncertain
@@ -147,9 +159,9 @@ bool operator==(const Uncertain<ValueType>& lhs,
  *  @return Whether the instances are not equivalent
  *
  */
-template<typename ValueType>
-bool operator!=(const Uncertain<ValueType>& lhs,
-                const Uncertain<ValueType>& rhs) {
+template<typename ValueType1, typename ValueType2>
+bool operator!=(const Uncertain<ValueType1>& lhs,
+                const Uncertain<ValueType2>& rhs) {
     return !(lhs == rhs);
 }
 
@@ -165,9 +177,9 @@ bool operator!=(const Uncertain<ValueType>& lhs,
  *  @return Whether @p lhs is less than @p rhs
  *
  */
-template<typename ValueType>
-bool operator<(const Uncertain<ValueType>& lhs,
-               const Uncertain<ValueType>& rhs) {
+template<typename ValueType1, typename ValueType2>
+bool operator<(const Uncertain<ValueType1>& lhs,
+               const Uncertain<ValueType2>& rhs) {
     return lhs.mean() < rhs.mean();
 }
 
@@ -183,9 +195,9 @@ bool operator<(const Uncertain<ValueType>& lhs,
  *  @return Whether @p lhs is greater than @p rhs
  *
  */
-template<typename ValueType>
-bool operator>(const Uncertain<ValueType>& lhs,
-               const Uncertain<ValueType>& rhs) {
+template<typename ValueType1, typename ValueType2>
+bool operator>(const Uncertain<ValueType1>& lhs,
+               const Uncertain<ValueType2>& rhs) {
     return rhs < lhs;
 }
 
@@ -199,9 +211,9 @@ bool operator>(const Uncertain<ValueType>& lhs,
  *  @return Whether @p lhs is less than or equal to @p rhs
  *
  */
-template<typename ValueType>
-bool operator<=(const Uncertain<ValueType>& lhs,
-                const Uncertain<ValueType>& rhs) {
+template<typename ValueType1, typename ValueType2>
+bool operator<=(const Uncertain<ValueType1>& lhs,
+                const Uncertain<ValueType2>& rhs) {
     return (lhs == rhs) || (lhs < rhs);
 }
 
@@ -215,15 +227,11 @@ bool operator<=(const Uncertain<ValueType>& lhs,
  *  @return Whether @p lhs is greater than or equal to @p rhs
  *
  */
-template<typename ValueType>
-bool operator>=(const Uncertain<ValueType>& lhs,
-                const Uncertain<ValueType>& rhs) {
+template<typename ValueType1, typename ValueType2>
+bool operator>=(const Uncertain<ValueType1>& lhs,
+                const Uncertain<ValueType2>& rhs) {
     return (lhs == rhs) || (lhs > rhs);
 }
-
-// External instantiations
-extern template class Uncertain<float>;
-extern template class Uncertain<double>;
 
 /// Typedef for an uncertain float
 using UFloat = Uncertain<float>;

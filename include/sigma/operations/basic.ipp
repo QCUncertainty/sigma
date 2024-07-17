@@ -1,10 +1,10 @@
-#include "setter.hpp"
-#include "sigma/operations/operations.hpp"
+#pragma once
+
+#include "sigma/detail_/setter.hpp"
 #include <cmath>
 
 namespace sigma {
 
-// -- Definitions --------------------------------------------------------------
 template<typename UncertainType>
 UncertainType abs(const UncertainType& a) {
     auto dcda = (a.mean() >= 0) ? 1.0 : -1.0;
@@ -89,36 +89,5 @@ UncertainType trunc(const UncertainType& a) {
     c_setter.update_mean(std::trunc(a.mean()));
     return c;
 }
-
-// -- Explicit Instantiation ---------------------------------------------------
-template UFloat abs<UFloat>(const UFloat&);
-template UDouble abs<UDouble>(const UDouble&);
-
-template UFloat ceil<UFloat>(const UFloat&);
-template UDouble ceil<UDouble>(const UDouble&);
-
-template UFloat floor<UFloat>(const UFloat&);
-template UDouble floor<UDouble>(const UDouble&);
-
-template UFloat fmod<UFloat>(const UFloat& a, const UFloat& b);
-template UDouble fmod<UDouble>(const UDouble& a, const UDouble& b);
-
-template UFloat fmod<UFloat>(const UFloat& a, double b);
-template UDouble fmod<UDouble>(const UDouble& a, double b);
-
-template UFloat fmod<UFloat>(double a, const UFloat& b);
-template UDouble fmod<UDouble>(double a, const UDouble& b);
-
-template UFloat copysign<UFloat>(const UFloat& a, const UFloat& b);
-template UDouble copysign<UDouble>(const UDouble& a, const UDouble& b);
-
-template UFloat copysign<UFloat>(const UFloat& a, double b);
-template UDouble copysign<UDouble>(const UDouble& a, double b);
-
-template double copysign<UFloat>(double a, const UFloat& b);
-template double copysign<UDouble>(double a, const UDouble& b);
-
-template UFloat trunc<UFloat>(const UFloat&);
-template UDouble trunc<UDouble>(const UDouble&);
 
 } // namespace sigma

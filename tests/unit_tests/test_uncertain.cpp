@@ -4,9 +4,23 @@
 
 using testing::test_uncertain;
 
+template<typename T>
+struct test_traits;
+
+template<>
+struct test_traits<sigma::UFloat> {
+    using other_t = sigma::UDouble;
+};
+
+template<>
+struct test_traits<sigma::UDouble> {
+    using other_t = sigma::UFloat;
+};
+
 TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
     using testing_t = TestType;
     using value_t   = typename testing_t::value_t;
+    using other_t   = typename test_traits<TestType>::other_t;
 
     SECTION("Constructors") {
         SECTION("Default") {
@@ -56,6 +70,10 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             auto second = first;
             REQUIRE(first == second);
             REQUIRE_FALSE(first != second);
+        }
+        SECTION("Different Value Type") {
+            auto second = other_t(1.1, 0.1);
+            REQUIRE_FALSE(first == second);
         }
         SECTION("Different Mean") {
             auto second = testing_t(1.1, 0.1);

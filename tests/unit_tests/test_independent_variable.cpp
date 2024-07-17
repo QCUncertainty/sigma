@@ -1,4 +1,4 @@
-#include "sigma/independent_variable.hpp"
+#include "sigma/detail_/independent_variable.hpp"
 #include <catch2/catch.hpp>
 #include <sstream>
 
