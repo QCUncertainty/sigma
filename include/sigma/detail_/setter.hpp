@@ -1,5 +1,4 @@
 #pragma once
-#include "independent_variable.hpp"
 #include "sigma/uncertain.hpp"
 
 namespace sigma {
@@ -24,11 +23,11 @@ public:
     /// The type of the values of the variable
     using value_t = typename uncertain_t::value_t;
 
-    /// The type of a variable that this instance depends on
-    using ind_var_t = typename uncertain_t::ind_var_t;
+    /// The type of a standard deviation that this instance depends on
+    using dep_sd_t = typename uncertain_t::dep_sd_t;
 
     /// A pointer to a dependency of this variable
-    using ind_var_ptr = typename uncertain_t::ind_var_ptr;
+    using dep_sd_ptr = typename uncertain_t::dep_sd_ptr;
 
     /// The type of the map holding the variable's dependencies
     using deps_map_t = typename uncertain_t::deps_map_t;
@@ -64,7 +63,7 @@ public:
                 if(clean) m_x_.m_deps_.erase(dep);
                 continue;
             }
-            m_x_.m_sd_ += std::pow(dep.get()->sd() * deriv, 2.0);
+            m_x_.m_sd_ += std::pow(*dep.get() * deriv, 2.0);
         }
         m_x_.m_sd_ = std::sqrt(m_x_.m_sd_);
     }
