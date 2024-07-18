@@ -51,18 +51,12 @@ public:
     /** @brief Calculate the standatd deviation of m_x_ based on the
      *         uncertainty of its dependencies.
      *
-     *  @param clean Whether or not to remove dependencies with partial
-     *               derivatives of 0. Default is false.
-     *
      *  @throw none No throw guarantee
      */
-    void update_sd(bool clean = false) {
+    void update_sd() {
         m_x_.m_sd_ = 0.0;
         for(const auto& [dep, deriv] : m_x_.m_deps_) {
-            if(deriv == 0.0) {
-                if(clean) m_x_.m_deps_.erase(dep);
-                continue;
-            }
+            if(deriv == 0.0) continue;
             m_x_.m_sd_ += std::pow(*dep.get() * deriv, 2.0);
         }
         m_x_.m_sd_ = std::sqrt(m_x_.m_sd_);
