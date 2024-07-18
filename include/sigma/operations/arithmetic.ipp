@@ -7,7 +7,7 @@ namespace sigma {
 template<typename UncertainType>
 UncertainType operator-(const UncertainType& a) {
     UncertainType c(a);
-    Setter<UncertainType> c_setter(c);
+    detail_::Setter<UncertainType> c_setter(c);
     c_setter.update_mean(-a.mean());
     c_setter.update_derivatives(-1.0);
     return c;
@@ -22,7 +22,7 @@ UncertainType operator+(const UncertainType& lhs, const UncertainType& rhs) {
 
 template<typename UncertainType>
 UncertainType& operator+=(UncertainType& lhs, const UncertainType& rhs) {
-    Setter<UncertainType> lhs_setter(lhs);
+    detail_::Setter<UncertainType> lhs_setter(lhs);
     lhs_setter.update_mean(lhs.mean() + rhs.mean());
     lhs_setter.update_derivatives(rhs.deps(), 1.0);
     return lhs;
@@ -58,7 +58,7 @@ template<typename UncertainType>
 UncertainType& operator*=(UncertainType& lhs, const UncertainType& rhs) {
     auto dcda = rhs.mean();
     auto dcdb = lhs.mean();
-    Setter<UncertainType> lhs_setter(lhs);
+    detail_::Setter<UncertainType> lhs_setter(lhs);
     lhs_setter.update_mean(lhs.mean() * rhs.mean());
     lhs_setter.update_derivatives(dcda, false);
     lhs_setter.update_derivatives(rhs.deps(), dcdb);
@@ -67,7 +67,7 @@ UncertainType& operator*=(UncertainType& lhs, const UncertainType& rhs) {
 
 template<typename UncertainType>
 UncertainType& operator*=(UncertainType& lhs, double rhs) {
-    Setter<UncertainType> lhs_setter(lhs);
+    detail_::Setter<UncertainType> lhs_setter(lhs);
     lhs_setter.update_mean(lhs.mean() * rhs);
     lhs_setter.update_derivatives(rhs);
     return lhs;
@@ -75,7 +75,7 @@ UncertainType& operator*=(UncertainType& lhs, double rhs) {
 
 template<typename UncertainType>
 UncertainType& operator-=(UncertainType& lhs, const UncertainType& rhs) {
-    Setter<UncertainType> lhs_setter(lhs);
+    detail_::Setter<UncertainType> lhs_setter(lhs);
     lhs_setter.update_mean(lhs.mean() - rhs.mean());
     lhs_setter.update_derivatives(rhs.deps(), -1.0);
     return lhs;
@@ -98,7 +98,7 @@ UncertainType operator/(const UncertainType& lhs, double rhs) {
 template<typename UncertainType>
 UncertainType operator/(double lhs, const UncertainType& rhs) {
     UncertainType c(rhs);
-    Setter<UncertainType> c_setter(c);
+    detail_::Setter<UncertainType> c_setter(c);
     c_setter.update_mean(lhs / rhs.mean());
     c_setter.update_derivatives(-lhs / std::pow(rhs.mean(), 2.0));
     return c;
@@ -108,7 +108,7 @@ template<typename UncertainType>
 UncertainType& operator/=(UncertainType& lhs, const UncertainType& rhs) {
     auto dcda = 1.0 / rhs.mean();
     auto dcdb = -lhs.mean() / std::pow(rhs.mean(), 2.0);
-    Setter<UncertainType> lhs_setter(lhs);
+    detail_::Setter<UncertainType> lhs_setter(lhs);
     lhs_setter.update_mean(lhs.mean() / rhs.mean());
     lhs_setter.update_derivatives(dcda, false);
     lhs_setter.update_derivatives(rhs.deps(), dcdb);
@@ -117,7 +117,7 @@ UncertainType& operator/=(UncertainType& lhs, const UncertainType& rhs) {
 
 template<typename UncertainType>
 UncertainType& operator/=(UncertainType& lhs, double rhs) {
-    Setter<UncertainType> lhs_setter(lhs);
+    detail_::Setter<UncertainType> lhs_setter(lhs);
     lhs_setter.update_mean(lhs.mean() / rhs);
     lhs_setter.update_derivatives(1.0 / rhs);
     return lhs;

@@ -8,6 +8,12 @@
 
 namespace sigma {
 
+// Foward Declaration
+namespace detail_ {
+template<typename T>
+class Setter; // Class to alter values inside Uncertain
+} // namespace detail_
+
 /** @brief Models an unceratin variable.
  *
  *  In this context, an uncertain variable is one that is dependent on one or
@@ -83,7 +89,7 @@ private:
     /// Standard deviation of the variable
     value_t m_sd_;
 
-    /** Map of the standard deviations this value is dependent on to their 
+    /** Map of the standard deviations this value is dependent on to their
      *  partial derivatives with respect to this value
      */
     deps_map_t m_deps_ = {};
@@ -92,7 +98,7 @@ private:
      *  of a variable that is being updated
      */
     template<typename T>
-    friend class Setter;
+    friend class detail_::Setter;
 
 }; // class Uncertain
 

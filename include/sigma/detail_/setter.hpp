@@ -1,7 +1,7 @@
 #pragma once
 #include "sigma/uncertain.hpp"
 
-namespace sigma {
+namespace sigma::detail_ {
 
 /** @brief Modifies an unceratin variable.
  *
@@ -131,4 +131,4 @@ private:
     uncertain_t& m_x_;
 };
 
-} // namespace sigma
+} // namespace sigma::detail_
