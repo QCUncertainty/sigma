@@ -1,5 +1,4 @@
 #pragma once
-#include "detail_/independent_variable.hpp"
 #include <cmath>
 #include <iostream>
 #include <map>
@@ -29,14 +28,14 @@ public:
     /// The numeric type of the variable
     using value_t = ValueType;
 
-    /// The type of a variable that this instance depends on
-    using ind_var_t = IndependentVariable<value_t>;
+    /// The type of a standard deviation this depends on
+    using dep_sd_t = value_t;
 
     /// A pointer to a dependency of this variable
-    using ind_var_ptr = std::shared_ptr<ind_var_t>;
+    using dep_sd_ptr = std::shared_ptr<dep_sd_t>;
 
     /// A map of dependencies and their contributions to the uncertainty
-    using deps_map_t = std::map<ind_var_ptr, value_t>;
+    using deps_map_t = std::map<dep_sd_ptr, value_t>;
 
     /// @brief Default ctor
     Uncertain() noexcept = default;
@@ -84,8 +83,8 @@ private:
     /// Standard deviation of the variable
     value_t m_sd_;
 
-    /** Map of the variables this value is dependent on to their partial
-     *  derivatives with respect to this value
+    /** Map of the standard deviations this value is dependent on to their 
+     *  partial derivatives with respect to this value
      */
     deps_map_t m_deps_ = {};
 
@@ -103,7 +102,7 @@ template<typename ValueType>
 Uncertain<ValueType>::Uncertain(value_t mean, value_t sd) :
   m_mean_(mean), m_sd_(sd) {
     m_deps_.emplace(
-      std::make_pair(std::make_shared<ind_var_t>(mean, sd), 1.0));
+      std::make_pair(std::make_shared<dep_sd_t>(sd), value_t{1.0}));
 }
 
 // -- Utility functions --------------------------------------------------------
