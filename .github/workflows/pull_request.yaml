@@ -28,9 +28,9 @@ jobs:
           brew install doxygen ninja
       - name: Build and Test
         run: |
-          toolchain_dir=${PWD}/.github/workflow_toolchains/
+          toolchain_dir=${PWD}/.github/workflow_toolchains
           toolchain=${toolchain_dir}/test_base.cmake
-          echo 'include('${toolchain_dir}'/${{matrix.compiler}})' >> $toolchain
+          echo 'include('${toolchain_dir}'/${{matrix.compiler}}.cmake)' >> $toolchain
 
           cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
           cmake --build build --parallel
