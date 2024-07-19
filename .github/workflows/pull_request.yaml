@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        compiler: [gnu-11, gnu-12, clang-15]
+        compiler: [gnu-11, gnu-12, clang]
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     steps:
