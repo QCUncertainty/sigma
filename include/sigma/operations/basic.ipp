@@ -17,7 +17,7 @@ UncertainType abs(const UncertainType& a) {
 
 template<typename UncertainType>
 UncertainType ceil(const UncertainType& a) {
-    UncertainType c;
+    UncertainType c{};
     detail_::Setter<UncertainType> c_setter(c);
     c_setter.update_mean(std::ceil(a.mean()));
     return c;
@@ -25,7 +25,7 @@ UncertainType ceil(const UncertainType& a) {
 
 template<typename UncertainType>
 UncertainType floor(const UncertainType& a) {
-    UncertainType c;
+    UncertainType c{};
     detail_::Setter<UncertainType> c_setter(c);
     c_setter.update_mean(std::floor(a.mean()));
     return c;
@@ -84,7 +84,7 @@ double copysign(double a, const UncertainType& b) {
 
 template<typename UncertainType>
 UncertainType trunc(const UncertainType& a) {
-    UncertainType c;
+    UncertainType c{};
     detail_::Setter<UncertainType> c_setter(c);
     c_setter.update_mean(std::trunc(a.mean()));
     return c;
