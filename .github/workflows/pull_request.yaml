@@ -8,18 +8,62 @@ on:
 jobs:
   # Build and test C++ libraries.
   test_library:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        compiler: [gnu-11, gnu-12, clang-default]
+    continue-on-error: true
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Linux Dependencies
+        if: contains(matrix.os, 'ubuntu')
+        run: |
+          sudo apt-get install -y doxygen ninja-build
+      - name: Install MacOS Dependencies
+        if: contains(matrix.os, 'macos')
+        run: |
+          brew install doxygen ninja
+      - name: Build and Test
+        run: |
+          toolchain_dir=${PWD}/.github/workflow_toolchains
+          toolchain=${toolchain_dir}/test_base.cmake
+          echo 'include('${toolchain_dir}'/${{matrix.compiler}}.cmake)' >> $toolchain
+
+          cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
+          cmake --build build --parallel
+          cd build
+          ctest -VV
+        shell: bash
+
+  # Test Build of Documentation
+  test_dox_build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Install Dependencies
-        run:  |
+      - name: Python
+        uses: actions/setup-python@v5
+      - name: Install Linux Dependencies
+        run: |
           sudo apt-get install -y doxygen ninja-build
-      - name: Build and Test
+      - name: Build Doxygen Part
+        run: |
+          toolchain_dir=${PWD}/.github/workflow_toolchains
+          toolchain=${toolchain_dir}/test_base.cmake
+          echo 'include('${toolchain_dir}'/gnu-11.cmake)' >> $toolchain
+
+          cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
+          cmake --build build --target sigma_cxx_api --parallel
+        shell: bash
+      - name: Build Sphinx Part
         run:  |
-          cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE=./.github/test_toolchain.cmake
-          cmake --build build --parallel
-          cd build
-          ctest -VV
+          cd docs
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+          make html SPHINXOPTS="-W --keep-going -n"
         shell: bash

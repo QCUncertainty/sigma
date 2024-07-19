@@ -18,7 +18,7 @@ template<typename UncertainType>
 UncertainType pow(const UncertainType& a, const UncertainType& exp) {
     auto dcda = exp.mean() * std::pow(a.mean(), exp.mean() - 1);
     auto dcdb = std::log(a.mean()) * std::pow(a.mean(), exp.mean());
-    UncertainType c;
+    UncertainType c{};
     detail_::Setter<UncertainType> c_setter(c);
     c_setter.update_mean(std::pow(a.mean(), exp.mean()));
     c_setter.update_derivatives(a.deps(), dcda, exp.deps(), dcdb);
@@ -61,7 +61,7 @@ template<typename UncertainType>
 UncertainType hypot(const UncertainType& a, const UncertainType& b) {
     auto dcda = a.mean() / std::hypot(a.mean(), b.mean());
     auto dcdb = b.mean() / std::hypot(a.mean(), b.mean());
-    UncertainType c;
+    UncertainType c{};
     detail_::Setter<UncertainType> c_setter(c);
     c_setter.update_mean(std::hypot(a.mean(), b.mean()));
     c_setter.update_derivatives(a.deps(), dcda, b.deps(), dcdb);
