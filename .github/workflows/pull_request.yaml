@@ -11,6 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
+        compiler: [gnu-11, gnu-12]
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     steps:
@@ -27,7 +28,11 @@ jobs:
           brew install doxygen ninja
       - name: Build and Test
         run: |
-          cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE=./.github/test_toolchain.cmake
+          toolchain_dir=${PWD}/.github/workflow_toolchains/
+          toolchain=${toolchain_dir}/test_base.cmake
+          echo 'include('${toolchain_dir}'/${{matrix.compiler}})' >> $toolchain
+
+          cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
           cmake --build build --parallel
           cd build
           ctest -VV
