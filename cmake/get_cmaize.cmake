@@ -1,7 +1,7 @@
 function(get_cmaize)
 
     if("${CMAIZE_VERSION}" STREQUAL "")
-        set(CMAIZE_VERSION v1.1.0 )
+        set(CMAIZE_VERSION v1.1.5 )
     endif()
 
     # Store whether we are building tests or not, then turn off the tests
