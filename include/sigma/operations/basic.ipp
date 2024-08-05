@@ -16,6 +16,13 @@ UncertainType abs(const UncertainType& a) {
 }
 
 template<typename UncertainType>
+UncertainType abs2(const UncertainType& a) {
+    UncertainType c = abs(a);
+    c = pow(c, 2.0);
+    return c;
+}
+
+template<typename UncertainType>
 UncertainType ceil(const UncertainType& a) {
     UncertainType c{};
     detail_::Setter<UncertainType> c_setter(c);

@@ -17,6 +17,19 @@ template<typename UncertainType>
 UncertainType abs(const UncertainType& a);
 
 /** @relates Uncertain
+ *  @brief The Square of the Absolute Value
+ *
+ *  @tparam UncertainType The type of the variable
+ *  @param a The variable
+ *
+ *  @return The square of the absolute value of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename UncertainType>
+UncertainType abs2(const UncertainType& a);
+
+/** @relates Uncertain
  *  @brief Nearest integer not less than the given value
  *
  *  Note that this returns an UncertainType value with no dependencies
