@@ -1,4 +1,6 @@
 #pragma once
+
+#ifdef ENABLE_EIGEN_SUPPORT
 #include <Eigen/Dense>
 
 // Foward Declaration
@@ -34,3 +36,4 @@ EIGEN_NUMTRAITS(double);
 } // namespace Eigen
 
 #undef EIGEN_NUMTRAITS
+#endif // ENABLE_EIGEN_SUPPORT

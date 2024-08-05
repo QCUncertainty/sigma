@@ -17,10 +17,12 @@ set(${PROJECT_NAME}_TESTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 cmaize_option_list(
     BUILD_TESTING OFF "Should the tests be built?"
     BUILD_DOCS OFF "Should we build the documentation?"
+    ENABLE_EIGEN_SUPPORT ON "Include Eigen compatibility headers?"
 )
 
-cmaize_find_or_build_dependency(
+cmaize_find_or_build_optional_dependency(
     eigen
+    ENABLE_EIGEN_SUPPORT
     URL https://www.gitlab.com/libeigen/eigen
     VERSION 3.4.0
     BUILD_TARGET eigen

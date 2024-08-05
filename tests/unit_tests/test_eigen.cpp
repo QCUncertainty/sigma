@@ -1,3 +1,5 @@
+#ifdef ENABLE_EIGEN_SUPPORT
+
 #include "testing.hpp"
 #include <Eigen/Dense>
 #include <sigma/sigma.hpp>
@@ -49,3 +51,5 @@ TEMPLATE_TEST_CASE("Eigen Matrix with Uncertain Elements", "", sigma::UFloat,
         test_uncertain(mat3(1, 1), 13.0, 1.8868, 3);
     }
 }
+
+#endif // ENABLE_EIGEN_SUPPORT
