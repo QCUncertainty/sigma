@@ -75,35 +75,38 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span>sigma {</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;UncertainType abs(<span class="keyword">const</span> UncertainType&amp; a);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;Uncertain&lt;T&gt; abs(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;UncertainType ceil(<span class="keyword">const</span> UncertainType&amp; a);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;UncertainType floor(<span class="keyword">const</span> UncertainType&amp; a);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;UncertainType fmod(<span class="keyword">const</span> UncertainType&amp; a, <span class="keyword">const</span> UncertainType&amp; b);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;UncertainType fmod(<span class="keyword">const</span> UncertainType&amp; a, <span class="keywordtype">double</span> b);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;UncertainType fmod(<span class="keywordtype">double</span> a, <span class="keyword">const</span> UncertainType&amp; b);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;UncertainType copysign(<span class="keyword">const</span> UncertainType&amp; a, <span class="keyword">const</span> UncertainType&amp; b);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;UncertainType copysign(<span class="keyword">const</span> UncertainType&amp; a, <span class="keywordtype">double</span> b);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">double</span> copysign(<span class="keywordtype">double</span> a, <span class="keyword">const</span> UncertainType&amp; b);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;UncertainType trunc(<span class="keyword">const</span> UncertainType&amp; a);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;Uncertain&lt;T&gt; abs2(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;Uncertain&lt;T&gt; ceil(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;Uncertain&lt;T&gt; floor(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;Uncertain&lt;T&gt; fmod(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;Uncertain&lt;T&gt; fmod(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keywordtype">double</span> b);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;Uncertain&lt;T&gt; fmod(<span class="keywordtype">double</span> a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;Uncertain&lt;T&gt; copysign(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;Uncertain&lt;T&gt; copysign(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keywordtype">double</span> b);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">double</span> copysign(<span class="keywordtype">double</span> a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;} <span class="comment">// namespace sigma</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#include &quot;basic.ipp&quot;</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;Uncertain&lt;T&gt; trunc(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;} <span class="comment">// namespace sigma</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#include &quot;basic.ipp&quot;</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

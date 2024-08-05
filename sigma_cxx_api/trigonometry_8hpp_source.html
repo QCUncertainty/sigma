@@ -75,36 +75,36 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span>sigma {</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;UncertainType degrees(<span class="keyword">const</span> UncertainType&amp; a);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;Uncertain&lt;T&gt; degrees(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;UncertainType radians(<span class="keyword">const</span> UncertainType&amp; a);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;Uncertain&lt;T&gt; radians(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;UncertainType sin(<span class="keyword">const</span> UncertainType&amp; a);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;Uncertain&lt;T&gt; sin(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;UncertainType cos(<span class="keyword">const</span> UncertainType&amp; a);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;Uncertain&lt;T&gt; cos(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;UncertainType tan(<span class="keyword">const</span> UncertainType&amp; a);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;Uncertain&lt;T&gt; tan(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;UncertainType asin(<span class="keyword">const</span> UncertainType&amp; a);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;Uncertain&lt;T&gt; asin(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;UncertainType acos(<span class="keyword">const</span> UncertainType&amp; a);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;Uncertain&lt;T&gt; acos(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;UncertainType atan(<span class="keyword">const</span> UncertainType&amp; a);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;Uncertain&lt;T&gt; atan(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;UncertainType atan2(<span class="keyword">const</span> UncertainType&amp; y, <span class="keyword">const</span> UncertainType&amp; x);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;UncertainType atan2(<span class="keyword">const</span> UncertainType&amp; y, <span class="keywordtype">double</span> x);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> UncertainType&gt;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;UncertainType atan2(<span class="keywordtype">double</span> y, <span class="keyword">const</span> UncertainType&amp; x);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;Uncertain&lt;T&gt; atan2(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; y, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; x);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;Uncertain&lt;T&gt; atan2(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; y, <span class="keywordtype">double</span> x);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;Uncertain&lt;T&gt; atan2(<span class="keywordtype">double</span> y, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; x);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;} <span class="comment">// namespace sigma</span></div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>

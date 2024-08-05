@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['ceil_70',['ceil',['../classsigma_1_1Uncertain.html#a5ff6ec4eedde0ab121973f7200167053',1,'sigma::Uncertain']]],
-  ['copysign_71',['copysign',['../classsigma_1_1Uncertain.html#a14ec7c530ee7f76cfb715901cf0426d8',1,'sigma::Uncertain']]],
-  ['cos_72',['cos',['../classsigma_1_1Uncertain.html#a2a9cd4aa06344093e372eb3cf0b7d6f9',1,'sigma::Uncertain']]],
-  ['cosh_73',['cosh',['../classsigma_1_1Uncertain.html#a21159c806e43008bc94921974b8de963',1,'sigma::Uncertain']]]
+  ['ceil_75',['ceil',['../classsigma_1_1Uncertain.html#a9fde35b428965b317d37747e8278f855',1,'sigma::Uncertain']]],
+  ['conj_76',['conj',['../classsigma_1_1Uncertain.html#a4bf925f221eb413c04aa4e87be3732df',1,'sigma::Uncertain']]],
+  ['copysign_77',['copysign',['../classsigma_1_1Uncertain.html#aec507a309e9a7214b9f04fd8d0990034',1,'sigma::Uncertain']]],
+  ['cos_78',['cos',['../classsigma_1_1Uncertain.html#a1be8ab202d12b2b12c05303c62c9588b',1,'sigma::Uncertain']]],
+  ['cosh_79',['cosh',['../classsigma_1_1Uncertain.html#a9524ced2b85adf1964527fd84c4be450',1,'sigma::Uncertain']]]
 ];

@@ -111,6 +111,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#aae65addf0d1a77f4bf10e8d7ab2db867">Uncertain</a> () noexcept=default</td></tr>
 <tr class="memdesc:aae65addf0d1a77f4bf10e8d7ab2db867"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default ctor. <br /></td></tr>
 <tr class="separator:aae65addf0d1a77f4bf10e8d7ab2db867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d37e96d9f215e20fe1cf7c814472822"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a9d37e96d9f215e20fe1cf7c814472822">Uncertain</a> (<a class="el" href="classsigma_1_1Uncertain.html#ab9d55c3ae3c72960a33db279c96cb952">value_t</a> <a class="el" href="classsigma_1_1Uncertain.html#a43412df1d1f48b62f0981b999fe74d10">mean</a>)</td></tr>
+<tr class="memdesc:a9d37e96d9f215e20fe1cf7c814472822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an certain value from mean.  <a href="classsigma_1_1Uncertain.html#a9d37e96d9f215e20fe1cf7c814472822">More...</a><br /></td></tr>
+<tr class="separator:a9d37e96d9f215e20fe1cf7c814472822"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a310551a4761f198f82435195b0ef4554"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a310551a4761f198f82435195b0ef4554">Uncertain</a> (<a class="el" href="classsigma_1_1Uncertain.html#ab9d55c3ae3c72960a33db279c96cb952">value_t</a> <a class="el" href="classsigma_1_1Uncertain.html#a43412df1d1f48b62f0981b999fe74d10">mean</a>, <a class="el" href="classsigma_1_1Uncertain.html#ab9d55c3ae3c72960a33db279c96cb952">value_t</a> <a class="el" href="classsigma_1_1Uncertain.html#ac68862bf06ad8a73649f077027a2f4ef">sd</a>)</td></tr>
 <tr class="memdesc:a310551a4761f198f82435195b0ef4554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an uncertain value from mean and standard deviation.  <a href="classsigma_1_1Uncertain.html#a310551a4761f198f82435195b0ef4554">More...</a><br /></td></tr>
 <tr class="separator:a310551a4761f198f82435195b0ef4554"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,166 +137,182 @@ Friends</h2></td></tr>
 Related Functions</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>(Note that these are not member functions.) </p>
 </td></tr>
-<tr class="memitem:a418f126c91c5eb3b58a9a92f968cd6da"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a418f126c91c5eb3b58a9a92f968cd6da"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a418f126c91c5eb3b58a9a92f968cd6da">operator-</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a418f126c91c5eb3b58a9a92f968cd6da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Negation Operation.  <a href="classsigma_1_1Uncertain.html#a418f126c91c5eb3b58a9a92f968cd6da">More...</a><br /></td></tr>
-<tr class="separator:a418f126c91c5eb3b58a9a92f968cd6da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac59e9f32be59413d938c2c3f4ae71aca"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:ac59e9f32be59413d938c2c3f4ae71aca"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#ac59e9f32be59413d938c2c3f4ae71aca">operator+</a> (const UncertainType &amp;lhs, const UncertainType &amp;rhs)</td></tr>
-<tr class="memdesc:ac59e9f32be59413d938c2c3f4ae71aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Addition Operation.  <a href="classsigma_1_1Uncertain.html#ac59e9f32be59413d938c2c3f4ae71aca">More...</a><br /></td></tr>
-<tr class="separator:ac59e9f32be59413d938c2c3f4ae71aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b7b7011eb5a23e69cb7000764621b48"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a3b7b7011eb5a23e69cb7000764621b48"><td class="memTemplItemLeft" align="right" valign="top">UncertainType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a3b7b7011eb5a23e69cb7000764621b48">operator+=</a> (UncertainType &amp;lhs, const UncertainType &amp;rhs)</td></tr>
-<tr class="memdesc:a3b7b7011eb5a23e69cb7000764621b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inplace Addition Operation.  <a href="classsigma_1_1Uncertain.html#a3b7b7011eb5a23e69cb7000764621b48">More...</a><br /></td></tr>
-<tr class="separator:a3b7b7011eb5a23e69cb7000764621b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc6273d1c22cc2daad1848a387541711"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:adc6273d1c22cc2daad1848a387541711"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#adc6273d1c22cc2daad1848a387541711">operator-</a> (const UncertainType &amp;lhs, const UncertainType &amp;rhs)</td></tr>
-<tr class="memdesc:adc6273d1c22cc2daad1848a387541711"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtraction Operation.  <a href="classsigma_1_1Uncertain.html#adc6273d1c22cc2daad1848a387541711">More...</a><br /></td></tr>
-<tr class="separator:adc6273d1c22cc2daad1848a387541711"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1df7b05cbce2f5c121e5db8eb87eec72"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a1df7b05cbce2f5c121e5db8eb87eec72"><td class="memTemplItemLeft" align="right" valign="top">UncertainType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a1df7b05cbce2f5c121e5db8eb87eec72">operator-=</a> (UncertainType &amp;lhs, const UncertainType &amp;rhs)</td></tr>
-<tr class="memdesc:a1df7b05cbce2f5c121e5db8eb87eec72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inplace Subtraction Operation.  <a href="classsigma_1_1Uncertain.html#a1df7b05cbce2f5c121e5db8eb87eec72">More...</a><br /></td></tr>
-<tr class="separator:a1df7b05cbce2f5c121e5db8eb87eec72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf189764bb8fac22c34e413a5a14d1c5"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:abf189764bb8fac22c34e413a5a14d1c5"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#abf189764bb8fac22c34e413a5a14d1c5">operator*</a> (const UncertainType &amp;lhs, const UncertainType &amp;rhs)</td></tr>
-<tr class="memdesc:abf189764bb8fac22c34e413a5a14d1c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplication Operation.  <a href="classsigma_1_1Uncertain.html#abf189764bb8fac22c34e413a5a14d1c5">More...</a><br /></td></tr>
-<tr class="separator:abf189764bb8fac22c34e413a5a14d1c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6fa07dc7720e4be797ee3b90fa33e10"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:af6fa07dc7720e4be797ee3b90fa33e10"><td class="memTemplItemLeft" align="right" valign="top">UncertainType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#af6fa07dc7720e4be797ee3b90fa33e10">operator*=</a> (UncertainType &amp;lhs, const UncertainType &amp;rhs)</td></tr>
-<tr class="memdesc:af6fa07dc7720e4be797ee3b90fa33e10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inplace Multiplication Operation.  <a href="classsigma_1_1Uncertain.html#af6fa07dc7720e4be797ee3b90fa33e10">More...</a><br /></td></tr>
-<tr class="separator:af6fa07dc7720e4be797ee3b90fa33e10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2580ab48bea83a73250f0807f68bbbe"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:ab2580ab48bea83a73250f0807f68bbbe"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#ab2580ab48bea83a73250f0807f68bbbe">operator/</a> (const UncertainType &amp;lhs, const UncertainType &amp;rhs)</td></tr>
-<tr class="memdesc:ab2580ab48bea83a73250f0807f68bbbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Division Operation.  <a href="classsigma_1_1Uncertain.html#ab2580ab48bea83a73250f0807f68bbbe">More...</a><br /></td></tr>
-<tr class="separator:ab2580ab48bea83a73250f0807f68bbbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7673c760dd463295c36b72bca93bccf"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:af7673c760dd463295c36b72bca93bccf"><td class="memTemplItemLeft" align="right" valign="top">UncertainType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#af7673c760dd463295c36b72bca93bccf">operator/=</a> (UncertainType &amp;lhs, const UncertainType &amp;rhs)</td></tr>
-<tr class="memdesc:af7673c760dd463295c36b72bca93bccf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inplace Division Operation.  <a href="classsigma_1_1Uncertain.html#af7673c760dd463295c36b72bca93bccf">More...</a><br /></td></tr>
-<tr class="separator:af7673c760dd463295c36b72bca93bccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8dc9e4a4da3df870b7c0e4597f32e5fc"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a8dc9e4a4da3df870b7c0e4597f32e5fc"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a8dc9e4a4da3df870b7c0e4597f32e5fc">abs</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a8dc9e4a4da3df870b7c0e4597f32e5fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute Value.  <a href="classsigma_1_1Uncertain.html#a8dc9e4a4da3df870b7c0e4597f32e5fc">More...</a><br /></td></tr>
-<tr class="separator:a8dc9e4a4da3df870b7c0e4597f32e5fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ff6ec4eedde0ab121973f7200167053"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a5ff6ec4eedde0ab121973f7200167053"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a5ff6ec4eedde0ab121973f7200167053">ceil</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a5ff6ec4eedde0ab121973f7200167053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nearest integer not less than the given value.  <a href="classsigma_1_1Uncertain.html#a5ff6ec4eedde0ab121973f7200167053">More...</a><br /></td></tr>
-<tr class="separator:a5ff6ec4eedde0ab121973f7200167053"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bdc4f5fa864cca889ac647bc8c0bbe8"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a2bdc4f5fa864cca889ac647bc8c0bbe8"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a2bdc4f5fa864cca889ac647bc8c0bbe8">floor</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a2bdc4f5fa864cca889ac647bc8c0bbe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nearest integer not greater than the given value.  <a href="classsigma_1_1Uncertain.html#a2bdc4f5fa864cca889ac647bc8c0bbe8">More...</a><br /></td></tr>
-<tr class="separator:a2bdc4f5fa864cca889ac647bc8c0bbe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ad9655dd346f5cd840869ed7354be9e"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a0ad9655dd346f5cd840869ed7354be9e"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a0ad9655dd346f5cd840869ed7354be9e">fmod</a> (const UncertainType &amp;a, const UncertainType &amp;b)</td></tr>
-<tr class="memdesc:a0ad9655dd346f5cd840869ed7354be9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Floating point module.  <a href="classsigma_1_1Uncertain.html#a0ad9655dd346f5cd840869ed7354be9e">More...</a><br /></td></tr>
-<tr class="separator:a0ad9655dd346f5cd840869ed7354be9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14ec7c530ee7f76cfb715901cf0426d8"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a14ec7c530ee7f76cfb715901cf0426d8"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a14ec7c530ee7f76cfb715901cf0426d8">copysign</a> (const UncertainType &amp;a, const UncertainType &amp;b)</td></tr>
-<tr class="memdesc:a14ec7c530ee7f76cfb715901cf0426d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the sign of one value to another.  <a href="classsigma_1_1Uncertain.html#a14ec7c530ee7f76cfb715901cf0426d8">More...</a><br /></td></tr>
-<tr class="separator:a14ec7c530ee7f76cfb715901cf0426d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43c50f9aabb4e13e70fa9de90bba3dec"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a43c50f9aabb4e13e70fa9de90bba3dec"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a43c50f9aabb4e13e70fa9de90bba3dec">trunc</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a43c50f9aabb4e13e70fa9de90bba3dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the fractional part from a variable.  <a href="classsigma_1_1Uncertain.html#a43c50f9aabb4e13e70fa9de90bba3dec">More...</a><br /></td></tr>
-<tr class="separator:a43c50f9aabb4e13e70fa9de90bba3dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ca3007d5ba838c8b12a91fbc1f2cc37"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a0ca3007d5ba838c8b12a91fbc1f2cc37"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a0ca3007d5ba838c8b12a91fbc1f2cc37">erf</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a0ca3007d5ba838c8b12a91fbc1f2cc37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error function.  <a href="classsigma_1_1Uncertain.html#a0ca3007d5ba838c8b12a91fbc1f2cc37">More...</a><br /></td></tr>
-<tr class="separator:a0ca3007d5ba838c8b12a91fbc1f2cc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f634f2794a937158c9d2eac25f42c70"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a2f634f2794a937158c9d2eac25f42c70"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a2f634f2794a937158c9d2eac25f42c70">erfc</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a2f634f2794a937158c9d2eac25f42c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complementary error function.  <a href="classsigma_1_1Uncertain.html#a2f634f2794a937158c9d2eac25f42c70">More...</a><br /></td></tr>
-<tr class="separator:a2f634f2794a937158c9d2eac25f42c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdd159ad75464bb25f919e6d57152780"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:acdd159ad75464bb25f919e6d57152780"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#acdd159ad75464bb25f919e6d57152780">tgamma</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:acdd159ad75464bb25f919e6d57152780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gamma function.  <a href="classsigma_1_1Uncertain.html#acdd159ad75464bb25f919e6d57152780">More...</a><br /></td></tr>
-<tr class="separator:acdd159ad75464bb25f919e6d57152780"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62ae3e8e1a2224813977d718f1b76fd5"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a62ae3e8e1a2224813977d718f1b76fd5"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a62ae3e8e1a2224813977d718f1b76fd5">lgamma</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a62ae3e8e1a2224813977d718f1b76fd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gamma function Natural Logarithm.  <a href="classsigma_1_1Uncertain.html#a62ae3e8e1a2224813977d718f1b76fd5">More...</a><br /></td></tr>
-<tr class="separator:a62ae3e8e1a2224813977d718f1b76fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a809b8a297a44dca494efb5331cd5c53d"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a809b8a297a44dca494efb5331cd5c53d"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a809b8a297a44dca494efb5331cd5c53d">pow</a> (const UncertainType &amp;a, double <a class="el" href="classsigma_1_1Uncertain.html#a23d96ae251e86a1d5949a2919b79b74a">exp</a>)</td></tr>
-<tr class="memdesc:a809b8a297a44dca494efb5331cd5c53d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponentiation of a variable.  <a href="classsigma_1_1Uncertain.html#a809b8a297a44dca494efb5331cd5c53d">More...</a><br /></td></tr>
-<tr class="separator:a809b8a297a44dca494efb5331cd5c53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3b406e262b4c3b4921c47939d682fd8"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:ac3b406e262b4c3b4921c47939d682fd8"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#ac3b406e262b4c3b4921c47939d682fd8">pow</a> (const UncertainType &amp;a, const UncertainType &amp;<a class="el" href="classsigma_1_1Uncertain.html#a23d96ae251e86a1d5949a2919b79b74a">exp</a>)</td></tr>
-<tr class="memdesc:ac3b406e262b4c3b4921c47939d682fd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponentiation of a variable by an uncertain variable.  <a href="classsigma_1_1Uncertain.html#ac3b406e262b4c3b4921c47939d682fd8">More...</a><br /></td></tr>
-<tr class="separator:ac3b406e262b4c3b4921c47939d682fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5c6ff31e0811ca42c71cd3325022238"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:ad5c6ff31e0811ca42c71cd3325022238"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#ad5c6ff31e0811ca42c71cd3325022238">sqrt</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:ad5c6ff31e0811ca42c71cd3325022238"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the square root of an uncertain variable.  <a href="classsigma_1_1Uncertain.html#ad5c6ff31e0811ca42c71cd3325022238">More...</a><br /></td></tr>
-<tr class="separator:ad5c6ff31e0811ca42c71cd3325022238"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23d96ae251e86a1d5949a2919b79b74a"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a23d96ae251e86a1d5949a2919b79b74a"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a23d96ae251e86a1d5949a2919b79b74a">exp</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a23d96ae251e86a1d5949a2919b79b74a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the Euler's number raised to the power of an uncertain variable.  <a href="classsigma_1_1Uncertain.html#a23d96ae251e86a1d5949a2919b79b74a">More...</a><br /></td></tr>
-<tr class="separator:a23d96ae251e86a1d5949a2919b79b74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3922bd4160382fabee1e7f57c7900c0"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:af3922bd4160382fabee1e7f57c7900c0"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#af3922bd4160382fabee1e7f57c7900c0">log</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:af3922bd4160382fabee1e7f57c7900c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the natural logarithm of a variable.  <a href="classsigma_1_1Uncertain.html#af3922bd4160382fabee1e7f57c7900c0">More...</a><br /></td></tr>
-<tr class="separator:af3922bd4160382fabee1e7f57c7900c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b815b45c2150d54567e072e2bbddc6a"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a2b815b45c2150d54567e072e2bbddc6a"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a2b815b45c2150d54567e072e2bbddc6a">log10</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a2b815b45c2150d54567e072e2bbddc6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the base 10 logarithm of a variable.  <a href="classsigma_1_1Uncertain.html#a2b815b45c2150d54567e072e2bbddc6a">More...</a><br /></td></tr>
-<tr class="separator:a2b815b45c2150d54567e072e2bbddc6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec0189184c886f4c739f59172194ca52"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:aec0189184c886f4c739f59172194ca52"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#aec0189184c886f4c739f59172194ca52">sinh</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:aec0189184c886f4c739f59172194ca52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic sine of the variable.  <a href="classsigma_1_1Uncertain.html#aec0189184c886f4c739f59172194ca52">More...</a><br /></td></tr>
-<tr class="separator:aec0189184c886f4c739f59172194ca52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21159c806e43008bc94921974b8de963"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a21159c806e43008bc94921974b8de963"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a21159c806e43008bc94921974b8de963">cosh</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a21159c806e43008bc94921974b8de963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic cosine of the variable.  <a href="classsigma_1_1Uncertain.html#a21159c806e43008bc94921974b8de963">More...</a><br /></td></tr>
-<tr class="separator:a21159c806e43008bc94921974b8de963"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0377c93b4e9b4c50fbbfae9c2eac0df7"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a0377c93b4e9b4c50fbbfae9c2eac0df7"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a0377c93b4e9b4c50fbbfae9c2eac0df7">tanh</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a0377c93b4e9b4c50fbbfae9c2eac0df7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic tangent of the variable.  <a href="classsigma_1_1Uncertain.html#a0377c93b4e9b4c50fbbfae9c2eac0df7">More...</a><br /></td></tr>
-<tr class="separator:a0377c93b4e9b4c50fbbfae9c2eac0df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6238e6a4a77b484345bc343e39d3b8d2"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a6238e6a4a77b484345bc343e39d3b8d2"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a6238e6a4a77b484345bc343e39d3b8d2">asinh</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a6238e6a4a77b484345bc343e39d3b8d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic arcsine of the variable.  <a href="classsigma_1_1Uncertain.html#a6238e6a4a77b484345bc343e39d3b8d2">More...</a><br /></td></tr>
-<tr class="separator:a6238e6a4a77b484345bc343e39d3b8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9f2b9169fcbaec81e3eea2330c639a0"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:ae9f2b9169fcbaec81e3eea2330c639a0"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#ae9f2b9169fcbaec81e3eea2330c639a0">acosh</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:ae9f2b9169fcbaec81e3eea2330c639a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic arccosine of the variable.  <a href="classsigma_1_1Uncertain.html#ae9f2b9169fcbaec81e3eea2330c639a0">More...</a><br /></td></tr>
-<tr class="separator:ae9f2b9169fcbaec81e3eea2330c639a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33fddf6756f8a2eb90b9700027087124"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a33fddf6756f8a2eb90b9700027087124"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a33fddf6756f8a2eb90b9700027087124">atanh</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a33fddf6756f8a2eb90b9700027087124"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic arctangent of the variable.  <a href="classsigma_1_1Uncertain.html#a33fddf6756f8a2eb90b9700027087124">More...</a><br /></td></tr>
-<tr class="separator:a33fddf6756f8a2eb90b9700027087124"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa08ab6340e62a8dee8e7509674fee889"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:aa08ab6340e62a8dee8e7509674fee889"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#aa08ab6340e62a8dee8e7509674fee889">degrees</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:aa08ab6340e62a8dee8e7509674fee889"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from radians to degrees.  <a href="classsigma_1_1Uncertain.html#aa08ab6340e62a8dee8e7509674fee889">More...</a><br /></td></tr>
-<tr class="separator:aa08ab6340e62a8dee8e7509674fee889"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3eb9ced4f793ed492313a1a998281f99"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a3eb9ced4f793ed492313a1a998281f99"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a3eb9ced4f793ed492313a1a998281f99">radians</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a3eb9ced4f793ed492313a1a998281f99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from degrees to radians.  <a href="classsigma_1_1Uncertain.html#a3eb9ced4f793ed492313a1a998281f99">More...</a><br /></td></tr>
-<tr class="separator:a3eb9ced4f793ed492313a1a998281f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed0358a4c1ab2dde53530652bd2f2cf3"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:aed0358a4c1ab2dde53530652bd2f2cf3"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#aed0358a4c1ab2dde53530652bd2f2cf3">sin</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:aed0358a4c1ab2dde53530652bd2f2cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sine of the variable.  <a href="classsigma_1_1Uncertain.html#aed0358a4c1ab2dde53530652bd2f2cf3">More...</a><br /></td></tr>
-<tr class="separator:aed0358a4c1ab2dde53530652bd2f2cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a9cd4aa06344093e372eb3cf0b7d6f9"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a2a9cd4aa06344093e372eb3cf0b7d6f9"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a2a9cd4aa06344093e372eb3cf0b7d6f9">cos</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a2a9cd4aa06344093e372eb3cf0b7d6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cosine of the variable.  <a href="classsigma_1_1Uncertain.html#a2a9cd4aa06344093e372eb3cf0b7d6f9">More...</a><br /></td></tr>
-<tr class="separator:a2a9cd4aa06344093e372eb3cf0b7d6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a187a0953cb8bb7df511becbd4f342f13"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a187a0953cb8bb7df511becbd4f342f13"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a187a0953cb8bb7df511becbd4f342f13">tan</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a187a0953cb8bb7df511becbd4f342f13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tangent of the variable.  <a href="classsigma_1_1Uncertain.html#a187a0953cb8bb7df511becbd4f342f13">More...</a><br /></td></tr>
-<tr class="separator:a187a0953cb8bb7df511becbd4f342f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a695f8a8a087b09cd7dcb94d2db242e2f"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a695f8a8a087b09cd7dcb94d2db242e2f"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a695f8a8a087b09cd7dcb94d2db242e2f">asin</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:a695f8a8a087b09cd7dcb94d2db242e2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arcsine of the variable.  <a href="classsigma_1_1Uncertain.html#a695f8a8a087b09cd7dcb94d2db242e2f">More...</a><br /></td></tr>
-<tr class="separator:a695f8a8a087b09cd7dcb94d2db242e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abace30a293874333bac501d5ceb3d173"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:abace30a293874333bac501d5ceb3d173"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#abace30a293874333bac501d5ceb3d173">acos</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:abace30a293874333bac501d5ceb3d173"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arccosine of the variable.  <a href="classsigma_1_1Uncertain.html#abace30a293874333bac501d5ceb3d173">More...</a><br /></td></tr>
-<tr class="separator:abace30a293874333bac501d5ceb3d173"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa077b46784be6e3f1efd546dcf36287c"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:aa077b46784be6e3f1efd546dcf36287c"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#aa077b46784be6e3f1efd546dcf36287c">atan</a> (const UncertainType &amp;a)</td></tr>
-<tr class="memdesc:aa077b46784be6e3f1efd546dcf36287c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arctangent of the variable.  <a href="classsigma_1_1Uncertain.html#aa077b46784be6e3f1efd546dcf36287c">More...</a><br /></td></tr>
-<tr class="separator:aa077b46784be6e3f1efd546dcf36287c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c3220a7501c58a6e4f579261fc45257"><td class="memTemplParams" colspan="2">template&lt;typename UncertainType &gt; </td></tr>
-<tr class="memitem:a0c3220a7501c58a6e4f579261fc45257"><td class="memTemplItemLeft" align="right" valign="top">UncertainType&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a0c3220a7501c58a6e4f579261fc45257">atan2</a> (const UncertainType &amp;y, const UncertainType &amp;x)</td></tr>
-<tr class="memdesc:a0c3220a7501c58a6e4f579261fc45257"><td class="mdescLeft">&#160;</td><td class="mdescRight">Two argument arctangent.  <a href="classsigma_1_1Uncertain.html#a0c3220a7501c58a6e4f579261fc45257">More...</a><br /></td></tr>
-<tr class="separator:a0c3220a7501c58a6e4f579261fc45257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcffb2dc69ee3e1ccccbe464ba53004e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:afcffb2dc69ee3e1ccccbe464ba53004e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#afcffb2dc69ee3e1ccccbe464ba53004e">operator-</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:afcffb2dc69ee3e1ccccbe464ba53004e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Negation Operation.  <a href="classsigma_1_1Uncertain.html#afcffb2dc69ee3e1ccccbe464ba53004e">More...</a><br /></td></tr>
+<tr class="separator:afcffb2dc69ee3e1ccccbe464ba53004e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac07cba9bb0c0fc4ec1fe69f9f8ed36e8"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac07cba9bb0c0fc4ec1fe69f9f8ed36e8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#ac07cba9bb0c0fc4ec1fe69f9f8ed36e8">operator+</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ac07cba9bb0c0fc4ec1fe69f9f8ed36e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Addition Operation.  <a href="classsigma_1_1Uncertain.html#ac07cba9bb0c0fc4ec1fe69f9f8ed36e8">More...</a><br /></td></tr>
+<tr class="separator:ac07cba9bb0c0fc4ec1fe69f9f8ed36e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2674c1a3c3ab94b36ed4c64140cdd34"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ad2674c1a3c3ab94b36ed4c64140cdd34"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#ad2674c1a3c3ab94b36ed4c64140cdd34">operator+=</a> (<a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ad2674c1a3c3ab94b36ed4c64140cdd34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inplace Addition Operation.  <a href="classsigma_1_1Uncertain.html#ad2674c1a3c3ab94b36ed4c64140cdd34">More...</a><br /></td></tr>
+<tr class="separator:ad2674c1a3c3ab94b36ed4c64140cdd34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a091294b34a9aa7f7c68756ffb2bd246c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a091294b34a9aa7f7c68756ffb2bd246c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a091294b34a9aa7f7c68756ffb2bd246c">operator-</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a091294b34a9aa7f7c68756ffb2bd246c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtraction Operation.  <a href="classsigma_1_1Uncertain.html#a091294b34a9aa7f7c68756ffb2bd246c">More...</a><br /></td></tr>
+<tr class="separator:a091294b34a9aa7f7c68756ffb2bd246c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69af714b85c7a3d4c5a4180073001ef6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a69af714b85c7a3d4c5a4180073001ef6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a69af714b85c7a3d4c5a4180073001ef6">operator-=</a> (<a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a69af714b85c7a3d4c5a4180073001ef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inplace Subtraction Operation.  <a href="classsigma_1_1Uncertain.html#a69af714b85c7a3d4c5a4180073001ef6">More...</a><br /></td></tr>
+<tr class="separator:a69af714b85c7a3d4c5a4180073001ef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4af87e1fab9f93869c1cf2a249ede416"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4af87e1fab9f93869c1cf2a249ede416"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a4af87e1fab9f93869c1cf2a249ede416">operator*</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a4af87e1fab9f93869c1cf2a249ede416"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplication Operation.  <a href="classsigma_1_1Uncertain.html#a4af87e1fab9f93869c1cf2a249ede416">More...</a><br /></td></tr>
+<tr class="separator:a4af87e1fab9f93869c1cf2a249ede416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a796266577f6ffd94de70ec48bb762fa5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a796266577f6ffd94de70ec48bb762fa5"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a796266577f6ffd94de70ec48bb762fa5">operator*=</a> (<a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a796266577f6ffd94de70ec48bb762fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inplace Multiplication Operation.  <a href="classsigma_1_1Uncertain.html#a796266577f6ffd94de70ec48bb762fa5">More...</a><br /></td></tr>
+<tr class="separator:a796266577f6ffd94de70ec48bb762fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5258f338f5479bf890135d4bc9437b36"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a5258f338f5479bf890135d4bc9437b36"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a5258f338f5479bf890135d4bc9437b36">operator/</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a5258f338f5479bf890135d4bc9437b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Division Operation.  <a href="classsigma_1_1Uncertain.html#a5258f338f5479bf890135d4bc9437b36">More...</a><br /></td></tr>
+<tr class="separator:a5258f338f5479bf890135d4bc9437b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf53fa5c4799bc2b4abbd79388fdaf68"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:adf53fa5c4799bc2b4abbd79388fdaf68"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#adf53fa5c4799bc2b4abbd79388fdaf68">operator/=</a> (<a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:adf53fa5c4799bc2b4abbd79388fdaf68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inplace Division Operation.  <a href="classsigma_1_1Uncertain.html#adf53fa5c4799bc2b4abbd79388fdaf68">More...</a><br /></td></tr>
+<tr class="separator:adf53fa5c4799bc2b4abbd79388fdaf68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73584ef0021212b349b4ba40d75e1fc9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a73584ef0021212b349b4ba40d75e1fc9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a73584ef0021212b349b4ba40d75e1fc9">abs</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a73584ef0021212b349b4ba40d75e1fc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute Value.  <a href="classsigma_1_1Uncertain.html#a73584ef0021212b349b4ba40d75e1fc9">More...</a><br /></td></tr>
+<tr class="separator:a73584ef0021212b349b4ba40d75e1fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a698429ad76a20ee0258354157f656ecd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a698429ad76a20ee0258354157f656ecd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a698429ad76a20ee0258354157f656ecd">abs2</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a698429ad76a20ee0258354157f656ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Square of the Absolute Value.  <a href="classsigma_1_1Uncertain.html#a698429ad76a20ee0258354157f656ecd">More...</a><br /></td></tr>
+<tr class="separator:a698429ad76a20ee0258354157f656ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fde35b428965b317d37747e8278f855"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9fde35b428965b317d37747e8278f855"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a9fde35b428965b317d37747e8278f855">ceil</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a9fde35b428965b317d37747e8278f855"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nearest integer not less than the given value.  <a href="classsigma_1_1Uncertain.html#a9fde35b428965b317d37747e8278f855">More...</a><br /></td></tr>
+<tr class="separator:a9fde35b428965b317d37747e8278f855"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a99beca2d0b72aa67d5281f900ec334"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3a99beca2d0b72aa67d5281f900ec334"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a3a99beca2d0b72aa67d5281f900ec334">floor</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a3a99beca2d0b72aa67d5281f900ec334"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nearest integer not greater than the given value.  <a href="classsigma_1_1Uncertain.html#a3a99beca2d0b72aa67d5281f900ec334">More...</a><br /></td></tr>
+<tr class="separator:a3a99beca2d0b72aa67d5281f900ec334"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac84abc1740e264a2d177aa3e9e450fb9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac84abc1740e264a2d177aa3e9e450fb9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#ac84abc1740e264a2d177aa3e9e450fb9">fmod</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;b)</td></tr>
+<tr class="memdesc:ac84abc1740e264a2d177aa3e9e450fb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Floating point module.  <a href="classsigma_1_1Uncertain.html#ac84abc1740e264a2d177aa3e9e450fb9">More...</a><br /></td></tr>
+<tr class="separator:ac84abc1740e264a2d177aa3e9e450fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec507a309e9a7214b9f04fd8d0990034"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aec507a309e9a7214b9f04fd8d0990034"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#aec507a309e9a7214b9f04fd8d0990034">copysign</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;b)</td></tr>
+<tr class="memdesc:aec507a309e9a7214b9f04fd8d0990034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the sign of one value to another.  <a href="classsigma_1_1Uncertain.html#aec507a309e9a7214b9f04fd8d0990034">More...</a><br /></td></tr>
+<tr class="separator:aec507a309e9a7214b9f04fd8d0990034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9a368510554a8d0fa777efd5109a63b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae9a368510554a8d0fa777efd5109a63b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#ae9a368510554a8d0fa777efd5109a63b">trunc</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:ae9a368510554a8d0fa777efd5109a63b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the fractional part from a variable.  <a href="classsigma_1_1Uncertain.html#ae9a368510554a8d0fa777efd5109a63b">More...</a><br /></td></tr>
+<tr class="separator:ae9a368510554a8d0fa777efd5109a63b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bf925f221eb413c04aa4e87be3732df"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4bf925f221eb413c04aa4e87be3732df"><td class="memTemplItemLeft" align="right" valign="top">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a4bf925f221eb413c04aa4e87be3732df">conj</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;x)</td></tr>
+<tr class="memdesc:a4bf925f221eb413c04aa4e87be3732df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complex Conjugate.  <a href="classsigma_1_1Uncertain.html#a4bf925f221eb413c04aa4e87be3732df">More...</a><br /></td></tr>
+<tr class="separator:a4bf925f221eb413c04aa4e87be3732df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28e3ef28835d7f480ae074bafeb6d222"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a28e3ef28835d7f480ae074bafeb6d222"><td class="memTemplItemLeft" align="right" valign="top">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a28e3ef28835d7f480ae074bafeb6d222">real</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;x)</td></tr>
+<tr class="memdesc:a28e3ef28835d7f480ae074bafeb6d222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the real part of a value.  <a href="classsigma_1_1Uncertain.html#a28e3ef28835d7f480ae074bafeb6d222">More...</a><br /></td></tr>
+<tr class="separator:a28e3ef28835d7f480ae074bafeb6d222"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a073a5f9208feefdf8d184da74205f3bc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a073a5f9208feefdf8d184da74205f3bc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a073a5f9208feefdf8d184da74205f3bc">imag</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;)</td></tr>
+<tr class="memdesc:a073a5f9208feefdf8d184da74205f3bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the imaginary part of a value.  <a href="classsigma_1_1Uncertain.html#a073a5f9208feefdf8d184da74205f3bc">More...</a><br /></td></tr>
+<tr class="separator:a073a5f9208feefdf8d184da74205f3bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc9ec46392f31c25e10276b4a849fa43"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:abc9ec46392f31c25e10276b4a849fa43"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#abc9ec46392f31c25e10276b4a849fa43">erf</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:abc9ec46392f31c25e10276b4a849fa43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error function.  <a href="classsigma_1_1Uncertain.html#abc9ec46392f31c25e10276b4a849fa43">More...</a><br /></td></tr>
+<tr class="separator:abc9ec46392f31c25e10276b4a849fa43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac29cd341a5b32348e0014c3fb116fcca"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac29cd341a5b32348e0014c3fb116fcca"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#ac29cd341a5b32348e0014c3fb116fcca">erfc</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:ac29cd341a5b32348e0014c3fb116fcca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complementary error function.  <a href="classsigma_1_1Uncertain.html#ac29cd341a5b32348e0014c3fb116fcca">More...</a><br /></td></tr>
+<tr class="separator:ac29cd341a5b32348e0014c3fb116fcca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf1e2307816479e3e26a91f1f319e8bf"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:abf1e2307816479e3e26a91f1f319e8bf"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#abf1e2307816479e3e26a91f1f319e8bf">tgamma</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:abf1e2307816479e3e26a91f1f319e8bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gamma function.  <a href="classsigma_1_1Uncertain.html#abf1e2307816479e3e26a91f1f319e8bf">More...</a><br /></td></tr>
+<tr class="separator:abf1e2307816479e3e26a91f1f319e8bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82f61f0a7a64ed343ef747cfa8e0ba15"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a82f61f0a7a64ed343ef747cfa8e0ba15"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a82f61f0a7a64ed343ef747cfa8e0ba15">lgamma</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a82f61f0a7a64ed343ef747cfa8e0ba15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gamma function Natural Logarithm.  <a href="classsigma_1_1Uncertain.html#a82f61f0a7a64ed343ef747cfa8e0ba15">More...</a><br /></td></tr>
+<tr class="separator:a82f61f0a7a64ed343ef747cfa8e0ba15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdff90b06ed63c2a1ec0e9721b0b3b15"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:acdff90b06ed63c2a1ec0e9721b0b3b15"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#acdff90b06ed63c2a1ec0e9721b0b3b15">pow</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a, double <a class="el" href="classsigma_1_1Uncertain.html#a51e9a2f4b29868bc6c0b206e9d42ae0d">exp</a>)</td></tr>
+<tr class="memdesc:acdff90b06ed63c2a1ec0e9721b0b3b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponentiation of a variable.  <a href="classsigma_1_1Uncertain.html#acdff90b06ed63c2a1ec0e9721b0b3b15">More...</a><br /></td></tr>
+<tr class="separator:acdff90b06ed63c2a1ec0e9721b0b3b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af10072cce8b58e8a06a52524e8eb8df1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af10072cce8b58e8a06a52524e8eb8df1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#af10072cce8b58e8a06a52524e8eb8df1">pow</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;<a class="el" href="classsigma_1_1Uncertain.html#a51e9a2f4b29868bc6c0b206e9d42ae0d">exp</a>)</td></tr>
+<tr class="memdesc:af10072cce8b58e8a06a52524e8eb8df1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponentiation of a variable by an uncertain variable.  <a href="classsigma_1_1Uncertain.html#af10072cce8b58e8a06a52524e8eb8df1">More...</a><br /></td></tr>
+<tr class="separator:af10072cce8b58e8a06a52524e8eb8df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cac33efd26aea69d002176dd218cb49"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1cac33efd26aea69d002176dd218cb49"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a1cac33efd26aea69d002176dd218cb49">sqrt</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a1cac33efd26aea69d002176dd218cb49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the square root of an uncertain variable.  <a href="classsigma_1_1Uncertain.html#a1cac33efd26aea69d002176dd218cb49">More...</a><br /></td></tr>
+<tr class="separator:a1cac33efd26aea69d002176dd218cb49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51e9a2f4b29868bc6c0b206e9d42ae0d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a51e9a2f4b29868bc6c0b206e9d42ae0d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a51e9a2f4b29868bc6c0b206e9d42ae0d">exp</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a51e9a2f4b29868bc6c0b206e9d42ae0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the Euler's number raised to the power of an uncertain variable.  <a href="classsigma_1_1Uncertain.html#a51e9a2f4b29868bc6c0b206e9d42ae0d">More...</a><br /></td></tr>
+<tr class="separator:a51e9a2f4b29868bc6c0b206e9d42ae0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a356d81ebe4172ff5b2f6e5f46ad60aa3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a356d81ebe4172ff5b2f6e5f46ad60aa3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a356d81ebe4172ff5b2f6e5f46ad60aa3">log</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a356d81ebe4172ff5b2f6e5f46ad60aa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the natural logarithm of a variable.  <a href="classsigma_1_1Uncertain.html#a356d81ebe4172ff5b2f6e5f46ad60aa3">More...</a><br /></td></tr>
+<tr class="separator:a356d81ebe4172ff5b2f6e5f46ad60aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c63861342f95928ac25e8f3ea1c6204"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3c63861342f95928ac25e8f3ea1c6204"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a3c63861342f95928ac25e8f3ea1c6204">log10</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a3c63861342f95928ac25e8f3ea1c6204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the base 10 logarithm of a variable.  <a href="classsigma_1_1Uncertain.html#a3c63861342f95928ac25e8f3ea1c6204">More...</a><br /></td></tr>
+<tr class="separator:a3c63861342f95928ac25e8f3ea1c6204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a066c639f03385b265cfa612d3f39d580"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a066c639f03385b265cfa612d3f39d580"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a066c639f03385b265cfa612d3f39d580">sinh</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a066c639f03385b265cfa612d3f39d580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic sine of the variable.  <a href="classsigma_1_1Uncertain.html#a066c639f03385b265cfa612d3f39d580">More...</a><br /></td></tr>
+<tr class="separator:a066c639f03385b265cfa612d3f39d580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9524ced2b85adf1964527fd84c4be450"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9524ced2b85adf1964527fd84c4be450"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a9524ced2b85adf1964527fd84c4be450">cosh</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a9524ced2b85adf1964527fd84c4be450"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic cosine of the variable.  <a href="classsigma_1_1Uncertain.html#a9524ced2b85adf1964527fd84c4be450">More...</a><br /></td></tr>
+<tr class="separator:a9524ced2b85adf1964527fd84c4be450"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24f8950aea4088c967b268541493d034"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a24f8950aea4088c967b268541493d034"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a24f8950aea4088c967b268541493d034">tanh</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a24f8950aea4088c967b268541493d034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic tangent of the variable.  <a href="classsigma_1_1Uncertain.html#a24f8950aea4088c967b268541493d034">More...</a><br /></td></tr>
+<tr class="separator:a24f8950aea4088c967b268541493d034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af76dc2e83d89577ad40d684730a929cd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af76dc2e83d89577ad40d684730a929cd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#af76dc2e83d89577ad40d684730a929cd">asinh</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:af76dc2e83d89577ad40d684730a929cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic arcsine of the variable.  <a href="classsigma_1_1Uncertain.html#af76dc2e83d89577ad40d684730a929cd">More...</a><br /></td></tr>
+<tr class="separator:af76dc2e83d89577ad40d684730a929cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14ae1907c8178b6bbbd58ccc2071af70"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a14ae1907c8178b6bbbd58ccc2071af70"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a14ae1907c8178b6bbbd58ccc2071af70">acosh</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a14ae1907c8178b6bbbd58ccc2071af70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic arccosine of the variable.  <a href="classsigma_1_1Uncertain.html#a14ae1907c8178b6bbbd58ccc2071af70">More...</a><br /></td></tr>
+<tr class="separator:a14ae1907c8178b6bbbd58ccc2071af70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd2fee329ae9c4bfc9254df57eef64f6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:abd2fee329ae9c4bfc9254df57eef64f6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#abd2fee329ae9c4bfc9254df57eef64f6">atanh</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:abd2fee329ae9c4bfc9254df57eef64f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic arctangent of the variable.  <a href="classsigma_1_1Uncertain.html#abd2fee329ae9c4bfc9254df57eef64f6">More...</a><br /></td></tr>
+<tr class="separator:abd2fee329ae9c4bfc9254df57eef64f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9eaa63f97907fe43b95b693fbe422e1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae9eaa63f97907fe43b95b693fbe422e1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#ae9eaa63f97907fe43b95b693fbe422e1">degrees</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:ae9eaa63f97907fe43b95b693fbe422e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from radians to degrees.  <a href="classsigma_1_1Uncertain.html#ae9eaa63f97907fe43b95b693fbe422e1">More...</a><br /></td></tr>
+<tr class="separator:ae9eaa63f97907fe43b95b693fbe422e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00c15a418d3c2a64e25617c7e8c743dc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a00c15a418d3c2a64e25617c7e8c743dc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a00c15a418d3c2a64e25617c7e8c743dc">radians</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a00c15a418d3c2a64e25617c7e8c743dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert from degrees to radians.  <a href="classsigma_1_1Uncertain.html#a00c15a418d3c2a64e25617c7e8c743dc">More...</a><br /></td></tr>
+<tr class="separator:a00c15a418d3c2a64e25617c7e8c743dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6588944dc32685c8f1e56c36bf96296f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6588944dc32685c8f1e56c36bf96296f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a6588944dc32685c8f1e56c36bf96296f">sin</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a6588944dc32685c8f1e56c36bf96296f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sine of the variable.  <a href="classsigma_1_1Uncertain.html#a6588944dc32685c8f1e56c36bf96296f">More...</a><br /></td></tr>
+<tr class="separator:a6588944dc32685c8f1e56c36bf96296f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1be8ab202d12b2b12c05303c62c9588b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1be8ab202d12b2b12c05303c62c9588b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a1be8ab202d12b2b12c05303c62c9588b">cos</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a1be8ab202d12b2b12c05303c62c9588b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cosine of the variable.  <a href="classsigma_1_1Uncertain.html#a1be8ab202d12b2b12c05303c62c9588b">More...</a><br /></td></tr>
+<tr class="separator:a1be8ab202d12b2b12c05303c62c9588b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a330e0ad4e4260d4deb64a987809a77c3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a330e0ad4e4260d4deb64a987809a77c3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a330e0ad4e4260d4deb64a987809a77c3">tan</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a330e0ad4e4260d4deb64a987809a77c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tangent of the variable.  <a href="classsigma_1_1Uncertain.html#a330e0ad4e4260d4deb64a987809a77c3">More...</a><br /></td></tr>
+<tr class="separator:a330e0ad4e4260d4deb64a987809a77c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72e411bbfb6a35126409d476ca74d05c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a72e411bbfb6a35126409d476ca74d05c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a72e411bbfb6a35126409d476ca74d05c">asin</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a72e411bbfb6a35126409d476ca74d05c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arcsine of the variable.  <a href="classsigma_1_1Uncertain.html#a72e411bbfb6a35126409d476ca74d05c">More...</a><br /></td></tr>
+<tr class="separator:a72e411bbfb6a35126409d476ca74d05c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a000a1e24fe3a09d1ac7c9d0e66f6df15"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a000a1e24fe3a09d1ac7c9d0e66f6df15"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a000a1e24fe3a09d1ac7c9d0e66f6df15">acos</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a000a1e24fe3a09d1ac7c9d0e66f6df15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arccosine of the variable.  <a href="classsigma_1_1Uncertain.html#a000a1e24fe3a09d1ac7c9d0e66f6df15">More...</a><br /></td></tr>
+<tr class="separator:a000a1e24fe3a09d1ac7c9d0e66f6df15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a976233610fe99745ebfecb3df7fce940"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a976233610fe99745ebfecb3df7fce940"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a976233610fe99745ebfecb3df7fce940">atan</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a976233610fe99745ebfecb3df7fce940"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arctangent of the variable.  <a href="classsigma_1_1Uncertain.html#a976233610fe99745ebfecb3df7fce940">More...</a><br /></td></tr>
+<tr class="separator:a976233610fe99745ebfecb3df7fce940"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3775cb162f9cd3d73de5be2f45efab64"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3775cb162f9cd3d73de5be2f45efab64"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a3775cb162f9cd3d73de5be2f45efab64">atan2</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;y, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;x)</td></tr>
+<tr class="memdesc:a3775cb162f9cd3d73de5be2f45efab64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Two argument arctangent.  <a href="classsigma_1_1Uncertain.html#a3775cb162f9cd3d73de5be2f45efab64">More...</a><br /></td></tr>
+<tr class="separator:a3775cb162f9cd3d73de5be2f45efab64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f22e12e277cb7bddcbbb505d2795a10"><td class="memTemplParams" colspan="2">template&lt;typename ValueType &gt; </td></tr>
 <tr class="memitem:a0f22e12e277cb7bddcbbb505d2795a10"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsigma_1_1Uncertain.html#a0f22e12e277cb7bddcbbb505d2795a10">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; ValueType &gt; &amp;u)</td></tr>
 <tr class="memdesc:a0f22e12e277cb7bddcbbb505d2795a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload stream insertion to print uncertain variable.  <a href="classsigma_1_1Uncertain.html#a0f22e12e277cb7bddcbbb505d2795a10">More...</a><br /></td></tr>
@@ -336,8 +355,51 @@ class sigma::Uncertain&lt; ValueType &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a9d37e96d9f215e20fe1cf7c814472822"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d37e96d9f215e20fe1cf7c814472822">&#9670;&nbsp;</a></span>Uncertain() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ValueType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">sigma::Uncertain</a>&lt; ValueType &gt;::<a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classsigma_1_1Uncertain.html#ab9d55c3ae3c72960a33db279c96cb952">value_t</a>&#160;</td>
+          <td class="paramname"><em>mean</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct an certain value from mean. </p>
+<p>The result of this is not an uncertain value. This is mostly a courtesy function for simpler operation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mean</td><td>The value of the variable</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a310551a4761f198f82435195b0ef4554"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a310551a4761f198f82435195b0ef4554">&#9670;&nbsp;</a></span>Uncertain()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a310551a4761f198f82435195b0ef4554">&#9670;&nbsp;</a></span>Uncertain() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -492,21 +554,21 @@ template&lt;typename ValueType &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a8dc9e4a4da3df870b7c0e4597f32e5fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8dc9e4a4da3df870b7c0e4597f32e5fc">&#9670;&nbsp;</a></span>abs()</h2>
+<a id="a73584ef0021212b349b4ba40d75e1fc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73584ef0021212b349b4ba40d75e1fc9">&#9670;&nbsp;</a></span>abs()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType abs </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; abs </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -521,7 +583,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Absolute Value. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -541,21 +603,70 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="abace30a293874333bac501d5ceb3d173"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abace30a293874333bac501d5ceb3d173">&#9670;&nbsp;</a></span>acos()</h2>
+<a id="a698429ad76a20ee0258354157f656ecd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a698429ad76a20ee0258354157f656ecd">&#9670;&nbsp;</a></span>abs2()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType acos </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; abs2 </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The Square of the Absolute Value. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The variable</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The square of the absolute value of <code>a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a000a1e24fe3a09d1ac7c9d0e66f6df15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a000a1e24fe3a09d1ac7c9d0e66f6df15">&#9670;&nbsp;</a></span>acos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; acos </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -570,7 +681,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Arccosine of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -590,21 +701,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="ae9f2b9169fcbaec81e3eea2330c639a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9f2b9169fcbaec81e3eea2330c639a0">&#9670;&nbsp;</a></span>acosh()</h2>
+<a id="a14ae1907c8178b6bbbd58ccc2071af70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14ae1907c8178b6bbbd58ccc2071af70">&#9670;&nbsp;</a></span>acosh()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType acosh </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; acosh </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -619,7 +730,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Hyperbolic arccosine of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -639,21 +750,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a695f8a8a087b09cd7dcb94d2db242e2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a695f8a8a087b09cd7dcb94d2db242e2f">&#9670;&nbsp;</a></span>asin()</h2>
+<a id="a72e411bbfb6a35126409d476ca74d05c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72e411bbfb6a35126409d476ca74d05c">&#9670;&nbsp;</a></span>asin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType asin </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; asin </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -668,7 +779,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Arcsine of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -688,21 +799,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a6238e6a4a77b484345bc343e39d3b8d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6238e6a4a77b484345bc343e39d3b8d2">&#9670;&nbsp;</a></span>asinh()</h2>
+<a id="af76dc2e83d89577ad40d684730a929cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af76dc2e83d89577ad40d684730a929cd">&#9670;&nbsp;</a></span>asinh()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType asinh </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; asinh </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -717,7 +828,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Hyperbolic arcsine of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -737,21 +848,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="aa077b46784be6e3f1efd546dcf36287c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa077b46784be6e3f1efd546dcf36287c">&#9670;&nbsp;</a></span>atan()</h2>
+<a id="a976233610fe99745ebfecb3df7fce940"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a976233610fe99745ebfecb3df7fce940">&#9670;&nbsp;</a></span>atan()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType atan </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; atan </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -766,7 +877,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Arctangent of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -786,27 +897,27 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a0c3220a7501c58a6e4f579261fc45257"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c3220a7501c58a6e4f579261fc45257">&#9670;&nbsp;</a></span>atan2()</h2>
+<a id="a3775cb162f9cd3d73de5be2f45efab64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3775cb162f9cd3d73de5be2f45efab64">&#9670;&nbsp;</a></span>atan2()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType atan2 </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; atan2 </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>y</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>x</em>&#160;</td>
         </tr>
         <tr>
@@ -825,7 +936,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Two argument arctangent. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -846,21 +957,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a33fddf6756f8a2eb90b9700027087124"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33fddf6756f8a2eb90b9700027087124">&#9670;&nbsp;</a></span>atanh()</h2>
+<a id="abd2fee329ae9c4bfc9254df57eef64f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd2fee329ae9c4bfc9254df57eef64f6">&#9670;&nbsp;</a></span>atanh()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType atanh </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; atanh </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -875,7 +986,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Hyperbolic arctangent of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -895,21 +1006,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a5ff6ec4eedde0ab121973f7200167053"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ff6ec4eedde0ab121973f7200167053">&#9670;&nbsp;</a></span>ceil()</h2>
+<a id="a9fde35b428965b317d37747e8278f855"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fde35b428965b317d37747e8278f855">&#9670;&nbsp;</a></span>ceil()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType ceil </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; ceil </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -922,10 +1033,10 @@ template&lt;typename UncertainType &gt; </div>
 </div><div class="memdoc">
 
 <p>Nearest integer not less than the given value. </p>
-<p>Note that this returns an UncertainType value with no dependencies</p>
+<p>Note that this returns an Uncertain&lt;T&gt; value with no dependencies</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -945,27 +1056,77 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a14ec7c530ee7f76cfb715901cf0426d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14ec7c530ee7f76cfb715901cf0426d8">&#9670;&nbsp;</a></span>copysign()</h2>
+<a id="a4bf925f221eb413c04aa4e87be3732df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bf925f221eb413c04aa4e87be3732df">&#9670;&nbsp;</a></span>conj()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType copysign </td>
+          <td class="memname">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp; conj </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Complex Conjugate. </p>
+<p>sigma doesn't currently support complex values, so this is a stub.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The variable</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The complex conjugate of <code>a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aec507a309e9a7214b9f04fd8d0990034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec507a309e9a7214b9f04fd8d0990034">&#9670;&nbsp;</a></span>copysign()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; copysign </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -984,7 +1145,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Copy the sign of one value to another. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1005,21 +1166,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a2a9cd4aa06344093e372eb3cf0b7d6f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a9cd4aa06344093e372eb3cf0b7d6f9">&#9670;&nbsp;</a></span>cos()</h2>
+<a id="a1be8ab202d12b2b12c05303c62c9588b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1be8ab202d12b2b12c05303c62c9588b">&#9670;&nbsp;</a></span>cos()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType cos </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; cos </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1034,7 +1195,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Cosine of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1054,21 +1215,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a21159c806e43008bc94921974b8de963"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21159c806e43008bc94921974b8de963">&#9670;&nbsp;</a></span>cosh()</h2>
+<a id="a9524ced2b85adf1964527fd84c4be450"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9524ced2b85adf1964527fd84c4be450">&#9670;&nbsp;</a></span>cosh()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType cosh </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; cosh </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1083,7 +1244,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Hyperbolic cosine of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1103,21 +1264,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="aa08ab6340e62a8dee8e7509674fee889"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa08ab6340e62a8dee8e7509674fee889">&#9670;&nbsp;</a></span>degrees()</h2>
+<a id="ae9eaa63f97907fe43b95b693fbe422e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9eaa63f97907fe43b95b693fbe422e1">&#9670;&nbsp;</a></span>degrees()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType degrees </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; degrees </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1132,7 +1293,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Convert from radians to degrees. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1179,21 +1340,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a0ca3007d5ba838c8b12a91fbc1f2cc37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ca3007d5ba838c8b12a91fbc1f2cc37">&#9670;&nbsp;</a></span>erf()</h2>
+<a id="abc9ec46392f31c25e10276b4a849fa43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc9ec46392f31c25e10276b4a849fa43">&#9670;&nbsp;</a></span>erf()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType erf </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; erf </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1208,7 +1369,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Error function. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1228,21 +1389,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a2f634f2794a937158c9d2eac25f42c70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f634f2794a937158c9d2eac25f42c70">&#9670;&nbsp;</a></span>erfc()</h2>
+<a id="ac29cd341a5b32348e0014c3fb116fcca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac29cd341a5b32348e0014c3fb116fcca">&#9670;&nbsp;</a></span>erfc()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType erfc </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; erfc </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1257,7 +1418,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Complementary error function. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1277,21 +1438,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a23d96ae251e86a1d5949a2919b79b74a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23d96ae251e86a1d5949a2919b79b74a">&#9670;&nbsp;</a></span>exp()</h2>
+<a id="a51e9a2f4b29868bc6c0b206e9d42ae0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51e9a2f4b29868bc6c0b206e9d42ae0d">&#9670;&nbsp;</a></span>exp()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType exp </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; exp </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1306,7 +1467,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Calculate the Euler's number raised to the power of an uncertain variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1326,21 +1487,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a2bdc4f5fa864cca889ac647bc8c0bbe8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2bdc4f5fa864cca889ac647bc8c0bbe8">&#9670;&nbsp;</a></span>floor()</h2>
+<a id="a3a99beca2d0b72aa67d5281f900ec334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a99beca2d0b72aa67d5281f900ec334">&#9670;&nbsp;</a></span>floor()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType floor </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; floor </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1353,10 +1514,10 @@ template&lt;typename UncertainType &gt; </div>
 </div><div class="memdoc">
 
 <p>Nearest integer not greater than the given value. </p>
-<p>Note that this returns an UncertainType value with no dependencies</p>
+<p>Note that this returns an Uncertain&lt;T&gt; value with no dependencies</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1376,27 +1537,27 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a0ad9655dd346f5cd840869ed7354be9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ad9655dd346f5cd840869ed7354be9e">&#9670;&nbsp;</a></span>fmod()</h2>
+<a id="ac84abc1740e264a2d177aa3e9e450fb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac84abc1740e264a2d177aa3e9e450fb9">&#9670;&nbsp;</a></span>fmod()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType fmod </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; fmod </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -1415,7 +1576,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Floating point module. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1436,21 +1597,71 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a62ae3e8e1a2224813977d718f1b76fd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62ae3e8e1a2224813977d718f1b76fd5">&#9670;&nbsp;</a></span>lgamma()</h2>
+<a id="a073a5f9208feefdf8d184da74205f3bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a073a5f9208feefdf8d184da74205f3bc">&#9670;&nbsp;</a></span>imag()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType lgamma </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; imag </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the imaginary part of a value. </p>
+<p>sigma doesn't currently support complex values, so this is a stub.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The variable</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The imaginary part of <code>a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a82f61f0a7a64ed343ef747cfa8e0ba15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82f61f0a7a64ed343ef747cfa8e0ba15">&#9670;&nbsp;</a></span>lgamma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; lgamma </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1465,7 +1676,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Gamma function Natural Logarithm. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1485,21 +1696,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="af3922bd4160382fabee1e7f57c7900c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3922bd4160382fabee1e7f57c7900c0">&#9670;&nbsp;</a></span>log()</h2>
+<a id="a356d81ebe4172ff5b2f6e5f46ad60aa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a356d81ebe4172ff5b2f6e5f46ad60aa3">&#9670;&nbsp;</a></span>log()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType log </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; log </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1514,7 +1725,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Calculate the natural logarithm of a variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1534,21 +1745,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a2b815b45c2150d54567e072e2bbddc6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b815b45c2150d54567e072e2bbddc6a">&#9670;&nbsp;</a></span>log10()</h2>
+<a id="a3c63861342f95928ac25e8f3ea1c6204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c63861342f95928ac25e8f3ea1c6204">&#9670;&nbsp;</a></span>log10()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType log10 </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; log10 </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1563,7 +1774,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Calculate the base 10 logarithm of a variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1637,27 +1848,27 @@ template&lt;typename ValueType1 , typename ValueType2 &gt; </div>
 
 </div>
 </div>
-<a id="abf189764bb8fac22c34e413a5a14d1c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf189764bb8fac22c34e413a5a14d1c5">&#9670;&nbsp;</a></span>operator*()</h2>
+<a id="a4af87e1fab9f93869c1cf2a249ede416"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4af87e1fab9f93869c1cf2a249ede416">&#9670;&nbsp;</a></span>operator*()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType operator* </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; operator* </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>&#160;</td>
         </tr>
         <tr>
@@ -1676,7 +1887,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Multiplication Operation. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variables </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variables </td></tr>
   </table>
   </dd>
 </dl>
@@ -1697,27 +1908,27 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="af6fa07dc7720e4be797ee3b90fa33e10"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6fa07dc7720e4be797ee3b90fa33e10">&#9670;&nbsp;</a></span>operator*=()</h2>
+<a id="a796266577f6ffd94de70ec48bb762fa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a796266577f6ffd94de70ec48bb762fa5">&#9670;&nbsp;</a></span>operator*=()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType &amp; operator*= </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp; operator*= </td>
           <td>(</td>
-          <td class="paramtype">UncertainType &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>&#160;</td>
         </tr>
         <tr>
@@ -1736,7 +1947,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Inplace Multiplication Operation. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variables </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variables </td></tr>
   </table>
   </dd>
 </dl>
@@ -1757,27 +1968,27 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="ac59e9f32be59413d938c2c3f4ae71aca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac59e9f32be59413d938c2c3f4ae71aca">&#9670;&nbsp;</a></span>operator+()</h2>
+<a id="ac07cba9bb0c0fc4ec1fe69f9f8ed36e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac07cba9bb0c0fc4ec1fe69f9f8ed36e8">&#9670;&nbsp;</a></span>operator+()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType operator+ </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; operator+ </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>&#160;</td>
         </tr>
         <tr>
@@ -1796,7 +2007,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Addition Operation. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variables </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variables </td></tr>
   </table>
   </dd>
 </dl>
@@ -1817,27 +2028,27 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a3b7b7011eb5a23e69cb7000764621b48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b7b7011eb5a23e69cb7000764621b48">&#9670;&nbsp;</a></span>operator+=()</h2>
+<a id="ad2674c1a3c3ab94b36ed4c64140cdd34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2674c1a3c3ab94b36ed4c64140cdd34">&#9670;&nbsp;</a></span>operator+=()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType &amp; operator+= </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp; operator+= </td>
           <td>(</td>
-          <td class="paramtype">UncertainType &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>&#160;</td>
         </tr>
         <tr>
@@ -1856,7 +2067,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Inplace Addition Operation. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variables </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variables </td></tr>
   </table>
   </dd>
 </dl>
@@ -1877,21 +2088,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a418f126c91c5eb3b58a9a92f968cd6da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a418f126c91c5eb3b58a9a92f968cd6da">&#9670;&nbsp;</a></span>operator-() <span class="overload">[1/2]</span></h2>
+<a id="afcffb2dc69ee3e1ccccbe464ba53004e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcffb2dc69ee3e1ccccbe464ba53004e">&#9670;&nbsp;</a></span>operator-() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType operator- </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; operator- </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1906,7 +2117,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Negation Operation. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -1926,27 +2137,27 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="adc6273d1c22cc2daad1848a387541711"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc6273d1c22cc2daad1848a387541711">&#9670;&nbsp;</a></span>operator-() <span class="overload">[2/2]</span></h2>
+<a id="a091294b34a9aa7f7c68756ffb2bd246c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a091294b34a9aa7f7c68756ffb2bd246c">&#9670;&nbsp;</a></span>operator-() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType operator- </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; operator- </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>&#160;</td>
         </tr>
         <tr>
@@ -1965,7 +2176,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Subtraction Operation. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variables </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variables </td></tr>
   </table>
   </dd>
 </dl>
@@ -1986,27 +2197,27 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a1df7b05cbce2f5c121e5db8eb87eec72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1df7b05cbce2f5c121e5db8eb87eec72">&#9670;&nbsp;</a></span>operator-=()</h2>
+<a id="a69af714b85c7a3d4c5a4180073001ef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69af714b85c7a3d4c5a4180073001ef6">&#9670;&nbsp;</a></span>operator-=()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType &amp; operator-= </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp; operator-= </td>
           <td>(</td>
-          <td class="paramtype">UncertainType &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>&#160;</td>
         </tr>
         <tr>
@@ -2025,7 +2236,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Inplace Subtraction Operation. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variables </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variables </td></tr>
   </table>
   </dd>
 </dl>
@@ -2046,27 +2257,27 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="ab2580ab48bea83a73250f0807f68bbbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2580ab48bea83a73250f0807f68bbbe">&#9670;&nbsp;</a></span>operator/()</h2>
+<a id="a5258f338f5479bf890135d4bc9437b36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5258f338f5479bf890135d4bc9437b36">&#9670;&nbsp;</a></span>operator/()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType operator/ </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; operator/ </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>&#160;</td>
         </tr>
         <tr>
@@ -2085,7 +2296,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Division Operation. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variables </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variables </td></tr>
   </table>
   </dd>
 </dl>
@@ -2106,27 +2317,27 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="af7673c760dd463295c36b72bca93bccf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7673c760dd463295c36b72bca93bccf">&#9670;&nbsp;</a></span>operator/=()</h2>
+<a id="adf53fa5c4799bc2b4abbd79388fdaf68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf53fa5c4799bc2b4abbd79388fdaf68">&#9670;&nbsp;</a></span>operator/=()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType &amp; operator/= </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp; operator/= </td>
           <td>(</td>
-          <td class="paramtype">UncertainType &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>&#160;</td>
         </tr>
         <tr>
@@ -2145,7 +2356,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Inplace Division Operation. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variables </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variables </td></tr>
   </table>
   </dd>
 </dl>
@@ -2498,27 +2709,27 @@ template&lt;typename ValueType1 , typename ValueType2 &gt; </div>
 
 </div>
 </div>
-<a id="ac3b406e262b4c3b4921c47939d682fd8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3b406e262b4c3b4921c47939d682fd8">&#9670;&nbsp;</a></span>pow() <span class="overload">[1/2]</span></h2>
+<a id="af10072cce8b58e8a06a52524e8eb8df1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af10072cce8b58e8a06a52524e8eb8df1">&#9670;&nbsp;</a></span>pow() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType pow </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; pow </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>exp</em>&#160;</td>
         </tr>
         <tr>
@@ -2537,7 +2748,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Exponentiation of a variable by an uncertain variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variables </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variables </td></tr>
   </table>
   </dd>
 </dl>
@@ -2558,21 +2769,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a809b8a297a44dca494efb5331cd5c53d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a809b8a297a44dca494efb5331cd5c53d">&#9670;&nbsp;</a></span>pow() <span class="overload">[2/2]</span></h2>
+<a id="acdff90b06ed63c2a1ec0e9721b0b3b15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdff90b06ed63c2a1ec0e9721b0b3b15">&#9670;&nbsp;</a></span>pow() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType pow </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; pow </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
@@ -2597,7 +2808,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Exponentiation of a variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -2618,21 +2829,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a3eb9ced4f793ed492313a1a998281f99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3eb9ced4f793ed492313a1a998281f99">&#9670;&nbsp;</a></span>radians()</h2>
+<a id="a00c15a418d3c2a64e25617c7e8c743dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00c15a418d3c2a64e25617c7e8c743dc">&#9670;&nbsp;</a></span>radians()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType radians </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; radians </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2647,7 +2858,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Convert from degrees to radians. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -2667,21 +2878,71 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="aed0358a4c1ab2dde53530652bd2f2cf3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed0358a4c1ab2dde53530652bd2f2cf3">&#9670;&nbsp;</a></span>sin()</h2>
+<a id="a28e3ef28835d7f480ae074bafeb6d222"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28e3ef28835d7f480ae074bafeb6d222">&#9670;&nbsp;</a></span>real()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType sin </td>
+          <td class="memname">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp; real </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the real part of a value. </p>
+<p>sigma doesn't currently support complex values, so this is a stub.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The variable</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The real part of <code>a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6588944dc32685c8f1e56c36bf96296f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6588944dc32685c8f1e56c36bf96296f">&#9670;&nbsp;</a></span>sin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; sin </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2696,7 +2957,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Sine of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -2716,21 +2977,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="aec0189184c886f4c739f59172194ca52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec0189184c886f4c739f59172194ca52">&#9670;&nbsp;</a></span>sinh()</h2>
+<a id="a066c639f03385b265cfa612d3f39d580"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a066c639f03385b265cfa612d3f39d580">&#9670;&nbsp;</a></span>sinh()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType sinh </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; sinh </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2745,7 +3006,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Hyperbolic sine of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -2765,21 +3026,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="ad5c6ff31e0811ca42c71cd3325022238"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5c6ff31e0811ca42c71cd3325022238">&#9670;&nbsp;</a></span>sqrt()</h2>
+<a id="a1cac33efd26aea69d002176dd218cb49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cac33efd26aea69d002176dd218cb49">&#9670;&nbsp;</a></span>sqrt()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType sqrt </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; sqrt </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2794,7 +3055,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Calculate the square root of an uncertain variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -2814,21 +3075,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a187a0953cb8bb7df511becbd4f342f13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a187a0953cb8bb7df511becbd4f342f13">&#9670;&nbsp;</a></span>tan()</h2>
+<a id="a330e0ad4e4260d4deb64a987809a77c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a330e0ad4e4260d4deb64a987809a77c3">&#9670;&nbsp;</a></span>tan()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType tan </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; tan </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2843,7 +3104,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Tangent of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -2863,21 +3124,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a0377c93b4e9b4c50fbbfae9c2eac0df7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0377c93b4e9b4c50fbbfae9c2eac0df7">&#9670;&nbsp;</a></span>tanh()</h2>
+<a id="a24f8950aea4088c967b268541493d034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24f8950aea4088c967b268541493d034">&#9670;&nbsp;</a></span>tanh()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType tanh </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; tanh </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2892,7 +3153,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Hyperbolic tangent of the variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -2912,21 +3173,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="acdd159ad75464bb25f919e6d57152780"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdd159ad75464bb25f919e6d57152780">&#9670;&nbsp;</a></span>tgamma()</h2>
+<a id="abf1e2307816479e3e26a91f1f319e8bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf1e2307816479e3e26a91f1f319e8bf">&#9670;&nbsp;</a></span>tgamma()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType tgamma </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; tgamma </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2941,7 +3202,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Gamma function. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -2961,21 +3222,21 @@ template&lt;typename UncertainType &gt; </div>
 
 </div>
 </div>
-<a id="a43c50f9aabb4e13e70fa9de90bba3dec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43c50f9aabb4e13e70fa9de90bba3dec">&#9670;&nbsp;</a></span>trunc()</h2>
+<a id="ae9a368510554a8d0fa777efd5109a63b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9a368510554a8d0fa777efd5109a63b">&#9670;&nbsp;</a></span>trunc()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename UncertainType &gt; </div>
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">UncertainType trunc </td>
+          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; trunc </td>
           <td>(</td>
-          <td class="paramtype">const UncertainType &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2990,7 +3251,7 @@ template&lt;typename UncertainType &gt; </div>
 <p>Remove the fractional part from a variable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">UncertainType</td><td>The type of the variable </td></tr>
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
   </table>
   </dd>
 </dl>
@@ -3014,6 +3275,7 @@ template&lt;typename UncertainType &gt; </div>
 <li>include/sigma/<a class="el" href="uncertain_8hpp_source.html">uncertain.hpp</a></li>
 <li>include/sigma/operations/<a class="el" href="arithmetic_8hpp_source.html">arithmetic.hpp</a></li>
 <li>include/sigma/operations/<a class="el" href="basic_8hpp_source.html">basic.hpp</a></li>
+<li>include/sigma/operations/<a class="el" href="complex_8hpp_source.html">complex.hpp</a></li>
 <li>include/sigma/operations/<a class="el" href="error__and__gamma_8hpp_source.html">error_and_gamma.hpp</a></li>
 <li>include/sigma/operations/<a class="el" href="exponents_8hpp_source.html">exponents.hpp</a></li>
 <li>include/sigma/operations/<a class="el" href="hyperbolic_8hpp_source.html">hyperbolic.hpp</a></li>
