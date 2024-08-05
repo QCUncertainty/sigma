@@ -36,6 +36,14 @@ Uncertain<T> operator-(const Uncertain<T>& lhs, const Uncertain<T>& rhs) {
 }
 
 template<typename T>
+Uncertain<T>& operator-=(Uncertain<T>& lhs, const Uncertain<T>& rhs) {
+    detail_::Setter<Uncertain<T>> lhs_setter(lhs);
+    lhs_setter.update_mean(lhs.mean() - rhs.mean());
+    lhs_setter.update_derivatives(rhs.deps(), -1.0);
+    return lhs;
+}
+
+template<typename T>
 Uncertain<T> operator*(const Uncertain<T>& lhs, const Uncertain<T>& rhs) {
     Uncertain<T> c(lhs);
     c *= rhs;
@@ -70,14 +78,6 @@ Uncertain<T>& operator*=(Uncertain<T>& lhs, double rhs) {
     detail_::Setter<Uncertain<T>> lhs_setter(lhs);
     lhs_setter.update_mean(lhs.mean() * rhs);
     lhs_setter.update_derivatives(rhs);
-    return lhs;
-}
-
-template<typename T>
-Uncertain<T>& operator-=(Uncertain<T>& lhs, const Uncertain<T>& rhs) {
-    detail_::Setter<Uncertain<T>> lhs_setter(lhs);
-    lhs_setter.update_mean(lhs.mean() - rhs.mean());
-    lhs_setter.update_derivatives(rhs.deps(), -1.0);
     return lhs;
 }
 
