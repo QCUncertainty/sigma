@@ -37,8 +37,8 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             // Mix up the floating point types to check implicit conversions
             float mean1  = 1.0;
             double mean2 = 1.0;
-            double sd1  = 0.1;
-            float sd2   = 0.1;
+            double sd1   = 0.1;
+            float sd2    = 0.1;
 
             auto first  = testing_t(mean1, sd1);
             auto second = testing_t(mean2, sd2);

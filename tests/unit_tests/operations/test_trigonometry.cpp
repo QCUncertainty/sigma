@@ -14,9 +14,7 @@ TEMPLATE_TEST_CASE("Trigonometry", "", sigma::UFloat, sigma::UDouble) {
     SECTION("Degrees") {
         test_uncertain(sigma::degrees(a), 45.0000, 5.7296, 1);
     }
-    SECTION("Radians") {
-        test_uncertain(sigma::radians(b), 0.7854, 0.0017, 1);
-    }
+    SECTION("Radians") { test_uncertain(sigma::radians(b), 0.7854, 0.0017, 1); }
     SECTION("Sine") { test_uncertain(sigma::sin(a), 0.7071, 0.0707, 1); }
     SECTION("Cosine") { test_uncertain(sigma::cos(a), 0.7071, 0.0707, 1); }
     SECTION("Tangent") { test_uncertain(sigma::tan(a), 1.0000, 0.2000, 1); }
