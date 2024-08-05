@@ -12,6 +12,11 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         compiler: [gnu-11, gnu-12, clang-default]
+        eigen: [ON]
+        include:
+          - os: ubuntu-latest
+            compiler: gnu-12
+            eigen: OFF
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     steps:
@@ -32,7 +37,7 @@ jobs:
           toolchain=${toolchain_dir}/test_base.cmake
           echo 'include('${toolchain_dir}'/${{matrix.compiler}}.cmake)' >> $toolchain
 
-          cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
+          cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=${{matrix.eigen}}
           cmake --build build --parallel
           cd build
           ctest -VV

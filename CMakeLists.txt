@@ -17,6 +17,16 @@ set(${PROJECT_NAME}_TESTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 cmaize_option_list(
     BUILD_TESTING OFF "Should the tests be built?"
     BUILD_DOCS OFF "Should we build the documentation?"
+    ENABLE_EIGEN_SUPPORT ON "Include Eigen compatibility headers?"
+)
+
+cmaize_find_or_build_optional_dependency(
+    eigen
+    ENABLE_EIGEN_SUPPORT
+    URL https://www.gitlab.com/libeigen/eigen
+    VERSION 3.4.0
+    BUILD_TARGET eigen
+    FIND_TARGET Eigen3::Eigen
 )
 
 ## Add libraries ##
@@ -24,7 +34,7 @@ cmaize_add_library(
     ${PROJECT_NAME}
     SOURCE_DIR "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
     INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
-    # DEPENDS 
+    DEPENDS eigen
 )
 
 if("${BUILD_DOCS}")
@@ -39,7 +49,7 @@ if("${BUILD_TESTING}")
         URL github.com/catchorg/Catch2
         BUILD_TARGET Catch2
         FIND_TARGET Catch2::Catch2
-        VERSION v2.x
+        VERSION v3.6.0
     )
 
     ## Add Tests ##
@@ -47,7 +57,7 @@ if("${BUILD_TESTING}")
         test_${PROJECT_NAME}
         SOURCE_DIR "${${PROJECT_NAME}_TESTS_DIR}/unit_tests"
         INCLUDE_DIRS "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
-        DEPENDS Catch2 ${PROJECT_NAME}
+        DEPENDS Catch2 eigen ${PROJECT_NAME}
     )
 
 endif()

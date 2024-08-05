@@ -4,6 +4,7 @@
 
 using testing::test_uncertain;
 
+namespace testing {
 template<typename T>
 struct test_traits;
 
@@ -16,26 +17,31 @@ template<>
 struct test_traits<sigma::UDouble> {
     using other_t = sigma::UFloat;
 };
+} // namespace testing
 
 TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
     using testing_t = TestType;
     using value_t   = typename testing_t::value_t;
-    using other_t   = typename test_traits<TestType>::other_t;
+    using other_t   = typename testing::test_traits<TestType>::other_t;
 
     SECTION("Constructors") {
         SECTION("Default") {
             auto value = testing_t();
             test_uncertain(value, 0.0, 0.0, 0);
         }
-        SECTION("With Values") {
+        SECTION("With Value") {
+            auto value = testing_t(1.0);
+            test_uncertain(value, 1.0, 0.0, 0);
+        }
+        SECTION("With Mean and SD") {
             // Mix up the floating point types to check implicit conversions
             float mean1  = 1.0;
             double mean2 = 1.0;
-            double std1  = 0.1;
-            float std2   = 0.1;
+            double sd1   = 0.1;
+            float sd2    = 0.1;
 
-            auto first  = testing_t(mean1, std1);
-            auto second = testing_t(mean2, std2);
+            auto first  = testing_t(mean1, sd1);
+            auto second = testing_t(mean2, sd2);
             test_uncertain(first, 1.0, 0.1, 1);
             test_uncertain(second, 1.0, 0.1, 1);
         }
