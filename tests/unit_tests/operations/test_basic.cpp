@@ -19,6 +19,7 @@ TEMPLATE_TEST_CASE("Basic", "", sigma::UFloat, sigma::UDouble) {
         test_uncertain(a + sigma::copysign(a, -1.0), 0.0, 0.0, 1);
     }
     SECTION("Absolute Value") { REQUIRE(a == sigma::abs(-a)); }
+    SECTION("Absolute Value Squared") { REQUIRE((c * c) == sigma::abs2(-c)); }
     SECTION("Ceiling") { test_uncertain(sigma::ceil(b), 2.0, 0.0, 0); }
     SECTION("Floor") { test_uncertain(sigma::floor(b), 1.0, 0.0, 0); }
     SECTION("Float modulo") {
