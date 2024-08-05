@@ -8,7 +8,7 @@ namespace sigma {
  *
  *  sigma doesn't currently support complex values, so this is a stub.
  *
- *  @tparam UncertainType The type of the variable
+ *  @tparam T The value type of the variable
  *  @param a The variable
  *
  *  @return The complex conjugate of @p a
@@ -25,7 +25,7 @@ const Uncertain<T>& conj(const Uncertain<T>& x) {
  *
  *  sigma doesn't currently support complex values, so this is a stub.
  *
- *  @tparam UncertainType The type of the variable
+ *  @tparam T The value type of the variable
  *  @param a The variable
  *
  *  @return The real part of @p a
@@ -42,7 +42,7 @@ const Uncertain<T>& real(const Uncertain<T>& x) {
  *
  *  sigma doesn't currently support complex values, so this is a stub.
  *
- *  @tparam UncertainType The type of the variable
+ *  @tparam T The value type of the variable
  *  @param a The variable
  *
  *  @return The imaginary part of @p a

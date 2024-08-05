@@ -5,8 +5,8 @@
 
 namespace testing {
 
-template<typename UncertainType>
-void test_uncertain(UncertainType x, double m, double s, std::size_t n) {
+template<typename TestType>
+void test_uncertain(TestType x, double m, double s, std::size_t n) {
     REQUIRE(x.mean() == Catch::Approx(m).margin(1.0e-4));
     REQUIRE(x.sd() == Catch::Approx(s).margin(1.0e-4));
     REQUIRE(x.deps().size() == n);
