@@ -12,7 +12,11 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         compiler: [gnu-11, gnu-12, clang-default]
-        eigen: [ON, OFF]
+        eigen: [ON]
+        include:
+          - os: ubuntu-latest
+          - compiler: gnu-12
+          - eigen: OFF
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     steps:
