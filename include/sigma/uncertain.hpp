@@ -46,6 +46,17 @@ public:
     /// @brief Default ctor
     Uncertain() noexcept = default;
 
+    /** @brief Construct an certain value from mean
+     *
+     *  The result of this is not an uncertain value. This is mostly a courtesy
+     *  function for simpler operation.
+     *
+     *  @param mean The value of the variable
+     *
+     *  @throw none No throw guarantee
+     */
+    Uncertain(value_t mean) : m_mean_(mean), m_sd_(0.0) {}
+
     /** @brief Construct an uncertain value from mean and standard deviation
      *
      *  Effectively, this creates a value that is a function of a single
