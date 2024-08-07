@@ -1,5 +1,6 @@
 #pragma once
 
+#include "sigma/detail_/operation_common.hpp"
 #include "sigma/detail_/setter.hpp"
 #include <cmath>
 
@@ -7,19 +8,14 @@ namespace sigma {
 
 template<typename T>
 Uncertain<T> abs(const Uncertain<T>& a) {
-    auto dcda = (a.mean() >= 0) ? 1.0 : -1.0;
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::abs(a.mean()));
-    c_setter.update_derivatives(dcda);
-    return c;
+    T mean = std::abs(a.mean());
+    T dcda = (a.mean() >= 0) ? 1.0 : -1.0;
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> abs2(const Uncertain<T>& a) {
-    Uncertain<T> c = abs(a);
-    c               = pow(c, 2.0);
-    return c;
+    return pow(abs(a), 2.0);
 }
 
 template<typename T>

@@ -1,16 +1,15 @@
 #pragma once
 
+#include "sigma/detail_/operation_common.hpp"
 #include "sigma/detail_/setter.hpp"
 
 namespace sigma {
 
 template<typename T>
 Uncertain<T> operator-(const Uncertain<T>& a) {
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(-a.mean());
-    c_setter.update_derivatives(-1.0);
-    return c;
+    T mean = -a.mean();
+    T dcda = -1.0;
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
