@@ -1,28 +1,23 @@
 #pragma once
 
-#include "sigma/detail_/setter.hpp"
+#include "sigma/detail_/operation_common.hpp"
 #include <cmath>
 
 namespace sigma {
 
 template<typename T>
 Uncertain<T> pow(const Uncertain<T>& a, double exp) {
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::pow(a.mean(), exp));
-    c_setter.update_derivatives(exp * std::pow(a.mean(), exp - 1));
-    return c;
+    T mean = std::pow(a.mean(), exp);
+    T dcda = exp * std::pow(a.mean(), exp - 1);
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> pow(const Uncertain<T>& a, const Uncertain<T>& exp) {
-    auto dcda = exp.mean() * std::pow(a.mean(), exp.mean() - 1);
-    auto dcdb = std::log(a.mean()) * std::pow(a.mean(), exp.mean());
-    Uncertain<T> c{};
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::pow(a.mean(), exp.mean()));
-    c_setter.update_derivatives(a.deps(), dcda, exp.deps(), dcdb);
-    return c;
+    T mean = std::pow(a.mean(), exp.mean());
+    T dcda = exp.mean() * std::pow(a.mean(), exp.mean() - 1);
+    T dcdb = std::log(a.mean()) * std::pow(a.mean(), exp.mean());
+    return detail_::binary_result(a, exp, mean, dcda, dcdb);
 }
 
 template<typename T>
@@ -32,49 +27,38 @@ Uncertain<T> sqrt(const Uncertain<T>& a) {
 
 template<typename T>
 Uncertain<T> exp(const Uncertain<T>& a) {
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::exp(a.mean()));
-    c_setter.update_derivatives(std::exp(a.mean()));
-    return c;
+    T mean = std::exp(a.mean());
+    T dcda = std::exp(a.mean());
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> log(const Uncertain<T>& a) {
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::log(a.mean()));
-    c_setter.update_derivatives(1.0 / a.mean());
-    return c;
+    T mean = std::log(a.mean());
+    T dcda = 1.0 / a.mean();
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> log10(const Uncertain<T>& a) {
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::log10(a.mean()));
-    c_setter.update_derivatives(1.0 / (a.mean() * std::log(10.0)));
-    return c;
+    T mean = std::log10(a.mean());
+    T dcda = 1.0 / (a.mean() * std::log(10.0));
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> hypot(const Uncertain<T>& a, const Uncertain<T>& b) {
-    auto dcda = a.mean() / std::hypot(a.mean(), b.mean());
-    auto dcdb = b.mean() / std::hypot(a.mean(), b.mean());
-    Uncertain<T> c{};
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::hypot(a.mean(), b.mean()));
-    c_setter.update_derivatives(a.deps(), dcda, b.deps(), dcdb);
-    return c;
+    T mean = std::hypot(a.mean(), b.mean());
+    T dcda = a.mean() / std::hypot(a.mean(), b.mean());
+    T dcdb = b.mean() / std::hypot(a.mean(), b.mean());
+    return detail_::binary_result(a, b, mean, dcda, dcdb);
 }
 
 template<typename T>
 Uncertain<T> hypot(const Uncertain<T>& a, double b) {
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::hypot(a.mean(), b));
-    c_setter.update_derivatives(a.mean() / std::hypot(a.mean(), b));
-    return c;
+    T mean = std::hypot(a.mean(), b);
+    T dcda = a.mean() / std::hypot(a.mean(), b);
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>

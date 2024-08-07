@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sigma/detail_/setter.hpp"
+#include "sigma/detail_/operation_common.hpp"
 #include <cmath>
 
 namespace sigma {
@@ -19,44 +19,32 @@ NumericType numeric_derivative(FunctionType f, NumericType a) {
 // -- Definitions --------------------------------------------------------------
 template<typename T>
 Uncertain<T> erf(const Uncertain<T>& a) {
-    auto dcda = std::exp(-std::pow(a.mean(), 2)) * (2 / std::sqrt(M_PI));
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::erf(a.mean()));
-    c_setter.update_derivatives(dcda);
-    return c;
+    T mean = std::erf(a.mean());
+    T dcda = std::exp(-std::pow(a.mean(), 2)) * (2 / std::sqrt(M_PI));
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> erfc(const Uncertain<T>& a) {
-    auto dcda = -std::exp(-std::pow(a.mean(), 2)) * (2 / std::sqrt(M_PI));
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::erfc(a.mean()));
-    c_setter.update_derivatives(dcda);
-    return c;
+    T mean = std::erfc(a.mean());
+    T dcda = -std::exp(-std::pow(a.mean(), 2)) * (2 / std::sqrt(M_PI));
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> tgamma(const Uncertain<T>& a) {
     auto func = [](decltype(a.mean()) x) { return std::tgamma(x); };
-    auto dcda = numeric_derivative(func, a.mean());
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::tgamma(a.mean()));
-    c_setter.update_derivatives(dcda);
-    return c;
+    T mean    = std::tgamma(a.mean());
+    T dcda    = numeric_derivative(func, a.mean());
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> lgamma(const Uncertain<T>& a) {
     auto func = [](decltype(a.mean()) x) { return std::lgamma(x); };
-    auto dcda = numeric_derivative(func, a.mean());
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::lgamma(a.mean()));
-    c_setter.update_derivatives(dcda);
-    return c;
+    T mean    = std::lgamma(a.mean());
+    T dcda    = numeric_derivative(func, a.mean());
+    return detail_::unary_result(a, mean, dcda);
 }
 
 } // namespace sigma
