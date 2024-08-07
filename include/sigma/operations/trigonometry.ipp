@@ -1,7 +1,6 @@
 #pragma once
 
 #include "sigma/detail_/operation_common.hpp"
-#include "sigma/detail_/setter.hpp"
 #include <cmath>
 
 namespace sigma {
@@ -66,34 +65,24 @@ Uncertain<T> atan(const Uncertain<T>& a) {
 
 template<typename T>
 Uncertain<T> atan2(const Uncertain<T>& y, const Uncertain<T>& x) {
-    auto dcda = x.mean() / (std::pow(x.mean(), 2) + std::pow(y.mean(), 2));
-    auto dcdb = -y.mean() / (std::pow(x.mean(), 2) + std::pow(y.mean(), 2));
-    Uncertain<T> c(y);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::atan2(y.mean(), x.mean()));
-    c_setter.update_derivatives(dcda, false);
-    c_setter.update_derivatives(x.deps(), dcdb);
-    return c;
+    T mean = std::atan2(y.mean(), x.mean());
+    T dcda = x.mean() / (std::pow(x.mean(), 2) + std::pow(y.mean(), 2));
+    T dcdb = -y.mean() / (std::pow(x.mean(), 2) + std::pow(y.mean(), 2));
+    return detail_::binary_result(y, x, mean, dcda, dcdb);
 }
 
 template<typename T>
 Uncertain<T> atan2(const Uncertain<T>& y, double x) {
-    auto dcda = x / (std::pow(x, 2) + std::pow(y.mean(), 2));
-    Uncertain<T> c(y);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::atan2(y.mean(), x));
-    c_setter.update_derivatives(dcda);
-    return c;
+    T mean = std::atan2(y.mean(), x);
+    T dcda = x / (std::pow(x, 2) + std::pow(y.mean(), 2));
+    return detail_::unary_result(y, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> atan2(double y, const Uncertain<T>& x) {
-    auto dcda = -y / (std::pow(x.mean(), 2) + std::pow(y, 2));
-    Uncertain<T> c(x);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::atan2(y, x.mean()));
-    c_setter.update_derivatives(dcda);
-    return c;
+    T mean = std::atan2(y, x.mean());
+    T dcda = -y / (std::pow(x.mean(), 2) + std::pow(y, 2));
+    return detail_::unary_result(x, mean, dcda);
 }
 
 } // namespace sigma

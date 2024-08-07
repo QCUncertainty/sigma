@@ -21,9 +21,10 @@ Uncertain<T> operator+(const Uncertain<T>& lhs, const Uncertain<T>& rhs) {
 
 template<typename T>
 Uncertain<T>& operator+=(Uncertain<T>& lhs, const Uncertain<T>& rhs) {
-    detail_::Setter<Uncertain<T>> lhs_setter(lhs);
-    lhs_setter.update_mean(lhs.mean() + rhs.mean());
-    lhs_setter.update_derivatives(rhs.deps(), 1.0);
+    T mean = lhs.mean() + rhs.mean();
+    T dcda = 1.0;
+    T dcdb = 1.0;
+    detail_::binary_inplace(lhs, rhs, mean, dcda, dcdb);
     return lhs;
 }
 
@@ -36,9 +37,10 @@ Uncertain<T> operator-(const Uncertain<T>& lhs, const Uncertain<T>& rhs) {
 
 template<typename T>
 Uncertain<T>& operator-=(Uncertain<T>& lhs, const Uncertain<T>& rhs) {
-    detail_::Setter<Uncertain<T>> lhs_setter(lhs);
-    lhs_setter.update_mean(lhs.mean() - rhs.mean());
-    lhs_setter.update_derivatives(rhs.deps(), -1.0);
+    T mean = lhs.mean() - rhs.mean();
+    T dcda = 1.0;
+    T dcdb = -1.0;
+    detail_::binary_inplace(lhs, rhs, mean, dcda, dcdb);
     return lhs;
 }
 
@@ -63,20 +65,18 @@ Uncertain<T> operator*(double lhs, const Uncertain<T>& rhs) {
 
 template<typename T>
 Uncertain<T>& operator*=(Uncertain<T>& lhs, const Uncertain<T>& rhs) {
-    auto dcda = rhs.mean();
-    auto dcdb = lhs.mean();
-    detail_::Setter<Uncertain<T>> lhs_setter(lhs);
-    lhs_setter.update_mean(lhs.mean() * rhs.mean());
-    lhs_setter.update_derivatives(dcda, false);
-    lhs_setter.update_derivatives(rhs.deps(), dcdb);
+    T mean = lhs.mean() * rhs.mean();
+    T dcda = rhs.mean();
+    T dcdb = lhs.mean();
+    detail_::binary_inplace(lhs, rhs, mean, dcda, dcdb);
     return lhs;
 }
 
 template<typename T>
 Uncertain<T>& operator*=(Uncertain<T>& lhs, double rhs) {
-    detail_::Setter<Uncertain<T>> lhs_setter(lhs);
-    lhs_setter.update_mean(lhs.mean() * rhs);
-    lhs_setter.update_derivatives(rhs);
+    T mean = lhs.mean() * rhs;
+    T dcda = rhs;
+    detail_::inplace_unary(lhs, mean, dcda);
     return lhs;
 }
 
@@ -96,29 +96,25 @@ Uncertain<T> operator/(const Uncertain<T>& lhs, double rhs) {
 
 template<typename T>
 Uncertain<T> operator/(double lhs, const Uncertain<T>& rhs) {
-    Uncertain<T> c(rhs);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(lhs / rhs.mean());
-    c_setter.update_derivatives(-lhs / std::pow(rhs.mean(), 2.0));
-    return c;
+    T mean = lhs / rhs.mean();
+    T dcda = -lhs / std::pow(rhs.mean(), 2.0);
+    return detail_::unary_result(rhs, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T>& operator/=(Uncertain<T>& lhs, const Uncertain<T>& rhs) {
-    auto dcda = 1.0 / rhs.mean();
-    auto dcdb = -lhs.mean() / std::pow(rhs.mean(), 2.0);
-    detail_::Setter<Uncertain<T>> lhs_setter(lhs);
-    lhs_setter.update_mean(lhs.mean() / rhs.mean());
-    lhs_setter.update_derivatives(dcda, false);
-    lhs_setter.update_derivatives(rhs.deps(), dcdb);
+    T mean = lhs.mean() / rhs.mean();
+    T dcda = 1.0 / rhs.mean();
+    T dcdb = -lhs.mean() / std::pow(rhs.mean(), 2.0);
+    detail_::binary_inplace(lhs, rhs, mean, dcda, dcdb);
     return lhs;
 }
 
 template<typename T>
 Uncertain<T>& operator/=(Uncertain<T>& lhs, double rhs) {
-    detail_::Setter<Uncertain<T>> lhs_setter(lhs);
-    lhs_setter.update_mean(lhs.mean() / rhs);
-    lhs_setter.update_derivatives(1.0 / rhs);
+    T mean = lhs.mean() / rhs;
+    T dcda = 1.0 / rhs;
+    detail_::inplace_unary(lhs, mean, dcda);
     return lhs;
 }
 

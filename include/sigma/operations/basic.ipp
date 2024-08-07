@@ -1,7 +1,6 @@
 #pragma once
 
 #include "sigma/detail_/operation_common.hpp"
-#include "sigma/detail_/setter.hpp"
 #include <cmath>
 
 namespace sigma {
@@ -20,48 +19,34 @@ Uncertain<T> abs2(const Uncertain<T>& a) {
 
 template<typename T>
 Uncertain<T> ceil(const Uncertain<T>& a) {
-    Uncertain<T> c{};
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::ceil(a.mean()));
-    return c;
+    return Uncertain<T>(std::ceil(a.mean()));
 }
 
 template<typename T>
 Uncertain<T> floor(const Uncertain<T>& a) {
-    Uncertain<T> c{};
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::floor(a.mean()));
-    return c;
+    return Uncertain<T>(std::floor(a.mean()));
 }
 
 template<typename T>
 Uncertain<T> fmod(const Uncertain<T>& a, const Uncertain<T>& b) {
-    auto dcda = 1.0;
-    auto dcdb = -std::floor(a.mean() / b.mean());
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::fmod(a.mean(), b.mean()));
-    c_setter.update_derivatives(dcda, false);
-    c_setter.update_derivatives(b.deps(), dcdb);
-    return c;
+    T mean = std::fmod(a.mean(), b.mean());
+    T dcda = 1.0;
+    T dcdb = -std::floor(a.mean() / b.mean());
+    return detail_::binary_result(a, b, mean, dcda, dcdb);
 }
 
 template<typename T>
 Uncertain<T> fmod(const Uncertain<T>& a, double b) {
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::fmod(a.mean(), b));
-    c_setter.update_derivatives(1.0);
-    return c;
+    T mean = std::fmod(a.mean(), b);
+    T dcda = 1.0;
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> fmod(double a, const Uncertain<T>& b) {
-    Uncertain<T> c(b);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::fmod(a, b.mean()));
-    c_setter.update_derivatives(-std::floor(a / b.mean()));
-    return c;
+    T mean = std::fmod(a, b.mean());
+    T dcda = -std::floor(a / b.mean());
+    return detail_::unary_result(b, mean, dcda);
 }
 
 template<typename T>
@@ -72,12 +57,9 @@ Uncertain<T> copysign(const Uncertain<T>& a, const Uncertain<T>& b) {
 template<typename T>
 Uncertain<T> copysign(const Uncertain<T>& a, double b) {
     auto b_sign = std::copysign(1.0, b);
-    auto dcda   = (a.mean() >= 0) ? b_sign : -b_sign;
-    Uncertain<T> c(a);
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::copysign(a.mean(), b));
-    c_setter.update_derivatives(dcda);
-    return c;
+    T mean      = std::copysign(a.mean(), b);
+    T dcda      = (a.mean() >= 0) ? b_sign : -b_sign;
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
@@ -87,10 +69,7 @@ double copysign(double a, const Uncertain<T>& b) {
 
 template<typename T>
 Uncertain<T> trunc(const Uncertain<T>& a) {
-    Uncertain<T> c{};
-    detail_::Setter<Uncertain<T>> c_setter(c);
-    c_setter.update_mean(std::trunc(a.mean()));
-    return c;
+    return Uncertain<T>(std::trunc(a.mean()));
 }
 
 } // namespace sigma

@@ -48,10 +48,6 @@ TEMPLATE_TEST_CASE("Setter", "", sigma::UFloat, sigma::UDouble) {
                 test_uncertain(a, 3.0, 1.3, 2);
             }
         }
-        SECTION("Two lists of derivatives") {
-            testing_a.update_derivatives(a.deps(), 2.0 / 3.0, b.deps(), 3.0);
-            test_uncertain(a, 3.0, 1.3, 2);
-        }
     }
     SECTION("Update the standard deviation") {
         // Change derivatives without updating the standard deviation

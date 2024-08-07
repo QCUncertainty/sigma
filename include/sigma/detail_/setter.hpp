@@ -73,8 +73,10 @@ public:
      *  @throw none No throw guarantee
      */
     void update_derivatives(value_t dxda, bool call_update_std = true) {
-        for(const auto& [dep, deriv] : m_x_.m_deps_) {
-            m_x_.m_deps_[dep] *= dxda;
+        if(dxda != 1.0) {
+            for(const auto& [dep, deriv] : m_x_.m_deps_) {
+                m_x_.m_deps_[dep] *= dxda;
+            }
         }
         if(call_update_std) update_sd();
     }
@@ -102,22 +104,6 @@ public:
             }
         }
         if(call_update_std) update_sd();
-    }
-
-    /** @brief Binary update/addition of derivatives
-     *
-     *  @param a_deps The dependencies of a
-     *  @param dxda The partial derivative of the variable with respect to a
-     *  @param b_deps The dependencies of b
-     *  @param dxdb The partial derivative of the variable with respect to b
-     *
-     *  @throw none No throw guarantee
-     */
-    void update_derivatives(const deps_map_t& a_deps, value_t dxda,
-                            const deps_map_t& b_deps, value_t dxdb) {
-        update_derivatives(a_deps, dxda, false);
-        update_derivatives(b_deps, dxdb, false);
-        update_sd();
     }
 
 private:
