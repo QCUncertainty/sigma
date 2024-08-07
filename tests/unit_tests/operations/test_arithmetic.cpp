@@ -15,20 +15,44 @@ TEMPLATE_TEST_CASE("Arithmetic", "", sigma::UFloat, sigma::UDouble) {
         test_uncertain(-(a + b), -3.0, 0.2236, 2);
         test_uncertain(-a + a, 0.0, 0.0, 1);
     }
-    SECTION("Addition") { test_uncertain(a + b, 3.0, 0.2236, 2); }
+    SECTION("Addition") {
+        SECTION("With Uncertain") { test_uncertain(a + b, 3.0, 0.2236, 2); }
+        SECTION("With Certain") {
+            test_uncertain(a + 1.0, 2.0, 0.1, 1);
+            test_uncertain(1.0 + a, 2.0, 0.1, 1);
+        }
+    }
     SECTION("Addition Assignment") {
         auto x = a;
-        x += b;
-        test_uncertain(x, 3.0, 0.2236, 2);
+        SECTION("With Uncertain") {
+            x += b;
+            test_uncertain(x, 3.0, 0.2236, 2);
+        }
+        SECTION("With Certain") {
+            x += 1.0;
+            test_uncertain(x, 2.0, 0.1, 1);
+        }
     }
     SECTION("Subtraction") {
-        test_uncertain(a - b, -1.0, 0.2236, 2);
-        test_uncertain(a - a, 0.0, 0.0, 1);
+        SECTION("With Uncertain") {
+            test_uncertain(a - b, -1.0, 0.2236, 2);
+            test_uncertain(a - a, 0.0, 0.0, 1);
+        }
+        SECTION("With Certain") {
+            test_uncertain(a - 1.0, 0.0, 0.1, 1);
+            test_uncertain(2.0 - a, 1.0, 0.1, 1);
+        }
     }
     SECTION("Subtraction Assignment") {
         auto x = a;
-        x -= b;
-        test_uncertain(x, -1.0, 0.2236, 2);
+        SECTION("With Uncertain") {
+            x -= b;
+            test_uncertain(x, -1.0, 0.2236, 2);
+        }
+        SECTION("With Uncertain") {
+            x -= 1.0;
+            test_uncertain(x, 0.0, 0.1, 1);
+        }
     }
     SECTION("Multiplication") {
         SECTION("By Uncertain") {

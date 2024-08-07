@@ -29,6 +29,10 @@ Uncertain<T> operator-(const Uncertain<T>& a);
  */
 template<typename T>
 Uncertain<T> operator+(const Uncertain<T>& lhs, const Uncertain<T>& rhs);
+template<typename T>
+Uncertain<T> operator+(const Uncertain<T>& lhs, double rhs);
+template<typename T>
+Uncertain<T> operator+(double lhs, const Uncertain<T>& rhs);
 
 /** @relates Uncertain
  *  @brief Inplace Addition Operation
@@ -43,6 +47,8 @@ Uncertain<T> operator+(const Uncertain<T>& lhs, const Uncertain<T>& rhs);
  */
 template<typename T>
 Uncertain<T>& operator+=(Uncertain<T>& lhs, const Uncertain<T>& rhs);
+template<typename T>
+Uncertain<T>& operator+=(Uncertain<T>& lhs, double rhs);
 
 /** @relates Uncertain
  *  @brief Subtraction Operation
@@ -57,6 +63,10 @@ Uncertain<T>& operator+=(Uncertain<T>& lhs, const Uncertain<T>& rhs);
  */
 template<typename T>
 Uncertain<T> operator-(const Uncertain<T>& lhs, const Uncertain<T>& rhs);
+template<typename T>
+Uncertain<T> operator-(const Uncertain<T>& lhs, double rhs);
+template<typename T>
+Uncertain<T> operator-(double lhs, const Uncertain<T>& rhs);
 
 /** @relates Uncertain
  *  @brief Inplace Subtraction Operation
@@ -71,6 +81,8 @@ Uncertain<T> operator-(const Uncertain<T>& lhs, const Uncertain<T>& rhs);
  */
 template<typename T>
 Uncertain<T>& operator-=(Uncertain<T>& lhs, const Uncertain<T>& rhs);
+template<typename T>
+Uncertain<T>& operator-=(Uncertain<T>& lhs, double rhs);
 
 /** @relates Uncertain
  *  @brief Multiplication Operation
