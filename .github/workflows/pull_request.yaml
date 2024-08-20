@@ -10,14 +10,14 @@ jobs:
   test_library:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        compiler: [gnu-11, gnu-12, clang-default]
+        os: [ubuntu-24.04, macos-14]
+        compiler: [gnu-12, gnu-13, gnu-14, clang-default]
         eigen: [ON]
         include:
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: gnu-12
             eigen: OFF
-          - os: windows-latest
+          - os: windows-2022
             compiler: gnu-12
             eigen: ON
     continue-on-error: true
