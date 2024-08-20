@@ -11,9 +11,15 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-24.04, macos-14]
-        compiler: [gnu-12, gnu-13, gnu-14, clang-default]
+        compiler: [gnu-12, gnu-13, gnu-14]
         eigen: [ON]
         include:
+          - os: ubuntu-24.04
+            compiler: clang-16
+            eigen: ON
+          - os: macos-14
+            compiler: clang-default
+            eigen: ON
           - os: ubuntu-24.04
             compiler: gnu-12
             eigen: OFF
@@ -56,7 +62,7 @@ jobs:
         run: |
           toolchain_dir=${PWD}/.github/workflow_toolchains
           toolchain=${toolchain_dir}/test_base.cmake
-          echo 'include('${toolchain_dir}'/gnu-11.cmake)' >> $toolchain
+          echo 'include('${toolchain_dir}'/gnu-14.cmake)' >> $toolchain
 
           cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
           cmake --build build --target sigma_cxx_api --parallel
