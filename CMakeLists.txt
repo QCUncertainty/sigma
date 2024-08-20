@@ -12,6 +12,7 @@ include(cmake/cxx_api_docs.cmake)
 set(${PROJECT_NAME}_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(${PROJECT_NAME}_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(${PROJECT_NAME}_TESTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+set(${PROJECT_NAME}_DOCS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/docs")
 
 ## Options ##
 cmaize_option_list(
@@ -38,7 +39,9 @@ cmaize_add_library(
 )
 
 if("${BUILD_DOCS}")
-    cxx_api_docs("${${PROJECT_NAME}_SOURCE_DIR}" "${${PROJECT_NAME}_INCLUDE_DIR}") 
+    cxx_api_docs("${${PROJECT_NAME}_SOURCE_DIR}" 
+                 "${${PROJECT_NAME}_INCLUDE_DIR}"
+                 "${${PROJECT_NAME}_DOCS_DIR}") 
 endif()
 
 ## Build tests ##
