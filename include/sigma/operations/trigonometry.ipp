@@ -6,7 +6,7 @@ namespace sigma {
 
 template<typename T>
 Uncertain<T> degrees(const Uncertain<T>& a) {
-    auto to_degrees = 180.0 / M_PI;
+    auto to_degrees = 180.0 / detail_::pi;
     T mean          = a.mean() * to_degrees;
     T dcda          = to_degrees;
     return detail_::unary_result(a, mean, dcda);
@@ -14,7 +14,7 @@ Uncertain<T> degrees(const Uncertain<T>& a) {
 
 template<typename T>
 Uncertain<T> radians(const Uncertain<T>& a) {
-    auto to_radians = M_PI / 180.0;
+    auto to_radians = detail_::pi / 180.0;
     T mean          = a.mean() * to_radians;
     T dcda          = to_radians;
     return detail_::unary_result(a, mean, dcda);

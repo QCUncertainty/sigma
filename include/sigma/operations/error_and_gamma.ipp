@@ -20,14 +20,14 @@ NumericType numeric_derivative(FunctionType f, NumericType a) {
 template<typename T>
 Uncertain<T> erf(const Uncertain<T>& a) {
     T mean = std::erf(a.mean());
-    T dcda = std::exp(-std::pow(a.mean(), 2)) * (2 / std::sqrt(M_PI));
+    T dcda = std::exp(-std::pow(a.mean(), 2)) * (2 / std::sqrt(detail_::pi));
     return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> erfc(const Uncertain<T>& a) {
     T mean = std::erfc(a.mean());
-    T dcda = -std::exp(-std::pow(a.mean(), 2)) * (2 / std::sqrt(M_PI));
+    T dcda = -std::exp(-std::pow(a.mean(), 2)) * (2 / std::sqrt(detail_::pi));
     return detail_::unary_result(a, mean, dcda);
 }
 

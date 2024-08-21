@@ -5,6 +5,9 @@
 
 namespace sigma::detail_ {
 
+// Value of Pi
+constexpr double pi = 3.14159265358979323846;
+
 /** @brief Generalized Inplace Unary Changes
  *
  *  @tparam T The value type of the variable
