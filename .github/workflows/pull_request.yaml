@@ -7,14 +7,20 @@ on:
 
 jobs:
   # Build and test C++ libraries.
-  test_library:
+  test_library_unix:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        compiler: [gnu-11, gnu-12, clang-default]
+        os: [ubuntu-24.04, macos-14]
+        compiler: [gnu-12, gnu-13, gnu-14]
         eigen: [ON]
         include:
-          - os: ubuntu-latest
+          - os: ubuntu-22.04
+            compiler: clang-default
+            eigen: ON
+          - os: macos-14
+            compiler: clang-default
+            eigen: ON
+          - os: ubuntu-24.04
             compiler: gnu-12
             eigen: OFF
     continue-on-error: true
@@ -23,42 +29,46 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Install Linux Dependencies
-        if: contains(matrix.os, 'ubuntu')
-        run: |
-          sudo apt-get install -y doxygen ninja-build
-      - name: Install MacOS Dependencies
-        if: contains(matrix.os, 'macos')
-        run: |
-          brew install doxygen ninja
+      - uses: ssciwr/doxygen-install@v1
+      - uses: seanmiddleditch/gha-setup-ninja@v5
       - name: Build and Test
         run: |
-          toolchain_dir=${PWD}/.github/workflow_toolchains
-          toolchain=${toolchain_dir}/test_base.cmake
-          echo 'include('${toolchain_dir}'/${{matrix.compiler}}.cmake)' >> $toolchain
-
+          toolchain=${PWD}/.github/workflow_toolchains/${{matrix.compiler}}.cmake
           cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=${{matrix.eigen}}
           cmake --build build --parallel
           cd build
           ctest -VV
         shell: bash
 
+  # Uncomment when Windows support in CMaize has matured
+  # test_library_windows:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: ssciwr/doxygen-install@v1
+  #     - name: Build and Test
+  #       run: |
+  #         toolchain=${PWD}/.github/workflow_toolchains/base.cmake
+  #         cmake -Bbuild -H. -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=ON
+  #         cmake --build build --parallel
+  #         cd build
+  #         ctest -VV
+  #       shell: bash
+
   # Test Build of Documentation
   test_dox_build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Install Linux Dependencies
-        run: |
-          sudo apt-get install -y doxygen ninja-build
+      - uses: ssciwr/doxygen-install@v1
+      - uses: seanmiddleditch/gha-setup-ninja@v5
       - name: Build Doxygen Part
         run: |
-          toolchain_dir=${PWD}/.github/workflow_toolchains
-          toolchain=${toolchain_dir}/test_base.cmake
-          echo 'include('${toolchain_dir}'/gnu-11.cmake)' >> $toolchain
-
+          toolchain=${PWD}/.github/workflow_toolchains/gnu-12.cmake
           cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
           cmake --build build --target sigma_cxx_api --parallel
         shell: bash
