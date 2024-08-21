@@ -1,7 +1,9 @@
 #pragma once
 
-#include "sigma/detail_/operation_common.hpp"
+#define _USE_MATH_DEFINES
 #include <cmath>
+
+#include "sigma/detail_/operation_common.hpp"
 
 namespace sigma {
 
