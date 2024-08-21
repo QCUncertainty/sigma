@@ -8,7 +8,7 @@ on:
 jobs:
   # Deploy Documentation
   deploy_dox:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: write
     steps:
@@ -24,7 +24,7 @@ jobs:
         run: |
           toolchain_dir=${PWD}/.github/workflow_toolchains
           toolchain=${toolchain_dir}/test_base.cmake
-          echo 'include('${toolchain_dir}'/gnu-11.cmake)' >> $toolchain
+          echo 'include('${toolchain_dir}'/gnu-12.cmake)' >> $toolchain
 
           cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
           cmake --build build --target sigma_cxx_api --parallel

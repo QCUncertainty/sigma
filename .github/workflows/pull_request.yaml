@@ -48,7 +48,7 @@ jobs:
 
   # Test Build of Documentation
   test_dox_build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -62,7 +62,7 @@ jobs:
         run: |
           toolchain_dir=${PWD}/.github/workflow_toolchains
           toolchain=${toolchain_dir}/test_base.cmake
-          echo 'include('${toolchain_dir}'/gnu-14.cmake)' >> $toolchain
+          echo 'include('${toolchain_dir}'/gnu-12.cmake)' >> $toolchain
 
           cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
           cmake --build build --target sigma_cxx_api --parallel
