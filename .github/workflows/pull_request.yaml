@@ -53,7 +53,7 @@ jobs:
           cmake -Bbuild -H. -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=ON
           cmake --build build --parallel
           cd build
-          ctest -VV
+          ctest -C "Debug" -VV
         shell: bash
 
   # Test Build of Documentation
