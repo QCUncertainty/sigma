@@ -14,8 +14,8 @@ function(get_cmaize)
     include(FetchContent)
     FetchContent_Declare(
         cmaize
-        GIT_REPOSITORY https://github.com/CMakePP/CMaize
-        GIT_TAG ${CMAIZE_VERSION}
+        GIT_REPOSITORY https://github.com/jwaldrop107/CMaize
+        GIT_TAG allow_dll
     )
     FetchContent_MakeAvailable(cmaize)
 
