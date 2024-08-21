@@ -7,7 +7,7 @@ on:
 
 jobs:
   # Build and test C++ libraries.
-  test_library:
+  test_library_unix:
     strategy:
       matrix:
         os: [ubuntu-24.04, macos-14]
@@ -23,9 +23,6 @@ jobs:
           - os: ubuntu-24.04
             compiler: gnu-12
             eigen: OFF
-          - os: windows-2022
-            compiler: gnu-12
-            eigen: ON
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     steps:
@@ -38,6 +35,22 @@ jobs:
         run: |
           toolchain=${PWD}/.github/workflow_toolchains/${{matrix.compiler}}.cmake
           cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=${{matrix.eigen}}
+          cmake --build build --parallel
+          cd build
+          ctest -VV
+        shell: bash
+
+  test_library_windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ssciwr/doxygen-install@v1
+      - name: Build and Test
+        run: |
+          toolchain=${PWD}/.github/workflow_toolchains/base.cmake
+          cmake -Bbuild -H. -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=ON
           cmake --build build --parallel
           cd build
           ctest -VV
