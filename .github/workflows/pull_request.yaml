@@ -34,21 +34,9 @@ jobs:
           fetch-depth: 0
       - uses: ssciwr/doxygen-install@v1
       - uses: seanmiddleditch/gha-setup-ninja@v5
-      - name: Toolchain Setup - Unix
-        if: ${{ !contains(matrix.os, 'windows') }}
-        run: |
-          toolchain_dir=${PWD}/.github/workflow_toolchains
-          toolchain=${toolchain_dir}/test_base.cmake
-          echo 'include('${toolchain_dir}'/${{matrix.compiler}}.cmake)' >> $toolchain
-      - name: Toolchain Setup - Windows
-        if: ${{ contains(matrix.os, 'windows') }}
-        run: |
-          $toolchain_dir = Join-Path -Path (Get-Location) -ChildPath ".github\workflow_toolchains"
-          $toolchain = Join-Path -Path $toolchain_dir -ChildPath "test_base.cmake"
-          Add-Content -Path $toolchain -Value "include('$toolchain_dir\$($env:matrix.compiler).cmake')"
       - name: Build and Test
         run: |
-          toolchain=${PWD}/.github/workflow_toolchains/test_base.cmake
+          toolchain=${PWD}/.github/workflow_toolchains/${{matrix.compiler}}.cmake
           cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=${{matrix.eigen}}
           cmake --build build --parallel
           cd build
@@ -67,10 +55,7 @@ jobs:
       - uses: seanmiddleditch/gha-setup-ninja@v5
       - name: Build Doxygen Part
         run: |
-          toolchain_dir=${PWD}/.github/workflow_toolchains
-          toolchain=${toolchain_dir}/test_base.cmake
-          echo 'include('${toolchain_dir}'/gnu-12.cmake)' >> $toolchain
-
+          toolchain=${PWD}/.github/workflow_toolchains/gnu-12.cmake
           cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
           cmake --build build --target sigma_cxx_api --parallel
         shell: bash
