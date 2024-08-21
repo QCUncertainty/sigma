@@ -1,3 +1,3 @@
 # sigma - C++ Uncertainty Propagation {#mainpage}
 
-- [Background](./background.md)
+- [Background](@ref Background)

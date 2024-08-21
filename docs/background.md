@@ -1,4 +1,4 @@
-# Background {#page}
+# Background {#Background}
 
 Some math background
 
