@@ -38,7 +38,7 @@ cmaize_add_library(
 )
 
 if("${BUILD_DOCS}")
-    cxx_api_docs("${${PROJECT_NAME}_SOURCE_DIR}" "${${PROJECT_NAME}_INCLUDE_DIR}") 
+    cxx_api_docs("${${PROJECT_NAME}_INCLUDE_DIR}") 
 endif()
 
 ## Build tests ##

@@ -1,10 +1,13 @@
 #pragma once
 #include "sigma/uncertain.hpp"
 
+/** @file trigonometry.hpp
+ *  @brief Trigonometric functions for uncertain variables 
+ */
+
 namespace sigma {
 
-/** @relates Uncertain
- *  @brief Convert from radians to degrees
+/** @brief Convert from radians to degrees
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -16,8 +19,7 @@ namespace sigma {
 template<typename T>
 Uncertain<T> degrees(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Convert from degrees to radians
+/** @brief Convert from degrees to radians
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -29,8 +31,7 @@ Uncertain<T> degrees(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> radians(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Sine of the variable
+/** @brief Sine of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -42,8 +43,7 @@ Uncertain<T> radians(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> sin(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Cosine of the variable
+/** @brief Cosine of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -55,8 +55,7 @@ Uncertain<T> sin(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> cos(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Tangent of the variable
+/** @brief Tangent of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -68,8 +67,7 @@ Uncertain<T> cos(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> tan(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Arcsine of the variable
+/** @brief Arcsine of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -81,8 +79,7 @@ Uncertain<T> tan(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> asin(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Arccosine of the variable
+/** @brief Arccosine of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -94,8 +91,7 @@ Uncertain<T> asin(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> acos(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Arctangent of the variable
+/** @brief Arctangent of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -107,8 +103,7 @@ Uncertain<T> acos(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> atan(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Two argument arctangent
+/** @brief Two argument arctangent
  *
  *  @tparam T The value type of the variable
  *  @param y The first variable
@@ -120,8 +115,10 @@ Uncertain<T> atan(const Uncertain<T>& a);
  */
 template<typename T>
 Uncertain<T> atan2(const Uncertain<T>& y, const Uncertain<T>& x);
+/** @overload */
 template<typename T>
 Uncertain<T> atan2(const Uncertain<T>& y, double x);
+/** @overload */
 template<typename T>
 Uncertain<T> atan2(double y, const Uncertain<T>& x);
 

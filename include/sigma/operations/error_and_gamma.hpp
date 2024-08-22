@@ -1,10 +1,13 @@
 #pragma once
 #include "sigma/uncertain.hpp"
 
+/** @file error_and_gamma.hpp
+ *  @brief Error and gamma functions for uncertain variables 
+ */
+
 namespace sigma {
 
-/** @relates Uncertain
- *  @brief Error function
+/** @brief Error function
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -16,8 +19,7 @@ namespace sigma {
 template<typename T>
 Uncertain<T> erf(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Complementary error function
+/** @brief Complementary error function
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -29,8 +31,7 @@ Uncertain<T> erf(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> erfc(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Gamma function
+/** @brief Gamma function
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -42,8 +43,7 @@ Uncertain<T> erfc(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> tgamma(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Gamma function Natural Logarithm
+/** @brief Gamma function Natural Logarithm
  *
  *  @tparam T The value type of the variable
  *  @param a The variable

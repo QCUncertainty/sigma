@@ -6,6 +6,10 @@
 #include <type_traits>
 #include <utility>
 
+/** @file uncertain.hpp
+ *  @brief Defines the Uncertain class
+ */
+
 namespace sigma {
 
 // Foward Declaration

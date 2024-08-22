@@ -1,10 +1,13 @@
 #pragma once
 #include "sigma/uncertain.hpp"
 
+/** @file basic.hpp
+ *  @brief Basic operations for uncertain variables
+ */
+
 namespace sigma {
 
-/** @relates Uncertain
- *  @brief Absolute Value
+/** @brief Absolute Value
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -16,8 +19,7 @@ namespace sigma {
 template<typename T>
 Uncertain<T> abs(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief The Square of the Absolute Value
+/** @brief The Square of the Absolute Value
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -29,8 +31,7 @@ Uncertain<T> abs(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> abs2(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Nearest integer not less than the given value
+/** @brief Nearest integer not less than the given value
  *
  *  Note that this returns an Uncertain<T> value with no dependencies
  *
@@ -44,8 +45,7 @@ Uncertain<T> abs2(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> ceil(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Nearest integer not greater than the given value
+/** @brief Nearest integer not greater than the given value
  *
  *  Note that this returns an Uncertain<T> value with no dependencies
  *
@@ -59,8 +59,7 @@ Uncertain<T> ceil(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> floor(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Floating point module
+/** @brief Floating point module
  *
  *  @tparam T The value type of the variable
  *  @param a The first variable
@@ -72,13 +71,14 @@ Uncertain<T> floor(const Uncertain<T>& a);
  */
 template<typename T>
 Uncertain<T> fmod(const Uncertain<T>& a, const Uncertain<T>& b);
+/** @overload */
 template<typename T>
 Uncertain<T> fmod(const Uncertain<T>& a, double b);
+/** @overload */
 template<typename T>
 Uncertain<T> fmod(double a, const Uncertain<T>& b);
 
-/** @relates Uncertain
- *  @brief Copy the sign of one value to another
+/** @brief Copy the sign of one value to another
  *
  *  @tparam T The value type of the variable
  *  @param a The variable whose magnitude is copied
@@ -90,13 +90,25 @@ Uncertain<T> fmod(double a, const Uncertain<T>& b);
  */
 template<typename T>
 Uncertain<T> copysign(const Uncertain<T>& a, const Uncertain<T>& b);
+/** @overload */
 template<typename T>
 Uncertain<T> copysign(const Uncertain<T>& a, double b);
-template<typename T>
-double copysign(double a, const Uncertain<T>& b);
 
-/** @relates Uncertain
- *  @brief Remove the fractional part from a variable
+/** @brief Copy the sign of one value to another
+ *
+ *  @tparam V The numeric type of @p a
+ *  @tparam T The value type of @p b
+ *  @param a The variable whose magnitude is copied
+ *  @param b The variable whose sign is copied
+ *
+ *  @return The copy of @p a with the sign of @p b
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename V, typename T>
+V copysign(V a, const Uncertain<T>& b);
+
+/** @brief Remove the fractional part from a variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable whose value is truncated

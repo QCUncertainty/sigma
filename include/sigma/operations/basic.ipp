@@ -62,8 +62,8 @@ Uncertain<T> copysign(const Uncertain<T>& a, double b) {
     return detail_::unary_result(a, mean, dcda);
 }
 
-template<typename T>
-double copysign(double a, const Uncertain<T>& b) {
+template<typename V, typename T>
+V copysign(V a, const Uncertain<T>& b) {
     return std::copysign(a, b.mean());
 }
 
