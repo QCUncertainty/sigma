@@ -3,7 +3,14 @@
 #include "sigma/detail_/setter.hpp"
 #include "sigma/uncertain.hpp"
 
+/** @file operation_common.hpp
+ *  @brief Common implementation details for operations
+ */ 
+
 namespace sigma::detail_ {
+
+/// Value of Pi
+constexpr double pi = 3.14159265358979323846;
 
 /** @brief Generalized Inplace Unary Changes
  *
@@ -80,6 +87,28 @@ Uncertain<T> binary_result(const Uncertain<T>& a, const Uncertain<T>& b, T mean,
     Uncertain<T> c(a);
     detail_::inplace_binary(c, b, mean, dcda, dcdb);
     return c;
+}
+
+/** @brief Compute the numeric derivative of a function
+ *
+ *  @tparam FunctionType The type of the function @p f
+ *  @tparam NumericType The numeric type of @p a
+ *  @param f The function whose derivative is computed
+ *  @param a The value aroud which the derivative of @p f is computed
+ *
+ *  @return The derivative of @p f evaluated at @p a.
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename FunctionType, typename NumericType>
+NumericType numeric_derivative(FunctionType f, NumericType a) {
+    // Step and step size chosen for consistency with uncertainties package
+    auto step_size = std::sqrt(std::numeric_limits<float>::epsilon());
+    auto step      = step_size * std::abs(a);
+    auto a_plus    = f(a + step);
+    auto a_minus   = f(a - step);
+    auto dcda      = (a_plus - a_minus) / (2 * step);
+    return dcda;
 }
 
 } // namespace sigma::detail_

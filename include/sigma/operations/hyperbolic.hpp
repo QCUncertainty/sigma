@@ -1,10 +1,13 @@
 #pragma once
 #include "sigma/uncertain.hpp"
 
+/** @file hyperbolic.hpp
+ *  @brief Hyperbolic trigonometric functions for uncertain variables 
+ */
+
 namespace sigma {
 
-/** @relates Uncertain
- *  @brief Hyperbolic sine of the variable
+/** @brief Hyperbolic sine of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -16,8 +19,7 @@ namespace sigma {
 template<typename T>
 Uncertain<T> sinh(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Hyperbolic cosine of the variable
+/** @brief Hyperbolic cosine of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -29,8 +31,7 @@ Uncertain<T> sinh(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> cosh(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Hyperbolic tangent of the variable
+/** @brief Hyperbolic tangent of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -42,8 +43,7 @@ Uncertain<T> cosh(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> tanh(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Hyperbolic arcsine of the variable
+/** @brief Hyperbolic arcsine of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -55,8 +55,7 @@ Uncertain<T> tanh(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> asinh(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Hyperbolic arccosine of the variable
+/** @brief Hyperbolic arccosine of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -68,8 +67,7 @@ Uncertain<T> asinh(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> acosh(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Hyperbolic arctangent of the variable
+/** @brief Hyperbolic arctangent of the variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
