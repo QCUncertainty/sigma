@@ -40,21 +40,22 @@ jobs:
           ctest -VV
         shell: bash
 
-  test_library_windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: ssciwr/doxygen-install@v1
-      - name: Build and Test
-        run: |
-          toolchain=${PWD}/.github/workflow_toolchains/windows.cmake
-          cmake -Bbuild -H. -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=ON
-          cmake --build build --parallel
-          cd build
-          ctest -C "Debug" -VV
-        shell: bash
+  # Uncomment when Windows support in CMaize has matured
+  # test_library_windows:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: ssciwr/doxygen-install@v1
+  #     - name: Build and Test
+  #       run: |
+  #         toolchain=${PWD}/.github/workflow_toolchains/windows.cmake
+  #         cmake -Bbuild -H. -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=ON
+  #         cmake --build build --parallel
+  #         cd build
+  #         ctest -C "Debug" -VV
+  #       shell: bash
 
   # Test Build of Documentation
   test_dox_build:
