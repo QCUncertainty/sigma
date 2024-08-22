@@ -70,31 +70,33 @@ $(function() {
 <div class="title">complex.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;sigma/uncertain.hpp&quot;</span></div>
+<a href="complex_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="uncertain_8hpp.html">sigma/uncertain.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span>sigma {</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classsigma_1_1Uncertain.html#a4bf925f221eb413c04aa4e87be3732df">   19</a></span>&#160;<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; <a class="code" href="classsigma_1_1Uncertain.html#a4bf925f221eb413c04aa4e87be3732df">conj</a>(<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; x) {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">return</span> x;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classsigma_1_1Uncertain.html#a28e3ef28835d7f480ae074bafeb6d222">   36</a></span>&#160;<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; <a class="code" href="classsigma_1_1Uncertain.html#a28e3ef28835d7f480ae074bafeb6d222">real</a>(<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; x) {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">return</span> x;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classsigma_1_1Uncertain.html#a073a5f9208feefdf8d184da74205f3bc">   53</a></span>&#160;<a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a> <a class="code" href="classsigma_1_1Uncertain.html#a073a5f9208feefdf8d184da74205f3bc">imag</a>(<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp;) {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>{0.0, 0.0};</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;} <span class="comment">// namespace sigma</span></div>
-<div class="ttc" id="aclasssigma_1_1Uncertain_html"><div class="ttname"><a href="classsigma_1_1Uncertain.html">sigma::Uncertain</a></div><div class="ttdoc">Models an unceratin variable.</div><div class="ttdef"><b>Definition:</b> uncertain.hpp:29</div></div>
-<div class="ttc" id="aclasssigma_1_1Uncertain_html_a073a5f9208feefdf8d184da74205f3bc"><div class="ttname"><a href="classsigma_1_1Uncertain.html#a073a5f9208feefdf8d184da74205f3bc">sigma::Uncertain::imag</a></div><div class="ttdeci">Uncertain&lt; T &gt; imag(const Uncertain&lt; T &gt; &amp;)</div><div class="ttdoc">Get the imaginary part of a value.</div><div class="ttdef"><b>Definition:</b> complex.hpp:53</div></div>
-<div class="ttc" id="aclasssigma_1_1Uncertain_html_a28e3ef28835d7f480ae074bafeb6d222"><div class="ttname"><a href="classsigma_1_1Uncertain.html#a28e3ef28835d7f480ae074bafeb6d222">sigma::Uncertain::real</a></div><div class="ttdeci">const Uncertain&lt; T &gt; &amp; real(const Uncertain&lt; T &gt; &amp;x)</div><div class="ttdoc">Get the real part of a value.</div><div class="ttdef"><b>Definition:</b> complex.hpp:36</div></div>
-<div class="ttc" id="aclasssigma_1_1Uncertain_html_a4bf925f221eb413c04aa4e87be3732df"><div class="ttname"><a href="classsigma_1_1Uncertain.html#a4bf925f221eb413c04aa4e87be3732df">sigma::Uncertain::conj</a></div><div class="ttdeci">const Uncertain&lt; T &gt; &amp; conj(const Uncertain&lt; T &gt; &amp;x)</div><div class="ttdoc">Complex Conjugate.</div><div class="ttdef"><b>Definition:</b> complex.hpp:19</div></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesigma.html">sigma</a> {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="namespacesigma.html#a5b8f7cfc2ad8cec54255ef13f25eae99">   22</a></span>&#160;<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; <a class="code" href="namespacesigma.html#a5b8f7cfc2ad8cec54255ef13f25eae99">conj</a>(<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; a) {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">return</span> a;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="namespacesigma.html#aa8212abd6fec26357d364606fd070f53">   38</a></span>&#160;<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; <a class="code" href="namespacesigma.html#aa8212abd6fec26357d364606fd070f53">real</a>(<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; a) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> a;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="namespacesigma.html#a300ef8b60d9ec1a1e64f7d72ee7a3647">   54</a></span>&#160;<a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a> <a class="code" href="namespacesigma.html#a300ef8b60d9ec1a1e64f7d72ee7a3647">imag</a>(<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; a) {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>{0.0, 0.0};</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <span class="comment">// namespace sigma</span></div>
+<div class="ttc" id="aclasssigma_1_1Uncertain_html"><div class="ttname"><a href="classsigma_1_1Uncertain.html">sigma::Uncertain</a></div><div class="ttdoc">Models an unceratin variable.</div><div class="ttdef"><b>Definition:</b> uncertain.hpp:33</div></div>
+<div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition:</b> operation_common.hpp:10</div></div>
+<div class="ttc" id="anamespacesigma_html_a300ef8b60d9ec1a1e64f7d72ee7a3647"><div class="ttname"><a href="namespacesigma.html#a300ef8b60d9ec1a1e64f7d72ee7a3647">sigma::imag</a></div><div class="ttdeci">Uncertain&lt; T &gt; imag(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Get the imaginary part of a value.</div><div class="ttdef"><b>Definition:</b> complex.hpp:54</div></div>
+<div class="ttc" id="anamespacesigma_html_a5b8f7cfc2ad8cec54255ef13f25eae99"><div class="ttname"><a href="namespacesigma.html#a5b8f7cfc2ad8cec54255ef13f25eae99">sigma::conj</a></div><div class="ttdeci">const Uncertain&lt; T &gt; &amp; conj(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Complex Conjugate.</div><div class="ttdef"><b>Definition:</b> complex.hpp:22</div></div>
+<div class="ttc" id="anamespacesigma_html_aa8212abd6fec26357d364606fd070f53"><div class="ttname"><a href="namespacesigma.html#aa8212abd6fec26357d364606fd070f53">sigma::real</a></div><div class="ttdeci">const Uncertain&lt; T &gt; &amp; real(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Get the real part of a value.</div><div class="ttdef"><b>Definition:</b> complex.hpp:38</div></div>
+<div class="ttc" id="auncertain_8hpp_html"><div class="ttname"><a href="uncertain_8hpp.html">uncertain.hpp</a></div><div class="ttdoc">Defines the Uncertain class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

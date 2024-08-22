@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['mean_29',['mean',['../classsigma_1_1Uncertain.html#a43412df1d1f48b62f0981b999fe74d10',1,'sigma::Uncertain']]],
-  ['my_5ft_30',['my_t',['../classsigma_1_1detail___1_1Setter.html#a9d8f2a08b59b86adaf046973ffeed554',1,'sigma::detail_::Setter::my_t()'],['../classsigma_1_1Uncertain.html#a9a53bd3a0c03873388fbb4f8b4699f83',1,'sigma::Uncertain::my_t()']]]
+  ['imag_36',['imag',['../namespacesigma.html#a300ef8b60d9ec1a1e64f7d72ee7a3647',1,'sigma']]],
+  ['inplace_5fbinary_37',['inplace_binary',['../namespacesigma_1_1detail__.html#a2ba8c119561a96410b163dfac31822e7',1,'sigma::detail_']]],
+  ['inplace_5funary_38',['inplace_unary',['../namespacesigma_1_1detail__.html#a4e7bb3552d85f228e20613973d6f101b',1,'sigma::detail_']]]
 ];

@@ -70,45 +70,74 @@ $(function() {
 <div class="title">operation_common.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="operation__common_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;sigma/detail_/setter.hpp&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;sigma/uncertain.hpp&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="setter_8hpp.html">sigma/detail_/setter.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="uncertain_8hpp.html">sigma/uncertain.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>sigma::detail_ {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> inplace_unary(Uncertain&lt;T&gt;&amp; c, T mean, T dcda) {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    detail_::Setter&lt;Uncertain&lt;T&gt;&gt; c_setter(c);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    c_setter.update_mean(mean);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    c_setter.update_derivatives(dcda);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;Uncertain&lt;T&gt; unary_result(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, T mean, T dcda) {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    Uncertain&lt;T&gt; c(a);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    detail_::inplace_unary(c, mean, dcda);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> c;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span> inplace_binary(Uncertain&lt;T&gt;&amp; c, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b, T mean, T dcda,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    T dcdb) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    detail_::Setter&lt;Uncertain&lt;T&gt;&gt; c_setter(c);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    c_setter.update_mean(mean);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    c_setter.update_derivatives(dcda, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    c_setter.update_derivatives(b.deps(), dcdb);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;Uncertain&lt;T&gt; binary_result(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b, T mean,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                           T dcda, T dcdb) {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    Uncertain&lt;T&gt; c(a);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    detail_::inplace_binary(c, b, mean, dcda, dcdb);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> c;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;} <span class="comment">// namespace sigma::detail_</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="namespacesigma.html">   10</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesigma_1_1detail__.html">sigma::detail_</a> {</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespacesigma_1_1detail__.html#a8d8ed28e719cef3b02f64c0d74a773ac">   13</a></span>&#160;constexpr <span class="keywordtype">double</span> <a class="code" href="namespacesigma_1_1detail__.html#a8d8ed28e719cef3b02f64c0d74a773ac">pi</a> = 3.14159265358979323846;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="namespacesigma_1_1detail__.html#a4e7bb3552d85f228e20613973d6f101b">   25</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespacesigma_1_1detail__.html#a4e7bb3552d85f228e20613973d6f101b">inplace_unary</a>(<a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; c, T mean, T dcda) {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classsigma_1_1detail___1_1Setter.html">detail_::Setter&lt;Uncertain&lt;T&gt;</a>&gt; c_setter(c);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    c_setter.<a class="code" href="classsigma_1_1detail___1_1Setter.html#aa65aa6d2469f71301275074e5d443d47">update_mean</a>(mean);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    c_setter.<a class="code" href="classsigma_1_1detail___1_1Setter.html#a8c83e0ed45c8b1d5abe54e2a93fd0c26">update_derivatives</a>(dcda);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="namespacesigma_1_1detail__.html#aa062249f4673530ce6e9c3e1b1ab8ffc">   44</a></span>&#160;<a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a> <a class="code" href="namespacesigma_1_1detail__.html#aa062249f4673530ce6e9c3e1b1ab8ffc">unary_result</a>(<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; a, T mean, T dcda) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a> c(a);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="namespacesigma_1_1detail__.html#a4e7bb3552d85f228e20613973d6f101b">detail_::inplace_unary</a>(c, mean, dcda);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">return</span> c;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="namespacesigma_1_1detail__.html#a2ba8c119561a96410b163dfac31822e7">   62</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespacesigma_1_1detail__.html#a2ba8c119561a96410b163dfac31822e7">inplace_binary</a>(<a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; c, <span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; b, T mean, T dcda,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    T dcdb) {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="classsigma_1_1detail___1_1Setter.html">detail_::Setter&lt;Uncertain&lt;T&gt;</a>&gt; c_setter(c);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    c_setter.<a class="code" href="classsigma_1_1detail___1_1Setter.html#aa65aa6d2469f71301275074e5d443d47">update_mean</a>(mean);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    c_setter.<a class="code" href="classsigma_1_1detail___1_1Setter.html#a8c83e0ed45c8b1d5abe54e2a93fd0c26">update_derivatives</a>(dcda, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    c_setter.<a class="code" href="classsigma_1_1detail___1_1Setter.html#a8c83e0ed45c8b1d5abe54e2a93fd0c26">update_derivatives</a>(b.<a class="code" href="classsigma_1_1Uncertain.html#a731f731e32cc52725aae26ccffd16c89">deps</a>(), dcdb);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="namespacesigma_1_1detail__.html#ac92efd0133979038d71157c6b24d00f2">   85</a></span>&#160;<a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a> <a class="code" href="namespacesigma_1_1detail__.html#ac92efd0133979038d71157c6b24d00f2">binary_result</a>(<span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; a, <span class="keyword">const</span> <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a>&amp; b, T mean,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                           T dcda, T dcdb) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="classsigma_1_1Uncertain.html">Uncertain&lt;T&gt;</a> c(a);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="namespacesigma_1_1detail__.html#a2ba8c119561a96410b163dfac31822e7">detail_::inplace_binary</a>(c, b, mean, dcda, dcdb);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">return</span> c;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> FunctionType, <span class="keyword">typename</span> NumericType&gt;</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="namespacesigma_1_1detail__.html#af89195fa94db2c6ec59257dd2d890bde">  104</a></span>&#160;NumericType <a class="code" href="namespacesigma_1_1detail__.html#af89195fa94db2c6ec59257dd2d890bde">numeric_derivative</a>(FunctionType f, NumericType a) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">// Step and step size chosen for consistency with uncertainties package</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">auto</span> step_size = <a class="code" href="namespacesigma.html#a18639ffce7e2664f8f6cc4ca85213fd1">std::sqrt</a>(std::numeric_limits&lt;float&gt;::epsilon());</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">auto</span> step      = step_size * <a class="code" href="namespacesigma.html#add954174f373873d59d093ceb3e82af5">std::abs</a>(a);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keyword">auto</span> a_plus    = f(a + step);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keyword">auto</span> a_minus   = f(a - step);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keyword">auto</span> dcda      = (a_plus - a_minus) / (2 * step);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">return</span> dcda;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;} <span class="comment">// namespace sigma::detail_</span></div>
+<div class="ttc" id="aclasssigma_1_1Uncertain_html"><div class="ttname"><a href="classsigma_1_1Uncertain.html">sigma::Uncertain</a></div><div class="ttdoc">Models an unceratin variable.</div><div class="ttdef"><b>Definition:</b> uncertain.hpp:33</div></div>
+<div class="ttc" id="aclasssigma_1_1Uncertain_html_a731f731e32cc52725aae26ccffd16c89"><div class="ttname"><a href="classsigma_1_1Uncertain.html#a731f731e32cc52725aae26ccffd16c89">sigma::Uncertain::deps</a></div><div class="ttdeci">const deps_map_t &amp; deps() const</div><div class="ttdoc">Get the dependencies of the variable.</div><div class="ttdef"><b>Definition:</b> uncertain.hpp:98</div></div>
+<div class="ttc" id="aclasssigma_1_1detail___1_1Setter_html"><div class="ttname"><a href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter</a></div><div class="ttdoc">Modifies an unceratin variable.</div><div class="ttdef"><b>Definition:</b> setter.hpp:19</div></div>
+<div class="ttc" id="aclasssigma_1_1detail___1_1Setter_html_a8c83e0ed45c8b1d5abe54e2a93fd0c26"><div class="ttname"><a href="classsigma_1_1detail___1_1Setter.html#a8c83e0ed45c8b1d5abe54e2a93fd0c26">sigma::detail_::Setter::update_derivatives</a></div><div class="ttdeci">void update_derivatives(value_t dxda, bool call_update_std=true)</div><div class="ttdoc">Update of existing derivatives.</div><div class="ttdef"><b>Definition:</b> setter.hpp:79</div></div>
+<div class="ttc" id="aclasssigma_1_1detail___1_1Setter_html_aa65aa6d2469f71301275074e5d443d47"><div class="ttname"><a href="classsigma_1_1detail___1_1Setter.html#aa65aa6d2469f71301275074e5d443d47">sigma::detail_::Setter::update_mean</a></div><div class="ttdeci">void update_mean(value_t mean)</div><div class="ttdoc">Update the mean of the wrapped variable.</div><div class="ttdef"><b>Definition:</b> setter.hpp:53</div></div>
+<div class="ttc" id="anamespacesigma_1_1detail___html"><div class="ttname"><a href="namespacesigma_1_1detail__.html">sigma::detail_</a></div><div class="ttdoc">The namespace that contains the implementation details of the library.</div><div class="ttdef"><b>Definition:</b> operation_common.hpp:10</div></div>
+<div class="ttc" id="anamespacesigma_1_1detail___html_a2ba8c119561a96410b163dfac31822e7"><div class="ttname"><a href="namespacesigma_1_1detail__.html#a2ba8c119561a96410b163dfac31822e7">sigma::detail_::inplace_binary</a></div><div class="ttdeci">void inplace_binary(Uncertain&lt; T &gt; &amp;c, const Uncertain&lt; T &gt; &amp;b, T mean, T dcda, T dcdb)</div><div class="ttdoc">Generalized Inplace Binary Changes.</div><div class="ttdef"><b>Definition:</b> operation_common.hpp:62</div></div>
+<div class="ttc" id="anamespacesigma_1_1detail___html_a4e7bb3552d85f228e20613973d6f101b"><div class="ttname"><a href="namespacesigma_1_1detail__.html#a4e7bb3552d85f228e20613973d6f101b">sigma::detail_::inplace_unary</a></div><div class="ttdeci">void inplace_unary(Uncertain&lt; T &gt; &amp;c, T mean, T dcda)</div><div class="ttdoc">Generalized Inplace Unary Changes.</div><div class="ttdef"><b>Definition:</b> operation_common.hpp:25</div></div>
+<div class="ttc" id="anamespacesigma_1_1detail___html_a8d8ed28e719cef3b02f64c0d74a773ac"><div class="ttname"><a href="namespacesigma_1_1detail__.html#a8d8ed28e719cef3b02f64c0d74a773ac">sigma::detail_::pi</a></div><div class="ttdeci">constexpr double pi</div><div class="ttdoc">Value of Pi.</div><div class="ttdef"><b>Definition:</b> operation_common.hpp:13</div></div>
+<div class="ttc" id="anamespacesigma_1_1detail___html_aa062249f4673530ce6e9c3e1b1ab8ffc"><div class="ttname"><a href="namespacesigma_1_1detail__.html#aa062249f4673530ce6e9c3e1b1ab8ffc">sigma::detail_::unary_result</a></div><div class="ttdeci">Uncertain&lt; T &gt; unary_result(const Uncertain&lt; T &gt; &amp;a, T mean, T dcda)</div><div class="ttdoc">Generalized Unary Changes.</div><div class="ttdef"><b>Definition:</b> operation_common.hpp:44</div></div>
+<div class="ttc" id="anamespacesigma_1_1detail___html_ac92efd0133979038d71157c6b24d00f2"><div class="ttname"><a href="namespacesigma_1_1detail__.html#ac92efd0133979038d71157c6b24d00f2">sigma::detail_::binary_result</a></div><div class="ttdeci">Uncertain&lt; T &gt; binary_result(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;b, T mean, T dcda, T dcdb)</div><div class="ttdoc">Generalized Binary Changes.</div><div class="ttdef"><b>Definition:</b> operation_common.hpp:85</div></div>
+<div class="ttc" id="anamespacesigma_1_1detail___html_af89195fa94db2c6ec59257dd2d890bde"><div class="ttname"><a href="namespacesigma_1_1detail__.html#af89195fa94db2c6ec59257dd2d890bde">sigma::detail_::numeric_derivative</a></div><div class="ttdeci">NumericType numeric_derivative(FunctionType f, NumericType a)</div><div class="ttdoc">Compute the numeric derivative of a function.</div><div class="ttdef"><b>Definition:</b> operation_common.hpp:104</div></div>
+<div class="ttc" id="anamespacesigma_html_a18639ffce7e2664f8f6cc4ca85213fd1"><div class="ttname"><a href="namespacesigma.html#a18639ffce7e2664f8f6cc4ca85213fd1">sigma::sqrt</a></div><div class="ttdeci">Uncertain&lt; T &gt; sqrt(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Calculate the square root of an uncertain variable.</div><div class="ttdef"><b>Definition:</b> exponents.ipp:24</div></div>
+<div class="ttc" id="anamespacesigma_html_add954174f373873d59d093ceb3e82af5"><div class="ttname"><a href="namespacesigma.html#add954174f373873d59d093ceb3e82af5">sigma::abs</a></div><div class="ttdeci">Uncertain&lt; T &gt; abs(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Absolute Value.</div><div class="ttdef"><b>Definition:</b> basic.ipp:9</div></div>
+<div class="ttc" id="asetter_8hpp_html"><div class="ttname"><a href="setter_8hpp.html">setter.hpp</a></div><div class="ttdoc">Defines the Setter class.</div></div>
+<div class="ttc" id="auncertain_8hpp_html"><div class="ttname"><a href="uncertain_8hpp.html">uncertain.hpp</a></div><div class="ttdoc">Defines the Uncertain class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

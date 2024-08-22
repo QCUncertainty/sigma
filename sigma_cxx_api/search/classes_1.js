@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uncertain_65',['Uncertain',['../classsigma_1_1Uncertain.html',1,'sigma']]]
+  ['setter_98',['Setter',['../classsigma_1_1detail___1_1Setter.html',1,'sigma::detail_']]]
 ];

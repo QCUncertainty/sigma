@@ -70,32 +70,40 @@ $(function() {
 <div class="title">hyperbolic.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;sigma/uncertain.hpp&quot;</span></div>
+<a href="hyperbolic_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="uncertain_8hpp.html">sigma/uncertain.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span>sigma {</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;Uncertain&lt;T&gt; sinh(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;Uncertain&lt;T&gt; cosh(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;Uncertain&lt;T&gt; tanh(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesigma.html">sigma</a> {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#a2e4a33ee5b89ddb9a1f023d6341d75a3">sinh</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#a8f8ded25467d58703d7ec390526bb2bb">cosh</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#aa5a3cb36953c116658b16ddc790db42d">tanh</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;Uncertain&lt;T&gt; asinh(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#aad587ce36b20a927d652a01148dc343c">asinh</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;Uncertain&lt;T&gt; acosh(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;Uncertain&lt;T&gt; atanh(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#ae0468bc7af0c3d24c8ecc0c38d8f2ef6">acosh</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#ad13293749576a5d73b834c598e2936c6">atanh</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;} <span class="comment">// namespace sigma</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;} <span class="comment">// namespace sigma</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#include &quot;hyperbolic.ipp&quot;</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#include &quot;hyperbolic.ipp&quot;</span></div>
+<div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition:</b> operation_common.hpp:10</div></div>
+<div class="ttc" id="anamespacesigma_html_a2e4a33ee5b89ddb9a1f023d6341d75a3"><div class="ttname"><a href="namespacesigma.html#a2e4a33ee5b89ddb9a1f023d6341d75a3">sigma::sinh</a></div><div class="ttdeci">Uncertain&lt; T &gt; sinh(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Hyperbolic sine of the variable.</div><div class="ttdef"><b>Definition:</b> hyperbolic.ipp:9</div></div>
+<div class="ttc" id="anamespacesigma_html_a8f8ded25467d58703d7ec390526bb2bb"><div class="ttname"><a href="namespacesigma.html#a8f8ded25467d58703d7ec390526bb2bb">sigma::cosh</a></div><div class="ttdeci">Uncertain&lt; T &gt; cosh(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Hyperbolic cosine of the variable.</div><div class="ttdef"><b>Definition:</b> hyperbolic.ipp:16</div></div>
+<div class="ttc" id="anamespacesigma_html_aa5a3cb36953c116658b16ddc790db42d"><div class="ttname"><a href="namespacesigma.html#aa5a3cb36953c116658b16ddc790db42d">sigma::tanh</a></div><div class="ttdeci">Uncertain&lt; T &gt; tanh(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Hyperbolic tangent of the variable.</div><div class="ttdef"><b>Definition:</b> hyperbolic.ipp:23</div></div>
+<div class="ttc" id="anamespacesigma_html_aad587ce36b20a927d652a01148dc343c"><div class="ttname"><a href="namespacesigma.html#aad587ce36b20a927d652a01148dc343c">sigma::asinh</a></div><div class="ttdeci">Uncertain&lt; T &gt; asinh(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Hyperbolic arcsine of the variable.</div><div class="ttdef"><b>Definition:</b> hyperbolic.ipp:30</div></div>
+<div class="ttc" id="anamespacesigma_html_ad13293749576a5d73b834c598e2936c6"><div class="ttname"><a href="namespacesigma.html#ad13293749576a5d73b834c598e2936c6">sigma::atanh</a></div><div class="ttdeci">Uncertain&lt; T &gt; atanh(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Hyperbolic arctangent of the variable.</div><div class="ttdef"><b>Definition:</b> hyperbolic.ipp:44</div></div>
+<div class="ttc" id="anamespacesigma_html_ae0468bc7af0c3d24c8ecc0c38d8f2ef6"><div class="ttname"><a href="namespacesigma.html#ae0468bc7af0c3d24c8ecc0c38d8f2ef6">sigma::acosh</a></div><div class="ttdeci">Uncertain&lt; T &gt; acosh(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Hyperbolic arccosine of the variable.</div><div class="ttdef"><b>Definition:</b> hyperbolic.ipp:37</div></div>
+<div class="ttc" id="auncertain_8hpp_html"><div class="ttname"><a href="uncertain_8hpp.html">uncertain.hpp</a></div><div class="ttdoc">Defines the Uncertain class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

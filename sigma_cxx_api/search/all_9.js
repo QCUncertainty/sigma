@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['pow_46',['pow',['../classsigma_1_1Uncertain.html#acdff90b06ed63c2a1ec0e9721b0b3b15',1,'sigma::Uncertain::pow(const Uncertain&lt; T &gt; &amp;a, double exp)'],['../classsigma_1_1Uncertain.html#af10072cce8b58e8a06a52524e8eb8df1',1,'sigma::Uncertain::pow(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;exp)']]]
+  ['mean_43',['mean',['../classsigma_1_1Uncertain.html#a43412df1d1f48b62f0981b999fe74d10',1,'sigma::Uncertain']]],
+  ['my_5ft_44',['my_t',['../classsigma_1_1detail___1_1Setter.html#a9d8f2a08b59b86adaf046973ffeed554',1,'sigma::detail_::Setter::my_t()'],['../classsigma_1_1Uncertain.html#a9a53bd3a0c03873388fbb4f8b4699f83',1,'sigma::Uncertain::my_t()']]]
 ];

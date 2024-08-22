@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['erf_82',['erf',['../classsigma_1_1Uncertain.html#abc9ec46392f31c25e10276b4a849fa43',1,'sigma::Uncertain']]],
-  ['erfc_83',['erfc',['../classsigma_1_1Uncertain.html#ac29cd341a5b32348e0014c3fb116fcca',1,'sigma::Uncertain']]],
-  ['exp_84',['exp',['../classsigma_1_1Uncertain.html#a51e9a2f4b29868bc6c0b206e9d42ae0d',1,'sigma::Uncertain']]]
+  ['degrees_131',['degrees',['../namespacesigma.html#ac8aa7a731dc93ac48f683999b3f712e8',1,'sigma']]],
+  ['deps_132',['deps',['../classsigma_1_1Uncertain.html#a731f731e32cc52725aae26ccffd16c89',1,'sigma::Uncertain']]]
 ];

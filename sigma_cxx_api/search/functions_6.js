@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['lgamma_88',['lgamma',['../classsigma_1_1Uncertain.html#a82f61f0a7a64ed343ef747cfa8e0ba15',1,'sigma::Uncertain']]],
-  ['log_89',['log',['../classsigma_1_1Uncertain.html#a356d81ebe4172ff5b2f6e5f46ad60aa3',1,'sigma::Uncertain']]],
-  ['log10_90',['log10',['../classsigma_1_1Uncertain.html#a3c63861342f95928ac25e8f3ea1c6204',1,'sigma::Uncertain']]]
+  ['hypot_138',['hypot',['../namespacesigma.html#a2ca53b359261368fe6bad807f92893fb',1,'sigma::hypot(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;b)'],['../namespacesigma.html#a88325e58b994e401c40a149828d39977',1,'sigma::hypot(const Uncertain&lt; T &gt; &amp;a, double b)'],['../namespacesigma.html#a3030bb7858f715dbee0ba8b3765c5919',1,'sigma::hypot(double a, const Uncertain&lt; T &gt; &amp;b)']]]
 ];

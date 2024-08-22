@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['abs_66',['abs',['../classsigma_1_1Uncertain.html#a73584ef0021212b349b4ba40d75e1fc9',1,'sigma::Uncertain']]],
-  ['abs2_67',['abs2',['../classsigma_1_1Uncertain.html#a698429ad76a20ee0258354157f656ecd',1,'sigma::Uncertain']]],
-  ['acos_68',['acos',['../classsigma_1_1Uncertain.html#a000a1e24fe3a09d1ac7c9d0e66f6df15',1,'sigma::Uncertain']]],
-  ['acosh_69',['acosh',['../classsigma_1_1Uncertain.html#a14ae1907c8178b6bbbd58ccc2071af70',1,'sigma::Uncertain']]],
-  ['asin_70',['asin',['../classsigma_1_1Uncertain.html#a72e411bbfb6a35126409d476ca74d05c',1,'sigma::Uncertain']]],
-  ['asinh_71',['asinh',['../classsigma_1_1Uncertain.html#af76dc2e83d89577ad40d684730a929cd',1,'sigma::Uncertain']]],
-  ['atan_72',['atan',['../classsigma_1_1Uncertain.html#a976233610fe99745ebfecb3df7fce940',1,'sigma::Uncertain']]],
-  ['atan2_73',['atan2',['../classsigma_1_1Uncertain.html#a3775cb162f9cd3d73de5be2f45efab64',1,'sigma::Uncertain']]],
-  ['atanh_74',['atanh',['../classsigma_1_1Uncertain.html#abd2fee329ae9c4bfc9254df57eef64f6',1,'sigma::Uncertain']]]
+  ['abs_116',['abs',['../namespacesigma.html#add954174f373873d59d093ceb3e82af5',1,'sigma']]],
+  ['abs2_117',['abs2',['../namespacesigma.html#aaa0794dcf432114a9467603ac7748c7c',1,'sigma']]],
+  ['acos_118',['acos',['../namespacesigma.html#af6eeba07517755fde0ced30d9ff56181',1,'sigma']]],
+  ['acosh_119',['acosh',['../namespacesigma.html#ae0468bc7af0c3d24c8ecc0c38d8f2ef6',1,'sigma']]],
+  ['asin_120',['asin',['../namespacesigma.html#ae48df01125f097867cd2144b958f3756',1,'sigma']]],
+  ['asinh_121',['asinh',['../namespacesigma.html#aad587ce36b20a927d652a01148dc343c',1,'sigma']]],
+  ['atan_122',['atan',['../namespacesigma.html#a29ac0ccb509ea16a5f8f2d69318af050',1,'sigma']]],
+  ['atan2_123',['atan2',['../namespacesigma.html#a0ff9ec568f44da54c09522be0b61ba9a',1,'sigma::atan2(const Uncertain&lt; T &gt; &amp;y, const Uncertain&lt; T &gt; &amp;x)'],['../namespacesigma.html#a556d0ecafb4d8fee869a3e59402806f5',1,'sigma::atan2(const Uncertain&lt; T &gt; &amp;y, double x)'],['../namespacesigma.html#a79d1db583d023ab4fc52664af6f086b3',1,'sigma::atan2(double y, const Uncertain&lt; T &gt; &amp;x)']]],
+  ['atanh_124',['atanh',['../namespacesigma.html#ad13293749576a5d73b834c598e2936c6',1,'sigma']]]
 ];

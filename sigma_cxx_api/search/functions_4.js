@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['floor_85',['floor',['../classsigma_1_1Uncertain.html#a3a99beca2d0b72aa67d5281f900ec334',1,'sigma::Uncertain']]],
-  ['fmod_86',['fmod',['../classsigma_1_1Uncertain.html#ac84abc1740e264a2d177aa3e9e450fb9',1,'sigma::Uncertain']]]
+  ['erf_133',['erf',['../namespacesigma.html#aa5be38188af80fdb54268b40ed84cf18',1,'sigma']]],
+  ['erfc_134',['erfc',['../namespacesigma.html#a7abc0fb71d9d31abe7546917879b44aa',1,'sigma']]],
+  ['exp_135',['exp',['../namespacesigma.html#ad8957603ced9a2feb2c82973b5bb1da9',1,'sigma']]]
 ];

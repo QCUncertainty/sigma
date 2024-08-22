@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['tan_54',['tan',['../classsigma_1_1Uncertain.html#a330e0ad4e4260d4deb64a987809a77c3',1,'sigma::Uncertain']]],
-  ['tanh_55',['tanh',['../classsigma_1_1Uncertain.html#a24f8950aea4088c967b268541493d034',1,'sigma::Uncertain']]],
-  ['tgamma_56',['tgamma',['../classsigma_1_1Uncertain.html#abf1e2307816479e3e26a91f1f319e8bf',1,'sigma::Uncertain']]],
-  ['trunc_57',['trunc',['../classsigma_1_1Uncertain.html#ae9a368510554a8d0fa777efd5109a63b',1,'sigma::Uncertain']]]
+  ['pi_67',['pi',['../namespacesigma_1_1detail__.html#a8d8ed28e719cef3b02f64c0d74a773ac',1,'sigma::detail_']]],
+  ['pow_68',['pow',['../namespacesigma.html#add2426a582c65cbedc5d2536c017a9ec',1,'sigma::pow(const Uncertain&lt; T &gt; &amp;a, double exp)'],['../namespacesigma.html#a0b3162c4a58cc30e72f7c4ddf3dfc1f6',1,'sigma::pow(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;exp)']]]
 ];

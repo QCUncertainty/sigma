@@ -70,45 +70,56 @@ $(function() {
 <div class="title">trigonometry.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;sigma/uncertain.hpp&quot;</span></div>
+<a href="trigonometry_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="uncertain_8hpp.html">sigma/uncertain.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span>sigma {</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;Uncertain&lt;T&gt; degrees(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;Uncertain&lt;T&gt; radians(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;Uncertain&lt;T&gt; sin(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesigma.html">sigma</a> {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#ac8aa7a731dc93ac48f683999b3f712e8">degrees</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#ae5e0046cd2d9e05322e6d880b593b679">radians</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#a174b5d94bc2a10f4a256eab8ee5a342d">sin</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;Uncertain&lt;T&gt; cos(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#a8d0718197bd681b48cfbc005d6629920">cos</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;Uncertain&lt;T&gt; tan(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;Uncertain&lt;T&gt; asin(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;Uncertain&lt;T&gt; acos(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;Uncertain&lt;T&gt; atan(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;Uncertain&lt;T&gt; atan2(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; y, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; x);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;Uncertain&lt;T&gt; atan2(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; y, <span class="keywordtype">double</span> x);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;Uncertain&lt;T&gt; atan2(<span class="keywordtype">double</span> y, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; x);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;} <span class="comment">// namespace sigma</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#include &quot;trigonometry.ipp&quot;</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#ac02929276a036dc441d88bf47027fbde">tan</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#ae48df01125f097867cd2144b958f3756">asin</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#af6eeba07517755fde0ced30d9ff56181">acos</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#a29ac0ccb509ea16a5f8f2d69318af050">atan</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#a0ff9ec568f44da54c09522be0b61ba9a">atan2</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; y, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; x);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#a0ff9ec568f44da54c09522be0b61ba9a">atan2</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; y, <span class="keywordtype">double</span> x);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#a0ff9ec568f44da54c09522be0b61ba9a">atan2</a>(<span class="keywordtype">double</span> y, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; x);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;} <span class="comment">// namespace sigma</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#include &quot;trigonometry.ipp&quot;</span></div>
+<div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition:</b> operation_common.hpp:10</div></div>
+<div class="ttc" id="anamespacesigma_html_a0ff9ec568f44da54c09522be0b61ba9a"><div class="ttname"><a href="namespacesigma.html#a0ff9ec568f44da54c09522be0b61ba9a">sigma::atan2</a></div><div class="ttdeci">Uncertain&lt; T &gt; atan2(const Uncertain&lt; T &gt; &amp;y, const Uncertain&lt; T &gt; &amp;x)</div><div class="ttdoc">Two argument arctangent.</div><div class="ttdef"><b>Definition:</b> trigonometry.ipp:66</div></div>
+<div class="ttc" id="anamespacesigma_html_a174b5d94bc2a10f4a256eab8ee5a342d"><div class="ttname"><a href="namespacesigma.html#a174b5d94bc2a10f4a256eab8ee5a342d">sigma::sin</a></div><div class="ttdeci">Uncertain&lt; T &gt; sin(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Sine of the variable.</div><div class="ttdef"><b>Definition:</b> trigonometry.ipp:24</div></div>
+<div class="ttc" id="anamespacesigma_html_a29ac0ccb509ea16a5f8f2d69318af050"><div class="ttname"><a href="namespacesigma.html#a29ac0ccb509ea16a5f8f2d69318af050">sigma::atan</a></div><div class="ttdeci">Uncertain&lt; T &gt; atan(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Arctangent of the variable.</div><div class="ttdef"><b>Definition:</b> trigonometry.ipp:59</div></div>
+<div class="ttc" id="anamespacesigma_html_a8d0718197bd681b48cfbc005d6629920"><div class="ttname"><a href="namespacesigma.html#a8d0718197bd681b48cfbc005d6629920">sigma::cos</a></div><div class="ttdeci">Uncertain&lt; T &gt; cos(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Cosine of the variable.</div><div class="ttdef"><b>Definition:</b> trigonometry.ipp:31</div></div>
+<div class="ttc" id="anamespacesigma_html_ac02929276a036dc441d88bf47027fbde"><div class="ttname"><a href="namespacesigma.html#ac02929276a036dc441d88bf47027fbde">sigma::tan</a></div><div class="ttdeci">Uncertain&lt; T &gt; tan(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Tangent of the variable.</div><div class="ttdef"><b>Definition:</b> trigonometry.ipp:38</div></div>
+<div class="ttc" id="anamespacesigma_html_ac8aa7a731dc93ac48f683999b3f712e8"><div class="ttname"><a href="namespacesigma.html#ac8aa7a731dc93ac48f683999b3f712e8">sigma::degrees</a></div><div class="ttdeci">Uncertain&lt; T &gt; degrees(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Convert from radians to degrees.</div><div class="ttdef"><b>Definition:</b> trigonometry.ipp:8</div></div>
+<div class="ttc" id="anamespacesigma_html_ae48df01125f097867cd2144b958f3756"><div class="ttname"><a href="namespacesigma.html#ae48df01125f097867cd2144b958f3756">sigma::asin</a></div><div class="ttdeci">Uncertain&lt; T &gt; asin(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Arcsine of the variable.</div><div class="ttdef"><b>Definition:</b> trigonometry.ipp:45</div></div>
+<div class="ttc" id="anamespacesigma_html_ae5e0046cd2d9e05322e6d880b593b679"><div class="ttname"><a href="namespacesigma.html#ae5e0046cd2d9e05322e6d880b593b679">sigma::radians</a></div><div class="ttdeci">Uncertain&lt; T &gt; radians(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Convert from degrees to radians.</div><div class="ttdef"><b>Definition:</b> trigonometry.ipp:16</div></div>
+<div class="ttc" id="anamespacesigma_html_af6eeba07517755fde0ced30d9ff56181"><div class="ttname"><a href="namespacesigma.html#af6eeba07517755fde0ced30d9ff56181">sigma::acos</a></div><div class="ttdeci">Uncertain&lt; T &gt; acos(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Arccosine of the variable.</div><div class="ttdef"><b>Definition:</b> trigonometry.ipp:52</div></div>
+<div class="ttc" id="auncertain_8hpp_html"><div class="ttname"><a href="uncertain_8hpp.html">uncertain.hpp</a></div><div class="ttdoc">Defines the Uncertain class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

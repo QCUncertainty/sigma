@@ -70,43 +70,53 @@ $(function() {
 <div class="title">basic.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;sigma/uncertain.hpp&quot;</span></div>
+<a href="basic_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="uncertain_8hpp.html">sigma/uncertain.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span>sigma {</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;Uncertain&lt;T&gt; abs(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;Uncertain&lt;T&gt; abs2(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;Uncertain&lt;T&gt; ceil(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesigma.html">sigma</a> {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#add954174f373873d59d093ceb3e82af5">abs</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#aaa0794dcf432114a9467603ac7748c7c">abs2</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#aae07ce73db5514f76faadd45497679fd">ceil</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;Uncertain&lt;T&gt; floor(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#aa33c27c2144a61b5061e6a4902349123">floor</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;Uncertain&lt;T&gt; fmod(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#aff47e6b43a710dc89637c5e6ae1e1c60">fmod</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;Uncertain&lt;T&gt; fmod(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keywordtype">double</span> b);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;Uncertain&lt;T&gt; fmod(<span class="keywordtype">double</span> a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#aff47e6b43a710dc89637c5e6ae1e1c60">fmod</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keywordtype">double</span> b);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#aff47e6b43a710dc89637c5e6ae1e1c60">fmod</a>(<span class="keywordtype">double</span> a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;Uncertain&lt;T&gt; copysign(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;Uncertain&lt;T&gt; copysign(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keywordtype">double</span> b);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">double</span> copysign(<span class="keywordtype">double</span> a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;Uncertain&lt;T&gt; trunc(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#acd31fdaf16ebab84607b4f004204a556">copysign</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#acd31fdaf16ebab84607b4f004204a556">copysign</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keywordtype">double</span> b);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> V, <span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;V <a class="code" href="namespacesigma.html#acd31fdaf16ebab84607b4f004204a556">copysign</a>(V a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;} <span class="comment">// namespace sigma</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#include &quot;basic.ipp&quot;</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;Uncertain&lt;T&gt; <a class="code" href="namespacesigma.html#ae431d0534d90713daf06f763dd523277">trunc</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;} <span class="comment">// namespace sigma</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#include &quot;basic.ipp&quot;</span></div>
+<div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition:</b> operation_common.hpp:10</div></div>
+<div class="ttc" id="anamespacesigma_html_aa33c27c2144a61b5061e6a4902349123"><div class="ttname"><a href="namespacesigma.html#aa33c27c2144a61b5061e6a4902349123">sigma::floor</a></div><div class="ttdeci">Uncertain&lt; T &gt; floor(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Nearest integer not greater than the given value.</div><div class="ttdef"><b>Definition:</b> basic.ipp:26</div></div>
+<div class="ttc" id="anamespacesigma_html_aaa0794dcf432114a9467603ac7748c7c"><div class="ttname"><a href="namespacesigma.html#aaa0794dcf432114a9467603ac7748c7c">sigma::abs2</a></div><div class="ttdeci">Uncertain&lt; T &gt; abs2(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">The Square of the Absolute Value.</div><div class="ttdef"><b>Definition:</b> basic.ipp:16</div></div>
+<div class="ttc" id="anamespacesigma_html_aae07ce73db5514f76faadd45497679fd"><div class="ttname"><a href="namespacesigma.html#aae07ce73db5514f76faadd45497679fd">sigma::ceil</a></div><div class="ttdeci">Uncertain&lt; T &gt; ceil(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Nearest integer not less than the given value.</div><div class="ttdef"><b>Definition:</b> basic.ipp:21</div></div>
+<div class="ttc" id="anamespacesigma_html_acd31fdaf16ebab84607b4f004204a556"><div class="ttname"><a href="namespacesigma.html#acd31fdaf16ebab84607b4f004204a556">sigma::copysign</a></div><div class="ttdeci">Uncertain&lt; T &gt; copysign(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;b)</div><div class="ttdoc">Copy the sign of one value to another.</div><div class="ttdef"><b>Definition:</b> basic.ipp:53</div></div>
+<div class="ttc" id="anamespacesigma_html_add954174f373873d59d093ceb3e82af5"><div class="ttname"><a href="namespacesigma.html#add954174f373873d59d093ceb3e82af5">sigma::abs</a></div><div class="ttdeci">Uncertain&lt; T &gt; abs(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Absolute Value.</div><div class="ttdef"><b>Definition:</b> basic.ipp:9</div></div>
+<div class="ttc" id="anamespacesigma_html_ae431d0534d90713daf06f763dd523277"><div class="ttname"><a href="namespacesigma.html#ae431d0534d90713daf06f763dd523277">sigma::trunc</a></div><div class="ttdeci">Uncertain&lt; T &gt; trunc(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Remove the fractional part from a variable.</div><div class="ttdef"><b>Definition:</b> basic.ipp:71</div></div>
+<div class="ttc" id="anamespacesigma_html_aff47e6b43a710dc89637c5e6ae1e1c60"><div class="ttname"><a href="namespacesigma.html#aff47e6b43a710dc89637c5e6ae1e1c60">sigma::fmod</a></div><div class="ttdeci">Uncertain&lt; T &gt; fmod(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;b)</div><div class="ttdoc">Floating point module.</div><div class="ttdef"><b>Definition:</b> basic.ipp:31</div></div>
+<div class="ttc" id="auncertain_8hpp_html"><div class="ttname"><a href="uncertain_8hpp.html">uncertain.hpp</a></div><div class="ttdoc">Defines the Uncertain class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
