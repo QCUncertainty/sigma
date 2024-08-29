@@ -29,6 +29,7 @@ macro(cxx_api_docs)
         set(CUSTOM_DIR "${${PROJECT_NAME}_DOCS_DIR}/doxygen-custom")
 
         # Doxygen Settinggs
+        set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "README.md")
         set(DOXYGEN_GENERATE_TREEVIEW "YES")
         set(DOXYGEN_DISABLE_INDEX "NO")
         set(DOXYGEN_FULL_SIDEBAR "NO")
@@ -51,6 +52,7 @@ macro(cxx_api_docs)
 
         # Add the Doxygen target
         doxygen_add_docs("${_ncad_target}" 
+                         "${CMAKE_CURRENT_SOURCE_DIR}/README.md"
                          "${${PROJECT_NAME}_INCLUDE_DIR}"
                          "${${PROJECT_NAME}_DOCS_DIR}")
 
