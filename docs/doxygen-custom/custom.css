@@ -1,0 +1,9 @@
+html {
+    /* Add light mode customizations here */
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not(.light-mode) {
+        /* Add dark mode customizations here */
+    }
+}

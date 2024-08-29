@@ -22,9 +22,6 @@ cmaize_option_list(
 
 ## Docs ##
 include(cmake/cxx_api_docs.cmake)
-cxx_api_docs("${${PROJECT_NAME}_SOURCE_DIR}" 
-             "${${PROJECT_NAME}_INCLUDE_DIR}"
-             "${${PROJECT_NAME}_DOCS_DIR}") 
 
 ## Dependencies ##
 cmaize_find_or_build_optional_dependency(

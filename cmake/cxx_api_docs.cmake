@@ -9,44 +9,47 @@ macro(cxx_api_docs)
 
     # Adding the docs target
     if("${BUILD_DOCS}")
-    # Target naming
+        # Target naming
         string(TOLOWER "${PROJECT_NAME}" _ncad_lc_name)
         set(_ncad_target "${_ncad_lc_name}_cxx_api")
 
         # Find Doxygen
         find_package(Doxygen REQUIRED)
 
-        # Doxygen Settinggs
-        if("${ENABLE_EIGEN_SUPPORT}")
-            set(DOXYGEN_PREDEFINED "ENABLE_EIGEN_SUPPORT")
-        endif()
-        set(DOXYGEN_MACRO_EXPANSION "YES")
-        set(DOXYGEN_USE_MATHJAX "YES")
-        set(DOXYGEN_MATHJAX_RELPATH "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5")
-        
-        # Get Awesome CSS Theme
+        # Get Doxygen Awesome CSS Theme
         include(FetchContent)
         fetchcontent_declare(
             doxygen-awesome-css
             URL https://github.com/jothepro/doxygen-awesome-css/archive/refs/heads/main.zip
         )
         fetchcontent_makeavailable(doxygen-awesome-css)
-        fetchcontent_getproperties(doxygen-awesome-css SOURCE_DIR AWESOME_CSS_DIR)
 
-        # Awesome CSS settings
-        set(CSS_BASE "${AWESOME_CSS_DIR}/doxygen-awesome.css")
-        set(CSS_SIDEBAR_ONLY "${AWESOME_CSS_DIR}/doxygen-awesome-sidebar-only.css")
-        set(CSS_DARKMODE_TOGGLE "${AWESOME_CSS_DIR}/doxygen-awesome-sidebar-only-darkmode-toggle.css")
-        set(DOXYGEN_HTML_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/docs/header.html")
-        set(DOXYGEN_HTML_EXTRA_FILES "${AWESOME_CSS_DIR}/doxygen-awesome-darkmode-toggle.js")
+        # Set Paths
+        fetchcontent_getproperties(doxygen-awesome-css SOURCE_DIR THEME_DIR)
+        set(CUSTOM_DIR "${${PROJECT_NAME}_DOCS_DIR}/doxygen-custom")
+
+        # Doxygen Settinggs
         set(DOXYGEN_GENERATE_TREEVIEW "YES")
         set(DOXYGEN_DISABLE_INDEX "NO")
         set(DOXYGEN_FULL_SIDEBAR "NO")
-        set(DOXYGEN_HTML_EXTRA_STYLESHEET "${CSS_BASE}" "${CSS_SIDEBAR_ONLY}" "${CSS_DARKMODE_TOGGLE}")
+        set(DOXYGEN_MACRO_EXPANSION "YES")
+        set(DOXYGEN_USE_MATHJAX "YES")
+        set(DOXYGEN_MATHJAX_RELPATH "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5")
         set(DOXYGEN_HTML_COLORSTYLE "LIGHT")
+        set(DOXYGEN_HTML_HEADER "${CUSTOM_DIR}/header.html")
+        set(DOXYGEN_HTML_EXTRA_FILES "${THEME_DIR}/doxygen-awesome-darkmode-toggle.js")
+        set(DOXYGEN_HTML_EXTRA_STYLESHEET "${THEME_DIR}/doxygen-awesome.css" 
+                                          "${THEME_DIR}/doxygen-awesome-sidebar-only.css" 
+                                          "${THEME_DIR}/doxygen-awesome-sidebar-only-darkmode-toggle.css"
+                                          "${CUSTOM_DIR}/custom.css")
+        if("${ENABLE_EIGEN_SUPPORT}")
+            set(DOXYGEN_PREDEFINED "ENABLE_EIGEN_SUPPORT")
+        endif()
 
         # Add the Doxygen target
-        doxygen_add_docs("${_ncad_target}" ${ARGV})
+        doxygen_add_docs("${_ncad_target}" 
+                         "${${PROJECT_NAME}_INCLUDE_DIR}"
+                         "${${PROJECT_NAME}_DOCS_DIR}")
 
         # If we're only building docs, then we're done
         if("${ONLY_BUILD_DOCS}")
@@ -54,3 +57,5 @@ macro(cxx_api_docs)
         endif()
     endif()
 endmacro()
+
+cxx_api_docs()
