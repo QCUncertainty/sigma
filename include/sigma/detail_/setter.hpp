@@ -1,6 +1,10 @@
 #pragma once
 #include "sigma/uncertain.hpp"
 
+/** @file setter.hpp 
+ *  @brief Defines the Setter class
+ */ 
+
 namespace sigma::detail_ {
 
 /** @brief Modifies an unceratin variable.

@@ -1,10 +1,13 @@
 #pragma once
 #include "sigma/uncertain.hpp"
 
+/** @file arithmetic.hpp
+ *  @brief Arithmetic operations for uncertain variables
+ */
+
 namespace sigma {
 
-/** @relates Uncertain
- *  @brief Negation Operation
+/** @brief Negation Operation
  *
  *  @tparam T The value type of the variable
  *  @param a The variable being negated
@@ -16,8 +19,7 @@ namespace sigma {
 template<typename T>
 Uncertain<T> operator-(const Uncertain<T>& a);
 
-/** @relates Uncertain
- *  @brief Addition Operation
+/** @brief Addition Operation
  *
  *  @tparam T The value type of the variables
  *  @param lhs The left-hand variable
@@ -29,13 +31,14 @@ Uncertain<T> operator-(const Uncertain<T>& a);
  */
 template<typename T>
 Uncertain<T> operator+(const Uncertain<T>& lhs, const Uncertain<T>& rhs);
+/** @overload */
 template<typename T>
 Uncertain<T> operator+(const Uncertain<T>& lhs, double rhs);
+/** @overload */
 template<typename T>
 Uncertain<T> operator+(double lhs, const Uncertain<T>& rhs);
 
-/** @relates Uncertain
- *  @brief Inplace Addition Operation
+/** @brief Inplace Addition Operation
  *
  *  @tparam T The value type of the variables
  *  @param lhs The left-hand variable being modified
@@ -47,11 +50,11 @@ Uncertain<T> operator+(double lhs, const Uncertain<T>& rhs);
  */
 template<typename T>
 Uncertain<T>& operator+=(Uncertain<T>& lhs, const Uncertain<T>& rhs);
+/** @overload */
 template<typename T>
 Uncertain<T>& operator+=(Uncertain<T>& lhs, double rhs);
 
-/** @relates Uncertain
- *  @brief Subtraction Operation
+/** @brief Subtraction Operation
  *
  *  @tparam T The value type of the variables
  *  @param lhs The left-hand variable
@@ -63,13 +66,14 @@ Uncertain<T>& operator+=(Uncertain<T>& lhs, double rhs);
  */
 template<typename T>
 Uncertain<T> operator-(const Uncertain<T>& lhs, const Uncertain<T>& rhs);
+/** @overload */
 template<typename T>
 Uncertain<T> operator-(const Uncertain<T>& lhs, double rhs);
+/** @overload */
 template<typename T>
 Uncertain<T> operator-(double lhs, const Uncertain<T>& rhs);
 
-/** @relates Uncertain
- *  @brief Inplace Subtraction Operation
+/** @brief Inplace Subtraction Operation
  *
  *  @tparam T The value type of the variables
  *  @param lhs The left-hand variable being modified
@@ -81,11 +85,11 @@ Uncertain<T> operator-(double lhs, const Uncertain<T>& rhs);
  */
 template<typename T>
 Uncertain<T>& operator-=(Uncertain<T>& lhs, const Uncertain<T>& rhs);
+/** @overload */
 template<typename T>
 Uncertain<T>& operator-=(Uncertain<T>& lhs, double rhs);
 
-/** @relates Uncertain
- *  @brief Multiplication Operation
+/** @brief Multiplication Operation
  *
  *  @tparam T The value type of the variables
  *  @param lhs The left-hand variable
@@ -97,13 +101,14 @@ Uncertain<T>& operator-=(Uncertain<T>& lhs, double rhs);
  */
 template<typename T>
 Uncertain<T> operator*(const Uncertain<T>& lhs, const Uncertain<T>& rhs);
+/** @overload */
 template<typename T>
 Uncertain<T> operator*(const Uncertain<T>& lhs, double rhs);
+/** @overload */
 template<typename T>
 Uncertain<T> operator*(double lhs, const Uncertain<T>& rhs);
 
-/** @relates Uncertain
- *  @brief Inplace Multiplication Operation
+/** @brief Inplace Multiplication Operation
  *
  *  @tparam T The value type of the variables
  *  @param lhs The left-hand variable being modified
@@ -115,11 +120,11 @@ Uncertain<T> operator*(double lhs, const Uncertain<T>& rhs);
  */
 template<typename T>
 Uncertain<T>& operator*=(Uncertain<T>& lhs, const Uncertain<T>& rhs);
+/** @overload */
 template<typename T>
 Uncertain<T>& operator*=(Uncertain<T>& lhs, double rhs);
 
-/** @relates Uncertain
- *  @brief Division Operation
+/** @brief Division Operation
  *
  *  @tparam T The value type of the variables
  *  @param lhs The left-hand variable
@@ -131,13 +136,14 @@ Uncertain<T>& operator*=(Uncertain<T>& lhs, double rhs);
  */
 template<typename T>
 Uncertain<T> operator/(const Uncertain<T>& lhs, const Uncertain<T>& rhs);
+/** @overload */
 template<typename T>
 Uncertain<T> operator/(double lhs, const Uncertain<T>& rhs);
+/** @overload */
 template<typename T>
 Uncertain<T> operator/(const Uncertain<T>& lhs, double rhs);
 
-/** @relates Uncertain
- *  @brief Inplace Division Operation
+/** @brief Inplace Division Operation
  *
  *  @tparam T The value type of the variables
  *  @param lhs The left-hand variable being modified
@@ -149,6 +155,7 @@ Uncertain<T> operator/(const Uncertain<T>& lhs, double rhs);
  */
 template<typename T>
 Uncertain<T>& operator/=(Uncertain<T>& lhs, const Uncertain<T>& rhs);
+/** @overload */
 template<typename T>
 Uncertain<T>& operator/=(Uncertain<T>& lhs, double rhs);
 

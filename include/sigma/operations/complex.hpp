@@ -1,10 +1,13 @@
 #pragma once
 #include "sigma/uncertain.hpp"
 
+/** @file complex.hpp
+ *  @brief Complex number operations for uncertain variables
+ */
+
 namespace sigma {
 
-/** @relates Uncertain
- *  @brief Complex Conjugate
+/** @brief Complex Conjugate
  *
  *  sigma doesn't currently support complex values, so this is a stub.
  *
@@ -16,12 +19,11 @@ namespace sigma {
  *  @throw none No throw guarantee
  */
 template<typename T>
-const Uncertain<T>& conj(const Uncertain<T>& x) {
-    return x;
+const Uncertain<T>& conj(const Uncertain<T>& a) {
+    return a;
 }
 
-/** @relates Uncertain
- *  @brief Get the real part of a value
+/** @brief Get the real part of a value
  *
  *  sigma doesn't currently support complex values, so this is a stub.
  *
@@ -33,12 +35,11 @@ const Uncertain<T>& conj(const Uncertain<T>& x) {
  *  @throw none No throw guarantee
  */
 template<typename T>
-const Uncertain<T>& real(const Uncertain<T>& x) {
-    return x;
+const Uncertain<T>& real(const Uncertain<T>& a) {
+    return a;
 }
 
-/** @relates Uncertain
- *  @brief Get the imaginary part of a value
+/** @brief Get the imaginary part of a value
  *
  *  sigma doesn't currently support complex values, so this is a stub.
  *
@@ -50,7 +51,7 @@ const Uncertain<T>& real(const Uncertain<T>& x) {
  *  @throw none No throw guarantee
  */
 template<typename T>
-Uncertain<T> imag(const Uncertain<T>&) {
+Uncertain<T> imag(const Uncertain<T>& a) {
     return Uncertain<T>{0.0, 0.0};
 }
 
