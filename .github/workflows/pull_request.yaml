@@ -68,7 +68,6 @@ jobs:
       - uses: seanmiddleditch/gha-setup-ninja@v5
       - name: Build Doxygen Part
         run: |
-          toolchain=${PWD}/.github/workflow_toolchains/gnu-12.cmake
-          cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
+          cmake -Bbuild -H. -GNinja -DONLY_BUILD_DOCS=ON -DDOCS_FAIL_ON_WARNING=ON
           cmake --build build --target sigma_cxx_api --parallel
         shell: bash

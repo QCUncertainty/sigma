@@ -17,6 +17,8 @@ include(cmake/get_cmaize.cmake)
 cmaize_option_list(
     BUILD_TESTING OFF "Should the tests be built?"
     BUILD_DOCS OFF "Should we build the documentation?"
+    ONLY_BUILD_DOCS OFF "Should we only build the documentation?"
+    DOCS_FAIL_ON_WARNING OFF "Should the documentation build fail from warnings?"
     ENABLE_EIGEN_SUPPORT ON "Include Eigen compatibility headers?"
 )
 

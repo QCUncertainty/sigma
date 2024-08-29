@@ -45,6 +45,9 @@ macro(cxx_api_docs)
         if("${ENABLE_EIGEN_SUPPORT}")
             set(DOXYGEN_PREDEFINED "ENABLE_EIGEN_SUPPORT")
         endif()
+        if("${DOCS_FAIL_ON_WARNING}")
+            set(DOXYGEN_WARN_AS_ERROR "FAIL_ON_WARNINGS")
+        endif()
 
         # Add the Doxygen target
         doxygen_add_docs("${_ncad_target}" 
