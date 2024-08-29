@@ -4,15 +4,14 @@ cmake_minimum_required(VERSION 3.14)
 file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/version.txt" VERSION)
 project(sigma VERSION "${VERSION}" LANGUAGES CXX)
 
-## Get CMaize
-include(cmake/get_cmaize.cmake)
-include(cmake/cxx_api_docs.cmake)
-
 ## Paths ##
 set(${PROJECT_NAME}_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(${PROJECT_NAME}_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(${PROJECT_NAME}_TESTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 set(${PROJECT_NAME}_DOCS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/docs")
+
+## Get CMaize
+include(cmake/get_cmaize.cmake)
 
 ## Options ##
 cmaize_option_list(
@@ -21,6 +20,13 @@ cmaize_option_list(
     ENABLE_EIGEN_SUPPORT ON "Include Eigen compatibility headers?"
 )
 
+## Docs ##
+include(cmake/cxx_api_docs.cmake)
+cxx_api_docs("${${PROJECT_NAME}_SOURCE_DIR}" 
+             "${${PROJECT_NAME}_INCLUDE_DIR}"
+             "${${PROJECT_NAME}_DOCS_DIR}") 
+
+## Dependencies ##
 cmaize_find_or_build_optional_dependency(
     eigen
     ENABLE_EIGEN_SUPPORT
@@ -37,12 +43,6 @@ cmaize_add_library(
     INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
     DEPENDS eigen
 )
-
-if("${BUILD_DOCS}")
-    cxx_api_docs("${${PROJECT_NAME}_SOURCE_DIR}" 
-                 "${${PROJECT_NAME}_INCLUDE_DIR}"
-                 "${${PROJECT_NAME}_DOCS_DIR}") 
-endif()
 
 ## Build tests ##
 if("${BUILD_TESTING}")
