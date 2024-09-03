@@ -9,12 +9,12 @@ macro(cxx_api_docs)
 
     # Adding the docs target
     if("${BUILD_DOCS}")
+        # Find Doxygen
+        find_package(Doxygen 1.10.0 REQUIRED)
+
         # Target naming
         string(TOLOWER "${PROJECT_NAME}" _ncad_lc_name)
         set(_ncad_target "${_ncad_lc_name}_cxx_api")
-
-        # Find Doxygen
-        find_package(Doxygen REQUIRED)
 
         # Get Doxygen Awesome CSS Theme
         include(FetchContent)
@@ -34,6 +34,7 @@ macro(cxx_api_docs)
         set(DOXYGEN_DISABLE_INDEX "NO")
         set(DOXYGEN_FULL_SIDEBAR "NO")
         set(DOXYGEN_MACRO_EXPANSION "YES")
+        set(DOXYGEN_MARKDOWN_ID_STYLE "GITHUB")
         set(DOXYGEN_USE_MATHJAX "YES")
         set(DOXYGEN_MATHJAX_RELPATH "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5")
         set(DOXYGEN_HTML_COLORSTYLE "LIGHT")

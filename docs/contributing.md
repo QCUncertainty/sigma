@@ -1,14 +1,14 @@
-# Contributing {#contributing}
+# Contributing
 Details for contributing.
 
-## Code of Conduct {#code-of-conduct}
+## Code of Conduct
 TODO: Write me!!
 
-## Contributor Guidelines {#contributor-guidelines}
+## Contributor Guidelines
 TODO: Write me!!
 
-## Contributor License Agreement {#contributor-license-agreement}
+## Contributor License Agreement
 TODO: Write me!!
 
-## Developer Documentation {#developer-documentation}
+## Developer Documentation
 TODO: Write me!!
