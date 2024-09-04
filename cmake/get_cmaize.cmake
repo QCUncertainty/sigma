@@ -1,7 +1,7 @@
 function(get_cmaize)
 
     if("${CMAIZE_VERSION}" STREQUAL "")
-        set(CMAIZE_VERSION v1.1.5 )
+        set(CMAIZE_VERSION aa6e702d969220ab350c0dab4ef09e48d634d7f4 )
     endif()
 
     # Store whether we are building tests or not, then turn off the tests
@@ -14,8 +14,8 @@ function(get_cmaize)
     include(FetchContent)
     FetchContent_Declare(
         cmaize
-        GIT_REPOSITORY https://github.com/jwaldrop107/CMaize
-        GIT_TAG allow_dll
+        GIT_REPOSITORY https://github.com/CMakePP/CMaize
+        GIT_TAG ${CMAIZE_VERSION}
     )
     FetchContent_MakeAvailable(cmaize)
 
