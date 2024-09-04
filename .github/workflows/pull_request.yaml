@@ -40,22 +40,21 @@ jobs:
           ctest -VV
         shell: bash
 
-  # Uncomment when Windows support in CMaize has matured
-  # test_library_windows:
-  #   runs-on: windows-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0
-  #     - uses: ssciwr/doxygen-install@v1
-  #     - name: Build and Test
-  #       run: |
-  #         SET "toolchain=%cd%\.github\workflow_toolchains\windows.cmake"
-  #         cmake -DCMAKE_TOOLCHAIN_FILE=%toolchain% -B "build" -G "Visual Studio 17 2022" -T host=x64 -A x64
-  #         cmake --build build --config Debug --parallel
-  #         cd build
-  #         ctest -C Debug -T test -VV
-  #       shell: cmd
+  test_library_windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ssciwr/doxygen-install@v1
+      - name: Build and Test
+        run: |
+          SET "toolchain=%cd%\.github\workflow_toolchains\windows.cmake"
+          cmake -DCMAKE_TOOLCHAIN_FILE=%toolchain% -B "build" -G "Visual Studio 17 2022" -T host=x64 -A x64
+          cmake --build build --config Debug --parallel
+          cd build
+          ctest -C Debug -T test -VV
+        shell: cmd
 
   # Test Build of Documentation
   test_dox_build:
