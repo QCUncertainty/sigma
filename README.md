@@ -6,7 +6,8 @@ mathematical operations on floating point values, inspired by
 [Measurements.jl](https://github.com/JuliaPhysics/Measurements.jl) for Julia.
 
 ## Motivation
-TODO: Add motivation
+Simplify tracking of uncertainty through mathematical operations, such as those
+in the computational simulation of chemical systems.
 
 See [Background](./docs/background.md) for more details.
 
