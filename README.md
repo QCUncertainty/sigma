@@ -1,5 +1,7 @@
 # Sigma 
 
+[Documentation](https://qcuncertainty.github.io/sigma/)
+
 Sigma is a header-only C++ library for uncertainty propagation throughout
 mathematical operations on floating point values, inspired by
 [uncertainties](https://github.com/lmfit/uncertainties) for Python and
