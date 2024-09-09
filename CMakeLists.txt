@@ -1,25 +1,39 @@
 cmake_minimum_required(VERSION 3.14)
 
+# # Windows Specifics
+if (WIN32)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+endif (WIN32)
+
 ## Set Project and Version
 file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/version.txt" VERSION)
 project(sigma VERSION "${VERSION}" LANGUAGES CXX)
-
-## Get CMaize
-include(cmake/get_cmaize.cmake)
-include(cmake/cxx_api_docs.cmake)
 
 ## Paths ##
 set(${PROJECT_NAME}_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(${PROJECT_NAME}_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(${PROJECT_NAME}_TESTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tests")
+set(${PROJECT_NAME}_DOCS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/docs")
+
+## Get CMaize
+include(cmake/get_cmaize.cmake)
 
 ## Options ##
 cmaize_option_list(
     BUILD_TESTING OFF "Should the tests be built?"
     BUILD_DOCS OFF "Should we build the documentation?"
+    ONLY_BUILD_DOCS OFF "Should we only build the documentation?"
+    DOCS_FAIL_ON_WARNING OFF "Should the documentation build fail from warnings?"
     ENABLE_EIGEN_SUPPORT ON "Include Eigen compatibility headers?"
 )
 
+## Docs ##
+include(cmake/cxx_api_docs.cmake)
+
+## Dependencies ##
 cmaize_find_or_build_optional_dependency(
     eigen
     ENABLE_EIGEN_SUPPORT
@@ -36,10 +50,6 @@ cmaize_add_library(
     INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
     DEPENDS eigen
 )
-
-if("${BUILD_DOCS}")
-    cxx_api_docs("${${PROJECT_NAME}_INCLUDE_DIR}") 
-endif()
 
 ## Build tests ##
 if("${BUILD_TESTING}")
