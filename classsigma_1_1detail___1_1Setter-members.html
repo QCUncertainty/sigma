@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.12.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>sigma: Sigma</title>
+    <title>sigma: Member List</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -88,7 +88,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('index.html',''); initResizable(true); });
+$(function(){initNavTree('classsigma_1_1detail___1_1Setter.html',''); initResizable(true); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -113,57 +113,25 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">Sigma </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">sigma::detail_::Setter&lt; T &gt; Member List</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a></p>
-<p><a href="https://qcuncertainty.github.io/sigma/">Documentation</a></p>
-<p>Sigma is a header-only C++ library for uncertainty propagation throughout mathematical operations on floating point values, inspired by <a href="https://github.com/lmfit/uncertainties">uncertainties</a> for Python and <a href="https://github.com/JuliaPhysics/Measurements.jl">Measurements.jl</a> for Julia.</p>
-<h1><a class="anchor" id="motivation"></a>
-Motivation</h1>
-<p>Simplify tracking of uncertainty through mathematical operations, such as those in the computational simulation of chemical systems.</p>
-<p>See <a class="el" href="md_docs_2background.html">Background</a> for more details.</p>
-<h1><a class="anchor" id="features"></a>
-Features</h1>
-<ul>
-<li>Propagate uncertainty throughout calculations</li>
-<li>Track dependent variable correlation to independent variables</li>
-<li>Support for common mathematical operations.</li>
-<li>Limited compatibility with <a href="https://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen</a> for linear algebra support.</li>
-</ul>
-<p>See <a class="el" href="md_docs_2examples.html">here</a> for examples.</p>
-<h1><a class="anchor" id="installation"></a>
-Installation</h1>
-<p>Sigma is header-only, so installation is not strictly required for usage. The files simply need to be locatable by your project, as well the dependencies required by Sigma itself (e.g. <a class="el" href="namespaceEigen.html" title="The namespace of the Eigen library.">Eigen</a> if support is configured). Dependency gathering, testing, building of the documentation, and installation are all handled with CMake and the <a href="https://github.com/CMakePP/CMaize">CMaize</a> Framework.</p>
-<div class="fragment"><div class="line"># -- Configuration Step --</div>
-<div class="line"># Should the tests be built? BUILD_TESTING=ON Default: OFF</div>
-<div class="line"># Should we build the documentation? BUILD_DOCS=ON Default: OFF</div>
-<div class="line"># Include Eigen compatibility headers? ENABLE_EIGEN_SUPPORT=ON Default: ON</div>
-<div class="line">cmake -Bbuild -H. \</div>
-<div class="line">    -DCMAKE_CXX_STANDARD=17 \</div>
-<div class="line">    -DCMAKE_INSTALL_PREFIX=/path/to/install \</div>
-<div class="line">    -DBUILD_TESTING=ON \</div>
-<div class="line">    -DBUILD_DOCS=ON \</div>
-<div class="line">    -DENABLE_EIGEN_SUPPORT=ON</div>
-<div class="line"> </div>
-<div class="line"># -- Build Documentation --</div>
-<div class="line">cmake --build build --target sigma_cxx_api</div>
-<div class="line"># Documentation will be in ./build/html</div>
-<div class="line"> </div>
-<div class="line"># -- Build and Run Tests --</div>
-<div class="line">cmake --build build --parallel</div>
-<div class="line">cd build</div>
-<div class="line">ctest -VV</div>
-<div class="line"> </div>
-<div class="line"># -- Install Library --</div>
-<div class="line">cmake --build build --target install</div>
-</div><!-- fragment --><h1><a class="anchor" id="acknowledgments"></a>
-Acknowledgments</h1>
-<p>TODO: Add acknowledgments </p>
-</div></div><!-- PageDoc -->
-<a href="doxygen_crawl.html"></a>
-</div><!-- contents -->
+
+<p>This is the complete list of members for <a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a>, including all inherited members.</p>
+<table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html#a7b26186a2757c8eff7a15134a26e4c8e">dep_sd_ptr</a> typedef</td><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html#a51b1eb8dc2255f1fa71b64f9afc13006">dep_sd_t</a> typedef</td><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html#a88a65cd262fe0918a1b290e4da8e3506">deps_map_t</a> typedef</td><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html#a2205274f1d2c710c8e97f753bd6054a2">my_t</a> typedef</td><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html#a825a744251af61aaf7ae16b692171a8b">Setter</a>(uncertain_t &amp;u)</td><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html#a307ebead119228bf4f4e1bbccfcf154a">uncertain_t</a> typedef</td><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html#aeadd1bc2f1a751930aec8a7d619615f3">update_derivatives</a>(value_t dxda, bool call_update_std=true)</td><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html#a6cf252472eff74294aa38077f7139a88">update_derivatives</a>(const deps_map_t &amp;deps, value_t dxda, bool call_update_std=true)</td><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html#a6e5c393a6e4192460e5157716a94147d">update_mean</a>(value_t mean)</td><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html#a7a6967b4d94d21bc3970748a7af034fd">update_sd</a>()</td><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html#a62c1d0537a6ee848492a90d64782c57a">value_t</a> typedef</td><td class="entry"><a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter&lt; T &gt;</a></td><td class="entry"></td></tr>
+</table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

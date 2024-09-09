@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.12.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>sigma: Sigma</title>
+    <title>sigma: Background</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -88,7 +88,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('index.html',''); initResizable(true); });
+$(function(){initNavTree('md_docs_2background.html',''); initResizable(true); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -114,56 +114,77 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Sigma </div></div>
+  <div class="headertitle"><div class="title">Background</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a></p>
-<p><a href="https://qcuncertainty.github.io/sigma/">Documentation</a></p>
-<p>Sigma is a header-only C++ library for uncertainty propagation throughout mathematical operations on floating point values, inspired by <a href="https://github.com/lmfit/uncertainties">uncertainties</a> for Python and <a href="https://github.com/JuliaPhysics/Measurements.jl">Measurements.jl</a> for Julia.</p>
-<h1><a class="anchor" id="motivation"></a>
-Motivation</h1>
-<p>Simplify tracking of uncertainty through mathematical operations, such as those in the computational simulation of chemical systems.</p>
-<p>See <a class="el" href="md_docs_2background.html">Background</a> for more details.</p>
-<h1><a class="anchor" id="features"></a>
-Features</h1>
-<ul>
-<li>Propagate uncertainty throughout calculations</li>
-<li>Track dependent variable correlation to independent variables</li>
-<li>Support for common mathematical operations.</li>
-<li>Limited compatibility with <a href="https://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen</a> for linear algebra support.</li>
-</ul>
-<p>See <a class="el" href="md_docs_2examples.html">here</a> for examples.</p>
-<h1><a class="anchor" id="installation"></a>
-Installation</h1>
-<p>Sigma is header-only, so installation is not strictly required for usage. The files simply need to be locatable by your project, as well the dependencies required by Sigma itself (e.g. <a class="el" href="namespaceEigen.html" title="The namespace of the Eigen library.">Eigen</a> if support is configured). Dependency gathering, testing, building of the documentation, and installation are all handled with CMake and the <a href="https://github.com/CMakePP/CMaize">CMaize</a> Framework.</p>
-<div class="fragment"><div class="line"># -- Configuration Step --</div>
-<div class="line"># Should the tests be built? BUILD_TESTING=ON Default: OFF</div>
-<div class="line"># Should we build the documentation? BUILD_DOCS=ON Default: OFF</div>
-<div class="line"># Include Eigen compatibility headers? ENABLE_EIGEN_SUPPORT=ON Default: ON</div>
-<div class="line">cmake -Bbuild -H. \</div>
-<div class="line">    -DCMAKE_CXX_STANDARD=17 \</div>
-<div class="line">    -DCMAKE_INSTALL_PREFIX=/path/to/install \</div>
-<div class="line">    -DBUILD_TESTING=ON \</div>
-<div class="line">    -DBUILD_DOCS=ON \</div>
-<div class="line">    -DENABLE_EIGEN_SUPPORT=ON</div>
-<div class="line"> </div>
-<div class="line"># -- Build Documentation --</div>
-<div class="line">cmake --build build --target sigma_cxx_api</div>
-<div class="line"># Documentation will be in ./build/html</div>
-<div class="line"> </div>
-<div class="line"># -- Build and Run Tests --</div>
-<div class="line">cmake --build build --parallel</div>
-<div class="line">cd build</div>
-<div class="line">ctest -VV</div>
-<div class="line"> </div>
-<div class="line"># -- Install Library --</div>
-<div class="line">cmake --build build --target install</div>
-</div><!-- fragment --><h1><a class="anchor" id="acknowledgments"></a>
-Acknowledgments</h1>
-<p>TODO: Add acknowledgments </p>
-</div></div><!-- PageDoc -->
-<a href="doxygen_crawl.html"></a>
-</div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="background"></a></p>
+<h1><a class="anchor" id="linear-error-propagation"></a>
+Linear Error Propagation</h1>
+<p>Like the <a href="https://github.com/lmfit/uncertainties">uncertainties</a> and <a href="https://github.com/JuliaPhysics/Measurements.jl">Measurements.jl</a> libraries, Sigma is based on the <a href="https://en.wikipedia.org/wiki/Propagation_of_uncertainty">theory of linear error propagation</a>. Here we will provide a brief summary of that theory.</p>
+<p>Assume a sequence of \( n \) variables \( \left(a_{i}\right)_{i=1}^{n} \) whose elements are defined as \( a_{i} = \bar{a}_{i} \pm \sigma_{a_{i}} \), where \( \bar{a}_{i} \) is the median value of \( a_{i} \) and \( \sigma_{a_{i}} \) is the standard deviation of of \( a_{i} \). \( F(A) \) is a function of \( A \), where \( A = \{a_{i} : i \in \mathbb{N}, 1 \leq i \leq n\} \). The uncertainty of \( F(A) \) can be determined as</p>
+<p class="formulaDsp">
+\[ \normalsize
+\sigma_{F} = 
+\sqrt{
+  \sum_{i=1}^{n} \left(
+    \left(
+      \left.
+        \frac{\partial F}{\partial a_{i}}
+      \right|_{a_{i}=\bar{a}_{i}} \sigma_{a_{i}}
+    \right)^2 + 
+    2 \sum_{j=i+1}^{n} \left(
+      \left(\frac{\partial F}{\partial a_{i}}\right)_{a_{i}=\bar{a}_{i}} 
+      \left(\frac{\partial F}{\partial a_{j}}\right)_{a_{j}=\bar{a}_{j}}
+      \sigma_{a_{i}a_{j}}
+    \right)
+  \right)
+}
+\]
+</p>
+<p>where \( \sigma_{a_{i}a_{j}} \) is the covariance of \( a_{i} \) and \( a_{j} \). These covariances can be eliminated from the above equation if the uncertainties of the variables are independent from one another, which is a requirement imposed here. As such, the uncertainty of \( F(A) \) when the members of \( A \) are independent from one another is</p>
+<p class="formulaDsp">
+\[ \normalsize
+\sigma_{F} = 
+\sqrt{
+  \sum_{i=1}^{n} \left(
+    \left.
+      \frac{\partial F}{\partial a_{i}}
+    \right|_{a_{i}=\bar{a}_{i}} \sigma_{a_{i}}
+  \right)^2
+}
+\]
+</p>
+<p>Next, we consider a set \( B = \{x, y\} \) where \( x = a_{i} + a_{j} \) and \( y = a_{j} - a_{k} \), i.e. the elements of \( B \) are dependent on a subset of the independent variables in set \( A \). Given the function \( G(B) \), the uncertainty of \( G \) can be determined by application of the chain rule to relate the independent variables to \( G \) through their relationships with the dependent variables</p>
+<p class="formulaDsp">
+\[ \normalsize
+\sigma_{G} = 
+\sqrt{
+  \left(
+    \left(
+      \frac{\partial G}{\partial x}
+      \frac{\partial x}{\partial a_{i}}
+    \right)_{a_{i}=\bar{a}_{i}} \sigma_{a_{i}}
+  \right)^2 +
+  \left(
+    \left(
+      \frac{\partial G}{\partial x}
+      \frac{\partial x}{\partial a_{j}}
+      +
+      \frac{\partial G}{\partial y}
+      \frac{\partial y}{\partial a_{j}}
+    \right)_{a_{j}=\bar{a}_{j}} \sigma_{a_{j}}
+  \right)^2 +
+  \left(
+    \left(
+      \frac{\partial G}{\partial y}
+      \frac{\partial y}{\partial a_{k}}
+    \right)_{a_{k}=\bar{a}_{k}} \sigma_{a_{k}}
+  \right)^2
+}
+\]
+</p>
+ </div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
