@@ -4,21 +4,6 @@
 
 using testing::test_uncertain;
 
-namespace testing {
-template<typename T>
-struct test_traits;
-
-template<>
-struct test_traits<sigma::UFloat> {
-    using other_t = sigma::UDouble;
-};
-
-template<>
-struct test_traits<sigma::UDouble> {
-    using other_t = sigma::UFloat;
-};
-} // namespace testing
-
 TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
     using testing_t = TestType;
     using value_t   = typename testing_t::value_t;

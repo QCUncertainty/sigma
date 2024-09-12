@@ -5,8 +5,8 @@
 
 namespace sigma {
 
-template<typename T>
-Uncertain<T> pow(const Uncertain<T>& a, double exp) {
+template<typename T, typename U>
+Uncertain<T> pow(const Uncertain<T>& a, const U& exp) {
     T mean = std::pow(a.mean(), exp);
     T dcda = exp * std::pow(a.mean(), exp - 1);
     return detail_::unary_result(a, mean, dcda);
@@ -54,15 +54,15 @@ Uncertain<T> hypot(const Uncertain<T>& a, const Uncertain<T>& b) {
     return detail_::binary_result(a, b, mean, dcda, dcdb);
 }
 
-template<typename T>
-Uncertain<T> hypot(const Uncertain<T>& a, double b) {
+template<typename T, typename U>
+Uncertain<T> hypot(const Uncertain<T>& a, const U& b) {
     T mean = std::hypot(a.mean(), b);
     T dcda = a.mean() / std::hypot(a.mean(), b);
     return detail_::unary_result(a, mean, dcda);
 }
 
-template<typename T>
-Uncertain<T> hypot(double a, const Uncertain<T>& b) {
+template<typename T, typename U>
+Uncertain<T> hypot(const U& a, const Uncertain<T>& b) {
     return hypot(b, a);
 }
 

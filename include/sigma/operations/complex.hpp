@@ -1,5 +1,6 @@
 #pragma once
 #include "sigma/uncertain.hpp"
+#include <complex>
 
 /** @file complex.hpp
  *  @brief Complex number operations for uncertain variables
@@ -9,7 +10,7 @@ namespace sigma {
 
 /** @brief Complex Conjugate
  *
- *  sigma doesn't currently support complex values, so this is a stub.
+ *  This is a stub to satisfy Eigen
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -25,7 +26,7 @@ const Uncertain<T>& conj(const Uncertain<T>& a) {
 
 /** @brief Get the real part of a value
  *
- *  sigma doesn't currently support complex values, so this is a stub.
+ *  This is a stub to satisfy Eigen
  *
  *  @tparam T The value type of the variable
  *  @param a The variable
@@ -41,7 +42,7 @@ const Uncertain<T>& real(const Uncertain<T>& a) {
 
 /** @brief Get the imaginary part of a value
  *
- *  sigma doesn't currently support complex values, so this is a stub.
+ *  This is a stub to satisfy Eigen
  *
  *  @tparam T The value type of the variable
  *  @param a The variable

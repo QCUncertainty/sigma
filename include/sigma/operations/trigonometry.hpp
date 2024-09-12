@@ -115,12 +115,34 @@ Uncertain<T> atan(const Uncertain<T>& a);
  */
 template<typename T>
 Uncertain<T> atan2(const Uncertain<T>& y, const Uncertain<T>& x);
-/** @overload */
-template<typename T>
-Uncertain<T> atan2(const Uncertain<T>& y, double x);
-/** @overload */
-template<typename T>
-Uncertain<T> atan2(double y, const Uncertain<T>& x);
+
+/** @brief Two argument arctangent
+ *
+ *  @tparam T The value type of the variable
+ *  @tparam U The numeric type of @p x
+ *  @param y The first variable
+ *  @param x The first variable
+ *
+ *  @return The two argument arctangent value of @p y and @p x
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T, typename U>
+Uncertain<T> atan2(const Uncertain<T>& y, const U& x);
+
+/** @brief Two argument arctangent
+ *
+ *  @tparam T The value type of the variable
+ *  @tparam U The numeric type of @p y
+ *  @param y The first variable
+ *  @param x The first variable
+ *
+ *  @return The two argument arctangent value of @p y and @p x
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T, typename U>
+Uncertain<T> atan2(const U& y, const Uncertain<T>& x);
 
 } // namespace sigma
 

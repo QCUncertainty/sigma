@@ -10,6 +10,7 @@ namespace sigma {
 /** @brief Exponentiation of a variable
  *
  *  @tparam T The value type of the variable
+ *  @tparam U The numeric type of the exponent
  *  @param a The base variable
  *  @param exp The exponent to raise the base by
  *
@@ -17,8 +18,8 @@ namespace sigma {
  *
  *  @throw none No throw guarantee
  */
-template<typename T>
-Uncertain<T> pow(const Uncertain<T>& a, double exp);
+template<typename T, typename U>
+Uncertain<T> pow(const Uncertain<T>& a, const U& exp);
 
 /** @brief Exponentiation of a variable by an uncertain variable
  *
@@ -94,12 +95,34 @@ Uncertain<T> log10(const Uncertain<T>& a);
  */
 template<typename T>
 Uncertain<T> hypot(const Uncertain<T>& a, const Uncertain<T>& b);
-/** @overload */
-template<typename T>
-Uncertain<T> hypot(const Uncertain<T>& a, double b);
-/** @overload */
-template<typename T>
-Uncertain<T> hypot(double a, const Uncertain<T>& b);
+
+/** @brief Calculate the square root of the sum of squared arguments
+ *
+ *  @tparam T The value type of the variable
+ *  @tparam U The numeric type of @p b
+ *  @param a The first variable
+ *  @param b The second variable
+ *
+ *  @return A variable whose value is the base 10 logarithm of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T, typename U>
+Uncertain<T> hypot(const Uncertain<T>& a, const U& b);
+
+/** @brief Calculate the square root of the sum of squared arguments
+ *
+ *  @tparam T The value type of the variable
+ *  @tparam U The numeric type of @p a
+ *  @param a The first variable
+ *  @param b The second variable
+ *
+ *  @return A variable whose value is the base 10 logarithm of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T, typename U>
+Uncertain<T> hypot(const U& a, const Uncertain<T>& b);
 
 } // namespace sigma
 
