@@ -143,18 +143,19 @@ $(function(){initNavTree('basic_8hpp_source.html',''); initResizable(true); });
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>Uncertain&lt;T&gt; <a class="code hl_function" href="namespacesigma.html#acd31fdaf16ebab84607b4f004204a556">copysign</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>Uncertain&lt;T&gt; <a class="code hl_function" href="namespacesigma.html#acd31fdaf16ebab84607b4f004204a556">copysign</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keywordtype">double</span> b);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> V, <span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>V <a class="code hl_function" href="namespacesigma.html#acd31fdaf16ebab84607b4f004204a556">copysign</a>(V a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>Uncertain&lt;T&gt; <a class="code hl_function" href="namespacesigma.html#ae431d0534d90713daf06f763dd523277">trunc</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>} <span class="comment">// namespace sigma</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">#include &quot;basic.ipp&quot;</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>Uncertain&lt;T&gt; <a class="code hl_function" href="namespacesigma.html#acd31fdaf16ebab84607b4f004204a556">copysign</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a, <span class="keyword">const</span> U&amp; b);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>U <a class="code hl_function" href="namespacesigma.html#acd31fdaf16ebab84607b4f004204a556">copysign</a>(<span class="keyword">const</span> U&amp; a, <span class="keyword">const</span> Uncertain&lt;T&gt;&amp; b);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>Uncertain&lt;T&gt; <a class="code hl_function" href="namespacesigma.html#ae431d0534d90713daf06f763dd523277">trunc</a>(<span class="keyword">const</span> Uncertain&lt;T&gt;&amp; a);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>} <span class="comment">// namespace sigma</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="preprocessor">#include &quot;basic.ipp&quot;</span></div>
 <div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:10</div></div>
 <div class="ttc" id="anamespacesigma_html_aa33c27c2144a61b5061e6a4902349123"><div class="ttname"><a href="namespacesigma.html#aa33c27c2144a61b5061e6a4902349123">sigma::floor</a></div><div class="ttdeci">Uncertain&lt; T &gt; floor(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Nearest integer not greater than the given value.</div><div class="ttdef"><b>Definition</b> basic.ipp:26</div></div>
 <div class="ttc" id="anamespacesigma_html_aaa0794dcf432114a9467603ac7748c7c"><div class="ttname"><a href="namespacesigma.html#aaa0794dcf432114a9467603ac7748c7c">sigma::abs2</a></div><div class="ttdeci">Uncertain&lt; T &gt; abs2(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">The Square of the Absolute Value.</div><div class="ttdef"><b>Definition</b> basic.ipp:16</div></div>
