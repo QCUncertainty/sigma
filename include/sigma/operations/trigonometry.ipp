@@ -70,15 +70,15 @@ Uncertain<T> atan2(const Uncertain<T>& y, const Uncertain<T>& x) {
     return detail_::binary_result(y, x, mean, dcda, dcdb);
 }
 
-template<typename T>
-Uncertain<T> atan2(const Uncertain<T>& y, double x) {
+template<typename T, typename U>
+Uncertain<T> atan2(const Uncertain<T>& y, const U& x) {
     T mean = std::atan2(y.mean(), x);
     T dcda = x / (std::pow(x, 2) + std::pow(y.mean(), 2));
     return detail_::unary_result(y, mean, dcda);
 }
 
-template<typename T>
-Uncertain<T> atan2(double y, const Uncertain<T>& x) {
+template<typename T, typename U>
+Uncertain<T> atan2(const U& y, const Uncertain<T>& x) {
     T mean = std::atan2(y, x.mean());
     T dcda = -y / (std::pow(x.mean(), 2) + std::pow(y, 2));
     return detail_::unary_result(x, mean, dcda);

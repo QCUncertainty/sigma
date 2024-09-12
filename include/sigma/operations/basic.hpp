@@ -90,14 +90,11 @@ Uncertain<T> fmod(double a, const Uncertain<T>& b);
  */
 template<typename T>
 Uncertain<T> copysign(const Uncertain<T>& a, const Uncertain<T>& b);
-/** @overload */
-template<typename T>
-Uncertain<T> copysign(const Uncertain<T>& a, double b);
 
 /** @brief Copy the sign of one value to another
  *
- *  @tparam V The numeric type of @p a
- *  @tparam T The value type of @p b
+ *  @tparam T The value type of @p a
+ *  @tparam U The numeric type of @p b
  *  @param a The variable whose magnitude is copied
  *  @param b The variable whose sign is copied
  *
@@ -105,8 +102,22 @@ Uncertain<T> copysign(const Uncertain<T>& a, double b);
  *
  *  @throw none No throw guarantee
  */
-template<typename V, typename T>
-V copysign(V a, const Uncertain<T>& b);
+template<typename T, typename U>
+Uncertain<T> copysign(const Uncertain<T>& a, const U& b);
+
+/** @brief Copy the sign of one value to another
+ *
+ *  @tparam T The value type of @p b
+ *  @tparam U The numeric type of @p a
+ *  @param a The variable whose magnitude is copied
+ *  @param b The variable whose sign is copied
+ *
+ *  @return The copy of @p a with the sign of @p b
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T, typename U>
+U copysign(const U& a, const Uncertain<T>& b);
 
 /** @brief Remove the fractional part from a variable
  *
