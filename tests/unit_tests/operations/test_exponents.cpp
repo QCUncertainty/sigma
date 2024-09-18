@@ -10,6 +10,7 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
     auto b = testing_t(2.0, 0.2);
     auto c = testing_t(4.0, 0.4);
     auto d = testing_t(5.0, 0.5);
+    auto e = testing_t(8.0, 0.8);
 
     SECTION("Exponentiation") {
         SECTION("Certain exponent") {
@@ -29,8 +30,15 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
         test_uncertain(sigma::sqrt(c), 2.0, 0.1, 1);
         test_uncertain(sigma::sqrt(c + d), 3.0, 0.1067, 2);
     }
+    SECTION("Cube Root") { test_uncertain(sigma::cbrt(e), 2.0, 0.0667, 1); }
     SECTION("Exponential Function") {
         test_uncertain(sigma::exp(a), 2.7183, 0.2718, 1);
+    }
+    SECTION("Exponential Base 2 Function") {
+        test_uncertain(sigma::exp2(a), 2.0, 0.2, 1);
+    }
+    SECTION("Exponential Minus 1 Function") {
+        test_uncertain(sigma::expm1(a), 1.7183, 0.2718, 1);
     }
     SECTION("Logarithms") {
         SECTION("Natural Log") {

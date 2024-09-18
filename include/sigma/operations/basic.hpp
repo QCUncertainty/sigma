@@ -19,6 +19,18 @@ namespace sigma {
 template<typename T>
 Uncertain<T> abs(const Uncertain<T>& a);
 
+/** @brief Absolute Value
+ *
+ *  @tparam T The value type of the variable
+ *  @param a The variable
+ *
+ *  @return The absolute value of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+Uncertain<T> fabs(const Uncertain<T>& a);
+
 /** @brief The Square of the Absolute Value
  *
  *  @tparam T The value type of the variable

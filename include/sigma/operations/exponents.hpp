@@ -46,18 +46,56 @@ Uncertain<T> pow(const Uncertain<T>& a, const Uncertain<T>& exp);
 template<typename T>
 Uncertain<T> sqrt(const Uncertain<T>& a);
 
+/** @brief Calculate the cube root of an uncertain variable
+ *
+ *  @tparam T The value type of the variable
+ *  @param a The variable whose root is computed
+ *
+ *  @return A variable whose value is the cube root of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+Uncertain<T> cbrt(const Uncertain<T>& a);
+
 /** @brief Calculate the Euler's number raised to the power of an uncertain
  *         variable
  *
  *  @tparam T The value type of the variable
  *  @param a The variable that is the exponent
  *
- *  @return A variable whose value Euler's number raised by the mean of @p a
+ *  @return A variable whose value is Euler's number raised by the mean of @p a
  *
  *  @throw none No throw guarantee
  */
 template<typename T>
 Uncertain<T> exp(const Uncertain<T>& a);
+
+/** @brief Calculate 2 raised to the power of an uncertain variable
+ *
+ *  @tparam T The value type of the variable
+ *  @param a The variable that is the exponent
+ *
+ *  @return A variable whose value is 2 raised by the mean of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+Uncertain<T> exp2(const Uncertain<T>& a);
+
+/** @brief Calculate the Euler's number raised to the power of an uncertain
+ *         variable, the subtract 1.
+ *
+ *  @tparam T The value type of the variable
+ *  @param a The variable that is the exponent
+ *
+ *  @return A variable whose value is Euler's number raised by the mean of @p a,
+ *          then subtract 1.
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+Uncertain<T> expm1(const Uncertain<T>& a);
 
 /** @brief Calculate the natural logarithm of a variable
  *

@@ -13,6 +13,11 @@ Uncertain<T> abs(const Uncertain<T>& a) {
 }
 
 template<typename T>
+Uncertain<T> fabs(const Uncertain<T>& a) {
+    return abs(a);
+}
+
+template<typename T>
 Uncertain<T> abs2(const Uncertain<T>& a) {
     return pow(abs(a), 2.0);
 }

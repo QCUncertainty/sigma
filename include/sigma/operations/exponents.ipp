@@ -22,12 +22,35 @@ Uncertain<T> pow(const Uncertain<T>& a, const Uncertain<T>& exp) {
 
 template<typename T>
 Uncertain<T> sqrt(const Uncertain<T>& a) {
-    return pow(std::move(a), 0.5);
+    T mean = std::sqrt(a.mean());
+    T dcda = 1.0 / (2.0 * std::sqrt(a.mean()));
+    return detail_::unary_result(a, mean, dcda);
+}
+
+template<typename T>
+Uncertain<T> cbrt(const Uncertain<T>& a) {
+    T mean = std::cbrt(a.mean());
+    T dcda = 1.0 / (3.0 * std::cbrt(std::pow(a.mean(), 2.0)));
+    return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> exp(const Uncertain<T>& a) {
     T mean = std::exp(a.mean());
+    T dcda = std::exp(a.mean());
+    return detail_::unary_result(a, mean, dcda);
+}
+
+template<typename T>
+Uncertain<T> exp2(const Uncertain<T>& a) {
+    T mean = std::exp2(a.mean());
+    T dcda = std::exp2(a.mean());
+    return detail_::unary_result(a, mean, dcda);
+}
+
+template<typename T>
+Uncertain<T> expm1(const Uncertain<T>& a) {
+    T mean = std::exp(a.mean()) - 1.0;
     T dcda = std::exp(a.mean());
     return detail_::unary_result(a, mean, dcda);
 }
