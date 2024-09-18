@@ -5,8 +5,8 @@
 Like the [uncertainties](https://github.com/lmfit/uncertainties) and
 [Measurements.jl](https://github.com/JuliaPhysics/Measurements.jl) libraries,
 Sigma is based on the 
-[theory of linear error propagation](https://en.wikipedia.org/wiki/Propagation_of_uncertainty). Here we will provide a brief summary of that 
-theory.
+[theory of linear error propagation](https://en.wikipedia.org/wiki/Propagation_of_uncertainty). 
+Here we will provide a brief summary of that theory.
 
 Assume a sequence of \f$ n \f$ variables \f$ \left(a_{i}\right)_{i=1}^{n} \f$
 whose elements are defined as \f$ a_{i} = \bar{a}_{i} \pm \sigma_{a_{i}} \f$, where 
