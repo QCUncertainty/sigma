@@ -10,7 +10,7 @@ theory.
 
 Assume a sequence of \f$ n \f$ variables \f$ \left(a_{i}\right)_{i=1}^{n} \f$
 whose elements are defined as \f$ a_{i} = \bar{a}_{i} \pm \sigma_{a_{i}} \f$, where 
-\f$ \bar{a}_{i} \f$ is the median value of \f$ a_{i} \f$ 
+\f$ \bar{a}_{i} \f$ is the mean value of \f$ a_{i} \f$ 
 and \f$ \sigma_{a_{i}} \f$ is the standard deviation of of \f$ a_{i} \f$.
 \f$ F(A) \f$ is a function of \f$ A \f$, where
 \f$ A = \{a_{i} : i \in \mathbb{N}, 1 \leq i \leq n\} \f$.
