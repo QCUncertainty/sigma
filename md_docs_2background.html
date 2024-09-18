@@ -121,7 +121,7 @@ $(function(){initNavTree('md_docs_2background.html',''); initResizable(true); })
 <h1><a class="anchor" id="linear-error-propagation"></a>
 Linear Error Propagation</h1>
 <p>Like the <a href="https://github.com/lmfit/uncertainties">uncertainties</a> and <a href="https://github.com/JuliaPhysics/Measurements.jl">Measurements.jl</a> libraries, Sigma is based on the <a href="https://en.wikipedia.org/wiki/Propagation_of_uncertainty">theory of linear error propagation</a>. Here we will provide a brief summary of that theory.</p>
-<p>Assume a sequence of \( n \) variables \( \left(a_{i}\right)_{i=1}^{n} \) whose elements are defined as \( a_{i} = \bar{a}_{i} \pm \sigma_{a_{i}} \), where \( \bar{a}_{i} \) is the median value of \( a_{i} \) and \( \sigma_{a_{i}} \) is the standard deviation of of \( a_{i} \). \( F(A) \) is a function of \( A \), where \( A = \{a_{i} : i \in \mathbb{N}, 1 \leq i \leq n\} \). The uncertainty of \( F(A) \) can be determined as</p>
+<p>Assume a sequence of \( n \) variables \( \left(a_{i}\right)_{i=1}^{n} \) whose elements are defined as \( a_{i} = \bar{a}_{i} \pm \sigma_{a_{i}} \), where \( \bar{a}_{i} \) is the mean value of \( a_{i} \) and \( \sigma_{a_{i}} \) is the standard deviation of of \( a_{i} \). \( F(A) \) is a function of \( A \), where \( A = \{a_{i} : i \in \mathbb{N}, 1 \leq i \leq n\} \). The uncertainty of \( F(A) \) can be determined as</p>
 <p class="formulaDsp">
 \[ \normalsize
 \sigma_{F} = 
