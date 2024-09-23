@@ -77,4 +77,9 @@ Uncertain<T> trunc(const Uncertain<T>& a) {
     return Uncertain<T>(std::trunc(a.mean()));
 }
 
+template<typename T>
+Uncertain<T> round(const Uncertain<T>& a) {
+    return Uncertain<T>(std::round(a.mean()));
+}
+
 } // namespace sigma

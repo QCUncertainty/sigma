@@ -34,4 +34,9 @@ TEMPLATE_TEST_CASE("Basic", "", sigma::UFloat, sigma::UDouble) {
         test_uncertain(sigma::trunc(b), 1.0, 0.0, 0);
         test_uncertain(sigma::trunc(-b), -1.0, 0.0, 0);
     }
+    SECTION("Round") {
+        test_uncertain(sigma::round(b), 1.0, 0.0, 0);
+        test_uncertain(sigma::round(-b), -1.0, 0.0, 0);
+        test_uncertain(sigma::round(testing_t{0.5}), 1.0, 0.0, 0);
+    }
 }

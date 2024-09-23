@@ -84,7 +84,7 @@ template<typename T>
 Uncertain<T> exp2(const Uncertain<T>& a);
 
 /** @brief Calculate the Euler's number raised to the power of an uncertain
- *         variable, the subtract 1.
+ *         variable, then subtract 1.
  *
  *  @tparam T The value type of the variable
  *  @param a The variable that is the exponent
@@ -120,6 +120,30 @@ Uncertain<T> log(const Uncertain<T>& a);
  */
 template<typename T>
 Uncertain<T> log10(const Uncertain<T>& a);
+
+/** @brief Calculate the base 2 logarithm of a variable
+ *
+ *  @tparam T The value type of the variable
+ *  @param a The variable whose logarithm is determined
+ *
+ *  @return A variable whose value is the base 2 logarithm of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+Uncertain<T> log2(const Uncertain<T>& a);
+
+/** @brief Calculate the natural logarithm of one plus a variable
+ *
+ *  @tparam T The value type of the variable
+ *  @param a The variable whose logarithm is determined
+ *
+ *  @return A variable whose value is the natural logarithm of @p a + 1
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+Uncertain<T> log1p(const Uncertain<T>& a);
 
 /** @brief Calculate the square root of the sum of squared arguments
  *

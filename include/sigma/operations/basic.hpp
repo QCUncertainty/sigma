@@ -143,6 +143,18 @@ U copysign(const U& a, const Uncertain<T>& b);
 template<typename T>
 Uncertain<T> trunc(const Uncertain<T>& a);
 
+/** @brief Round to the nearest integar, away from zero in halfway case.
+ *
+ *  @tparam T The value type of the variable
+ *  @param a The variable whose value is truncated
+ *
+ *  @return A variable whose value is the rounded value of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+Uncertain<T> round(const Uncertain<T>& a);
+
 } // namespace sigma
 
 #include "basic.ipp"

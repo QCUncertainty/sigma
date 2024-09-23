@@ -44,13 +44,13 @@ Uncertain<T> exp(const Uncertain<T>& a) {
 template<typename T>
 Uncertain<T> exp2(const Uncertain<T>& a) {
     T mean = std::exp2(a.mean());
-    T dcda = std::exp2(a.mean());
+    T dcda = mean * std::log(2.0);
     return detail_::unary_result(a, mean, dcda);
 }
 
 template<typename T>
 Uncertain<T> expm1(const Uncertain<T>& a) {
-    T mean = std::exp(a.mean()) - 1.0;
+    T mean = std::expm1(a.mean());
     T dcda = std::exp(a.mean());
     return detail_::unary_result(a, mean, dcda);
 }
@@ -66,6 +66,20 @@ template<typename T>
 Uncertain<T> log10(const Uncertain<T>& a) {
     T mean = std::log10(a.mean());
     T dcda = 1.0 / (a.mean() * std::log(10.0));
+    return detail_::unary_result(a, mean, dcda);
+}
+
+template<typename T>
+Uncertain<T> log2(const Uncertain<T>& a) {
+    T mean = std::log2(a.mean());
+    T dcda = 1.0 / (a.mean() * std::log(2.0));
+    return detail_::unary_result(a, mean, dcda);
+}
+
+template<typename T>
+Uncertain<T> log1p(const Uncertain<T>& a) {
+    T mean = std::log1p(a.mean());
+    T dcda = 1.0 / (a.mean() + 1.0);
     return detail_::unary_result(a, mean, dcda);
 }
 
