@@ -7,7 +7,7 @@ class and the operations that act on those objects. Sigma provides the typedefs
 `Uncertain<double>`. Below is a simple and complete example of using Sigma, 
 with more details in the examples that follow:
 
-```cxx
+```cpp
 #include <sigma/sigma.hpp>
 
 int main(int argc, char *argv[]) {
@@ -29,13 +29,13 @@ int main(int argc, char *argv[]) {
 ## Construction of Uncertain Variables
 To construct an uncertain variable of the `sigma::UDouble`, you must pass the
 mean value of the variable and the value of the standard deviation.
-```cxx
+```cpp
 // An uncertain variable, equal to 10+/-0.2
 sigma::UDouble x{10.0, 0.2};
 ```
 Passing no values or only the mean results in values that are certain,
 i.e. their standard deviation is 0.0.
-```cxx
+```cpp
 // Defaulted certain value equal to 0+/-0
 sigma::UDouble y{};
 
@@ -48,7 +48,7 @@ The mean and standard deviation of an `Uncertain` instance can be accessed in a
 read-only fashion with the `mean()` and `sd()` functions, respectively. These
 elements cannot be directly manipulated, and are only updated by mathematical
 operations.
-```cxx
+```cpp
 sigma::UDouble x{10.0, 0.2};
 std::cout << x.mean() << std::endl; // Prints 10
 std::cout << x.sd() << std::endl;   // Prints 0.2
@@ -59,7 +59,7 @@ Two `Uncertain` instances are considered equal if they have the same mean,
 standard deviation, and dependencies. This means that two instances can have the
 same mean and distribution and be nonequivalent because they are dependent on
 different sources of error.
-```cxx
+```cpp
 sigma::UDouble a{1.0, 0.1};
 sigma::UDouble b{1.0, 0.1};           // Different error source than a
 sigma::UDouble c = a;                 // Same error source as a
@@ -68,14 +68,14 @@ bool same_error_source      = (a==c); // True
 ```
 Comparisons between `Uncertain` instances are based on the mean values of the 
 variables, regardless of distribution.
-```cxx
+```cpp
 sigma::UDouble a{1.8, 0.1};
 sigma::UDouble b{2.0, 1.0};
 bool a_less_than_b = (a < b); // True
 ```
 The `>=` and `<=` operators have a notable interaction with the equality
 definition above:
-```cxx
+```cpp
 sigma::UDouble a{1.0, 0.1};
 sigma::UDouble b{1.0, 0.1};
 bool not_less_than_or_equal = (a <= b); // False
@@ -87,7 +87,7 @@ This boolean is `false` because the mean value of `a` is not less than that of
 The `Uncertain` class supports common arithmetic operations, as well as
 equivalents for many of the functions found in the C++ standard header 
 `<cmath>`.
-```cxx
+```cpp
 sigma::UDouble a{1.0, 0.1};
 sigma::UDouble b{2.0, 0.2};
 
@@ -101,7 +101,7 @@ For a complete list of functions, see [here](@ref sigma).
 Sigma has limited compatibility with the 
 [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page) library, which
 provides support for a number of linear algebra operations.
-```cxx
+```cpp
 #include <Eigen/Dense>
 using udouble_t = sigma::UDouble;
 using umatrix_t = Eigen::Matrix<udouble_t, Eigen::Dynamic, Eigen::Dynamic>;

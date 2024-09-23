@@ -10,6 +10,7 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
     auto b = testing_t(2.0, 0.2);
     auto c = testing_t(4.0, 0.4);
     auto d = testing_t(5.0, 0.5);
+    auto e = testing_t(8.0, 0.8);
 
     SECTION("Exponentiation") {
         SECTION("Certain exponent") {
@@ -29,8 +30,17 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
         test_uncertain(sigma::sqrt(c), 2.0, 0.1, 1);
         test_uncertain(sigma::sqrt(c + d), 3.0, 0.1067, 2);
     }
+    SECTION("Cube Root") { test_uncertain(sigma::cbrt(e), 2.0, 0.0667, 1); }
     SECTION("Exponential Function") {
-        test_uncertain(sigma::exp(a), 2.7183, 0.2718, 1);
+        SECTION("Natural Exponential") {
+            test_uncertain(sigma::exp(a), 2.7183, 0.2718, 1);
+        }
+        SECTION("Exponential Base 2 Function") {
+            test_uncertain(sigma::exp2(a), 2.0, 0.1386, 1);
+        }
+        SECTION("Exponential Minus 1 Function") {
+            test_uncertain(sigma::expm1(a), 1.7183, 0.2718, 1);
+        }
     }
     SECTION("Logarithms") {
         SECTION("Natural Log") {
@@ -40,6 +50,14 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
         SECTION("Log Base 10") {
             test_uncertain(sigma::log10(a), 0.0, 0.0434, 1);
             test_uncertain(sigma::log10(b), 0.3010, 0.0434, 1);
+        }
+        SECTION("Log Base 2") {
+            test_uncertain(sigma::log2(a), 0.0, 0.1443, 1);
+            test_uncertain(sigma::log2(b), 1.0, 0.1443, 1);
+        }
+        SECTION("Natural Log Plus 1") {
+            test_uncertain(sigma::log1p(a), 0.6931, 0.05, 1);
+            test_uncertain(sigma::log1p(b), 1.0986, 0.0667, 1);
         }
     }
     SECTION("Hypotenuse") {
