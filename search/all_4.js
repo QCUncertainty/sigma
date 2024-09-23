@@ -11,5 +11,7 @@ var searchData=
   ['error_5fand_5fgamma_2ehpp_8',['error_and_gamma.hpp',['../error__and__gamma_8hpp.html',1,'']]],
   ['examples_9',['Examples',['../md_docs_2examples.html',1,'']]],
   ['exp_10',['exp',['../namespacesigma.html#ad8957603ced9a2feb2c82973b5bb1da9',1,'sigma']]],
-  ['exponents_2ehpp_11',['exponents.hpp',['../exponents_8hpp.html',1,'']]]
+  ['exp2_11',['exp2',['../namespacesigma.html#a8b8bd16447e0de7576da03967ee39c1d',1,'sigma']]],
+  ['expm1_12',['expm1',['../namespacesigma.html#a6e8a786a7e432384133805656a75084e',1,'sigma']]],
+  ['exponents_2ehpp_13',['exponents.hpp',['../exponents_8hpp.html',1,'']]]
 ];
