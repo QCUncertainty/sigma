@@ -13,6 +13,11 @@ Uncertain<T> abs(const Uncertain<T>& a) {
 }
 
 template<typename T>
+Uncertain<T> fabs(const Uncertain<T>& a) {
+    return abs(a);
+}
+
+template<typename T>
 Uncertain<T> abs2(const Uncertain<T>& a) {
     return pow(abs(a), 2.0);
 }
@@ -70,6 +75,11 @@ U copysign(const U& a, const Uncertain<T>& b) {
 template<typename T>
 Uncertain<T> trunc(const Uncertain<T>& a) {
     return Uncertain<T>(std::trunc(a.mean()));
+}
+
+template<typename T>
+Uncertain<T> round(const Uncertain<T>& a) {
+    return Uncertain<T>(std::round(a.mean()));
 }
 
 } // namespace sigma
