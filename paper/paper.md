@@ -56,7 +56,7 @@ $a_{i} = \bar{a}_{i} \pm \sigma_{a_{i}}$, where $\bar{a}_{i}$ is the mean value
 of the variable and $\sigma_{a_{i}}$ is its standard deviation. The uncertainty
 of $F(A)$ can be determined as 
 $$
-\sigma_{F} = 
+\sigma_{F} \approx
 \sqrt{
   \sum_{i=1}^{n} \left(
     \left(
@@ -86,7 +86,7 @@ independent from one another, which is a requirement imposed here. As such, the
 uncertainty of $F(A)$ when the members of $A$ are independent from one another
 is simply
 $$
-\sigma_{F} = 
+\sigma_{F} \approx
 \sqrt{
   \sum_{a_{i} \in A} \left(
     \left.
@@ -108,7 +108,7 @@ uncertainty of $G$ can be properly determined by application of the chain rule
 to relate the independent variables to $G$ through their relationships with the
 dependent variables
 $$
-\sigma_{G} = 
+\sigma_{G} \approx 
 \sqrt{
   \left(
     \left(
@@ -132,7 +132,7 @@ $$
 
 Sigma is header-only, so it only needs to be findable by the dependent project 
 to be used. The library is buildable with CMake [@CMake], and utilizes the 
-CMaize [@CMaize] extension to will handle configuration, dependency 
+CMaize [@CMaize] extension to handle configuration, dependency 
 management, and building the tests and/or documentation. To use the library in a
 project, simply add `#include <sigma/sigma.hpp>` in an appropriate location 
 within the project's source.
@@ -176,7 +176,7 @@ auto tangent    = sigma::tan(radians)      //  1.0000+/-0.2000
 auto truncated  = sigma::trunc({1.2, 0.1}) //  1.0+/-0.0
 ```
 Sigma also has a limited degree of compatibility with the Eigen library [@Eigen],
-allowing for a least basic matrix operations involving uncertain values.
+allowing for at least basic matrix operations involving uncertain values.
 Additional operations are possible, though not currently ensured.
 
 # Acknowledgements
