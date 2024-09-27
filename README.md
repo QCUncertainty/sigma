@@ -56,4 +56,7 @@ cmake --build build --target install
 ```
 
 ## Acknowledgments
-TODO: Add acknowledgments
+
+This work was supported by the Ames National Laboratory's Laboratory Directed 
+Research and Development (LDRD) program. The Ames Laboratory is operated for the
+U.S. DOE by Iowa State University under contract # DE-AC02-07CH11358.
