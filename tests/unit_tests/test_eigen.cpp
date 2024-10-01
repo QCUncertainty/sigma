@@ -52,41 +52,86 @@ TEMPLATE_TEST_CASE("Eigen Matrix with Uncertain Elements", "", sigma::UFloat,
     }
 
     SECTION("Linear Algebra") {
-        umatrix_t A(3, 3);
-        umatrix_t b(3, 1);
-        A << u(1), u(2), u(3), u(4), u(5), u(6), u(7), u(8), u(10);
-        b << u(3), u(3), u(4);
-
-        umatrix_t x;
-        auto check_solution = [&x]() {
-            test_uncertain(x(0, 0), -2.0, 2.5016, 12);
-            test_uncertain(x(1, 0), 1.0, 5.7594, 12);
-            test_uncertain(x(2, 0), 1.0, 3.0627, 12);
-        };
-
-        SECTION("Partial LU Decomposition") {
-            x = A.partialPivLu().solve(b);
-            check_solution();
+        SECTION("LU Decomposition") {
+            umatrix_t A(3, 3);
+            umatrix_t b(3, 1);
+            umatrix_t x;
+            A << u(1), u(2), u(3), u(4), u(5), u(6), u(7), u(8), u(10);
+            b << u(3), u(3), u(4);
+            auto check_solution = [&x]() {
+                test_uncertain(x(0, 0), -2.0, 2.5016, 12);
+                test_uncertain(x(1, 0), 1.0, 5.7594, 12);
+                test_uncertain(x(2, 0), 1.0, 3.0627, 12);
+            };
+            SECTION("Partial") {
+                x = A.partialPivLu().solve(b);
+                check_solution();
+            }
+            SECTION("Full") {
+                x = A.fullPivLu().solve(b);
+                check_solution();
+            }
         }
-
-        SECTION("Full LU Decomposition") {
-            x = A.fullPivLu().solve(b);
-            check_solution();
+        SECTION("Householder Decompistion") {
+            umatrix_t A(3, 3);
+            umatrix_t b(3, 1);
+            umatrix_t x;
+            A << u(1), u(2), u(3), u(4), u(5), u(6), u(7), u(8), u(10);
+            b << u(3), u(3), u(4);
+            auto check_solution = [&x]() {
+                test_uncertain(x(0, 0), -2.0, 2.5016, 12);
+                test_uncertain(x(1, 0), 1.0, 5.7594, 12);
+                test_uncertain(x(2, 0), 1.0, 3.0627, 12);
+            };
+            SECTION("QR") {
+                x = A.householderQr().solve(b);
+                check_solution();
+            }
+            SECTION("Column-Pivoting QR") {
+                x = A.colPivHouseholderQr().solve(b);
+                check_solution();
+            }
+            SECTION("Full-Pivoting QR") {
+                x = A.fullPivHouseholderQr().solve(b);
+                check_solution();
+            }
         }
-
-        SECTION("Householder QR Decomposition") {
-            x = A.householderQr().solve(b);
-            check_solution();
+        SECTION("Cholesky Decomposition") {
+            umatrix_t A(2, 2);
+            umatrix_t b(2, 2);
+            umatrix_t x;
+            A << u(2), u(-1), u(-1), u(3);
+            b << u(1), u(2), u(3), u(1);
+            auto check_solution = [&x]() {
+                test_uncertain(x(0, 0), 1.2, 0.2160, 5);
+                test_uncertain(x(0, 1), 1.4, 0.2261, 5);
+                test_uncertain(x(1, 0), 1.4, 0.2261, 5);
+                test_uncertain(x(1, 1), 0.8, 0.1440, 5);
+            };
+            SECTION("LLT") {
+                x = A.llt().solve(b);
+                check_solution();
+            }
+            SECTION("LDLT") {
+                x = A.ldlt().solve(b);
+                check_solution();
+            }
         }
-
-        SECTION("Column-Pivoting Householder QR Decomposition") {
-            x = A.colPivHouseholderQr().solve(b);
-            check_solution();
-        }
-
-        SECTION("Full-Pivoting Householder QR Decomposition") {
-            x = A.fullPivHouseholderQr().solve(b);
-            check_solution();
+        SECTION("Eigendecomposition") {
+            umatrix_t A(2, 2);
+            A(0, 0) = u(1);
+            A(0, 1) = u(2);
+            A(1, 0) = A(0, 1); // Take care with symmetry
+            A(1, 1) = u(3);
+            Eigen::SelfAdjointEigenSolver<umatrix_t> solver(A);
+            umatrix_t evalues  = solver.eigenvalues();
+            umatrix_t evectors = solver.eigenvectors();
+            test_uncertain(evalues(0, 0), -0.2361, 0.2100, 3);
+            test_uncertain(evalues(1, 0), 4.2361, 0.2826, 3);
+            test_uncertain(evectors(0, 0), -0.8507, 0.0197, 3);
+            test_uncertain(evectors(0, 1), -0.5257, 0.0318, 3);
+            test_uncertain(evectors(1, 0), 0.5257, 0.0318, 3);
+            test_uncertain(evectors(1, 1), -0.8507, 0.0197, 3);
         }
     }
 }
