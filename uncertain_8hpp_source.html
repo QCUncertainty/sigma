@@ -177,7 +177,7 @@ $(function(){initNavTree('uncertain_8hpp_source.html',''); initResizable(true); 
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> ValueType&gt;</div>
 <div class="foldopen" id="foldopen00123" data-start="{" data-end="}">
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classsigma_1_1Uncertain.html#a310551a4761f198f82435195b0ef4554">  123</a></span><a class="code hl_function" href="classsigma_1_1Uncertain.html#aae65addf0d1a77f4bf10e8d7ab2db867">Uncertain&lt;ValueType&gt;::Uncertain</a>(<a class="code hl_typedef" href="classsigma_1_1Uncertain.html#ab9d55c3ae3c72960a33db279c96cb952">value_t</a> mean, <a class="code hl_typedef" href="classsigma_1_1Uncertain.html#ab9d55c3ae3c72960a33db279c96cb952">value_t</a> sd) :</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  m_mean_(mean), m_sd_(sd) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  m_mean_(mean), m_sd_(std::<a class="code hl_function" href="namespacesigma.html#add954174f373873d59d093ceb3e82af5">abs</a>(sd)) {</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    m_deps_.emplace(</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>      std::make_pair(std::make_shared&lt;dep_sd_t&gt;(<a class="code hl_function" href="classsigma_1_1Uncertain.html#ac68862bf06ad8a73649f077027a2f4ef">sd</a>), <a class="code hl_typedef" href="classsigma_1_1Uncertain.html#ab9d55c3ae3c72960a33db279c96cb952">value_t</a>{1.0}));</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>}</div>
@@ -271,6 +271,7 @@ $(function(){initNavTree('uncertain_8hpp_source.html',''); initResizable(true); 
 <div class="ttc" id="aclasssigma_1_1Uncertain_html_acc40534d87fdba24215242f6021babe0"><div class="ttname"><a href="classsigma_1_1Uncertain.html#acc40534d87fdba24215242f6021babe0">sigma::Uncertain::dep_sd_ptr</a></div><div class="ttdeci">std::shared_ptr&lt; dep_sd_t &gt; dep_sd_ptr</div><div class="ttdoc">A pointer to a dependency of this variable.</div><div class="ttdef"><b>Definition</b> uncertain.hpp:45</div></div>
 <div class="ttc" id="aclasssigma_1_1detail___1_1Setter_html"><div class="ttname"><a href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter</a></div><div class="ttdoc">Modifies an unceratin variable.</div><div class="ttdef"><b>Definition</b> uncertain.hpp:18</div></div>
 <div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:10</div></div>
+<div class="ttc" id="anamespacesigma_html_add954174f373873d59d093ceb3e82af5"><div class="ttname"><a href="namespacesigma.html#add954174f373873d59d093ceb3e82af5">sigma::abs</a></div><div class="ttdeci">Uncertain&lt; T &gt; abs(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Absolute Value.</div><div class="ttdef"><b>Definition</b> basic.ipp:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
