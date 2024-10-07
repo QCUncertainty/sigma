@@ -118,5 +118,12 @@ auto mat3 = mat1 * mat2;
 // 8+/-0.979796  5+/-0.616441
 //20+/-2.46577  13+/-1.8868
 ```
+Aside from basic arithmetic operations, the following decomposition methods have
+been tested:
+- LU (partial and full)
+- Householder QR (full, column, and no pivoting)
+- Cholesky (LLT and LDLT)
+- Eigendecomposition (self-adjoint matrix only)
+
 For details on %Eigen usage, see their 
 [documentation](https://eigen.tuxfamily.org/dox/).
