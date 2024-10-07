@@ -7,12 +7,19 @@ authors:
   - name: Jonathan M. Waldrop
     orcid: 0000-0003-0442-193X
     equal-contrib: true
+    corresponding: true
     affiliation: "1"
+  - name: Ryan M. Richard
+    orcid: 0000-0003-4235-5179
+    affiliation: "1, 2"
 affiliations:
- - name: Chemical and Biological Sciences, Ames National Laboratory, USA
-   index: 1
-   ror: 041m9xr71
-date: 12 September 2024
+  - name: Chemical and Biological Sciences, Ames National Laboratory, USA
+    index: 1
+    ror: 041m9xr71
+  - name: Department of Chemistry, Iowa State University, USA
+    index: 2
+    ror: 04rswrd78
+date: 1 October 2024
 bibliography: paper.bib
 
 ---
