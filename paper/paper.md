@@ -183,8 +183,8 @@ auto tangent    = sigma::tan(radians)      //  1.0000+/-0.2000
 auto truncated  = sigma::trunc({1.2, 0.1}) //  1.0+/-0.0
 ```
 Sigma also has a limited degree of compatibility with the Eigen library [@Eigen],
-allowing for at least basic matrix operations involving uncertain values.
-Additional operations are possible, though not currently ensured.
+allowing for matrix operations and a number of linear solvers.
+Additional functionality is possible, though not currently ensured.
 
 # Acknowledgements
 
