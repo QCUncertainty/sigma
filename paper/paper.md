@@ -6,7 +6,6 @@ tags:
 authors:
   - name: Jonathan M. Waldrop
     orcid: 0000-0003-0442-193X
-    equal-contrib: true
     corresponding: true
     affiliation: "1"
   - name: Ryan M. Richard
