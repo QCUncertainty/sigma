@@ -59,8 +59,9 @@ Assume $F(A)$ is a function of $A$, where $A$ is a set whose elements are some
 or all of the elements of the sequence of $n$ variables 
 $\left(a_{i}\right)_{i=1}^{n}$. These element are defined as 
 $a_{i} = \bar{a}_{i} \pm \sigma_{a_{i}}$, where $\bar{a}_{i}$ is the mean value
-of the variable and $\sigma_{a_{i}}$ is its standard deviation. The uncertainty
-of $F(A)$ can be determined as 
+of the variable and $\sigma_{a_{i}}$ is called the uncertainty and is assumed to
+represent an error measure closely related to the standard deviation of a random
+variable. The linear uncertainty of $F(A)$ can be determined as 
 $$
 \sigma_{F} \approx
 \sqrt{
@@ -144,9 +145,10 @@ project, simply add `#include <sigma/sigma.hpp>` in an appropriate location
 within the project's source.
 
 The primary component of Sigma is the `Uncertain<T>` class, templated on
-the floating point type used to represent the mean and standard deviation of the
-variable. Simple construction of an uncertain floating point value is 
-accomplished by passing the mean and standard deviation values:
+the floating point type used to represent the mean and uncertainty of the
+variable. Simple construction of an uncertain floating point value can be
+accomplished by passing the mean and a value for the uncertainty (such as a 
+standard deviation):
 ```cpp
 using numeric_t = double;
 numeric_t a_mean{100.0};
