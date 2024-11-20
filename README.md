@@ -55,6 +55,11 @@ ctest -VV
 cmake --build build --target install
 ```
 
+## Contributing
+
+- [Contributor Guidelines](./docs/contributing.md)
+- [Code of Conduct](./docs/code_of_conduct.md)
+
 ## Acknowledgments
 
 This work was supported by the Ames National Laboratory's Laboratory Directed 
