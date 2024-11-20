@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['fabs_0',['fabs',['../namespacesigma.html#ac4d519de22722a51cda0bc3c92960e89',1,'sigma']]],
-  ['features_1',['Features',['../index.html#features',1,'']]],
-  ['floor_2',['floor',['../namespacesigma.html#aa33c27c2144a61b5061e6a4902349123',1,'sigma']]],
-  ['fmod_3',['fmod',['../namespacesigma.html#aff47e6b43a710dc89637c5e6ae1e1c60',1,'sigma::fmod(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;b)'],['../namespacesigma.html#a09be7785a22e02bd9b1ff1e44f3b5072',1,'sigma::fmod(const Uncertain&lt; T &gt; &amp;a, double b)'],['../namespacesigma.html#a878dc31b111a5c5db62a8985188b8247',1,'sigma::fmod(double a, const Uncertain&lt; T &gt; &amp;b)']]]
+  ['background_0',['Background',['../md_docs_2background.html',1,'']]],
+  ['ban_1',['Ban',['../md_docs_2code__of__conduct.html#autotoc_md3-temporary-ban',1,'3. Temporary Ban'],['../md_docs_2code__of__conduct.html#autotoc_md4-permanent-ban',1,'4. Permanent Ban']]],
+  ['basic_2ehpp_2',['basic.hpp',['../basic_8hpp.html',1,'']]],
+  ['binary_5fresult_3',['binary_result',['../namespacesigma_1_1detail__.html#ad03f668925095364c575785bcbf03537',1,'sigma::detail_']]]
 ];

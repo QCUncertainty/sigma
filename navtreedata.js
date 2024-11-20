@@ -25,12 +25,33 @@
 var NAVTREE =
 [
   [ "sigma", "index.html", [
-    [ "Motivation", "index.html#motivation", null ],
+    [ "Statement of Need", "index.html#statement-of-need", null ],
     [ "Features", "index.html#features", null ],
     [ "Installation", "index.html#installation", null ],
+    [ "Contributing", "index.html#contributing", null ],
     [ "Acknowledgments", "index.html#acknowledgments", null ],
     [ "Background", "md_docs_2background.html", [
       [ "Linear Error Propagation", "md_docs_2background.html#linear-error-propagation", null ]
+    ] ],
+    [ "Contributor Covenant Code of Conduct", "md_docs_2code__of__conduct.html", [
+      [ "Our Pledge", "md_docs_2code__of__conduct.html#our-pledge", null ],
+      [ "Our Standards", "md_docs_2code__of__conduct.html#our-standards", null ],
+      [ "Enforcement Responsibilities", "md_docs_2code__of__conduct.html#enforcement-responsibilities", null ],
+      [ "Scope", "md_docs_2code__of__conduct.html#scope", null ],
+      [ "Enforcement", "md_docs_2code__of__conduct.html#enforcement", null ],
+      [ "Enforcement Guidelines", "md_docs_2code__of__conduct.html#enforcement-guidelines", [
+        [ "Correction", "md_docs_2code__of__conduct.html#autotoc_md1-correction", null ],
+        [ "Warning", "md_docs_2code__of__conduct.html#autotoc_md2-warning", null ],
+        [ "Temporary Ban", "md_docs_2code__of__conduct.html#autotoc_md3-temporary-ban", null ],
+        [ "Permanent Ban", "md_docs_2code__of__conduct.html#autotoc_md4-permanent-ban", null ]
+      ] ],
+      [ "Attribution", "md_docs_2code__of__conduct.html#attribution", null ]
+    ] ],
+    [ "Contributor Guidelines", "md_docs_2contributing.html", [
+      [ "Asking Questions", "md_docs_2contributing.html#asking-questions", null ],
+      [ "Ways to Contribute", "md_docs_2contributing.html#ways-to-contribute", null ],
+      [ "Code of Conduct", "md_docs_2contributing.html#code-of-conduct", null ],
+      [ "Acknowledgments", "md_docs_2contributing.html#acknowledgments-1", null ]
     ] ],
     [ "Examples", "md_docs_2examples.html", [
       [ "Construction of Uncertain Variables", "md_docs_2examples.html#construction-of-uncertain-variables", null ],
@@ -72,7 +93,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"namespacesigma.html#ad8957603ced9a2feb2c82973b5bb1da9"
+"namespacesigma.html#aa5a3cb36953c116658b16ddc790db42d"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

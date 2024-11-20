@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sigma_0',['Sigma',['../index.html',1,'']]]
+  ['examples_0',['Examples',['../md_docs_2examples.html',1,'']]]
 ];
