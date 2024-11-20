@@ -7,11 +7,22 @@ mathematical operations on floating point values, inspired by
 [uncertainties](https://github.com/lmfit/uncertainties) for Python and
 [Measurements.jl](https://github.com/JuliaPhysics/Measurements.jl) for Julia.
 
-## Motivation
-Simplify tracking of uncertainty through mathematical operations, such as those
-in the computational simulation of chemical systems.
+## Statement of Need
+Scientific analysis, whether based on experiment or simulation, often uses
+values that are paired with some representation of their accuracy or 
+reliability. Oftentimes, this representation is a value's standard deviation or
+a similar metric. The uncertainty in a value can be derived from a number of 
+sources, including instrument accuracy, limitations from approximations, or 
+the statistical nature of the value itself. New values resulting from operations
+on uncertain inputs will have uncertainties derived from the input 
+uncertainties, but the process of propagating those relationships can become
+tedious and complicated. To the best of our knowledge, there is no currently 
+maintained C++ library to facilitate this kind of uncertainty propagation. As 
+C++ is an important language in the development of scientific software and 
+high-performance computing, Sigma has been developed in an attempt to fill this
+gap.
 
-See [Background](./docs/background.md) for more details.
+See [Background](./docs/background.md) for methodological details.
 
 ## Features
 - Propagate uncertainty throughout calculations
