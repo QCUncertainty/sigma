@@ -57,7 +57,7 @@ been developed in an attempt to fill this gap.
 
 Assume $F(A)$ is a function of $A$, where $A$ is a set whose elements are some 
 or all of the elements of the sequence of $n$ variables 
-$\left(a_{i}\right)_{i=1}^{n}$. These element are defined as 
+$\left(a_{i}\right)_{i=1}^{n}$. These elements are defined as 
 $a_{i} = \bar{a}_{i} \pm \sigma_{a_{i}}$, where $\bar{a}_{i}$ is the mean value
 of the variable and $\sigma_{a_{i}}$ is called the uncertainty and is assumed to
 represent an error measure closely related to the standard deviation of a random
@@ -138,7 +138,7 @@ $$
 # Usage
 
 Sigma is header-only, so it only needs to be findable by the dependent project 
-to be used. The library is buildable with CMake [@CMake], and utilizes the 
+to be used. The library is buildable with CMake [@CMake] and utilizes the 
 CMaize [@CMaize] extension to handle configuration, dependency 
 management, and building the tests and/or documentation. To use the library in a
 project, simply add `#include <sigma/sigma.hpp>` in an appropriate location 
@@ -146,7 +146,7 @@ within the project's source.
 
 The primary component of Sigma is the `Uncertain<T>` class, templated on
 the floating point type used to represent the mean and uncertainty of the
-variable. Simple construction of an uncertain floating point value can be
+variable. A simple construction of an uncertain floating point value can be
 accomplished by passing the mean and a value for the uncertainty (such as a 
 standard deviation):
 ```cpp
@@ -160,7 +160,7 @@ The same can be accomplished in a less verbose way as
 `sigma::Uncertain a{100.0, 1.0}`. Sigma also provides the typedefs `UFloat`
 and `UDouble` (uncertain `float` and `double`, respectively) for convenience.
 
-Basic arithmetic with certain or uncertain values is accomplish trivially,
+Basic arithmetic with certain or uncertain values is accomplished trivially,
 ```cpp
 sigma::Uncertain a{1.0, 0.1};
 sigma::Uncertain b{2.0, 0.2};
