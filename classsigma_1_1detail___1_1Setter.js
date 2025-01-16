@@ -1,14 +1,14 @@
 var classsigma_1_1detail___1_1Setter =
 [
-    [ "dep_sd_ptr", "classsigma_1_1detail___1_1Setter.html#a7b26186a2757c8eff7a15134a26e4c8e", null ],
-    [ "dep_sd_t", "classsigma_1_1detail___1_1Setter.html#a51b1eb8dc2255f1fa71b64f9afc13006", null ],
-    [ "deps_map_t", "classsigma_1_1detail___1_1Setter.html#a88a65cd262fe0918a1b290e4da8e3506", null ],
-    [ "my_t", "classsigma_1_1detail___1_1Setter.html#a2205274f1d2c710c8e97f753bd6054a2", null ],
-    [ "uncertain_t", "classsigma_1_1detail___1_1Setter.html#a307ebead119228bf4f4e1bbccfcf154a", null ],
-    [ "value_t", "classsigma_1_1detail___1_1Setter.html#a62c1d0537a6ee848492a90d64782c57a", null ],
-    [ "Setter", "classsigma_1_1detail___1_1Setter.html#a825a744251af61aaf7ae16b692171a8b", null ],
-    [ "update_derivatives", "classsigma_1_1detail___1_1Setter.html#a6cf252472eff74294aa38077f7139a88", null ],
-    [ "update_derivatives", "classsigma_1_1detail___1_1Setter.html#aeadd1bc2f1a751930aec8a7d619615f3", null ],
-    [ "update_mean", "classsigma_1_1detail___1_1Setter.html#a6e5c393a6e4192460e5157716a94147d", null ],
-    [ "update_sd", "classsigma_1_1detail___1_1Setter.html#a7a6967b4d94d21bc3970748a7af034fd", null ]
+    [ "dep_sd_ptr", "classsigma_1_1detail___1_1Setter.html#a317752307a6665ce2ab3c577755599e7", null ],
+    [ "dep_sd_t", "classsigma_1_1detail___1_1Setter.html#acd92e5a8d988dd83e97926c58f4d5ebb", null ],
+    [ "deps_map_t", "classsigma_1_1detail___1_1Setter.html#ad786977eb876807acd9fb35bae3f84fc", null ],
+    [ "my_t", "classsigma_1_1detail___1_1Setter.html#a9d8f2a08b59b86adaf046973ffeed554", null ],
+    [ "uncertain_t", "classsigma_1_1detail___1_1Setter.html#a155e265ac4e84126191bbab847afaff1", null ],
+    [ "value_t", "classsigma_1_1detail___1_1Setter.html#ab5be0d3fe3e4ca83389a05fd75a0886c", null ],
+    [ "Setter", "classsigma_1_1detail___1_1Setter.html#a53b7d8051c5d5d34b095b393f1bb1624", null ],
+    [ "update_derivatives", "classsigma_1_1detail___1_1Setter.html#ab8c241451b3cb29fa31a8a0ff3dee314", null ],
+    [ "update_derivatives", "classsigma_1_1detail___1_1Setter.html#a8c83e0ed45c8b1d5abe54e2a93fd0c26", null ],
+    [ "update_mean", "classsigma_1_1detail___1_1Setter.html#aa65aa6d2469f71301275074e5d443d47", null ],
+    [ "update_sd", "classsigma_1_1detail___1_1Setter.html#a5c959f3cacf1a974b4237690ba5095f0", null ]
 ];

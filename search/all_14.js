@@ -2,7 +2,7 @@ var searchData=
 [
   ['scope_0',['Scope',['../md_docs_2code__of__conduct.html#scope',1,'']]],
   ['sd_1',['sd',['../classsigma_1_1Uncertain.html#ac68862bf06ad8a73649f077027a2f4ef',1,'sigma::Uncertain']]],
-  ['setter_2',['Setter',['../classsigma_1_1detail___1_1Setter.html',1,'sigma::detail_::Setter&lt; T &gt;'],['../classsigma_1_1detail___1_1Setter.html#a825a744251af61aaf7ae16b692171a8b',1,'sigma::detail_::Setter::Setter()']]],
+  ['setter_2',['Setter',['../classsigma_1_1detail___1_1Setter.html',1,'sigma::detail_::Setter&lt; UncertainType &gt;'],['../classsigma_1_1detail___1_1Setter.html#a53b7d8051c5d5d34b095b393f1bb1624',1,'sigma::detail_::Setter::Setter()']]],
   ['setter_2ehpp_3',['setter.hpp',['../setter_8hpp.html',1,'']]],
   ['sigma_4',['Sigma',['../index.html',1,'']]],
   ['sigma_5',['sigma',['../namespacesigma.html',1,'']]],

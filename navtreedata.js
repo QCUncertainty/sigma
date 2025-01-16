@@ -93,8 +93,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"namespacesigma.html#aa5a3cb36953c116658b16ddc790db42d"
+"structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html#a3416d8e1540a87f7e9e44226802f833f"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
