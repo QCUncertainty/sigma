@@ -38,9 +38,10 @@ cmaize_find_or_build_optional_dependency(
     eigen
     ENABLE_EIGEN_SUPPORT
     URL https://www.gitlab.com/libeigen/eigen
-    VERSION 3.4.0
+    VERSION 5e4f3475b5cb77414bca1f3dde7d6fd9cb4d2011
     BUILD_TARGET eigen
     FIND_TARGET Eigen3::Eigen
+    BUILD_ARGS EIGEN_BUILD_TESTING=OFF
 )
 
 ## Add libraries ##
