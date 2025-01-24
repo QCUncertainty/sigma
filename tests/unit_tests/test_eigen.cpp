@@ -3,6 +3,7 @@
 #include "testing.hpp"
 #include <Eigen/Dense>
 #include <sigma/sigma.hpp>
+#include <unsupported/Eigen/CXX11/Tensor>
 
 using testing::test_uncertain;
 
@@ -133,6 +134,58 @@ TEMPLATE_TEST_CASE("Eigen Matrix with Uncertain Elements", "", sigma::UFloat,
             test_uncertain(evectors(1, 0), 0.5257, 0.0318, 3);
             test_uncertain(evectors(1, 1), -0.8507, 0.0197, 3);
         }
+    }
+
+    SECTION("Tensors") {
+        using scalar_t = Eigen::Tensor<testing_t, 0>;
+        using vector_t = Eigen::Tensor<testing_t, 1>;
+        using matrix_t = Eigen::Tensor<testing_t, 2>;
+        using index_t  = Eigen::IndexPair<int>;
+
+        // Replicate TW Tests
+        scalar_t scalar{};
+        scalar(0) = 42.0;
+
+        vector_t vector(2);
+        vector(0) = 0.0;
+        vector(1) = 1.0;
+
+        matrix_t matrix(2, 2);
+        matrix(0, 0) = 1.0;
+        matrix(0, 1) = 2.0;
+        matrix(1, 0) = 3.0;
+        matrix(1, 1) = 4.0;
+
+        std::cout << "Inputs" << std::endl;
+        std::cout << scalar << "\n\n";
+        std::cout << vector << "\n\n";
+        std::cout << matrix << "\n\n";
+
+        // i,i->
+        std::cout << "i,i->" << std::endl;
+        Eigen::array<index_t, 1> m0 = {index_t(0, 0)};
+        scalar_t scalar_rv1         = vector.contract(vector, m0);
+        std::cout << scalar_rv1 << "\n\n";
+
+        // ij,ij->
+        std::cout << "ij,ij->" << std::endl;
+        Eigen::array<index_t, 2> m1 = {index_t(0, 0), index_t(1, 1)};
+        scalar_t scalar_rv2         = matrix.contract(matrix, m1);
+        std::cout << scalar_rv2 << "\n\n";
+
+        // ki,kj->ij
+        std::cout << "ki,kj->ij" << std::endl;
+        Eigen::array<index_t, 1> m2 = {index_t(0, 0)};
+        matrix_t matrix_rv1         = matrix.contract(matrix, m2);
+        std::cout << matrix_rv1 << "\n\n";
+
+        // ij,i->j
+        std::cout << "ij,i->j" << std::endl;
+        Eigen::array<index_t, 1> m3 = {index_t(0, 0)};
+        vector_t vector_rv1         = matrix.contract(vector, m3);
+        std::cout << vector_rv1 << "\n\n";
+        
+        std::cout << "End" << std::endl;
     }
 }
 
