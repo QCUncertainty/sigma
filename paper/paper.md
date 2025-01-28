@@ -164,10 +164,10 @@ Basic arithmetic with certain or uncertain values is accomplished trivially,
 ```cpp
 sigma::Uncertain a{1.0, 0.1};
 sigma::Uncertain b{2.0, 0.2};
-auto c = a + 2.0 // 3.0+/-0.1
-auto d = a * 2.0 // 2.0+/-0.2
-auto e = a + b   // 3.0+/-0.2236
-auto f = a * b   // 2.0+/-0.2828
+auto c = a + 2.0; // 3.0+/-0.1
+auto d = a * 2.0; // 2.0+/-0.2
+auto e = a + b;   // 3.0+/-0.2236
+auto f = a * b;   // 2.0+/-0.2828
 ```
 The resulting variables here are functionally correlated to `a` and/or `b`,
 meaning the operation `e - c` would return an instance with the value 
@@ -178,10 +178,11 @@ standard library, such as those for trigonometry and rounding:
 ```cpp
 sigma::Uncertain radians{0.785398, 0.1};
 sigma::Uncertain degrees{45.0, 0.1};
+sigma::Uncertain decimal{1.2, 0.1};
 auto to_degrees = sigma::degrees(radians); // 45.0000+/-5.7296
 auto in_radians = sigma::radians(degrees); //  0.7854+/-0.0017
-auto tangent    = sigma::tan(radians)      //  1.0000+/-0.2000
-auto truncated  = sigma::trunc({1.2, 0.1}) //  1.0+/-0.0
+auto tangent    = sigma::tan(radians);     //  1.0000+/-0.2000
+auto truncated  = sigma::trunc(decimal);   //  1.0+/-0.0
 ```
 Sigma also has a limited degree of compatibility with the Eigen library [@Eigen],
 allowing for matrix operations and a number of linear solvers.
