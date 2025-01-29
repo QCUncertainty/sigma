@@ -185,8 +185,22 @@ auto tangent    = sigma::tan(radians);     //  1.0000+/-0.2000
 auto truncated  = sigma::trunc(decimal);   //  1.0+/-0.0
 ```
 Sigma also has a limited degree of compatibility with the Eigen library [@Eigen],
-allowing for matrix operations and a number of linear solvers.
-Additional functionality is possible, though not currently ensured.
+allowing for matrix operations and a number of linear solvers. Additional 
+functionality is possible, though not currently ensured. Linear algebra usage is
+partially limited by Sigma only being suitable for the representation of real 
+numbers, but support for complex numbers is intended at a later time.
+
+While inspired by `uncertainties` and `Measurements.jl`, Sigma is not a 
+one-to-one translation of either package. Sigma implements a method of tracking
+variable dependence similar to those found in the other packages, with each
+instance tracking the independent variables that it depends on and the 
+contributions of those variables to the instance's uncertainty. Function names 
+in Sigma use the naming convention of the C++ Standard Library where applicable,
+and may differ from the names used in the other packages. `uncertainties` 
+specifically allows for the alteration of an independent variable's uncertainty 
+and on-the-fly re-evaluation for dependent variables. Sigma does not replicate 
+this feature, preferring a static evaluation of uncertainties that is more 
+consistent with the expected behavior for C++'s floating types.
 
 # Acknowledgements
 
