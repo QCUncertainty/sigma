@@ -1,5 +1,7 @@
 # Sigma 
 
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.07404/status.svg)](https://doi.org/10.21105/joss.07404)
+
 [Documentation](https://qcuncertainty.github.io/sigma/)
 
 Sigma is a header-only C++ library for uncertainty propagation throughout
