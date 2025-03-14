@@ -27,7 +27,7 @@ constexpr auto edynam = Eigen::Dynamic;
 using eig_mat_t       = Eigen::Matrix<uncertain_t, edynam, edynam, rmajor>;
 using map_t           = Eigen::Map<const eig_mat_t>;
 
-static double error_v = 1e-4;
+static double error_v = 1e-6;
 
 // These are all pre-generated integral values from Libint2
 namespace he_dimer {
