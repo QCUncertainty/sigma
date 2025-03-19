@@ -27,10 +27,10 @@ constexpr auto edynam = Eigen::Dynamic;
 using eig_mat_t       = Eigen::Matrix<uncertain_t, edynam, edynam, rmajor>;
 using map_t           = Eigen::Map<const eig_mat_t>;
 
-static double error_v = 1e-16;
+static double error_v = 1e-6;
 
 // These are all pre-generated integral values from Libint2
-namespace he_dimer {
+namespace he_dimer_6 {
 matrix_t get_s() {
     matrix_t s(2, 2);
     s.setConstant(uncertain_t(0.0, error_v));
@@ -61,61 +61,35 @@ matrix_t get_v() {
     return v;
 }
 
-matrix_t get_eri2() {
-    matrix_t eri2(2, 2);
-    eri2.setConstant(uncertain_t(0.0, error_v));
-    eri2(0, 0) = eri2(0, 0) + 21.4979587529757126;
-    eri2(0, 1) = eri2(0, 1) + 7.8307853298825503;
-    eri2(1, 0) = eri2(1, 0) + 7.8307853298825503;
-    eri2(1, 1) = eri2(1, 1) + 21.4979587529757126;
-    return eri2;
-}
-
-tensor3_t get_eri3() {
-    tensor3_t eri3(2, 2, 2);
-    eri3.setConstant(uncertain_t(0.0, error_v));
-    eri3(0, 0, 0) = eri3(0, 0, 0) + 4.4040620499087861;
-    eri3(0, 0, 1) = eri3(0, 0, 1) + 0.0110712179476109;
-    eri3(0, 1, 0) = eri3(0, 1, 0) + 0.0110712179476109;
-    eri3(0, 1, 1) = eri3(0, 1, 1) + 1.2526601242314155;
-    eri3(1, 0, 0) = eri3(1, 0, 0) + 1.2526601242314157;
-    eri3(1, 0, 1) = eri3(1, 0, 1) + 0.0110712179476109;
-    eri3(1, 1, 0) = eri3(1, 1, 0) + 0.0110712179476109;
-    eri3(1, 1, 1) = eri3(1, 1, 1) + 4.4040620499087861;
-    return eri3;
-}
-
 tensor4_t get_eri4() {
     tensor4_t eri4(2, 2, 2, 2);
     eri4.setConstant(uncertain_t(0.0, error_v));
     eri4(0, 0, 0, 0) = eri4(0, 0, 0, 0) + 1.0557129400212610;
-    eri4(0, 0, 0, 1) = eri4(0, 0, 0, 1) + 0.0019251605202176;
-    eri4(0, 0, 1, 0) = eri4(0, 0, 1, 0) + 0.0019251605202176;
+    eri4(0, 0, 0, 1) = eri4(0, 0, 0, 1) + 0.0019213771068706;
+    eri4(0, 0, 1, 0) = eri4(0, 0, 1, 0) + 0.0019213771068706;
     eri4(0, 0, 1, 1) = eri4(0, 0, 1, 1) + 0.1999993218713060;
-    eri4(0, 1, 0, 0) = eri4(0, 1, 0, 0) + 0.0019251605202176;
-    eri4(0, 1, 0, 1) = eri4(0, 1, 0, 1) + 0.0000134711573656;
-    eri4(0, 1, 1, 0) = eri4(0, 1, 1, 0) + 0.0000134711573656;
-    eri4(0, 1, 1, 1) = eri4(0, 1, 1, 1) + 0.0019251605202176;
-    eri4(1, 0, 0, 0) = eri4(1, 0, 0, 0) + 0.0019251605202176;
-    eri4(1, 0, 0, 1) = eri4(1, 0, 0, 1) + 0.0000134711573656;
-    eri4(1, 0, 1, 0) = eri4(1, 0, 1, 0) + 0.0000134711573656;
-    eri4(1, 0, 1, 1) = eri4(1, 0, 1, 1) + 0.0019251605202176;
+    eri4(0, 1, 0, 0) = eri4(0, 1, 0, 0) + 0.0019213771068706;
+    eri4(0, 1, 0, 1) = eri4(0, 1, 0, 1) + 0.0000000000000000;
+    eri4(0, 1, 1, 0) = eri4(0, 1, 1, 0) + 0.0000000000000000;
+    eri4(0, 1, 1, 1) = eri4(0, 1, 1, 1) + 0.0019213771068706;
+    eri4(1, 0, 0, 0) = eri4(1, 0, 0, 0) + 0.0019213771068706;
+    eri4(1, 0, 0, 1) = eri4(1, 0, 0, 1) + 0.0000000000000000;
+    eri4(1, 0, 1, 0) = eri4(1, 0, 1, 0) + 0.0000000000000000;
+    eri4(1, 0, 1, 1) = eri4(1, 0, 1, 1) + 0.0019213771068706;
     eri4(1, 1, 0, 0) = eri4(1, 1, 0, 0) + 0.1999993218713060;
-    eri4(1, 1, 0, 1) = eri4(1, 1, 0, 1) + 0.0019251605202176;
-    eri4(1, 1, 1, 0) = eri4(1, 1, 1, 0) + 0.0019251605202176;
+    eri4(1, 1, 0, 1) = eri4(1, 1, 0, 1) + 0.0019213771068706;
+    eri4(1, 1, 1, 0) = eri4(1, 1, 1, 0) + 0.0019213771068706;
     eri4(1, 1, 1, 1) = eri4(1, 1, 1, 1) + 1.0557129400212610;
     return eri4;
 }
-} // namespace he_dimer
+} // namespace he_dimer_6
 
-TEST_CASE("Model SCF - He Dimer") {
+TEST_CASE("Model SCF - He Dimer - 10e-6") {
     // Set Integral Values
-    auto s          = he_dimer::get_s();
-    auto t          = he_dimer::get_t();
-    auto v          = he_dimer::get_v();
-    auto eri2       = he_dimer::get_eri2();
-    auto eri3       = he_dimer::get_eri3();
-    auto eri4       = he_dimer::get_eri4();
+    auto s          = he_dimer_6::get_s();
+    auto t          = he_dimer_6::get_t();
+    auto v          = he_dimer_6::get_v();
+    auto eri4       = he_dimer_6::get_eri4();
     matrix_t H_core = t + v;
 
     // Nuclear repulsion energy
@@ -138,7 +112,7 @@ TEST_CASE("Model SCF - He Dimer") {
     p(1, 0) = density(1, 0);
     p(1, 1) = density(1, 1);
 
-    std::cout << "He Dimer" << std::endl;
+    std::cout << "He Dimer - 10e-6" << std::endl;
     SECTION("Maintain error sources") {
         std::cout << "Maintain error sources" << std::endl;
         for(auto i = 0; i < max_iter; ++i) {
@@ -187,12 +161,12 @@ TEST_CASE("Model SCF - He Dimer") {
             Eigen::array<index_t, 2> k_modes{index_t(1, 0), index_t(2, 1)};
 
             // get new instances
-            matrix_t J = he_dimer::get_eri4().contract(p, j_modes);
-            matrix_t K = he_dimer::get_eri4().contract(p, k_modes);
-            matrix_t F = he_dimer::get_t() + he_dimer::get_v() + 2 * J - K;
+            matrix_t J = he_dimer_6::get_eri4().contract(p, j_modes);
+            matrix_t K = he_dimer_6::get_eri4().contract(p, k_modes);
+            matrix_t F = he_dimer_6::get_t() + he_dimer_6::get_v() + 2 * J - K;
 
             // Compute Energy
-            matrix_t H = he_dimer::get_t() + he_dimer::get_v() + F;
+            matrix_t H = he_dimer_6::get_t() + he_dimer_6::get_v() + F;
             Eigen::array<index_t, 2> e_modes{index_t(0, 0), index_t(1, 1)};
             scalar_t e         = H.contract(p, e_modes);
             uncertain_t e_elec = e();
@@ -204,7 +178,7 @@ TEST_CASE("Model SCF - He Dimer") {
             // }
 
             map_t F_map(F.data(), 2, 2);
-            auto s_again = he_dimer::get_s();
+            auto s_again = he_dimer_6::get_s();
             map_t s_again_map(s_again.data(), 2, 2);
             Eigen::GeneralizedSelfAdjointEigenSolver<eig_mat_t> es(F_map,
                                                                    s_again_map);
