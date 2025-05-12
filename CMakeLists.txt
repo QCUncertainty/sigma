@@ -37,6 +37,7 @@ include(cmake/cxx_api_docs.cmake)
 cmaize_find_or_build_optional_dependency(
     eigen
     ENABLE_EIGEN_SUPPORT
+    NAME Eigen3
     URL https://www.gitlab.com/libeigen/eigen
     VERSION 5e4f3475b5cb77414bca1f3dde7d6fd9cb4d2011
     BUILD_TARGET eigen
