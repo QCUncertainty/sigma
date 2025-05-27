@@ -17,10 +17,10 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
             test_uncertain(sigma::pow(a, 2), 1.0, 0.2, 1);
             test_uncertain(sigma::pow((a + b), -1), 0.3333, 0.0248, 2);
             test_uncertain(sigma::pow((a + b + a * b), 0.5), 2.2361, 0.1118, 2);
-            test_uncertain(sigma::pow((a + b + a * b), 0.0), 1.0, 0.0, 2);
+            test_uncertain(sigma::pow((a + b + a * b), 0.0), 1.0, 0.0, 0);
         }
         SECTION("Uncertain exponent") {
-            test_uncertain(sigma::pow(a, b), 1.0, 0.2, 2);
+            test_uncertain(sigma::pow(a, b), 1.0, 0.2, 1);
             test_uncertain(sigma::pow(c, -b), 0.0625, 0.0214, 2);
             test_uncertain(sigma::pow(c, a * 0.5), 2.0, 0.1709, 2);
         }

@@ -13,7 +13,7 @@ TEMPLATE_TEST_CASE("Error Function and Gamma", "", sigma::UFloat,
     }
     SECTION("Complementary Error Function") {
         test_uncertain(sigma::erfc(a), 0.1573, 0.0415, 1);
-        test_uncertain(sigma::erf(a) + sigma::erfc(a), 1.0, 0.0, 1);
+        test_uncertain(sigma::erf(a) + sigma::erfc(a), 1.0, 0.0, 0);
     }
     SECTION("Gamma Function") {
         test_uncertain(sigma::tgamma(a), 1.0, 0.0577, 1);

@@ -55,6 +55,6 @@ TEMPLATE_TEST_CASE("Setter", "", sigma::UFloat, sigma::UDouble) {
         test_uncertain(a, 3.0, 0.3, 1);
         // Explicitly update the standard deviation
         testing_a.update_sd();
-        test_uncertain(a, 3.0, 0.0, 1);
+        test_uncertain(a, 3.0, 0.0, 0);
     }
 }
