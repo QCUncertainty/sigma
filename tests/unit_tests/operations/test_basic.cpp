@@ -16,7 +16,7 @@ TEMPLATE_TEST_CASE("Basic", "", sigma::UFloat, sigma::UDouble) {
         REQUIRE(-a == sigma::copysign(a, -b));
         REQUIRE(-a == sigma::copysign(a, -1.0));
         REQUIRE(-1.0 == sigma::copysign(1.0, -b));
-        test_uncertain(a + sigma::copysign(a, -1.0), 0.0, 0.0, 1);
+        test_uncertain(a + sigma::copysign(a, -1.0), 0.0, 0.0, 0);
     }
     SECTION("Absolute Value") { 
         REQUIRE(a == sigma::abs(-a));
