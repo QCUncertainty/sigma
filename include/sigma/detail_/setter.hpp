@@ -1,9 +1,9 @@
 #pragma once
 #include "sigma/uncertain.hpp"
 
-/** @file setter.hpp 
+/** @file setter.hpp
  *  @brief Defines the Setter class
- */ 
+ */
 
 namespace sigma::detail_ {
 
@@ -59,10 +59,15 @@ public:
      */
     void update_sd() {
         m_x_.m_sd_ = 0.0;
+        std::vector<dep_sd_ptr> zero_contributions{};
         for(const auto& [dep, deriv] : m_x_.m_deps_) {
-            if(deriv == 0.0) continue;
+            if(deriv == 0.0) {
+                zero_contributions.emplace_back(dep);
+                continue;
+            }
             m_x_.m_sd_ += std::pow(*dep.get() * deriv, 2.0);
         }
+        for(const auto& dep : zero_contributions) { m_x_.m_deps_.erase(dep); }
         m_x_.m_sd_ = std::sqrt(m_x_.m_sd_);
     }
 

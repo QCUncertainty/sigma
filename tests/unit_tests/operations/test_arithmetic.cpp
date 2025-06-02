@@ -13,7 +13,7 @@ TEMPLATE_TEST_CASE("Arithmetic", "", sigma::UFloat, sigma::UDouble) {
     SECTION("Negation") {
         test_uncertain(-a, -1.0, 0.1, 1);
         test_uncertain(-(a + b), -3.0, 0.2236, 2);
-        test_uncertain(-a + a, 0.0, 0.0, 1);
+        test_uncertain(-a + a, 0.0, 0.0, 0);
     }
     SECTION("Addition") {
         SECTION("With Uncertain") { test_uncertain(a + b, 3.0, 0.2236, 2); }
@@ -36,7 +36,7 @@ TEMPLATE_TEST_CASE("Arithmetic", "", sigma::UFloat, sigma::UDouble) {
     SECTION("Subtraction") {
         SECTION("With Uncertain") {
             test_uncertain(a - b, -1.0, 0.2236, 2);
-            test_uncertain(a - a, 0.0, 0.0, 1);
+            test_uncertain(a - a, 0.0, 0.0, 0);
         }
         SECTION("With Certain") {
             test_uncertain(a - 1.0, 0.0, 0.1, 1);
@@ -90,7 +90,7 @@ TEMPLATE_TEST_CASE("Arithmetic", "", sigma::UFloat, sigma::UDouble) {
     SECTION("Division") {
         SECTION("By Uncertain") {
             test_uncertain(a / b, 0.5, 0.0707, 2);
-            test_uncertain(a / a, 1.0, 0.0, 1);
+            test_uncertain(a / a, 1.0, 0.0, 0);
         }
         SECTION("By Certain") {
             int two = 2;
@@ -107,7 +107,7 @@ TEMPLATE_TEST_CASE("Arithmetic", "", sigma::UFloat, sigma::UDouble) {
             x /= b;
             y /= a;
             test_uncertain(x, 0.5, 0.0707, 2);
-            test_uncertain(y, 1.0, 0.0, 1);
+            test_uncertain(y, 1.0, 0.0, 0);
         }
         SECTION("By Certain") {
             int two = 2;
