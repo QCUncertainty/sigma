@@ -5,9 +5,7 @@ function(get_cmaize)
     endif()
 
     # Store whether we are building tests or not, then turn off the tests
-    if(BUILD_TESTING)
-        set(build_testing_old "${BUILD_TESTING}")
-    endif()
+    set(build_testing_old "${BUILD_TESTING}")
     set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
 
     # Download CMakePP and bring it into scope
@@ -21,7 +19,7 @@ function(get_cmaize)
 
     # Restore the previous value, if set
     # Unset otherwise
-    if(build_testing_old)
+    if(NOT "${build_testing_old}" STREQUAL "")
         set(BUILD_TESTING "${build_testing_old}" CACHE BOOL "" FORCE)
     else()
         unset(BUILD_TESTING CACHE)
