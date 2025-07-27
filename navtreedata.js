@@ -40,10 +40,10 @@ var NAVTREE =
       [ "Scope", "md_docs_2code__of__conduct.html#scope", null ],
       [ "Enforcement", "md_docs_2code__of__conduct.html#enforcement", null ],
       [ "Enforcement Guidelines", "md_docs_2code__of__conduct.html#enforcement-guidelines", [
-        [ "Correction", "md_docs_2code__of__conduct.html#autotoc_md1-correction", null ],
-        [ "Warning", "md_docs_2code__of__conduct.html#autotoc_md2-warning", null ],
-        [ "Temporary Ban", "md_docs_2code__of__conduct.html#autotoc_md3-temporary-ban", null ],
-        [ "Permanent Ban", "md_docs_2code__of__conduct.html#autotoc_md4-permanent-ban", null ]
+        [ "1. Correction", "md_docs_2code__of__conduct.html#autotoc_md1-correction", null ],
+        [ "2. Warning", "md_docs_2code__of__conduct.html#autotoc_md2-warning", null ],
+        [ "3. Temporary Ban", "md_docs_2code__of__conduct.html#autotoc_md3-temporary-ban", null ],
+        [ "4. Permanent Ban", "md_docs_2code__of__conduct.html#autotoc_md4-permanent-ban", null ]
       ] ],
       [ "Attribution", "md_docs_2code__of__conduct.html#attribution", null ]
     ] ],
@@ -98,3 +98,4 @@ var NAVTREEINDEX =
 
 var SYNCONMSG = 'click to disable panel synchronization';
 var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';

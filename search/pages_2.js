@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['examples_0',['Examples',['../md_docs_2examples.html',1,'']]]
+  ['3_20temporary_20ban_0',['3. Temporary Ban',['../md_docs_2code__of__conduct.html#autotoc_md3-temporary-ban',1,'']]]
 ];
