@@ -28,6 +28,7 @@ cmaize_option_list(
     ONLY_BUILD_DOCS OFF "Should we only build the documentation?"
     DOCS_FAIL_ON_WARNING OFF "Should the documentation build fail from warnings?"
     ENABLE_EIGEN_SUPPORT ON "Include Eigen compatibility headers?"
+    HEADER_ONLY ON "Header only or not"
 )
 
 ## Docs ##
@@ -46,12 +47,21 @@ cmaize_find_or_build_optional_dependency(
 )
 
 ## Add libraries ##
-cmaize_add_library(
-    ${PROJECT_NAME}
-    SOURCE_DIR "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
-    INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
-    DEPENDS eigen
-)
+if("${HEADER_ONLY}")
+    cmaize_add_library(
+        ${PROJECT_NAME}
+        # SOURCE_DIR "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
+        INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
+        DEPENDS eigen
+    )
+else()
+    cmaize_add_library(
+        ${PROJECT_NAME}
+        SOURCE_DIR "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
+        INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
+        DEPENDS eigen
+    )
+endif()
 
 ## Build tests ##
 if("${BUILD_TESTING}")
