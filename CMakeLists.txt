@@ -1,42 +1,46 @@
 cmake_minimum_required(VERSION 3.14)
 
-# # Windows Specifics
-if (WIN32)
+# Windows Specifics
+if(WIN32)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-endif (WIN32)
+endif()
 
-## Set Project and Version
+# Set Project and Version
 file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/version.txt" VERSION)
-project(sigma VERSION "${VERSION}" LANGUAGES CXX)
+project(
+    sigma
+    VERSION "${VERSION}"
+    LANGUAGES CXX
+)
 
-## Paths ##
+# Paths
 set(${PROJECT_NAME}_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(${PROJECT_NAME}_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(${PROJECT_NAME}_TESTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 set(${PROJECT_NAME}_DOCS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/docs")
 
-## Get CMaize
+# Get CMaize
 include(cmake/get_cmaize.cmake)
 
-## Options ##
+# Options
 cmaize_option_list(
     BUILD_TESTING OFF "Should the tests be built?"
     BUILD_DOCS OFF "Should we build the documentation?"
     ONLY_BUILD_DOCS OFF "Should we only build the documentation?"
-    DOCS_FAIL_ON_WARNING OFF "Should the documentation build fail from warnings?"
+    DOCS_FAIL_ON_WARNING OFF
+    "Should the documentation build fail from warnings?"
     ENABLE_EIGEN_SUPPORT ON "Include Eigen compatibility headers?"
 )
 
-## Docs ##
+# Docs
 include(cmake/cxx_api_docs.cmake)
 
-## Dependencies ##
+# Dependencies
 cmaize_find_or_build_optional_dependency(
-    eigen
-    ENABLE_EIGEN_SUPPORT
+    eigen ENABLE_EIGEN_SUPPORT
     NAME Eigen3
     URL https://www.gitlab.com/libeigen/eigen
     VERSION 5e4f3475b5cb77414bca1f3dde7d6fd9cb4d2011
@@ -45,7 +49,7 @@ cmaize_find_or_build_optional_dependency(
     CMAKE_ARGS EIGEN_BUILD_TESTING=OFF
 )
 
-## Add libraries ##
+# Add libraries
 cmaize_add_library(
     ${PROJECT_NAME}
     SOURCE_DIR "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
@@ -53,9 +57,9 @@ cmaize_add_library(
     DEPENDS eigen
 )
 
-## Build tests ##
+# Build tests
 if("${BUILD_TESTING}")
-    ## Find or build dependencies for tests
+    # Find or build dependencies for tests
     cmaize_find_or_build_dependency(
         Catch2
         URL github.com/catchorg/Catch2
@@ -64,7 +68,7 @@ if("${BUILD_TESTING}")
         VERSION v3.6.0
     )
 
-    ## Add Tests ##
+    # Add Tests
     cmaize_add_tests(
         test_${PROJECT_NAME}
         SOURCE_DIR "${${PROJECT_NAME}_TESTS_DIR}/unit_tests"
@@ -74,7 +78,5 @@ if("${BUILD_TESTING}")
 
 endif()
 
-## Add package ##
-cmaize_add_package(
-    ${PROJECT_NAME} NAMESPACE ${PROJECT_NAME}::
-)
+# Add package
+cmaize_add_package(${PROJECT_NAME} NAMESPACE ${PROJECT_NAME}::)
