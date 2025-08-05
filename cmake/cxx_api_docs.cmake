@@ -18,14 +18,14 @@ macro(cxx_api_docs)
 
         # Get Doxygen Awesome CSS Theme
         include(FetchContent)
-        fetchcontent_declare(
+        FetchContent_Declare(
             doxygen-awesome-css
             URL https://github.com/jothepro/doxygen-awesome-css/archive/refs/heads/main.zip
         )
-        fetchcontent_makeavailable(doxygen-awesome-css)
+        FetchContent_MakeAvailable(doxygen-awesome-css)
 
         # Set Paths
-        fetchcontent_getproperties(doxygen-awesome-css SOURCE_DIR THEME_DIR)
+        FetchContent_GetProperties(doxygen-awesome-css SOURCE_DIR THEME_DIR)
         set(CUSTOM_DIR "${${PROJECT_NAME}_DOCS_DIR}/doxygen-custom")
 
         # Doxygen Settinggs
@@ -36,14 +36,20 @@ macro(cxx_api_docs)
         set(DOXYGEN_MACRO_EXPANSION "YES")
         set(DOXYGEN_MARKDOWN_ID_STYLE "GITHUB")
         set(DOXYGEN_USE_MATHJAX "YES")
-        set(DOXYGEN_MATHJAX_RELPATH "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5")
+        set(DOXYGEN_MATHJAX_RELPATH
+            "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5"
+        )
         set(DOXYGEN_HTML_COLORSTYLE "LIGHT")
         set(DOXYGEN_HTML_HEADER "${CUSTOM_DIR}/header.html")
-        set(DOXYGEN_HTML_EXTRA_FILES "${THEME_DIR}/doxygen-awesome-darkmode-toggle.js")
-        set(DOXYGEN_HTML_EXTRA_STYLESHEET "${THEME_DIR}/doxygen-awesome.css" 
-                                          "${THEME_DIR}/doxygen-awesome-sidebar-only.css" 
-                                          "${THEME_DIR}/doxygen-awesome-sidebar-only-darkmode-toggle.css"
-                                          "${CUSTOM_DIR}/custom.css")
+        set(DOXYGEN_HTML_EXTRA_FILES
+            "${THEME_DIR}/doxygen-awesome-darkmode-toggle.js"
+        )
+        set(DOXYGEN_HTML_EXTRA_STYLESHEET
+            "${THEME_DIR}/doxygen-awesome.css"
+            "${THEME_DIR}/doxygen-awesome-sidebar-only.css"
+            "${THEME_DIR}/doxygen-awesome-sidebar-only-darkmode-toggle.css"
+            "${CUSTOM_DIR}/custom.css"
+        )
         if("${ENABLE_EIGEN_SUPPORT}")
             set(DOXYGEN_PREDEFINED "ENABLE_EIGEN_SUPPORT")
         endif()
@@ -52,10 +58,10 @@ macro(cxx_api_docs)
         endif()
 
         # Add the Doxygen target
-        doxygen_add_docs("${_ncad_target}" 
-                         "${CMAKE_CURRENT_SOURCE_DIR}/README.md"
-                         "${${PROJECT_NAME}_INCLUDE_DIR}"
-                         "${${PROJECT_NAME}_DOCS_DIR}")
+        doxygen_add_docs(
+            "${_ncad_target}" "${CMAKE_CURRENT_SOURCE_DIR}/README.md"
+            "${${PROJECT_NAME}_INCLUDE_DIR}" "${${PROJECT_NAME}_DOCS_DIR}"
+        )
 
         # If we're only building docs, then we're done
         if("${ONLY_BUILD_DOCS}")

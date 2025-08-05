@@ -1,12 +1,15 @@
 function(get_cmaize)
 
     if("${CMAIZE_VERSION}" STREQUAL "")
-        set(CMAIZE_VERSION ca0f41e6d42829f9afb3c02f68ba4030fff6fee7 )
+        set(CMAIZE_VERSION ca0f41e6d42829f9afb3c02f68ba4030fff6fee7)
     endif()
 
     # Store whether we are building tests or not, then turn off the tests
     set(build_testing_old "${BUILD_TESTING}")
-    set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
+    set(BUILD_TESTING
+        OFF
+        CACHE BOOL "" FORCE
+    )
 
     # Download CMakePP and bring it into scope
     include(FetchContent)
@@ -17,10 +20,12 @@ function(get_cmaize)
     )
     FetchContent_MakeAvailable(cmaize)
 
-    # Restore the previous value, if set
-    # Unset otherwise
+    # Restore the previous value, if set; unset otherwise
     if(NOT "${build_testing_old}" STREQUAL "")
-        set(BUILD_TESTING "${build_testing_old}" CACHE BOOL "" FORCE)
+        set(BUILD_TESTING
+            "${build_testing_old}"
+            CACHE BOOL "" FORCE
+        )
     else()
         unset(BUILD_TESTING CACHE)
     endif()
