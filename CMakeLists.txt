@@ -47,25 +47,19 @@ cmaize_find_or_build_optional_dependency(
 )
 
 ## Add libraries ##
-# if("${HEADER_ONLY}")
-    cmaize_add_library(
-        ${PROJECT_NAME}
-        INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
-        DEPENDS eigen
+cmaize_add_library(
+    ${PROJECT_NAME}
+    INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
+    DEPENDS eigen
+)
+if("${ENABLE_EIGEN_SUPPORT}")
+    cpp_get_global(_top_proj CMAIZE_TOP_PROJECT)
+    CMaizeProject(get_target "${_top_proj}" _main_tgt ${PROJECT_NAME})
+    CMaizeTarget(set_property
+        "${_main_tgt}"
+        INTERFACE_COMPILE_DEFINITIONS "ENABLE_EIGEN_SUPPORT"
     )
-    if("${ENABLE_EIGEN_SUPPORT}")
-        cpp_get_global(_top_proj CMAIZE_TOP_PROJECT)
-        CMaizeProject(get_target "${_top_proj}" _main_tgt ${PROJECT_NAME})
-        CMaizeTarget(set_property "${_main_tgt}" INTERFACE_COMPILE_DEFINITIONS "ENABLE_EIGEN_SUPPORT")
-    endif()
-# else()
-#     cmaize_add_library(
-#         ${PROJECT_NAME}
-#         SOURCE_DIR "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
-#         INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
-#         DEPENDS eigen
-#     )
-# endif()
+endif()
 
 ## Build tests ##
 if("${BUILD_TESTING}")
@@ -82,7 +76,6 @@ if("${BUILD_TESTING}")
     cmaize_add_tests(
         test_${PROJECT_NAME}
         SOURCE_DIR "${${PROJECT_NAME}_TESTS_DIR}/unit_tests"
-        INCLUDE_DIRS "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
         DEPENDS Catch2 eigen ${PROJECT_NAME}
     )
 
