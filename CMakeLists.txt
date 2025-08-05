@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.14)
 
-# # Windows Specifics
-if (WIN32)
+## Windows Specifics ##
+if(WIN32)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-endif (WIN32)
+endif()
 
-## Set Project and Version
+## Set Project and Version ##
 file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/version.txt" VERSION)
 project(sigma VERSION "${VERSION}" LANGUAGES CXX)
 
@@ -18,7 +18,7 @@ set(${PROJECT_NAME}_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(${PROJECT_NAME}_TESTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 set(${PROJECT_NAME}_DOCS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/docs")
 
-## Get CMaize
+## Get CMaize ##
 include(cmake/get_cmaize.cmake)
 
 ## Options ##
@@ -67,7 +67,7 @@ endif()
 
 ## Build tests ##
 if("${BUILD_TESTING}")
-    ## Find or build dependencies for tests
+    ## Find or build dependencies for tests ##
     cmaize_find_or_build_dependency(
         Catch2
         URL github.com/catchorg/Catch2
@@ -86,6 +86,4 @@ if("${BUILD_TESTING}")
 endif()
 
 ## Add package ##
-cmaize_add_package(
-    ${PROJECT_NAME} NAMESPACE ${PROJECT_NAME}::
-)
+cmaize_add_package(${PROJECT_NAME} NAMESPACE ${PROJECT_NAME}::)
