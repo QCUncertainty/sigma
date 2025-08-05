@@ -2,7 +2,7 @@
 #include "sigma/uncertain.hpp"
 
 /** @file trigonometry.hpp
- *  @brief Trigonometric functions for uncertain variables 
+ *  @brief Trigonometric functions for uncertain variables
  */
 
 namespace sigma {

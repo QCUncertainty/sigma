@@ -3,8 +3,8 @@
 To use the Sigma library, simply `#include` the header `sigma/sigma.hpp`.
 This imports the features of the `sigma` namespace, including the `Uncertain`
 class and the operations that act on those objects. Sigma provides the typedefs
-`UFloat` and `UDouble` for the classes `Uncertain<float>` and 
-`Uncertain<double>`. Below is a simple and complete example of using Sigma, 
+`UFloat` and `UDouble` for the classes `Uncertain<float>` and
+`Uncertain<double>`. Below is a simple and complete example of using Sigma,
 with more details in the examples that follow:
 
 ```cpp
@@ -13,7 +13,7 @@ with more details in the examples that follow:
 int main(int argc, char *argv[]) {
     using ufloat = sigma::UFloat;   // same as sigma::Uncertain<float>
     using udouble = sigma::UDouble; // same as sigma::Uncertain<double>;
-    
+
     udouble a{1.0, 0.1};
     udouble b{1.0, 0.2};
 
@@ -44,7 +44,7 @@ sigma::UDouble z{10.0};
 ```
 
 ## Element Access
-The mean and standard deviation of an `Uncertain` instance can be accessed in a 
+The mean and standard deviation of an `Uncertain` instance can be accessed in a
 read-only fashion with the `mean()` and `sd()` functions, respectively. These
 elements cannot be directly manipulated, and are only updated by mathematical
 operations.
@@ -55,7 +55,7 @@ std::cout << x.sd() << std::endl;   // Prints 0.2
 ```
 
 ## Equality and Comparison
-Two `Uncertain` instances are considered equal if they have the same mean, 
+Two `Uncertain` instances are considered equal if they have the same mean,
 standard deviation, and dependencies. This means that two instances can have the
 same mean and distribution and be nonequivalent because they are dependent on
 different sources of error.
@@ -66,7 +66,7 @@ sigma::UDouble c = a;                 // Same error source as a
 bool different_error_source = (a==b); // False
 bool same_error_source      = (a==c); // True
 ```
-Comparisons between `Uncertain` instances are based on the mean values of the 
+Comparisons between `Uncertain` instances are based on the mean values of the
 variables, regardless of distribution.
 ```cpp
 sigma::UDouble a{1.8, 0.1};
@@ -80,12 +80,12 @@ sigma::UDouble a{1.0, 0.1};
 sigma::UDouble b{1.0, 0.1};
 bool not_less_than_or_equal = (a <= b); // False
 ```
-This boolean is `false` because the mean value of `a` is not less than that of 
+This boolean is `false` because the mean value of `a` is not less than that of
 `b`, but the two values are not equal because they have different error sources.
 
 ## Mathematical Operations
 The `Uncertain` class supports common arithmetic operations, as well as
-equivalents for many of the functions found in the C++ standard header 
+equivalents for many of the functions found in the C++ standard header
 `<cmath>`.
 ```cpp
 sigma::UDouble a{1.0, 0.1};
@@ -98,7 +98,7 @@ auto e = sigma::pow(a, 2);      // e = 1+/-0.2
 For a complete list of functions, see [here](@ref sigma).
 
 ## Linear Algebra
-Sigma has limited compatibility with the 
+Sigma has limited compatibility with the
 [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page) library, which
 provides support for a number of linear algebra operations.
 ```cpp
@@ -125,5 +125,5 @@ been tested:
 - Cholesky (LLT and LDLT)
 - Eigendecomposition (self-adjoint matrix only)
 
-For details on %Eigen usage, see their 
+For details on %Eigen usage, see their
 [documentation](https://eigen.tuxfamily.org/dox/).

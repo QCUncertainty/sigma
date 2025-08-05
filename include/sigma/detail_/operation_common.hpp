@@ -5,7 +5,7 @@
 
 /** @file operation_common.hpp
  *  @brief Common implementation details for operations
- */ 
+ */
 
 namespace sigma::detail_ {
 

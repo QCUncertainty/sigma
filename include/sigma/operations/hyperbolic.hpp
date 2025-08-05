@@ -2,7 +2,7 @@
 #include "sigma/uncertain.hpp"
 
 /** @file hyperbolic.hpp
- *  @brief Hyperbolic trigonometric functions for uncertain variables 
+ *  @brief Hyperbolic trigonometric functions for uncertain variables
  */
 
 namespace sigma {

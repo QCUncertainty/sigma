@@ -25,14 +25,14 @@ bibliography: paper.bib
 
 # Summary
 
-Sigma is a header-only C++-17 library for uncertainty propagation, 
+Sigma is a header-only C++-17 library for uncertainty propagation,
 inspired by `uncertainties` [@uncertainties] for Python and
-`Measurements.jl` [@Measurements.jl-2016] for Julia. The library tracks the 
+`Measurements.jl` [@Measurements.jl-2016] for Julia. The library tracks the
 functional correlation between dependent and independent variables, ensuring
 that the uncertainty of the independent variables is properly considered in the
-calculation of the dependent variables' uncertainties. It is intended as a near 
-drop-in replacement for the standard floating point types (aside from 
-uncertainty specification), and aims to be easily interoperable with the 
+calculation of the dependent variables' uncertainties. It is intended as a near
+drop-in replacement for the standard floating point types (aside from
+uncertainty specification), and aims to be easily interoperable with the
 existing standard types.
 
 # Statement of need
@@ -55,13 +55,13 @@ been developed in an attempt to fill this gap.
 
 # Mathematics
 
-Assume $F(A)$ is a function of $A$, where $A$ is a set whose elements are some 
-or all of the elements of the sequence of $n$ variables 
-$\left(a_{i}\right)_{i=1}^{n}$. These elements are defined as 
+Assume $F(A)$ is a function of $A$, where $A$ is a set whose elements are some
+or all of the elements of the sequence of $n$ variables
+$\left(a_{i}\right)_{i=1}^{n}$. These elements are defined as
 $a_{i} = \bar{a}_{i} \pm \sigma_{a_{i}}$, where $\bar{a}_{i}$ is the mean value
 of the variable and $\sigma_{a_{i}}$ is called the uncertainty and is assumed to
 represent an error measure closely related to the standard deviation of a random
-variable. The linear uncertainty of $F(A)$ can be determined as 
+variable. The linear uncertainty of $F(A)$ can be determined as
 $$
 \sigma_{F} \approx
 \sqrt{
@@ -70,9 +70,9 @@ $$
       \left.
         \frac{\partial F}{\partial a_{i}}
       \right|_{a_{i}=\bar{a}_{i}} \sigma_{a_{i}}
-    \right)^2 + 
+    \right)^2 +
     2 \sum_{j=i+1}^{n} \left(
-      \left(\frac{\partial F}{\partial a_{i}}\right)_{a_{i}=\bar{a}_{i}} 
+      \left(\frac{\partial F}{\partial a_{i}}\right)_{a_{i}=\bar{a}_{i}}
       \left(\frac{\partial F}{\partial a_{j}}\right)_{a_{j}=\bar{a}_{j}}
       \sigma_{a_{i}a_{j}}
     \right)
@@ -81,14 +81,14 @@ $$
 $$
 Note that for any element $a_{i}$ that is not a member of $A$,
 $\frac{\partial F}{\partial a_{i}} = 0$ and those terms vanish in the
-summations. The term $\sigma_{a_{i}a_{j}}$ is the covariance of $a_{i}$ and 
+summations. The term $\sigma_{a_{i}a_{j}}$ is the covariance of $a_{i}$ and
 $a_{j}$, defined as
 $$
-\sigma_{a_{i}a_{j}} = 
+\sigma_{a_{i}a_{j}} =
 E[\left(a_{i} - E[a_{i}]\right)\left(a_{j} - E[a_{j}]\right)],
 $$
-where $E[a_{i}]$ is the expectation value of $a_{i}$. The covariances can be 
-eliminated from the above equation if the uncertainties of the variables are 
+where $E[a_{i}]$ is the expectation value of $a_{i}$. The covariances can be
+eliminated from the above equation if the uncertainties of the variables are
 independent from one another, which is a requirement imposed here. As such, the
 uncertainty of $F(A)$ when the members of $A$ are independent from one another
 is simply
@@ -104,18 +104,18 @@ $$
 $$
 
 Next, we consider a set $B = \{x, y\}$ where $x = x(a_{i}, a_{j})$ and
-$y = y(a_{j})$, i.e. the elements of $B$ are functions of some number of 
+$y = y(a_{j})$, i.e. the elements of $B$ are functions of some number of
 independent variables. As the values of $x$ and $y$ are dependent on the values
 of $a_{i}$ and $a_{j}$, they are said to be *functionally correlated* to the
 independent variables [@Measurements.jl-2016] and their uncertainties are easily
-calculated from the previous equation. Given the function $G(B)$, 
+calculated from the previous equation. Given the function $G(B)$,
 the value of $\sigma_{G}$ cannot be calculated from the previous equation as it
 does not account for the functional correlation of the elements of $B$. The
-uncertainty of $G$ can be properly determined by application of the chain rule 
+uncertainty of $G$ can be properly determined by application of the chain rule
 to relate the independent variables to $G$ through their relationships with the
 dependent variables
 $$
-\sigma_{G} \approx 
+\sigma_{G} \approx
 \sqrt{
   \left(
     \left(
@@ -137,17 +137,17 @@ $$
 
 # Usage
 
-Sigma is header-only, so it only needs to be findable by the dependent project 
-to be used. The library is buildable with CMake [@CMake] and utilizes the 
-CMaize [@CMaize] extension to handle configuration, dependency 
+Sigma is header-only, so it only needs to be findable by the dependent project
+to be used. The library is buildable with CMake [@CMake] and utilizes the
+CMaize [@CMaize] extension to handle configuration, dependency
 management, and building the tests and/or documentation. To use the library in a
-project, simply add `#include <sigma/sigma.hpp>` in an appropriate location 
+project, simply add `#include <sigma/sigma.hpp>` in an appropriate location
 within the project's source.
 
 The primary component of Sigma is the `Uncertain<T>` class, templated on
 the floating point type used to represent the mean and uncertainty of the
 variable. A simple construction of an uncertain floating point value can be
-accomplished by passing the mean and a value for the uncertainty (such as a 
+accomplished by passing the mean and a value for the uncertainty (such as a
 standard deviation):
 ```cpp
 using numeric_t = double;
@@ -156,7 +156,7 @@ numeric_t a_sd{1.0};
 sigma::Uncertain<numeric_t> a{a_mean, a_sd};
 std::cout << a << std::endl;    // Prints: 100+/-1
 ```
-The same can be accomplished in a less verbose way as 
+The same can be accomplished in a less verbose way as
 `sigma::Uncertain a{100.0, 1.0}`. Sigma also provides the typedefs `UFloat`
 and `UDouble` (uncertain `float` and `double`, respectively) for convenience.
 
@@ -170,7 +170,7 @@ auto e = a + b;   // 3.0+/-0.2236
 auto f = a * b;   // 2.0+/-0.2828
 ```
 The resulting variables here are functionally correlated to `a` and/or `b`,
-meaning the operation `e - c` would return an instance with the value 
+meaning the operation `e - c` would return an instance with the value
 $0\pm0.2$ as the contributions from `a` would exactly negate each other.
 
 Sigma also implements many of the most common math functions found in the C++
@@ -185,26 +185,26 @@ auto tangent    = sigma::tan(radians);     //  1.0000+/-0.2000
 auto truncated  = sigma::trunc(decimal);   //  1.0+/-0.0
 ```
 Sigma also has a limited degree of compatibility with the Eigen library [@Eigen],
-allowing for matrix operations and a number of linear solvers. Additional 
+allowing for matrix operations and a number of linear solvers. Additional
 functionality is possible, though not currently ensured. Linear algebra usage is
-partially limited by Sigma only being suitable for the representation of real 
+partially limited by Sigma only being suitable for the representation of real
 numbers, but support for complex numbers is intended at a later time.
 
-While inspired by `uncertainties` and `Measurements.jl`, Sigma is not a 
+While inspired by `uncertainties` and `Measurements.jl`, Sigma is not a
 one-to-one translation of either package. Sigma implements a method of tracking
 variable dependence similar to those found in the other packages, with each
-instance tracking the independent variables that it depends on and the 
-contributions of those variables to the instance's uncertainty. Function names 
+instance tracking the independent variables that it depends on and the
+contributions of those variables to the instance's uncertainty. Function names
 in Sigma use the naming convention of the C++ Standard Library where applicable,
-and may differ from the names used in the other packages. `uncertainties` 
-specifically allows for the alteration of an independent variable's uncertainty 
-and on-the-fly re-evaluation for dependent variables. Sigma does not replicate 
-this feature, preferring a static evaluation of uncertainties that is more 
+and may differ from the names used in the other packages. `uncertainties`
+specifically allows for the alteration of an independent variable's uncertainty
+and on-the-fly re-evaluation for dependent variables. Sigma does not replicate
+this feature, preferring a static evaluation of uncertainties that is more
 consistent with the expected behavior for C++'s floating types.
 
 # Acknowledgements
 
-This work was supported by the Ames National Laboratory's Laboratory Directed 
+This work was supported by the Ames National Laboratory's Laboratory Directed
 Research and Development (LDRD) program. The Ames Laboratory is operated for the
 U.S. DOE by Iowa State University under contract # DE-AC02-07CH11358.
 

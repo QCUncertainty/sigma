@@ -2,7 +2,7 @@
 #include "sigma/uncertain.hpp"
 
 /** @file error_and_gamma.hpp
- *  @brief Error and gamma functions for uncertain variables 
+ *  @brief Error and gamma functions for uncertain variables
  */
 
 namespace sigma {
