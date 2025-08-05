@@ -13,6 +13,9 @@ _build/
 Debug/
 Release/
 
+# Project automation
+.tox/
+
 # Users commonly store their specific CMake settings in a toolchain file
 toolchain.cmake
 
