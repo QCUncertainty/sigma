@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.14)
 
-# # Windows Specifics
-if (WIN32)
+## Windows Specifics ##
+if(WIN32)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-endif (WIN32)
+endif()
 
-## Set Project and Version
+## Set Project and Version ##
 file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/version.txt" VERSION)
 project(sigma VERSION "${VERSION}" LANGUAGES CXX)
 
@@ -18,7 +18,7 @@ set(${PROJECT_NAME}_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(${PROJECT_NAME}_TESTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tests")
 set(${PROJECT_NAME}_DOCS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/docs")
 
-## Get CMaize
+## Get CMaize ##
 include(cmake/get_cmaize.cmake)
 
 ## Options ##
@@ -49,14 +49,26 @@ cmaize_find_or_build_optional_dependency(
 ## Add libraries ##
 cmaize_add_library(
     ${PROJECT_NAME}
-    SOURCE_DIR "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
     INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
     DEPENDS eigen
 )
 
+# Add ENABLE_EIGEN_SUPPORT compile definition to the main target, since it
+# does not appear to be propagated from the eigen target.
+# This is necessary for the compile definition to appear in the Sigma
+# installation properly for dependents.
+if("${ENABLE_EIGEN_SUPPORT}")
+    cpp_get_global(_top_proj CMAIZE_TOP_PROJECT)
+    CMaizeProject(get_target "${_top_proj}" _main_tgt ${PROJECT_NAME})
+    CMaizeTarget(set_property
+        "${_main_tgt}"
+        INTERFACE_COMPILE_DEFINITIONS "ENABLE_EIGEN_SUPPORT"
+    )
+endif()
+
 ## Build tests ##
 if("${BUILD_TESTING}")
-    ## Find or build dependencies for tests
+    ## Find or build dependencies for tests ##
     cmaize_find_or_build_dependency(
         Catch2
         URL github.com/catchorg/Catch2
@@ -69,13 +81,10 @@ if("${BUILD_TESTING}")
     cmaize_add_tests(
         test_${PROJECT_NAME}
         SOURCE_DIR "${${PROJECT_NAME}_TESTS_DIR}/unit_tests"
-        INCLUDE_DIRS "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
         DEPENDS Catch2 eigen ${PROJECT_NAME}
     )
 
 endif()
 
 ## Add package ##
-cmaize_add_package(
-    ${PROJECT_NAME} NAMESPACE ${PROJECT_NAME}::
-)
+cmaize_add_package(${PROJECT_NAME} NAMESPACE ${PROJECT_NAME}::)

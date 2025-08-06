@@ -1,5 +1,6 @@
 #pragma once
 #include "sigma/uncertain.hpp"
+#include <vector>
 
 /** @file setter.hpp
  *  @brief Defines the Setter class
