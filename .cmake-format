@@ -48,6 +48,14 @@ with section("parse"):
             },
         },
         "cmaize_option_list": {"pargs": [3, 3, 3, 3, 3]},
+        "CMaizeProject": {
+            "pargs": [1, 1, 2],
+            "kwargs": {"NAME": 1},
+        },
+        "CMaizeTarget": {
+            "pargs": [1, 1, 2],
+        },
+        "cpp_get_global": {"pargs": [2]},
     }
 
     # Override configurations per-command where available

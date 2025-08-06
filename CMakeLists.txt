@@ -52,10 +52,27 @@ cmaize_find_or_build_optional_dependency(
 # Add libraries
 cmaize_add_library(
     ${PROJECT_NAME}
-    SOURCE_DIR "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
     INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
     DEPENDS eigen
 )
+
+# Add ENABLE_EIGEN_SUPPORT compile definition to the main target, since it does
+# not appear to be propagated from the eigen target. This is necessary for the
+# compile definition to appear in the Sigma installation properly for
+# dependents.
+if("${ENABLE_EIGEN_SUPPORT}")
+    cpp_get_global(_top_proj CMAIZE_TOP_PROJECT)
+    CMaizeProject(
+        get_target
+        "${_top_proj}"
+        _main_tgt ${PROJECT_NAME}
+    )
+    CMaizeTarget(
+        set_property
+        "${_main_tgt}"
+        INTERFACE_COMPILE_DEFINITIONS "ENABLE_EIGEN_SUPPORT"
+    )
+endif()
 
 # Build tests
 if("${BUILD_TESTING}")
@@ -72,7 +89,6 @@ if("${BUILD_TESTING}")
     cmaize_add_tests(
         test_${PROJECT_NAME}
         SOURCE_DIR "${${PROJECT_NAME}_TESTS_DIR}/unit_tests"
-        INCLUDE_DIRS "${${PROJECT_NAME}_SOURCE_DIR}/${PROJECT_NAME}"
         DEPENDS Catch2 eigen ${PROJECT_NAME}
     )
 
