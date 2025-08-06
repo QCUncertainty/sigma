@@ -63,5 +63,3 @@ macro(cxx_api_docs)
         endif()
     endif()
 endmacro()
-
-cxx_api_docs()
