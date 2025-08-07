@@ -32,7 +32,7 @@ There's three main ways to contribute:
 
    If you want to contribute code to a Sigma project go ahead and open a pull
    request (PR). We recommend you first create a draft PR explaining what you
-   are going to do. This gives us a chance to provide feedback and help 
+   are going to do. This gives us a chance to provide feedback and help
    throughout the process. We welcome contributions to any part of the
    project, not just source code.
 

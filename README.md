@@ -1,4 +1,4 @@
-# Sigma 
+# Sigma
 
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.07404/status.svg)](https://doi.org/10.21105/joss.07404)
 
@@ -11,16 +11,16 @@ mathematical operations on floating point values, inspired by
 
 ## Statement of Need
 Scientific analysis, whether based on experiment or simulation, often uses
-values that are paired with some representation of their accuracy or 
+values that are paired with some representation of their accuracy or
 reliability. Oftentimes, this representation is a value's standard deviation or
-a similar metric. The uncertainty in a value can be derived from a number of 
-sources, including instrument accuracy, limitations from approximations, or 
+a similar metric. The uncertainty in a value can be derived from a number of
+sources, including instrument accuracy, limitations from approximations, or
 the statistical nature of the value itself. New values resulting from operations
-on uncertain inputs will have uncertainties derived from the input 
+on uncertain inputs will have uncertainties derived from the input
 uncertainties, but the process of propagating those relationships can become
-tedious and complicated. To the best of our knowledge, there is no currently 
-maintained C++ library to facilitate this kind of uncertainty propagation. As 
-C++ is an important language in the development of scientific software and 
+tedious and complicated. To the best of our knowledge, there is no currently
+maintained C++ library to facilitate this kind of uncertainty propagation. As
+C++ is an important language in the development of scientific software and
 high-performance computing, Sigma has been developed in an attempt to fill this
 gap.
 
@@ -40,7 +40,7 @@ Sigma is header-only, so installation is not strictly required for usage. The
 files simply need to be locatable by your project, as well the dependencies
 required by Sigma itself (e.g. Eigen if support is configured). Dependency
 gathering, testing, building of the documentation, and installation are all
-handled with CMake and the [CMaize](https://github.com/CMakePP/CMaize) 
+handled with CMake and the [CMaize](https://github.com/CMakePP/CMaize)
 Framework.
 
 ```Bash
@@ -75,6 +75,6 @@ cmake --build build --target install
 
 ## Acknowledgments
 
-This work was supported by the Ames National Laboratory's Laboratory Directed 
+This work was supported by the Ames National Laboratory's Laboratory Directed
 Research and Development (LDRD) program. The Ames Laboratory is operated for the
 U.S. DOE by Iowa State University under contract # DE-AC02-07CH11358.
