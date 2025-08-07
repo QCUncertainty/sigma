@@ -116,16 +116,16 @@ Linear Error Propagation</h1>
 <p>Assume a sequence of \( n \) variables \( \left(a_{i}\right)_{i=1}^{n} \) whose elements are defined as \( a_{i} = \bar{a}_{i} \pm \sigma_{a_{i}} \), where \( \bar{a}_{i} \) is the mean value of \( a_{i} \) and \( \sigma_{a_{i}} \) is the standard deviation of \( a_{i} \). \( F(A) \) is a function of \( A \), where \( A = \{a_{i} : i \in \mathbb{N}, 1 \leq i \leq n\} \). The uncertainty of \( F(A) \) can be determined as</p>
 <p class="formulaDsp">
 \[ \normalsize
-\sigma_{F} = 
+\sigma_{F} =
 \sqrt{
   \sum_{i=1}^{n} \left(
     \left(
       \left.
         \frac{\partial F}{\partial a_{i}}
       \right|_{a_{i}=\bar{a}_{i}} \sigma_{a_{i}}
-    \right)^2 + 
+    \right)^2 +
     2 \sum_{j=i+1}^{n} \left(
-      \left(\frac{\partial F}{\partial a_{i}}\right)_{a_{i}=\bar{a}_{i}} 
+      \left(\frac{\partial F}{\partial a_{i}}\right)_{a_{i}=\bar{a}_{i}}
       \left(\frac{\partial F}{\partial a_{j}}\right)_{a_{j}=\bar{a}_{j}}
       \sigma_{a_{i}a_{j}}
     \right)
@@ -136,7 +136,7 @@ Linear Error Propagation</h1>
 <p>where \( \sigma_{a_{i}a_{j}} \) is the covariance of \( a_{i} \) and \( a_{j} \). These covariances can be eliminated from the above equation if the uncertainties of the variables are independent from one another, which is a requirement imposed here. As such, the uncertainty of \( F(A) \) when the members of \( A \) are independent from one another is</p>
 <p class="formulaDsp">
 \[ \normalsize
-\sigma_{F} = 
+\sigma_{F} =
 \sqrt{
   \sum_{i=1}^{n} \left(
     \left.
@@ -149,7 +149,7 @@ Linear Error Propagation</h1>
 <p>Next, we consider a set \( B = \{x, y\} \) where \( x = a_{i} + a_{j} \) and \( y = a_{j} - a_{k} \), i.e. the elements of \( B \) are dependent on a subset of the independent variables in set \( A \). Given the function \( G(B) \), the uncertainty of \( G \) can be determined by application of the chain rule to relate the independent variables to \( G \) through their relationships with the dependent variables</p>
 <p class="formulaDsp">
 \[ \normalsize
-\sigma_{G} = 
+\sigma_{G} =
 \sqrt{
   \left(
     \left(
