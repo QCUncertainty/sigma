@@ -26,11 +26,10 @@ jobs:
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - uses: ssciwr/doxygen-install@v1
-      - uses: seanmiddleditch/gha-setup-ninja@v5
       - name: Build and Test
         run: |
           toolchain=${PWD}/.github/workflow_toolchains/${{matrix.compiler}}.cmake
@@ -43,7 +42,7 @@ jobs:
   test_library_windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - uses: ssciwr/doxygen-install@v1
@@ -60,13 +59,26 @@ jobs:
   test_dox_build:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - uses: ssciwr/doxygen-install@v1
-      - uses: seanmiddleditch/gha-setup-ninja@v5
       - name: Build Doxygen Part
         run: |
           cmake -Bbuild -H. -GNinja -DONLY_BUILD_DOCS=ON -DDOCS_FAIL_ON_WARNING=ON
           cmake --build build --target sigma_cxx_api --parallel
+        shell: bash
+
+  # Run pre-commit hooks
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+          pip-install: -r requirements.txt
+      - name: Run pre-commit
+        run: pre-commit run --all-files
         shell: bash
