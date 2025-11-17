@@ -14,7 +14,7 @@ jobs:
         compiler: [gnu-13, gnu-14]
         eigen: [ON]
         include:
-          - os: ubuntu-24.04
+          - os: ubuntu-22.04
             compiler: clang-default
             eigen: ON
           - os: macos-14

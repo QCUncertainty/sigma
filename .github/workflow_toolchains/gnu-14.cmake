@@ -7,4 +7,4 @@ set(BUILD_DOCS ON)
 set(CMAKE_C_COMPILER gcc-14)
 set(CMAKE_CXX_COMPILER g++-14)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Werror")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
