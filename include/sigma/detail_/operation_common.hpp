@@ -63,7 +63,7 @@ void inplace_binary(Uncertain<T>& c, const Uncertain<T>& b, T mean, T dcda,
                     T dcdb) {
     detail_::Setter<Uncertain<T>> c_setter(c);
     c_setter.update_mean(mean);
-    c_setter.update_derivatives(dcda, false);
+    c_setter.update_derivatives(dcda);
     c_setter.update_derivatives(b.deps(), dcdb);
 }
 
