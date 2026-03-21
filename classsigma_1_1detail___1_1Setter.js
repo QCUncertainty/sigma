@@ -7,8 +7,7 @@ var classsigma_1_1detail___1_1Setter =
     [ "uncertain_t", "classsigma_1_1detail___1_1Setter.html#a155e265ac4e84126191bbab847afaff1", null ],
     [ "value_t", "classsigma_1_1detail___1_1Setter.html#ab5be0d3fe3e4ca83389a05fd75a0886c", null ],
     [ "Setter", "classsigma_1_1detail___1_1Setter.html#a53b7d8051c5d5d34b095b393f1bb1624", null ],
-    [ "update_derivatives", "classsigma_1_1detail___1_1Setter.html#ab8c241451b3cb29fa31a8a0ff3dee314", null ],
-    [ "update_derivatives", "classsigma_1_1detail___1_1Setter.html#a8c83e0ed45c8b1d5abe54e2a93fd0c26", null ],
-    [ "update_mean", "classsigma_1_1detail___1_1Setter.html#aa65aa6d2469f71301275074e5d443d47", null ],
-    [ "update_sd", "classsigma_1_1detail___1_1Setter.html#a5c959f3cacf1a974b4237690ba5095f0", null ]
+    [ "update_derivatives", "classsigma_1_1detail___1_1Setter.html#a34d4c236e3ff78d070195c5c9005b54d", null ],
+    [ "update_derivatives", "classsigma_1_1detail___1_1Setter.html#a2130464380818977ab4c55c9d3c33da7", null ],
+    [ "update_mean", "classsigma_1_1detail___1_1Setter.html#aa65aa6d2469f71301275074e5d443d47", null ]
 ];
