@@ -1,9 +1,9 @@
 #pragma once
 #include <cmath>
 #include <iostream>
-#include <map>
 #include <memory>
 #include <type_traits>
+#include <unordered_map>
 #include <utility>
 
 /** @file uncertain.hpp
@@ -45,7 +45,7 @@ public:
     using dep_sd_ptr = std::shared_ptr<dep_sd_t>;
 
     /// A map of dependencies and their contributions to the uncertainty
-    using deps_map_t = std::map<dep_sd_ptr, value_t>;
+    using deps_map_t = std::unordered_map<dep_sd_ptr, value_t>;
 
     /// @brief Default ctor
     Uncertain() noexcept = default;
@@ -122,8 +122,7 @@ private:
 template<typename ValueType>
 Uncertain<ValueType>::Uncertain(value_t mean, value_t sd) :
   m_mean_(mean), m_sd_(std::abs(sd)) {
-    m_deps_.emplace(
-      std::make_pair(std::make_shared<dep_sd_t>(sd), value_t{1.0}));
+    m_deps_.emplace(std::make_shared<dep_sd_t>(sd), value_t{1.0});
 }
 
 // -- Utility functions --------------------------------------------------------
