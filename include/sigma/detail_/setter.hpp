@@ -92,21 +92,19 @@ public:
         // change anything
         if(dxda == 0.0) { return; }
 
-        // We need to determine which dependencies are new, which are zeroed
-        // out, and which are updated. We can then update the standard deviation
-        // accordingly.
+        // Update the map of contributions and their derivatives, keeping track
+        // of any that are reduced to zero and will need to be removed.
         std::vector<dep_sd_ptr> zero_contributions{};
-        std::vector<dep_sd_ptr> new_contributions{};
-        std::vector<dep_sd_ptr> updated_contributions{};
+        size_t n_updated = 0;
         for(const auto& [dep, deriv] : deps) {
-            if(m_x_.m_deps_.count(dep) == 0) {
-                new_contributions.push_back(dep);
-            } else {
-                if(m_x_.m_deps_[dep] + (dxda * deriv) == 0.0) {
-                    zero_contributions.push_back(dep);
-                } else {
-                    updated_contributions.push_back(dep);
+            if(m_x_.m_deps_.count(dep)) {
+                m_x_.m_deps_[dep] += dxda * deriv;
+                if(m_x_.m_deps_[dep] == 0.0) {
+                    zero_contributions.emplace_back(dep);
                 }
+                n_updated++;
+            } else {
+                m_x_.m_deps_.emplace(dep, dxda * deriv);
             }
         }
 
@@ -116,41 +114,43 @@ public:
         // standard deviation in place by removing the contribution of the
         // zeroed and updated dependencies and then adding the new contribution
         // of the updated dependencies.
-        if(updated_contributions.size() > (m_x_.m_deps_.size() / 2)) {
+        if(n_updated > (m_x_.m_deps_.size() / 2)) {
+            // Remove from m_deps_ any dependency that was reduced to zero.
             for(const auto& dep : zero_contributions) {
                 m_x_.m_deps_.erase(dep);
             }
-            for(const auto& dep : updated_contributions) {
-                m_x_.m_deps_[dep] += dxda * deps.at(dep);
-            }
+
+            // Recalculate the variance.
             m_x_.m_sd_ = 0.0;
             for(const auto& [dep, deriv] : m_x_.m_deps_) {
                 m_x_.m_sd_ += std::pow(*dep.get() * deriv, 2.0);
             }
         } else {
+            // Return to the variance so we can update the sum.
             m_x_.m_sd_ = std::pow(m_x_.m_sd_, 2.0);
+
+            // Step through the updated dependencies and update the variance
+            // accordingly.
+            for(const auto& [dep, deriv] : deps) {
+                auto old_deriv = m_x_.m_deps_[dep] - dxda * deriv;
+                // As long as the dependency hasn't been reduce to zero, we need
+                // to add its contribution to the variance.
+                if(m_x_.m_deps_[dep] != 0.0) {
+                    m_x_.m_sd_ += std::pow(*dep.get() * m_x_.m_deps_[dep], 2.0);
+                }
+                // As long as the dependency isn't new, we need to remove its
+                // previous contribution to the variance.
+                if(old_deriv != 0.0) {
+                    m_x_.m_sd_ -= std::pow(*dep.get() * old_deriv, 2.0);
+                }
+            }
+
+            // Remove from m_deps_ any dependency that was reduced to zero.
             for(const auto& dep : zero_contributions) {
-                m_x_.m_sd_ -= std::pow(*dep.get() * m_x_.m_deps_[dep], 2.0);
                 m_x_.m_deps_.erase(dep);
             }
-            // While removing the contribution of the zeroed dependencies, we
-            // can get minor numerical variations that cause the standard
-            // deviation to become small and negative if the variable is now
-            // independent of all other variables. In this case, we can just set
-            // it to zero.
-            if(m_x_.m_deps_.size() == 0) { m_x_.m_sd_ = 0.0; }
-            for(const auto& dep : updated_contributions) {
-                m_x_.m_sd_ -= std::pow(*dep.get() * m_x_.m_deps_[dep], 2.0);
-                m_x_.m_deps_[dep] += dxda * deps.at(dep);
-                m_x_.m_sd_ += std::pow(*dep.get() * m_x_.m_deps_[dep], 2.0);
-            }
         }
-        // Finally, we need to add the contributions of the new dependencies to
-        // the standard deviation and take the square root.
-        for(const auto& dep : new_contributions) {
-            m_x_.m_deps_.emplace(std::make_pair(dep, dxda * deps.at(dep)));
-            m_x_.m_sd_ += std::pow(*dep.get() * m_x_.m_deps_[dep], 2.0);
-        }
+        // Take the square root of the variance to get the standard deviation.
         m_x_.m_sd_ = std::sqrt(m_x_.m_sd_);
     }
 
