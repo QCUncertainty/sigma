@@ -18,6 +18,18 @@ Uncertain<T> fabs(const Uncertain<T>& a) {
 }
 
 template<typename T>
+Interval<T> abs(const Interval<T>& a) {
+    auto result = boost::numeric::abs(
+        boost::numeric::interval<T>(a.lower(), a.upper()));
+    return Interval<T>(result.lower(), result.upper());
+}
+
+template<typename T>
+Interval<T> fabs(const Interval<T>& a) {
+    return abs(a);
+}
+
+template<typename T>
 Uncertain<T> abs2(const Uncertain<T>& a) {
     return pow(abs(a), 2.0);
 }
