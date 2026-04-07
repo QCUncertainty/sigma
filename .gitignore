@@ -1,6 +1,7 @@
 # These are directories used by IDEs for storing settings
 .idea/
 .vscode/
+.cache/
 
 # These are common build directory names
 build*/

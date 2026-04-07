@@ -41,6 +41,8 @@ include(cmake/cxx_api_docs.cmake)
 cxx_api_docs()
 
 # Dependencies
+find_package(Boost REQUIRED)
+
 cmaize_find_or_build_optional_dependency(
     eigen ENABLE_EIGEN_SUPPORT
     NAME Eigen3
@@ -55,7 +57,7 @@ cmaize_find_or_build_optional_dependency(
 cmaize_add_library(
     ${PROJECT_NAME}
     INCLUDE_DIRS "${${PROJECT_NAME}_INCLUDE_DIR}/${PROJECT_NAME}"
-    DEPENDS eigen
+    DEPENDS eigen Boost::boost
 )
 
 # Add ENABLE_EIGEN_SUPPORT compile definition to the main target, since it does
