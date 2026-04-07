@@ -23,6 +23,24 @@ public:
     /// The numeric type of the bounds
     using value_t = ValueType;
 
+    /** @brief Default constructor
+     *
+     *  Constructs an interval with both bounds set to 0.0.
+     *
+     *  @throw none No throw guarantee
+     */
+    explicit Interval() : m_interval_(0.0, 0.0) {}
+
+    /** @brief Construct an interval from a single value
+     *
+     *  Constructs an interval with both bounds set to the given value.
+     *
+     *  @param value The value to set both bounds to
+     *
+     *  @throw none No throw guarantee
+     */
+    explicit Interval(value_t value) : m_interval_(value, value) {}
+
     /** @brief Construct an interval from lower and upper bounds
      *
      *  @param lower The lower bound of the interval
