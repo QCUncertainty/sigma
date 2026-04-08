@@ -29,7 +29,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    explicit Interval() : m_interval_(0.0, 0.0) {}
+    Interval() : m_interval_(0.0, 0.0) {}
 
     /** @brief Construct an interval from a single value
      *
@@ -39,7 +39,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    explicit Interval(value_t value) : m_interval_(value, value) {}
+    Interval(value_t value) : m_interval_(value, value) {}
 
     /** @brief Construct an interval from lower and upper bounds
      *
@@ -206,7 +206,7 @@ private:
  */
 template<typename ValueType>
 std::ostream& operator<<(std::ostream& os, const Interval<ValueType>& i) {
-    os << "[" << i.lower() << ", " << i.upper() << "]";
+    os << i.median() << "+/-" << i.radius();
     return os;
 }
 
@@ -260,7 +260,7 @@ bool operator<(const Interval<T1>& lhs, const Interval<T2>& rhs) {
 }
 
 /** @relates Interval
- *  @brief Whether one interval is certainly greater than another
+ *  @brief Whether one interval is greater than another
  *
  *  @tparam T1 The numerical type of the left-hand interval
  *  @tparam T2 The numerical type of the right-hand interval

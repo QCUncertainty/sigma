@@ -42,7 +42,7 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
         auto value = testing_t(lo, hi);
         std::stringstream ss, corr;
         ss << value;
-        corr << "[" << lo << ", " << hi << "]";
+        corr << value.median() << "+/-" << value.radius();
         REQUIRE(ss.str() == corr.str());
     }
     SECTION("Comparisons") {
