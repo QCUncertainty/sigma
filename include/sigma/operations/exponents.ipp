@@ -106,23 +106,19 @@ Uncertain<T> hypot(const U& a, const Uncertain<T>& b) {
 
 template<typename T>
 Interval<T> sqrt(const Interval<T>& a) {
-    auto result = boost::numeric::sqrt(
-        boost::numeric::interval<T>(a.lower(), a.upper()));
+    auto result =
+      boost::numeric::sqrt(boost::numeric::interval<T>(a.lower(), a.upper()));
     return Interval<T>(result.lower(), result.upper());
 }
 
 template<typename T>
 Interval<T> exp(const Interval<T>& a) {
-    auto result = boost::numeric::exp(
-        boost::numeric::interval<T>(a.lower(), a.upper()));
-    return Interval<T>(result.lower(), result.upper());
+    return Interval<T>(std::exp(a.lower()), std::exp(a.upper()));
 }
 
 template<typename T>
 Interval<T> log(const Interval<T>& a) {
-    auto result = boost::numeric::log(
-        boost::numeric::interval<T>(a.lower(), a.upper()));
-    return Interval<T>(result.lower(), result.upper());
+    return Interval<T>(std::log(a.lower()), std::log(a.upper()));
 }
 
 } // namespace sigma
