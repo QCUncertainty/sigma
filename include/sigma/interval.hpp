@@ -66,6 +66,22 @@ public:
      */
     value_t upper() const { return m_interval_.upper(); }
 
+    /** @brief Whether a scalar lies in this interval (endpoints included)
+     *
+     *  Returns true if lower() <= @p value <= upper(). Boundary values are
+     *  considered contained.
+     *
+     *  @param value The scalar to test
+     *
+     *  @return True if @p value lies in the closed interval from lower() to
+     *          upper()
+     *
+     *  @throw none No throw guarantee
+     */
+    bool contains(value_t value) const {
+        return value >= lower() && value <= upper();
+    }
+
     /** @brief Returns the midpoint of the interval
      *
      *  @return The midpoint value

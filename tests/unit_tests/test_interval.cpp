@@ -97,6 +97,35 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
             }
         }
     }
+    SECTION("contains") {
+        auto interval = testing_t(value_t{1}, value_t{3});
+
+        SECTION("interior") { REQUIRE(interval.contains(value_t{2})); }
+
+        SECTION("endpoints are included") {
+            REQUIRE(interval.contains(value_t{1}));
+            REQUIRE(interval.contains(value_t{3}));
+        }
+
+        SECTION("outside") {
+            REQUIRE_FALSE(interval.contains(value_t{0.99}));
+            REQUIRE_FALSE(interval.contains(value_t{3.01}));
+        }
+
+        SECTION("degenerate interval (single point)") {
+            auto point = testing_t(value_t{5}, value_t{5});
+            REQUIRE(point.contains(value_t{5}));
+            REQUIRE_FALSE(point.contains(value_t{4.99}));
+            REQUIRE_FALSE(point.contains(value_t{5.01}));
+        }
+
+        SECTION("default constructed [0, 0]") {
+            testing_t zero{};
+            REQUIRE(zero.contains(value_t{0}));
+            REQUIRE_FALSE(zero.contains(value_t{-0.01}));
+            REQUIRE_FALSE(zero.contains(value_t{0.01}));
+        }
+    }
     SECTION("Arithmetic") {
         // a = [1, 3], b = [2, 4]
         auto a = testing_t(value_t{1}, value_t{3});
