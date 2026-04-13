@@ -61,6 +61,10 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ssciwr/doxygen-install@v2
+      - name: Install boost
+        uses: MarkusJx/install-boost@v2
+        with:
+          boost_version: 1.84.0
       - name: Build and Test
         run: |
           SET "toolchain=%cd%\.github\workflow_toolchains\windows.cmake"
