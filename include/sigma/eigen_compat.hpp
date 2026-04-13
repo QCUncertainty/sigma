@@ -46,29 +46,29 @@ class Interval;
 /** @def EIGEN_NUMTRAITS_INTERVAL(float_type)
  *  @brief Factorization for Eigen::NumTraits Specialization for Interval
  */
-#define EIGEN_NUMTRAITS_INTERVAL(float_type)                                   \
-    /** @brief Numeric traits for Interval<float_type> */                      \
-    template<>                                                                 \
-    struct NumTraits<sigma::Interval<float_type>> : NumTraits<float_type> {    \
-        /** The interval type */                                               \
-        using Interval = sigma::Interval<float_type>;                          \
-        /** The corresponding real type */                                     \
-        using Real = Interval;                                                 \
-        /** The corresponding non-integer type */                              \
-        using NonInteger = Interval;                                           \
-        /** The corresponding literal type */                                  \
-        using Literal = Interval;                                              \
-        /** The corresponding nested type */                                   \
-        using Nested = Interval;                                               \
-        enum {                                                                 \
-            IsComplex             = 0,                                         \
-            IsInteger             = 0,                                         \
-            IsSigned              = 1,                                         \
-            RequireInitialization = 1,                                         \
-            ReadCost              = 1,                                         \
-            AddCost               = 3,                                         \
-            MulCost               = 3                                          \
-        };                                                                     \
+#define EIGEN_NUMTRAITS_INTERVAL(float_type)                                \
+    /** @brief Numeric traits for Interval<float_type> */                   \
+    template<>                                                              \
+    struct NumTraits<sigma::Interval<float_type>> : NumTraits<float_type> { \
+        /** The interval type */                                            \
+        using Interval = sigma::Interval<float_type>;                       \
+        /** The corresponding real type */                                  \
+        using Real = Interval;                                              \
+        /** The corresponding non-integer type */                           \
+        using NonInteger = Interval;                                        \
+        /** The corresponding literal type */                               \
+        using Literal = Interval;                                           \
+        /** The corresponding nested type */                                \
+        using Nested = Interval;                                            \
+        enum {                                                              \
+            IsComplex             = 0,                                      \
+            IsInteger             = 0,                                      \
+            IsSigned              = 1,                                      \
+            RequireInitialization = 1,                                      \
+            ReadCost              = 1,                                      \
+            AddCost               = 3,                                      \
+            MulCost               = 3                                       \
+        };                                                                  \
     }
 
 /** @namespace Eigen

@@ -38,8 +38,8 @@ void test_uncertain(TestType&& x, double m, double s, std::size_t n) {
 
 template<typename TestType>
 void test_interval(TestType&& x, double lo, double hi) {
-    REQUIRE(x.lower()  == Catch::Approx(lo).margin(1.0e-4));
-    REQUIRE(x.upper()  == Catch::Approx(hi).margin(1.0e-4));
+    REQUIRE(x.lower() == Catch::Approx(lo).margin(1.0e-4));
+    REQUIRE(x.upper() == Catch::Approx(hi).margin(1.0e-4));
     REQUIRE(x.median() == Catch::Approx((lo + hi) / 2.0).margin(1.0e-4));
     REQUIRE(x.radius() == Catch::Approx((hi - lo) / 2.0).margin(1.0e-4));
 }
