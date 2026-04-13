@@ -424,6 +424,9 @@ Interval<T> operator*(T lhs, const Interval<T>& rhs) {
 /** @relates Interval
  *  @brief Division of two intervals
  *
+ *  If the interval contains zero the resulting interval will loose most of its
+ *  information.
+ *
  *  @tparam T The numerical type of the intervals
  *  @param lhs The left-hand interval
  *  @param rhs The right-hand interval
