@@ -33,6 +33,17 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ssciwr/doxygen-install@v2
+      - name: Install boost
+        run: |
+          if [ "${{ matrix.os }}" == "ubuntu-24.04" ]; then
+            sudo apt-get update
+            sudo apt-get install -y libboost-all-dev
+            BOOST_ROOT=/usr/include/boost
+          elif [ "${{ matrix.os }}" == "macos-15" ]; then
+            brew install boost
+            BOOST_ROOT=$(brew --prefix boost)/include/boost
+          fi
+          echo "BOOST_ROOT=$BOOST_ROOT" >> $GITHUB_ENV
       - name: Build and Test
         run: |
           toolchain=${PWD}/.github/workflow_toolchains/${{matrix.compiler}}.cmake
