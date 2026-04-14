@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['abs_0',['abs',['../namespacesigma.html#add954174f373873d59d093ceb3e82af5',1,'sigma']]],
+  ['abs_0',['abs',['../namespacesigma.html#add954174f373873d59d093ceb3e82af5',1,'sigma::abs(const Uncertain&lt; T &gt; &amp;a)'],['../namespacesigma.html#a3ea8a8ec91205acbf995d458fbf19105',1,'sigma::abs(const Interval&lt; T &gt; &amp;a)']]],
   ['abs2_1',['abs2',['../namespacesigma.html#aaa0794dcf432114a9467603ac7748c7c',1,'sigma']]],
   ['acos_2',['acos',['../namespacesigma.html#af6eeba07517755fde0ced30d9ff56181',1,'sigma']]],
   ['acosh_3',['acosh',['../namespacesigma.html#ae0468bc7af0c3d24c8ecc0c38d8f2ef6',1,'sigma']]],

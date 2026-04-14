@@ -122,6 +122,10 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numeric traits for <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html#a11fc90ab63ca0f2e95e8ff7219cd6f55">Uncertain&lt;float&gt;</a>.  <a href="structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Eigen_3A_3ANumTraits_3C_20sigma_3A_3AUncertain_3C_20double_20_3E_20_3E" id="r_Eigen_3A_3ANumTraits_3C_20sigma_3A_3AUncertain_3C_20double_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01double_01_4_01_4.html">Eigen::NumTraits&lt; sigma::Uncertain&lt; double &gt; &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numeric traits for <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01double_01_4_01_4.html#a794a55823076bd7781dca7e1845988f3">Uncertain&lt;double&gt;</a>.  <a href="structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01double_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Eigen_3A_3ANumTraits_3C_20sigma_3A_3AInterval_3C_20float_20_3E_20_3E" id="r_Eigen_3A_3ANumTraits_3C_20sigma_3A_3AInterval_3C_20float_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01float_01_4_01_4.html">Eigen::NumTraits&lt; sigma::Interval&lt; float &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numeric traits for <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01float_01_4_01_4.html#aafad52b1ada0c02a29304106521de935">Interval&lt;float&gt;</a>.  <a href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01float_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Eigen_3A_3ANumTraits_3C_20sigma_3A_3AInterval_3C_20double_20_3E_20_3E" id="r_Eigen_3A_3ANumTraits_3C_20sigma_3A_3AInterval_3C_20double_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html">Eigen::NumTraits&lt; sigma::Interval&lt; double &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numeric traits for <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html#adae696ceb2f1ea7dfc7c9bed04fbee26">Interval&lt;double&gt;</a>.  <a href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -133,7 +137,9 @@ Namespaces</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a85fe60578981898cbd7b9bb1f322f58f" id="r_a85fe60578981898cbd7b9bb1f322f58f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a85fe60578981898cbd7b9bb1f322f58f">EIGEN_NUMTRAITS</a>(float_type)</td></tr>
-<tr class="memdesc:a85fe60578981898cbd7b9bb1f322f58f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorization for Eigen::NumTraits Specialization.  <br /></td></tr>
+<tr class="memdesc:a85fe60578981898cbd7b9bb1f322f58f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorization for Eigen::NumTraits Specialization for Uncertain.  <br /></td></tr>
+<tr class="memitem:a8ecf92ec643a734472d6bf50d7e91e66" id="r_a8ecf92ec643a734472d6bf50d7e91e66"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8ecf92ec643a734472d6bf50d7e91e66">EIGEN_NUMTRAITS_INTERVAL</a>(float_type)</td></tr>
+<tr class="memdesc:a8ecf92ec643a734472d6bf50d7e91e66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorization for Eigen::NumTraits Specialization for Interval.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Components for compatibility with <a class="el" href="namespaceEigen.html" title="The namespace of the Eigen library.">Eigen</a>. </p>
@@ -173,7 +179,45 @@ Macros</h2></td></tr>
 <div class="ttc" id="aclasssigma_1_1Uncertain_html"><div class="ttname"><a href="classsigma_1_1Uncertain.html">sigma::Uncertain</a></div><div class="ttdoc">Models an unceratin variable.</div><div class="ttdef"><b>Definition</b> uncertain.hpp:33</div></div>
 <div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:10</div></div>
 </div><!-- fragment -->
-<p>Factorization for Eigen::NumTraits Specialization. </p>
+<p>Factorization for Eigen::NumTraits Specialization for Uncertain. </p>
+
+</div>
+</div>
+<a id="a8ecf92ec643a734472d6bf50d7e91e66" name="a8ecf92ec643a734472d6bf50d7e91e66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ecf92ec643a734472d6bf50d7e91e66">&#9670;&#160;</a></span>EIGEN_NUMTRAITS_INTERVAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EIGEN_NUMTRAITS_INTERVAL</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>float_type</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">                   \</div>
+<div class="line"><span class="keyword">template</span>&lt;&gt;                                                              \</div>
+<div class="line"><span class="keyword">struct </span>NumTraits&lt;<a class="code hl_namespace" href="namespacesigma.html">sigma</a>::Interval&lt;float_type&gt;&gt; : NumTraits&lt;float_type&gt; { \                                            \</div>
+<div class="line">    <span class="keyword">using </span>Interval = <a class="code hl_class" href="classsigma_1_1Interval.html">sigma::Interval&lt;float_type&gt;</a>;                       \                                  \</div>
+<div class="line">    <span class="keyword">using </span>Real = Interval;                                              \                           \</div>
+<div class="line">    <span class="keyword">using </span>NonInteger = Interval;                                        \                               \</div>
+<div class="line">    <span class="keyword">using </span>Literal = Interval;                                           \                                \</div>
+<div class="line">    <span class="keyword">using </span>Nested = Interval;                                            \</div>
+<div class="line">    <span class="keyword">enum</span> {                                                              \</div>
+<div class="line">        IsComplex             = 0,                                      \</div>
+<div class="line">        IsInteger             = 0,                                      \</div>
+<div class="line">        IsSigned              = 1,                                      \</div>
+<div class="line">        RequireInitialization = 1,                                      \</div>
+<div class="line">        ReadCost              = 1,                                      \</div>
+<div class="line">        AddCost               = 3,                                      \</div>
+<div class="line">        MulCost               = 3                                       \</div>
+<div class="line">    };                                                                  \</div>
+<div class="line">}</div>
+<div class="ttc" id="aclasssigma_1_1Interval_html"><div class="ttname"><a href="classsigma_1_1Interval.html">sigma::Interval</a></div><div class="ttdoc">Models a numeric interval.</div><div class="ttdef"><b>Definition</b> interval.hpp:21</div></div>
+</div><!-- fragment -->
+<p>Factorization for Eigen::NumTraits Specialization for Interval. </p>
 
 </div>
 </div>

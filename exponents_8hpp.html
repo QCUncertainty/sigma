@@ -112,7 +112,8 @@ $(function(){initNavTree('exponents_8hpp.html','',''); });
 
 <p>Exponent operations for uncertain variables.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="uncertain_8hpp_source.html">sigma/uncertain.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="interval_8hpp_source.html">sigma/interval.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="uncertain_8hpp_source.html">sigma/uncertain.hpp</a>&quot;</code><br />
 <code>#include &quot;exponents.ipp&quot;</code><br />
 </div>
 <p><a href="exponents_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -166,6 +167,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a181b0d75d0f1bda0bf7be58cb2236032" id="r_a181b0d75d0f1bda0bf7be58cb2236032"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
 <tr class="memitem:a181b0d75d0f1bda0bf7be58cb2236032 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacesigma.html#a181b0d75d0f1bda0bf7be58cb2236032">sigma::hypot</a> (const U &amp;a, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;b)</td></tr>
 <tr class="memdesc:a181b0d75d0f1bda0bf7be58cb2236032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the square root of the sum of squared arguments.  <br /></td></tr>
+<tr class="memitem:ae6ce659ec97fb6dcb2e582be33e059a1" id="r_ae6ce659ec97fb6dcb2e582be33e059a1"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ae6ce659ec97fb6dcb2e582be33e059a1 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacesigma.html#ae6ce659ec97fb6dcb2e582be33e059a1">sigma::sqrt</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:ae6ce659ec97fb6dcb2e582be33e059a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the square root of an interval.  <br /></td></tr>
+<tr class="memitem:abd4d114d01f89ba6b65bb6661722e152" id="r_abd4d114d01f89ba6b65bb6661722e152"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:abd4d114d01f89ba6b65bb6661722e152 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacesigma.html#abd4d114d01f89ba6b65bb6661722e152">sigma::exp</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:abd4d114d01f89ba6b65bb6661722e152"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate Euler's number raised to the power of an interval.  <br /></td></tr>
+<tr class="memitem:a05ed885aa305fef4a9b2a14e5a374b48" id="r_a05ed885aa305fef4a9b2a14e5a374b48"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a05ed885aa305fef4a9b2a14e5a374b48 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacesigma.html#a05ed885aa305fef4a9b2a14e5a374b48">sigma::log</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a05ed885aa305fef4a9b2a14e5a374b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the natural logarithm of an interval.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Exponent operations for uncertain variables. </p>

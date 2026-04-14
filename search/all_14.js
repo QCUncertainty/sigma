@@ -10,7 +10,7 @@ var searchData=
   ['sigma_3a_3adetail_5f_7',['detail_',['../namespacesigma_1_1detail__.html',1,'sigma']]],
   ['sin_8',['sin',['../namespacesigma.html#a174b5d94bc2a10f4a256eab8ee5a342d',1,'sigma']]],
   ['sinh_9',['sinh',['../namespacesigma.html#a2e4a33ee5b89ddb9a1f023d6341d75a3',1,'sigma']]],
-  ['sqrt_10',['sqrt',['../namespacesigma.html#a18639ffce7e2664f8f6cc4ca85213fd1',1,'sigma']]],
+  ['sqrt_10',['sqrt',['../namespacesigma.html#a18639ffce7e2664f8f6cc4ca85213fd1',1,'sigma::sqrt(const Uncertain&lt; T &gt; &amp;a)'],['../namespacesigma.html#ae6ce659ec97fb6dcb2e582be33e059a1',1,'sigma::sqrt(const Interval&lt; T &gt; &amp;a)']]],
   ['standards_11',['Our Standards',['../md_docs_2code__of__conduct.html#our-standards',1,'']]],
   ['statement_20of_20need_12',['Statement of Need',['../index.html#statement-of-need',1,'']]]
 ];

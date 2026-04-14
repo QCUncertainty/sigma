@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['setter_2ehpp_0',['setter.hpp',['../setter_8hpp.html',1,'']]],
-  ['sigma_2ehpp_1',['sigma.hpp',['../sigma_8hpp.html',1,'']]]
+  ['operation_5fcommon_2ehpp_0',['operation_common.hpp',['../operation__common_8hpp.html',1,'']]],
+  ['operations_2ehpp_1',['operations.hpp',['../operations_8hpp.html',1,'']]]
 ];

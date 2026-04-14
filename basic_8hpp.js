@@ -1,11 +1,13 @@
 var basic_8hpp =
 [
+    [ "sigma::abs", "namespacesigma.html#a3ea8a8ec91205acbf995d458fbf19105", null ],
     [ "sigma::abs", "namespacesigma.html#add954174f373873d59d093ceb3e82af5", null ],
     [ "sigma::abs2", "namespacesigma.html#aaa0794dcf432114a9467603ac7748c7c", null ],
     [ "sigma::ceil", "namespacesigma.html#aae07ce73db5514f76faadd45497679fd", null ],
     [ "sigma::copysign", "namespacesigma.html#a60742125f0d5c889ac848e306876404f", null ],
     [ "sigma::copysign", "namespacesigma.html#aab0b028f2d1d0c35269b0d0c9f75ccfa", null ],
     [ "sigma::copysign", "namespacesigma.html#acd31fdaf16ebab84607b4f004204a556", null ],
+    [ "sigma::fabs", "namespacesigma.html#a1e51b493c47ce761af8c6947bc94ca8b", null ],
     [ "sigma::fabs", "namespacesigma.html#ac4d519de22722a51cda0bc3c92960e89", null ],
     [ "sigma::floor", "namespacesigma.html#aa33c27c2144a61b5061e6a4902349123", null ],
     [ "sigma::fmod", "namespacesigma.html#aff47e6b43a710dc89637c5e6ae1e1c60", null ],
