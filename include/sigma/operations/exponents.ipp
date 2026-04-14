@@ -1,6 +1,7 @@
 #pragma once
 
 #include "sigma/detail_/operation_common.hpp"
+#include "sigma/interval.hpp"
 #include <cmath>
 
 namespace sigma {
@@ -101,6 +102,23 @@ Uncertain<T> hypot(const Uncertain<T>& a, const U& b) {
 template<typename T, typename U>
 Uncertain<T> hypot(const U& a, const Uncertain<T>& b) {
     return hypot(b, a);
+}
+
+template<typename T>
+Interval<T> sqrt(const Interval<T>& a) {
+    auto result =
+      boost::numeric::sqrt(boost::numeric::interval<T>(a.lower(), a.upper()));
+    return Interval<T>(result.lower(), result.upper());
+}
+
+template<typename T>
+Interval<T> exp(const Interval<T>& a) {
+    return Interval<T>(std::exp(a.lower()), std::exp(a.upper()));
+}
+
+template<typename T>
+Interval<T> log(const Interval<T>& a) {
+    return Interval<T>(std::log(a.lower()), std::log(a.upper()));
 }
 
 } // namespace sigma
