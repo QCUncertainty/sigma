@@ -63,6 +63,7 @@ jobs:
       - uses: ssciwr/doxygen-install@v2
       - name: Install boost
         uses: MarkusJx/install-boost@v2
+        id: install-boost
         with:
           boost_version: 1.84.0
       - name: Build and Test
@@ -72,6 +73,8 @@ jobs:
           cmake --build build --config Debug --parallel
           cd build
           ctest -C Debug -T test -VV --no-tests=error
+        env:
+            BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
         shell: cmd
 
   # Test Build of Documentation
