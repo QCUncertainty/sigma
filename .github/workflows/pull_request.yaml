@@ -51,7 +51,7 @@ jobs:
           cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=${{matrix.eigen}}
           cmake --build build --parallel
           cd build
-          ctest -VV --no-test=error
+          ctest -VV --no-tests=error
         shell: bash
 
   test_library_windows:
