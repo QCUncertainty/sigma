@@ -71,7 +71,7 @@ jobs:
           cmake -DCMAKE_TOOLCHAIN_FILE=%toolchain% -B "build" -G "Visual Studio 17 2022" -T host=x64 -A x64
           cmake --build build --config Debug --parallel
           cd build
-          ctest -C Debug -T test -VV
+          ctest -C Debug -T test -VV --no-tests=error
         shell: cmd
 
   # Test Build of Documentation
