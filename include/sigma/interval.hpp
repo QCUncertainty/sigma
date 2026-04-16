@@ -1,5 +1,6 @@
 #pragma once
 #include <boost/numeric/interval.hpp>
+#include <iomanip>
 #include <iostream>
 #include <type_traits>
 
@@ -102,6 +103,19 @@ public:
         return boost::numeric::width(m_interval_) / value_t{2};
     }
 
+    /** @brief Returns the magnitude of the interval.
+     *
+     * The magnitude, or absolute value, of an interval is defined as the
+     * maximum of the magnitudes of the lower and upper bounds.
+     *
+     * @return The magnitude of the interval
+     *
+     * @throw none No throw guarantee
+     */
+    value_t abs() const {
+        return std::max(std::abs(lower()), std::abs(upper()));
+    }
+
     // -- Arithmetic in-place operators ----------------------------------------
 
     /** @brief In-place addition of another interval
@@ -199,6 +213,14 @@ public:
         m_interval_ /= rhs;
         return *this;
     }
+
+    /** @brief Returns a string representation of the interval in interval form
+     *
+     *  @return A string representation of the interval in interval form
+     *
+     *  @throw none No throw guarantee
+     */
+    std::string print_interval_form() const;
 
 private:
     /// The underlying boost interval
@@ -318,6 +340,14 @@ bool operator<=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
 template<typename T1, typename T2>
 bool operator>=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
     return (lhs == rhs) || (lhs > rhs);
+}
+
+template<typename ValueType>
+std::string Interval<ValueType>::print_interval_form() const {
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(10);
+    ss << "[" << lower() << ", " << upper() << "]";
+    return ss.str();
 }
 
 // -- Arithmetic free functions ------------------------------------------------
