@@ -13,6 +13,8 @@ template<typename T>
 class Uncertain;
 template<typename T>
 class Interval;
+template<typename T>
+class GeneralInterval;
 } // namespace sigma
 
 /** @def EIGEN_NUMTRAITS(float_type)
@@ -71,6 +73,37 @@ class Interval;
         };                                                                  \
     }
 
+/** @def EIGEN_NUMTRAITS_GENERAL_INTERVAL(float_type)
+ *  @brief Factorization for Eigen::NumTraits Specialization for GeneralInterval
+ */
+#define EIGEN_NUMTRAITS_GENERAL_INTERVAL(float_type)                      \
+    /** @brief Numeric traits for GeneralInterval<float_type> */          \
+    template<>                                                            \
+    struct NumTraits<sigma::GeneralInterval<sigma::Interval<float_type>>> \
+      : NumTraits<float_type> {                                           \
+        /** The interval type */                                          \
+        using Interval = sigma::Interval<float_type>;                     \
+        /** The general interval type */                                  \
+        using GeneralInterval = sigma::GeneralInterval<Interval>;         \
+        /** The corresponding real type */                                \
+        using Real = GeneralInterval;                                     \
+        /** The corresponding non-integer type */                         \
+        using NonInteger = GeneralInterval;                               \
+        /** The corresponding literal type */                             \
+        using Literal = GeneralInterval;                                  \
+        /** The corresponding nested type */                              \
+        using Nested = GeneralInterval;                                   \
+        enum {                                                            \
+            IsComplex             = 0,                                    \
+            IsInteger             = 0,                                    \
+            IsSigned              = 1,                                    \
+            RequireInitialization = 1,                                    \
+            ReadCost              = 1,                                    \
+            AddCost               = 3,                                    \
+            MulCost               = 3                                     \
+        };                                                                \
+    }
+
 /** @namespace Eigen
  *  @brief The namespace of the Eigen library
  *
@@ -85,8 +118,12 @@ EIGEN_NUMTRAITS(double);
 EIGEN_NUMTRAITS_INTERVAL(float);
 EIGEN_NUMTRAITS_INTERVAL(double);
 
+EIGEN_NUMTRAITS_GENERAL_INTERVAL(float);
+EIGEN_NUMTRAITS_GENERAL_INTERVAL(double);
+
 } // namespace Eigen
 
 #undef EIGEN_NUMTRAITS
 #undef EIGEN_NUMTRAITS_INTERVAL
+#undef EIGEN_NUMTRAITS_GENERAL_INTERVAL
 #endif // ENABLE_EIGEN_SUPPORT

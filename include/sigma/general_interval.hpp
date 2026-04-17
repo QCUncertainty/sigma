@@ -56,12 +56,18 @@ public:
     using size_type        = typename dep_radius_map_t::size_type;
 
     GeneralInterval() {}
+    GeneralInterval(const value_t& value) : GeneralInterval(value, value) {}
+    GeneralInterval(const value_t& low, const value_t& high) :
+      GeneralInterval(interval_t(low, high)) {}
     GeneralInterval(const interval_t&);
     GeneralInterval(const interval_t& center, const dep_radius_map_t& dep);
     GeneralInterval(const GeneralInterval& other) = default;
 
     const auto& center() const { return m_midpoint_; }
     const auto& dep() const { return m_radius_to_weight_; }
+    bool contains(const value_t& value) const {
+        return as_interval().contains(value);
+    }
 
     interval_t as_interval() const { return compute_interval_(); }
 
@@ -94,6 +100,12 @@ public:
         return result;
     }
 
+    GeneralInterval operator/(const GeneralInterval& other) const {
+        GeneralInterval result(*this);
+        result /= other;
+        return result;
+    }
+
     // -- GeneralInterval with value_t Arithmetic --
     GeneralInterval& operator*=(const value_t& other) {
         m_midpoint_ *= other;
@@ -109,6 +121,32 @@ public:
         GeneralInterval result(*this);
         result *= other;
         return result;
+    }
+
+    // -- GeneralInterval with GeneralInterval Comparison --
+    bool operator==(const GeneralInterval& other) const {
+        return m_midpoint_ == other.m_midpoint_ &&
+               m_radius_to_weight_ == other.m_radius_to_weight_;
+    }
+
+    bool operator!=(const GeneralInterval& other) const {
+        return !(*this == other);
+    }
+
+    bool operator<(const GeneralInterval& other) const {
+        return as_interval() < other.as_interval();
+    }
+
+    bool operator>(const GeneralInterval& other) const {
+        return as_interval() > other.as_interval();
+    }
+
+    bool operator<=(const GeneralInterval& other) const {
+        return as_interval() <= other.as_interval();
+    }
+
+    bool operator>=(const GeneralInterval& other) const {
+        return as_interval() >= other.as_interval();
     }
 
 private:
@@ -141,7 +179,11 @@ template<typename IntervalType>
 GeneralInterval<IntervalType>::GeneralInterval(const interval_t& interval) :
   m_midpoint_(interval.median()),
   m_radius_to_weight_(
-    {{std::make_shared<value_t>(interval.radius()), interval_t(1.0)}}) {}
+    {{std::make_shared<value_t>(interval.radius()), interval_t(1.0)}}) {
+    if(interval.radius() != 0.0) return;
+    m_radius_to_weight_.clear();
+    m_midpoint_ = interval;
+}
 
 template<typename IntervalType>
 GeneralInterval<IntervalType>::GeneralInterval(const interval_t& center,
