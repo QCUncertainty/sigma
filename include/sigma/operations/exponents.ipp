@@ -121,4 +121,30 @@ Interval<T> log(const Interval<T>& a) {
     return Interval<T>(std::log(a.lower()), std::log(a.upper()));
 }
 
+template<typename T>
+GeneralInterval<T> sqrt(const GeneralInterval<T>& a) {
+    using value_t   = typename GeneralInterval<T>::value_t;
+    auto new_center = sigma::sqrt(a.center());
+    auto new_dep    = a.dep();
+    // Derivative of sqrt(x) = 1 / (2 * sqrt(x))
+    auto deriv = value_t(0.5) / sigma::sqrt(a.as_interval());
+    for(auto&& [radius, weight] : new_dep) { new_dep[radius] *= deriv; }
+    return GeneralInterval<T>(new_center, new_dep);
+}
+
+template<typename T>
+GeneralInterval<T> exp(const GeneralInterval<T>& a) {
+    auto new_center = sigma::exp(a.center());
+    auto new_dep    = a.dep();
+    // Derivative of exp(x) = exp(x)
+    auto deriv = sigma::exp(a.as_interval());
+    for(auto&& [radius, weight] : new_dep) { new_dep[radius] *= deriv; }
+    return GeneralInterval<T>(new_center, new_dep);
+}
+
+template<typename T>
+GeneralInterval<T> log(const GeneralInterval<T>& a) {
+    throw std::runtime_error("log(GeneralInterval) not implemented");
+}
+
 } // namespace sigma

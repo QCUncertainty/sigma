@@ -18,18 +18,6 @@ Uncertain<T> fabs(const Uncertain<T>& a) {
 }
 
 template<typename T>
-Interval<T> abs(const Interval<T>& a) {
-    auto result = boost::numeric::abs(
-        boost::numeric::interval<T>(a.lower(), a.upper()));
-    return Interval<T>(result.lower(), result.upper());
-}
-
-template<typename T>
-Interval<T> fabs(const Interval<T>& a) {
-    return abs(a);
-}
-
-template<typename T>
 Uncertain<T> abs2(const Uncertain<T>& a) {
     return pow(abs(a), 2.0);
 }
@@ -92,6 +80,28 @@ Uncertain<T> trunc(const Uncertain<T>& a) {
 template<typename T>
 Uncertain<T> round(const Uncertain<T>& a) {
     return Uncertain<T>(std::round(a.mean()));
+}
+
+template<typename T>
+Interval<T> abs(const Interval<T>& a) {
+    auto result =
+      boost::numeric::abs(boost::numeric::interval<T>(a.lower(), a.upper()));
+    return Interval<T>(result.lower(), result.upper());
+}
+
+template<typename T>
+Interval<T> fabs(const Interval<T>& a) {
+    return abs(a);
+}
+
+template<typename T>
+GeneralInterval<T> abs(const GeneralInterval<T>& a) {
+    return GeneralInterval<T>(abs(a.as_interval()));
+}
+
+template<typename T>
+GeneralInterval<T> fabs(const GeneralInterval<T>& a) {
+    return abs(a);
 }
 
 } // namespace sigma

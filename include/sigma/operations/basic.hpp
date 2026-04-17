@@ -1,4 +1,5 @@
 #pragma once
+#include "sigma/general_interval.hpp"
 #include "sigma/interval.hpp"
 #include "sigma/uncertain.hpp"
 
@@ -31,35 +32,6 @@ Uncertain<T> abs(const Uncertain<T>& a);
  */
 template<typename T>
 Uncertain<T> fabs(const Uncertain<T>& a);
-
-/** @brief Absolute Value of an interval
- *
- *  Returns the interval {|x| : x ∈ a}, i.e.:
- *  - [lo, hi]       if lo >= 0
- *  - [-hi, -lo]     if hi <= 0
- *  - [0, max(|lo|, hi)] if lo < 0 < hi
- *
- *  @tparam T The value type of the interval
- *  @param a The interval
- *
- *  @return The absolute value of @p a
- *
- *  @throw none No throw guarantee
- */
-template<typename T>
-Interval<T> abs(const Interval<T>& a);
-
-/** @brief Absolute Value of an interval
- *
- *  @tparam T The value type of the interval
- *  @param a The interval
- *
- *  @return The absolute value of @p a
- *
- *  @throw none No throw guarantee
- */
-template<typename T>
-Interval<T> fabs(const Interval<T>& a);
 
 /** @brief The Square of the Absolute Value
  *
@@ -185,6 +157,62 @@ Uncertain<T> trunc(const Uncertain<T>& a);
 template<typename T>
 Uncertain<T> round(const Uncertain<T>& a);
 
+// -- Interval Basic Operations --
+
+/** @brief Absolute Value of an interval
+ *
+ *  Returns the interval {|x| : x ∈ a}, i.e.:
+ *  - [lo, hi]       if lo >= 0
+ *  - [-hi, -lo]     if hi <= 0
+ *  - [0, max(|lo|, hi)] if lo < 0 < hi
+ *
+ *  @tparam T The value type of the interval
+ *  @param a The interval
+ *
+ *  @return The absolute value of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+Interval<T> abs(const Interval<T>& a);
+
+/** @brief Absolute Value of an interval
+ *
+ *  @tparam T The value type of the interval
+ *  @param a The interval
+ *
+ *  @return The absolute value of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+Interval<T> fabs(const Interval<T>& a);
+
+// -- General Interval Basic Operations --
+
+/** @brief Absolute Value of a general interval
+ *
+ *  @tparam T The value type of the interval
+ *  @param a The interval
+ *
+ *  @return The absolute value of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+GeneralInterval<T> abs(const GeneralInterval<T>& a);
+
+/** @brief Absolute Value of a general interval
+ *
+ *  @tparam T The value type of the interval
+ *  @param a The interval
+ *
+ *  @return The absolute value of @p a
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+GeneralInterval<T> fabs(const GeneralInterval<T>& a);
 } // namespace sigma
 
 #include "basic.ipp"

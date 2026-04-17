@@ -4,36 +4,6 @@
 using testing::test_interval;
 using testing::test_uncertain;
 
-TEMPLATE_TEST_CASE("Exponents (Interval)", "", sigma::IFloat, sigma::IDouble) {
-    using testing_t = TestType;
-    using value_t   = typename testing_t::value_t;
-
-    SECTION("Square Root") {
-        // sqrt([1, 4]) = [1, 2]
-        auto a = testing_t(value_t{1}, value_t{4});
-        test_interval(sigma::sqrt(a), 1.0, 2.0);
-        // sqrt([4, 9]) = [2, 3]
-        auto b = testing_t(value_t{4}, value_t{9});
-        test_interval(sigma::sqrt(b), 2.0, 3.0);
-    }
-    SECTION("Exponential Function") {
-        // exp([0, 1]) = [1, e]
-        auto a = testing_t(value_t{0}, value_t{1});
-        test_interval(sigma::exp(a), 1.0, 2.7183);
-        // exp([1, 2]) = [e, e^2]
-        auto b = testing_t(value_t{1}, value_t{2});
-        test_interval(sigma::exp(b), 2.7183, 7.3891);
-    }
-    SECTION("Natural Logarithm") {
-        // log([1, e]) = [0, 1]
-        auto a = testing_t(value_t{1}, value_t{2.7183});
-        test_interval(sigma::log(a), 0.0, 1.0);
-        // log([1, 1]) = [0, 0]
-        auto b = testing_t(value_t{1}, value_t{1});
-        test_interval(sigma::log(b), 0.0, 0.0);
-    }
-}
-
 TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
     using testing_t = TestType;
 
@@ -99,5 +69,56 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
             test_uncertain(sigma::hypot(a, 2.0), 2.2361, 0.0447, 1);
             test_uncertain(sigma::hypot(2.0, a), 2.2361, 0.0447, 1);
         }
+    }
+}
+
+TEMPLATE_TEST_CASE("Exponents (Interval)", "", sigma::IFloat, sigma::IDouble) {
+    using testing_t = TestType;
+    using value_t   = typename testing_t::value_t;
+
+    SECTION("Square Root") {
+        // sqrt([1, 4]) = [1, 2]
+        auto a = testing_t(value_t{1}, value_t{4});
+        test_interval(sigma::sqrt(a), 1.0, 2.0);
+        // sqrt([4, 9]) = [2, 3]
+        auto b = testing_t(value_t{4}, value_t{9});
+        test_interval(sigma::sqrt(b), 2.0, 3.0);
+    }
+    SECTION("Exponential Function") {
+        // exp([0, 1]) = [1, e]
+        auto a = testing_t(value_t{0}, value_t{1});
+        test_interval(sigma::exp(a), 1.0, 2.7183);
+        // exp([1, 2]) = [e, e^2]
+        auto b = testing_t(value_t{1}, value_t{2});
+        test_interval(sigma::exp(b), 2.7183, 7.3891);
+    }
+    SECTION("Natural Logarithm") {
+        // log([1, e]) = [0, 1]
+        auto a = testing_t(value_t{1}, value_t{2.7183});
+        test_interval(sigma::log(a), 0.0, 1.0);
+        // log([1, 1]) = [0, 0]
+        auto b = testing_t(value_t{1}, value_t{1});
+        test_interval(sigma::log(b), 0.0, 0.0);
+    }
+}
+
+TEMPLATE_TEST_CASE("Exponents (General Interval)", "", sigma::IFloat,
+                   sigma::IDouble) {
+    using testing_t = sigma::GeneralInterval<TestType>;
+    using value_t   = typename testing_t::value_t;
+
+    SECTION("sqrt") {
+        auto a   = testing_t(TestType(value_t{5}, value_t{10}));
+        auto b   = testing_t(TestType(value_t{1}, value_t{2}));
+        auto num = a + b;
+        auto den = a - b;
+        num /= den;
+        std::cout << sigma::sqrt(num).print_interval_form() << std::endl;
+        test_interval(sigma::sqrt(num).as_interval(), 0.54433105, 1.9051587);
+    }
+
+    SECTION("exp") {
+        auto a = testing_t(TestType(value_t{1}, value_t{1.1}));
+        test_interval(sigma::exp(a).as_interval(), 2.7074428, 3.0078595);
     }
 }

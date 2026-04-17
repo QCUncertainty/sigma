@@ -57,7 +57,18 @@ public:
 
     GeneralInterval() {}
     GeneralInterval(const interval_t&);
+    GeneralInterval(const interval_t& center, const dep_radius_map_t& dep);
     GeneralInterval(const GeneralInterval& other) = default;
+
+    const auto& center() const { return m_midpoint_; }
+    const auto& dep() const { return m_radius_to_weight_; }
+
+    interval_t as_interval() const { return compute_interval_(); }
+
+    std::string print_hansen_form() const;
+    std::string print_interval_form() const {
+        return as_interval().print_interval_form();
+    }
 
     // -- GeneralInterval with GeneralInterval Arithmetic --
     GeneralInterval& operator+=(const GeneralInterval& other);
@@ -87,7 +98,6 @@ public:
     GeneralInterval& operator*=(const value_t& other) {
         m_midpoint_ *= other;
         for(auto&& [radius, weight] : m_radius_to_weight_) { weight *= other; }
-        update_cached_interval_();
         return *this;
     }
 
@@ -101,25 +111,16 @@ public:
         return result;
     }
 
-    interval_t as_interval() const { return m_interval_; }
-    const auto& dep() const { return m_radius_to_weight_; }
-    std::string print_hansen_form() const;
-    std::string print_interval_form() const {
-        return m_interval_.print_interval_form();
-    }
-
 private:
-    void update_cached_interval_();
+    /// "Flattens" *this to a normal interval
+    interval_t compute_interval_() const;
+
     /// The midpoint of the generalized interval (Hassan calls it [c])
     interval_t m_midpoint_;
 
     /// Map from radii to weights (Hassan calls them respectively zeta and
     /// v)
     dep_radius_map_t m_radius_to_weight_;
-
-    // Cached representation of *this as a "normal" interval Ref calls it
-    // RIA
-    interval_t m_interval_;
 };
 
 template<typename IntervalType>
@@ -140,8 +141,25 @@ template<typename IntervalType>
 GeneralInterval<IntervalType>::GeneralInterval(const interval_t& interval) :
   m_midpoint_(interval.median()),
   m_radius_to_weight_(
-    {{std::make_shared<value_t>(interval.radius()), interval_t(1.0)}}),
-  m_interval_(interval) {}
+    {{std::make_shared<value_t>(interval.radius()), interval_t(1.0)}}) {}
+
+template<typename IntervalType>
+GeneralInterval<IntervalType>::GeneralInterval(const interval_t& center,
+                                               const dep_radius_map_t& dep) :
+  m_midpoint_(center), m_radius_to_weight_(dep) {}
+
+template<typename IntervalType>
+std::string GeneralInterval<IntervalType>::print_hansen_form() const {
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(10);
+    ss << m_midpoint_.print_interval_form() << " + [-1,1] * (";
+    for(auto&& [radius, weight] : m_radius_to_weight_) {
+        ss << (*radius) << "*" << weight.print_interval_form() << " + ";
+    }
+    auto temp = ss.str();
+    temp.erase(temp.size() - 3); // Remove the last " + "
+    return temp + ")";
+}
 
 template<typename IntervalType>
 auto GeneralInterval<IntervalType>::operator+=(const GeneralInterval& other)
@@ -150,7 +168,6 @@ auto GeneralInterval<IntervalType>::operator+=(const GeneralInterval& other)
     for(auto&& [radius, weight] : other.m_radius_to_weight_) {
         m_radius_to_weight_[radius] += weight;
     }
-    update_cached_interval_();
     return *this;
 }
 
@@ -161,7 +178,6 @@ auto GeneralInterval<IntervalType>::operator-=(const GeneralInterval& other)
     for(auto&& [radius, weight] : other.m_radius_to_weight_) {
         m_radius_to_weight_[radius] -= weight;
     }
-    update_cached_interval_();
     return *this;
 }
 
@@ -227,7 +243,6 @@ auto GeneralInterval<IntervalType>::operator*=(const GeneralInterval& other)
 
     m_midpoint_         = std::move(new_midpoint);
     m_radius_to_weight_ = std::move(new_radius_to_weight);
-    update_cached_interval_();
     return *this;
 }
 
@@ -268,31 +283,17 @@ auto GeneralInterval<IntervalType>::operator/=(const GeneralInterval& other)
 
     m_midpoint_         = std::move(new_midpoint);
     m_radius_to_weight_ = std::move(new_radius_to_weight);
-    update_cached_interval_();
     return *this;
 }
 
 template<typename IntervalType>
-std::string GeneralInterval<IntervalType>::print_hansen_form() const {
-    std::stringstream ss;
-    ss << std::fixed << std::setprecision(10);
-    ss << m_midpoint_.print_interval_form() << " + [-1,1] * (";
-    for(auto&& [radius, weight] : m_radius_to_weight_) {
-        ss << (*radius) << "*" << weight.print_interval_form() << " + ";
-    }
-    auto temp = ss.str();
-    temp.erase(temp.size() - 3); // Remove the last " + "
-    return temp + ")";
-}
-
-template<typename IntervalType>
-void GeneralInterval<IntervalType>::update_cached_interval_() {
+auto GeneralInterval<IntervalType>::compute_interval_() const -> interval_t {
     value_t sum = 0.0;
     for(auto&& [radius, weight] : m_radius_to_weight_) {
         sum += (*radius) * weight.abs();
     }
     interval_t unit(-1, 1);
-    m_interval_ = m_midpoint_ + sum * unit;
+    return m_midpoint_ + sum * unit;
 }
 
 } // namespace sigma
