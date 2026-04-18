@@ -113,7 +113,8 @@ TEMPLATE_TEST_CASE("Exponents (Interval)", "", sigma::IFloat, sigma::IDouble) {
 //         auto num = a + b;
 //         auto den = a - b;
 //         num /= den;
-//         std::cout << sigma::sqrt(num).print_interval_form() << std::endl;
+//         std::cout << sigma::sqrt(num).print_gradient() << std::endl;
+//         std::cout << sigma::sqrt(num).print_hansen_form() << std::endl;
 //         test_interval(sigma::sqrt(num).as_interval(), 0.54433105, 1.9051587);
 //     }
 

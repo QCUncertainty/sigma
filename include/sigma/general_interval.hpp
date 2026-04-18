@@ -123,7 +123,10 @@ public:
     // -- GeneralInterval with value_t Arithmetic --
     GeneralInterval& operator*=(const value_t& other) {
         m_midpoint_ *= other;
-        for(auto&& [radius, weight] : m_radius_to_weight_) { weight *= other; }
+        for(auto&& [radius, weight] : m_radius_to_weight_) {
+            weight *= other;
+            m_gradient_[radius] *= other;
+        }
         return *this;
     }
 
@@ -266,16 +269,21 @@ auto GeneralInterval<IntervalType>::operator*=(const GeneralInterval& other)
     // [v_i^z] = [c^y][v_i^x] + [c^x][v_i^y] + [-1,1]|v_i^x|\sum_j
     // |r_j||v_j^y|
 
+    // ydx/dzi + xdy/dzi
+
     interval_t unit(-1, 1);
     interval_t new_midpoint(m_midpoint_);
     dep_radius_map_t new_radius_to_weight;
+    dep_radius_map_t new_gradient;
 
     // center update [c^x][c^y]
     new_midpoint *= other.m_midpoint_;
 
+    auto other_interval = other.as_interval();
     for(auto&& [radius, weight] : m_radius_to_weight_) {
         // [v_i^z] update [v_i^x][c^y]
         new_radius_to_weight[radius] = weight * other.m_midpoint_;
+        new_gradient[radius] += other_interval * m_gradient_.at(radius);
 
         // [v_i^z] update [-1, 1]|v_i^x|\sum_j |r_j||v_j^y|
         const auto vi = weight.abs();
@@ -304,7 +312,10 @@ auto GeneralInterval<IntervalType>::operator*=(const GeneralInterval& other)
 
     // We have now covered all i in *this and all i in other shared with
     // *this. we thus need i that is in other but not in *this.
+    auto this_interval = as_interval();
     for(auto&& [radius, weight] : other.m_radius_to_weight_) {
+        new_gradient[radius] += this_interval * other.m_gradient_.at(radius);
+
         if(new_radius_to_weight.count(radius) == 1) continue;
         new_radius_to_weight[radius] = weight * m_midpoint_;
 
@@ -321,6 +332,7 @@ auto GeneralInterval<IntervalType>::operator*=(const GeneralInterval& other)
 
     m_midpoint_         = std::move(new_midpoint);
     m_radius_to_weight_ = std::move(new_radius_to_weight);
+    m_gradient_         = std::move(new_gradient);
     return *this;
 }
 
@@ -331,20 +343,27 @@ auto GeneralInterval<IntervalType>::operator/=(const GeneralInterval& other)
     // [v_i^z] = [v_i^x][c^y] - [c^x][v_i^y] /
     //    ([c^y]([c^y]+ [-1,1]|v_i^x|\sum_j|r_j||v_j^y|))
 
+    if(other.contains(0.0)) { throw std::runtime_error("Division by zero"); }
+
     interval_t new_midpoint(m_midpoint_);
     new_midpoint /= other.m_midpoint_;
 
     dep_radius_map_t new_radius_to_weight;
+    dep_radius_map_t new_gradient;
 
     // Compute the denominator for [v_i^z]
     interval_t unit(-1, 1);
-    value_t sum = 0.0;
+    value_t sum         = 0.0;
+    auto other_interval = other.as_interval();
+    auto other_squared  = other_interval * other_interval;
+
     for(auto&& [radius, weight] : other.m_radius_to_weight_) {
         sum += (*radius) * weight.abs();
     }
     auto denominator = other.m_midpoint_ * (other.m_midpoint_ + unit * sum);
 
     for(auto&& [radius, weight] : m_radius_to_weight_) {
+        new_gradient[radius] += m_gradient_.at(radius) / other_interval;
         interval_t numerator = weight * other.m_midpoint_;
         if(other.m_radius_to_weight_.count(radius) == 1) {
             auto other_weight = other.m_radius_to_weight_.at(radius);
@@ -352,7 +371,11 @@ auto GeneralInterval<IntervalType>::operator/=(const GeneralInterval& other)
         }
         new_radius_to_weight[radius] = numerator / denominator;
     }
+
+    auto this_interval = as_interval();
     for(auto&& [radius, weight] : other.m_radius_to_weight_) {
+        new_gradient[radius] -=
+          this_interval * other.m_gradient_.at(radius) / other_squared;
         // Skip common radii
         if(m_radius_to_weight_.count(radius) == 1) continue;
         auto numerator               = -weight * m_midpoint_;
@@ -361,6 +384,7 @@ auto GeneralInterval<IntervalType>::operator/=(const GeneralInterval& other)
 
     m_midpoint_         = std::move(new_midpoint);
     m_radius_to_weight_ = std::move(new_radius_to_weight);
+    m_gradient_         = std::move(new_gradient);
     return *this;
 }
 
