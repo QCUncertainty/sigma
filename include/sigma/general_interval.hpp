@@ -60,7 +60,8 @@ public:
     GeneralInterval(const value_t& low, const value_t& high) :
       GeneralInterval(interval_t(low, high)) {}
     GeneralInterval(const interval_t&);
-    GeneralInterval(const interval_t& center, const dep_radius_map_t& dep);
+    GeneralInterval(const interval_t& center, const dep_radius_map_t& dep,
+                    const dep_radius_map_t& gradient);
     GeneralInterval(const GeneralInterval& other) = default;
 
     const auto& center() const { return m_midpoint_; }
@@ -69,11 +70,24 @@ public:
         return as_interval().contains(value);
     }
 
+    const auto& gradient() const { return m_gradient_; }
+    interval_t derivative(dep_radius_ptr radius) const {
+        return m_gradient_.count(radius) ? m_gradient_.at(radius) :
+                                           interval_t(0.0);
+    }
+
     interval_t as_interval() const { return compute_interval_(); }
 
     std::string print_hansen_form() const;
+    std::string print_gradient() const;
     std::string print_interval_form() const {
         return as_interval().print_interval_form();
+    }
+
+    GeneralInterval operator-() const {
+        GeneralInterval result(*this);
+        result *= -1.0;
+        return result;
     }
 
     // -- GeneralInterval with GeneralInterval Arithmetic --
@@ -153,12 +167,18 @@ private:
     /// "Flattens" *this to a normal interval
     interval_t compute_interval_() const;
 
+    /// Computes the derivative of *this with respect to a given radius
+    interval_t compute_derivative_(dep_radius_ptr radius) const;
+
     /// The midpoint of the generalized interval (Hassan calls it [c])
     interval_t m_midpoint_;
 
     /// Map from radii to weights (Hassan calls them respectively zeta and
     /// v)
     dep_radius_map_t m_radius_to_weight_;
+
+    /// Gradient stored as a map from radii to partial derivative
+    dep_radius_map_t m_gradient_;
 };
 
 template<typename IntervalType>
@@ -177,18 +197,19 @@ GeneralInterval<IntervalType> operator*(
 
 template<typename IntervalType>
 GeneralInterval<IntervalType>::GeneralInterval(const interval_t& interval) :
-  m_midpoint_(interval.median()),
-  m_radius_to_weight_(
-    {{std::make_shared<value_t>(interval.radius()), interval_t(1.0)}}) {
-    if(interval.radius() != 0.0) return;
-    m_radius_to_weight_.clear();
-    m_midpoint_ = interval;
+  m_midpoint_(interval.median()) {
+    // Is the interval a scalar? If so, we don't need to track the dependencies
+    if(interval.radius() == 0.0) return;
+    auto pradius                 = std::make_shared<value_t>(interval.radius());
+    m_radius_to_weight_[pradius] = interval_t(-1.0);
+    m_gradient_[pradius]         = interval_t(1.0);
 }
 
 template<typename IntervalType>
-GeneralInterval<IntervalType>::GeneralInterval(const interval_t& center,
-                                               const dep_radius_map_t& dep) :
-  m_midpoint_(center), m_radius_to_weight_(dep) {}
+GeneralInterval<IntervalType>::GeneralInterval(
+  const interval_t& center, const dep_radius_map_t& dep,
+  const dep_radius_map_t& gradient) :
+  m_midpoint_(center), m_radius_to_weight_(dep), m_gradient_(gradient) {}
 
 template<typename IntervalType>
 std::string GeneralInterval<IntervalType>::print_hansen_form() const {
@@ -204,11 +225,25 @@ std::string GeneralInterval<IntervalType>::print_hansen_form() const {
 }
 
 template<typename IntervalType>
+std::string GeneralInterval<IntervalType>::print_gradient() const {
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(10);
+    ss << "(";
+    for(auto&& [radius, weight] : m_gradient_) {
+        ss << weight.print_interval_form() << ", ";
+    }
+    auto temp = ss.str();
+    temp.erase(temp.size() - 2); // Remove the last ", "
+    return temp + ")";
+}
+
+template<typename IntervalType>
 auto GeneralInterval<IntervalType>::operator+=(const GeneralInterval& other)
   -> GeneralInterval& {
     m_midpoint_ += other.m_midpoint_;
     for(auto&& [radius, weight] : other.m_radius_to_weight_) {
         m_radius_to_weight_[radius] += weight;
+        m_gradient_[radius] += other.m_gradient_.at(radius);
     }
     return *this;
 }
@@ -219,6 +254,7 @@ auto GeneralInterval<IntervalType>::operator-=(const GeneralInterval& other)
     m_midpoint_ -= other.m_midpoint_;
     for(auto&& [radius, weight] : other.m_radius_to_weight_) {
         m_radius_to_weight_[radius] -= weight;
+        m_gradient_[radius] -= other.m_gradient_.at(radius);
     }
     return *this;
 }

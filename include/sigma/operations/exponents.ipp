@@ -123,23 +123,31 @@ Interval<T> log(const Interval<T>& a) {
 
 template<typename T>
 GeneralInterval<T> sqrt(const GeneralInterval<T>& a) {
-    using value_t   = typename GeneralInterval<T>::value_t;
-    auto new_center = sigma::sqrt(a.center());
-    auto new_dep    = a.dep();
+    using value_t     = typename GeneralInterval<T>::value_t;
+    auto new_center   = sigma::sqrt(a.center());
+    auto new_dep      = a.dep();
+    auto new_gradient = a.gradient();
     // Derivative of sqrt(x) = 1 / (2 * sqrt(x))
     auto deriv = value_t(0.5) / sigma::sqrt(a.as_interval());
-    for(auto&& [radius, weight] : new_dep) { new_dep[radius] *= deriv; }
-    return GeneralInterval<T>(new_center, new_dep);
+    for(auto&& [radius, weight] : new_dep) {
+        new_gradient[radius] *= deriv;
+        new_dep[radius] *= new_gradient[radius];
+    }
+    return GeneralInterval<T>(new_center, new_dep, new_gradient);
 }
 
 template<typename T>
 GeneralInterval<T> exp(const GeneralInterval<T>& a) {
-    auto new_center = sigma::exp(a.center());
-    auto new_dep    = a.dep();
+    auto new_center   = sigma::exp(a.center());
+    auto new_dep      = a.dep();
+    auto new_gradient = a.gradient();
     // Derivative of exp(x) = exp(x)
     auto deriv = sigma::exp(a.as_interval());
-    for(auto&& [radius, weight] : new_dep) { new_dep[radius] *= deriv; }
-    return GeneralInterval<T>(new_center, new_dep);
+    for(auto&& [radius, weight] : new_dep) {
+        new_gradient[radius] *= deriv;
+        new_dep[radius] *= new_gradient[radius];
+    }
+    return GeneralInterval<T>(new_center, new_dep, new_gradient);
 }
 
 template<typename T>
