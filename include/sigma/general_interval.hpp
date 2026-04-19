@@ -65,7 +65,7 @@ public:
     GeneralInterval(const GeneralInterval& other) = default;
 
     const auto& center() const { return m_midpoint_; }
-    const auto& dep() const { return m_radius_to_weight_; }
+    const auto& weights() const { return m_weights_; }
     bool contains(const value_t& value) const {
         return as_interval().contains(value);
     }
@@ -123,7 +123,7 @@ public:
     // -- GeneralInterval with value_t Arithmetic --
     GeneralInterval& operator*=(const value_t& other) {
         m_midpoint_ *= other;
-        for(auto&& [radius, weight] : m_radius_to_weight_) {
+        for(auto&& [radius, weight] : m_weights_) {
             weight *= other;
             m_gradient_[radius] *= other;
         }
@@ -143,7 +143,8 @@ public:
     // -- GeneralInterval with GeneralInterval Comparison --
     bool operator==(const GeneralInterval& other) const {
         return m_midpoint_ == other.m_midpoint_ &&
-               m_radius_to_weight_ == other.m_radius_to_weight_;
+               m_weights_ == other.m_weights_ &&
+               m_gradient_ == other.m_gradient_;
     }
 
     bool operator!=(const GeneralInterval& other) const {
@@ -176,9 +177,8 @@ private:
     /// The midpoint of the generalized interval (Hassan calls it [c])
     interval_t m_midpoint_;
 
-    /// Map from radii to weights (Hassan calls them respectively zeta and
-    /// v)
-    dep_radius_map_t m_radius_to_weight_;
+    /// Weights of each radius
+    dep_radius_map_t m_weights_;
 
     /// Gradient stored as a map from radii to partial derivative
     dep_radius_map_t m_gradient_;
@@ -203,23 +203,23 @@ GeneralInterval<IntervalType>::GeneralInterval(const interval_t& interval) :
   m_midpoint_(interval.median()) {
     // Is the interval a scalar? If so, we don't need to track the dependencies
     if(interval.radius() == 0.0) return;
-    auto pradius                 = std::make_shared<value_t>(interval.radius());
-    m_radius_to_weight_[pradius] = interval_t(-1.0);
-    m_gradient_[pradius]         = interval_t(1.0);
+    auto pradius         = std::make_shared<value_t>(interval.radius());
+    m_weights_[pradius]  = interval_t(-1.0);
+    m_gradient_[pradius] = interval_t(1.0);
 }
 
 template<typename IntervalType>
 GeneralInterval<IntervalType>::GeneralInterval(
   const interval_t& center, const dep_radius_map_t& dep,
   const dep_radius_map_t& gradient) :
-  m_midpoint_(center), m_radius_to_weight_(dep), m_gradient_(gradient) {}
+  m_midpoint_(center), m_weights_(dep), m_gradient_(gradient) {}
 
 template<typename IntervalType>
 std::string GeneralInterval<IntervalType>::print_hansen_form() const {
     std::stringstream ss;
     ss << std::fixed << std::setprecision(10);
     ss << m_midpoint_.print_interval_form() << " + [-1,1] * (";
-    for(auto&& [radius, weight] : m_radius_to_weight_) {
+    for(auto&& [radius, weight] : m_weights_) {
         ss << (*radius) << "*" << weight.print_interval_form() << " + ";
     }
     auto temp = ss.str();
@@ -244,8 +244,8 @@ template<typename IntervalType>
 auto GeneralInterval<IntervalType>::operator+=(const GeneralInterval& other)
   -> GeneralInterval& {
     m_midpoint_ += other.m_midpoint_;
-    for(auto&& [radius, weight] : other.m_radius_to_weight_) {
-        m_radius_to_weight_[radius] += weight;
+    for(auto&& [radius, weight] : other.m_weights_) {
+        m_weights_[radius] += weight;
         m_gradient_[radius] += other.m_gradient_.at(radius);
     }
     return *this;
@@ -255,8 +255,8 @@ template<typename IntervalType>
 auto GeneralInterval<IntervalType>::operator-=(const GeneralInterval& other)
   -> GeneralInterval& {
     m_midpoint_ -= other.m_midpoint_;
-    for(auto&& [radius, weight] : other.m_radius_to_weight_) {
-        m_radius_to_weight_[radius] -= weight;
+    for(auto&& [radius, weight] : other.m_weights_) {
+        m_weights_[radius] -= weight;
         m_gradient_[radius] -= other.m_gradient_.at(radius);
     }
     return *this;
@@ -280,27 +280,31 @@ auto GeneralInterval<IntervalType>::operator*=(const GeneralInterval& other)
     new_midpoint *= other.m_midpoint_;
 
     auto other_interval = other.as_interval();
-    for(auto&& [radius, weight] : m_radius_to_weight_) {
+
+    auto compute_radius = [&](const auto& weights, const auto& radius) {
+        value_t sum = 0.0;
+        for(auto&& [other_radius, other_weight] : weights) {
+            if(radius == other_radius) continue;
+            sum += (*other_radius) * other_weight.abs();
+        }
+        return sum * unit;
+    };
+
+    for(auto&& [radius, weight] : m_weights_) {
         // [v_i^z] update [v_i^x][c^y]
         new_radius_to_weight[radius] = weight * other.m_midpoint_;
         new_gradient[radius] += other_interval * m_gradient_.at(radius);
 
         // [v_i^z] update [-1, 1]|v_i^x|\sum_j |r_j||v_j^y|
         const auto vi = weight.abs();
-        value_t sum   = 0.0;
-        for(auto&& [other_radius, other_weight] : other.m_radius_to_weight_) {
-            if(radius == other_radius) continue;
-            const auto rj = (*other_radius);
-            const auto vj = other_weight.abs();
-            sum += rj * vj;
-        }
-        new_radius_to_weight[radius] += unit * vi * sum;
+        const auto rj = compute_radius(other.m_weights_, radius);
+        new_radius_to_weight[radius] += vi * rj;
 
         // If radius is only in *this, then [v_i^y] = [0,0],
         // i.e. no center update and [v_i^z] = [c^y][v_i^x]
-        if(other.m_radius_to_weight_.count(radius) == 0) continue;
+        if(other.m_weights_.count(radius) == 0) continue;
 
-        auto other_weight = other.m_radius_to_weight_.at(radius);
+        auto other_weight = other.m_weights_.at(radius);
 
         // center update [0, r_i^2][v_i^x][v_i^y]
         auto r2 = (*radius) * (*radius);
@@ -313,26 +317,20 @@ auto GeneralInterval<IntervalType>::operator*=(const GeneralInterval& other)
     // We have now covered all i in *this and all i in other shared with
     // *this. we thus need i that is in other but not in *this.
     auto this_interval = as_interval();
-    for(auto&& [radius, weight] : other.m_radius_to_weight_) {
+    for(auto&& [radius, weight] : other.m_weights_) {
         new_gradient[radius] += this_interval * other.m_gradient_.at(radius);
 
         if(new_radius_to_weight.count(radius) == 1) continue;
         new_radius_to_weight[radius] = weight * m_midpoint_;
 
         const auto vi = weight.abs();
-        value_t sum   = 0.0;
-        for(auto&& [other_radius, other_weight] : m_radius_to_weight_) {
-            if(radius == other_radius) continue;
-            const auto rj = (*other_radius);
-            const auto vj = other_weight.abs();
-            sum += rj * vj;
-        }
-        new_radius_to_weight[radius] += unit * vi * sum;
+        const auto rj = compute_radius(m_weights_, radius);
+        new_radius_to_weight[radius] += vi * rj;
     }
 
-    m_midpoint_         = std::move(new_midpoint);
-    m_radius_to_weight_ = std::move(new_radius_to_weight);
-    m_gradient_         = std::move(new_gradient);
+    m_midpoint_ = std::move(new_midpoint);
+    m_weights_  = std::move(new_radius_to_weight);
+    m_gradient_ = std::move(new_gradient);
     return *this;
 }
 
@@ -357,41 +355,41 @@ auto GeneralInterval<IntervalType>::operator/=(const GeneralInterval& other)
     auto other_interval = other.as_interval();
     auto other_squared  = other_interval * other_interval;
 
-    for(auto&& [radius, weight] : other.m_radius_to_weight_) {
+    for(auto&& [radius, weight] : other.m_weights_) {
         sum += (*radius) * weight.abs();
     }
     auto denominator = other.m_midpoint_ * (other.m_midpoint_ + unit * sum);
 
-    for(auto&& [radius, weight] : m_radius_to_weight_) {
+    for(auto&& [radius, weight] : m_weights_) {
         new_gradient[radius] += m_gradient_.at(radius) / other_interval;
         interval_t numerator = weight * other.m_midpoint_;
-        if(other.m_radius_to_weight_.count(radius) == 1) {
-            auto other_weight = other.m_radius_to_weight_.at(radius);
+        if(other.m_weights_.count(radius) == 1) {
+            auto other_weight = other.m_weights_.at(radius);
             numerator -= m_midpoint_ * other_weight;
         }
         new_radius_to_weight[radius] = numerator / denominator;
     }
 
     auto this_interval = as_interval();
-    for(auto&& [radius, weight] : other.m_radius_to_weight_) {
+    for(auto&& [radius, weight] : other.m_weights_) {
         new_gradient[radius] -=
           this_interval * other.m_gradient_.at(radius) / other_squared;
         // Skip common radii
-        if(m_radius_to_weight_.count(radius) == 1) continue;
+        if(m_weights_.count(radius) == 1) continue;
         auto numerator               = -weight * m_midpoint_;
         new_radius_to_weight[radius] = numerator / denominator;
     }
 
-    m_midpoint_         = std::move(new_midpoint);
-    m_radius_to_weight_ = std::move(new_radius_to_weight);
-    m_gradient_         = std::move(new_gradient);
+    m_midpoint_ = std::move(new_midpoint);
+    m_weights_  = std::move(new_radius_to_weight);
+    m_gradient_ = std::move(new_gradient);
     return *this;
 }
 
 template<typename IntervalType>
 auto GeneralInterval<IntervalType>::compute_interval_() const -> interval_t {
     value_t sum = 0.0;
-    for(auto&& [radius, weight] : m_radius_to_weight_) {
+    for(auto&& [radius, weight] : m_weights_) {
         sum += (*radius) * weight.abs();
     }
     interval_t unit(-1, 1);

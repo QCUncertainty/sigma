@@ -121,6 +121,21 @@ Interval<T> log(const Interval<T>& a) {
     return Interval<T>(std::log(a.lower()), std::log(a.upper()));
 }
 
+// template<typename T>
+// GeneralInterval<T> square(const GeneralInterval<T>& a) {
+//     auto a_interval = a.as_interval();
+//     auto new_center = a_interval * a_interval;
+//     auto new_dep = a.dep();
+//     auto new_gradient = a.gradient();
+//     // f(x) = x^2 so df/dx = 2x
+//     auto dfda = 2 * a_interval;
+//     interval_t s2;
+//     for(auto&& [radius, weight] : new_dep) {
+//         new_gradient[radius] *= dfda;
+//         auto r2 =(*radius) * (*radius);
+//         s2 += interval_t(0, r2) * weight * weight;
+// }
+
 template<typename T>
 GeneralInterval<T> sqrt(const GeneralInterval<T>& a) {
     using value_t     = typename GeneralInterval<T>::value_t;

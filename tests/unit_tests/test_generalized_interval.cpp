@@ -12,16 +12,16 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
         SECTION("Default") {
             ginterval_t value;
             test_interval(value.as_interval(), 0.0, 0.0);
-            REQUIRE(value.dep().size() == 0);
+            REQUIRE(value.weights().size() == 0);
             REQUIRE(value.gradient().size() == 0);
         }
         SECTION("From Interval") {
             interval_t interval(1.0, 2.0);
             ginterval_t value(interval);
             test_interval(value.as_interval(), 1.0, 2.0);
-            REQUIRE(value.dep().size() == 1);
+            REQUIRE(value.weights().size() == 1);
             REQUIRE(value.gradient().size() == 1);
-            for(auto&& [radius, weight] : value.dep()) {
+            for(auto&& [radius, weight] : value.weights()) {
                 REQUIRE(value.derivative(radius) == interval_t(1.0));
             }
         }
@@ -33,9 +33,9 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
             ginterval_t b(interval_t(3.0, 4.0));
             a += b;
             test_interval(a.as_interval(), 4.0, 6.0);
-            REQUIRE(a.dep().size() == 2);
+            REQUIRE(a.weights().size() == 2);
             REQUIRE(a.gradient().size() == 2);
-            for(auto&& [radius, weight] : a.dep()) {
+            for(auto&& [radius, weight] : a.weights()) {
                 REQUIRE(a.derivative(radius) == interval_t(1.0));
             }
         }
@@ -44,9 +44,9 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
             ginterval_t b(a);
             a += b;
             test_interval(a.as_interval(), 2.0, 4.0);
-            REQUIRE(a.dep().size() == 1);
+            REQUIRE(a.weights().size() == 1);
             REQUIRE(a.gradient().size() == 1);
-            for(auto&& [radius, weight] : a.dep()) {
+            for(auto&& [radius, weight] : a.weights()) {
                 REQUIRE(a.derivative(radius) == interval_t(2.0));
             }
         }
@@ -55,12 +55,12 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
     SECTION("operator-=") {
         SECTION("Independent") {
             ginterval_t a(interval_t(1.0, 2.0));
-            auto pradius_a = a.dep().begin()->first;
+            auto pradius_a = a.weights().begin()->first;
             ginterval_t b(interval_t(1.0, 2.0));
-            auto pradius_b = b.dep().begin()->first;
+            auto pradius_b = b.weights().begin()->first;
             a -= b;
             test_interval(a.as_interval(), -1.0, 1.0);
-            REQUIRE(a.dep().size() == 2);
+            REQUIRE(a.weights().size() == 2);
             REQUIRE(a.gradient().size() == 2);
             REQUIRE(a.derivative(pradius_a) == interval_t(1.0));
             REQUIRE(a.derivative(pradius_b) == interval_t(-1.0));
@@ -71,40 +71,41 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
             ginterval_t b(a);
             a -= b;
             test_interval(a.as_interval(), 0.0, 0.0);
-            REQUIRE(a.dep().size() == 1);
+            REQUIRE(a.weights().size() == 1);
             REQUIRE(a.gradient().size() == 1);
-            REQUIRE(a.derivative(a.dep().begin()->first) == interval_t(0.0));
+            REQUIRE(a.derivative(a.weights().begin()->first) ==
+                    interval_t(0.0));
         }
     }
 
     SECTION("operator*= (GeneralInterval)") {
         SECTION("Independent") {
             ginterval_t a(interval_t(1.0, 2.0));
-            auto pradius_a  = a.dep().begin()->first;
+            auto pradius_a  = a.weights().begin()->first;
             auto a_interval = a.as_interval();
 
             ginterval_t b(interval_t(3.0, 4.0));
-            auto pradius_b = b.dep().begin()->first;
+            auto pradius_b = b.weights().begin()->first;
             a *= b;
             // The paper says 2.5, 8, but I think their [1.5,1.5] term
             // should be [1.0, 2.0] (which then gives the answer
             // [2.25, 8.25])
             test_interval(a.as_interval(), 2.25, 8.25);
-            REQUIRE(a.dep().size() == 2);
+            REQUIRE(a.weights().size() == 2);
             REQUIRE(a.gradient().size() == 2);
             REQUIRE(a.derivative(pradius_a) == b.as_interval());
             REQUIRE(a.derivative(pradius_b) == a_interval);
         }
         SECTION("Dependent") {
             ginterval_t a(interval_t(1.0, 2.0));
-            auto pradius_a = a.dep().begin()->first;
-            auto a_weight  = a.dep().begin()->second;
+            auto pradius_a = a.weights().begin()->first;
+            auto a_weight  = a.weights().begin()->second;
 
             ginterval_t b(a);
-            auto b_weight = b.dep().begin()->second;
+            auto b_weight = b.weights().begin()->second;
             a *= b;
             test_interval(a.as_interval(), 0.75, 4.0);
-            REQUIRE(a.dep().size() == 1);
+            REQUIRE(a.weights().size() == 1);
             REQUIRE(a.gradient().size() == 1);
             REQUIRE(a.derivative(pradius_a) == b.as_interval() * value_t(2.0));
         }
@@ -113,16 +114,16 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
     SECTION("operator/= (GeneralInterval)") {
         SECTION("Independent") {
             ginterval_t a(interval_t(1.0, 2.0));
-            auto pradius_a  = a.dep().begin()->first;
+            auto pradius_a  = a.weights().begin()->first;
             auto a_interval = a.as_interval();
 
             ginterval_t b(interval_t(3.0, 4.0));
-            auto pradius_b  = b.dep().begin()->first;
+            auto pradius_b  = b.weights().begin()->first;
             auto b_interval = b.as_interval();
 
             a /= b;
             test_interval(a.as_interval(), 0.190476, 0.666667);
-            REQUIRE(a.dep().size() == 2);
+            REQUIRE(a.weights().size() == 2);
             REQUIRE(a.gradient().size() == 2);
             REQUIRE(a.derivative(pradius_a) == interval_t(1.0) / b_interval);
             REQUIRE(a.derivative(pradius_b) ==
@@ -131,7 +132,7 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
 
         SECTION("Dependent") {
             ginterval_t a(interval_t(1.0, 2.0));
-            auto pradius_a  = a.dep().begin()->first;
+            auto pradius_a  = a.weights().begin()->first;
             auto a_interval = a.as_interval();
 
             auto a_interval_squared = a_interval * a_interval;
@@ -142,7 +143,7 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
 
             a /= b;
             test_interval(a.as_interval(), 1.0, 1.0);
-            REQUIRE(a.dep().size() == 1);
+            REQUIRE(a.weights().size() == 1);
             REQUIRE(a.gradient().size() == 1);
             REQUIRE(a.derivative(pradius_a) == term0 - term1);
         }
@@ -152,9 +153,9 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
         ginterval_t a(interval_t(1.0, 2.0));
         a *= 2.0;
         test_interval(a.as_interval(), 2.0, 4.0);
-        REQUIRE(a.dep().size() == 1);
+        REQUIRE(a.weights().size() == 1);
         REQUIRE(a.gradient().size() == 1);
-        REQUIRE(a.derivative(a.dep().begin()->first) == interval_t(2.0));
+        REQUIRE(a.derivative(a.weights().begin()->first) == interval_t(2.0));
     }
 
     SECTION("Example 8.1 from paper") {
@@ -190,9 +191,9 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
             interval_t deriv_2(-6);
 
             REQUIRE(result.gradient().size() == 2);
-            REQUIRE(result.derivative(x_1.dep().begin()->first) ==
+            REQUIRE(result.derivative(x_1.weights().begin()->first) ==
                     deriv_1.as_interval());
-            REQUIRE(result.derivative(x_2.dep().begin()->first) == deriv_2);
+            REQUIRE(result.derivative(x_2.weights().begin()->first) == deriv_2);
         }
     }
 }
