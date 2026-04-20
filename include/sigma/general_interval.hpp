@@ -123,6 +123,9 @@ public:
     /// Returns the square of *this
     GeneralInterval square() const;
 
+    /// Returns *this raised to an integer power
+    GeneralInterval power(int power) const;
+
     // -- GeneralInterval with value_t Arithmetic --
     GeneralInterval& operator*=(const value_t& other) {
         m_midpoint_ *= other;
@@ -202,12 +205,32 @@ GeneralInterval<IntervalType> operator*(
 }
 
 template<typename IntervalType>
+GeneralInterval<IntervalType> operator*(
+  const IntervalType& lhs, const GeneralInterval<IntervalType>& rhs) {
+    return GeneralInterval<IntervalType>(lhs) * rhs;
+}
+
+template<typename IntervalType>
+GeneralInterval<IntervalType> operator/(
+  const typename IntervalType::value_t& lhs,
+  const GeneralInterval<IntervalType>& rhs) {
+    using interval_t = typename GeneralInterval<IntervalType>::interval_t;
+    return interval_t(lhs) / rhs;
+}
+
+template<typename IntervalType>
+GeneralInterval<IntervalType> operator/(
+  const IntervalType& lhs, const GeneralInterval<IntervalType>& rhs) {
+    return GeneralInterval<IntervalType>(lhs) / rhs;
+}
+
+template<typename IntervalType>
 GeneralInterval<IntervalType>::GeneralInterval(const interval_t& interval) :
   m_midpoint_(interval.median()) {
     // Is the interval a scalar? If so, we don't need to track the dependencies
     if(interval.radius() == 0.0) return;
     auto pradius         = std::make_shared<value_t>(interval.radius());
-    m_weights_[pradius]  = interval_t(-1.0);
+    m_weights_[pradius]  = interval_t(1.0);
     m_gradient_[pradius] = interval_t(1.0);
 }
 
@@ -416,6 +439,26 @@ auto GeneralInterval<IntervalType>::square() const -> GeneralInterval {
         new_weights[radius] = value_t(2.0) * m_midpoint_ * weight + rj_sum;
     }
     return GeneralInterval(new_midpoint, new_weights, new_gradient);
+}
+
+template<typename IntervalType>
+auto GeneralInterval<IntervalType>::power(int k) const -> GeneralInterval {
+    if(k < -2) return value_t(1.0) / power(k);
+    if(k == -2) return value_t(1.0) / square();
+    if(k == -1) return value_t(1.0) / *this;
+    if(k == 0) return GeneralInterval(1.0);
+    if(k == 1) return *this;
+    if(k == 2) return square();
+
+    // How many times do we square *this?
+    int remainder = k % 2;
+    int n_squares = (k - remainder) / 2;
+
+    auto this_squared = square();
+    auto result(this_squared); // first square of *this, i.e. i starts at 1
+    for(int i = 1; i < n_squares; ++i) { result *= this_squared; }
+    if(remainder == 1) { result = this_squared * (*this); }
+    return result;
 }
 
 // -- Private Method Implementations --

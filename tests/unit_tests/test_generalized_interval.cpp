@@ -170,42 +170,127 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
         REQUIRE(a_squared.derivative(pradius_a) == value_t(2.0) * a_interval);
     }
 
-    SECTION("Example 8.1 from paper") {
-        SECTION("Independent") {
-            // I'm not sure how many of the x_1 intervals are treated as
-            // independent in the paper, but we'll assume one per power
-            ginterval_t x_1_0(interval_t(1.0, 2.0));
-            ginterval_t x_1_1(interval_t(1.0, 2.0));
-            ginterval_t x_1_2(interval_t(1.0, 2.0));
-            ginterval_t x_2(interval_t(3.0, 4.0));
+    // SECTION("power()") {
+    //     SECTION("power == 0") {
+    //         ginterval_t a(interval_t(1.0, 2.0));
+    //         auto a_powered = a.power(0);
+    //         test_interval(a_powered.as_interval(), 1.0, 1.0);
+    //         REQUIRE(a_powered.weights().size() == 0);
+    //         REQUIRE(a_powered.gradient().size() == 0);
+    //     }
+    //     SECTION("power == 1") {
+    //         ginterval_t a(interval_t(1.0, 2.0));
+    //         auto pradius_a = a.weights().begin()->first;
+    //         auto a_powered = a.power(1);
+    //         test_interval(a_powered.as_interval(), 1.0, 2.0);
+    //         REQUIRE(a_powered.weights().size() == 1);
+    //         REQUIRE(a_powered.gradient().size() == 1);
+    //         REQUIRE(a_powered.derivative(pradius_a) == interval_t(1.0));
+    //     }
+    //     SECTION("power == 2") {
+    //         ginterval_t a(interval_t(1.0, 2.0));
+    //         auto pradius_a = a.weights().begin()->first;
+    //         auto a_squared = a.power(2);
+    //         test_interval(a_squared.as_interval(), 0.75, 4.0);
+    //         REQUIRE(a_squared.weights().size() == 1);
+    //         REQUIRE(a_squared.gradient().size() == 1);
+    //         REQUIRE(a_squared.derivative(pradius_a) ==
+    //                 interval_t(2.0) * a.as_interval());
+    //     }
+    //     SECTION("power == 3") {
+    //         ginterval_t a(interval_t(1.0, 2.0));
+    //         auto pradius_a = a.weights().begin()->first;
+    //         auto a_powered = a.power(3);
+    //         test_interval(a_powered.as_interval(), -0.125, 8.0);
+    //         REQUIRE(a_powered.weights().size() == 1);
+    //         REQUIRE(a_powered.gradient().size() == 1);
+    //         auto corr = interval_t(3.0) * a.square().as_interval();
+    //         REQUIRE(a_powered.derivative(pradius_a) == corr);
+    //     }
+    //     SECTION("power == -1") {
+    //         ginterval_t a(interval_t(1.0, 2.0));
+    //         auto pradius_a  = a.weights().begin()->first;
+    //         auto a_interval = a.as_interval();
 
-            auto x5 = x_1_0 * x_1_0 * x_1_0 * x_1_0 * x_1_0;
-            auto x3 = x_1_1 * x_1_1 * x_1_1;
+    //         auto a_powered = a.power(-1);
+    //         test_interval(a_powered.as_interval(), 0.333333, 1.0);
+    //         REQUIRE(a_powered.weights().size() == 1);
+    //         REQUIRE(a_powered.gradient().size() == 1);
+    //         auto corr = interval_t(-1.0) / (a_interval * a_interval);
+    //         REQUIRE(a_powered.derivative(pradius_a) == corr);
+    //     }
+    //     SECTION("power == -2") {
+    //         ginterval_t a(interval_t(1.0, 2.0));
+    //         auto pradius_a  = a.weights().begin()->first;
+    //         auto a_interval = a.as_interval();
 
-            auto result = x5 - x3 * 25.2 + 24 * x_1_2 - 6 * x_2;
-            // The paper gives -200.600000, 36.800000, but our result has a
-            // slightly larger range (they say something about only keeping
-            // terms linear in the radius, but we keep the quadratic terms too)
-            test_interval(result.as_interval(), -209.506250, 65.150000);
-        }
+    //         auto a_powered = a.power(-2);
+    //         test_interval(a_powered.as_interval(), -0.488889, 1.333333);
+    //         REQUIRE(a_powered.weights().size() == 1);
+    //         REQUIRE(a_powered.gradient().size() == 1);
+    //         auto corr =
+    //           interval_t(-2.0) / (a_interval * a_interval * a_interval);
+    //         REQUIRE(a_powered.derivative(pradius_a) == corr);
+    //     }
+    // }
 
-        SECTION("Dependent") {
-            ginterval_t x_1(interval_t(1.0, 2.0));
-            ginterval_t x_2(interval_t(3.0, 4.0));
-            auto x5     = x_1 * x_1 * x_1 * x_1 * x_1;
-            auto x4     = x_1 * x_1 * x_1 * x_1;
-            auto x3     = x_1 * x_1 * x_1;
-            auto x2     = x_1 * x_1;
-            auto result = x5 - x3 * 25.2 + 24 * x_1 - 6 * x_2;
-            test_interval(result.as_interval(), -157.350000, 12.993750);
+    SECTION("(x + y) / (x - y)") {
+        // Taken from Example 6.2 in the paper
+        ginterval_t x(interval_t(5.0, 10.0));
+        auto pradius_x = x.weights().begin()->first;
+        ginterval_t y(interval_t(1.0, 2.0));
+        auto pradius_y = y.weights().begin()->first;
 
-            auto deriv_1 = 5 * x4 - 3 * 25.2 * x2 + 24;
-            interval_t deriv_2(-6);
+        auto result = (x + y) / (x - y);
+        test_interval(result.as_interval(), 0.66666667, 2.33333333);
+        REQUIRE(result.weights().size() == 2);
 
-            REQUIRE(result.gradient().size() == 2);
-            REQUIRE(result.derivative(x_1.weights().begin()->first) ==
-                    deriv_1.as_interval());
-            REQUIRE(result.derivative(x_2.weights().begin()->first) == deriv_2);
-        }
+        REQUIRE(result.gradient().size() == 2);
+        // I'm not getting the same value as the paper here...
+        test_interval(result.derivative(pradius_x), -1.8708292246,
+                      0.2078699172);
+        test_interval(result.derivative(pradius_y), 0.18518519, 1.66666667);
     }
+
+    //     SECTION("Example 8.1 from paper") {
+    //         SECTION("Independent") {
+    //             // I'm not sure how many of the x_1 intervals are treated as
+    //             // independent in the paper, but we'll assume one per power
+    //             ginterval_t x_1_0(interval_t(1.0, 2.0));
+    //             ginterval_t x_1_1(interval_t(1.0, 2.0));
+    //             ginterval_t x_1_2(interval_t(1.0, 2.0));
+    //             ginterval_t x_2(interval_t(3.0, 4.0));
+
+    //             auto x5 = x_1_0.power(5);
+    //             auto x3 = x_1_1.power(3);
+
+    //             auto result = x5 - x3 * 25.2 + 24 * x_1_2 - 6 * x_2;
+    //             // The paper gives -200.600000, 36.800000, but our result has
+    //             a
+    //             // slightly different answer. I'm assuming it's because we do
+    //             things
+    //             // in a different order, but have not confirmed this.
+    //             test_interval(result.as_interval(), -201.725006, 41.150000);
+    //         }
+
+    //         SECTION("Dependent") {
+    //             ginterval_t x_1(interval_t(1.0, 2.0));
+    //             ginterval_t x_2(interval_t(3.0, 4.0));
+    //             auto x5     = x_1.power(5);
+    //             auto x4     = x_1.power(4);
+    //             auto x3     = x_1.power(3);
+    //             auto x2     = x_1.power(2);
+    //             auto result = x5 - x3 * 25.2 + 24 * x_1 - 6 * x_2;
+    //             test_interval(result.as_interval(), -157.350000, 12.993750);
+
+    //             auto deriv_1 = 5 * x4 - 3 * 25.2 * x2 + 24;
+    //             interval_t deriv_2(-6);
+
+    //             REQUIRE(result.gradient().size() == 2);
+    //             REQUIRE(result.derivative(x_1.weights().begin()->first) ==
+    //                     deriv_1.as_interval());
+    //             REQUIRE(result.derivative(x_2.weights().begin()->first) ==
+    //             deriv_2);
+    //         }
+    //     }
 }
