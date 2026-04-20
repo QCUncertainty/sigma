@@ -120,6 +120,9 @@ public:
         return result;
     }
 
+    /// Returns the square of *this
+    GeneralInterval square() const;
+
     // -- GeneralInterval with value_t Arithmetic --
     GeneralInterval& operator*=(const value_t& other) {
         m_midpoint_ *= other;
@@ -385,6 +388,37 @@ auto GeneralInterval<IntervalType>::operator/=(const GeneralInterval& other)
     m_gradient_ = std::move(new_gradient);
     return *this;
 }
+
+template<typename IntervalType>
+auto GeneralInterval<IntervalType>::square() const -> GeneralInterval {
+    dep_radius_map_t new_weights;
+    dep_radius_map_t new_gradient(m_gradient_);
+
+    auto a_interval    = as_interval();
+    auto old_midpoint2 = m_midpoint_ * m_midpoint_;
+    interval_t r2_sum;
+    for(auto&& [radius, weight] : m_weights_) {
+        auto r2 = (*radius) * (*radius);
+        r2_sum += interval_t(0, r2) * weight * weight;
+        new_gradient[radius] *= value_t(2.0) * a_interval;
+    }
+    auto new_midpoint = old_midpoint2 + r2_sum;
+
+    interval_t unit(-1, 1);
+    for(auto&& [radius, weight] : m_weights_) {
+        auto w_i_max = weight.abs();
+        interval_t rj_sum;
+        for(auto&& [other_radius, other_weight] : m_weights_) {
+            if(radius == other_radius) continue;
+            auto w_j_max = other_weight.abs();
+            rj_sum += unit * (*other_radius) * w_j_max * w_i_max;
+        }
+        new_weights[radius] = value_t(2.0) * m_midpoint_ * weight + rj_sum;
+    }
+    return GeneralInterval(new_midpoint, new_weights, new_gradient);
+}
+
+// -- Private Method Implementations --
 
 template<typename IntervalType>
 auto GeneralInterval<IntervalType>::compute_interval_() const -> interval_t {

@@ -158,6 +158,18 @@ TEMPLATE_TEST_CASE("Generalized Interval", "", float, double) {
         REQUIRE(a.derivative(a.weights().begin()->first) == interval_t(2.0));
     }
 
+    SECTION("square()") {
+        ginterval_t a(interval_t(-0.2, 0.3));
+        auto pradius_a  = a.weights().begin()->first;
+        auto a_interval = a.as_interval();
+
+        auto a_squared = a.square();
+        test_interval(a_squared.as_interval(), -0.0225, 0.09);
+        REQUIRE(a_squared.weights().size() == 1);
+        REQUIRE(a_squared.gradient().size() == 1);
+        REQUIRE(a_squared.derivative(pradius_a) == value_t(2.0) * a_interval);
+    }
+
     SECTION("Example 8.1 from paper") {
         SECTION("Independent") {
             // I'm not sure how many of the x_1 intervals are treated as
