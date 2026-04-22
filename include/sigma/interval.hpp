@@ -204,6 +204,26 @@ public:
         return *this;
     }
 
+    bool operator==(const Interval& other) const {
+        return m_interval_ == other.m_interval_;
+    }
+    bool operator!=(const Interval& other) const {
+        return m_interval_ != other.m_interval_;
+    }
+
+    bool operator<(const Interval& other) const {
+        return m_interval_ < other.m_interval_;
+    }
+    bool operator>(const Interval& other) const {
+        return m_interval_ > other.m_interval_;
+    }
+    bool operator<=(const Interval& other) const {
+        return m_interval_ <= other.m_interval_;
+    }
+    bool operator>=(const Interval& other) const {
+        return m_interval_ >= other.m_interval_;
+    }
+
 private:
     /// The underlying boost interval
     boost::numeric::interval<value_t> m_interval_;
@@ -228,100 +248,6 @@ template<typename ValueType>
 std::ostream& operator<<(std::ostream& os, const Interval<ValueType>& i) {
     os << i.median() << "+/-" << i.radius();
     return os;
-}
-
-/** @relates Interval
- *  @brief Compare two intervals for equality
- *
- *  @tparam T1 The numerical type of the left-hand interval
- *  @tparam T2 The numerical type of the right-hand interval
- *  @param lhs The first interval
- *  @param rhs The second interval
- *
- *  @return Whether the instances are equivalent
- */
-template<typename T1, typename T2>
-bool operator==(const Interval<T1>& lhs, const Interval<T2>& rhs) {
-    if constexpr(!std::is_same_v<T1, T2>) return false;
-    return lhs.lower() == rhs.lower() && lhs.upper() == rhs.upper();
-}
-
-/** @relates Interval
- *  @brief Compare two intervals for inequality
- *
- *  @tparam T1 The numerical type of the left-hand interval
- *  @tparam T2 The numerical type of the right-hand interval
- *  @param lhs The first interval
- *  @param rhs The second interval
- *
- *  @return Whether the instances are not equivalent
- */
-template<typename T1, typename T2>
-bool operator!=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
-    return !(lhs == rhs);
-}
-
-/** @relates Interval
- *  @brief Whether one interval is certainly less than another
- *
- *  Returns true only when @p lhs lies entirely below @p rhs, i.e.
- *  lhs.upper() < rhs.lower().
- *
- *  @tparam T1 The numerical type of the left-hand interval
- *  @tparam T2 The numerical type of the right-hand interval
- *  @param lhs The first interval
- *  @param rhs The second interval
- *
- *  @return Whether @p lhs is certainly less than @p rhs
- */
-template<typename T1, typename T2>
-bool operator<(const Interval<T1>& lhs, const Interval<T2>& rhs) {
-    return lhs.upper() < rhs.lower();
-}
-
-/** @relates Interval
- *  @brief Whether one interval is greater than another
- *
- *  @tparam T1 The numerical type of the left-hand interval
- *  @tparam T2 The numerical type of the right-hand interval
- *  @param lhs The first interval
- *  @param rhs The second interval
- *
- *  @return Whether @p lhs is certainly greater than @p rhs
- */
-template<typename T1, typename T2>
-bool operator>(const Interval<T1>& lhs, const Interval<T2>& rhs) {
-    return rhs < lhs;
-}
-
-/** @relates Interval
- *  @brief Whether one interval is less than or equal to another
- *
- *  @tparam T1 The numerical type of the left-hand interval
- *  @tparam T2 The numerical type of the right-hand interval
- *  @param lhs The first interval
- *  @param rhs The second interval
- *
- *  @return Whether @p lhs is less than or equal to @p rhs
- */
-template<typename T1, typename T2>
-bool operator<=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
-    return (lhs == rhs) || (lhs < rhs);
-}
-
-/** @relates Interval
- *  @brief Whether one interval is greater than or equal to another
- *
- *  @tparam T1 The numerical type of the left-hand interval
- *  @tparam T2 The numerical type of the right-hand interval
- *  @param lhs The first interval
- *  @param rhs The second interval
- *
- *  @return Whether @p lhs is greater than or equal to @p rhs
- */
-template<typename T1, typename T2>
-bool operator>=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
-    return (lhs == rhs) || (lhs > rhs);
 }
 
 // -- Arithmetic free functions ------------------------------------------------

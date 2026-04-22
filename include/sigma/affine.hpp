@@ -60,12 +60,25 @@ public:
         return contains(affine.range());
     }
 
+    bool strictly_less(value_t value) const {
+        return strictly_less(interval_t(value, value));
+    }
+    bool strictly_greater(value_t value) const {
+        return strictly_greater(interval_t(value, value));
+    }
+    bool strictly_less(const Affine& other) const {
+        return range() < other.range();
+    }
+    bool strictly_greater(const Affine& other) const {
+        return range() > other.range();
+    }
+
     std::string print_affine_form() const;
 
     /// Additive inverse
     Affine operator-() const;
 
-    /// In-place addition
+    /// Addition
     Affine& operator+=(value_t value) {
         m_center_ += value;
         m_interval_ += value;
@@ -73,15 +86,28 @@ public:
     }
     Affine& operator+=(const Affine& other);
 
-    /// In-place subtraction
+    Affine operator+(value_t value) const { return Affine(*this) += value; }
+
+    Affine operator+(const Affine& other) const {
+        return Affine(*this) += other;
+    }
+
+    /// Subtraction
     Affine& operator-=(value_t value) {
         m_center_ -= value;
         m_interval_ -= value;
         return *this;
     }
+
     Affine& operator-=(const Affine& other);
 
-    /// In-place multiplication
+    Affine operator-(value_t value) const { return Affine(*this) -= value; }
+
+    Affine operator-(const Affine& other) const {
+        return Affine(*this) -= other;
+    }
+
+    /// Multiplication
     Affine& operator*=(value_t value) {
         m_center_ *= value;
         for(auto&& [error_term, radius_i] : m_radii_) { radius_i *= value; }
@@ -89,9 +115,15 @@ public:
         return *this;
     }
 
+    Affine operator*(value_t value) const { return Affine(*this) *= value; }
+
+    Affine operator*(const Affine& other) const {
+        return Affine(*this) *= other;
+    }
+
     Affine& operator*=(const Affine& other);
 
-    /// In-place division
+    /// Division
     Affine& operator/=(value_t value) {
         if(value == 0) { throw std::domain_error("Division by zero"); }
         m_center_ /= value;
@@ -101,6 +133,19 @@ public:
     }
 
     Affine& operator/=(const Affine& other);
+
+    Affine operator/(value_t value) const { return Affine(*this) /= value; }
+
+    Affine operator/(const Affine& other) const {
+        return Affine(*this) /= other;
+    }
+
+    bool operator==(const Affine& other) const {
+        return m_center_ == other.m_center_ && m_radii_ == other.m_radii_ &&
+               m_interval_ == other.m_interval_;
+    }
+
+    bool operator!=(const Affine& other) const { return !(*this == other); }
 
     /** @brief Applies an affine transformation to *this.
      *
