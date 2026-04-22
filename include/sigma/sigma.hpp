@@ -1,4 +1,5 @@
 #pragma once
+#include "affine.hpp"
 #include "eigen_compat.hpp"
 #include "interval.hpp"
 #include "operations/operations.hpp"

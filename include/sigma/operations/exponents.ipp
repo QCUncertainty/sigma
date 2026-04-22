@@ -1,5 +1,6 @@
 #pragma once
 
+#include "sigma/affine.hpp"
 #include "sigma/detail_/operation_common.hpp"
 #include "sigma/interval.hpp"
 #include <cmath>
@@ -119,6 +120,22 @@ Interval<T> exp(const Interval<T>& a) {
 template<typename T>
 Interval<T> log(const Interval<T>& a) {
     return Interval<T>(std::log(a.lower()), std::log(a.upper()));
+}
+
+template<typename T>
+Affine<T> sqrt(const Affine<T>& a) {
+    auto a_range    = a.range();
+    auto sqrt_lower = std::sqrt(a_range.lower());
+    auto sqrt_upper = std::sqrt(a_range.upper());
+    auto sqrt_sum   = sqrt_upper + sqrt_lower;
+    auto sqrt_diff  = sqrt_upper - sqrt_lower;
+    auto alpha      = T(1.0) / (sqrt_sum);
+    auto zeta =
+      sqrt_sum / T(8.0) + T(0.5) * (sqrt_upper * sqrt_lower) / sqrt_sum;
+    auto delta                   = sqrt_diff * sqrt_diff / (T(8.0) * sqrt_sum);
+    auto [new_center, new_radii] = a.apply_affine_transform(alpha, zeta, delta);
+    auto new_interval            = sigma::sqrt(a.traditional_interval());
+    return Affine<T>(new_center, new_radii, new_interval);
 }
 
 } // namespace sigma

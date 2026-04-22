@@ -82,6 +82,10 @@ public:
         return value >= lower() && value <= upper();
     }
 
+    bool contains(const Interval& other) const {
+        return contains(other.lower()) && contains(other.upper());
+    }
+
     /** @brief Returns the midpoint of the interval
      *
      *  @return The midpoint value

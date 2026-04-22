@@ -101,3 +101,16 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
         }
     }
 }
+
+TEMPLATE_TEST_CASE("Exponents (Affine)", "", float, double) {
+    using affine_t = sigma::Affine<TestType>;
+    using value_t  = typename affine_t::value_t;
+
+    SECTION("Square Root") {
+        auto a = affine_t(value_t{1}, value_t{2});
+        // Without intersection with m_interval_ upper bound is 1.431980515
+        // With intersection with m_interval_ upper bound is 1.41421365
+        test_interval(sigma::sqrt(a).range(), 1.0, 1.41421365);
+        test_interval(sigma::sqrt(a).traditional_interval(), 1.0, 1.41421);
+    }
+}
