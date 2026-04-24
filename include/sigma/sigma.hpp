@@ -3,6 +3,7 @@
 #include "eigen_compat.hpp"
 #include "interval.hpp"
 #include "operations/operations.hpp"
+#include "partitioned_affine.hpp"
 #include "uncertain.hpp"
 
 /** @file sigma.hpp

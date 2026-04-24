@@ -16,7 +16,7 @@ namespace sigma {
 template<typename ValueType>
 class Affine {
 public:
-    enum class CorrectionMethod { AFFPY, EQ26 };
+    enum class CorrectionMethod { AFFPY, EQ26, EQ27 };
 
     using size_type    = std::size_t;
     using value_t      = ValueType;
@@ -74,6 +74,9 @@ public:
     }
 
     std::string print_affine_form() const;
+    std::string print_interval_form() const {
+        return range().print_interval_form();
+    }
 
     /// Additive inverse
     Affine operator-() const;
@@ -190,6 +193,9 @@ private:
     /// Eq. 26 in  https://www.tuhh.de/ti3/paper/rump/RuKas14.pdf
     value_t eq26_correction_(const Affine& other) const;
 
+    /// Eq. 27 in  https://www.tuhh.de/ti3/paper/rump/RuKas14.pdf
+    value_t eq27_correction_(const Affine& other) const;
+
     /// Dispatches based on m_correction_method_
     value_t multiplication_correction_(const Affine& other) const;
 
@@ -201,6 +207,12 @@ private:
 
     CorrectionMethod m_correction_method_ = CorrectionMethod::AFFPY;
 };
+
+template<typename ValueType>
+std::ostream& operator<<(std::ostream& os, const Affine<ValueType>& a) {
+    os << a.range();
+    return os;
+}
 
 template<typename ValueType>
 Affine<ValueType> operator*(ValueType value, const Affine<ValueType>& a) {
@@ -323,6 +335,22 @@ auto Affine<ValueType>::affpy_correction_(const Affine& other) const
 }
 
 template<typename ValueType>
+auto Affine<ValueType>::eq27_correction_(const Affine& other) const -> value_t {
+    value_t lhsq = 0.0;
+    value_t rhsq = 0.0;
+    for(auto&& [error_term, radius_i] : m_radii_) {
+        lhsq += radius_i * radius_i;
+    }
+    for(auto&& [error_term, radius_j] : other.m_radii_) {
+        rhsq += radius_j * radius_j;
+    }
+    auto lpr = (*this) + other;
+    auto lmr = (*this) - other;
+    return std::sqrt(lhsq) * std::sqrt(rhsq) *
+           std::max(lpr.radius(), lmr.radius());
+}
+
+template<typename ValueType>
 auto Affine<ValueType>::eq26_correction_(const Affine& other) const -> value_t {
     value_t new_error_term = 0;
     value_t pos_sum        = 0;
@@ -366,8 +394,11 @@ auto Affine<ValueType>::multiplication_correction_(const Affine& other) const
   -> value_t {
     if(m_correction_method_ == CorrectionMethod::AFFPY) {
         return affpy_correction_(other);
-    } else {
+    } else if(m_correction_method_ == CorrectionMethod::EQ26) {
         return eq26_correction_(other);
+    } else if(m_correction_method_ == CorrectionMethod::EQ27) {
+        return eq27_correction_(other);
     }
+    throw std::runtime_error("Unknown correction method");
 }
 } // namespace sigma

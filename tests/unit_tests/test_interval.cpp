@@ -37,6 +37,39 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
             test_interval(value, 1.0, 2.0);
         }
     }
+    SECTION("width") {
+        auto value = testing_t(1.0, 2.0);
+        REQUIRE(value.width() == 1.0);
+
+        value = testing_t(1.0, 3.0);
+        REQUIRE(value.width() == 2.0);
+
+        value = testing_t(1.0, 1.0);
+        REQUIRE(value.width() == 0.0);
+
+        value = testing_t(-1.2, 0.0);
+        REQUIRE(value.width() == value_t(1.2));
+    }
+    SECTION("set_union") {
+        auto value  = testing_t(1.0, 2.0);
+        auto value2 = testing_t(2.0, 4.0);
+        auto result = value.set_union(value2);
+        REQUIRE(result.lower() == 1.0);
+        REQUIRE(result.upper() == 4.0);
+
+        auto value3  = testing_t(2.0, 3.0);
+        auto result2 = result.set_union(value3);
+        REQUIRE(result2.lower() == 1.0);
+        REQUIRE(result2.upper() == 4.0);
+
+        auto value4  = testing_t(-2.0, 1.0);
+        auto result3 = value4.set_union(value);
+        REQUIRE(result3.lower() == -2.0);
+        REQUIRE(result3.upper() == 2.0);
+
+        REQUIRE_THROWS_AS(value4.set_union(value3), std::domain_error);
+    }
+
     SECTION("operator<<(std::ostream, Interval)") {
         value_t lo = 1.0, hi = 2.0;
         auto value = testing_t(lo, hi);
