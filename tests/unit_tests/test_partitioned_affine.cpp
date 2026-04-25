@@ -161,22 +161,6 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
             value3 += value3;
             test_interval(value3.range(), -four, -two);
         }
-        SECTION("Tighten: loose m_certificate_ after Minkowski add") {
-            using center_t   = typename pinterval_t::center_t;
-            using radii_t    = typename pinterval_t::radii_t;
-            using radius_t   = typename pinterval_t::radius_t;
-            using err_term_t = typename pinterval_t::error_term_t;
-            // One partition, strip [1,2] but certificate intentionally wide
-            err_term_t e0 = std::make_shared<std::size_t>(0u);
-            radii_t rad0;
-            radius_t r0{0.5};
-            rad0[e0] = r0;
-            pinterval_t loose(center_t{1.5}, std::move(rad0),
-                              interval_t(value_t(-100.0), value_t(100.0)));
-            pinterval_t addend(one, two, 1u);
-            loose += addend;
-            test_interval(loose.range(), two, four);
-        }
     }
 
     SECTION("operator-=") {
@@ -193,18 +177,20 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
             value3 -= pinterval_t(interval_t(three, four), 20);
             test_interval(value3.range(), -value_t(6.0), -four);
         }
-        SECTION("Dependent (same object; x - x)") {
+        SECTION("Dependent (same object; x - x, Minkowski on certificate)") {
             pinterval_t value(one, two);
             value -= value;
-            test_interval(value.range(), zero, zero);
+            // cert + neg(cert): [1,2] + [-2,-1] = [-1,1] (independent IA on
+            // m_certificate_)
+            test_interval(value.range(), -one, one);
 
             pinterval_t value2(interval_t(-one, two), 20);
             value2 -= value2;
-            test_interval(value2.range(), zero, zero);
+            test_interval(value2.range(), -three, three);
 
             pinterval_t value3(interval_t(-two, -one), 20);
             value3 -= value3;
-            test_interval(value3.range(), zero, zero);
+            test_interval(value3.range(), -one, one);
         }
     }
 

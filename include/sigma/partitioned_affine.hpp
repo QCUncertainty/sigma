@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include <iterator>
 #include <numeric>
 #include <sigma/interval.hpp>
@@ -127,6 +128,22 @@ private:
     }
 
     interval_t partition_hull_() const;
+
+    /// Widen new_radii in-place with one independent ε so strip hull encloses
+    /// @p minkowski (classical 1D bound) after a diagonal merge.
+    void minkowski_slack_new_radii_(center_t& centers, radii_t& radii,
+                                    const interval_t& minkowski) {
+        if(centers.empty() || minkowski.empty()) { return; }
+        PartitionedAffine pre(center_t(centers), radii_t(radii), minkowski);
+        if(pre.empty()) { return; }
+        interval_t H = pre.partition_hull_();
+        if(H.empty()) { return; }
+        value_t d0 = H.lower() - minkowski.lower();
+        value_t d1 = minkowski.upper() - H.upper();
+        value_t d  = std::max<value_t>({value_t(0.0), d0, d1});
+        if(d <= 0) { return; }
+        radii[make_error_term_()] = radius_t(centers.size(), d);
+    }
 
     void tighten_certificate_() {
         auto hull      = partition_hull_();
@@ -267,6 +284,7 @@ auto PartitionedAffine<ValueType>::operator+=(const PartitionedAffine& other)
     }
     // Certificate: 1D Minkowski (independent) on m_certificate_, like Affine.
     interval_t new_certificate = m_certificate_ + other.m_certificate_;
+    minkowski_slack_new_radii_(new_centers, new_radii, new_certificate);
     *this = PartitionedAffine(new_centers, new_radii, new_certificate);
     tighten_certificate_();
     return *this;
