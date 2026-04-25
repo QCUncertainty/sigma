@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <boost/numeric/interval.hpp>
 #include <iostream>
+#include <optional>
 #include <type_traits>
 
 /** @file interval.hpp
@@ -26,11 +27,11 @@ public:
 
     /** @brief Default constructor
      *
-     *  Constructs an interval with both bounds set to 0.0.
+     *  Constructs an empty interval (contains no values).
      *
      *  @throw none No throw guarantee
      */
-    Interval() : m_interval_(0.0, 0.0) {}
+    Interval() {}
 
     /** @brief Construct an interval from a single value
      *
@@ -40,9 +41,12 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    Interval(value_t value) : m_interval_(value, value) {}
+    Interval(value_t value) : Interval(value, value) {}
 
-    /** @brief Construct an interval from lower and upper bounds
+    /** @brief Construct an interval from two bounds
+     *
+     *  For convenience, the bounds are sorted so that lower() <= upper().
+     *
      *
      *  @param lower The lower bound of the interval
      *  @param upper The upper bound of the interval
@@ -50,25 +54,33 @@ public:
      *  @throw none No throw guarantee
      */
     Interval(value_t lower, value_t upper) :
-      m_interval_(std::min(lower, upper), std::max(lower, upper)) {}
+      m_interval_(interval_t(std::min(lower, upper), std::max(lower, upper))) {}
 
-    value_t width() const { return boost::numeric::width(m_interval_); }
+    value_t width() const {
+        return !empty() ? boost::numeric::width(*m_interval_) : 0.0;
+    }
 
     /** @brief Returns the lower bound of the interval
      *
      *  @return The lower bound value
      *
-     *  @throw none No throw guarantee
+     *  @throw std::domain_error if the interval is empty
      */
-    value_t lower() const { return m_interval_.lower(); }
+    value_t lower() const {
+        assert_not_empty_();
+        return m_interval_->lower();
+    }
 
     /** @brief Returns the upper bound of the interval
      *
      *  @return The upper bound value
      *
-     *  @throw none No throw guarantee
+     *  @throw std::domain_error if the interval is empty
      */
-    value_t upper() const { return m_interval_.upper(); }
+    value_t upper() const {
+        assert_not_empty_();
+        return m_interval_->upper();
+    }
 
     /** @brief Whether a scalar lies in this interval (endpoints included)
      *
@@ -83,20 +95,21 @@ public:
      *  @throw none No throw guarantee
      */
     bool contains(value_t value) const {
+        if(empty()) { return false; }
         return value >= lower() && value <= upper();
     }
 
     // Is @p other fully contained in this interval?
     bool contains(const Interval& other) const {
+        if(other.empty()) { return true; }
+        if(empty()) { return false; }
         return lower() <= other.lower() && upper() >= other.upper();
     }
 
-    bool overlap(const Interval& other) const {
-        return upper() >= other.lower() && lower() <= other.upper();
-    }
-
     Interval set_union(const Interval& other) const {
-        if(!overlap(other)) {
+        if(empty()) { return other; }
+        if(other.empty()) { return *this; }
+        if(set_intersection(other).empty()) {
             throw std::domain_error("Intervals do not overlap");
         }
         return Interval(std::min(lower(), other.lower()),
@@ -104,19 +117,24 @@ public:
     }
 
     Interval set_intersection(const Interval& other) const {
-        if(!overlap(other)) {
-            throw std::domain_error("Intervals do not overlap");
+        if(empty() || other.empty()) { return Interval(); }
+        if(other.upper() < lower() || other.lower() > upper()) {
+            return Interval();
         }
         return Interval(std::max(lower(), other.lower()),
                         std::min(upper(), other.upper()));
     }
+
     /** @brief Returns the midpoint of the interval
      *
      *  @return The midpoint value
      *
-     *  @throw none No throw guarantee
+     *  @throw std::domain_error if the interval is empty
      */
-    value_t median() const { return boost::numeric::median(m_interval_); }
+    value_t median() const {
+        assert_not_empty_();
+        return boost::numeric::median(*m_interval_);
+    }
 
     /** @brief Returns the half-width of the interval
      *
@@ -128,6 +146,8 @@ public:
      */
     value_t radius() const { return width() / value_t{2}; }
 
+    bool empty() const { return !m_interval_; }
+
     // -- Arithmetic in-place operators ----------------------------------------
 
     /** @brief In-place addition of another interval
@@ -138,7 +158,13 @@ public:
      *  @throw none No throw guarantee
      */
     Interval& operator+=(const Interval& rhs) {
-        m_interval_ += rhs.m_interval_;
+        if(empty()) {
+            m_interval_ = rhs.m_interval_;
+        } else if(rhs.empty()) {
+            return *this;
+        } else {
+            m_interval_ = *m_interval_ + *rhs.m_interval_;
+        }
         return *this;
     }
 
@@ -149,10 +175,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    Interval& operator+=(value_t rhs) {
-        m_interval_ += rhs;
-        return *this;
-    }
+    Interval& operator+=(value_t rhs) { return *this += Interval(rhs, rhs); }
 
     /** @brief In-place subtraction of another interval
      *
@@ -162,7 +185,13 @@ public:
      *  @throw none No throw guarantee
      */
     Interval& operator-=(const Interval& rhs) {
-        m_interval_ -= rhs.m_interval_;
+        if(empty()) {
+            m_interval_ = -*rhs.m_interval_;
+        } else if(rhs.empty()) {
+            return *this;
+        } else {
+            m_interval_ = *m_interval_ - *rhs.m_interval_;
+        }
         return *this;
     }
 
@@ -173,10 +202,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    Interval& operator-=(value_t rhs) {
-        m_interval_ -= rhs;
-        return *this;
-    }
+    Interval& operator-=(value_t rhs) { return *this -= Interval(rhs, rhs); }
 
     /** @brief In-place multiplication by another interval
      *
@@ -186,7 +212,12 @@ public:
      *  @throw none No throw guarantee
      */
     Interval& operator*=(const Interval& rhs) {
-        m_interval_ *= rhs.m_interval_;
+        if(empty() || rhs.empty()) {
+            *this = Interval();
+            return *this;
+        } else {
+            m_interval_ = *m_interval_ * *rhs.m_interval_;
+        }
         return *this;
     }
 
@@ -197,10 +228,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    Interval& operator*=(value_t rhs) {
-        m_interval_ *= rhs;
-        return *this;
-    }
+    Interval& operator*=(value_t rhs) { return *this *= Interval(rhs, rhs); }
 
     /** @brief In-place division by another interval
      *
@@ -210,7 +238,12 @@ public:
      *  @throw none No throw guarantee
      */
     Interval& operator/=(const Interval& rhs) {
-        m_interval_ /= rhs.m_interval_;
+        if(empty() || rhs.empty()) {
+            *this = Interval();
+            return *this;
+        } else {
+            m_interval_ = *m_interval_ / *rhs.m_interval_;
+        }
         return *this;
     }
 
@@ -221,23 +254,26 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    Interval& operator/=(value_t rhs) {
-        m_interval_ /= rhs;
-        return *this;
-    }
+    Interval& operator/=(value_t rhs) { return *this /= Interval(rhs, rhs); }
 
     std::string print_interval_form() const {
+        if(empty()) { return "[]"; }
         return "[" + std::to_string(lower()) + ", " + std::to_string(upper()) +
                "]";
     }
 
 private:
-    /// The underlying boost interval
-    boost::numeric::interval<value_t> m_interval_;
+    void assert_not_empty_() const {
+        if(empty()) { throw std::domain_error("Interval is empty"); }
+    }
+    using interval_t = boost::numeric::interval<value_t>;
+
+    std::optional<interval_t> m_interval_;
 
 }; // class Interval
 
-// -- Utility functions --------------------------------------------------------
+// -- Utility functions
+// --------------------------------------------------------
 
 /** @relates Interval
  *  @brief Overload stream insertion to print an interval
@@ -253,6 +289,10 @@ private:
  */
 template<typename ValueType>
 std::ostream& operator<<(std::ostream& os, const Interval<ValueType>& i) {
+    if(i.empty()) {
+        os << " ∅";
+        return os;
+    }
     os << i.median() << "+/-" << i.radius();
     return os;
 }
@@ -270,6 +310,8 @@ std::ostream& operator<<(std::ostream& os, const Interval<ValueType>& i) {
 template<typename T1, typename T2>
 bool operator==(const Interval<T1>& lhs, const Interval<T2>& rhs) {
     if constexpr(!std::is_same_v<T1, T2>) return false;
+    if(lhs.empty() && rhs.empty()) { return true; }
+    if(lhs.empty() || rhs.empty()) { return false; }
     return lhs.lower() == rhs.lower() && lhs.upper() == rhs.upper();
 }
 
@@ -351,7 +393,8 @@ bool operator>=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
     return (lhs == rhs) || (lhs > rhs);
 }
 
-// -- Arithmetic free functions ------------------------------------------------
+// -- Arithmetic free functions
+// ------------------------------------------------
 
 /** @relates Interval
  *  @brief Negation of an interval
@@ -365,6 +408,7 @@ bool operator>=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
  */
 template<typename T>
 Interval<T> operator-(const Interval<T>& a) {
+    if(a.empty()) { return Interval<T>(); }
     return Interval<T>(-a.upper(), -a.lower());
 }
 
@@ -455,8 +499,8 @@ Interval<T> operator*(T lhs, const Interval<T>& rhs) {
 /** @relates Interval
  *  @brief Division of two intervals
  *
- *  If the interval contains zero the resulting interval will loose most of its
- *  information.
+ *  If the interval contains zero the resulting interval will loose most of
+ * its information.
  *
  *  @tparam T The numerical type of the intervals
  *  @param lhs The left-hand interval

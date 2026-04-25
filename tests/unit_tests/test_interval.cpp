@@ -10,6 +10,11 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
     using other_t   = typename testing::test_traits<TestType>::other_t;
 
     SECTION("Constructors") {
+        SECTION("Default") {
+            auto value = testing_t();
+            REQUIRE(value.empty());
+            REQUIRE(value.width() == 0.0);
+        }
         SECTION("With Lower and Upper") {
             auto value = testing_t(1.0, 2.0);
             test_interval(value, 1.0, 2.0);
@@ -152,11 +157,12 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
             REQUIRE_FALSE(point.contains(value_t{5.01}));
         }
 
-        SECTION("default constructed [0, 0]") {
-            testing_t zero{};
-            REQUIRE(zero.contains(value_t{0}));
-            REQUIRE_FALSE(zero.contains(value_t{-0.01}));
-            REQUIRE_FALSE(zero.contains(value_t{0.01}));
+        SECTION("default constructed (empty)") {
+            testing_t empty{};
+            REQUIRE(empty.contains(empty));
+            REQUIRE_FALSE(empty.contains(value_t{0}));
+            REQUIRE_FALSE(empty.contains(value_t{-0.01}));
+            REQUIRE_FALSE(empty.contains(value_t{0.01}));
         }
     }
     SECTION("Arithmetic") {

@@ -16,8 +16,7 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
     SECTION("Constructors") {
         SECTION("Default") {
             auto value = affine_t();
-            test_interval(value.range(), zero, zero);
-            test_interval(value.traditional_interval(), zero, zero);
+            REQUIRE(value.range() == interval_t());
         }
 
         SECTION("From Center") {

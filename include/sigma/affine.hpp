@@ -222,6 +222,7 @@ Affine<ValueType> operator*(ValueType value, const Affine<ValueType>& a) {
 template<typename ValueType>
 auto Affine<ValueType>::range() const -> interval_t {
     auto r = radius();
+    if(m_interval_.empty()) { return m_interval_; }
     // Return the intersection *this and m_interval_
     auto lo = std::max(m_center_ - r, m_interval_.lower());
     auto hi = std::min(m_center_ + r, m_interval_.upper());

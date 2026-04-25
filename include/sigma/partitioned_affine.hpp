@@ -32,11 +32,12 @@ public:
                       size_type num_partitions = 10) :
       PartitionedAffine(interval_t(lower, upper), num_partitions) {}
 
-    PartitionedAffine(const interval_t& interval,
-                      size_type num_partitions = 10);
+    PartitionedAffine(interval_t interval, size_type num_partitions = 10);
 
-    PartitionedAffine(center_t centers, radii_t radii) :
-      m_centers_(std::move(centers)), m_radii_(std::move(radii)) {}
+    PartitionedAffine(center_t centers, radii_t radii, interval_t certificate) :
+      m_centers_(std::move(centers)),
+      m_radii_(std::move(radii)),
+      m_certificate_(std::move(certificate)) {}
 
     bool contains(value_t value) const { return range().contains(value); }
 
@@ -44,13 +45,9 @@ public:
         return range().contains(interval);
     }
 
-    // bool contains(const affine_t& affine) const {
-    //     return contains(affine.range());
-    // }
-
-    // bool contains(const PartitionedAffine& other) const {
-    //     return contains(other.range());
-    // }
+    bool contains(const PartitionedAffine& other) const {
+        return contains(other.range());
+    }
 
     std::string print_interval_form() const {
         return range().print_interval_form();
@@ -68,7 +65,7 @@ public:
 
     value_t center() const;
 
-    bool empty() const { return m_centers_.empty(); }
+    bool empty() const { return m_certificate_.empty(); }
 
     // interval_t traditional_interval() const {
     //     if(m_intervals_.empty()) { return interval_t(); }
@@ -129,20 +126,33 @@ private:
         }
     }
 
+    interval_t partition_hull_() const;
+
+    void tighten_certificate_() {
+        auto hull      = partition_hull_();
+        m_certificate_ = hull.set_intersection(m_certificate_);
+        if(m_certificate_.empty() && !hull.empty()) {
+            throw std::domain_error("Certificate is empty after tightening");
+        }
+    }
+
     error_term_t make_error_term_() {
         return std::make_shared<size_type>(m_radii_.size());
     }
 
     center_t m_centers_;
     radii_t m_radii_;
+    interval_t m_certificate_;
 };
 
 template<typename ValueType>
-PartitionedAffine<ValueType>::PartitionedAffine(const interval_t& interval,
-                                                size_type n) {
-    auto partition_width = interval.width() / value_t(n);
-    auto lower           = interval.lower();
-    auto upper           = interval.upper();
+PartitionedAffine<ValueType>::PartitionedAffine(interval_t interval,
+                                                size_type n) :
+  m_certificate_(std::move(interval)) {
+    if(m_certificate_.width() == 0) { return; }
+    auto partition_width = m_certificate_.width() / value_t(n);
+    auto lower           = m_certificate_.lower();
+    auto upper           = m_certificate_.upper();
 
     // Index of the last partition
     auto nm1 = n - 1;
@@ -210,37 +220,34 @@ auto PartitionedAffine<ValueType>::range(size_type i) const -> interval_t {
 
 template<typename ValueType>
 auto PartitionedAffine<ValueType>::range() const -> interval_t {
-    if(empty()) { return interval_t(); }
-    interval_t rv(range(0));
-    for(size_type i = 1; i < num_partitions(); ++i) {
-        auto range_i = range(i);
-        auto lo      = std::min(rv.lower(), range_i.lower());
-        auto hi      = std::max(rv.upper(), range_i.upper());
-        rv           = interval_t(lo, hi);
-    }
-    return rv;
+    auto rv = partition_hull_();
+    return rv.set_intersection(m_certificate_);
 }
 
 template<typename ValueType>
 auto PartitionedAffine<ValueType>::operator-() const -> PartitionedAffine {
     if(empty()) { return PartitionedAffine(); }
-    center_t new_centers(m_centers_);
-    for(auto& center : new_centers) { center = -center; }
-
-    radii_t new_radii(m_radii_);
-    for(auto&& [error_term, radius_i] : new_radii) {
-        for(size_type i = 0; i < radius_i.size(); ++i) {
-            radius_i[i] = -radius_i[i];
-        }
+    auto n = num_partitions();
+    center_t new_centers;
+    new_centers.reserve(n);
+    for(auto itr = m_centers_.rbegin(); itr != m_centers_.rend(); ++itr) {
+        new_centers.push_back(-*itr);
     }
-
-    return PartitionedAffine(new_centers, new_radii);
+    radii_t new_radii;
+    for(auto&& [error_term, radius_i] : m_radii_) {
+        new_radii[error_term] = radius_t(radius_i.rbegin(), radius_i.rend());
+    }
+    interval_t new_certificate = -m_certificate_;
+    return PartitionedAffine(std::move(new_centers), std::move(new_radii),
+                             std::move(new_certificate));
 }
 
 template<typename ValueType>
 auto PartitionedAffine<ValueType>::operator+=(const PartitionedAffine& other)
   -> PartitionedAffine& {
     assert_same_size(other);
+    // n-strip: per-partition centers; radii per error_term (shared key => same
+    // ε).
     center_t new_centers(m_centers_);
     radii_t new_radii(m_radii_);
 
@@ -257,7 +264,11 @@ auto PartitionedAffine<ValueType>::operator+=(const PartitionedAffine& other)
             }
         }
     }
-    return *this = PartitionedAffine(new_centers, new_radii);
+    // Certificate: 1D Minkowski (independent) on m_certificate_, like Affine.
+    interval_t new_certificate = m_certificate_ + other.m_certificate_;
+    *this = PartitionedAffine(new_centers, new_radii, new_certificate);
+    tighten_certificate_();
+    return *this;
 }
 
 template<typename ValueType>
@@ -303,7 +314,8 @@ auto PartitionedAffine<ValueType>::operator*=(const PartitionedAffine& other)
         }
     }
     new_radii[make_error_term_()] = new_radius;
-    return *this                  = PartitionedAffine(new_centers, new_radii);
+    interval_t new_certificate    = m_certificate_ * other.m_certificate_;
+    return *this = PartitionedAffine(new_centers, new_radii, new_certificate);
 }
 
 // template<typename ValueType>
@@ -327,4 +339,17 @@ auto PartitionedAffine<ValueType>::operator*=(const PartitionedAffine& other)
 //     return *this = PartitionedAffine(new_interval, n);
 // }
 
+template<typename ValueType>
+auto PartitionedAffine<ValueType>::partition_hull_() const -> interval_t {
+    if(empty()) { return interval_t(); }
+    if(m_certificate_.width() == 0) { return m_certificate_; }
+    interval_t rv(range(0));
+    for(size_type i = 1; i < num_partitions(); ++i) {
+        auto range_i = range(i);
+        auto lo      = std::min(rv.lower(), range_i.lower());
+        auto hi      = std::max(rv.upper(), range_i.upper());
+        rv           = interval_t(lo, hi);
+    }
+    return rv;
+}
 } // namespace sigma
