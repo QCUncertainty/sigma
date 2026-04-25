@@ -184,6 +184,27 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
             pinterval_t value(one, two);
             value -= pinterval_t(three, four);
             test_interval(value.range(), -three, -one);
+
+            pinterval_t value2(interval_t(-one, two), 20);
+            value2 -= pinterval_t(interval_t(three, four), 20);
+            test_interval(value2.range(), -value_t(5.0), -one);
+
+            pinterval_t value3(interval_t(-two, -one), 20);
+            value3 -= pinterval_t(interval_t(three, four), 20);
+            test_interval(value3.range(), -value_t(6.0), -four);
+        }
+        SECTION("Dependent (same object; x - x)") {
+            pinterval_t value(one, two);
+            value -= value;
+            test_interval(value.range(), zero, zero);
+
+            pinterval_t value2(interval_t(-one, two), 20);
+            value2 -= value2;
+            test_interval(value2.range(), zero, zero);
+
+            pinterval_t value3(interval_t(-two, -one), 20);
+            value3 -= value3;
+            test_interval(value3.range(), zero, zero);
         }
     }
 

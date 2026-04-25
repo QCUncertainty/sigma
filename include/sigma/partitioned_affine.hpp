@@ -220,6 +220,7 @@ auto PartitionedAffine<ValueType>::range(size_type i) const -> interval_t {
 
 template<typename ValueType>
 auto PartitionedAffine<ValueType>::range() const -> interval_t {
+    if(m_certificate_.width() == 0) { return m_certificate_; }
     auto rv = partition_hull_();
     return rv.set_intersection(m_certificate_);
 }
@@ -230,12 +231,12 @@ auto PartitionedAffine<ValueType>::operator-() const -> PartitionedAffine {
     auto n = num_partitions();
     center_t new_centers;
     new_centers.reserve(n);
-    for(auto itr = m_centers_.rbegin(); itr != m_centers_.rend(); ++itr) {
-        new_centers.push_back(-*itr);
-    }
-    radii_t new_radii;
-    for(auto&& [error_term, radius_i] : m_radii_) {
-        new_radii[error_term] = radius_t(radius_i.rbegin(), radius_i.rend());
+    for(auto& center : m_centers_) { new_centers.push_back(-center); }
+    radii_t new_radii(m_radii_);
+    for(auto&& [error_term, radius_i] : new_radii) {
+        for(size_type i = 0; i < radius_i.size(); ++i) {
+            radius_i[i] = -radius_i[i];
+        }
     }
     interval_t new_certificate = -m_certificate_;
     return PartitionedAffine(std::move(new_centers), std::move(new_radii),
@@ -342,7 +343,6 @@ auto PartitionedAffine<ValueType>::operator*=(const PartitionedAffine& other)
 template<typename ValueType>
 auto PartitionedAffine<ValueType>::partition_hull_() const -> interval_t {
     if(empty()) { return interval_t(); }
-    if(m_certificate_.width() == 0) { return m_certificate_; }
     interval_t rv(range(0));
     for(size_type i = 1; i < num_partitions(); ++i) {
         auto range_i = range(i);
