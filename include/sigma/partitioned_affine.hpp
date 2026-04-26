@@ -263,31 +263,51 @@ auto PartitionedAffine<ValueType>::operator-() const -> PartitionedAffine {
 template<typename ValueType>
 auto PartitionedAffine<ValueType>::operator+=(const PartitionedAffine& other)
   -> PartitionedAffine& {
-    assert_same_size(other);
-    // n-strip: per-partition centers; radii per error_term (shared key => same
-    // ε).
-    center_t new_centers(m_centers_);
-    radii_t new_radii(m_radii_);
+    auto n_lhs = num_partitions();
+    auto n_rhs = other.num_partitions();
 
-    for(size_type i = 0; i < new_centers.size(); ++i) {
-        new_centers[i] += other.m_centers_[i];
+    // Update centers and traditional intervals
+    center_t new_centers(n_lhs * n_rhs, 0.0);
+    for(size_type i = 0; i < n_lhs; ++i) {
+        for(size_type j = 0; j < n_rhs; ++j) {
+            new_centers[i * n_rhs + j] = m_centers_[i] + other.m_centers_[j];
+        }
     }
 
-    for(auto&& [error_term, radius_i] : other.m_radii_) {
+    radii_t new_radii;
+    for(auto&& [error_term, radius_i] : m_radii_) {
+        radius_t new_radius(n_lhs * n_rhs, 0.0);
+        for(size_type i = 0; i < n_lhs; ++i) {
+            for(size_type j = 0; j < n_rhs; ++j) {
+                new_radius[i * n_rhs + j] = radius_i[i];
+            }
+        }
+        new_radii[error_term] = new_radius;
+    }
+
+    for(auto&& [error_term, radius_j] : other.m_radii_) {
         if(new_radii.count(error_term) == 0) {
-            new_radii[error_term] = radius_i;
+            radius_t new_radius(n_lhs * n_rhs, 0.0);
+            for(size_type i = 0; i < n_lhs; ++i) {
+                for(size_type j = 0; j < n_rhs; ++j) {
+                    new_radius[i * n_rhs + j] = radius_j[j];
+                }
+            }
+            new_radii[error_term] = new_radius;
         } else {
-            for(size_type i = 0; i < radius_i.size(); ++i) {
-                new_radii[error_term][i] += radius_i[i];
+            for(size_type i = 0; i < n_lhs; ++i) {
+                for(size_type j = 0; j < n_rhs; ++j) {
+                    new_radii[error_term][i * n_rhs + j] += radius_j[j];
+                }
             }
         }
     }
-    // Certificate: 1D Minkowski (independent) on m_certificate_, like Affine.
+
     interval_t new_certificate = m_certificate_ + other.m_certificate_;
-    minkowski_slack_new_radii_(new_centers, new_radii, new_certificate);
-    *this = PartitionedAffine(new_centers, new_radii, new_certificate);
-    tighten_certificate_();
-    return *this;
+    PartitionedAffine temp(new_centers, new_radii, new_certificate);
+    temp.tighten_certificate_();
+    temp.repartition_(n_lhs);
+    return *this = temp;
 }
 
 template<typename ValueType>
