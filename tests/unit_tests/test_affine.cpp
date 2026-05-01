@@ -1,5 +1,7 @@
 #include "testing.hpp"
 #include <sigma/sigma.hpp>
+#include <type_traits>
+#include <unordered_map>
 
 using testing::test_interval;
 
@@ -7,6 +9,10 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
     using value_t    = TestType;
     using affine_t   = sigma::Affine<TestType>;
     using interval_t = typename affine_t::interval_t;
+    static_assert(
+      std::is_same_v<
+        typename affine_t::error_terms_t,
+        std::unordered_map<typename affine_t::error_term_t, value_t>>);
 
     value_t zero  = 0.0;
     value_t one   = 1.0;
@@ -16,29 +22,25 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
     SECTION("Constructors") {
         SECTION("Default") {
             auto value = affine_t();
-            REQUIRE(value.range() == interval_t());
+            test_interval(value.range(), zero, zero);
         }
 
         SECTION("From Center") {
             auto value = affine_t(value_t(1.0));
             test_interval(value.range(), one, one);
-            test_interval(value.traditional_interval(), one, one);
         }
 
         SECTION("From Lower and Upper") {
             auto value = affine_t(one, two);
             test_interval(value.range(), one, two);
-            test_interval(value.traditional_interval(), one, two);
         }
 
         SECTION("From Interval") {
             auto value = affine_t(interval_t(one, two));
             test_interval(value.range(), one, two);
-            test_interval(value.traditional_interval(), one, two);
 
             auto value2 = affine_t(interval_t(-two, three));
             test_interval(value2.range(), -two, three);
-            test_interval(value2.traditional_interval(), -two, three);
         }
     }
 
@@ -63,7 +65,6 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         auto value  = affine_t(one, two);
         auto value2 = -value;
         test_interval(value2.range(), -two, -one);
-        test_interval(value2.traditional_interval(), -two, -one);
     }
 
     SECTION("operator+=") {
@@ -71,19 +72,16 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
             auto value = affine_t(one, two);
             value += value_t(3.0);
             test_interval(value.range(), four, value_t(5.0));
-            test_interval(value.traditional_interval(), four, value_t(5.0));
         }
         SECTION("Independent") {
             auto value = affine_t(one, two);
             value += affine_t(three, four);
             test_interval(value.range(), four, value_t(6.0));
-            test_interval(value.traditional_interval(), four, value_t(6.0));
         }
         SECTION("Dependent") {
             auto value = affine_t(one, two);
             value += value;
             test_interval(value.range(), two, four);
-            test_interval(value.traditional_interval(), two, four);
         }
     }
 
@@ -92,19 +90,16 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
             auto value = affine_t(one, two);
             value -= value_t(3.0);
             test_interval(value.range(), -two, -one);
-            test_interval(value.traditional_interval(), -two, -one);
         }
         SECTION("Independent") {
             auto value = affine_t(one, two);
             value -= affine_t(three, four);
             test_interval(value.range(), -three, -one);
-            test_interval(value.traditional_interval(), -three, -one);
         }
         SECTION("Dependent") {
             auto value = affine_t(one, two);
             value -= value;
             test_interval(value.range(), zero, zero);
-            test_interval(value.traditional_interval(), -one, one);
         }
     }
 
@@ -113,24 +108,24 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
             auto value = affine_t(one, two);
             value *= value_t(3.0);
             test_interval(value.range(), three, value_t(6.0));
-            test_interval(value.traditional_interval(), three, value_t(6.0));
         }
 
         SECTION("Independent") {
             auto value = affine_t(one, two);
             value *= affine_t(three, four);
-            // Without intersection with m_interval_ lower bound is 2.5
-            // With intersection with m_interval_ lower bound is 3.0
-            test_interval(value.range(), three, value_t(8.0));
-            test_interval(value.traditional_interval(), three, value_t(8.0));
+            // Tight range is [3, 8]
+            test_interval(value.range(), value_t(2.5), value_t(8.0));
         }
         SECTION("Dependent") {
             auto value = affine_t(one, two);
             value *= value;
-            // Without intersection with m_interval_ lower bound is 0.5
-            // With intersection with m_interval_ lower bound is 1.0
-            test_interval(value.range(), one, four);
-            test_interval(value.traditional_interval(), one, four);
+            // Tight range is [1, 4]
+            test_interval(value.range(), value_t(0.5), value_t(4.0));
+
+            affine_t value2(-two, two);
+            value2 *= value2;
+            // Tight range is [-4, 4]
+            test_interval(value2.range(), -four, four);
         }
     }
 
@@ -140,26 +135,20 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
             value /= value_t(3.0);
             test_interval(value.range(), value_t(1.0 / 3.0),
                           value_t(2.0 / 3.0));
-            test_interval(value.traditional_interval(), value_t(1.0 / 3.0),
-                          value_t(2.0 / 3.0));
         }
         SECTION("Independent") {
             auto value = affine_t(one, two);
             value /= affine_t(three, four);
-            // Without intersection with m_interval_ lower bound is 0.2083333
-            // With intersection with m_interval_ lower bound is 0.25
-            test_interval(value.range(), value_t(0.25), value_t(2.0 / 3.0));
-            test_interval(value.traditional_interval(), value_t(0.25),
+            // Tight range is [1/4, 2/3]
+            test_interval(value.range(), value_t(0.2083333),
                           value_t(2.0 / 3.0));
         }
         SECTION("Dependent") {
             auto value = affine_t(one, two);
             value /= value;
-
+            // Tight range is [1, 1]
             test_interval(value.range(), value_t(5.0 / 8.0),
                           value_t(13.0 / 8.0));
-            test_interval(value.traditional_interval(), value_t(1.0 / 2.0),
-                          two);
         }
     }
 }

@@ -74,6 +74,13 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
 
         REQUIRE_THROWS_AS(value4.set_union(value3), std::domain_error);
     }
+    SECTION("set_intersection") {
+        auto value  = testing_t(0.0, 0.0);
+        auto value2 = testing_t(-1.0, 1.0);
+        auto result = value.set_intersection(value2);
+        REQUIRE(result.lower() == 0.0);
+        REQUIRE(result.upper() == 0.0);
+    }
 
     SECTION("operator<<(std::ostream, Interval)") {
         value_t lo = 1.0, hi = 2.0;

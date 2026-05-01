@@ -16,28 +16,23 @@ namespace sigma {
 template<typename ValueType>
 class Affine {
 public:
-    enum class CorrectionMethod { AFFPY, EQ26, EQ27 };
-
-    using size_type    = std::size_t;
-    using value_t      = ValueType;
-    using error_term_t = std::shared_ptr<size_type>;
-    using radii_t      = std::unordered_map<error_term_t, value_t>;
-    using interval_t   = Interval<value_t>;
-    Affine()           = default;
+    using size_type     = std::size_t;
+    using value_t       = ValueType;
+    using error_term_t  = std::shared_ptr<size_type>;
+    using error_terms_t = std::unordered_map<error_term_t, value_t>;
+    using interval_t    = Interval<value_t>;
+    Affine()            = default;
     Affine(value_t center) : Affine(interval_t(center, center)) {}
     Affine(value_t lo, value_t hi) : Affine(interval_t(lo, hi)) {}
 
-    Affine(const interval_t& interval) :
-      m_center_(interval.median()), m_interval_(interval) {
+    Affine(const interval_t& interval) : m_center_(interval.median()) {
         if(interval.radius() > 0) {
-            m_radii_[make_error_term()] = interval.radius();
+            m_error_terms_[make_error_term()] = interval.radius();
         }
     }
 
-    Affine(value_t center, radii_t radii, interval_t interval) :
-      m_center_(center),
-      m_radii_(std::move(radii)),
-      m_interval_(std::move(interval)) {}
+    Affine(value_t center, error_terms_t radii) :
+      m_center_(center), m_error_terms_(std::move(radii)) {}
 
     Affine(const Affine& other)     = default;
     Affine(Affine&& other) noexcept = default;
@@ -47,12 +42,13 @@ public:
 
     interval_t range() const;
 
-    /// Returns the result using traditional interval arithmetic
-    interval_t traditional_interval() const { return m_interval_; }
-
     value_t center() const { return m_center_; }
-    radii_t radii() const { return m_radii_; }
+    error_terms_t error_terms() const { return m_error_terms_; }
     value_t radius() const;
+    void set_center(value_t center) { m_center_ = center; }
+    void add_error_term(error_term_t error_term, value_t radius) {
+        m_error_terms_[error_term] = radius;
+    }
 
     bool contains(value_t value) const;
     bool contains(const interval_t& interval) const;
@@ -84,7 +80,6 @@ public:
     /// Addition
     Affine& operator+=(value_t value) {
         m_center_ += value;
-        m_interval_ += value;
         return *this;
     }
     Affine& operator+=(const Affine& other);
@@ -98,7 +93,6 @@ public:
     /// Subtraction
     Affine& operator-=(value_t value) {
         m_center_ -= value;
-        m_interval_ -= value;
         return *this;
     }
 
@@ -113,8 +107,9 @@ public:
     /// Multiplication
     Affine& operator*=(value_t value) {
         m_center_ *= value;
-        for(auto&& [error_term, radius_i] : m_radii_) { radius_i *= value; }
-        m_interval_ *= value;
+        for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
+            error_term_i *= value;
+        }
         return *this;
     }
 
@@ -130,8 +125,9 @@ public:
     Affine& operator/=(value_t value) {
         if(value == 0) { throw std::domain_error("Division by zero"); }
         m_center_ /= value;
-        for(auto&& [error_term, radius_i] : m_radii_) { radius_i /= value; }
-        m_interval_ /= value;
+        for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
+            error_term_i /= value;
+        }
         return *this;
     }
 
@@ -144,8 +140,8 @@ public:
     }
 
     bool operator==(const Affine& other) const {
-        return m_center_ == other.m_center_ && m_radii_ == other.m_radii_ &&
-               m_interval_ == other.m_interval_;
+        return m_center_ == other.m_center_ &&
+               m_error_terms_ == other.m_error_terms_;
     }
 
     bool operator!=(const Affine& other) const { return !(*this == other); }
@@ -165,19 +161,15 @@ public:
      *
      *  @return The new center and radii.
      */
-    auto apply_affine_transform(value_t alpha, value_t zeta,
-                                value_t delta) const {
+    Affine apply_affine_transform(value_t alpha, value_t zeta,
+                                  value_t delta) const {
         value_t new_center = alpha * m_center_ + zeta;
-        radii_t new_radii;
-        for(auto&& [error_term, radius_i] : m_radii_) {
-            new_radii[error_term] = alpha * radius_i;
+        error_terms_t new_error_terms;
+        for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
+            new_error_terms[error_symbol] = alpha * error_term_i;
         }
-        new_radii[make_error_term()] = delta;
-        return std::make_pair(new_center, new_radii);
-    }
-
-    void set_correction_method(CorrectionMethod method) {
-        m_correction_method_ = method;
+        new_error_terms[make_error_term()] = delta;
+        return Affine(new_center, std::move(new_error_terms));
     }
 
 private:
@@ -185,27 +177,17 @@ private:
     /// At present it's the address of the object that is important;
     // could switch to a hash or uuid.
     error_term_t make_error_term() const {
-        return std::make_shared<size_type>(m_radii_.size());
+        return std::make_shared<size_type>(m_error_terms_.size());
     }
 
     value_t affpy_correction_(const Affine& other) const;
-
-    /// Eq. 26 in  https://www.tuhh.de/ti3/paper/rump/RuKas14.pdf
-    value_t eq26_correction_(const Affine& other) const;
-
-    /// Eq. 27 in  https://www.tuhh.de/ti3/paper/rump/RuKas14.pdf
-    value_t eq27_correction_(const Affine& other) const;
 
     /// Dispatches based on m_correction_method_
     value_t multiplication_correction_(const Affine& other) const;
 
     value_t m_center_ = value_t(0.0);
 
-    radii_t m_radii_;
-
-    interval_t m_interval_;
-
-    CorrectionMethod m_correction_method_ = CorrectionMethod::AFFPY;
+    error_terms_t m_error_terms_;
 };
 
 template<typename ValueType>
@@ -222,17 +204,15 @@ Affine<ValueType> operator*(ValueType value, const Affine<ValueType>& a) {
 template<typename ValueType>
 auto Affine<ValueType>::range() const -> interval_t {
     auto r = radius();
-    if(m_interval_.empty()) { return m_interval_; }
-    // Return the intersection *this and m_interval_
-    auto lo = std::max(m_center_ - r, m_interval_.lower());
-    auto hi = std::min(m_center_ + r, m_interval_.upper());
-    return interval_t(lo, hi);
+    return interval_t(m_center_ - r, m_center_ + r);
 }
 
 template<typename ValueType>
 auto Affine<ValueType>::radius() const -> value_t {
     value_t r = 0;
-    for(auto&& [error_term, radius_i] : m_radii_) { r += std::fabs(radius_i); }
+    for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
+        r += std::fabs(error_term_i);
+    }
     return r;
 }
 
@@ -253,7 +233,9 @@ template<typename ValueType>
 std::string Affine<ValueType>::print_affine_form() const {
     std::stringstream ss;
     ss << m_center_ << " + ";
-    for(auto&& [error_term, radius_i] : m_radii_) { ss << radius_i << " + "; }
+    for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
+        ss << error_term_i << " + ";
+    }
     auto temp = ss.str();
     temp.erase(temp.end() - 2, temp.end());
     return temp;
@@ -262,55 +244,55 @@ std::string Affine<ValueType>::print_affine_form() const {
 template<typename ValueType>
 auto Affine<ValueType>::operator-() const -> Affine {
     value_t new_center = -m_center_;
-    radii_t new_radii;
-    for(auto&& [error_term, radius_i] : m_radii_) {
-        new_radii[error_term] = -radius_i;
+    error_terms_t new_error_terms;
+    for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
+        new_error_terms[error_symbol] = -error_term_i;
     }
-    interval_t new_interval = -m_interval_;
-    return Affine(new_center, new_radii, new_interval);
+    return Affine(new_center, new_error_terms);
 }
 
 template<typename ValueType>
 auto Affine<ValueType>::operator+=(const Affine& other) -> Affine& {
-    value_t new_center = m_center_ + other.m_center_;
-    radii_t new_radii  = m_radii_;
-    for(auto&& [error_term, radius_i] : other.m_radii_) {
-        new_radii[error_term] += radius_i;
+    value_t new_center            = m_center_ + other.m_center_;
+    error_terms_t new_error_terms = m_error_terms_;
+    for(auto&& [error_symbol, error_term_i] : other.m_error_terms_) {
+        new_error_terms[error_symbol] += error_term_i;
     }
-    interval_t new_interval = m_interval_ + other.m_interval_;
-    return *this            = Affine(new_center, new_radii, new_interval);
+    return *this = Affine(new_center, new_error_terms);
 }
 
 template<typename ValueType>
 auto Affine<ValueType>::operator-=(const Affine& other) -> Affine& {
-    value_t new_center = m_center_ - other.m_center_;
-    radii_t new_radii  = m_radii_;
-    for(auto&& [error_term, radius_i] : other.m_radii_) {
-        new_radii[error_term] -= radius_i;
+    value_t new_center            = m_center_ - other.m_center_;
+    error_terms_t new_error_terms = m_error_terms_;
+    for(auto&& [error_symbol, error_term_i] : other.m_error_terms_) {
+        new_error_terms[error_symbol] -= error_term_i;
     }
-    interval_t new_interval = m_interval_ - other.m_interval_;
-    return *this            = Affine(new_center, new_radii, new_interval);
+    return *this = Affine(new_center, new_error_terms);
 }
 
 template<typename ValueType>
 auto Affine<ValueType>::operator*=(const Affine& other) -> Affine& {
     value_t new_center = m_center_ * other.m_center_;
-    radii_t new_radii;
-
-    for(auto&& [error_term, radius_i] : m_radii_) {
-        new_radii[error_term] = radius_i * other.m_center_;
+    error_terms_t new_error_terms;
+    value_t new_radius = 0;
+    for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
+        new_error_terms[error_symbol] = error_term_i * other.m_center_;
+        new_radius += std::fabs(new_error_terms[error_symbol]);
     }
-    for(auto&& [error_term, radius_j] : other.m_radii_) {
-        new_radii[error_term] += radius_j * m_center_;
+    for(auto&& [error_symbol, error_term_j] : other.m_error_terms_) {
+        new_error_terms[error_symbol] += error_term_j * m_center_;
+        new_radius += std::fabs(new_error_terms[error_symbol]);
     }
-    new_radii[make_error_term()] = multiplication_correction_(other);
-    interval_t new_interval      = m_interval_ * other.m_interval_;
-    return *this                 = Affine(new_center, new_radii, new_interval);
+    auto correction                    = multiplication_correction_(other);
+    new_error_terms[make_error_term()] = correction;
+    return *this                       = Affine(new_center, new_error_terms);
 }
 
 template<typename ValueType>
 auto Affine<ValueType>::operator/=(const Affine& other) -> Affine& {
     if(other.contains(0)) { throw std::domain_error("Division by zero"); }
+    // Compute the affine transformation which transforms other to 1 / other
     auto other_range = other.range();
     auto abs_inf     = std::fabs(other_range.lower());
     auto abs_sup     = std::fabs(other_range.upper());
@@ -322,11 +304,9 @@ auto Affine<ValueType>::operator/=(const Affine& other) -> Affine& {
     interval_t interval(std::min(lo, hi), std::max(lo, hi));
     auto zeta  = std::fabs(interval.median());
     auto delta = interval.radius();
-    auto [new_center, new_radii] =
-      other.apply_affine_transform(alpha, zeta, delta);
-    auto new_interval = interval_t(1.0, 1.0) / other.m_interval_;
-    Affine one_over_other(new_center, new_radii, new_interval);
-    return *this *= one_over_other;
+
+    // Multiply by this by 1 / other
+    return *this *= other.apply_affine_transform(alpha, zeta, delta);
 }
 
 template<typename ValueType>
@@ -336,70 +316,8 @@ auto Affine<ValueType>::affpy_correction_(const Affine& other) const
 }
 
 template<typename ValueType>
-auto Affine<ValueType>::eq27_correction_(const Affine& other) const -> value_t {
-    value_t lhsq = 0.0;
-    value_t rhsq = 0.0;
-    for(auto&& [error_term, radius_i] : m_radii_) {
-        lhsq += radius_i * radius_i;
-    }
-    for(auto&& [error_term, radius_j] : other.m_radii_) {
-        rhsq += radius_j * radius_j;
-    }
-    auto lpr = (*this) + other;
-    auto lmr = (*this) - other;
-    return std::sqrt(lhsq) * std::sqrt(rhsq) *
-           std::max(lpr.radius(), lmr.radius());
-}
-
-template<typename ValueType>
-auto Affine<ValueType>::eq26_correction_(const Affine& other) const -> value_t {
-    value_t new_error_term = 0;
-    value_t pos_sum        = 0;
-    value_t neg_sum        = 0;
-    std::vector<error_term_t> common_error_terms;
-
-    for(auto&& [error_term, radius_i] : m_radii_) {
-        // computes the v_i = gamma_i delta_i terms
-        if(other.m_radii_.count(error_term)) {
-            common_error_terms.push_back(error_term);
-            auto r_ij = radius_i * m_radii_.at(error_term);
-            if(r_ij > 0) {
-                pos_sum += r_ij;
-            } else {
-                neg_sum += std::fabs(r_ij);
-            }
-            continue;
-        }
-        // Computes the gamma_i delta_j for errors unique to *this and other
-        for(auto&& [error_term_j, radius_j] : other.m_radii_) {
-            if(m_radii_.count(error_term_j)) continue;
-            new_error_term += std::fabs(radius_i * radius_j);
-        }
-    }
-
-    // We missed pairs gamma_i delta_j (i!=j) where i and j are shared errors
-    for(std::size_t i = 0; i < common_error_terms.size(); i++) {
-        auto gi = m_radii_.at(common_error_terms[i]);
-        auto di = other.m_radii_.at(common_error_terms[i]);
-        for(std::size_t j = i + 1; j < common_error_terms.size(); j++) {
-            auto gj = m_radii_.at(common_error_terms[j]);
-            auto dj = other.m_radii_.at(common_error_terms[j]);
-            new_error_term += std::fabs(gi * dj + gj * di);
-        }
-    }
-    return new_error_term + std::max(pos_sum, neg_sum);
-}
-
-template<typename ValueType>
 auto Affine<ValueType>::multiplication_correction_(const Affine& other) const
   -> value_t {
-    if(m_correction_method_ == CorrectionMethod::AFFPY) {
-        return affpy_correction_(other);
-    } else if(m_correction_method_ == CorrectionMethod::EQ26) {
-        return eq26_correction_(other);
-    } else if(m_correction_method_ == CorrectionMethod::EQ27) {
-        return eq27_correction_(other);
-    }
-    throw std::runtime_error("Unknown correction method");
+    return affpy_correction_(other);
 }
 } // namespace sigma

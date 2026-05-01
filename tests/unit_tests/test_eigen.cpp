@@ -221,15 +221,10 @@ TEMPLATE_TEST_CASE("Eigen Matrix with Affine Elements", "", float, double) {
         }
         SECTION("Matrix Multiplication") {
             auto mat3 = mat1 * mat2;
-            // (0,0): a*d + b*b = [1,3]*[4,6]+[2,4]*[2,4] = [4,18]+[4,16] =
-            // [8,34] (0,1): a*c + b*a = [1,3]*[3,5]+[2,4]*[1,3] = [3,15]+[2,12]
-            // = [5,27] (1,0): c*d + d*b = [3,5]*[4,6]+[4,6]*[2,4] =
-            // [12,30]+[8,24] = [20,54] (1,1): c*c + d*a =
-            // [3,5]*[3,5]+[4,6]*[1,3] = [9,25]+[4,18] = [13,43]
-            test_interval(mat3(0, 0).range(), 8.0, 34.0);
-            test_interval(mat3(0, 1).range(), 5.0, 27.0);
-            test_interval(mat3(1, 0).range(), 20.0, 54.0);
-            test_interval(mat3(1, 1).range(), 13.0, 43.0);
+            test_interval(mat3(0, 0).range(), 4.0, 34.0);
+            test_interval(mat3(0, 1).range(), 1.0, 27.0);
+            test_interval(mat3(1, 0).range(), 16.0, 54.0);
+            test_interval(mat3(1, 1).range(), 9.0, 43.0);
         }
     }
 }

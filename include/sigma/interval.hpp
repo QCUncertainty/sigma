@@ -150,6 +150,8 @@ public:
 
     // -- Arithmetic in-place operators ----------------------------------------
 
+    Interval operator-() const { return Interval(-upper(), -lower()); }
+
     /** @brief In-place addition of another interval
      *
      *  @param rhs The interval to add
@@ -534,3 +536,16 @@ using IFloat = Interval<float>;
 using IDouble = Interval<double>;
 
 } // namespace sigma
+
+namespace std {
+template<typename ValueType>
+struct hash<sigma::Interval<ValueType>> {
+    size_t operator()(const sigma::Interval<ValueType>& i) const {
+        std::size_t hash_low  = std::hash<ValueType>()(i.lower());
+        std::size_t hash_high = std::hash<ValueType>()(i.upper());
+        std::size_t seed      = hash_low;
+        seed ^= hash_high + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+        return seed;
+    }
+};
+} // namespace std

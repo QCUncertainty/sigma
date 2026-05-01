@@ -132,10 +132,8 @@ Affine<T> sqrt(const Affine<T>& a) {
     auto alpha      = T(1.0) / (sqrt_sum);
     auto zeta =
       sqrt_sum / T(8.0) + T(0.5) * (sqrt_upper * sqrt_lower) / sqrt_sum;
-    auto delta                   = sqrt_diff * sqrt_diff / (T(8.0) * sqrt_sum);
-    auto [new_center, new_radii] = a.apply_affine_transform(alpha, zeta, delta);
-    auto new_interval            = sigma::sqrt(a.traditional_interval());
-    return Affine<T>(new_center, new_radii, new_interval);
+    auto delta = sqrt_diff * sqrt_diff / (T(8.0) * sqrt_sum);
+    return a.apply_affine_transform(alpha, zeta, delta);
 }
 
 } // namespace sigma
