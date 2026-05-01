@@ -65,6 +65,8 @@ public:
 
     value_t center() const;
 
+    const affines_t& partitioned_affines() const { return m_affines_; }
+
     bool empty() const { return num_partitions() == 0; }
     void repartition(size_type n);
 

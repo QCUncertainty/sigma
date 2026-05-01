@@ -112,3 +112,14 @@ TEMPLATE_TEST_CASE("Exponents (Affine)", "", float, double) {
         test_interval(sigma::sqrt(a).range(), 1.0, 1.431980515);
     }
 }
+
+TEMPLATE_TEST_CASE("Exponents (PartitionedAffine)", "", float, double) {
+    using affine_t = sigma::PartitionedAffine<TestType>;
+    using value_t  = typename affine_t::value_t;
+
+    SECTION("Square Root") {
+        auto a = affine_t(value_t{1}, value_t{2});
+        // TODO: Establish tight range
+        test_interval(sigma::sqrt(a).range(), 1.0, 1.41432835267698676);
+    }
+}

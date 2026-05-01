@@ -3,6 +3,7 @@
 #include "sigma/affine.hpp"
 #include "sigma/detail_/operation_common.hpp"
 #include "sigma/interval.hpp"
+#include "sigma/partitioned_affine.hpp"
 #include <cmath>
 
 namespace sigma {
@@ -134,6 +135,21 @@ Affine<T> sqrt(const Affine<T>& a) {
       sqrt_sum / T(8.0) + T(0.5) * (sqrt_upper * sqrt_lower) / sqrt_sum;
     auto delta = sqrt_diff * sqrt_diff / (T(8.0) * sqrt_sum);
     return a.apply_affine_transform(alpha, zeta, delta);
+}
+
+template<typename T>
+PartitionedAffine<T> sqrt(const PartitionedAffine<T>& a) {
+    using partitions_t = typename PartitionedAffine<T>::partitions_t;
+    using affines_t    = typename PartitionedAffine<T>::affines_t;
+
+    partitions_t new_partitions;
+    affines_t new_affines;
+    for(const auto& [partition, affine] : a.partitioned_affines()) {
+        auto new_affine        = sqrt(affine);
+        new_affines[partition] = new_affine;
+        new_partitions.push_back(partition);
+    }
+    return PartitionedAffine<T>(new_partitions, new_affines);
 }
 
 } // namespace sigma
