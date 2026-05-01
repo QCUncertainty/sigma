@@ -122,6 +122,19 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
         REQUIRE_FALSE(value.contains(pinterval_t(zero, one)));
     }
 
+    SECTION("apply_affine_transform") {
+        pinterval_t value(interval_t(one, two));
+        value_t a(1.0);
+        value_t b(2.0);
+        auto alpha = value_t(-1.0) / (b * b);
+        auto lo    = value_t(1.0) / a - alpha * a;
+        auto hi    = value_t(2.0) / b;
+        interval_t interval(std::min(lo, hi), std::max(lo, hi));
+        auto zeta   = std::fabs(interval.median());
+        auto delta  = interval.radius();
+        auto value2 = value.apply_affine_transform(alpha, zeta, delta);
+        test_interval(value2.range(), value_t(0.5), value_t(1.0));
+    }
     // SECTION("repartition") {
     //     // pinterval_t value(interval_t(one, two));
     //     // value.repartition(20);
@@ -208,62 +221,52 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
         }
     }
 
-    // SECTION("operator*=") {
-    //     // SECTION("Value") {
-    //     //     auto value = affine_t(one, two);
-    //     //     value *= value_t(3.0);
-    //     //     test_interval(value.range(), three, value_t(6.0));
-    //     // }
+    SECTION("operator*=") {
+        // SECTION("Value") {
+        //     auto value = affine_t(one, two);
+        //     value *= value_t(3.0);
+        //     test_interval(value.range(), three, value_t(6.0));
+        // }
 
-    //     // SECTION("Independent") {
-    //     //     pinterval_t value(one, two, 10);
-    //     //     value *= pinterval_t(three, four, 10);
-    //     //     test_interval(value.range(), 3.0, 8.0);
+        SECTION("Independent") {
+            pinterval_t value(one, two);
+            value *= pinterval_t(three, four);
+            test_interval(value.range(), 3.0, 8.0);
 
-    //     //     pinterval_t value2(three, value_t(8.0), 100);
-    //     //     value2 *= pinterval_t(interval_t(-three, -two), 100);
-    //     //     test_interval(value2.range(), -24.0, -6.0);
+            pinterval_t value2(three, value_t(8.0));
+            value2 *= pinterval_t(interval_t(-three, -two));
+            // Tight range is [-24, -6]
+            test_interval(value2.range(), -24.0, -5.999750);
 
-    //     //     value *= pinterval_t(interval_t(-two, two));
-    //     //     test_interval(value.range(), value_t(-6.0), value_t(16.0));
-    //     // }
-    //     SECTION("Dependent") {
-    //         // pinterval_t value(-one, two);
-    //         // value *= value;
-    //         // test_interval(value.range(), -0.23750012, 4.202500);
-    //     }
-    // }
+            value *= pinterval_t(interval_t(-two, two));
+            test_interval(value.range(), value_t(-16.0), value_t(16.0));
+        }
+        SECTION("Dependent") {
+            pinterval_t value(-one, two);
+            value *= value;
+            // Tight range is [0, 4]
+            test_interval(value.range(), -0.000350, 4.000000);
+        }
+    }
 
-    // //     SECTION("operator/=") {
-    // //         // SECTION("Value") {
-    // //         //     auto value = paffine_t(one, two);
-    // //         //     value /= value_t(3.0);
-    // //         //     test_interval(value.range(), value_t(1.0 / 3.0),
-    // //         //                   value_t(2.0 / 3.0));
-    // //         //     test_interval(value.traditional_interval(), value_t(1.0
-    // //         / 3.0),
-    // //         //                   value_t(2.0 / 3.0));
-    // //         // }
-    // //         // SECTION("Independent") {
-    // //         //     auto value = paffine_t(one, two);
-    // //         //     value /= paffine_t(three, four);
-    // //         //     std::cout << value.print_interval_form() << std::endl;
-    // //         //     std::cout << value.range().print_interval_form() <<
-    // //         std::endl;
-    // //         //     test_interval(value.range(), value_t(0.25), value_t(2.0
-    // //         / 3.0));
-    // //         //     test_interval(value.traditional_interval(),
-    // value_t(0.25),
-    // //         //                   value_t(2.0 / 3.0));
-    // //         // }
-    // //         // SECTION("Dependent") {
-    // //         //     auto value = paffine_t(one, two);
-    // //         //     value /= value;
-    // //         //     std::cout << value.range().print_interval_form() <<
-    // //         std::endl;
-    // //         //     test_interval(value.range(), 0.991306067, 1.013248);
-    // //         //     test_interval(value.traditional_interval(),
-    // //         0.909008, 1.100100);
-    // //         // }
-    // //     }
+    SECTION("operator/=") {
+        // SECTION("Value") {
+        //     auto value = paffine_t(one, two);
+        //     value /= value_t(3.0);
+        //     test_interval(value.range(), value_t(1.0 / 3.0),
+        //                   value_t(2.0 / 3.0));
+        //   test_interval(value.traditional_interval(), value_t(1.0/ 3.0),
+        //                   value_t(2.0 / 3.0));
+        // }
+        SECTION("Independent") {
+            pinterval_t value(one, two);
+            value /= pinterval_t(three, four);
+            test_interval(value.range(), value_t(0.25), value_t(2.0 / 3.0));
+        }
+        SECTION("Dependent") {
+            pinterval_t value(one, two);
+            value /= value;
+            test_interval(value.range(), 0.999951, 1.000009);
+        }
+    }
 }

@@ -97,12 +97,14 @@ public:
 
     PartitionedAffine& operator*=(const PartitionedAffine& other);
 
-    // PartitionedAffine& operator/=(value_t value) {
-    //     for(auto& interval : m_intervals_) { interval /= value; }
-    //     return *this;
-    // }
+    // PartitionedAffine& operator/=(value_t value);
 
-    // PartitionedAffine& operator/=(const PartitionedAffine& other);
+    PartitionedAffine& operator/=(const PartitionedAffine& other);
+
+    PartitionedAffine apply_affine_transform(value_t alpha, value_t zeta,
+                                             value_t delta) const;
+
+    PartitionedAffine multiplicative_inverse() const;
 
 private:
     void assert_partition_bound_(size_type a) const {
@@ -192,8 +194,9 @@ PartitionedAffine<ValueType>::PartitionedAffine(interval_t interval,
     value_t upper        = 1;
     auto partition_width = (upper - lower) / value_t(n);
 
-    affine_t full_affine;
     auto error_term = make_error_term_();
+
+    affine_t full_affine;
     full_affine.set_center(center);
     full_affine.add_error_term(error_term, radius);
     for(size_type a = 0; a < n; ++a) {
@@ -250,6 +253,29 @@ auto PartitionedAffine<ValueType>::range() const -> interval_t {
         upper        = std::max(upper, range_i.upper());
     }
     return interval_t(lower, upper);
+}
+
+template<typename ValueType>
+auto PartitionedAffine<ValueType>::apply_affine_transform(value_t alpha,
+                                                          value_t zeta,
+                                                          value_t delta) const
+  -> PartitionedAffine {
+    if(empty()) { return PartitionedAffine(); }
+    partitions_t new_partitions;
+    affines_t new_affines;
+    for(const auto& [partition, affine] : m_affines_) {
+        auto new_affine = affine.apply_affine_transform(alpha, zeta, delta);
+        partition_t new_partition;
+        for(const auto& [error_symbol, partition_i] : partition) {
+            affine_t temp(partition_i);
+            temp = temp.apply_affine_transform(alpha, zeta, delta);
+            new_partition.add_partition(error_symbol, temp.range());
+        }
+        new_affines[new_partition] = new_affine;
+        new_partitions.push_back(new_partition);
+        assert(new_partitions.back() == new_partition);
+    }
+    return PartitionedAffine(std::move(new_partitions), std::move(new_affines));
 }
 
 template<typename ValueType>
@@ -310,30 +336,116 @@ auto PartitionedAffine<ValueType>::operator+=(const PartitionedAffine& other)
 template<typename ValueType>
 auto PartitionedAffine<ValueType>::operator*=(const PartitionedAffine& other)
   -> PartitionedAffine& {
-    return *this;
+    partitions_t new_partitions;
+    affines_t new_affines;
+
+    using error_terms_t = std::unordered_map<error_term_t, value_t>;
+    for(size_type i = 0; i < num_partitions(); ++i) {
+        const auto& partition_i = m_partitions_[i];
+        const auto& affine_i    = m_affines_.at(partition_i);
+
+        for(size_type j = 0; j < other.num_partitions(); ++j) {
+            const auto& partition_j = other.m_partitions_[j];
+            const auto& affine_j    = other.m_affines_.at(partition_j);
+
+            auto combined_partition = partition_i.align_with(partition_j);
+            if(combined_partition.empty()) { continue; }
+            auto i_restricted = restrict_affine_(affine_i, combined_partition);
+            auto j_restricted = restrict_affine_(affine_j, combined_partition);
+
+            auto i_center   = i_restricted.center();
+            auto j_center   = j_restricted.center();
+            auto new_center = i_center * j_center;
+
+            error_terms_t new_error_terms;
+
+            for(const auto& error : combined_partition.error_set()) {
+                value_t i_error_term = 0.0;
+                if(i_restricted.error_terms().count(error) > 0) {
+                    i_error_term =
+                      i_restricted.error_terms().at(error) * j_center;
+                }
+                value_t j_error_term = 0.0;
+                if(j_restricted.error_terms().count(error) > 0) {
+                    j_error_term =
+                      j_restricted.error_terms().at(error) * i_center;
+                }
+                new_error_terms[error] = i_error_term + j_error_term;
+            }
+
+            value_t new_error = 0.0;
+            for(const auto& i_error : i_restricted.error_terms()) {
+                for(const auto& j_error : j_restricted.error_terms()) {
+                    new_error += std::fabs(i_error.second * j_error.second);
+                }
+            }
+            new_error_terms[make_error_term_()] = new_error;
+            Affine new_affine(new_center, std::move(new_error_terms));
+            new_partitions.push_back(combined_partition);
+            new_affines[new_partitions.back()] = new_affine;
+        }
+    }
+
+    return *this = PartitionedAffine(std::move(new_partitions),
+                                     std::move(new_affines));
 }
 
-// template<typename ValueType>
-// auto PartitionedAffine<ValueType>::operator/=(const
-// PartitionedAffine& other)
-//   -> PartitionedAffine& {
-//     std::vector<affine_t> new_intervals;
-//     for(size_type i = 0; i < m_intervals_.size(); ++i) {
-//         for(size_type j = 0; j < other.m_intervals_.size(); ++j)
-//         {
-//             new_intervals.push_back(m_intervals_[i] /
-//             other.m_intervals_[j]);
-//         }
-//     }
-//     interval_t new_interval = new_intervals[0].range();
+template<typename ValueType>
+auto PartitionedAffine<ValueType>::operator/=(const PartitionedAffine& other)
+  -> PartitionedAffine& {
+    partitions_t new_partitions;
+    affines_t new_affines;
 
-//     for(size_type i = 1; i < new_intervals.size(); ++i) {
-//         new_interval =
-//         new_interval.set_union(new_intervals[i].range());
-//     }
-//     PartitionNumber n{m_intervals_.size()};
-//     return *this = PartitionedAffine(new_interval, n);
-// }
+    using error_terms_t = std::unordered_map<error_term_t, value_t>;
+    for(size_type i = 0; i < num_partitions(); ++i) {
+        const auto& partition_i = m_partitions_[i];
+        const auto& affine_i    = m_affines_.at(partition_i);
+
+        for(size_type j = 0; j < other.num_partitions(); ++j) {
+            const auto& partition_j = other.m_partitions_[j];
+            const auto& affine_j    = other.m_affines_.at(partition_j);
+
+            auto combined_partition = partition_i.align_with(partition_j);
+            if(combined_partition.empty()) { continue; }
+            auto i_restricted = restrict_affine_(affine_i, combined_partition);
+            auto j_restricted = restrict_affine_(affine_j, combined_partition);
+            auto one_over_j   = j_restricted.multiplicative_inverse();
+            auto i_center     = i_restricted.center();
+            auto j_center     = one_over_j.center();
+            auto new_center   = i_center * j_center;
+
+            error_terms_t new_error_terms;
+
+            for(const auto& error : combined_partition.error_set()) {
+                value_t i_error_term = 0.0;
+                if(i_restricted.error_terms().count(error) > 0) {
+                    i_error_term =
+                      i_restricted.error_terms().at(error) * j_center;
+                }
+                value_t j_error_term = 0.0;
+                if(one_over_j.error_terms().count(error) > 0) {
+                    j_error_term =
+                      one_over_j.error_terms().at(error) * i_center;
+                }
+                new_error_terms[error] = i_error_term + j_error_term;
+            }
+
+            value_t new_error = 0.0;
+            for(const auto& i_error : i_restricted.error_terms()) {
+                for(const auto& j_error : one_over_j.error_terms()) {
+                    new_error += std::fabs(i_error.second * j_error.second);
+                }
+            }
+            new_error_terms[make_error_term_()] = new_error;
+            Affine new_affine(new_center, std::move(new_error_terms));
+            new_partitions.push_back(combined_partition);
+            new_affines[new_partitions.back()] = new_affine;
+        }
+    }
+
+    return *this = PartitionedAffine(std::move(new_partitions),
+                                     std::move(new_affines));
+}
 
 // template<typename ValueType>
 // void PartitionedAffine<ValueType>::repartition(size_type n_new) {
@@ -358,8 +470,8 @@ auto PartitionedAffine<ValueType>::operator*=(const PartitionedAffine& other)
 //     radii_t new_radii;
 
 //     // Map from error term to overlaps.
-//     // Each overlap is the amount of the old range that overlaps with the
-//     j-th
+//     // Each overlap is the amount of the old range that overlaps with
+//     the j-th
 //     // partition of the new range
 //     std::unordered_map<error_term_t, radius_t> overlaps;
 //     for(auto&& [error_term, radius_i] : m_radii_) {
@@ -387,7 +499,8 @@ auto PartitionedAffine<ValueType>::operator*=(const PartitionedAffine& other)
 //         overlaps[error_term] = overlap;
 //     }
 
-//     // Calculate the total overlap, across all error terms, for each new
+//     // Calculate the total overlap, across all error terms, for each
+//     new
 //     // partition
 //     radius_t overlap_sum(n_new, 0.0);
 //     for(auto&& [error_term, overlap] : overlaps) {
@@ -401,7 +514,8 @@ auto PartitionedAffine<ValueType>::operator*=(const PartitionedAffine& other)
 //         radius_t new_radius(n_new, 0.0);
 //         auto& overlap_i = overlaps[error_term];
 //         for(size_type i = 0; i < n_new; ++i) {
-//             new_radius[i] = widths[i] * overlap_i[i] / overlap_sum[i];
+//             new_radius[i] = widths[i] * overlap_i[i] /
+//             overlap_sum[i];
 //         }
 //         new_radii[error_term] = new_radius;
 //     }

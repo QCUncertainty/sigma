@@ -172,6 +172,8 @@ public:
         return Affine(new_center, std::move(new_error_terms));
     }
 
+    Affine multiplicative_inverse() const;
+
 private:
     /// Creates an opaque object that uniquely identifies an error term.
     /// At present it's the address of the object that is important;
@@ -291,9 +293,15 @@ auto Affine<ValueType>::operator*=(const Affine& other) -> Affine& {
 
 template<typename ValueType>
 auto Affine<ValueType>::operator/=(const Affine& other) -> Affine& {
-    if(other.contains(0)) { throw std::domain_error("Division by zero"); }
+    // Multiply by this by 1 / other
+    return *this *= other.multiplicative_inverse();
+}
+
+template<typename ValueType>
+auto Affine<ValueType>::multiplicative_inverse() const -> Affine {
+    if(contains(0)) { throw std::domain_error("Division by zero"); }
     // Compute the affine transformation which transforms other to 1 / other
-    auto other_range = other.range();
+    auto other_range = range();
     auto abs_inf     = std::fabs(other_range.lower());
     auto abs_sup     = std::fabs(other_range.upper());
     auto a           = std::min(abs_inf, abs_sup);
@@ -304,9 +312,7 @@ auto Affine<ValueType>::operator/=(const Affine& other) -> Affine& {
     interval_t interval(std::min(lo, hi), std::max(lo, hi));
     auto zeta  = std::fabs(interval.median());
     auto delta = interval.radius();
-
-    // Multiply by this by 1 / other
-    return *this *= other.apply_affine_transform(alpha, zeta, delta);
+    return apply_affine_transform(alpha, zeta, delta);
 }
 
 template<typename ValueType>
