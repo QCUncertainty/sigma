@@ -1,3 +1,4 @@
+#include "catch2/catch_test_macros.hpp"
 #include "testing.hpp"
 #include <sigma/sigma.hpp>
 #include <sstream>
@@ -9,52 +10,334 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
     using value_t   = typename testing_t::value_t;
     using other_t   = typename testing::test_traits<TestType>::other_t;
 
+    testing_t empty;
+    testing_t one_two(1.0, 2.0);
+    testing_t one_two_left_open(1.0, 2.0, true, false);
+    testing_t one_two_right_open(1.0, 2.0, false, true);
+    testing_t one_two_open(1.0, 2.0, true, true);
+
     SECTION("Constructors") {
         SECTION("Default") {
-            auto value = testing_t();
-            REQUIRE(value.empty());
-            REQUIRE(value.width() == 0.0);
+            REQUIRE(empty.empty());
+            REQUIRE(empty.width() == 0.0);
+            REQUIRE(empty.left_open() == false);
+            REQUIRE(empty.right_open() == false);
         }
+
+        SECTION("With value") {
+            testing_t one(1.0);
+            test_interval(one, 1.0, 1.0);
+            REQUIRE_FALSE(one.empty());
+            REQUIRE(one.left_open() == false);
+            REQUIRE(one.right_open() == false);
+        }
+
         SECTION("With Lower and Upper") {
-            auto value = testing_t(1.0, 2.0);
-            test_interval(value, 1.0, 2.0);
+            SECTION("Closed Interval") {
+                test_interval(one_two, 1.0, 2.0);
+                REQUIRE_FALSE(one_two.empty());
+                REQUIRE(one_two.left_open() == false);
+                REQUIRE(one_two.right_open() == false);
+            }
+            SECTION("Left Open Interval") {
+                test_interval(one_two_left_open, 1.0, 2.0);
+                REQUIRE_FALSE(one_two_left_open.empty());
+                REQUIRE(one_two_left_open.left_open() == true);
+                REQUIRE(one_two_left_open.right_open() == false);
+            }
+            SECTION("Right Open Interval") {
+                test_interval(one_two_right_open, 1.0, 2.0);
+                REQUIRE_FALSE(one_two_right_open.empty());
+                REQUIRE(one_two_right_open.left_open() == false);
+                REQUIRE(one_two_right_open.right_open() == true);
+            }
+            SECTION("Open Interval") {
+                test_interval(one_two_open, 1.0, 2.0);
+                REQUIRE_FALSE(one_two_open.empty());
+                REQUIRE(one_two_open.left_open() == true);
+                REQUIRE(one_two_open.right_open() == true);
+            }
+            SECTION("Edge case: open interval with single value") {
+                testing_t is_empty(1.0, 1.0, true, true);
+                REQUIRE(is_empty == empty);
+                REQUIRE(is_empty.empty());
+                REQUIRE(is_empty.left_open() == false);
+                REQUIRE(is_empty.right_open() == false);
+            }
         }
         SECTION("Copy") {
-            auto first = testing_t(1.0, 2.0);
-            testing_t value(first);
-            test_interval(value, 1.0, 2.0);
-            test_interval(first, 1.0, 2.0);
+            testing_t copy_empty(empty);
+            REQUIRE(copy_empty == empty);
+            REQUIRE(copy_empty.empty());
+
+            testing_t copy_one_two(one_two);
+            test_interval(copy_one_two, 1.0, 2.0);
+            REQUIRE(copy_one_two == one_two);
+
+            testing_t copy_one_two_left_open(one_two_left_open);
+            test_interval(copy_one_two_left_open, 1.0, 2.0);
+            REQUIRE(copy_one_two_left_open == one_two_left_open);
+
+            testing_t copy_one_two_right_open(one_two_right_open);
+            test_interval(copy_one_two_right_open, 1.0, 2.0);
+            REQUIRE(copy_one_two_right_open == one_two_right_open);
+
+            testing_t copy_one_two_open(one_two_open);
+            test_interval(copy_one_two_open, 1.0, 2.0);
+            REQUIRE(copy_one_two_open == one_two_open);
         }
         SECTION("Move") {
-            auto first = testing_t(1.0, 2.0);
-            testing_t value(std::move(first));
-            test_interval(value, 1.0, 2.0);
+            testing_t copy_empty(empty);
+            testing_t move_empty(std::move(empty));
+            REQUIRE(move_empty == copy_empty);
+            REQUIRE(move_empty.empty());
+
+            testing_t copy_one_two(one_two);
+            testing_t move_one_two(std::move(one_two));
+            test_interval(move_one_two, 1.0, 2.0);
+            REQUIRE(move_one_two == copy_one_two);
+
+            testing_t copy_one_two_left_open(one_two_left_open);
+            testing_t move_one_two_left_open(std::move(one_two_left_open));
+            test_interval(move_one_two_left_open, 1.0, 2.0);
+            REQUIRE(move_one_two_left_open == copy_one_two_left_open);
+
+            testing_t copy_one_two_right_open(one_two_right_open);
+            testing_t move_one_two_right_open(std::move(one_two_right_open));
+            test_interval(move_one_two_right_open, 1.0, 2.0);
+            REQUIRE(move_one_two_right_open == copy_one_two_right_open);
+
+            testing_t copy_one_two_open(one_two_open);
+            testing_t move_one_two_open(std::move(one_two_open));
+            test_interval(move_one_two_open, 1.0, 2.0);
+            REQUIRE(move_one_two_open == copy_one_two_open);
         }
         SECTION("Copy Assignment") {
-            auto first = testing_t(1.0, 2.0);
-            auto value = first;
-            test_interval(value, 1.0, 2.0);
-            test_interval(first, 1.0, 2.0);
+            testing_t copy_empty(empty);
+            auto pcopy_empty = &(copy_empty = empty);
+            REQUIRE(pcopy_empty == &copy_empty);
+            REQUIRE(copy_empty == empty);
+
+            testing_t copy_one_two(one_two);
+            auto pcopy_one_two = &(copy_one_two = one_two);
+            REQUIRE(pcopy_one_two == &copy_one_two);
+            REQUIRE(copy_one_two == one_two);
+
+            testing_t copy_one_two_left_open(one_two_left_open);
+            auto pcopy_one_two_left_open =
+              &(copy_one_two_left_open = one_two_left_open);
+            REQUIRE(pcopy_one_two_left_open == &copy_one_two_left_open);
+            REQUIRE(copy_one_two_left_open == one_two_left_open);
+
+            testing_t copy_one_two_right_open(one_two_right_open);
+            auto pcopy_one_two_right_open =
+              &(copy_one_two_right_open = one_two_right_open);
+            REQUIRE(pcopy_one_two_right_open == &copy_one_two_right_open);
+            REQUIRE(copy_one_two_right_open == one_two_right_open);
+
+            testing_t copy_one_two_open(one_two_open);
+            auto pcopy_one_two_open = &(copy_one_two_open = one_two_open);
+            REQUIRE(pcopy_one_two_open == &copy_one_two_open);
+            REQUIRE(copy_one_two_open == one_two_open);
         }
         SECTION("Move Assignment") {
-            auto first = testing_t(1.0, 2.0);
-            auto value = std::move(first);
-            test_interval(value, 1.0, 2.0);
+            testing_t copy_empty(empty);
+            testing_t move_empty;
+            auto pmove_empty = &(move_empty = std::move(copy_empty));
+            REQUIRE(pmove_empty == &move_empty);
+            REQUIRE(move_empty == copy_empty);
+
+            testing_t copy_one_two(one_two);
+            testing_t move_one_two;
+            auto pmove_one_two = &(move_one_two = std::move(copy_one_two));
+            REQUIRE(pmove_one_two == &move_one_two);
+            REQUIRE(move_one_two == copy_one_two);
+
+            testing_t copy_one_two_left_open(one_two_left_open);
+            testing_t move_one_two_left_open;
+            auto pmove_one_two_left_open =
+              &(move_one_two_left_open = std::move(copy_one_two_left_open));
+            REQUIRE(pmove_one_two_left_open == &move_one_two_left_open);
+            REQUIRE(move_one_two_left_open == copy_one_two_left_open);
+
+            testing_t copy_one_two_right_open(one_two_right_open);
+            testing_t move_one_two_right_open;
+            auto pmove_one_two_right_open =
+              &(move_one_two_right_open = std::move(copy_one_two_right_open));
+            REQUIRE(pmove_one_two_right_open == &move_one_two_right_open);
+            REQUIRE(move_one_two_right_open == copy_one_two_right_open);
+
+            testing_t copy_one_two_open(one_two_open);
+            testing_t move_one_two_open;
+            auto pmove_one_two_open =
+              &(move_one_two_open = std::move(copy_one_two_open));
+            REQUIRE(pmove_one_two_open == &move_one_two_open);
+            REQUIRE(move_one_two_open == copy_one_two_open);
         }
     }
     SECTION("width") {
-        auto value = testing_t(1.0, 2.0);
-        REQUIRE(value.width() == 1.0);
+        REQUIRE(empty.width() == 0.0);
+        REQUIRE(one_two.width() == 1.0);
+        REQUIRE(one_two_left_open.width() == 1.0);
+        REQUIRE(one_two_right_open.width() == 1.0);
+        REQUIRE(one_two_open.width() == 1.0);
 
-        value = testing_t(1.0, 3.0);
-        REQUIRE(value.width() == 2.0);
+        testing_t one_three(1.0, 3.0);
+        REQUIRE(one_three.width() == 2.0);
 
-        value = testing_t(1.0, 1.0);
-        REQUIRE(value.width() == 0.0);
+        testing_t one(1.0, 1.0);
+        REQUIRE(one.width() == 0.0);
 
-        value = testing_t(-1.2, 0.0);
+        testing_t value(-1.2, 0.0);
         REQUIRE(value.width() == value_t(1.2));
     }
+
+    SECTION("left_open") {
+        REQUIRE(one_two.left_open() == false);
+        REQUIRE(one_two_left_open.left_open() == true);
+        REQUIRE(one_two_right_open.left_open() == false);
+        REQUIRE(one_two_open.left_open() == true);
+    }
+
+    SECTION("left_closed") {
+        REQUIRE(one_two.left_closed() == true);
+        REQUIRE(one_two_left_open.left_closed() == false);
+        REQUIRE(one_two_right_open.left_closed() == true);
+        REQUIRE(one_two_open.left_closed() == false);
+    }
+
+    SECTION("right_open") {
+        REQUIRE(one_two.right_open() == false);
+        REQUIRE(one_two_left_open.right_open() == false);
+        REQUIRE(one_two_right_open.right_open() == true);
+        REQUIRE(one_two_open.right_open() == true);
+    }
+
+    SECTION("right_closed") {
+        REQUIRE(one_two.right_closed() == true);
+        REQUIRE(one_two_left_open.right_closed() == true);
+        REQUIRE(one_two_right_open.right_closed() == false);
+        REQUIRE(one_two_open.right_closed() == false);
+    }
+
+    SECTION("lower") {
+        REQUIRE(one_two.lower() == 1.0);
+        REQUIRE(one_two_left_open.lower() == 1.0);
+        REQUIRE(one_two_right_open.lower() == 1.0);
+        REQUIRE(one_two_open.lower() == 1.0);
+        REQUIRE_THROWS_AS(empty.lower(), std::domain_error);
+    }
+
+    SECTION("upper") {
+        REQUIRE(one_two.upper() == 2.0);
+        REQUIRE(one_two_left_open.upper() == 2.0);
+        REQUIRE(one_two_right_open.upper() == 2.0);
+        REQUIRE(one_two_open.upper() == 2.0);
+        REQUIRE_THROWS_AS(empty.upper(), std::domain_error);
+    }
+
+    SECTION("contains (value)") {
+        REQUIRE_FALSE(empty.contains(0.0));
+
+        auto one_m_epsilon = std::nextafter(one_two.lower(), value_t(0.0));
+        auto one_p_epsilon = std::nextafter(one_two.lower(), value_t(3.0));
+        auto two_m_epsilon = std::nextafter(one_two.upper(), value_t(0.0));
+        auto two_p_epsilon = std::nextafter(one_two.upper(), value_t(3.0));
+
+        testing_t one(1.0);
+        REQUIRE_FALSE(one.contains(one_m_epsilon));
+        REQUIRE(one.contains(1.0));
+        REQUIRE_FALSE(one.contains(one_p_epsilon));
+
+        REQUIRE_FALSE(one_two.contains(one_m_epsilon));
+        REQUIRE(one_two.contains(1.0));
+        REQUIRE(one_two.contains(one_p_epsilon));
+        REQUIRE(one_two.contains(two_m_epsilon));
+        REQUIRE(one_two.contains(2.0));
+        REQUIRE_FALSE(one_two.contains(two_p_epsilon));
+
+        REQUIRE_FALSE(one_two_left_open.contains(one_m_epsilon));
+        REQUIRE_FALSE(one_two_left_open.contains(1.0));
+        REQUIRE(one_two_left_open.contains(one_p_epsilon));
+        REQUIRE(one_two_left_open.contains(two_m_epsilon));
+        REQUIRE(one_two_left_open.contains(2.0));
+        REQUIRE_FALSE(one_two_left_open.contains(two_p_epsilon));
+
+        REQUIRE_FALSE(one_two_right_open.contains(one_m_epsilon));
+        REQUIRE(one_two_right_open.contains(1.0));
+        REQUIRE(one_two_right_open.contains(one_p_epsilon));
+        REQUIRE(one_two_right_open.contains(two_m_epsilon));
+        REQUIRE_FALSE(one_two_right_open.contains(2.0));
+        REQUIRE_FALSE(one_two_right_open.contains(two_p_epsilon));
+
+        REQUIRE_FALSE(one_two_open.contains(one_m_epsilon));
+        REQUIRE_FALSE(one_two_open.contains(1.0));
+        REQUIRE(one_two_open.contains(one_p_epsilon));
+        REQUIRE(one_two_open.contains(two_m_epsilon));
+        REQUIRE_FALSE(one_two_open.contains(2.0));
+        REQUIRE_FALSE(one_two_open.contains(two_p_epsilon));
+    }
+
+    SECTION("contains (interval)") {
+        REQUIRE(empty.contains(testing_t()));
+        REQUIRE_FALSE(empty.contains(one_two));
+
+        auto one_m_epsilon = std::nextafter(one_two.lower(), value_t(0.0));
+        auto one_p_epsilon = std::nextafter(one_two.lower(), value_t(3.0));
+        auto two_m_epsilon = std::nextafter(one_two.upper(), value_t(0.0));
+        auto two_p_epsilon = std::nextafter(one_two.upper(), value_t(3.0));
+
+        testing_t outside_left(one_m_epsilon, one_p_epsilon);
+        testing_t on_left(value_t(1.0), one_p_epsilon);
+        testing_t inside(one_p_epsilon, two_m_epsilon);
+        testing_t on_right(two_m_epsilon, value_t(2.0));
+        testing_t outside_right(two_m_epsilon, two_p_epsilon);
+
+        REQUIRE(one_two.contains(testing_t()));
+        REQUIRE_FALSE(one_two.contains(outside_left));
+        REQUIRE(one_two.contains(one_two));
+        REQUIRE(one_two.contains(one_two_left_open));
+        REQUIRE(one_two.contains(on_left));
+        REQUIRE(one_two.contains(inside));
+        REQUIRE(one_two.contains(one_two_open));
+        REQUIRE(one_two.contains(on_right));
+        REQUIRE(one_two.contains(one_two_right_open));
+        REQUIRE_FALSE(one_two.contains(outside_right));
+
+        REQUIRE(one_two_left_open.contains(testing_t()));
+        REQUIRE_FALSE(one_two_left_open.contains(outside_left));
+        REQUIRE_FALSE(one_two_left_open.contains(one_two));
+        REQUIRE(one_two_left_open.contains(one_two_left_open));
+        REQUIRE_FALSE(one_two_left_open.contains(on_left));
+        REQUIRE(one_two_left_open.contains(inside));
+        REQUIRE(one_two_left_open.contains(one_two_open));
+        REQUIRE(one_two_left_open.contains(on_right));
+        REQUIRE_FALSE(one_two_left_open.contains(one_two_right_open));
+        REQUIRE_FALSE(one_two_left_open.contains(outside_right));
+
+        REQUIRE(one_two_right_open.contains(testing_t()));
+        REQUIRE_FALSE(one_two_right_open.contains(outside_left));
+        REQUIRE_FALSE(one_two_right_open.contains(one_two));
+        REQUIRE_FALSE(one_two_right_open.contains(one_two_left_open));
+        REQUIRE(one_two_right_open.contains(on_left));
+        REQUIRE(one_two_right_open.contains(inside));
+        REQUIRE(one_two_right_open.contains(one_two_open));
+        REQUIRE_FALSE(one_two_right_open.contains(on_right));
+        REQUIRE(one_two_right_open.contains(one_two_right_open));
+        REQUIRE_FALSE(one_two_right_open.contains(outside_right));
+
+        REQUIRE(one_two_open.contains(testing_t()));
+        REQUIRE_FALSE(one_two_open.contains(outside_left));
+        REQUIRE_FALSE(one_two_open.contains(one_two));
+        REQUIRE_FALSE(one_two_open.contains(one_two_left_open));
+        REQUIRE_FALSE(one_two_open.contains(on_left));
+        REQUIRE(one_two_open.contains(inside));
+        REQUIRE(one_two_open.contains(one_two_open));
+        REQUIRE_FALSE(one_two_open.contains(on_right));
+        REQUIRE_FALSE(one_two_open.contains(one_two_right_open));
+        REQUIRE_FALSE(one_two_open.contains(outside_right));
+    }
+
     SECTION("set_union") {
         auto value  = testing_t(1.0, 2.0);
         auto value2 = testing_t(2.0, 4.0);

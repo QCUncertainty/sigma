@@ -35,10 +35,10 @@ public:
     PartitionedAffine(value_t value) : PartitionedAffine(value, value) {}
 
     PartitionedAffine(value_t lower, value_t upper,
-                      size_type num_partitions = 1) :
+                      size_type num_partitions = 10) :
       PartitionedAffine(interval_t(lower, upper), num_partitions) {}
 
-    PartitionedAffine(interval_t interval, size_type num_partitions = 1);
+    PartitionedAffine(interval_t interval, size_type num_partitions = 10);
 
     PartitionedAffine(partitions_t partitions, affines_t affines) :
       m_partitions_(std::move(partitions)), m_affines_(std::move(affines)) {}

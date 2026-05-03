@@ -4,7 +4,6 @@
 #include <iostream>
 #include <optional>
 #include <type_traits>
-
 /** @file interval.hpp
  *  @brief Defines the Interval class
  */
@@ -41,7 +40,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    Interval(value_t value) : Interval(value, value) {}
+    Interval(value_t value) : Interval(value, value, false, false) {}
 
     /** @brief Construct an interval from two bounds
      *
@@ -50,15 +49,64 @@ public:
      *
      *  @param lower The lower bound of the interval
      *  @param upper The upper bound of the interval
+     *  @param left_open Is @p lower just outside the interval?
+     *  @param right_open Is @p upper just outside the interval?
+     *  @throw none No throw guarantee
+     */
+    Interval(value_t lower, value_t upper, bool left_open = false,
+             bool right_open = false) :
+      m_is_left_open_(left_open),
+      m_is_right_open_(right_open),
+      m_interval_(interval_t(std::min(lower, upper), std::max(lower, upper))) {
+        // A single value in an open interval is actually empty
+        if((left_open || right_open) && lower == upper) *this = Interval();
+    }
+
+    /** @brief Returns the distance between the interval's bounds.
+     *
+     *  The width of an interval is defined by |upper() - lower()|. The width
+     *  does NOT depend on the openness of the interval. The width of an empty
+     *  interval is zero.
+     *
+     *  @return The width of the interval
      *
      *  @throw none No throw guarantee
      */
-    Interval(value_t lower, value_t upper) :
-      m_interval_(interval_t(std::min(lower, upper), std::max(lower, upper))) {}
-
     value_t width() const {
         return !empty() ? boost::numeric::width(*m_interval_) : 0.0;
     }
+
+    /** @brief  Is lower() NOT contained in the interval?
+     *
+     *  @return True if lower() is NOT contained in the interval
+     *
+     *  @throw none No throw guarantee
+     */
+    bool left_open() const { return m_is_left_open_; }
+
+    /** @brief  Is lower() contained in the interval?
+     *
+     * @return True if lower() is contained in the interval.
+     *
+     * @throw none No throw guarantee.
+     */
+    bool left_closed() const { return !left_open(); }
+
+    /** @brief Is upper() NOT contained in the interval?
+     *
+     *  @return True if upper() is NOT contained in the interval
+     *
+     *  @throw none No throw guarantee
+     */
+    bool right_open() const { return m_is_right_open_; }
+
+    /** @brief Is upeer contained in the interval?
+     *
+     *  @return True if upper() is contained in the interval.
+     *
+     *  @throw none No throw guarantee
+     */
+    bool right_closed() const { return !right_open(); }
 
     /** @brief Returns the lower bound of the interval
      *
@@ -82,28 +130,58 @@ public:
         return m_interval_->upper();
     }
 
-    /** @brief Whether a scalar lies in this interval (endpoints included)
+    /** @brief Whether a scalar lies in this interval
      *
-     *  Returns true if lower() <= @p value <= upper(). Boundary values are
-     *  considered contained.
+     *  Returns true if lower() <= @p value <= upper(). Equality to lower()/
+     *  upper() is only allowed if lower_closed()/upper_closed() is true,
+     *  respectively.
      *
      *  @param value The scalar to test
      *
-     *  @return True if @p value lies in the closed interval from lower() to
-     *          upper()
+     *  @return True if @p value lies in the interval represented by *this and
+     *          false otherwise.
      *
      *  @throw none No throw guarantee
      */
     bool contains(value_t value) const {
         if(empty()) { return false; }
-        return value >= lower() && value <= upper();
+
+        // Check if the value is definitely outside the interval
+        if(value < lower() || value > upper()) { return false; }
+
+        // Now we know it's squarely in the interval (or one of the bounds)
+
+        // Not allowed to be a bound if the interval is open on that side
+        if(left_open() && value == lower()) { return false; }
+        if(right_open() && value == upper()) { return false; }
+
+        return true;
     }
 
     // Is @p other fully contained in this interval?
     bool contains(const Interval& other) const {
         if(other.empty()) { return true; }
         if(empty()) { return false; }
-        return lower() <= other.lower() && upper() >= other.upper();
+
+        // Check if definitely outside the interval
+        if(other.lower() < lower() || other.upper() > upper()) { return false; }
+
+        // Check if the interval is squarely inside the interval
+        if(other.lower() > lower() && other.upper() < upper()) { return true; }
+
+        // *this and other must share at least one bound
+        // For each bound the choices are:
+        // *this open and other closed -> not okay
+        // *this open and other open -> okay
+        // *this closed and other closed -> okay
+        // *this closed and other open -> okay
+        if(other.lower() == lower()) {
+            if(left_open() && other.left_closed()) { return false; }
+        }
+        if(other.upper() == upper()) {
+            if(right_open() && other.right_closed()) { return false; }
+        }
+        return true;
     }
 
     Interval set_union(const Interval& other) const {
@@ -270,6 +348,8 @@ private:
     }
     using interval_t = boost::numeric::interval<value_t>;
 
+    bool m_is_left_open_  = false;
+    bool m_is_right_open_ = false;
     std::optional<interval_t> m_interval_;
 
 }; // class Interval
@@ -314,6 +394,8 @@ bool operator==(const Interval<T1>& lhs, const Interval<T2>& rhs) {
     if constexpr(!std::is_same_v<T1, T2>) return false;
     if(lhs.empty() && rhs.empty()) { return true; }
     if(lhs.empty() || rhs.empty()) { return false; }
+    if(lhs.left_open() != rhs.left_open()) { return false; }
+    if(lhs.right_open() != rhs.right_open()) { return false; }
     return lhs.lower() == rhs.lower() && lhs.upper() == rhs.upper();
 }
 
