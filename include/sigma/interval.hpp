@@ -186,6 +186,18 @@ public:
         return true;
     }
 
+    /** @brief Returns the union of this interval and another interval
+     *
+     *  The union of two intervals is the smallest interval that contains both
+     *  intervals. Because the result must be an interval, union is only defined
+     *  when then the intervals overlap at least at one point.
+     *
+     *  @param other The interval to union with
+     *  @return The union of this interval and @p other
+     *
+     *  @throw std::domain_error if the intervals do not overlap. Strong throw
+     *          guarantee.
+     */
     Interval set_union(const Interval& other) const {
         if(empty()) { return other; }
         if(other.empty()) { return *this; }

@@ -175,6 +175,7 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
             REQUIRE(move_one_two_open == copy_one_two_open);
         }
     }
+
     SECTION("width") {
         REQUIRE(empty.width() == 0.0);
         REQUIRE(one_two.width() == 1.0);
@@ -465,6 +466,7 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
         testing_t disjoint(4.0, 5.0);
         REQUIRE_THROWS_AS(one_two.set_union(disjoint), std::domain_error);
     }
+
     SECTION("set_intersection") {
         auto value  = testing_t(0.0, 0.0);
         auto value2 = testing_t(-1.0, 1.0);
