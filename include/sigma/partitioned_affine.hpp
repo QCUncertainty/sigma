@@ -32,11 +32,13 @@ public:
 
     PartitionedAffine() = default;
 
+    PartitionedAffine(value_t value) : PartitionedAffine(value, value) {}
+
     PartitionedAffine(value_t lower, value_t upper,
-                      size_type num_partitions = 10) :
+                      size_type num_partitions = 1) :
       PartitionedAffine(interval_t(lower, upper), num_partitions) {}
 
-    PartitionedAffine(interval_t interval, size_type num_partitions = 10);
+    PartitionedAffine(interval_t interval, size_type num_partitions = 1);
 
     PartitionedAffine(partitions_t partitions, affines_t affines) :
       m_partitions_(std::move(partitions)), m_affines_(std::move(affines)) {}
@@ -72,41 +74,77 @@ public:
 
     PartitionedAffine operator-() const;
 
-    // PartitionedAffine& operator+=(value_t value) {
-    //     for(auto& interval : m_intervals_) { interval += value; }
-    //     return *this;
-    // }
+    PartitionedAffine& operator+=(value_t value) {
+        return *this += PartitionedAffine(value);
+    }
 
     PartitionedAffine& operator+=(const PartitionedAffine& other);
 
-    // PartitionedAffine operator-=(value_t value) {
-    //     for(auto& interval : m_intervals_) { interval -= value; }
-    //     return *this;
-    // }
+    PartitionedAffine operator+(value_t value) const {
+        return PartitionedAffine(*this) += value;
+    }
 
-    /// Dependent @p a -= @p a: rebuild the strip from the Minkowski
-    /// combination of the two @p m_certificate_ intervals, then reapply
-    /// slack (same as a diagonal / template merge) so `partition_hull_`
-    /// encloses the classical 1D outer.
+    PartitionedAffine operator+(const PartitionedAffine& other) const {
+        return PartitionedAffine(*this) += other;
+    }
+
+    PartitionedAffine operator-=(value_t value) {
+        return *this -= PartitionedAffine(value);
+    }
+
     PartitionedAffine& operator-=(const PartitionedAffine& other) {
         return *this += -other;
     }
 
-    // PartitionedAffine& operator*=(value_t value) {
-    //     for(auto& interval : m_intervals_) { interval *= value; }
-    //     return *this;
-    // }
+    PartitionedAffine operator-(value_t value) const {
+        return PartitionedAffine(*this) -= value;
+    }
+
+    PartitionedAffine operator-(const PartitionedAffine& other) const {
+        return PartitionedAffine(*this) -= other;
+    }
+
+    PartitionedAffine& operator*=(value_t value) {
+        return *this *= PartitionedAffine(value);
+    }
 
     PartitionedAffine& operator*=(const PartitionedAffine& other);
 
-    // PartitionedAffine& operator/=(value_t value);
+    PartitionedAffine operator*(value_t value) const {
+        return PartitionedAffine(*this) *= value;
+    }
+
+    PartitionedAffine operator*(const PartitionedAffine& other) const {
+        return PartitionedAffine(*this) *= other;
+    }
+
+    PartitionedAffine& operator/=(value_t value) {
+        return *this /= PartitionedAffine(value);
+    }
 
     PartitionedAffine& operator/=(const PartitionedAffine& other);
+
+    PartitionedAffine operator/(value_t value) const {
+        return PartitionedAffine(*this) /= value;
+    }
+
+    PartitionedAffine operator/(const PartitionedAffine& other) const {
+        return PartitionedAffine(*this) /= other;
+    }
 
     PartitionedAffine apply_affine_transform(value_t alpha, value_t zeta,
                                              value_t delta) const;
 
     PartitionedAffine multiplicative_inverse() const;
+
+    bool operator==(const PartitionedAffine& other) const {
+        return m_partitions_ == other.m_partitions_ &&
+               m_affines_ == other.m_affines_;
+    }
+
+    bool operator!=(const PartitionedAffine& other) const {
+        return !(*this == other);
+    }
 
 private:
     void assert_partition_bound_(size_type a) const {
@@ -180,6 +218,19 @@ private:
 }; // namespace sigma
 
 template<typename ValueType>
+std::ostream& operator<<(std::ostream& os,
+                         const PartitionedAffine<ValueType>& pa) {
+    os << pa.range();
+    return os;
+}
+
+template<typename ValueType>
+PartitionedAffine<ValueType> operator*(ValueType value,
+                                       const PartitionedAffine<ValueType>& pa) {
+    return pa * value;
+}
+
+template<typename ValueType>
 PartitionedAffine<ValueType>::PartitionedAffine(interval_t interval,
                                                 size_type n) {
     if(n == 0) { return; }
@@ -204,8 +255,8 @@ PartitionedAffine<ValueType>::PartitionedAffine(interval_t interval,
     for(size_type a = 0; a < n; ++a) {
         auto lower_a = lower + partition_width * a;
         auto upper_a = lower + partition_width * (a + 1);
-        // Make the upper bound just slightly less than the lower bound of the
-        // next partition to avoid overlap.
+        // Make the upper bound just slightly less than the lower bound of
+        // the next partition to avoid overlap.
         upper_a = std::nextafter(upper_a, lower_a);
         if(a == n - 1) { upper_a = upper; }
         interval_t range_a(lower_a, upper_a);
