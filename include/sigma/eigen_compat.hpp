@@ -15,6 +15,8 @@ template<typename T>
 class Interval;
 template<typename T>
 class Affine;
+template<typename T>
+class PartitionedAffine;
 } // namespace sigma
 
 /** @def EIGEN_NUMTRAITS(float_type)
@@ -101,6 +103,35 @@ class Affine;
         };                                                                \
     }
 
+/** @def EIGEN_NUMTRAITS_AFFINE(float_type)
+ *  @brief Factorization for Eigen::NumTraits Specialization for Affine
+ */
+#define EIGEN_NUMTRAITS_PARTITIONED_AFFINE(float_type)       \
+    /** @brief Numeric traits for Interval<float_type> */    \
+    template<>                                               \
+    struct NumTraits<sigma::PartitionedAffine<float_type>>   \
+      : NumTraits<float_type> {                              \
+        /** The affine type */                               \
+        using Affine = sigma::PartitionedAffine<float_type>; \
+        /** The corresponding real type */                   \
+        using Real = Affine;                                 \
+        /** The corresponding non-integer type */            \
+        using NonInteger = Affine;                           \
+        /** The corresponding literal type */                \
+        using Literal = Affine;                              \
+        /** The corresponding nested type */                 \
+        using Nested = Affine;                               \
+        enum {                                               \
+            IsComplex             = 0,                       \
+            IsInteger             = 0,                       \
+            IsSigned              = 1,                       \
+            RequireInitialization = 1,                       \
+            ReadCost              = 1,                       \
+            AddCost               = 3,                       \
+            MulCost               = 3                        \
+        };                                                   \
+    }
+
 /** @namespace Eigen
  *  @brief The namespace of the Eigen library
  *
@@ -117,6 +148,9 @@ EIGEN_NUMTRAITS_INTERVAL(double);
 
 EIGEN_NUMTRAITS_AFFINE(float);
 EIGEN_NUMTRAITS_AFFINE(double);
+
+EIGEN_NUMTRAITS_PARTITIONED_AFFINE(float);
+EIGEN_NUMTRAITS_PARTITIONED_AFFINE(double);
 
 } // namespace Eigen
 
