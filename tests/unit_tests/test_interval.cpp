@@ -339,23 +339,131 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
     }
 
     SECTION("set_union") {
-        auto value  = testing_t(1.0, 2.0);
-        auto value2 = testing_t(2.0, 4.0);
-        auto result = value.set_union(value2);
-        REQUIRE(result.lower() == 1.0);
-        REQUIRE(result.upper() == 4.0);
+        SECTION("Union with Empty") {
+            REQUIRE(empty.set_union(empty) == empty);
+            REQUIRE(empty.set_union(one_two) == one_two);
+            REQUIRE(empty.set_union(one_two_left_open) == one_two_left_open);
+            REQUIRE(empty.set_union(one_two_right_open) == one_two_right_open);
+            REQUIRE(empty.set_union(one_two_open) == one_two_open);
+        }
+        SECTION("Same interval different openness") {
+            REQUIRE(one_two.set_union(empty) == one_two);
+            REQUIRE(one_two.set_union(one_two) == one_two);
+            REQUIRE(one_two.set_union(one_two_left_open) == one_two);
+            REQUIRE(one_two.set_union(one_two_right_open) == one_two);
+            REQUIRE(one_two.set_union(one_two_open) == one_two);
 
-        auto value3  = testing_t(2.0, 3.0);
-        auto result2 = result.set_union(value3);
-        REQUIRE(result2.lower() == 1.0);
-        REQUIRE(result2.upper() == 4.0);
+            REQUIRE(one_two_left_open.set_union(empty) == one_two_left_open);
+            REQUIRE(one_two_left_open.set_union(one_two) == one_two);
+            REQUIRE(one_two_left_open.set_union(one_two_left_open) ==
+                    one_two_left_open);
+            REQUIRE(one_two_left_open.set_union(one_two_right_open) == one_two);
+            REQUIRE(one_two_left_open.set_union(one_two_open) ==
+                    one_two_left_open);
 
-        auto value4  = testing_t(-2.0, 1.0);
-        auto result3 = value4.set_union(value);
-        REQUIRE(result3.lower() == -2.0);
-        REQUIRE(result3.upper() == 2.0);
+            REQUIRE(one_two_right_open.set_union(empty) == one_two_right_open);
+            REQUIRE(one_two_right_open.set_union(one_two) == one_two);
+            REQUIRE(one_two_right_open.set_union(one_two_left_open) == one_two);
+            REQUIRE(one_two_right_open.set_union(one_two_right_open) ==
+                    one_two_right_open);
+            REQUIRE(one_two_right_open.set_union(one_two_open) ==
+                    one_two_right_open);
 
-        REQUIRE_THROWS_AS(value4.set_union(value3), std::domain_error);
+            REQUIRE(one_two_open.set_union(empty) == one_two_open);
+            REQUIRE(one_two_open.set_union(one_two) == one_two);
+            REQUIRE(one_two_open.set_union(one_two_left_open) ==
+                    one_two_left_open);
+            REQUIRE(one_two_open.set_union(one_two_right_open) ==
+                    one_two_right_open);
+            REQUIRE(one_two_open.set_union(one_two_open) == one_two_open);
+        }
+        SECTION("Expands left bound") {
+            // We say "one" because "one_point_five" is too long
+            testing_t zero_one(0.0, 1.5);
+            testing_t zero_one_left_open(0.0, 1.5, true, false);
+            testing_t zero_one_right_open(0.0, 1.5, false, true);
+            testing_t zero_one_open(0.0, 1.5, true, true);
+
+            testing_t zero_two(0.0, 2.0);
+            testing_t zero_two_left_open(0.0, 2.0, true, false);
+            testing_t zero_two_right_open(0.0, 2.0, false, true);
+            testing_t zero_two_open(0.0, 2.0, true, true);
+
+            REQUIRE(one_two.set_union(zero_one) == zero_two);
+            REQUIRE(one_two.set_union(zero_one_left_open) ==
+                    zero_two_left_open);
+            REQUIRE(one_two.set_union(zero_one_right_open) == zero_two);
+            REQUIRE(one_two.set_union(zero_one_open) == zero_two_left_open);
+
+            REQUIRE(one_two_left_open.set_union(zero_one) == zero_two);
+            REQUIRE(one_two_left_open.set_union(zero_one_left_open) ==
+                    zero_two_left_open);
+            REQUIRE(one_two_left_open.set_union(zero_one_right_open) ==
+                    zero_two);
+            REQUIRE(one_two_left_open.set_union(zero_one_open) ==
+                    zero_two_left_open);
+
+            REQUIRE(one_two_right_open.set_union(zero_one) ==
+                    zero_two_right_open);
+            REQUIRE(one_two_right_open.set_union(zero_one_left_open) ==
+                    zero_two_open);
+            REQUIRE(one_two_right_open.set_union(zero_one_right_open) ==
+                    zero_two_right_open);
+            REQUIRE(one_two_right_open.set_union(zero_one_open) ==
+                    zero_two_open);
+
+            REQUIRE(one_two_open.set_union(zero_one) == zero_two_right_open);
+            REQUIRE(one_two_open.set_union(zero_one_left_open) ==
+                    zero_two_open);
+            REQUIRE(one_two_open.set_union(zero_one_right_open) ==
+                    zero_two_right_open);
+            REQUIRE(one_two_open.set_union(zero_one_open) == zero_two_open);
+        }
+
+        SECTION("Expands right bound") {
+            testing_t one_three(1.5, 3.0);
+            testing_t one_three_left_open(1.5, 3.0, true, false);
+            testing_t one_three_right_open(1.5, 3.0, false, true);
+            testing_t one_three_open(1.5, 3.0, true, true);
+
+            testing_t one_three2(1.0, 3.0);
+            testing_t one_three2_left_open(1.0, 3.0, true, false);
+            testing_t one_three2_right_open(1.0, 3.0, false, true);
+            testing_t one_three2_open(1.0, 3.0, true, true);
+
+            REQUIRE(one_two.set_union(one_three) == one_three2);
+            REQUIRE(one_two.set_union(one_three_left_open) == one_three2);
+            REQUIRE(one_two.set_union(one_three_right_open) ==
+                    one_three2_right_open);
+            REQUIRE(one_two.set_union(one_three_open) == one_three2_right_open);
+
+            REQUIRE(one_two_left_open.set_union(one_three) ==
+                    one_three2_left_open);
+            REQUIRE(one_two_left_open.set_union(one_three_left_open) ==
+                    one_three2_left_open);
+            REQUIRE(one_two_left_open.set_union(one_three_right_open) ==
+                    one_three2_open);
+            REQUIRE(one_two_left_open.set_union(one_three_open) ==
+                    one_three2_open);
+
+            REQUIRE(one_two_right_open.set_union(one_three) == one_three2);
+            REQUIRE(one_two_right_open.set_union(one_three_left_open) ==
+                    one_three2);
+            REQUIRE(one_two_right_open.set_union(one_three_right_open) ==
+                    one_three2_right_open);
+            REQUIRE(one_two_right_open.set_union(one_three_open) ==
+                    one_three2_right_open);
+
+            REQUIRE(one_two_open.set_union(one_three) == one_three2_left_open);
+            REQUIRE(one_two_open.set_union(one_three_left_open) ==
+                    one_three2_left_open);
+            REQUIRE(one_two_open.set_union(one_three_right_open) ==
+                    one_three2_open);
+            REQUIRE(one_two_open.set_union(one_three_open) == one_three2_open);
+        }
+
+        testing_t disjoint(4.0, 5.0);
+        REQUIRE_THROWS_AS(one_two.set_union(disjoint), std::domain_error);
     }
     SECTION("set_intersection") {
         auto value  = testing_t(0.0, 0.0);

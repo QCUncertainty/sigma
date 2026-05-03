@@ -158,7 +158,9 @@ public:
         return true;
     }
 
-    // Is @p other fully contained in this interval?
+    /** @brief Is @p other fully contained in this interval?
+     *
+     */
     bool contains(const Interval& other) const {
         if(other.empty()) { return true; }
         if(empty()) { return false; }
@@ -190,8 +192,30 @@ public:
         if(set_intersection(other).empty()) {
             throw std::domain_error("Intervals do not overlap");
         }
-        return Interval(std::min(lower(), other.lower()),
-                        std::max(upper(), other.upper()));
+        value_t low        = lower();
+        value_t hi         = upper();
+        bool lower_is_open = false;
+        bool upper_is_open = false;
+        if(lower() < other.lower()) { // *this has the lower bound
+            lower_is_open = left_open();
+        } else if(lower() == other.lower()) {
+            // If both are open, then result is open; otherwise closed
+            lower_is_open = left_open() && other.left_open();
+        } else {
+            low           = other.lower();
+            lower_is_open = other.left_open();
+        }
+
+        if(upper() > other.upper()) {
+            upper_is_open = right_open();
+        } else if(upper() == other.upper()) {
+            upper_is_open = right_open() && other.right_open();
+        } else {
+            hi            = other.upper();
+            upper_is_open = other.right_open();
+        }
+
+        return Interval(low, hi, lower_is_open, upper_is_open);
     }
 
     Interval set_intersection(const Interval& other) const {
