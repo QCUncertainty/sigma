@@ -66,15 +66,49 @@ public:
      *
      *  The width of an interval is defined by |upper() - lower()|. The width
      *  does NOT depend on the openness of the interval. The width of an empty
-     *  interval is zero.
+     *  interval is undefined (and calling this member on an empty interval
+     * will cause a domain_error to be thrown)
      *
      *  @return The width of the interval
      *
-     *  @throw none No throw guarantee
+     *  @throw std::domain_error if the interval is empty
      */
     value_t width() const {
-        return !empty() ? boost::numeric::width(*m_interval_) : 0.0;
+        assert_not_empty_();
+        return boost::numeric::width(*m_interval_);
     }
+
+    /** @brief Returns the midpoint of the interval
+     *
+     *  @return The midpoint value
+     *
+     *  @throw std::domain_error if the interval is empty
+     */
+    value_t median() const {
+        assert_not_empty_();
+        return boost::numeric::median(*m_interval_);
+    }
+
+    /** @brief Returns the half-width of the interval
+     *
+     *  This is the distance from the median to either endpoint. This is a
+     *  convenience method for width() / value_t{2}
+     *
+     *  @return The half-width value
+     *
+     *  @throw std::domain_error if the interval is empty
+     */
+    value_t radius() const { return width() / value_t{2}; }
+
+    /** @brief Is *this the empty interval?
+     *
+     *  The empty interval contains no values.
+     *
+     *  @return True if *this is the empty interval, false otherwise.
+     *
+     *  @throw none No throw guarantee
+     */
+    bool empty() const { return !m_interval_; }
 
     /** @brief  Is lower() NOT contained in the interval?
      *
@@ -272,32 +306,21 @@ public:
         return Interval(low, hi, lower_is_open, upper_is_open);
     }
 
-    /** @brief Returns the midpoint of the interval
-     *
-     *  @return The midpoint value
-     *
-     *  @throw std::domain_error if the interval is empty
-     */
-    value_t median() const {
-        assert_not_empty_();
-        return boost::numeric::median(*m_interval_);
-    }
+    // -- Arithmetic in-place operators ----------------------------------------
 
-    /** @brief Returns the half-width of the interval
+    /** @brief Negation of an interval
      *
-     *  This is the distance from the median to either endpoint.
+     *  Given the interval [a, b], the negation is [-b, -a]. The openness of the
+     *  bounds is reversed, e.g., [a, b) becomes (-b, -a].
      *
-     *  @return The half-width value
+     *  @return A new interval with negated bounds
      *
      *  @throw none No throw guarantee
      */
-    value_t radius() const { return width() / value_t{2}; }
-
-    bool empty() const { return !m_interval_; }
-
-    // -- Arithmetic in-place operators ----------------------------------------
-
-    Interval operator-() const { return Interval(-upper(), -lower()); }
+    Interval operator-() const {
+        if(empty()) { return Interval(); }
+        return Interval(-upper(), -lower(), right_open(), left_open());
+    }
 
     /** @brief In-place addition of another interval
      *
@@ -308,11 +331,13 @@ public:
      */
     Interval& operator+=(const Interval& rhs) {
         if(empty()) {
-            m_interval_ = rhs.m_interval_;
+            return *this = rhs;
         } else if(rhs.empty()) {
             return *this;
         } else {
-            m_interval_ = *m_interval_ + *rhs.m_interval_;
+            m_interval_      = *m_interval_ + *rhs.m_interval_;
+            m_is_left_open_  = left_open() || rhs.left_open();
+            m_is_right_open_ = right_open() || rhs.right_open();
         }
         return *this;
     }
@@ -333,16 +358,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    Interval& operator-=(const Interval& rhs) {
-        if(empty()) {
-            m_interval_ = -*rhs.m_interval_;
-        } else if(rhs.empty()) {
-            return *this;
-        } else {
-            m_interval_ = *m_interval_ - *rhs.m_interval_;
-        }
-        return *this;
-    }
+    Interval& operator-=(const Interval& rhs) { return *this += -rhs; }
 
     /** @brief In-place subtraction of a scalar
      *
@@ -361,13 +377,133 @@ public:
      *  @throw none No throw guarantee
      */
     Interval& operator*=(const Interval& rhs) {
+        /* Putting this here in case it's helpful for optimizing.
+         * Given two intervals X = [a, b] and Y = [c, d], the product X * Y is:
+         * [min(ac, ad, bc, bd), max(ac, ad, bc, bd)]. Thus the entire product
+         * is determined by four sub-products: ac, ad, bc, and bd. Simple
+         * combinatorics suggests that there are 16 possible products for X*Y,
+         * (i.e., chose one sub-product for the new lower bound and one for the
+         * new upper bound).
+         *
+         * If we know that a < b and c < d, i.e., our intervals are not points,
+         * we can immediately rule out eight products:
+         *
+         * - [ac, ac], [ad, ad], [bc, bc], and [bd,bd].
+         * - [ac, ad], [ac, bc], [bd, bc], and [bd,ad].
+         *
+         * Proofs that these products are impossible are given below.
+         *
+         * To prove the first four products are impossible consider [ac, ac],
+         * which implies:
+         *
+         * - ac <= ad <= ac,
+         * - ac <= bc <= ac, and
+         * -ac <= bd <= ac
+         *
+         * The first inequality means c == d, the second means a == b. Which
+         * means X = [a, a] and Y = [c, c], i.e. X and Y must be points. This
+         * contridicts our assumption that X and Y are not points and thus these
+         * four products will never appear. Similar logic holds for the other
+         * three products of the form [xy, xy].
+         *
+         * Now consider the product [ac, ad]. This implies:
+         *
+         * - ac <= bc <= ad, and
+         * - ac <= bd <= ad
+         *
+         * If a is negative, then d <= bc/a <= c, which is not possible with the
+         * assumption c < d. If a is zero, the product [ac, ad] is [0, 0], which
+         * means bc and bd must be zero. b can't be zero because then
+         * X = [0, 0]. This would then mean that both c and d must be zero, but
+         * c and d both can't be zero because then Y = [0, 0]. Thus a must be
+         * positive. If a is positive, then so is b. If c >= 0 then d is
+         * positive and then we have that bd > ad, which is not consistent with
+         * bd <= ad. c also can't be negative because then bc < ac. We thus
+         * conclude that [ac, ad] is not possible.
+         *
+         * The remaining three proofs follow similarly. Let "target interval"
+         * refer to the interval we are proving is not possible. Then the proof
+         * proceeds by showing:
+         *
+         * - We get two inequalities by forcing the remaining two sub-products
+         *   to be bounded by the target interval. Above this showed that bc and
+         *   bd must be in the interval [ac, ad]. We term these the "implicit
+         *   sub-products" because they do not show up explicitly in the target
+         *   interval.
+         * - One of X or Y's bounds will appear twice in the target interval. We
+         *   term this the "common bound". Above this bound was "a".
+         * - If the common bound is the lower bound of X(Y) try assuming the
+         *   commonbound is negative and dividing the inequalities by it. If the
+         *   common bound is the upper bound, instead divide the inequalities by
+         *   the positive of it. This will cause one of the two inequalities to
+         *   be a contradiction eliminating that possibility. Above this ruled
+         *   out "a" being negative.
+         * - The common bound can't be zero otherwise X and Y collapse to
+         *   point intervals.
+         * - This means the common bound must be positive (negative) for a lower
+         *   (upper) bound. In turn, the "other bound" must be positive
+         *   (negative) too. Above this "other bound" was "b".
+         * - The implicit sub-products will share other bound. If other bound is
+         *   the upper (lower) bound, then assume that the lower (upper) bound
+         *   of the other interval is positive (negative) or zero. This
+         *   will force the upper (lower) bound of the other interval to be
+         *   positive (negative) too. All bounds will now have the same sign
+         *   and violate one of the inequalities.
+         * - The last possibility is then that the lower (upper) bound of the
+         *   other interval has the opposite sign as the common bound. This too
+         *   will violate one of the inequalities and we conclude that the
+         *   target interval is not possible.
+         */
+
         if(empty() || rhs.empty()) {
-            *this = Interval();
-            return *this;
-        } else {
-            m_interval_ = *m_interval_ * *rhs.m_interval_;
+            return *this = Interval();
+        } else if(width() == 0 && rhs.width() == 0) { // Both points
+            value_t prod = lower() * rhs.lower();
+            return *this = Interval(prod);
+        } else if(width() == 0) { // *this is a point, rhs is an interval
+            auto l             = lower();
+            auto ll            = l * rhs.lower();
+            auto lh            = l * rhs.upper();
+            value_t low        = std::min(ll, lh);
+            value_t high       = std::max(ll, lh);
+            bool lower_is_open = rhs.left_open();
+            bool upper_is_open = rhs.right_open();
+            if(low != ll) {
+                lower_is_open = rhs.right_open();
+                upper_is_open = rhs.right_open();
+            }
+            return *this = Interval(low, high, lower_is_open, upper_is_open);
+        } else if(rhs.width() == 0) { // rhs is point, *this is an interval
+            // Dispatch to *this is point, rhs is interval
+            return *this = (rhs * (*this));
         }
-        return *this;
+        auto ll            = lower() * rhs.lower();
+        auto lh            = lower() * rhs.upper();
+        auto hl            = upper() * rhs.lower();
+        auto hh            = upper() * rhs.upper();
+        auto low           = std::min(std::min(ll, lh), std::min(hl, hh));
+        auto high          = std::max(std::max(ll, lh), std::max(hl, hh));
+        bool lower_is_open = left_open() || rhs.left_open();
+        bool upper_is_open = right_open() || rhs.right_open();
+        // if(low == ll) // default is correct for this case
+        if(low == lh) {
+            lower_is_open = left_open() || rhs.right_open();
+        } else if(low == hl) {
+            lower_is_open = right_open() || rhs.left_open();
+        } else if(low == hh) {
+            lower_is_open = right_open() || rhs.right_open();
+        }
+
+        // if(high == hh) // default is correct for this case
+        if(high == lh) {
+            upper_is_open = left_open() || rhs.right_open();
+        } else if(high == hl) {
+            upper_is_open = right_open() || rhs.left_open();
+        } else if(high == ll) {
+            upper_is_open = left_open() || rhs.left_open();
+        }
+
+        return *this = Interval(low, high, lower_is_open, upper_is_open);
     }
 
     /** @brief In-place multiplication by a scalar
@@ -377,7 +513,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    Interval& operator*=(value_t rhs) { return *this *= Interval(rhs, rhs); }
+    Interval& operator*=(value_t rhs) { return *this *= Interval(rhs); }
 
     /** @brief In-place division by another interval
      *
@@ -407,8 +543,11 @@ public:
 
     std::string print_interval_form() const {
         if(empty()) { return "[]"; }
-        return "[" + std::to_string(lower()) + ", " + std::to_string(upper()) +
-               "]";
+        std::string left_open_str  = left_open() ? "(" : "[";
+        std::string right_open_str = right_open() ? ")" : "]";
+
+        return left_open_str + std::to_string(lower()) + ", " +
+               std::to_string(upper()) + right_open_str;
     }
 
 private:
@@ -548,22 +687,6 @@ bool operator>=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
 
 // -- Arithmetic free functions
 // ------------------------------------------------
-
-/** @relates Interval
- *  @brief Negation of an interval
- *
- *  @tparam T The numerical type of the interval
- *  @param a The interval to negate
- *
- *  @return A new interval with negated bounds
- *
- *  @throw none No throw guarantee
- */
-template<typename T>
-Interval<T> operator-(const Interval<T>& a) {
-    if(a.empty()) { return Interval<T>(); }
-    return Interval<T>(-a.upper(), -a.lower());
-}
 
 /** @relates Interval
  *  @brief Addition of two intervals

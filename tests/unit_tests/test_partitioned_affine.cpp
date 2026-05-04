@@ -99,7 +99,7 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
         REQUIRE(value3.radius() == Catch::Approx(1.5));
 
         pinterval_t empty;
-        REQUIRE(empty.radius() == 0.0);
+        REQUIRE_THROWS_AS(empty.radius(), std::domain_error);
 
         pinterval_t scalar(one, one);
         REQUIRE(scalar.radius() == 0.0);

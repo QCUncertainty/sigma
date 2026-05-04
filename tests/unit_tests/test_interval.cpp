@@ -19,7 +19,6 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
     SECTION("Constructors") {
         SECTION("Default") {
             REQUIRE(empty.empty());
-            REQUIRE(empty.width() == 0.0);
             REQUIRE(empty.left_open() == false);
             REQUIRE(empty.right_open() == false);
         }
@@ -177,7 +176,6 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
     }
 
     SECTION("width") {
-        REQUIRE(empty.width() == 0.0);
         REQUIRE(one_two.width() == 1.0);
         REQUIRE(one_two_left_open.width() == 1.0);
         REQUIRE(one_two_right_open.width() == 1.0);
@@ -191,6 +189,32 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
 
         testing_t value(-1.2, 0.0);
         REQUIRE(value.width() == value_t(1.2));
+
+        REQUIRE_THROWS_AS(empty.width(), std::domain_error);
+    }
+
+    SECTION("median") {
+        REQUIRE(one_two.median() == 1.5);
+        REQUIRE(one_two_left_open.median() == 1.5);
+        REQUIRE(one_two_right_open.median() == 1.5);
+        REQUIRE(one_two_open.median() == 1.5);
+        REQUIRE_THROWS_AS(empty.median(), std::domain_error);
+    }
+
+    SECTION("radius") {
+        REQUIRE(one_two.radius() == 0.5);
+        REQUIRE(one_two_left_open.radius() == 0.5);
+        REQUIRE(one_two_right_open.radius() == 0.5);
+        REQUIRE(one_two_open.radius() == 0.5);
+        REQUIRE_THROWS_AS(empty.radius(), std::domain_error);
+    }
+
+    SECTION("empty") {
+        REQUIRE(empty.empty() == true);
+        REQUIRE(one_two.empty() == false);
+        REQUIRE(one_two_left_open.empty() == false);
+        REQUIRE(one_two_right_open.empty() == false);
+        REQUIRE(one_two_open.empty() == false);
     }
 
     SECTION("left_open") {
@@ -605,6 +629,491 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
         REQUIRE(one_two.set_intersection(disjoint) == testing_t());
     }
 
+    SECTION("operator-") {
+        REQUIRE(-empty == empty);
+        REQUIRE(-one_two == testing_t(-2.0, -1.0));
+        REQUIRE(-one_two_left_open == testing_t(-2.0, -1.0, false, true));
+        REQUIRE(-one_two_right_open == testing_t(-2.0, -1.0, true, false));
+        REQUIRE(-one_two_open == testing_t(-2.0, -1.0, true, true));
+    }
+
+    SECTION("operator+=") {
+        // We just spot check here and rely on operator+ for exhaustive testing
+        auto pone_two = &(one_two += one_two);
+        REQUIRE(pone_two == &one_two);
+        REQUIRE(one_two == testing_t(2.0, 4.0));
+
+        auto pempty = &(empty += value_t(2.0));
+        REQUIRE(pempty == &empty);
+        REQUIRE(empty == testing_t(2.0, 2.0));
+    }
+
+    SECTION("operator+") {
+        SECTION("With Interval") {
+            SECTION("Empty") {
+                REQUIRE(empty + one_two == one_two);
+                REQUIRE(one_two + empty == one_two);
+                REQUIRE(empty + one_two_left_open == one_two_left_open);
+                REQUIRE(one_two_left_open + empty == one_two_left_open);
+                REQUIRE(empty + one_two_right_open == one_two_right_open);
+                REQUIRE(one_two_right_open + empty == one_two_right_open);
+                REQUIRE(empty + one_two_open == one_two_open);
+                REQUIRE(one_two_open + empty == one_two_open);
+            }
+            SECTION("Non-empty") {
+                testing_t three_four(3.0, 4.0);
+                testing_t three_four_left_open(3.0, 4.0, true, false);
+                testing_t three_four_right_open(3.0, 4.0, false, true);
+                testing_t three_four_open(3.0, 4.0, true, true);
+
+                testing_t four_six(4.0, 6.0);
+                testing_t four_six_left_open(4.0, 6.0, true, false);
+                testing_t four_six_right_open(4.0, 6.0, false, true);
+                testing_t four_six_open(4.0, 6.0, true, true);
+
+                REQUIRE(one_two + three_four == four_six);
+                REQUIRE(one_two + three_four_left_open == four_six_left_open);
+                REQUIRE(one_two + three_four_right_open == four_six_right_open);
+                REQUIRE(one_two + three_four_open == four_six_open);
+
+                REQUIRE(one_two_left_open + three_four == four_six_left_open);
+                REQUIRE(one_two_left_open + three_four_left_open ==
+                        four_six_left_open);
+                REQUIRE(one_two_left_open + three_four_right_open ==
+                        four_six_open);
+                REQUIRE(one_two_left_open + three_four_open == four_six_open);
+
+                REQUIRE(one_two_right_open + three_four == four_six_right_open);
+                REQUIRE(one_two_right_open + three_four_left_open ==
+                        four_six_open);
+                REQUIRE(one_two_right_open + three_four_right_open ==
+                        four_six_right_open);
+                REQUIRE(one_two_right_open + three_four_open == four_six_open);
+
+                REQUIRE(one_two_open + three_four == four_six_open);
+                REQUIRE(one_two_open + three_four_left_open == four_six_open);
+                REQUIRE(one_two_open + three_four_right_open == four_six_open);
+                REQUIRE(one_two_open + three_four_open == four_six_open);
+            }
+        }
+        SECTION("With Scalar") {
+            value_t two(2.0);
+
+            testing_t two_two(two, two);
+            testing_t three_four(3.0, 4.0);
+            testing_t three_four_left_open(3.0, 4.0, true, false);
+            testing_t three_four_right_open(3.0, 4.0, false, true);
+            testing_t three_four_open(3.0, 4.0, true, true);
+
+            REQUIRE(empty + two == two_two);
+            REQUIRE(one_two + two == three_four);
+            REQUIRE(one_two_left_open + two == three_four_left_open);
+            REQUIRE(one_two_right_open + two == three_four_right_open);
+            REQUIRE(one_two_open + two == three_four_open);
+        }
+    }
+
+    SECTION("operator-=") {
+        // We just spot check here and rely on operator- for exhaustive testing
+        auto pone_two = &(one_two -= one_two);
+        REQUIRE(pone_two == &one_two);
+        REQUIRE(one_two == testing_t(-1.0, 1.0));
+
+        auto pempty = &(empty -= value_t(2.0));
+        REQUIRE(pempty == &empty);
+        REQUIRE(empty == testing_t(-2.0, -2.0));
+    }
+
+    SECTION("operator-") {
+        SECTION("With Interval") {
+            SECTION("Empty") {
+                REQUIRE(empty - one_two == -one_two);
+                REQUIRE(one_two - empty == one_two);
+                REQUIRE(empty - one_two_left_open == -one_two_left_open);
+                REQUIRE(one_two_left_open - empty == one_two_left_open);
+                REQUIRE(empty - one_two_right_open == -one_two_right_open);
+                REQUIRE(one_two_right_open - empty == one_two_right_open);
+                REQUIRE(empty - one_two_open == -one_two_open);
+                REQUIRE(one_two_open - empty == one_two_open);
+            }
+            SECTION("Non-empty") {
+                testing_t three_four(3.0, 4.0);
+                testing_t three_four_left_open(3.0, 4.0, true, false);
+                testing_t three_four_right_open(3.0, 4.0, false, true);
+                testing_t three_four_open(3.0, 4.0, true, true);
+
+                testing_t three_one(-3.0, -1.0);
+                testing_t three_one_left_open(-3.0, -1.0, true, false);
+                testing_t three_one_right_open(-3.0, -1.0, false, true);
+                testing_t three_one_open(-3.0, -1.0, true, true);
+
+                REQUIRE(one_two - three_four == three_one);
+                REQUIRE(one_two - three_four_left_open == three_one_right_open);
+                REQUIRE(one_two - three_four_right_open == three_one_left_open);
+                REQUIRE(one_two - three_four_open == three_one_open);
+
+                REQUIRE(one_two_left_open - three_four == three_one_left_open);
+                REQUIRE(one_two_left_open - three_four_left_open ==
+                        three_one_open);
+                REQUIRE(one_two_left_open - three_four_right_open ==
+                        three_one_left_open);
+                REQUIRE(one_two_left_open - three_four_open == three_one_open);
+
+                REQUIRE(one_two_right_open - three_four ==
+                        three_one_right_open);
+                REQUIRE(one_two_right_open - three_four_left_open ==
+                        three_one_right_open);
+                REQUIRE(one_two_right_open - three_four_right_open ==
+                        three_one_open);
+                REQUIRE(one_two_right_open - three_four_open == three_one_open);
+
+                REQUIRE(one_two_open - three_four == three_one_open);
+                REQUIRE(one_two_open - three_four_left_open == three_one_open);
+                REQUIRE(one_two_open - three_four_right_open == three_one_open);
+                REQUIRE(one_two_open - three_four_open == three_one_open);
+            }
+        }
+        SECTION("With Scalar") {
+            value_t two(2.0);
+
+            testing_t two_two(two, two);
+            testing_t one_zero(-1.0, 0.0);
+            testing_t one_zero_left_open(-1.0, 0.0, true, false);
+            testing_t one_zero_right_open(-1.0, 0.0, false, true);
+            testing_t one_zero_open(-1.0, 0.0, true, true);
+
+            REQUIRE(empty - two == -two_two);
+            REQUIRE(two - empty == two_two);
+            REQUIRE(one_two - two == one_zero);
+            REQUIRE(two - one_two == -one_zero);
+            REQUIRE(one_two_left_open - two == one_zero_left_open);
+            REQUIRE(two - one_two_left_open == -one_zero_left_open);
+            REQUIRE(one_two_right_open - two == one_zero_right_open);
+            REQUIRE(two - one_two_right_open == -one_zero_right_open);
+            REQUIRE(one_two_open - two == one_zero_open);
+            REQUIRE(two - one_two_open == -one_zero_open);
+        }
+    }
+
+    SECTION("operator*=") {
+        // Spot check here and rely on operator* for exhaustive testing
+        auto pone_two = &(one_two *= one_two);
+        REQUIRE(pone_two == &one_two);
+        REQUIRE(one_two == testing_t(1.0, 4.0));
+
+        auto pempty = &(empty *= value_t(2.0));
+        REQUIRE(pempty == &empty);
+        REQUIRE(empty == testing_t());
+    }
+
+    SECTION("operator*") {
+        SECTION("With Interval") {
+            SECTION("Empty") {
+                REQUIRE(empty * one_two == empty);
+                REQUIRE(one_two * empty == empty);
+                REQUIRE(empty * one_two_left_open == empty);
+                REQUIRE(one_two_left_open * empty == empty);
+                REQUIRE(empty * one_two_right_open == empty);
+                REQUIRE(one_two_right_open * empty == empty);
+                REQUIRE(empty * one_two_open == empty);
+                REQUIRE(one_two_open * empty == empty);
+            }
+            SECTION("Non-empty") {
+                SECTION("result == [ll, hh]") {
+                    testing_t rhs(3.0, 4.0);
+                    testing_t rhs_left_open(3.0, 4.0, true, false);
+                    testing_t rhs_right_open(3.0, 4.0, false, true);
+                    testing_t rhs_open(3.0, 4.0, true, true);
+
+                    testing_t result(3.0, 8.0);
+                    testing_t result_left_open(3.0, 8.0, true, false);
+                    testing_t result_right_open(3.0, 8.0, false, true);
+                    testing_t result_open(3.0, 8.0, true, true);
+
+                    REQUIRE(one_two * rhs == result);
+                    REQUIRE(one_two * rhs_left_open == result_left_open);
+                    REQUIRE(one_two * rhs_right_open == result_right_open);
+                    REQUIRE(one_two * rhs_open == result_open);
+
+                    REQUIRE(one_two_left_open * rhs == result_left_open);
+                    REQUIRE(one_two_left_open * rhs_left_open ==
+                            result_left_open);
+                    REQUIRE(one_two_left_open * rhs_right_open == result_open);
+                    REQUIRE(one_two_left_open * rhs_open == result_open);
+
+                    REQUIRE(one_two_right_open * rhs == result_right_open);
+                    REQUIRE(one_two_right_open * rhs_left_open == result_open);
+                    REQUIRE(one_two_right_open * rhs_right_open ==
+                            result_right_open);
+                    REQUIRE(one_two_right_open * rhs_open == result_open);
+
+                    REQUIRE(one_two_open * rhs == result_open);
+                    REQUIRE(one_two_open * rhs_left_open == result_open);
+                    REQUIRE(one_two_open * rhs_right_open == result_open);
+                    REQUIRE(one_two_open * rhs_open == result_open);
+                }
+                SECTION("result == [lh, ll]") {
+                    testing_t rhs(-4.0, 3.0);
+                    testing_t rhs_left_open(-4.0, 3.0, true, false);
+                    testing_t rhs_right_open(-4.0, 3.0, false, true);
+                    testing_t rhs_open(-4.0, 3.0, true, true);
+                    testing_t lhs(-3.0, 2.0);
+                    testing_t lhs_left_open(-3.0, 2.0, true, false);
+                    testing_t lhs_right_open(-3.0, 2.0, false, true);
+                    testing_t lhs_open(-3.0, 2.0, true, true);
+
+                    testing_t result(-9.0, 12.0);
+                    testing_t result_left_open(-9.0, 12.0, true, false);
+                    testing_t result_right_open(-9.0, 12.0, false, true);
+                    testing_t result_open(-9.0, 12.0, true, true);
+
+                    REQUIRE(lhs * rhs == result);
+                    REQUIRE(lhs * rhs_left_open == result_right_open);
+                    REQUIRE(lhs * rhs_right_open == result_left_open);
+                    REQUIRE(lhs * rhs_open == result_open);
+
+                    REQUIRE(lhs_left_open * rhs == result_open);
+                    REQUIRE(lhs_left_open * rhs_left_open == result_open);
+                    REQUIRE(lhs_left_open * rhs_right_open == result_open);
+                    REQUIRE(lhs_left_open * rhs_open == result_open);
+
+                    REQUIRE(lhs_right_open * rhs == result);
+                    REQUIRE(lhs_right_open * rhs_left_open ==
+                            result_right_open);
+                    REQUIRE(lhs_right_open * rhs_right_open ==
+                            result_left_open);
+                    REQUIRE(lhs_right_open * rhs_open == result_open);
+
+                    REQUIRE(lhs_open * rhs == result_open);
+                    REQUIRE(lhs_open * rhs_left_open == result_open);
+                    REQUIRE(lhs_open * rhs_right_open == result_open);
+                    REQUIRE(lhs_open * rhs_open == result_open);
+                }
+                SECTION("result == [lh, hl]") {
+                    testing_t lhs(-4.0, -3.0);
+                    testing_t lhs_left_open(-4.0, -3.0, true, false);
+                    testing_t lhs_right_open(-4.0, -3.0, false, true);
+                    testing_t lhs_open(-4.0, -3.0, true, true);
+
+                    testing_t result(-8.0, -3.0);
+                    testing_t result_left_open(-8.0, -3.0, true, false);
+                    testing_t result_right_open(-8.0, -3.0, false, true);
+                    testing_t result_open(-8.0, -3.0, true, true);
+
+                    REQUIRE(lhs * one_two == result);
+                    REQUIRE(lhs * one_two_left_open == result_right_open);
+                    REQUIRE(lhs * one_two_right_open == result_left_open);
+                    REQUIRE(lhs * one_two_open == result_open);
+
+                    REQUIRE(lhs_left_open * one_two == result_left_open);
+                    REQUIRE(lhs_left_open * one_two_left_open == result_open);
+                    REQUIRE(lhs_left_open * one_two_right_open ==
+                            result_left_open);
+                    REQUIRE(lhs_left_open * one_two_open == result_open);
+
+                    REQUIRE(lhs_right_open * one_two == result_right_open);
+                    REQUIRE(lhs_right_open * one_two_left_open ==
+                            result_right_open);
+                    REQUIRE(lhs_right_open * one_two_right_open == result_open);
+                    REQUIRE(lhs_right_open * one_two_open == result_open);
+
+                    REQUIRE(lhs_open * one_two == result_open);
+                    REQUIRE(lhs_open * one_two_left_open == result_open);
+                    REQUIRE(lhs_open * one_two_right_open == result_open);
+                    REQUIRE(lhs_open * one_two_open == result_open);
+                }
+                SECTION("result == [lh, hh]") {
+                    testing_t lhs(-3.0, 4.0);
+                    testing_t lhs_left_open(-3.0, 4.0, true, false);
+                    testing_t lhs_right_open(-3.0, 4.0, false, true);
+                    testing_t lhs_open(-3.0, 4.0, true, true);
+
+                    testing_t result(-6.0, 8.0);
+                    testing_t result_left_open(-6.0, 8.0, true, false);
+                    testing_t result_right_open(-6.0, 8.0, false, true);
+                    testing_t result_open(-6.0, 8.0, true, true);
+
+                    REQUIRE(lhs * one_two == result);
+                    REQUIRE(lhs * one_two_left_open == result);
+                    REQUIRE(lhs * one_two_right_open == result_open);
+                    REQUIRE(lhs * one_two_open == result_open);
+
+                    REQUIRE(lhs_left_open * one_two == result_left_open);
+                    REQUIRE(lhs_left_open * one_two_left_open ==
+                            result_left_open);
+                    REQUIRE(lhs_left_open * one_two_right_open == result_open);
+                    REQUIRE(lhs_left_open * one_two_open == result_open);
+
+                    REQUIRE(lhs_right_open * one_two == result_right_open);
+                    REQUIRE(lhs_right_open * one_two_left_open ==
+                            result_right_open);
+                    REQUIRE(lhs_right_open * one_two_right_open == result_open);
+                    REQUIRE(lhs_right_open * one_two_open == result_open);
+
+                    REQUIRE(lhs_open * one_two == result_open);
+                    REQUIRE(lhs_open * one_two_left_open == result_open);
+                    REQUIRE(lhs_open * one_two_right_open == result_open);
+                    REQUIRE(lhs_open * one_two_open == result_open);
+                }
+                SECTION("result == [hl, ll]") {
+                    testing_t lhs(-4.0, 3.0);
+                    testing_t lhs_left_open(-4.0, 3.0, true, false);
+                    testing_t lhs_right_open(-4.0, 3.0, false, true);
+                    testing_t lhs_open(-4.0, 3.0, true, true);
+                    testing_t rhs(-3.0, 2.0);
+                    testing_t rhs_left_open(-3.0, 2.0, true, false);
+                    testing_t rhs_right_open(-3.0, 2.0, false, true);
+                    testing_t rhs_open(-3.0, 2.0, true, true);
+
+                    testing_t result(-9.0, 12.0);
+                    testing_t result_left_open(-9.0, 12.0, true, false);
+                    testing_t result_right_open(-9.0, 12.0, false, true);
+                    testing_t result_open(-9.0, 12.0, true, true);
+
+                    REQUIRE(lhs * rhs == result);
+                    REQUIRE(lhs * rhs_left_open == result_open);
+                    REQUIRE(lhs * rhs_right_open == result);
+                    REQUIRE(lhs * rhs_open == result_open);
+
+                    REQUIRE(lhs_left_open * rhs == result_right_open);
+                    REQUIRE(lhs_left_open * rhs_left_open == result_open);
+                    REQUIRE(lhs_left_open * rhs_right_open ==
+                            result_right_open);
+                    REQUIRE(lhs_left_open * rhs_open == result_open);
+
+                    REQUIRE(lhs_right_open * rhs == result_left_open);
+                    REQUIRE(lhs_right_open * rhs_left_open == result_open);
+                    REQUIRE(lhs_right_open * rhs_right_open ==
+                            result_left_open);
+                    REQUIRE(lhs_right_open * rhs_open == result_open);
+
+                    REQUIRE(lhs_open * rhs == result_open);
+                    REQUIRE(lhs_open * rhs_left_open == result_open);
+                    REQUIRE(lhs_open * rhs_right_open == result_open);
+                    REQUIRE(lhs_open * rhs_open == result_open);
+                }
+                SECTION("result == [hl, lh]") {
+                    testing_t rhs(-4.0, -3.0);
+                    testing_t rhs_left_open(-4.0, -3.0, true, false);
+                    testing_t rhs_right_open(-4.0, -3.0, false, true);
+                    testing_t rhs_open(-4.0, -3.0, true, true);
+
+                    testing_t result(-8.0, -3.0);
+                    testing_t result_left_open(-8.0, -3.0, true, false);
+                    testing_t result_right_open(-8.0, -3.0, false, true);
+                    testing_t result_open(-8.0, -3.0, true, true);
+
+                    REQUIRE(one_two * rhs == result);
+                    REQUIRE(one_two * rhs_left_open == result_left_open);
+                    REQUIRE(one_two * rhs_right_open == result_right_open);
+                    REQUIRE(one_two * rhs_open == result_open);
+
+                    REQUIRE(one_two_left_open * rhs == result_right_open);
+                    REQUIRE(one_two_left_open * rhs_left_open == result_open);
+                    REQUIRE(one_two_left_open * rhs_right_open ==
+                            result_right_open);
+                    REQUIRE(one_two_left_open * rhs_open == result_open);
+
+                    REQUIRE(one_two_right_open * rhs == result_left_open);
+                    REQUIRE(one_two_right_open * rhs_left_open ==
+                            result_left_open);
+                    REQUIRE(one_two_right_open * rhs_right_open == result_open);
+                    REQUIRE(one_two_right_open * rhs_open == result_open);
+
+                    REQUIRE(one_two_open * rhs == result_open);
+                    REQUIRE(one_two_open * rhs_left_open == result_open);
+                    REQUIRE(one_two_open * rhs_right_open == result_open);
+                    REQUIRE(one_two_open * rhs_open == result_open);
+                }
+                SECTION("result == [hl, hh]") {
+                    testing_t rhs(-3.0, 4.0);
+                    testing_t rhs_left_open(-3.0, 4.0, true, false);
+                    testing_t rhs_right_open(-3.0, 4.0, false, true);
+                    testing_t rhs_open(-3.0, 4.0, true, true);
+
+                    testing_t result(-6.0, 8.0);
+                    testing_t result_left_open(-6.0, 8.0, true, false);
+                    testing_t result_right_open(-6.0, 8.0, false, true);
+                    testing_t result_open(-6.0, 8.0, true, true);
+
+                    REQUIRE(one_two * rhs == result);
+                    REQUIRE(one_two * rhs_left_open == result_left_open);
+                    REQUIRE(one_two * rhs_right_open == result_right_open);
+                    REQUIRE(one_two * rhs_open == result_open);
+
+                    REQUIRE(one_two_left_open * rhs == result);
+                    REQUIRE(one_two_left_open * rhs_left_open ==
+                            result_left_open);
+                    REQUIRE(one_two_left_open * rhs_right_open ==
+                            result_right_open);
+                    REQUIRE(one_two_left_open * rhs_open == result_open);
+
+                    REQUIRE(one_two_right_open * rhs == result_open);
+                    REQUIRE(one_two_right_open * rhs_left_open == result_open);
+                    REQUIRE(one_two_right_open * rhs_right_open == result_open);
+                    REQUIRE(one_two_right_open * rhs_open == result_open);
+
+                    REQUIRE(one_two_open * rhs == result_open);
+                    REQUIRE(one_two_open * rhs_left_open == result_open);
+                    REQUIRE(one_two_open * rhs_right_open == result_open);
+                    REQUIRE(one_two_open * rhs_open == result_open);
+                }
+                SECTION("result == [hh,ll]") {
+                    testing_t lhs(-4.0, -3.0);
+                    testing_t lhs_left_open(-4.0, -3.0, true, false);
+                    testing_t lhs_right_open(-4.0, -3.0, false, true);
+                    testing_t lhs_open(-4.0, -3.0, true, true);
+                    testing_t rhs(-2.0, -1.0);
+                    testing_t rhs_left_open(-2.0, -1.0, true, false);
+                    testing_t rhs_right_open(-2.0, -1.0, false, true);
+                    testing_t rhs_open(-2.0, -1.0, true, true);
+
+                    testing_t result(3.0, 8.0);
+                    testing_t result_left_open(3.0, 8.0, true, false);
+                    testing_t result_right_open(3.0, 8.0, false, true);
+                    testing_t result_open(3.0, 8.0, true, true);
+
+                    REQUIRE(lhs * rhs == result);
+                    REQUIRE(lhs * rhs_left_open == result_right_open);
+                    REQUIRE(lhs * rhs_right_open == result_left_open);
+                    REQUIRE(lhs * rhs_open == result_open);
+
+                    REQUIRE(lhs_left_open * rhs == result_right_open);
+                    REQUIRE(lhs_left_open * rhs_left_open == result_right_open);
+                    REQUIRE(lhs_left_open * rhs_right_open == result_open);
+                    REQUIRE(lhs_left_open * rhs_open == result_open);
+
+                    REQUIRE(lhs_right_open * rhs == result_left_open);
+                    REQUIRE(lhs_right_open * rhs_left_open == result_open);
+                    REQUIRE(lhs_right_open * rhs_right_open ==
+                            result_left_open);
+                    REQUIRE(lhs_right_open * rhs_open == result_open);
+
+                    REQUIRE(lhs_open * rhs == result_open);
+                    REQUIRE(lhs_open * rhs_left_open == result_open);
+                    REQUIRE(lhs_open * rhs_right_open == result_open);
+                    REQUIRE(lhs_open * rhs_open == result_open);
+                }
+            }
+            SECTION("value") {
+                value_t two(2.0);
+
+                testing_t result(2.0, 4.0);
+                testing_t result_left_open(2.0, 4.0, true, false);
+                testing_t result_right_open(2.0, 4.0, false, true);
+                testing_t result_open(2.0, 4.0, true, true);
+
+                REQUIRE(one_two * two == result);
+                REQUIRE(two * one_two == result);
+                REQUIRE(one_two_left_open * two == result_left_open);
+                REQUIRE(two * one_two_left_open == result_left_open);
+                REQUIRE(one_two_right_open * two == result_right_open);
+                REQUIRE(two * one_two_right_open == result_right_open);
+                REQUIRE(one_two_open * two == result_open);
+                REQUIRE(two * one_two_open == result_open);
+            }
+        }
+    }
     SECTION("operator<<(std::ostream, Interval)") {
         value_t lo = 1.0, hi = 2.0;
         auto value = testing_t(lo, hi);
@@ -662,119 +1171,6 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
                 REQUIRE(second >= third);
                 REQUIRE_FALSE(first >= second);
                 REQUIRE_FALSE(third >= first);
-            }
-        }
-    }
-    SECTION("contains") {
-        auto interval = testing_t(value_t{1}, value_t{3});
-
-        SECTION("interior") { REQUIRE(interval.contains(value_t{2})); }
-
-        SECTION("endpoints are included") {
-            REQUIRE(interval.contains(value_t{1}));
-            REQUIRE(interval.contains(value_t{3}));
-        }
-
-        SECTION("outside") {
-            REQUIRE_FALSE(interval.contains(value_t{0.99}));
-            REQUIRE_FALSE(interval.contains(value_t{3.01}));
-        }
-
-        SECTION("degenerate interval (single point)") {
-            auto point = testing_t(value_t{5}, value_t{5});
-            REQUIRE(point.contains(value_t{5}));
-            REQUIRE_FALSE(point.contains(value_t{4.99}));
-            REQUIRE_FALSE(point.contains(value_t{5.01}));
-        }
-
-        SECTION("default constructed (empty)") {
-            testing_t empty{};
-            REQUIRE(empty.contains(empty));
-            REQUIRE_FALSE(empty.contains(value_t{0}));
-            REQUIRE_FALSE(empty.contains(value_t{-0.01}));
-            REQUIRE_FALSE(empty.contains(value_t{0.01}));
-        }
-    }
-    SECTION("Arithmetic") {
-        // a = [1, 3], b = [2, 4]
-        auto a = testing_t(value_t{1}, value_t{3});
-        auto b = testing_t(value_t{2}, value_t{4});
-
-        SECTION("Negation") { test_interval(-a, -3.0, -1.0); }
-        SECTION("Addition") {
-            SECTION("With Interval") { test_interval(a + b, 3.0, 7.0); }
-            SECTION("With Scalar") {
-                test_interval(a + value_t{1}, 2.0, 4.0);
-                test_interval(value_t{1} + a, 2.0, 4.0);
-            }
-        }
-        SECTION("Addition Assignment") {
-            SECTION("With Interval") {
-                auto x = a;
-                x += b;
-                test_interval(x, 3.0, 7.0);
-            }
-            SECTION("With Scalar") {
-                auto x = a;
-                x += value_t{1};
-                test_interval(x, 2.0, 4.0);
-            }
-        }
-        SECTION("Subtraction") {
-            SECTION("With Interval") { test_interval(a - b, -3.0, 1.0); }
-            SECTION("With Scalar") {
-                test_interval(a - value_t{1}, 0.0, 2.0);
-                test_interval(value_t{1} - a, -2.0, 0.0);
-            }
-        }
-        SECTION("Subtraction Assignment") {
-            SECTION("With Interval") {
-                auto x = a;
-                x -= b;
-                test_interval(x, -3.0, 1.0);
-            }
-            SECTION("With Scalar") {
-                auto x = a;
-                x -= value_t{1};
-                test_interval(x, 0.0, 2.0);
-            }
-        }
-        SECTION("Multiplication") {
-            SECTION("By Interval") { test_interval(a * b, 2.0, 12.0); }
-            SECTION("By Scalar") {
-                test_interval(a * value_t{2}, 2.0, 6.0);
-                test_interval(value_t{2} * a, 2.0, 6.0);
-            }
-        }
-        SECTION("Multiplication Assignment") {
-            SECTION("By Interval") {
-                auto x = a;
-                x *= b;
-                test_interval(x, 2.0, 12.0);
-            }
-            SECTION("By Scalar") {
-                auto x = a;
-                x *= value_t{2};
-                test_interval(x, 2.0, 6.0);
-            }
-        }
-        SECTION("Division") {
-            SECTION("By Interval") { test_interval(a / b, 0.25, 1.5); }
-            SECTION("By Scalar") {
-                test_interval(a / value_t{2}, 0.5, 1.5);
-                test_interval(value_t{2} / a, 0.6667, 2.0);
-            }
-        }
-        SECTION("Division Assignment") {
-            SECTION("By Interval") {
-                auto x = a;
-                x /= b;
-                test_interval(x, 0.25, 1.5);
-            }
-            SECTION("By Scalar") {
-                auto x = a;
-                x /= value_t{2};
-                test_interval(x, 0.5, 1.5);
             }
         }
     }
