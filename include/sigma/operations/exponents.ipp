@@ -108,19 +108,26 @@ Uncertain<T> hypot(const U& a, const Uncertain<T>& b) {
 
 template<typename T>
 Interval<T> sqrt(const Interval<T>& a) {
-    auto result =
-      boost::numeric::sqrt(boost::numeric::interval<T>(a.lower(), a.upper()));
-    return Interval<T>(result.lower(), result.upper());
+    if(a.empty()) { return Interval<T>(); }
+    auto low  = std::sqrt(a.lower());
+    auto high = std::sqrt(a.upper());
+    return Interval<T>(low, high, a.left_open(), a.right_open());
 }
 
 template<typename T>
 Interval<T> exp(const Interval<T>& a) {
-    return Interval<T>(std::exp(a.lower()), std::exp(a.upper()));
+    if(a.empty()) { return Interval<T>(); }
+    auto low  = std::exp(a.lower());
+    auto high = std::exp(a.upper());
+    return Interval<T>(low, high, a.left_open(), a.right_open());
 }
 
 template<typename T>
 Interval<T> log(const Interval<T>& a) {
-    return Interval<T>(std::log(a.lower()), std::log(a.upper()));
+    if(a.empty()) { return Interval<T>(); }
+    auto low  = std::log(a.lower());
+    auto high = std::log(a.upper());
+    return Interval<T>(low, high, a.left_open(), a.right_open());
 }
 
 template<typename T>

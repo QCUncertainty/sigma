@@ -6,31 +6,54 @@ using testing::test_uncertain;
 
 TEMPLATE_TEST_CASE("Exponents (Interval)", "", sigma::IFloat, sigma::IDouble) {
     using testing_t = TestType;
-    using value_t   = typename testing_t::value_t;
+
+    testing_t empty;
+    testing_t one_two(1.0, 2.0);
+    testing_t one_two_left_open(1.0, 2.0, true, false);
+    testing_t one_two_right_open(1.0, 2.0, false, true);
+    testing_t one_two_open(1.0, 2.0, true, true);
 
     SECTION("Square Root") {
-        // sqrt([1, 4]) = [1, 2]
-        auto a = testing_t(value_t{1}, value_t{4});
-        test_interval(sigma::sqrt(a), 1.0, 2.0);
-        // sqrt([4, 9]) = [2, 3]
-        auto b = testing_t(value_t{4}, value_t{9});
-        test_interval(sigma::sqrt(b), 2.0, 3.0);
+        auto low  = std::sqrt(one_two.lower());
+        auto high = std::sqrt(one_two.upper());
+        testing_t result(low, high);
+        testing_t result_left_open(low, high, true, false);
+        testing_t result_right_open(low, high, false, true);
+        testing_t result_open(low, high, true, true);
+
+        REQUIRE(sigma::sqrt(empty) == empty);
+        REQUIRE(sigma::sqrt(one_two) == result);
+        REQUIRE(sigma::sqrt(one_two_left_open) == result_left_open);
+        REQUIRE(sigma::sqrt(one_two_right_open) == result_right_open);
+        REQUIRE(sigma::sqrt(one_two_open) == result_open);
     }
     SECTION("Exponential Function") {
-        // exp([0, 1]) = [1, e]
-        auto a = testing_t(value_t{0}, value_t{1});
-        test_interval(sigma::exp(a), 1.0, 2.7183);
-        // exp([1, 2]) = [e, e^2]
-        auto b = testing_t(value_t{1}, value_t{2});
-        test_interval(sigma::exp(b), 2.7183, 7.3891);
+        auto low  = std::exp(one_two.lower());
+        auto high = std::exp(one_two.upper());
+        testing_t result(low, high);
+        testing_t result_left_open(low, high, true, false);
+        testing_t result_right_open(low, high, false, true);
+        testing_t result_open(low, high, true, true);
+
+        REQUIRE(sigma::exp(empty) == empty);
+        REQUIRE(sigma::exp(one_two) == result);
+        REQUIRE(sigma::exp(one_two_left_open) == result_left_open);
+        REQUIRE(sigma::exp(one_two_right_open) == result_right_open);
+        REQUIRE(sigma::exp(one_two_open) == result_open);
     }
     SECTION("Natural Logarithm") {
-        // log([1, e]) = [0, 1]
-        auto a = testing_t(value_t{1}, value_t{2.7183});
-        test_interval(sigma::log(a), 0.0, 1.0);
-        // log([1, 1]) = [0, 0]
-        auto b = testing_t(value_t{1}, value_t{1});
-        test_interval(sigma::log(b), 0.0, 0.0);
+        auto low  = std::log(one_two.lower());
+        auto high = std::log(one_two.upper());
+        testing_t result(low, high);
+        testing_t result_left_open(low, high, true, false);
+        testing_t result_right_open(low, high, false, true);
+        testing_t result_open(low, high, true, true);
+
+        REQUIRE(sigma::log(empty) == empty);
+        REQUIRE(sigma::log(one_two) == result);
+        REQUIRE(sigma::log(one_two_left_open) == result_left_open);
+        REQUIRE(sigma::log(one_two_right_open) == result_right_open);
+        REQUIRE(sigma::log(one_two_open) == result_open);
     }
 }
 

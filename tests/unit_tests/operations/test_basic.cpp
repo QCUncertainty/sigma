@@ -6,23 +6,83 @@ using testing::test_uncertain;
 
 TEMPLATE_TEST_CASE("Basic (Interval)", "", sigma::IFloat, sigma::IDouble) {
     using testing_t = TestType;
-    using value_t   = typename testing_t::value_t;
 
     SECTION("Absolute Value") {
         SECTION("All positive") {
-            auto a = testing_t(value_t{1}, value_t{3});
+            testing_t a(1.0, 3.0);
             test_interval(sigma::abs(a), 1.0, 3.0);
             test_interval(sigma::fabs(a), 1.0, 3.0);
+
+            testing_t a_left_open(1.0, 3.0, true, false);
+            REQUIRE(sigma::abs(a_left_open) == a_left_open);
+            REQUIRE(sigma::fabs(a_left_open) == a_left_open);
+
+            testing_t a_right_open(1.0, 3.0, false, true);
+            test_interval(sigma::abs(a_right_open), 1.0, 3.0);
+            test_interval(sigma::fabs(a_right_open), 1.0, 3.0);
+
+            testing_t a_open(1.0, 3.0, true, true);
+            REQUIRE(sigma::abs(a_open) == a_open);
+            REQUIRE(sigma::fabs(a_open) == a_open);
+
+            testing_t a_empty;
+            REQUIRE(sigma::abs(a_empty) == a_empty);
+            REQUIRE(sigma::fabs(a_empty) == a_empty);
         }
         SECTION("All negative") {
-            auto a = testing_t(value_t{-3}, value_t{-1});
+            testing_t a(-3.0, -1.0);
             test_interval(sigma::abs(a), 1.0, 3.0);
             test_interval(sigma::fabs(a), 1.0, 3.0);
+
+            testing_t a_left_open(-3.0, -1.0, true, false);
+            testing_t a_left_open_result(1.0, 3.0, false, true);
+            REQUIRE(sigma::abs(a_left_open) == a_left_open_result);
+            REQUIRE(sigma::fabs(a_left_open) == a_left_open_result);
+
+            testing_t a_right_open(-3.0, -1.0, false, true);
+            testing_t a_right_open_result(1.0, 3.0, true, false);
+            REQUIRE(sigma::abs(a_right_open) == a_right_open_result);
+            REQUIRE(sigma::fabs(a_right_open) == a_right_open_result);
+
+            testing_t a_open(-3.0, -1.0, true, true);
+            testing_t a_open_result(1.0, 3.0, true, true);
+            REQUIRE(sigma::abs(a_open) == a_open_result);
+            REQUIRE(sigma::fabs(a_open) == a_open_result);
         }
         SECTION("Straddles zero") {
-            auto a = testing_t(value_t{-2}, value_t{3});
+            testing_t a(-2.0, 3.0);
+            testing_t b(-3.0, 2.0);
             test_interval(sigma::abs(a), 0.0, 3.0);
             test_interval(sigma::fabs(a), 0.0, 3.0);
+            test_interval(sigma::abs(b), 0.0, 3.0);
+            test_interval(sigma::fabs(b), 0.0, 3.0);
+
+            testing_t a_left_open(-2.0, 3.0, true, false);
+            testing_t a_left_open_result(0.0, 3.0, false, false);
+            testing_t b_left_open(-3.0, 2.0, true, false);
+            testing_t b_left_open_result(0.0, 3.0, false, true);
+            REQUIRE(sigma::abs(a_left_open) == a_left_open_result);
+            REQUIRE(sigma::fabs(a_left_open) == a_left_open_result);
+            REQUIRE(sigma::abs(b_left_open) == b_left_open_result);
+            REQUIRE(sigma::fabs(b_left_open) == b_left_open_result);
+
+            testing_t a_right_open(-2.0, 3.0, false, true);
+            testing_t a_right_open_result(0.0, 3.0, false, true);
+            testing_t b_right_open(-3.0, 2.0, false, true);
+            testing_t b_right_open_result(0.0, 3.0, false, false);
+            REQUIRE(sigma::abs(a_right_open) == a_right_open_result);
+            REQUIRE(sigma::fabs(a_right_open) == a_right_open_result);
+            REQUIRE(sigma::abs(b_right_open) == b_right_open_result);
+            REQUIRE(sigma::fabs(b_right_open) == b_right_open_result);
+
+            testing_t a_open(-2.0, 3.0, true, true);
+            testing_t a_open_result(0.0, 3.0, false, true);
+            testing_t b_open(-3.0, 2.0, true, true);
+            testing_t b_open_result(0.0, 3.0, false, true);
+            REQUIRE(sigma::abs(a_open) == a_open_result);
+            REQUIRE(sigma::fabs(a_open) == a_open_result);
+            REQUIRE(sigma::abs(b_open) == b_open_result);
+            REQUIRE(sigma::fabs(b_open) == b_open_result);
         }
     }
 }
