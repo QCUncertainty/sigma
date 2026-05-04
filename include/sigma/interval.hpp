@@ -526,10 +526,8 @@ public:
         if(empty() || rhs.empty()) {
             *this = Interval();
             return *this;
-        } else {
-            m_interval_ = *m_interval_ / *rhs.m_interval_;
         }
-        return *this;
+        return *this *= value_t(1.0) / rhs;
     }
 
     /** @brief In-place division by a scalar
@@ -541,8 +539,17 @@ public:
      */
     Interval& operator/=(value_t rhs) { return *this /= Interval(rhs, rhs); }
 
+    /** @brief Print the interval in interval form
+     *
+     *  The interval is printed in the form where closed bounds are represented
+     *  by square brackets and open bounds are represented by parentheses.
+     *
+     *  @return A string representation of the interval.
+     *
+     *  @throw none No throw guarantee
+     */
     std::string print_interval_form() const {
-        if(empty()) { return "[]"; }
+        if(empty()) { return "[∅]"; }
         std::string left_open_str  = left_open() ? "(" : "[";
         std::string right_open_str = right_open() ? ")" : "]";
 
@@ -551,13 +558,21 @@ public:
     }
 
 private:
+    /// Code factorization for throwing when a method doesn't make sense with an
+    /// empty interval.
     void assert_not_empty_() const {
         if(empty()) { throw std::domain_error("Interval is empty"); }
     }
+
+    /// The underlying interval type
     using interval_t = boost::numeric::interval<value_t>;
 
-    bool m_is_left_open_  = false;
+    /// Whether the lower bound is open
+    bool m_is_left_open_ = false;
+    /// Whether the upper bound is open
     bool m_is_right_open_ = false;
+
+    /// The underlying interval. If optional is empty, the interval is empty.
     std::optional<interval_t> m_interval_;
 
 }; // class Interval
@@ -620,69 +635,6 @@ bool operator==(const Interval<T1>& lhs, const Interval<T2>& rhs) {
 template<typename T1, typename T2>
 bool operator!=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
     return !(lhs == rhs);
-}
-
-/** @relates Interval
- *  @brief Whether one interval is certainly less than another
- *
- *  Returns true only when @p lhs lies entirely below @p rhs, i.e.
- *  lhs.upper() < rhs.lower().
- *
- *  @tparam T1 The numerical type of the left-hand interval
- *  @tparam T2 The numerical type of the right-hand interval
- *  @param lhs The first interval
- *  @param rhs The second interval
- *
- *  @return Whether @p lhs is certainly less than @p rhs
- */
-template<typename T1, typename T2>
-bool operator<(const Interval<T1>& lhs, const Interval<T2>& rhs) {
-    return lhs.upper() < rhs.lower();
-}
-
-/** @relates Interval
- *  @brief Whether one interval is greater than another
- *
- *  @tparam T1 The numerical type of the left-hand interval
- *  @tparam T2 The numerical type of the right-hand interval
- *  @param lhs The first interval
- *  @param rhs The second interval
- *
- *  @return Whether @p lhs is certainly greater than @p rhs
- */
-template<typename T1, typename T2>
-bool operator>(const Interval<T1>& lhs, const Interval<T2>& rhs) {
-    return rhs < lhs;
-}
-
-/** @relates Interval
- *  @brief Whether one interval is less than or equal to another
- *
- *  @tparam T1 The numerical type of the left-hand interval
- *  @tparam T2 The numerical type of the right-hand interval
- *  @param lhs The first interval
- *  @param rhs The second interval
- *
- *  @return Whether @p lhs is less than or equal to @p rhs
- */
-template<typename T1, typename T2>
-bool operator<=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
-    return (lhs == rhs) || (lhs < rhs);
-}
-
-/** @relates Interval
- *  @brief Whether one interval is greater than or equal to another
- *
- *  @tparam T1 The numerical type of the left-hand interval
- *  @tparam T2 The numerical type of the right-hand interval
- *  @param lhs The first interval
- *  @param rhs The second interval
- *
- *  @return Whether @p lhs is greater than or equal to @p rhs
- */
-template<typename T1, typename T2>
-bool operator>=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
-    return (lhs == rhs) || (lhs > rhs);
 }
 
 // -- Arithmetic free functions
@@ -794,13 +746,17 @@ Interval<T> operator/(Interval<T> lhs, const Interval<T>& rhs) {
 /** @overload */
 template<typename T>
 Interval<T> operator/(Interval<T> lhs, T rhs) {
-    return lhs /= rhs;
+    if(rhs == 0) { throw std::domain_error("Division by zero"); }
+    return lhs *= T(1.0 / rhs);
 }
 
 /** @overload */
 template<typename T>
 Interval<T> operator/(T lhs, const Interval<T>& rhs) {
-    return Interval<T>(lhs, lhs) /= rhs;
+    if(rhs.empty()) { return rhs; }
+    if(rhs.contains(0)) { throw std::domain_error("Division by zero"); }
+    return Interval<T>(lhs / rhs.upper(), lhs / rhs.lower(), rhs.right_open(),
+                       rhs.left_open());
 }
 
 /// Typedef for an interval of floats

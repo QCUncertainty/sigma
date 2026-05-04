@@ -8,7 +8,6 @@ using testing::test_interval;
 TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
     using testing_t = TestType;
     using value_t   = typename testing_t::value_t;
-    using other_t   = typename testing::test_traits<TestType>::other_t;
 
     testing_t empty;
     testing_t one_two(1.0, 2.0);
@@ -629,7 +628,7 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
         REQUIRE(one_two.set_intersection(disjoint) == testing_t());
     }
 
-    SECTION("operator-") {
+    SECTION("operator-(void)") {
         REQUIRE(-empty == empty);
         REQUIRE(-one_two == testing_t(-2.0, -1.0));
         REQUIRE(-one_two_left_open == testing_t(-2.0, -1.0, false, true));
@@ -1114,6 +1113,105 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
             }
         }
     }
+
+    SECTION("operator/=") {
+        // Spot check here and rely on operator/ for exhaustive testing
+        auto pone_two = &(one_two /= one_two);
+        REQUIRE(pone_two == &one_two);
+        REQUIRE(one_two == testing_t(value_t(1.0 / 2.0), value_t(2.0)));
+
+        auto pempty = &(empty /= value_t(2.0));
+        REQUIRE(pempty == &empty);
+        REQUIRE(empty == testing_t());
+    }
+
+    SECTION("operator/") {
+        SECTION("With Interval") {
+            SECTION("Empty") {
+                REQUIRE(empty / one_two == empty);
+                REQUIRE(one_two / empty == empty);
+                REQUIRE(empty / one_two_left_open == empty);
+                REQUIRE(one_two_left_open / empty == empty);
+                REQUIRE(empty / one_two_right_open == empty);
+            }
+            SECTION("Non-empty") {
+                // The implementation consists of calling
+                // 1. 1.0 / rhs.
+                // 2. multiplying lhs by the result of 1.
+                // Step 1 is tested in the "With Value" section below and works.
+                // Step 2 is tested in the operator* section above and works.
+                // We just spot check here.
+
+                testing_t result(0.5, 2.0);
+                testing_t result_left_open(0.5, 2.0, true, false);
+                testing_t result_right_open(0.5, 2.0, false, true);
+                testing_t result_open(0.5, 2.0, true, true);
+
+                REQUIRE(one_two / one_two == result);
+
+                REQUIRE(one_two_left_open / one_two == result_left_open);
+                REQUIRE(one_two / one_two_left_open == result_right_open);
+
+                REQUIRE(one_two_right_open / one_two == result_right_open);
+                REQUIRE(one_two / one_two_right_open == result_left_open);
+
+                REQUIRE(one_two_open / one_two == result_open);
+                REQUIRE(one_two / one_two_right_open == result_left_open);
+
+                REQUIRE_THROWS_AS(one_two / value_t(0.0), std::domain_error);
+                REQUIRE_THROWS_AS(one_two / testing_t(-1.0, 1.0),
+                                  std::domain_error);
+            }
+        }
+        SECTION("With Value") {
+            value_t two(2.0);
+
+            // Result when two is on left side
+            testing_t result_lhs(1.0, 2.0);
+            testing_t result_lhs_left_open(1.0, 2.0, true, false);
+            testing_t result_lhs_right_open(1.0, 2.0, false, true);
+            testing_t result_lhs_open(1.0, 2.0, true, true);
+
+            // Result when two is on right side
+            testing_t result_rhs(0.5, 1.0);
+            testing_t result_rhs_left_open(0.5, 1.0, true, false);
+            testing_t result_rhs_right_open(0.5, 1.0, false, true);
+            testing_t result_rhs_open(0.5, 1.0, true, true);
+            testing_t result_open(1.0, 2.0, true, true);
+
+            REQUIRE(empty / two == empty);
+            REQUIRE(two / empty == empty);
+
+            REQUIRE(one_two / two == result_rhs);
+            REQUIRE(two / one_two == result_lhs);
+
+            REQUIRE(one_two_left_open / two == result_rhs_left_open);
+            REQUIRE(two / one_two_left_open == result_lhs_right_open);
+
+            REQUIRE(one_two_right_open / two == result_rhs_right_open);
+            REQUIRE(two / one_two_right_open == result_lhs_left_open);
+
+            REQUIRE(one_two_open / two == result_rhs_open);
+            REQUIRE(two / one_two_open == result_lhs_open);
+
+            REQUIRE_THROWS_AS(one_two / value_t(0.0), std::domain_error);
+            REQUIRE_THROWS_AS(two / testing_t(-1.0, 1.0), std::domain_error);
+        }
+    }
+
+    SECTION("print_interval_form") {
+        std::stringstream ss;
+        ss << std::to_string(one_two.lower()) << ", "
+           << std::to_string(one_two.upper());
+        auto guts = ss.str();
+
+        REQUIRE(one_two.print_interval_form() == "[" + guts + "]");
+        REQUIRE(one_two_left_open.print_interval_form() == "(" + guts + "]");
+        REQUIRE(one_two_right_open.print_interval_form() == "[" + guts + ")");
+        REQUIRE(one_two_open.print_interval_form() == "(" + guts + ")");
+        REQUIRE(empty.print_interval_form() == "[∅]");
+    }
+
     SECTION("operator<<(std::ostream, Interval)") {
         value_t lo = 1.0, hi = 2.0;
         auto value = testing_t(lo, hi);
@@ -1122,56 +1220,42 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
         corr << value.median() << "+/-" << value.radius();
         REQUIRE(ss.str() == corr.str());
     }
-    SECTION("Comparisons") {
-        auto first = testing_t(1.0, 2.0);
-        SECTION("Same") {
-            auto second = first;
-            REQUIRE(first == second);
-            REQUIRE_FALSE(first != second);
-        }
-        SECTION("Different Value Type") {
-            auto second = other_t(1.0, 2.0);
-            REQUIRE_FALSE(first == second);
-        }
-        SECTION("Different Lower") {
-            auto second = testing_t(0.5, 2.0);
-            REQUIRE_FALSE(first == second);
-            REQUIRE(first != second);
-        }
-        SECTION("Different Upper") {
-            auto second = testing_t(1.0, 3.0);
-            REQUIRE_FALSE(first == second);
-            REQUIRE(first != second);
-        }
-        SECTION("Relative") {
-            // [1,2] is certainly less than [3,4]
-            auto second = testing_t(3.0, 4.0);
-            // [1.5, 2.5] overlaps with [1,2]
-            auto third = testing_t(1.5, 2.5);
-            SECTION("Less than") {
-                REQUIRE(first < second);
-                REQUIRE(third < second);
-                REQUIRE_FALSE(second < first);
-                REQUIRE_FALSE(first < third);
-            }
-            SECTION("Greater than") {
-                REQUIRE(second > first);
-                REQUIRE(second > third);
-                REQUIRE_FALSE(first > second);
-                REQUIRE_FALSE(third > first);
-            }
-            SECTION("Less than or equal") {
-                REQUIRE(first <= second);
-                REQUIRE(third <= second);
-                REQUIRE_FALSE(second <= first);
-                REQUIRE_FALSE(first <= third);
-            }
-            SECTION("Greater than or equal") {
-                REQUIRE(second >= first);
-                REQUIRE(second >= third);
-                REQUIRE_FALSE(first >= second);
-                REQUIRE_FALSE(third >= first);
-            }
-        }
+
+    SECTION("operator==") {
+        REQUIRE(one_two == testing_t(1.0, 2.0));
+        REQUIRE_FALSE(one_two == one_two_left_open);
+        REQUIRE_FALSE(one_two == one_two_right_open);
+        REQUIRE_FALSE(one_two == one_two_open);
+        REQUIRE_FALSE(one_two == empty);
+
+        REQUIRE(one_two_left_open == testing_t(1.0, 2.0, true, false));
+        REQUIRE_FALSE(one_two_left_open == one_two);
+        REQUIRE_FALSE(one_two_left_open == one_two_right_open);
+        REQUIRE_FALSE(one_two_left_open == one_two_open);
+        REQUIRE_FALSE(one_two_left_open == empty);
+
+        REQUIRE(one_two_right_open == testing_t(1.0, 2.0, false, true));
+        REQUIRE_FALSE(one_two_right_open == one_two);
+        REQUIRE_FALSE(one_two_right_open == one_two_left_open);
+        REQUIRE_FALSE(one_two_right_open == one_two_open);
+        REQUIRE_FALSE(one_two_right_open == empty);
+
+        REQUIRE(one_two_open == testing_t(1.0, 2.0, true, true));
+        REQUIRE_FALSE(one_two_open == one_two);
+        REQUIRE_FALSE(one_two_open == one_two_left_open);
+        REQUIRE_FALSE(one_two_open == one_two_right_open);
+        REQUIRE_FALSE(one_two_open == empty);
+
+        REQUIRE(empty == testing_t());
+        REQUIRE_FALSE(empty == one_two);
+        REQUIRE_FALSE(empty == one_two_left_open);
+        REQUIRE_FALSE(empty == one_two_right_open);
+        REQUIRE_FALSE(empty == one_two_open);
+    }
+
+    SECTION("operator!=") {
+        // Just negates operator== so spot check is fine.
+        REQUIRE(one_two != one_two_left_open);
+        REQUIRE_FALSE(one_two != one_two);
     }
 }
