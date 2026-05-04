@@ -468,11 +468,141 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
     }
 
     SECTION("set_intersection") {
-        auto value  = testing_t(0.0, 0.0);
-        auto value2 = testing_t(-1.0, 1.0);
-        auto result = value.set_intersection(value2);
-        REQUIRE(result.lower() == 0.0);
-        REQUIRE(result.upper() == 0.0);
+        SECTION("Intersection with Empty") {
+            REQUIRE(empty.set_intersection(empty) == empty);
+            REQUIRE(empty.set_intersection(one_two) == empty);
+            REQUIRE(empty.set_intersection(one_two_left_open) == empty);
+            REQUIRE(empty.set_intersection(one_two_right_open) == empty);
+            REQUIRE(empty.set_intersection(one_two_open) == empty);
+        }
+        SECTION("Same interval different openness") {
+            REQUIRE(one_two.set_intersection(empty) == empty);
+            REQUIRE(one_two.set_intersection(one_two) == one_two);
+            REQUIRE(one_two.set_intersection(one_two_left_open) ==
+                    one_two_left_open);
+            REQUIRE(one_two.set_intersection(one_two_right_open) ==
+                    one_two_right_open);
+            REQUIRE(one_two.set_intersection(one_two_open) == one_two_open);
+
+            REQUIRE(one_two_left_open.set_intersection(empty) == empty);
+            REQUIRE(one_two_left_open.set_intersection(one_two) ==
+                    one_two_left_open);
+            REQUIRE(one_two_left_open.set_intersection(one_two_left_open) ==
+                    one_two_left_open);
+            REQUIRE(one_two_left_open.set_intersection(one_two_right_open) ==
+                    one_two_open);
+            REQUIRE(one_two_left_open.set_intersection(one_two_open) ==
+                    one_two_open);
+
+            REQUIRE(one_two_right_open.set_intersection(empty) == empty);
+            REQUIRE(one_two_right_open.set_intersection(one_two) ==
+                    one_two_right_open);
+            REQUIRE(one_two_right_open.set_intersection(one_two_left_open) ==
+                    one_two_open);
+            REQUIRE(one_two_right_open.set_intersection(one_two_right_open) ==
+                    one_two_right_open);
+            REQUIRE(one_two_right_open.set_intersection(one_two_open) ==
+                    one_two_open);
+
+            REQUIRE(one_two_open.set_intersection(empty) == empty);
+            REQUIRE(one_two_open.set_intersection(one_two) == one_two_open);
+            REQUIRE(one_two_open.set_intersection(one_two_left_open) ==
+                    one_two_open);
+            REQUIRE(one_two_open.set_intersection(one_two_right_open) ==
+                    one_two_open);
+            REQUIRE(one_two_open.set_intersection(one_two_open) ==
+                    one_two_open);
+        }
+        SECTION("Expands left bound") {
+            // We say "one" because "one_point_five" is too long
+            testing_t zero_one(0.0, 1.5);
+            testing_t zero_one_left_open(0.0, 1.5, true, false);
+            testing_t zero_one_right_open(0.0, 1.5, false, true);
+            testing_t zero_one_open(0.0, 1.5, true, true);
+
+            testing_t one(1.0, 1.5);
+            testing_t one_left_open(1.0, 1.5, true, false);
+            testing_t one_right_open(1.0, 1.5, false, true);
+            testing_t one_open(1.0, 1.5, true, true);
+
+            REQUIRE(one_two.set_intersection(zero_one) == one);
+            REQUIRE(one_two.set_intersection(zero_one_left_open) == one);
+            REQUIRE(one_two.set_intersection(zero_one_right_open) ==
+                    one_right_open);
+            REQUIRE(one_two.set_intersection(zero_one_open) == one_right_open);
+
+            REQUIRE(one_two_left_open.set_intersection(zero_one) ==
+                    one_left_open);
+            REQUIRE(one_two_left_open.set_intersection(zero_one_left_open) ==
+                    one_left_open);
+            REQUIRE(one_two_left_open.set_intersection(zero_one_right_open) ==
+                    one_open);
+            REQUIRE(one_two_left_open.set_intersection(zero_one_open) ==
+                    one_open);
+
+            REQUIRE(one_two_right_open.set_intersection(zero_one) == one);
+            REQUIRE(one_two_right_open.set_intersection(zero_one_left_open) ==
+                    one);
+            REQUIRE(one_two_right_open.set_intersection(zero_one_right_open) ==
+                    one_right_open);
+            REQUIRE(one_two_right_open.set_intersection(zero_one_open) ==
+                    one_right_open);
+
+            REQUIRE(one_two_open.set_intersection(zero_one) == one_left_open);
+            REQUIRE(one_two_open.set_intersection(zero_one_left_open) ==
+                    one_left_open);
+            REQUIRE(one_two_open.set_intersection(zero_one_right_open) ==
+                    one_open);
+            REQUIRE(one_two_open.set_intersection(zero_one_open) == one_open);
+        }
+
+        SECTION("Expands right bound") {
+            testing_t one_three(1.5, 3.0);
+            testing_t one_three_left_open(1.5, 3.0, true, false);
+            testing_t one_three_right_open(1.5, 3.0, false, true);
+            testing_t one_three_open(1.5, 3.0, true, true);
+
+            testing_t one_two2(1.5, 2.0);
+            testing_t one_two2_left_open(1.5, 2.0, true, false);
+            testing_t one_two2_right_open(1.5, 2.0, false, true);
+            testing_t one_two2_open(1.5, 2.0, true, true);
+
+            REQUIRE(one_two.set_intersection(one_three) == one_two2);
+            REQUIRE(one_two.set_intersection(one_three_left_open) ==
+                    one_two2_left_open);
+            REQUIRE(one_two.set_intersection(one_three_right_open) == one_two2);
+            REQUIRE(one_two.set_intersection(one_three_open) ==
+                    one_two2_left_open);
+
+            REQUIRE(one_two_left_open.set_intersection(one_three) == one_two2);
+            REQUIRE(one_two_left_open.set_intersection(one_three_left_open) ==
+                    one_two2_left_open);
+            REQUIRE(one_two_left_open.set_intersection(one_three_right_open) ==
+                    one_two2);
+            REQUIRE(one_two_left_open.set_intersection(one_three_open) ==
+                    one_two2_left_open);
+
+            REQUIRE(one_two_right_open.set_intersection(one_three) ==
+                    one_two2_right_open);
+            REQUIRE(one_two_right_open.set_intersection(one_three_left_open) ==
+                    one_two2_open);
+            REQUIRE(one_two_right_open.set_intersection(one_three_right_open) ==
+                    one_two2_right_open);
+            REQUIRE(one_two_right_open.set_intersection(one_three_open) ==
+                    one_two2_open);
+
+            REQUIRE(one_two_open.set_intersection(one_three) ==
+                    one_two2_right_open);
+            REQUIRE(one_two_open.set_intersection(one_three_left_open) ==
+                    one_two2_open);
+            REQUIRE(one_two_open.set_intersection(one_three_right_open) ==
+                    one_two2_right_open);
+            REQUIRE(one_two_open.set_intersection(one_three_open) ==
+                    one_two2_open);
+        }
+
+        testing_t disjoint(4.0, 5.0);
+        REQUIRE(one_two.set_intersection(disjoint) == testing_t());
     }
 
     SECTION("operator<<(std::ostream, Interval)") {

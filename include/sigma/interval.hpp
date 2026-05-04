@@ -230,13 +230,46 @@ public:
         return Interval(low, hi, lower_is_open, upper_is_open);
     }
 
+    /** @brief Returns the intersection of this interval and another interval
+     *
+     *  The intersection of two intervals is the largest interval that is
+     *  contained in both intervals.
+     *
+     *  @param other The interval to intersect with
+     *  @return The intersection of this interval and @p other
+
+     *  @throw None No throw guarantee.
+     */
     Interval set_intersection(const Interval& other) const {
         if(empty() || other.empty()) { return Interval(); }
         if(other.upper() < lower() || other.lower() > upper()) {
             return Interval();
         }
-        return Interval(std::max(lower(), other.lower()),
-                        std::min(upper(), other.upper()));
+        value_t low        = lower();
+        value_t hi         = upper();
+        bool lower_is_open = left_open();
+        bool upper_is_open = right_open();
+
+        if(lower() < other.lower()) {
+            low           = other.lower();
+            lower_is_open = other.left_open();
+        } else if(lower() > other.lower()) {
+            low           = lower();
+            lower_is_open = left_open();
+        } else {
+            lower_is_open = left_open() || other.left_open();
+        }
+
+        if(upper() > other.upper()) {
+            hi            = other.upper();
+            upper_is_open = other.right_open();
+        } else if(upper() < other.upper()) {
+            hi            = upper();
+            upper_is_open = right_open();
+        } else {
+            upper_is_open = right_open() || other.right_open();
+        }
+        return Interval(low, hi, lower_is_open, upper_is_open);
     }
 
     /** @brief Returns the midpoint of the interval
