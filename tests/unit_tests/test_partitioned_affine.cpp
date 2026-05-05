@@ -21,6 +21,12 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
             REQUIRE(value.num_partitions() == 0);
         }
 
+        SECTION("From Value") {
+            pinterval_t value(one);
+            test_interval(value.range(), one, one);
+            REQUIRE(value.num_partitions() == 1);
+        }
+
         SECTION("From Lower and Upper") {
             pinterval_t value(one, two, 2);
             test_interval(value.range(0), one, 1.5);
@@ -56,6 +62,9 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
     SECTION("num_partitions") {
         pinterval_t defaulted;
         REQUIRE(defaulted.num_partitions() == 0);
+
+        pinterval_t scalar(one);
+        REQUIRE(scalar.num_partitions() == 1);
 
         pinterval_t value(interval_t(one, two));
         REQUIRE(value.num_partitions() == 10);
@@ -122,34 +131,11 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
         REQUIRE_FALSE(value.contains(pinterval_t(zero, one)));
     }
 
-    SECTION("apply_affine_transform") {
-        pinterval_t value(interval_t(one, two));
-        value_t a(1.0);
-        value_t b(2.0);
-        auto alpha = value_t(-1.0) / (b * b);
-        auto lo    = value_t(1.0) / a - alpha * a;
-        auto hi    = value_t(2.0) / b;
-        interval_t interval(std::min(lo, hi), std::max(lo, hi));
-        auto zeta   = std::fabs(interval.median());
-        auto delta  = interval.radius();
-        auto value2 = value.apply_affine_transform(alpha, zeta, delta);
-        test_interval(value2.range(), value_t(0.5), value_t(1.0));
-    }
-    // SECTION("repartition") {
-    //     // pinterval_t value(interval_t(one, two));
-    //     // value.repartition(20);
-    //     // test_interval(value.range(), one, two);
-    //     // REQUIRE(value.num_partitions() == 20);
-
-    //     // pinterval_t value2(interval_t(three, four));
-    //     // value2 += value;
-    //     // test_interval(value2.range(), four, value_t(6.0));
-    //     // value2.repartition(20);
-    //     // test_interval(value2.range(), four, value_t(6.0));
-    //     // REQUIRE(value2.num_partitions() == 20);
-    // }
-
     SECTION("operator-") {
+        pinterval_t scalar(one);
+        auto scalar2 = -scalar;
+        test_interval(scalar2.range(), -one, -one);
+
         pinterval_t value(interval_t(one, two));
         auto value2 = -value;
         test_interval(value2.range(), -two, -one);
@@ -164,6 +150,12 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
     }
 
     SECTION("operator+=") {
+        SECTION("Value") {
+            pinterval_t value(one);
+            pinterval_t value2(one, two, 2);
+            value2 += value;
+            test_interval(value2.range(), two, value_t(3.0));
+        }
         SECTION("Independent") {
             pinterval_t value(one, two, 2);
             value += pinterval_t(three, four, 2);
@@ -191,6 +183,12 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
     }
 
     SECTION("operator-=") {
+        SECTION("Value") {
+            pinterval_t value(one);
+            pinterval_t value2(one, two, 2);
+            value2 -= value;
+            test_interval(value2.range(), zero, one);
+        }
         SECTION("Independent") {
             pinterval_t value(one, two, 2);
             pinterval_t temp(three, four, 2);
@@ -222,11 +220,12 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
     }
 
     SECTION("operator*=") {
-        // SECTION("Value") {
-        //     auto value = affine_t(one, two);
-        //     value *= value_t(3.0);
-        //     test_interval(value.range(), three, value_t(6.0));
-        // }
+        SECTION("Value") {
+            pinterval_t value(one);
+            pinterval_t value2(one, two, 2);
+            value2 *= value;
+            test_interval(value2.range(), one, two);
+        }
 
         SECTION("Independent") {
             pinterval_t value(one, two);
@@ -250,14 +249,12 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
     }
 
     SECTION("operator/=") {
-        // SECTION("Value") {
-        //     auto value = paffine_t(one, two);
-        //     value /= value_t(3.0);
-        //     test_interval(value.range(), value_t(1.0 / 3.0),
-        //                   value_t(2.0 / 3.0));
-        //   test_interval(value.traditional_interval(), value_t(1.0/ 3.0),
-        //                   value_t(2.0 / 3.0));
-        // }
+        SECTION("Value") {
+            pinterval_t value(one);
+            pinterval_t value2(one, two, 2);
+            value2 /= value;
+            test_interval(value2.range(), one, two);
+        }
         SECTION("Independent") {
             pinterval_t value(one, two);
             value /= pinterval_t(three, four);
@@ -268,5 +265,14 @@ TEMPLATE_TEST_CASE("PartitionedAffine", "", float, double) {
             value /= value;
             test_interval(value.range(), 0.999951, 1.000009);
         }
+    }
+
+    SECTION("operator<<") {
+        pinterval_t value(one, two, 1);
+        std::stringstream ss;
+        ss << value;
+        std::stringstream corr_ss;
+        corr_ss << value.center() << "+/-" << value.radius();
+        REQUIRE(ss.str() == corr_ss.str());
     }
 }

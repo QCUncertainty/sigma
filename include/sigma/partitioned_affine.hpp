@@ -32,7 +32,7 @@ public:
 
     PartitionedAffine() = default;
 
-    PartitionedAffine(value_t value) : PartitionedAffine(value, value) {}
+    PartitionedAffine(value_t value) : PartitionedAffine(value, value, 1) {}
 
     PartitionedAffine(value_t lower, value_t upper,
                       size_type num_partitions = 10) :
