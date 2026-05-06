@@ -8,7 +8,7 @@ var searchData=
   ['conduct_5',['Conduct',['../md_docs_2contributing.html#code-of-conduct',1,'Code of Conduct'],['../md_docs_2code__of__conduct.html',1,'Contributor Covenant Code of Conduct']]],
   ['conj_6',['conj',['../namespacesigma.html#a0a033b5557b1f726f89fa4cba5140e92',1,'sigma']]],
   ['construction_20of_20uncertain_20variables_7',['Construction of Uncertain Variables',['../md_docs_2examples.html#construction-of-uncertain-variables',1,'']]],
-  ['contains_8',['contains',['../classsigma_1_1Interval.html#a6c68bd56059a86ee764fcb3b27cbddec',1,'sigma::Interval']]],
+  ['contains_8',['contains',['../classsigma_1_1Interval.html#a6c68bd56059a86ee764fcb3b27cbddec',1,'sigma::Interval::contains(value_t value) const'],['../classsigma_1_1Interval.html#aa2ca8d499d214f1843229a847d4b8807',1,'sigma::Interval::contains(const Interval &amp;other) const']]],
   ['contribute_9',['Ways to Contribute',['../md_docs_2contributing.html#ways-to-contribute',1,'']]],
   ['contributing_10',['Contributing',['../index.html#contributing',1,'']]],
   ['contributor_20covenant_20code_20of_20conduct_11',['Contributor Covenant Code of Conduct',['../md_docs_2code__of__conduct.html',1,'']]],

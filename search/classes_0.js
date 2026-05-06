@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['interval_0',['Interval',['../classsigma_1_1Interval.html',1,'sigma']]],
-  ['interval_3c_20double_20_3e_1',['Interval&lt; double &gt;',['../classsigma_1_1Interval.html',1,'sigma']]],
-  ['interval_3c_20float_20_3e_2',['Interval&lt; float &gt;',['../classsigma_1_1Interval.html',1,'sigma']]]
+  ['hash_3c_20sigma_3a_3ainterval_3c_20valuetype_20_3e_20_3e_0',['hash&lt; sigma::Interval&lt; ValueType &gt; &gt;',['../structstd_1_1hash_3_01sigma_1_1Interval_3_01ValueType_01_4_01_4.html',1,'std']]]
 ];

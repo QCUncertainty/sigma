@@ -12,5 +12,8 @@ var annotated_dup =
       ] ],
       [ "Uncertain", "classsigma_1_1Uncertain.html", "classsigma_1_1Uncertain" ],
       [ "Interval", "classsigma_1_1Interval.html", "classsigma_1_1Interval" ]
+    ] ],
+    [ "std", null, [
+      [ "hash&lt; sigma::Interval&lt; ValueType &gt; &gt;", "structstd_1_1hash_3_01sigma_1_1Interval_3_01ValueType_01_4_01_4.html", "structstd_1_1hash_3_01sigma_1_1Interval_3_01ValueType_01_4_01_4" ]
     ] ]
 ];

@@ -1,6 +1,7 @@
 var interval_8hpp =
 [
     [ "sigma::Interval&lt; ValueType &gt;", "classsigma_1_1Interval.html", "classsigma_1_1Interval" ],
+    [ "std::hash&lt; sigma::Interval&lt; ValueType &gt; &gt;", "structstd_1_1hash_3_01sigma_1_1Interval_3_01ValueType_01_4_01_4.html", "structstd_1_1hash_3_01sigma_1_1Interval_3_01ValueType_01_4_01_4" ],
     [ "sigma::IDouble", "namespacesigma.html#ab126639cc3e0c6982521627290a6139d", null ],
     [ "sigma::IFloat", "namespacesigma.html#a39fce2e2c854ce7cafbc61b57c1e90a6", null ],
     [ "sigma::operator*", "namespacesigma.html#a52c096ac39f822287d282bd2269e127b", null ],
