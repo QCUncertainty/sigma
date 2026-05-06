@@ -714,7 +714,8 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
 
     SECTION("operator-=") {
         // We just spot check here and rely on operator- for exhaustive testing
-        auto pone_two = &(one_two -= one_two);
+        testing_t copy_one_two(one_two);
+        auto pone_two = &(one_two -= copy_one_two);
         REQUIRE(pone_two == &one_two);
         REQUIRE(one_two == testing_t(-1.0, 1.0));
 
@@ -1116,7 +1117,8 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
 
     SECTION("operator/=") {
         // Spot check here and rely on operator/ for exhaustive testing
-        auto pone_two = &(one_two /= one_two);
+        testing_t copy_one_two(one_two);
+        auto pone_two = &(one_two /= copy_one_two);
         REQUIRE(pone_two == &one_two);
         REQUIRE(one_two == testing_t(value_t(1.0 / 2.0), value_t(2.0)));
 
