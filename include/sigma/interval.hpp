@@ -768,8 +768,12 @@ using IDouble = Interval<double>;
 } // namespace sigma
 
 namespace std {
+
+/// Specializes std::has for Intervals
 template<typename ValueType>
 struct hash<sigma::Interval<ValueType>> {
+    /// Hashes the lower and upper bounds of an interval and then combines them
+    /// using a simple XOR operation.
     size_t operator()(const sigma::Interval<ValueType>& i) const {
         std::size_t hash_low  = std::hash<ValueType>()(i.lower());
         std::size_t hash_high = std::hash<ValueType>()(i.upper());
