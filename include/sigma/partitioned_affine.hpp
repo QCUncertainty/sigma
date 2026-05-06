@@ -1,16 +1,19 @@
 #pragma once
 #include <algorithm>
+#include <limits>
 #include <map>
+#include <numeric>
 #include <sigma/affine.hpp>
 #include <sigma/error_partition.hpp>
 #include <sigma/interval.hpp>
+#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
+
 /** @file partitioned_affine.hpp
  *  @brief Defines the PartitionedAffine class
  */
-
 namespace sigma {
 
 /** @brief Implements a partitioned affine interval.
@@ -70,7 +73,7 @@ public:
     const affines_t& partitioned_affines() const { return m_affines_; }
 
     bool empty() const { return num_partitions() == 0; }
-    void repartition(size_type n);
+    void collapse(size_type n);
 
     PartitionedAffine operator-() const;
 
@@ -309,6 +312,102 @@ auto PartitionedAffine<ValueType>::range() const -> interval_t {
 }
 
 template<typename ValueType>
+void PartitionedAffine<ValueType>::collapse(size_type n) {
+    if(n == 0 || num_partitions() <= n) return;
+
+    const size_type total = num_partitions();
+    // Sort partition indices by value-space lower bound so that contiguous
+    // groups cover adjacent parts of the value range.
+    std::vector<size_type> order(total);
+    std::iota(order.begin(), order.end(), 0);
+    std::sort(order.begin(), order.end(), [&](size_type a, size_type b) {
+        return range(a).lower() < range(b).lower();
+    });
+
+    partitions_t new_partitions;
+    affines_t new_affines;
+
+    for(size_type g = 0; g < n; ++g) {
+        size_type first = (g * total) / n;
+        size_type last  = ((g + 1) * total) / n;
+
+        // Step 1+2: build merged ErrorPartition by taking the hull of
+        // each error symbol's noise sub-interval across the group.
+        partition_t merged_ep;
+        for(size_type idx = first; idx < last; ++idx) {
+            const auto& ep_i = m_partitions_[order[idx]];
+            for(const auto& [ek, sub_i] : ep_i) {
+                if(!merged_ep.count(ek)) {
+                    merged_ep.add_partition(ek, sub_i);
+                } else {
+                    auto existing = merged_ep.at(ek);
+                    auto lo       = std::min(existing.lower(), sub_i.lower());
+                    auto hi       = std::max(existing.upper(), sub_i.upper());
+                    merged_ep.add_partition(ek, interval_t(lo, hi));
+                }
+            }
+        }
+
+        // Step 3: restrict each Affine to the merged ErrorPartition, then
+        // take max-abs coefficient per error symbol.
+        // Track both the restricted center spread and the full value-space
+        // bounding interval so the merged Affine is always conservative.
+        value_t center_lo = std::numeric_limits<value_t>::max();
+        value_t center_hi = std::numeric_limits<value_t>::lowest();
+        value_t vspace_lo = std::numeric_limits<value_t>::max();
+        value_t vspace_hi = std::numeric_limits<value_t>::lowest();
+        std::unordered_map<error_term_t, value_t> max_coeffs;
+
+        for(size_type idx = first; idx < last; ++idx) {
+            const auto& affine_i = m_affines_.at(m_partitions_[order[idx]]);
+            auto restricted      = restrict_affine_(affine_i, merged_ep);
+            auto c               = restricted.center();
+            center_lo            = std::min(center_lo, c);
+            center_hi            = std::max(center_hi, c);
+            auto r_i             = range(order[idx]);
+            vspace_lo            = std::min(vspace_lo, r_i.lower());
+            vspace_hi            = std::max(vspace_hi, r_i.upper());
+            for(const auto& [ek, coeff] : restricted.error_terms()) {
+                auto abs_c = std::fabs(coeff);
+                if(!max_coeffs.count(ek) || abs_c > max_coeffs[ek])
+                    max_coeffs[ek] = abs_c;
+            }
+        }
+
+        // Place the merged center at the midpoint of the restricted centers.
+        value_t merged_center = (center_lo + center_hi) / value_t(2);
+
+        // Compute the total radius the error-symbol coefficients contribute.
+        value_t coeff_radius = value_t(0);
+        for(const auto& [ek, max_c] : max_coeffs) coeff_radius += max_c;
+
+        // The fresh correction term must cover any gap between what the
+        // coefficient-only radius guarantees and the actual value-space range.
+        value_t needed_lo = merged_center - vspace_hi; // must be <= -coeff_r
+        value_t needed_hi = vspace_lo - merged_center; // must be <= -coeff_r
+        value_t extra_radius =
+          std::max(value_t(0), std::max(-needed_lo - coeff_radius,
+                                        -needed_hi - coeff_radius));
+        // Also cover the center spread.
+        extra_radius =
+          std::max(extra_radius, (center_hi - center_lo) / value_t(2));
+
+        affine_t merged_affine;
+        merged_affine.set_center(merged_center);
+        if(extra_radius > value_t(0))
+            merged_affine.add_error_term(make_error_term_(), extra_radius);
+        for(const auto& [ek, max_c] : max_coeffs)
+            merged_affine.add_error_term(ek, max_c);
+
+        new_partitions.push_back(merged_ep);
+        new_affines[new_partitions.back()] = merged_affine;
+    }
+
+    m_partitions_ = std::move(new_partitions);
+    m_affines_    = std::move(new_affines);
+}
+
+template<typename ValueType>
 auto PartitionedAffine<ValueType>::apply_affine_transform(value_t alpha,
                                                           value_t zeta,
                                                           value_t delta) const
@@ -345,6 +444,8 @@ auto PartitionedAffine<ValueType>::operator-() const -> PartitionedAffine {
 template<typename ValueType>
 auto PartitionedAffine<ValueType>::operator+=(const PartitionedAffine& other)
   -> PartitionedAffine& {
+    const size_type target_n =
+      std::max(num_partitions(), other.num_partitions());
     partitions_t new_partitions;
     affines_t new_affines;
 
@@ -382,13 +483,17 @@ auto PartitionedAffine<ValueType>::operator+=(const PartitionedAffine& other)
         }
     }
 
-    return *this = PartitionedAffine(std::move(new_partitions),
-                                     std::move(new_affines));
+    *this =
+      PartitionedAffine(std::move(new_partitions), std::move(new_affines));
+    collapse(target_n);
+    return *this;
 }
 
 template<typename ValueType>
 auto PartitionedAffine<ValueType>::operator*=(const PartitionedAffine& other)
   -> PartitionedAffine& {
+    const size_type target_n =
+      std::max(num_partitions(), other.num_partitions());
     partitions_t new_partitions;
     affines_t new_affines;
 
@@ -439,13 +544,17 @@ auto PartitionedAffine<ValueType>::operator*=(const PartitionedAffine& other)
         }
     }
 
-    return *this = PartitionedAffine(std::move(new_partitions),
-                                     std::move(new_affines));
+    *this =
+      PartitionedAffine(std::move(new_partitions), std::move(new_affines));
+    collapse(target_n);
+    return *this;
 }
 
 template<typename ValueType>
 auto PartitionedAffine<ValueType>::operator/=(const PartitionedAffine& other)
   -> PartitionedAffine& {
+    const size_type target_n =
+      std::max(num_partitions(), other.num_partitions());
     partitions_t new_partitions;
     affines_t new_affines;
 
@@ -496,8 +605,10 @@ auto PartitionedAffine<ValueType>::operator/=(const PartitionedAffine& other)
         }
     }
 
-    return *this = PartitionedAffine(std::move(new_partitions),
-                                     std::move(new_affines));
+    *this =
+      PartitionedAffine(std::move(new_partitions), std::move(new_affines));
+    collapse(target_n);
+    return *this;
 }
 
 // template<typename ValueType>

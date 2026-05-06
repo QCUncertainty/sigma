@@ -1,9 +1,9 @@
 #pragma once
 #include <functional>
+#include <set>
 #include <sigma/interval.hpp>
 #include <unordered_map>
 #include <unordered_set>
-
 namespace sigma {
 
 template<typename ValueType>
@@ -65,9 +65,14 @@ public:
 
     auto hash() const {
         std::size_t seed = 0;
+        std::set<error_term_t> error_terms;
         for(const auto& [error_term, interval] : m_partitions_) {
-            auto hash_error    = std::hash<error_term_t>()(error_term);
-            auto hash_interval = std::hash<interval_t>()(interval);
+            error_terms.insert(error_term);
+        }
+        for(const auto& error_term : error_terms) {
+            const auto& interval = at(error_term);
+            auto hash_error      = std::hash<error_term_t>()(error_term);
+            auto hash_interval   = std::hash<interval_t>()(interval);
             seed ^= hash_error + 0x9e3779b9 + (seed << 6) + (seed >> 2);
             seed ^= hash_interval + 0x9e3779b9 + (seed << 6) + (seed >> 2);
         }
