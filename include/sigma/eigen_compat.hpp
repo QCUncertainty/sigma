@@ -15,10 +15,10 @@ template<typename T>
 class Interval;
 } // namespace sigma
 
-/** @def EIGEN_NUMTRAITS(float_type)
+/** @def EIGEN_NUMTRAITS_UNCERTAIN(float_type)
  *  @brief Factorization for Eigen::NumTraits Specialization for Uncertain
  */
-#define EIGEN_NUMTRAITS(float_type)                                          \
+#define EIGEN_NUMTRAITS_UNCERTAIN(float_type)                                \
     /** @brief Numeric traits for Uncertain<float_type> */                   \
     template<>                                                               \
     struct NumTraits<sigma::Uncertain<float_type>> : NumTraits<float_type> { \
@@ -79,14 +79,14 @@ class Interval;
  */
 namespace Eigen {
 
-EIGEN_NUMTRAITS(float);
-EIGEN_NUMTRAITS(double);
+EIGEN_NUMTRAITS_UNCERTAIN(float);
+EIGEN_NUMTRAITS_UNCERTAIN(double);
 
 EIGEN_NUMTRAITS_INTERVAL(float);
 EIGEN_NUMTRAITS_INTERVAL(double);
 
 } // namespace Eigen
 
-#undef EIGEN_NUMTRAITS
+#undef EIGEN_NUMTRAITS_UNCERTAIN
 #undef EIGEN_NUMTRAITS_INTERVAL
 #endif // ENABLE_EIGEN_SUPPORT
