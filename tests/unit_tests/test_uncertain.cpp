@@ -9,18 +9,14 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
     using value_t   = typename testing_t::value_t;
     using other_t   = typename testing::test_traits<TestType>::other_t;
 
-    auto default_threshold = std::numeric_limits<value_t>::epsilon();
-
     SECTION("Constructors") {
         SECTION("Default") {
             auto value = testing_t();
             test_uncertain(value, 0.0, 0.0, 0);
-            REQUIRE(value.threshold() == default_threshold);
         }
         SECTION("With Value") {
             auto value = testing_t(1.0);
             test_uncertain(value, 1.0, 0.0, 0);
-            REQUIRE(value.threshold() == default_threshold);
         }
         SECTION("With Mean and SD") {
             // Mix up the floating point types to check implicit conversions
@@ -32,41 +28,34 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             auto first  = testing_t(mean1, sd1);
             auto second = testing_t(mean2, sd2);
             test_uncertain(first, 1.0, 0.1, 1);
-            REQUIRE(first.threshold() == default_threshold);
             test_uncertain(second, 1.0, 0.1, 1);
-            REQUIRE(second.threshold() == default_threshold);
         }
         SECTION("With Mean, SD, and Threshold") {
             auto value = testing_t(1.0, 0.1, 0.2);
-            test_uncertain(value, 1.0, 0.0, 0);
-            REQUIRE(value.threshold() == value_t{0.2});
+            test_uncertain(value, 1.0, 0.0, 0, 0.2);
         }
         SECTION("Copy") {
             auto first = testing_t(1.0, 0.1);
             testing_t value(first);
             test_uncertain(value, 1.0, 0.1, 1);
-            REQUIRE(value.threshold() == default_threshold);
             test_uncertain(first, 1.0, 0.1, 1);
         }
         SECTION("Move") {
             auto first = testing_t(1.0, 0.1);
             testing_t value(std::move(first));
             test_uncertain(value, 1.0, 0.1, 1);
-            REQUIRE(value.threshold() == default_threshold);
             test_uncertain(first, 1.0, 0.1, 0);
         }
         SECTION("Copy Assignment") {
             auto first = testing_t(1.0, 0.1);
             auto value = first;
             test_uncertain(value, 1.0, 0.1, 1);
-            REQUIRE(value.threshold() == default_threshold);
             test_uncertain(first, 1.0, 0.1, 1);
         }
         SECTION("Move Assignment") {
             auto first = testing_t(1.0, 0.1);
             auto value = std::move(first);
             test_uncertain(value, 1.0, 0.1, 1);
-            REQUIRE(value.threshold() == default_threshold);
             test_uncertain(first, 1.0, 0.1, 0);
         }
     }
