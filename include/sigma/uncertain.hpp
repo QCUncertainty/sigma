@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <type_traits>
+#include <typeinfo>
 #include <unordered_map>
 #include <utility>
 
@@ -47,20 +48,6 @@ public:
     /// A map of dependencies and their contributions to the uncertainty
     using deps_map_t = std::unordered_map<dep_sd_ptr, value_t>;
 
-    /// @brief Default ctor
-    Uncertain() noexcept = default;
-
-    /** @brief Construct an certain value from mean
-     *
-     *  The result of this is not an uncertain value. This is mostly a courtesy
-     *  function for simpler operation.
-     *
-     *  @param mean The value of the variable
-     *
-     *  @throw none No throw guarantee
-     */
-    Uncertain(value_t mean) : m_mean_(mean), m_sd_(0.0) {}
-
     /** @brief Construct an uncertain value from mean and standard deviation
      *
      *  Effectively, this creates a value that is a function of a single
@@ -68,10 +55,12 @@ public:
      *
      *  @param mean The average value of the variable
      *  @param sd The standard deviation of the variable
+     *  @param threshold The threshold for values to be considered zero
      *
      *  @throw none No throw guarantee
      */
-    Uncertain(value_t mean, value_t sd);
+    Uncertain(value_t mean = 0.0, value_t sd = 0.0,
+              value_t threshold = std::numeric_limits<value_t>::epsilon());
 
     /** @brief Get the mean value of the variable
      *
@@ -97,12 +86,31 @@ public:
      */
     const deps_map_t& deps() const { return m_deps_; }
 
+    /** @brief Access the zero threshold
+     *
+     *  @return The value of the zero threshold
+     *
+     *  @throw none No throw guarantee
+     */
+    value_t threshold() const { return m_threshold_; }
+
+    /** @brief Update the zero threshold
+     *
+     *  @param new_threshold The new value of the zero threshold
+     *
+     *  @throw none No throw guarantee
+     */
+    void threshold(value_t new_threshold) { m_threshold_ = new_threshold; }
+
 private:
     /// Mean value of the variable
     value_t m_mean_;
 
     /// Standard deviation of the variable
     value_t m_sd_;
+
+    /// Threshold for values to be considered zero
+    value_t m_threshold_;
 
     /** Map of the standard deviations this value is dependent on to their
      *  partial derivatives with respect to this value
@@ -120,9 +128,12 @@ private:
 // -- Out-of-line Definitions --------------------------------------------------
 
 template<typename ValueType>
-Uncertain<ValueType>::Uncertain(value_t mean, value_t sd) :
-  m_mean_(mean), m_sd_(std::abs(sd)) {
-    m_deps_.emplace(std::make_shared<dep_sd_t>(sd), value_t{1.0});
+Uncertain<ValueType>::Uncertain(value_t mean, value_t sd, value_t threshold) :
+  m_mean_(mean), m_sd_(std::abs(sd)), m_threshold_(threshold) {
+    if(m_sd_ < m_threshold_) { m_sd_ = 0.0; }
+    if(m_sd_ > 0.0) {
+        m_deps_.emplace(std::make_shared<dep_sd_t>(m_sd_), value_t{1.0});
+    }
 }
 
 // -- Utility functions --------------------------------------------------------
@@ -164,6 +175,7 @@ bool operator==(const Uncertain<ValueType1>& lhs,
         if(lhs.mean() != rhs.mean()) return false;
         if(lhs.sd() != rhs.sd()) return false;
         if(lhs.deps() != rhs.deps()) return false;
+        if(lhs.threshold() != rhs.threshold()) return false;
         return true;
     }
 }
