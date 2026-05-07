@@ -60,10 +60,12 @@ Uncertain<T> floor(const Uncertain<T>& a) {
 
 template<typename T>
 Uncertain<T> fmod(const Uncertain<T>& a, const Uncertain<T>& b) {
+    Uncertain<T> c(a);
     T mean = std::fmod(a.mean(), b.mean());
     T dcda = 1.0;
     T dcdb = -std::floor(a.mean() / b.mean());
-    return detail_::binary_result(a, b, mean, dcda, dcdb);
+    detail_::inplace_binary(c, b, mean, dcda, dcdb);
+    return c;
 }
 
 template<typename T>

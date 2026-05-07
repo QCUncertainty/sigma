@@ -15,10 +15,12 @@ Uncertain<T> pow(const Uncertain<T>& a, const U& exp) {
 
 template<typename T>
 Uncertain<T> pow(const Uncertain<T>& a, const Uncertain<T>& exp) {
+    Uncertain<T> c(a);
     T mean = std::pow(a.mean(), exp.mean());
     T dcda = exp.mean() * std::pow(a.mean(), exp.mean() - 1);
     T dcdb = std::log(a.mean()) * std::pow(a.mean(), exp.mean());
-    return detail_::binary_result(a, exp, mean, dcda, dcdb);
+    detail_::inplace_binary(c, exp, mean, dcda, dcdb);
+    return c;
 }
 
 template<typename T>
@@ -86,10 +88,12 @@ Uncertain<T> log1p(const Uncertain<T>& a) {
 
 template<typename T>
 Uncertain<T> hypot(const Uncertain<T>& a, const Uncertain<T>& b) {
+    Uncertain<T> c(a);
     T mean = std::hypot(a.mean(), b.mean());
     T dcda = a.mean() / std::hypot(a.mean(), b.mean());
     T dcdb = b.mean() / std::hypot(a.mean(), b.mean());
-    return detail_::binary_result(a, b, mean, dcda, dcdb);
+    detail_::inplace_binary(c, b, mean, dcda, dcdb);
+    return c;
 }
 
 template<typename T, typename U>

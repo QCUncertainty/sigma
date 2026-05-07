@@ -64,10 +64,12 @@ Uncertain<T> atan(const Uncertain<T>& a) {
 
 template<typename T>
 Uncertain<T> atan2(const Uncertain<T>& y, const Uncertain<T>& x) {
+    Uncertain<T> c(y);
     T mean = std::atan2(y.mean(), x.mean());
     T dcda = x.mean() / (std::pow(x.mean(), 2) + std::pow(y.mean(), 2));
     T dcdb = -y.mean() / (std::pow(x.mean(), 2) + std::pow(y.mean(), 2));
-    return detail_::binary_result(y, x, mean, dcda, dcdb);
+    detail_::inplace_binary(c, x, mean, dcda, dcdb);
+    return c;
 }
 
 template<typename T, typename U>
