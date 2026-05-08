@@ -6,65 +6,65 @@ using testing::test_uncertain;
 TEMPLATE_TEST_CASE("Arithmetic", "", sigma::UFloat, sigma::UDouble) {
     using testing_t = TestType;
 
-    auto a = testing_t(1.0, 0.1);
+    auto a = testing_t(1.0, 0.1, 0.001);
     auto b = testing_t(2.0, 0.2);
-    auto c = testing_t(3.0, 0.3);
 
     SECTION("Negation") {
-        test_uncertain(-a, -1.0, 0.1, 1);
-        test_uncertain(-(a + b), -3.0, 0.2236, 2);
-        test_uncertain(-a + a, 0.0, 0.0, 0);
+        test_uncertain(-a, -1.0, 0.1, 1, 0.001);
+        test_uncertain(-(a + b), -3.0, 0.2236, 2, 0.001);
+        test_uncertain(-a + a, 0.0, 0.0, 0, 0.001);
     }
     SECTION("Addition") {
-        SECTION("With Uncertain") { test_uncertain(a + b, 3.0, 0.2236, 2); }
+        SECTION("With Uncertain") {
+            test_uncertain(a + b, 3.0, 0.2236, 2, 0.001);
+        }
         SECTION("With Certain") {
-            test_uncertain(a + 1.0, 2.0, 0.1, 1);
-            test_uncertain(1.0 + a, 2.0, 0.1, 1);
+            test_uncertain(a + 1.0, 2.0, 0.1, 1, 0.001);
+            test_uncertain(1.0 + a, 2.0, 0.1, 1, 0.001);
         }
     }
     SECTION("Addition Assignment") {
         auto x = a;
         SECTION("With Uncertain") {
             x += b;
-            test_uncertain(x, 3.0, 0.2236, 2);
+            test_uncertain(x, 3.0, 0.2236, 2, 0.001);
         }
         SECTION("With Certain") {
             x += 1.0;
-            test_uncertain(x, 2.0, 0.1, 1);
+            test_uncertain(x, 2.0, 0.1, 1, 0.001);
         }
     }
     SECTION("Subtraction") {
         SECTION("With Uncertain") {
-            test_uncertain(a - b, -1.0, 0.2236, 2);
-            test_uncertain(a - a, 0.0, 0.0, 0);
+            test_uncertain(a - b, -1.0, 0.2236, 2, 0.001);
+            test_uncertain(a - a, 0.0, 0.0, 0, 0.001);
         }
         SECTION("With Certain") {
-            test_uncertain(a - 1.0, 0.0, 0.1, 1);
-            test_uncertain(2.0 - a, 1.0, 0.1, 1);
+            test_uncertain(a - 1.0, 0.0, 0.1, 1, 0.001);
+            test_uncertain(2.0 - a, 1.0, 0.1, 1, 0.001);
         }
     }
     SECTION("Subtraction Assignment") {
         auto x = a;
         SECTION("With Uncertain") {
             x -= b;
-            test_uncertain(x, -1.0, 0.2236, 2);
+            test_uncertain(x, -1.0, 0.2236, 2, 0.001);
         }
         SECTION("With Uncertain") {
             x -= 1.0;
-            test_uncertain(x, 0.0, 0.1, 1);
+            test_uncertain(x, 0.0, 0.1, 1, 0.001);
         }
     }
     SECTION("Multiplication") {
         SECTION("By Uncertain") {
-            auto x = a * b;
-            test_uncertain(a * b, 2.0, 0.2828, 2);
+            test_uncertain(a * b, 2.0, 0.2828, 2, 0.001);
         }
         SECTION("By Certain") {
             int two = 2;
             auto x  = a * two;        // Works with int
             auto y = (double)two * a; // Works with floating point, and reversed
-            test_uncertain(x, 2.0, 0.2, 1);
-            test_uncertain(y, 2.0, 0.2, 1);
+            test_uncertain(x, 2.0, 0.2, 1, 0.001);
+            test_uncertain(y, 2.0, 0.2, 1, 0.001);
             REQUIRE(x == y);
             REQUIRE(x == (a + a));
         }
@@ -73,7 +73,7 @@ TEMPLATE_TEST_CASE("Arithmetic", "", sigma::UFloat, sigma::UDouble) {
         SECTION("By Uncertain") {
             auto x = a;
             x *= b;
-            test_uncertain(x, 2.0, 0.2828, 2);
+            test_uncertain(x, 2.0, 0.2828, 2, 0.001);
         }
         SECTION("By Certain") {
             int two = 2;
@@ -81,23 +81,23 @@ TEMPLATE_TEST_CASE("Arithmetic", "", sigma::UFloat, sigma::UDouble) {
             auto y  = a;
             x *= two;
             y *= (double)two;
-            test_uncertain(x, 2.0, 0.2, 1);
-            test_uncertain(y, 2.0, 0.2, 1);
+            test_uncertain(x, 2.0, 0.2, 1, 0.001);
+            test_uncertain(y, 2.0, 0.2, 1, 0.001);
             REQUIRE(x == y);
             REQUIRE(x == (a + a));
         }
     }
     SECTION("Division") {
         SECTION("By Uncertain") {
-            test_uncertain(a / b, 0.5, 0.0707, 2);
-            test_uncertain(a / a, 1.0, 0.0, 0);
+            test_uncertain(a / b, 0.5, 0.0707, 2, 0.001);
+            test_uncertain(a / a, 1.0, 0.0, 0, 0.001);
         }
         SECTION("By Certain") {
             int two = 2;
             auto x  = a / two;        // Works with int
             auto y = (double)two / a; // Works with floating point, and reversed
-            test_uncertain(x, 0.5, 0.05, 1);
-            test_uncertain(y, 2.0, 0.2, 1);
+            test_uncertain(x, 0.5, 0.05, 1, 0.001);
+            test_uncertain(y, 2.0, 0.2, 1, 0.001);
         }
     }
     SECTION("Division Assignment") {
@@ -106,15 +106,15 @@ TEMPLATE_TEST_CASE("Arithmetic", "", sigma::UFloat, sigma::UDouble) {
             auto y = a;
             x /= b;
             y /= a;
-            test_uncertain(x, 0.5, 0.0707, 2);
-            test_uncertain(y, 1.0, 0.0, 0);
+            test_uncertain(x, 0.5, 0.0707, 2, 0.001);
+            test_uncertain(y, 1.0, 0.0, 0, 0.001);
         }
         SECTION("By Certain") {
             int two = 2;
             auto x  = a / two;        // Works with int
             auto y = (double)two / a; // Works with floating point, and reversed
-            test_uncertain(x, 0.5, 0.05, 1);
-            test_uncertain(y, 2.0, 0.2, 1);
+            test_uncertain(x, 0.5, 0.05, 1, 0.001);
+            test_uncertain(y, 2.0, 0.2, 1, 0.001);
         }
     }
 }
