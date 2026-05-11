@@ -22,6 +22,16 @@ TEMPLATE_TEST_CASE("Arithmetic", "", sigma::UFloat, sigma::UDouble) {
             test_uncertain(a + 1.0, 2.0, 0.1, 1, 0.001);
             test_uncertain(1.0 + a, 2.0, 0.1, 1, 0.001);
         }
+        SECTION("Ignores values below threshold") {
+            auto c = testing_t(10.0, 1.0, 1.0);
+            auto d = testing_t(0.1, 0.01);
+            // Updates mean, but ignores the derivative of d since it's below
+            // the threshold of c.
+            test_uncertain(c + a, 11.0, 1.0, 1, 1.0);
+            // Doesn't alter anything, because d is 0.0 +/- 0.0 within the
+            // threshold of c.
+            test_uncertain(c + d, 10.0, 1.0, 1, 1.0);
+        }
     }
     SECTION("Addition Assignment") {
         auto x = a;
