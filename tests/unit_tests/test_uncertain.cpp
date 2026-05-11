@@ -31,8 +31,12 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             test_uncertain(second, 1.0, 0.1, 1);
         }
         SECTION("With Mean, SD, and Threshold") {
-            auto value = testing_t(1.0, 0.1, 0.2);
-            test_uncertain(value, 1.0, 0.0, 0, 0.2);
+            auto value = testing_t(1.0, 0.1, 0.02);
+            test_uncertain(value, 1.0, 0.1, 1, 0.02);
+        }
+        SECTION("Mean and SD below threshold") {
+            auto value = testing_t(1.0, 0.1, 10.0);
+            test_uncertain(value, 0.0, 0.0, 0, 10.0);
         }
         SECTION("Copy") {
             auto first = testing_t(1.0, 0.1);
@@ -58,12 +62,6 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             test_uncertain(value, 1.0, 0.1, 1);
             test_uncertain(first, 1.0, 0.1, 0);
         }
-    }
-    SECTION("Update Zero Threshold") {
-        testing_t first;
-        value_t corr = 0.1;
-        first.threshold(corr);
-        REQUIRE(first.threshold() == corr);
     }
     SECTION("operator<<(std::ostream, IndependentVariable)") {
         value_t mean = 1.0, std = 0.1;

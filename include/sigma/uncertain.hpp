@@ -94,14 +94,6 @@ public:
      */
     value_t threshold() const { return m_threshold_; }
 
-    /** @brief Update the zero threshold
-     *
-     *  @param new_threshold The new value of the zero threshold
-     *
-     *  @throw none No throw guarantee
-     */
-    void threshold(value_t new_threshold) { m_threshold_ = new_threshold; }
-
 private:
     /// Mean value of the variable
     value_t m_mean_;
@@ -129,8 +121,9 @@ private:
 
 template<typename ValueType>
 Uncertain<ValueType>::Uncertain(value_t mean, value_t sd, value_t threshold) :
-  m_mean_(mean), m_sd_(std::abs(sd)), m_threshold_(threshold) {
-    if(m_sd_ < m_threshold_) { m_sd_ = 0.0; }
+  m_mean_(std::abs(mean) < threshold ? 0 : mean),
+  m_sd_(std::abs(sd) < threshold ? 0 : std::abs(sd)),
+  m_threshold_(threshold) {
     if(m_sd_ > 0.0) {
         m_deps_.emplace(std::make_shared<dep_sd_t>(m_sd_), value_t{1.0});
     }
