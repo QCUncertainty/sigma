@@ -59,8 +59,8 @@ public:
      *  @throw none No throw guarantee
      */
     void update_mean(value_t mean) {
-        if(std::abs(m_x_.m_mean_ - mean) < m_x_.threshold()) return;
-        m_x_.m_mean_ = mean;
+        if(std::abs(m_x_.m_mean_ - mean) >= m_x_.threshold())
+            m_x_.m_mean_ = mean;
     }
 
     /** @brief Recalculate the standard deviation of the wrapped variable from
