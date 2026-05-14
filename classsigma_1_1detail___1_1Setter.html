@@ -135,6 +135,9 @@ using&#160;</td><td class="memItemRight"><b>dep_sd_ptr</b> = typename uncertain_
 <tr class="memitem:ad786977eb876807acd9fb35bae3f84fc" id="r_ad786977eb876807acd9fb35bae3f84fc"><td class="memItemLeft"><a id="ad786977eb876807acd9fb35bae3f84fc" name="ad786977eb876807acd9fb35bae3f84fc"></a>
 using&#160;</td><td class="memItemRight"><b>deps_map_t</b> = typename uncertain_t::deps_map_t</td></tr>
 <tr class="memdesc:ad786977eb876807acd9fb35bae3f84fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the map holding the variable's dependencies. <br /></td></tr>
+<tr class="memitem:af469b99c4a9e2c9a2fbb46558690cc64" id="r_af469b99c4a9e2c9a2fbb46558690cc64"><td class="memItemLeft"><a id="af469b99c4a9e2c9a2fbb46558690cc64" name="af469b99c4a9e2c9a2fbb46558690cc64"></a>
+using&#160;</td><td class="memItemRight"><b>deps_vector_t</b> = typename std::vector&lt;<a class="el" href="#a317752307a6665ce2ab3c577755599e7">dep_sd_ptr</a>&gt;</td></tr>
+<tr class="memdesc:af469b99c4a9e2c9a2fbb46558690cc64"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of a vector of dependencies of this variable. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -142,6 +145,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a53b7d8051c5d5d34b095b393f1bb1624"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classsigma_1_1detail___1_1Setter.html" title="Modifies an unceratin variable.">Setter</a> for a variable.  <br /></td></tr>
 <tr class="memitem:aa65aa6d2469f71301275074e5d443d47" id="r_aa65aa6d2469f71301275074e5d443d47"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa65aa6d2469f71301275074e5d443d47">update_mean</a> (<a class="el" href="#ab5be0d3fe3e4ca83389a05fd75a0886c">value_t</a> mean)</td></tr>
 <tr class="memdesc:aa65aa6d2469f71301275074e5d443d47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the mean of the wrapped variable.  <br /></td></tr>
+<tr class="memitem:ae0f7763f2470d230a3e8636e3008c773" id="r_ae0f7763f2470d230a3e8636e3008c773"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae0f7763f2470d230a3e8636e3008c773">recalculate_sd</a> ()</td></tr>
+<tr class="memdesc:ae0f7763f2470d230a3e8636e3008c773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recalculate the standard deviation of the wrapped variable from its dependencies.  <br /></td></tr>
 <tr class="memitem:a2130464380818977ab4c55c9d3c33da7" id="r_a2130464380818977ab4c55c9d3c33da7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2130464380818977ab4c55c9d3c33da7">update_derivatives</a> (<a class="el" href="#ab5be0d3fe3e4ca83389a05fd75a0886c">value_t</a> dxda)</td></tr>
 <tr class="memdesc:a2130464380818977ab4c55c9d3c33da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update of existing derivatives.  <br /></td></tr>
 <tr class="memitem:a34d4c236e3ff78d070195c5c9005b54d" id="r_a34d4c236e3ff78d070195c5c9005b54d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a34d4c236e3ff78d070195c5c9005b54d">update_derivatives</a> (const <a class="el" href="#ad786977eb876807acd9fb35bae3f84fc">deps_map_t</a> &amp;deps, <a class="el" href="#ab5be0d3fe3e4ca83389a05fd75a0886c">value_t</a> dxda)</td></tr>
@@ -200,6 +205,41 @@ template&lt;typename UncertainType&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="ae0f7763f2470d230a3e8636e3008c773" name="ae0f7763f2470d230a3e8636e3008c773"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0f7763f2470d230a3e8636e3008c773">&#9670;&#160;</a></span>recalculate_sd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename UncertainType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classsigma_1_1detail___1_1Setter.html">sigma::detail_::Setter</a>&lt; UncertainType &gt;::recalculate_sd </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recalculate the standard deviation of the wrapped variable from its dependencies. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a34d4c236e3ff78d070195c5c9005b54d" name="a34d4c236e3ff78d070195c5c9005b54d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a34d4c236e3ff78d070195c5c9005b54d">&#9670;&#160;</a></span>update_derivatives() <span class="overload">[1/2]</span></h2>
 
@@ -230,6 +270,7 @@ template&lt;typename UncertainType&gt; </div>
 </div><div class="memdoc">
 
 <p>Update/addition of derivatives. </p>
+<p>Updates the map of dependencies and their derivatives with the provided map, while ignoring any new dependencies or contributions that are below the zero threshold. If any existing dependencies are reduced below the zero threshold, they will be removed from the dependencies map and the standard deviation will be updated accordingly.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">deps</td><td>The dependencies to update </td></tr>
@@ -272,6 +313,7 @@ template&lt;typename UncertainType&gt; </div>
 </div><div class="memdoc">
 
 <p>Update of existing derivatives. </p>
+<p>Updates the partial derivatives of the variable with respect to its dependencies, taking into account that some may be reduced below the zero threshold and need to be removed from the dependencies map. If so, the standard deviation will be updated accordingly.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dxda</td><td>The partial derivative of the variable</td></tr>
@@ -313,6 +355,7 @@ template&lt;typename UncertainType&gt; </div>
 </div><div class="memdoc">
 
 <p>Update the mean of the wrapped variable. </p>
+<p>If the difference between the new mean and the current mean is below the zero threshold, the update is ignored. Otherwise, the mean is updated to the new value.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mean</td><td>The new mean value of the variable</td></tr>

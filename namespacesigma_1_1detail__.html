@@ -129,9 +129,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a2ba8c119561a96410b163dfac31822e7" id="r_a2ba8c119561a96410b163dfac31822e7"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a2ba8c119561a96410b163dfac31822e7 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2ba8c119561a96410b163dfac31822e7">inplace_binary</a> (<a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;c, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;b, T mean, T dcda, T dcdb)</td></tr>
 <tr class="memdesc:a2ba8c119561a96410b163dfac31822e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generalized Inplace Binary Changes.  <br /></td></tr>
-<tr class="memitem:ad03f668925095364c575785bcbf03537" id="r_ad03f668925095364c575785bcbf03537"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ad03f668925095364c575785bcbf03537 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ad03f668925095364c575785bcbf03537">binary_result</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;b, T mean, T dcda, T dcdb)</td></tr>
-<tr class="memdesc:ad03f668925095364c575785bcbf03537"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generalized Binary Changes.  <br /></td></tr>
 <tr class="memitem:af89195fa94db2c6ec59257dd2d890bde" id="r_af89195fa94db2c6ec59257dd2d890bde"><td class="memTemplParams" colspan="2">template&lt;typename FunctionType, typename NumericType&gt; </td></tr>
 <tr class="memitem:af89195fa94db2c6ec59257dd2d890bde template"><td class="memItemLeft">NumericType&#160;</td><td class="memItemRight"><a class="el" href="#af89195fa94db2c6ec59257dd2d890bde">numeric_derivative</a> (FunctionType f, NumericType a)</td></tr>
 <tr class="memdesc:af89195fa94db2c6ec59257dd2d890bde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the numeric derivative of a function.  <br /></td></tr>
@@ -146,69 +143,6 @@ constexpr double&#160;</td><td class="memItemRight"><b>pi</b> = 3.14159265358979
 <div class="textblock"><p>The namespace that contains the implementation details of the library. </p>
 <p>This is the namespace details not intended for user interaction. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="ad03f668925095364c575785bcbf03537" name="ad03f668925095364c575785bcbf03537"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad03f668925095364c575785bcbf03537">&#9670;&#160;</a></span>binary_result()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; sigma::detail_::binary_result </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>mean</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>dcda</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>dcdb</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Generalized Binary Changes. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">a</td><td>The variable being altered copied </td></tr>
-    <tr><td class="paramname">b</td><td>The variable whose dependencies are being added to <code class="param">a's</code> </td></tr>
-    <tr><td class="paramname">mean</td><td>The new mean value of the variable </td></tr>
-    <tr><td class="paramname">dcda</td><td>The partial derivative being added to the chain from <code class="param">a</code> </td></tr>
-    <tr><td class="paramname">dcdb</td><td>The partial derivative being added to the chain from <code class="param">b</code> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A variable with the new mean value and the dependencies of <code class="param">a</code> and <code class="param">b</code>, altered respectively by <code class="param">dcda</code> and <code class="param">dcdb</code>.</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a2ba8c119561a96410b163dfac31822e7" name="a2ba8c119561a96410b163dfac31822e7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2ba8c119561a96410b163dfac31822e7">&#9670;&#160;</a></span>inplace_binary()</h2>
 

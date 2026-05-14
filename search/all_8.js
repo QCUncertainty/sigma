@@ -2,8 +2,8 @@ var searchData=
 [
   ['eigen_0',['Eigen',['../namespaceEigen.html',1,'']]],
   ['eigen_5fcompat_2ehpp_1',['eigen_compat.hpp',['../eigen__compat_8hpp.html',1,'']]],
-  ['eigen_5fnumtraits_2',['EIGEN_NUMTRAITS',['../eigen__compat_8hpp.html#a85fe60578981898cbd7b9bb1f322f58f',1,'eigen_compat.hpp']]],
-  ['eigen_5fnumtraits_5finterval_3',['EIGEN_NUMTRAITS_INTERVAL',['../eigen__compat_8hpp.html#a8ecf92ec643a734472d6bf50d7e91e66',1,'eigen_compat.hpp']]],
+  ['eigen_5fnumtraits_5finterval_2',['EIGEN_NUMTRAITS_INTERVAL',['../eigen__compat_8hpp.html#a8ecf92ec643a734472d6bf50d7e91e66',1,'eigen_compat.hpp']]],
+  ['eigen_5fnumtraits_5funcertain_3',['EIGEN_NUMTRAITS_UNCERTAIN',['../eigen__compat_8hpp.html#a9f1cbc28d1a99975489fd4c862d43f1f',1,'eigen_compat.hpp']]],
   ['element_20access_4',['Element Access',['../md_docs_2examples.html#element-access',1,'']]],
   ['empty_5',['empty',['../classsigma_1_1Interval.html#a90c6009af9e26cc7aa934d9c0f420a7a',1,'sigma::Interval']]],
   ['enforcement_6',['Enforcement',['../md_docs_2code__of__conduct.html#enforcement',1,'']]],

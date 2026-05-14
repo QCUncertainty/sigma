@@ -136,53 +136,14 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a85fe60578981898cbd7b9bb1f322f58f" id="r_a85fe60578981898cbd7b9bb1f322f58f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a85fe60578981898cbd7b9bb1f322f58f">EIGEN_NUMTRAITS</a>(float_type)</td></tr>
-<tr class="memdesc:a85fe60578981898cbd7b9bb1f322f58f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorization for Eigen::NumTraits Specialization for Uncertain.  <br /></td></tr>
+<tr class="memitem:a9f1cbc28d1a99975489fd4c862d43f1f" id="r_a9f1cbc28d1a99975489fd4c862d43f1f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9f1cbc28d1a99975489fd4c862d43f1f">EIGEN_NUMTRAITS_UNCERTAIN</a>(float_type)</td></tr>
+<tr class="memdesc:a9f1cbc28d1a99975489fd4c862d43f1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorization for Eigen::NumTraits Specialization for Uncertain.  <br /></td></tr>
 <tr class="memitem:a8ecf92ec643a734472d6bf50d7e91e66" id="r_a8ecf92ec643a734472d6bf50d7e91e66"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8ecf92ec643a734472d6bf50d7e91e66">EIGEN_NUMTRAITS_INTERVAL</a>(float_type)</td></tr>
 <tr class="memdesc:a8ecf92ec643a734472d6bf50d7e91e66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factorization for Eigen::NumTraits Specialization for Interval.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Components for compatibility with <a class="el" href="namespaceEigen.html" title="The namespace of the Eigen library.">Eigen</a>. </p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
-<a id="a85fe60578981898cbd7b9bb1f322f58f" name="a85fe60578981898cbd7b9bb1f322f58f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85fe60578981898cbd7b9bb1f322f58f">&#9670;&#160;</a></span>EIGEN_NUMTRAITS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define EIGEN_NUMTRAITS</td>
-          <td>(</td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>float_type</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">                   \</div>
-<div class="line"><span class="keyword">template</span>&lt;&gt;                                                               \</div>
-<div class="line"><span class="keyword">struct </span>NumTraits&lt;<a class="code hl_namespace" href="namespacesigma.html">sigma</a>::Uncertain&lt;float_type&gt;&gt; : NumTraits&lt;float_type&gt; { \                                            \</div>
-<div class="line">    <span class="keyword">using </span>Uncertain = <a class="code hl_class" href="classsigma_1_1Uncertain.html">sigma::Uncertain&lt;float_type&gt;</a>;                      \                                   \</div>
-<div class="line">    <span class="keyword">using </span>Real = Uncertain;                                              \                            \</div>
-<div class="line">    <span class="keyword">using </span>NonInteger = Uncertain;                                        \                                \</div>
-<div class="line">    <span class="keyword">using </span>Literal = Uncertain;                                           \                                 \</div>
-<div class="line">    <span class="keyword">using </span>Nested = Uncertain;                                            \</div>
-<div class="line">    <span class="keyword">enum</span> {                                                               \</div>
-<div class="line">        IsComplex             = 0,                                       \</div>
-<div class="line">        IsInteger             = 0,                                       \</div>
-<div class="line">        IsSigned              = 1,                                       \</div>
-<div class="line">        RequireInitialization = 1,                                       \</div>
-<div class="line">        ReadCost              = 1,                                       \</div>
-<div class="line">        AddCost               = 3,                                       \</div>
-<div class="line">        MulCost               = 3                                        \</div>
-<div class="line">    };                                                                   \</div>
-<div class="line">}</div>
-<div class="ttc" id="aclasssigma_1_1Uncertain_html"><div class="ttname"><a href="classsigma_1_1Uncertain.html">sigma::Uncertain</a></div><div class="ttdoc">Models an unceratin variable.</div><div class="ttdef"><b>Definition</b> uncertain.hpp:33</div></div>
-<div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:10</div></div>
-</div><!-- fragment -->
-<p>Factorization for Eigen::NumTraits Specialization for Uncertain. </p>
-
-</div>
-</div>
 <a id="a8ecf92ec643a734472d6bf50d7e91e66" name="a8ecf92ec643a734472d6bf50d7e91e66"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8ecf92ec643a734472d6bf50d7e91e66">&#9670;&#160;</a></span>EIGEN_NUMTRAITS_INTERVAL</h2>
 
@@ -216,8 +177,47 @@ Macros</h2></td></tr>
 <div class="line">    };                                                                  \</div>
 <div class="line">}</div>
 <div class="ttc" id="aclasssigma_1_1Interval_html"><div class="ttname"><a href="classsigma_1_1Interval.html">sigma::Interval</a></div><div class="ttdoc">Models a numeric interval.</div><div class="ttdef"><b>Definition</b> interval.hpp:22</div></div>
+<div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:10</div></div>
 </div><!-- fragment -->
 <p>Factorization for Eigen::NumTraits Specialization for Interval. </p>
+
+</div>
+</div>
+<a id="a9f1cbc28d1a99975489fd4c862d43f1f" name="a9f1cbc28d1a99975489fd4c862d43f1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f1cbc28d1a99975489fd4c862d43f1f">&#9670;&#160;</a></span>EIGEN_NUMTRAITS_UNCERTAIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EIGEN_NUMTRAITS_UNCERTAIN</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>float_type</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">                   \</div>
+<div class="line"><span class="keyword">template</span>&lt;&gt;                                                               \</div>
+<div class="line"><span class="keyword">struct </span>NumTraits&lt;<a class="code hl_namespace" href="namespacesigma.html">sigma</a>::Uncertain&lt;float_type&gt;&gt; : NumTraits&lt;float_type&gt; { \                                            \</div>
+<div class="line">    <span class="keyword">using </span>Uncertain = <a class="code hl_class" href="classsigma_1_1Uncertain.html">sigma::Uncertain&lt;float_type&gt;</a>;                      \                                   \</div>
+<div class="line">    <span class="keyword">using </span>Real = Uncertain;                                              \                            \</div>
+<div class="line">    <span class="keyword">using </span>NonInteger = Uncertain;                                        \                                \</div>
+<div class="line">    <span class="keyword">using </span>Literal = Uncertain;                                           \                                 \</div>
+<div class="line">    <span class="keyword">using </span>Nested = Uncertain;                                            \</div>
+<div class="line">    <span class="keyword">enum</span> {                                                               \</div>
+<div class="line">        IsComplex             = 0,                                       \</div>
+<div class="line">        IsInteger             = 0,                                       \</div>
+<div class="line">        IsSigned              = 1,                                       \</div>
+<div class="line">        RequireInitialization = 1,                                       \</div>
+<div class="line">        ReadCost              = 1,                                       \</div>
+<div class="line">        AddCost               = 3,                                       \</div>
+<div class="line">        MulCost               = 3                                        \</div>
+<div class="line">    };                                                                   \</div>
+<div class="line">}</div>
+<div class="ttc" id="aclasssigma_1_1Uncertain_html"><div class="ttname"><a href="classsigma_1_1Uncertain.html">sigma::Uncertain</a></div><div class="ttdoc">Models an unceratin variable.</div><div class="ttdef"><b>Definition</b> uncertain.hpp:34</div></div>
+</div><!-- fragment -->
+<p>Factorization for Eigen::NumTraits Specialization for Uncertain. </p>
 
 </div>
 </div>
