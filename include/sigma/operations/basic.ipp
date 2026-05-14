@@ -50,20 +50,22 @@ Uncertain<T> abs2(const Uncertain<T>& a) {
 
 template<typename T>
 Uncertain<T> ceil(const Uncertain<T>& a) {
-    return Uncertain<T>(std::ceil(a.mean()));
+    return Uncertain<T>(std::ceil(a.mean()), T{0.0}, a.threshold());
 }
 
 template<typename T>
 Uncertain<T> floor(const Uncertain<T>& a) {
-    return Uncertain<T>(std::floor(a.mean()));
+    return Uncertain<T>(std::floor(a.mean()), T{0.0}, a.threshold());
 }
 
 template<typename T>
 Uncertain<T> fmod(const Uncertain<T>& a, const Uncertain<T>& b) {
+    Uncertain<T> c(a);
     T mean = std::fmod(a.mean(), b.mean());
     T dcda = 1.0;
     T dcdb = -std::floor(a.mean() / b.mean());
-    return detail_::binary_result(a, b, mean, dcda, dcdb);
+    detail_::inplace_binary(c, b, mean, dcda, dcdb);
+    return c;
 }
 
 template<typename T>
@@ -100,12 +102,12 @@ U copysign(const U& a, const Uncertain<T>& b) {
 
 template<typename T>
 Uncertain<T> trunc(const Uncertain<T>& a) {
-    return Uncertain<T>(std::trunc(a.mean()));
+    return Uncertain<T>(std::trunc(a.mean()), T{0.0}, a.threshold());
 }
 
 template<typename T>
 Uncertain<T> round(const Uncertain<T>& a) {
-    return Uncertain<T>(std::round(a.mean()));
+    return Uncertain<T>(std::round(a.mean()), T{0.0}, a.threshold());
 }
 
 } // namespace sigma

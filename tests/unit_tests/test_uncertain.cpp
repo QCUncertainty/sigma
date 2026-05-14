@@ -30,6 +30,14 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
             test_uncertain(first, 1.0, 0.1, 1);
             test_uncertain(second, 1.0, 0.1, 1);
         }
+        SECTION("With Mean, SD, and Threshold") {
+            auto value = testing_t(1.0, 0.1, 0.02);
+            test_uncertain(value, 1.0, 0.1, 1, 0.02);
+        }
+        SECTION("Mean and SD below threshold") {
+            auto value = testing_t(1.0, 0.1, 10.0);
+            test_uncertain(value, 0.0, 0.0, 0, 10.0);
+        }
         SECTION("Copy") {
             auto first = testing_t(1.0, 0.1);
             testing_t value(first);
@@ -80,6 +88,10 @@ TEMPLATE_TEST_CASE("Uncertain", "", sigma::UFloat, sigma::UDouble) {
         }
         SECTION("Different Standard Deviation") {
             auto second = testing_t(1.0, 0.2);
+            REQUIRE_FALSE(first == second);
+        }
+        SECTION("Different Threshold") {
+            auto second = testing_t(1.0, 0.1, 0.2);
             REQUIRE_FALSE(first == second);
         }
         SECTION("Different Dependencies") {

@@ -3,6 +3,7 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 #include <sigma/sigma.hpp>
+#include <type_traits>
 
 namespace testing {
 
@@ -29,12 +30,19 @@ struct test_traits<sigma::IDouble> {
     using other_t = sigma::IFloat;
 };
 
+#define VALUE_TYPE typename std::remove_reference<TestType>::type::value_t
+
 template<typename TestType>
-void test_uncertain(TestType&& x, double m, double s, std::size_t n) {
+void test_uncertain(
+  TestType&& x, VALUE_TYPE m, VALUE_TYPE s, std::size_t n,
+  VALUE_TYPE threshold = std::numeric_limits<VALUE_TYPE>::epsilon()) {
     REQUIRE(x.mean() == Catch::Approx(m).margin(1.0e-4));
     REQUIRE(x.sd() == Catch::Approx(s).margin(1.0e-4));
     REQUIRE(x.deps().size() == n);
+    REQUIRE(x.threshold() == threshold);
 }
+
+#undef VALUE_TYPE
 
 template<typename TestType>
 void test_interval(TestType&& x, double lo, double hi) {

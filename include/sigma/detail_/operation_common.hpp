@@ -67,28 +67,6 @@ void inplace_binary(Uncertain<T>& c, const Uncertain<T>& b, T mean, T dcda,
     c_setter.update_derivatives(b.deps(), dcdb);
 }
 
-/** @brief Generalized Binary Changes
- *
- *  @tparam T The value type of the variable
- *  @param a The variable being altered copied
- *  @param b The variable whose dependencies are being added to @p a's
- *  @param mean The new mean value of the variable
- *  @param dcda The partial derivative being added to the chain from @p a
- *  @param dcdb The partial derivative being added to the chain from @p b
- *
- *  @return A variable with the new mean value and the dependencies of @p a and
- *          @p b, altered respectively by @p dcda and @p dcdb.
- *
- *  @throw none No throw guarantee
- */
-template<typename T>
-Uncertain<T> binary_result(const Uncertain<T>& a, const Uncertain<T>& b, T mean,
-                           T dcda, T dcdb) {
-    Uncertain<T> c(a);
-    detail_::inplace_binary(c, b, mean, dcda, dcdb);
-    return c;
-}
-
 /** @brief Compute the numeric derivative of a function
  *
  *  @tparam FunctionType The type of the function @p f

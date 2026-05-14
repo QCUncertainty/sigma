@@ -12,7 +12,7 @@ TEMPLATE_TEST_CASE("Complex", "", sigma::UFloat, sigma::UDouble) {
         SECTION("Complex Conjugate") { REQUIRE(a == sigma::conj(a)); }
         SECTION("Real Part") { REQUIRE(a == sigma::real(a)); }
         SECTION("Imaginary Part") {
-            test_uncertain(sigma::imag(a), 0.0, 0.0, 1);
+            test_uncertain(sigma::imag(a), 0.0, 0.0, 0);
         }
     }
 }
