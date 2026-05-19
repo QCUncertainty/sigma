@@ -7,16 +7,23 @@ on:
 
 jobs:
   # Build and test C++ libraries.
-  test_library_unix:
+  test_library:
     strategy:
       matrix:
+        eigen: [ON, OFF]
         include:
           - os: macos-15
-            toolset: clang
             version: 15
+            toolset: clang
+            arch: aarch64
           - os: ubuntu-24.04
-            toolset: gcc
             version: 24.04
+            toolset: gcc
+            arch: x86
+          - os: windows-2022
+            version: 2022
+            toolset: msvc
+            arch: x86
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     steps:
@@ -31,36 +38,16 @@ jobs:
           boost_version: 1.89.0
           platform_version: ${{ matrix.version }}
           toolset: ${{ matrix.toolset }}
+          arch: ${{ matrix.arch }}
       - name: Build and Test
         run: |
           toolchain=${PWD}/.github/workflow_toolchains/${{matrix.toolset}}.cmake
-          cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}"
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            cmake -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -B "build" -G "Visual Studio 17 2022" -T host=x64 -A x64 -DENABLE_EIGEN_SUPPORT=${{matrix.eigen}}
+          else
+            cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=${{matrix.eigen}}
+          fi
           cmake --build build --parallel
-          cd build
-          ctest -VV --no-tests=error
-        env:
-            BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
-        shell: bash
-
-  test_library_windows:
-    runs-on: windows-2022
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-      - uses: ssciwr/doxygen-install@v2
-      - name: Install boost
-        uses: MarkusJx/install-boost@v2
-        id: install-boost
-        with:
-          boost_version: 1.89.0
-          platform_version: 2022
-          toolset: msvc
-      - name: Build and Test
-        run: |
-          toolchain=${PWD}/.github/workflow_toolchains/msvc.cmake
-          cmake -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -B "build" -G "Visual Studio 17 2022" -T host=x64 -A x64
-          cmake --build build --config Debug --parallel
           cd build
           ctest -C Debug -T test -VV --no-tests=error
         env:
