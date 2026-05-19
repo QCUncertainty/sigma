@@ -7,55 +7,26 @@ on:
 
 jobs:
   # Build and test C++ libraries.
-  test_library_unix:
+  test_library:
     strategy:
       matrix:
-        os: [ubuntu-24.04, macos-15]
-        compiler: [gnu-13, gnu-14]
-        eigen: [ON]
+        os: [macos-15, ubuntu-24.04, windows-2022]
+        eigen: [ENABLE_EIGEN_SUPPORT=ON, ENABLE_EIGEN_SUPPORT=OFF]
         include:
-          - os: ubuntu-22.04
-            compiler: clang-default
-            eigen: ON
           - os: macos-15
-            compiler: clang-default
-            eigen: ON
+            version: 15
+            toolset: clang
+            arch: aarch64
           - os: ubuntu-24.04
-            compiler: gnu-12
-            eigen: ON
-          - os: ubuntu-24.04
-            compiler: gnu-12
-            eigen: OFF
+            version: 24.04
+            toolset: gcc
+            arch: x86
+          - os: windows-2022
+            version: 2022
+            toolset: msvc
+            arch: x86
     continue-on-error: true
     runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-      - uses: ssciwr/doxygen-install@v2
-      - name: Install boost
-        run: |
-          if [[ ${{ matrix.os }} == ubuntu* ]]; then
-            echo "Installing boost for Ubuntu"
-            sudo apt-get update
-            sudo apt-get install -y libboost-all-dev
-            BOOST_ROOT=/usr/include/boost
-          elif [ "${{ matrix.os }}" == "macos-15" ]; then
-            brew install boost
-            BOOST_ROOT=$(brew --prefix boost)/include/boost
-          fi
-          echo "BOOST_ROOT=$BOOST_ROOT" >> $GITHUB_ENV
-      - name: Build and Test
-        run: |
-          toolchain=${PWD}/.github/workflow_toolchains/${{matrix.compiler}}.cmake
-          cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=${{matrix.eigen}}
-          cmake --build build --parallel
-          cd build
-          ctest -VV --no-tests=error
-        shell: bash
-
-  test_library_windows:
-    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v5
         with:
@@ -65,17 +36,24 @@ jobs:
         uses: MarkusJx/install-boost@v2
         id: install-boost
         with:
-          boost_version: 1.84.0
+          boost_version: 1.89.0
+          platform_version: ${{ matrix.version }}
+          toolset: ${{ matrix.toolset }}
+          arch: ${{ matrix.arch }}
       - name: Build and Test
         run: |
-          SET "toolchain=%cd%\.github\workflow_toolchains\windows.cmake"
-          cmake -DCMAKE_TOOLCHAIN_FILE=%toolchain% -B "build" -G "Visual Studio 17 2022" -T host=x64 -A x64
-          cmake --build build --config Debug --parallel
+          toolchain=${PWD}/.github/workflow_toolchains/${{matrix.toolset}}.cmake
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            cmake -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -B "build" -G "Visual Studio 17 2022" -T host=x64 -A x64 -D${{matrix.eigen}}
+          else
+            cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -D${{matrix.eigen}}
+          fi
+          cmake --build build --parallel
           cd build
           ctest -C Debug -T test -VV --no-tests=error
         env:
             BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
-        shell: cmd
+        shell: bash
 
   # Test Build of Documentation
   test_dox_build:
