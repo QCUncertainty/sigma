@@ -223,6 +223,9 @@ Interval<T> exp(const Interval<T>& a);
 template<typename T>
 Interval<T> log(const Interval<T>& a);
 
+template<typename T, typename U>
+Interval<T> pow(const Interval<T>& a, const U& exp);
+
 } // namespace sigma
 
 #include "exponents.ipp"
