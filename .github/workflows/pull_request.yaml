@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-15, ubuntu-24.04, windows-2022]
-        eigen: [ON, OFF]
+        eigen: [ENABLE_EIGEN_SUPPORT=ON, ENABLE_EIGEN_SUPPORT=OFF]
         include:
           - os: macos-15
             version: 15
@@ -44,9 +44,9 @@ jobs:
         run: |
           toolchain=${PWD}/.github/workflow_toolchains/${{matrix.toolset}}.cmake
           if [ "$RUNNER_OS" == "Windows" ]; then
-            cmake -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -B "build" -G "Visual Studio 17 2022" -T host=x64 -A x64 -DENABLE_EIGEN_SUPPORT=${{matrix.eigen}}
+            cmake -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -B "build" -G "Visual Studio 17 2022" -T host=x64 -A x64 -D${{matrix.eigen}}
           else
-            cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -DENABLE_EIGEN_SUPPORT=${{matrix.eigen}}
+            cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -D${{matrix.eigen}}
           fi
           cmake --build build --parallel
           cd build
