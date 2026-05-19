@@ -223,6 +223,21 @@ Interval<T> exp(const Interval<T>& a);
 template<typename T>
 Interval<T> log(const Interval<T>& a);
 
+/** @brief Exponentiation of a variable
+ *
+ *  @tparam T The value type of the variable
+ *  @tparam U The numeric type of the exponent
+ *  @param a The interval base
+ *  @param exp The exponent to raise the base by
+ *
+ *  @return A interval whose bounds are the bounds of @p a raised to the power
+ *  @p exp
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T, typename U>
+Interval<T> pow(const Interval<T>& a, const U& exp);
+
 } // namespace sigma
 
 #include "exponents.ipp"

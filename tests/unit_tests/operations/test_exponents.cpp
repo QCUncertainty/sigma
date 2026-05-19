@@ -32,6 +32,19 @@ TEMPLATE_TEST_CASE("Exponents (Interval)", "", sigma::IFloat, sigma::IDouble) {
         auto b = testing_t(value_t{1}, value_t{1});
         test_interval(sigma::log(b), 0.0, 0.0);
     }
+    SECTION("Power") {
+        // pow([1, 2], 2) = [1, 4]
+        auto a = testing_t(value_t{1}, value_t{2});
+        test_interval(sigma::pow(a, 2), 1.0, 4.0);
+
+        // pow([1, 2], 0.5) = [1, sqrt(2)]
+        auto b = testing_t(value_t{1}, value_t{2});
+        test_interval(sigma::pow(b, 0.5), 1.0, std::sqrt(2.0));
+
+        // pow([1, 2], -1) = [0.5, 1]
+        auto c = testing_t(value_t{1}, value_t{2});
+        test_interval(sigma::pow(c, -1), 0.5, 1.0);
+    }
 }
 
 TEMPLATE_TEST_CASE("Exponents", "", sigma::UFloat, sigma::UDouble) {
