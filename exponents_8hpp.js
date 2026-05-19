@@ -13,6 +13,7 @@ var exponents_8hpp =
     [ "sigma::log10", "namespacesigma.html#a9146d79ed7ea7741bc579d6061d11b23", null ],
     [ "sigma::log1p", "namespacesigma.html#a73a4c967a311eb8c5c83704c5742305f", null ],
     [ "sigma::log2", "namespacesigma.html#a76e7cbcb3b0bd1b3023fb771ff8d9cc5", null ],
+    [ "sigma::pow", "namespacesigma.html#a35f137fea763cf0d93250a9b758381b3", null ],
     [ "sigma::pow", "namespacesigma.html#ac240ea50be68f2eb2ee4b6abf0d063c7", null ],
     [ "sigma::pow", "namespacesigma.html#a0b3162c4a58cc30e72f7c4ddf3dfc1f6", null ],
     [ "sigma::sqrt", "namespacesigma.html#ae6ce659ec97fb6dcb2e582be33e059a1", null ],

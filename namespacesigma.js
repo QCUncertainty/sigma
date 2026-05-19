@@ -93,6 +93,7 @@ var namespacesigma =
     [ "operator==", "classsigma_1_1Uncertain.html#ab71a01e520ecc48a1bbf1f33731f6240", null ],
     [ "operator>", "classsigma_1_1Uncertain.html#a260933b6c0a1e09b25d957cf549b5cc4", null ],
     [ "operator>=", "classsigma_1_1Uncertain.html#a56035ec9b0d943801f157949b45da232", null ],
+    [ "pow", "namespacesigma.html#a35f137fea763cf0d93250a9b758381b3", null ],
     [ "pow", "namespacesigma.html#ac240ea50be68f2eb2ee4b6abf0d063c7", null ],
     [ "pow", "namespacesigma.html#a0b3162c4a58cc30e72f7c4ddf3dfc1f6", null ],
     [ "radians", "namespacesigma.html#ae5e0046cd2d9e05322e6d880b593b679", null ],

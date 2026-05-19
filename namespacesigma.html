@@ -324,6 +324,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a05ed885aa305fef4a9b2a14e5a374b48" id="r_a05ed885aa305fef4a9b2a14e5a374b48"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a05ed885aa305fef4a9b2a14e5a374b48 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a05ed885aa305fef4a9b2a14e5a374b48">log</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a)</td></tr>
 <tr class="memdesc:a05ed885aa305fef4a9b2a14e5a374b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the natural logarithm of an interval.  <br /></td></tr>
+<tr class="memitem:a35f137fea763cf0d93250a9b758381b3" id="r_a35f137fea763cf0d93250a9b758381b3"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:a35f137fea763cf0d93250a9b758381b3 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a35f137fea763cf0d93250a9b758381b3">pow</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a, const U &amp;<a class="el" href="#ad8957603ced9a2feb2c82973b5bb1da9">exp</a>)</td></tr>
+<tr class="memdesc:a35f137fea763cf0d93250a9b758381b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponentiation of a variable.  <br /></td></tr>
 <tr class="memitem:a2e4a33ee5b89ddb9a1f023d6341d75a3" id="r_a2e4a33ee5b89ddb9a1f023d6341d75a3"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a2e4a33ee5b89ddb9a1f023d6341d75a3 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a2e4a33ee5b89ddb9a1f023d6341d75a3">sinh</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
 <tr class="memdesc:a2e4a33ee5b89ddb9a1f023d6341d75a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hyperbolic sine of the variable.  <br /></td></tr>
@@ -3055,8 +3058,54 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a35f137fea763cf0d93250a9b758381b3" name="a35f137fea763cf0d93250a9b758381b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35f137fea763cf0d93250a9b758381b3">&#9670;&#160;</a></span>pow() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; sigma::pow </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const U &amp;</td>          <td class="paramname"><span class="paramname"><em>exp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exponentiation of a variable. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
+    <tr><td class="paramname">U</td><td>The numeric type of the exponent </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval base </td></tr>
+    <tr><td class="paramname"><a class="el" href="#ad8957603ced9a2feb2c82973b5bb1da9" title="Calculate the Euler&#39;s number raised to the power of an uncertain variable.">exp</a></td><td>The exponent to raise the base by</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A interval whose bounds are the bounds of <code class="param">a</code> raised to the power <code class="param">exp</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac240ea50be68f2eb2ee4b6abf0d063c7" name="ac240ea50be68f2eb2ee4b6abf0d063c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac240ea50be68f2eb2ee4b6abf0d063c7">&#9670;&#160;</a></span>pow() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac240ea50be68f2eb2ee4b6abf0d063c7">&#9670;&#160;</a></span>pow() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3102,7 +3151,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="a0b3162c4a58cc30e72f7c4ddf3dfc1f6" name="a0b3162c4a58cc30e72f7c4ddf3dfc1f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b3162c4a58cc30e72f7c4ddf3dfc1f6">&#9670;&#160;</a></span>pow() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b3162c4a58cc30e72f7c4ddf3dfc1f6">&#9670;&#160;</a></span>pow() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
