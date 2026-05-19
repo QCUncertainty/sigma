@@ -31,17 +31,12 @@ jobs:
           fetch-depth: 0
       - uses: ssciwr/doxygen-install@v2
       - name: Install boost
-        run: |
-          if [[ ${{ matrix.os }} == ubuntu* ]]; then
-            echo "Installing boost for Ubuntu"
-            sudo apt-get update
-            sudo apt-get install -y libboost-all-dev
-            BOOST_ROOT=/usr/include/boost
-          elif [ "${{ matrix.os }}" == "macos-15" ]; then
-            brew install boost
-            BOOST_ROOT=$(brew --prefix boost)/include/boost
-          fi
-          echo "BOOST_ROOT=$BOOST_ROOT" >> $GITHUB_ENV
+        uses: MarkusJx/install-boost@v2
+        id: install-boost
+        with:
+          boost_version: 1.89.0
+          platform_version: ${{ split(matrix.os, '-')[1] }}
+          toolset: ${{ matrix.compiler }}
       - name: Build and Test
         run: |
           toolchain=${PWD}/.github/workflow_toolchains/${{matrix.compiler}}.cmake
@@ -49,6 +44,8 @@ jobs:
           cmake --build build --parallel
           cd build
           ctest -VV --no-tests=error
+        env:
+            BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
         shell: bash
 
   test_library_windows:
