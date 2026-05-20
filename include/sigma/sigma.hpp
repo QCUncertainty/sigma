@@ -1,8 +1,6 @@
 #pragma once
-#include "eigen_compat.hpp"
-#include "interval.hpp"
-#include "operations/operations.hpp"
-#include "uncertain.hpp"
+#include "interval/interval.hpp"
+#include "uncertain/uncertain.hpp"
 
 /** @file sigma.hpp
  *  @brief Convenience header for the sigma library
