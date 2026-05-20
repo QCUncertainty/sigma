@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['abs_0',['abs',['../namespacesigma.html#add954174f373873d59d093ceb3e82af5',1,'sigma::abs(const Uncertain&lt; T &gt; &amp;a)'],['../namespacesigma.html#a3ea8a8ec91205acbf995d458fbf19105',1,'sigma::abs(const Interval&lt; T &gt; &amp;a)']]],
+  ['abs_0',['abs',['../namespacesigma.html#a3ea8a8ec91205acbf995d458fbf19105',1,'sigma::abs(const Interval&lt; T &gt; &amp;a)'],['../namespacesigma.html#add954174f373873d59d093ceb3e82af5',1,'sigma::abs(const Uncertain&lt; T &gt; &amp;a)']]],
   ['abs2_1',['abs2',['../namespacesigma.html#aaa0794dcf432114a9467603ac7748c7c',1,'sigma']]],
   ['access_2',['Element Access',['../md_docs_2examples.html#element-access',1,'']]],
   ['acknowledgments_3',['Acknowledgments',['../index.html#acknowledgments',1,'Acknowledgments'],['../md_docs_2contributing.html#acknowledgments-1',1,'Acknowledgments']]],

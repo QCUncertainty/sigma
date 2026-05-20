@@ -1,8 +1,8 @@
 var namespacesigma =
 [
     [ "detail_", "namespacesigma_1_1detail__.html", "namespacesigma_1_1detail__" ],
-    [ "Uncertain", "classsigma_1_1Uncertain.html", "classsigma_1_1Uncertain" ],
     [ "Interval", "classsigma_1_1Interval.html", "classsigma_1_1Interval" ],
+    [ "Uncertain", "classsigma_1_1Uncertain.html", "classsigma_1_1Uncertain" ],
     [ "IDouble", "namespacesigma.html#ab126639cc3e0c6982521627290a6139d", null ],
     [ "IFloat", "namespacesigma.html#a39fce2e2c854ce7cafbc61b57c1e90a6", null ],
     [ "UDouble", "namespacesigma.html#a4208b27a7ef51017bd313e6009915c84", null ],

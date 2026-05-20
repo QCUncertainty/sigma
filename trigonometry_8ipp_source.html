@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.16.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>sigma: include/sigma/operations/trigonometry.ipp Source File</title>
+    <title>sigma: include/sigma/uncertain/operations/trigonometry.ipp Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -103,7 +103,7 @@ $(function(){initNavTree('trigonometry_8ipp_source.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="operation__common_8hpp.html">sigma/detail_/operation_common.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="operation__common_8hpp.html">sigma/uncertain/detail_/operation_common.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesigma.html">sigma</a> {</div>
@@ -215,10 +215,10 @@ $(function(){initNavTree('trigonometry_8ipp_source.html','',''); });
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>} <span class="comment">// namespace sigma</span></div>
 <div class="ttc" id="aclasssigma_1_1Uncertain_html"><div class="ttname"><a href="classsigma_1_1Uncertain.html">sigma::Uncertain</a></div><div class="ttdoc">Models an unceratin variable.</div><div class="ttdef"><b>Definition</b> uncertain.hpp:34</div></div>
 <div class="ttc" id="aclasssigma_1_1Uncertain_html_a43412df1d1f48b62f0981b999fe74d10"><div class="ttname"><a href="classsigma_1_1Uncertain.html#a43412df1d1f48b62f0981b999fe74d10">sigma::Uncertain::mean</a></div><div class="ttdeci">value_t mean() const</div><div class="ttdoc">Get the mean value of the variable.</div><div class="ttdef"><b>Definition</b> uncertain.hpp:71</div></div>
-<div class="ttc" id="anamespacesigma_1_1detail___html_a2ba8c119561a96410b163dfac31822e7"><div class="ttname"><a href="namespacesigma_1_1detail__.html#a2ba8c119561a96410b163dfac31822e7">sigma::detail_::inplace_binary</a></div><div class="ttdeci">void inplace_binary(Uncertain&lt; T &gt; &amp;c, const Uncertain&lt; T &gt; &amp;b, T mean, T dcda, T dcdb)</div><div class="ttdoc">Generalized Inplace Binary Changes.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:62</div></div>
-<div class="ttc" id="anamespacesigma_1_1detail___html_a8d8ed28e719cef3b02f64c0d74a773ac"><div class="ttname"><a href="namespacesigma_1_1detail__.html#a8d8ed28e719cef3b02f64c0d74a773ac">sigma::detail_::pi</a></div><div class="ttdeci">constexpr double pi</div><div class="ttdoc">Value of Pi.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:13</div></div>
-<div class="ttc" id="anamespacesigma_1_1detail___html_ab38d71e447d05e0bc8ad7af25bc5eb74"><div class="ttname"><a href="namespacesigma_1_1detail__.html#ab38d71e447d05e0bc8ad7af25bc5eb74">sigma::detail_::unary_result</a></div><div class="ttdeci">Uncertain&lt; T &gt; unary_result(const Uncertain&lt; T &gt; &amp;a, T mean, T dcda)</div><div class="ttdoc">Generalized Unary Changes.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:44</div></div>
-<div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:10</div></div>
+<div class="ttc" id="anamespacesigma_1_1detail___html_a2ba8c119561a96410b163dfac31822e7"><div class="ttname"><a href="namespacesigma_1_1detail__.html#a2ba8c119561a96410b163dfac31822e7">sigma::detail_::inplace_binary</a></div><div class="ttdeci">void inplace_binary(Uncertain&lt; T &gt; &amp;c, const Uncertain&lt; T &gt; &amp;b, T mean, T dcda, T dcdb)</div><div class="ttdoc">Generalized Inplace Binary Changes.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:61</div></div>
+<div class="ttc" id="anamespacesigma_1_1detail___html_a8d8ed28e719cef3b02f64c0d74a773ac"><div class="ttname"><a href="namespacesigma_1_1detail__.html#a8d8ed28e719cef3b02f64c0d74a773ac">sigma::detail_::pi</a></div><div class="ttdeci">constexpr double pi</div><div class="ttdoc">Value of Pi.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:12</div></div>
+<div class="ttc" id="anamespacesigma_1_1detail___html_ab38d71e447d05e0bc8ad7af25bc5eb74"><div class="ttname"><a href="namespacesigma_1_1detail__.html#ab38d71e447d05e0bc8ad7af25bc5eb74">sigma::detail_::unary_result</a></div><div class="ttdeci">Uncertain&lt; T &gt; unary_result(const Uncertain&lt; T &gt; &amp;a, T mean, T dcda)</div><div class="ttdoc">Generalized Unary Changes.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:43</div></div>
+<div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition</b> eigen_compat.hpp:11</div></div>
 <div class="ttc" id="anamespacesigma_html_a0ff9ec568f44da54c09522be0b61ba9a"><div class="ttname"><a href="namespacesigma.html#a0ff9ec568f44da54c09522be0b61ba9a">sigma::atan2</a></div><div class="ttdeci">Uncertain&lt; T &gt; atan2(const Uncertain&lt; T &gt; &amp;y, const Uncertain&lt; T &gt; &amp;x)</div><div class="ttdoc">Two argument arctangent.</div><div class="ttdef"><b>Definition</b> trigonometry.ipp:66</div></div>
 <div class="ttc" id="anamespacesigma_html_a174b5d94bc2a10f4a256eab8ee5a342d"><div class="ttname"><a href="namespacesigma.html#a174b5d94bc2a10f4a256eab8ee5a342d">sigma::sin</a></div><div class="ttdeci">Uncertain&lt; T &gt; sin(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Sine of the variable.</div><div class="ttdef"><b>Definition</b> trigonometry.ipp:24</div></div>
 <div class="ttc" id="anamespacesigma_html_a29ac0ccb509ea16a5f8f2d69318af050"><div class="ttname"><a href="namespacesigma.html#a29ac0ccb509ea16a5f8f2d69318af050">sigma::atan</a></div><div class="ttdeci">Uncertain&lt; T &gt; atan(const Uncertain&lt; T &gt; &amp;a)</div><div class="ttdoc">Arctangent of the variable.</div><div class="ttdef"><b>Definition</b> trigonometry.ipp:59</div></div>
@@ -235,7 +235,7 @@ $(function(){initNavTree('trigonometry_8ipp_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>sigma</b></li><li class="navelem"><b>operations</b></li><li class="navelem"><b>trigonometry.ipp</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>sigma</b></li><li class="navelem"><b>uncertain</b></li><li class="navelem"><b>operations</b></li><li class="navelem"><b>trigonometry.ipp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

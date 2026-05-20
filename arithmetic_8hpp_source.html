@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="generator" content="Doxygen 1.16.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>sigma: include/sigma/operations/arithmetic.hpp Source File</title>
+    <title>sigma: include/sigma/uncertain/operations/arithmetic.hpp Source File</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -103,7 +103,7 @@ $(function(){initNavTree('arithmetic_8hpp_source.html','',''); });
 </div><!--header-->
 <div class="contents">
 <a href="arithmetic_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="uncertain_8hpp.html">sigma/uncertain.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="uncertain_8hpp.html">sigma/uncertain/uncertain.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacesigma.html">sigma</a> {</div>
@@ -163,15 +163,15 @@ $(function(){initNavTree('arithmetic_8hpp_source.html','',''); });
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="preprocessor">#include &quot;arithmetic.ipp&quot;</span></div>
 <div class="ttc" id="aclasssigma_1_1Uncertain_html"><div class="ttname"><a href="classsigma_1_1Uncertain.html">sigma::Uncertain</a></div><div class="ttdoc">Models an unceratin variable.</div><div class="ttdef"><b>Definition</b> uncertain.hpp:34</div></div>
-<div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition</b> operation_common.hpp:10</div></div>
-<div class="ttc" id="anamespacesigma_html_a16cfe83c0dd802acbe0241247e036de1"><div class="ttname"><a href="namespacesigma.html#a16cfe83c0dd802acbe0241247e036de1">sigma::operator/</a></div><div class="ttdeci">Interval&lt; T &gt; operator/(Interval&lt; T &gt; lhs, T rhs)</div><div class="ttdef"><b>Definition</b> interval.hpp:748</div></div>
-<div class="ttc" id="anamespacesigma_html_a3b86b59f07e9b068ef91e186da0e0bb7"><div class="ttname"><a href="namespacesigma.html#a3b86b59f07e9b068ef91e186da0e0bb7">sigma::operator/=</a></div><div class="ttdeci">Uncertain&lt; T &gt; &amp; operator/=(Uncertain&lt; T &gt; &amp;lhs, const Uncertain&lt; T &gt; &amp;rhs)</div><div class="ttdoc">Inplace Division Operation.</div><div class="ttdef"><b>Definition</b> arithmetic.ipp:148</div></div>
-<div class="ttc" id="anamespacesigma_html_a462c03e83482bd8336adb133bcd4ff7e"><div class="ttname"><a href="namespacesigma.html#a462c03e83482bd8336adb133bcd4ff7e">sigma::operator-</a></div><div class="ttdeci">Interval&lt; T &gt; operator-(Interval&lt; T &gt; lhs, T rhs)</div><div class="ttdef"><b>Definition</b> interval.hpp:689</div></div>
-<div class="ttc" id="anamespacesigma_html_a52c096ac39f822287d282bd2269e127b"><div class="ttname"><a href="namespacesigma.html#a52c096ac39f822287d282bd2269e127b">sigma::operator*</a></div><div class="ttdeci">Interval&lt; T &gt; operator*(Interval&lt; T &gt; lhs, T rhs)</div><div class="ttdef"><b>Definition</b> interval.hpp:717</div></div>
-<div class="ttc" id="anamespacesigma_html_a920dd90b639d9e3737931d2d2af297cd"><div class="ttname"><a href="namespacesigma.html#a920dd90b639d9e3737931d2d2af297cd">sigma::operator*=</a></div><div class="ttdeci">Uncertain&lt; T &gt; &amp; operator*=(Uncertain&lt; T &gt; &amp;lhs, const Uncertain&lt; T &gt; &amp;rhs)</div><div class="ttdoc">Inplace Multiplication Operation.</div><div class="ttdef"><b>Definition</b> arithmetic.ipp:110</div></div>
-<div class="ttc" id="anamespacesigma_html_aae3dda0f049be5b993ce136f23c640cf"><div class="ttname"><a href="namespacesigma.html#aae3dda0f049be5b993ce136f23c640cf">sigma::operator+</a></div><div class="ttdeci">Interval&lt; T &gt; operator+(Interval&lt; T &gt; lhs, T rhs)</div><div class="ttdef"><b>Definition</b> interval.hpp:661</div></div>
-<div class="ttc" id="anamespacesigma_html_af83de505fbc5a44cd17287bc193c6421"><div class="ttname"><a href="namespacesigma.html#af83de505fbc5a44cd17287bc193c6421">sigma::operator-=</a></div><div class="ttdeci">Uncertain&lt; T &gt; &amp; operator-=(Uncertain&lt; T &gt; &amp;lhs, const Uncertain&lt; T &gt; &amp;rhs)</div><div class="ttdoc">Inplace Subtraction Operation.</div><div class="ttdef"><b>Definition</b> arithmetic.ipp:74</div></div>
-<div class="ttc" id="anamespacesigma_html_aff88b15205b29f22c6fd500a51ac5c50"><div class="ttname"><a href="namespacesigma.html#aff88b15205b29f22c6fd500a51ac5c50">sigma::operator+=</a></div><div class="ttdeci">Uncertain&lt; T &gt; &amp; operator+=(Uncertain&lt; T &gt; &amp;lhs, const Uncertain&lt; T &gt; &amp;rhs)</div><div class="ttdoc">Inplace Addition Operation.</div><div class="ttdef"><b>Definition</b> arithmetic.ipp:36</div></div>
+<div class="ttc" id="anamespacesigma_html"><div class="ttname"><a href="namespacesigma.html">sigma</a></div><div class="ttdoc">The primary namespace for the sigma library.</div><div class="ttdef"><b>Definition</b> eigen_compat.hpp:11</div></div>
+<div class="ttc" id="anamespacesigma_html_a16cfe83c0dd802acbe0241247e036de1"><div class="ttname"><a href="namespacesigma.html#a16cfe83c0dd802acbe0241247e036de1">sigma::operator/</a></div><div class="ttdeci">Interval&lt; T &gt; operator/(Interval&lt; T &gt; lhs, T rhs)</div><div class="ttdef"><b>Definition</b> interval.hpp:779</div></div>
+<div class="ttc" id="anamespacesigma_html_a3b86b59f07e9b068ef91e186da0e0bb7"><div class="ttname"><a href="namespacesigma.html#a3b86b59f07e9b068ef91e186da0e0bb7">sigma::operator/=</a></div><div class="ttdeci">Uncertain&lt; T &gt; &amp; operator/=(Uncertain&lt; T &gt; &amp;lhs, const Uncertain&lt; T &gt; &amp;rhs)</div><div class="ttdoc">Inplace Division Operation.</div><div class="ttdef"><b>Definition</b> arithmetic.ipp:147</div></div>
+<div class="ttc" id="anamespacesigma_html_a462c03e83482bd8336adb133bcd4ff7e"><div class="ttname"><a href="namespacesigma.html#a462c03e83482bd8336adb133bcd4ff7e">sigma::operator-</a></div><div class="ttdeci">Interval&lt; T &gt; operator-(Interval&lt; T &gt; lhs, T rhs)</div><div class="ttdef"><b>Definition</b> interval.hpp:720</div></div>
+<div class="ttc" id="anamespacesigma_html_a52c096ac39f822287d282bd2269e127b"><div class="ttname"><a href="namespacesigma.html#a52c096ac39f822287d282bd2269e127b">sigma::operator*</a></div><div class="ttdeci">Interval&lt; T &gt; operator*(Interval&lt; T &gt; lhs, T rhs)</div><div class="ttdef"><b>Definition</b> interval.hpp:748</div></div>
+<div class="ttc" id="anamespacesigma_html_a920dd90b639d9e3737931d2d2af297cd"><div class="ttname"><a href="namespacesigma.html#a920dd90b639d9e3737931d2d2af297cd">sigma::operator*=</a></div><div class="ttdeci">Uncertain&lt; T &gt; &amp; operator*=(Uncertain&lt; T &gt; &amp;lhs, const Uncertain&lt; T &gt; &amp;rhs)</div><div class="ttdoc">Inplace Multiplication Operation.</div><div class="ttdef"><b>Definition</b> arithmetic.ipp:109</div></div>
+<div class="ttc" id="anamespacesigma_html_aae3dda0f049be5b993ce136f23c640cf"><div class="ttname"><a href="namespacesigma.html#aae3dda0f049be5b993ce136f23c640cf">sigma::operator+</a></div><div class="ttdeci">Interval&lt; T &gt; operator+(Interval&lt; T &gt; lhs, T rhs)</div><div class="ttdef"><b>Definition</b> interval.hpp:692</div></div>
+<div class="ttc" id="anamespacesigma_html_af83de505fbc5a44cd17287bc193c6421"><div class="ttname"><a href="namespacesigma.html#af83de505fbc5a44cd17287bc193c6421">sigma::operator-=</a></div><div class="ttdeci">Uncertain&lt; T &gt; &amp; operator-=(Uncertain&lt; T &gt; &amp;lhs, const Uncertain&lt; T &gt; &amp;rhs)</div><div class="ttdoc">Inplace Subtraction Operation.</div><div class="ttdef"><b>Definition</b> arithmetic.ipp:73</div></div>
+<div class="ttc" id="anamespacesigma_html_aff88b15205b29f22c6fd500a51ac5c50"><div class="ttname"><a href="namespacesigma.html#aff88b15205b29f22c6fd500a51ac5c50">sigma::operator+=</a></div><div class="ttdeci">Uncertain&lt; T &gt; &amp; operator+=(Uncertain&lt; T &gt; &amp;lhs, const Uncertain&lt; T &gt; &amp;rhs)</div><div class="ttdoc">Inplace Addition Operation.</div><div class="ttdef"><b>Definition</b> arithmetic.ipp:35</div></div>
 <div class="ttc" id="auncertain_8hpp_html"><div class="ttname"><a href="uncertain_8hpp.html">uncertain.hpp</a></div><div class="ttdoc">Defines the Uncertain class.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -179,7 +179,7 @@ $(function(){initNavTree('arithmetic_8hpp_source.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>sigma</b></li><li class="navelem"><b>operations</b></li><li class="navelem"><a href="arithmetic_8hpp.html">arithmetic.hpp</a></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>sigma</b></li><li class="navelem"><b>uncertain</b></li><li class="navelem"><b>operations</b></li><li class="navelem"><a href="arithmetic_8hpp.html">arithmetic.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>
