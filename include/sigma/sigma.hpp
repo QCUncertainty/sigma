@@ -1,4 +1,5 @@
 #pragma once
+#include "affine/affine.hpp"
 #include "interval/interval.hpp"
 #include "uncertain/uncertain.hpp"
 
