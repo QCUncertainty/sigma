@@ -5,15 +5,17 @@
 using testing::test_affine;
 
 TEMPLATE_TEST_CASE("Affine", "", float, double) {
-    using value_t    = TestType;
-    using affine_t   = sigma::Affine<TestType>;
-    using interval_t = typename affine_t::interval_t;
+    using value_t      = TestType;
+    using affine_t     = sigma::Affine<TestType>;
+    using interval_t   = typename affine_t::interval_t;
+    using error_term_t = typename affine_t::error_term_t;
 
     value_t zero  = 0.0;
     value_t one   = 1.0;
     value_t two   = 2.0;
     value_t three = 3.0;
     value_t four  = 4.0;
+
     SECTION("Constructors") {
         SECTION("Default") {
             affine_t empty;
@@ -48,7 +50,7 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         }
 
         SECTION("From Center and Error Terms") {
-            affine_t value(one, {{typename affine_t::error_term_t{}, one}});
+            affine_t value(one, {{error_term_t{}, one}});
             test_affine(value, zero, two);
         }
 
@@ -119,6 +121,81 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
             REQUIRE(pmove_interval == &move_interval);
             test_affine(move_interval, one, two);
         }
+    }
+
+    SECTION("range") {
+        affine_t empty;
+        REQUIRE(empty.range().empty());
+
+        affine_t point(one);
+        REQUIRE(point.range() == interval_t(one, one));
+
+        affine_t interval(one, two);
+        REQUIRE(interval.range() == interval_t(one, two));
+    }
+
+    SECTION("center") {
+        affine_t empty;
+        REQUIRE_THROWS_AS(empty.center(), std::domain_error);
+
+        affine_t point(one);
+        REQUIRE(point.center() == one);
+
+        affine_t interval(one, two);
+        REQUIRE(interval.center() == value_t(1.5));
+    }
+
+    SECTION("error_terms") {
+        affine_t empty;
+        REQUIRE(empty.error_terms().empty());
+
+        affine_t point(one);
+        REQUIRE(point.error_terms().empty());
+
+        affine_t interval(one, two);
+        REQUIRE(interval.error_terms().size() == 1);
+    }
+
+    SECTION("radius") {
+        affine_t empty;
+        REQUIRE_THROWS_AS(empty.radius(), std::domain_error);
+
+        affine_t point(one);
+        REQUIRE(point.radius() == zero);
+
+        affine_t interval(one, two);
+        REQUIRE(interval.radius() == value_t(0.5));
+
+        interval.add_error_term(error_term_t{}, value_t(-0.1));
+        REQUIRE(interval.radius() == value_t(0.6));
+    }
+
+    SECTION("set_center") {
+        affine_t empty;
+        empty.set_center(one);
+        test_affine(empty, one, one);
+
+        affine_t point(one);
+        point.set_center(two);
+        test_affine(point, two, two);
+
+        affine_t interval(one, two);
+        interval.set_center(value_t(3.5));
+        test_affine(interval, three, four);
+    }
+
+    SECTION("add_error_term") {
+        affine_t empty;
+        empty.add_error_term(error_term_t{}, one);
+        test_affine(empty, -one, one);
+
+        affine_t point(one);
+        point.add_error_term(error_term_t{}, value_t(0.5));
+        test_affine(point, value_t(0.5), value_t(1.5));
+
+        affine_t interval(one, two);
+        interval.add_error_term(error_term_t{}, value_t(0.25));
+        test_affine(interval, value_t(0.75), value_t(2.25));
     }
 
     // SECTION("contains") {

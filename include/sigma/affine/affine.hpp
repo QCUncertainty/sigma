@@ -159,14 +159,45 @@ public:
 
     // -- State Accessors -----------------------------------------------------
 
+    /** @brief Returns the interval represented by the affine form.
+     *
+     *  @return The interval represented by the affine form.
+     *
+     *  @throw none No throw guarantee
+     */
     interval_t range() const;
 
-    value_t center() const { return *m_center_; }
-    error_terms_t error_terms() const { return m_error_terms_; }
+    /** @brief Returns the center of the affine form.
+     *
+     *  @return The center of the affine form.
+     *
+     *  @throw std::domain_error If the affine form is empty (i.e., it has no
+     *                      center and no error terms). Strong throw guarantee.
+     */
+    value_t center() const {
+        assert_not_empty_();
+        return *m_center_;
+    }
+
+    /** @brief Returns the error terms of the affine form.
+     *
+     *  The error terms are returned a map where the keys are symbolic
+     *  representations of the error terms and and the values are the radii of
+     *  the error terms. The symbols are opaque objects that uniquely identify
+     *  each error source. The symbols themselves have no meaning outside of
+     *  the context of the affine form except that they satisfy the property
+     *  that if two error symbols are equal, then they represent the same error
+     *  source.
+     *
+     *  @return The error terms of the affine form.
+     *
+     *  @throw None No throw guarantee.
+     */
+    const error_terms_t& error_terms() const { return m_error_terms_; }
 
     /** @brief Returns the radius of the affine form.
      *
-     *  The radius is the maximum absolute value of the error terms.
+     *  The radius is the sum of the absolute values of the error terms.
      *
      *  @return The radius of the affine form.
      *
@@ -175,8 +206,33 @@ public:
      */
     value_t radius() const;
 
+    /** @brief Sets the center of the affine form.
+     *
+     *  This method allows the center of the affine form to be updated. The
+     *  error terms are not modified by this method, so the radius of the affine
+     *  form is not changed by this method.
+     *
+     *  @param[in] center The new center of the affine form.
+     *
+     *  @throw None No throw guarantee.
+     */
     void set_center(value_t center) { m_center_ = center; }
+
+    /** @brief Adds an error term to the affine form.
+     *
+     *  This method allows a new error term to be added to the affine form. The
+     *  radius of the affine form is increased by the radius of the new error
+     *  term. If the affine form is empty, the center is set to 0 before
+     *  adding the error term (consistent with the idea that the resulting
+     *  affine form should represent the interval [-radius, radius]).
+     *
+     *  @param[in] error_term The symbol representing the new error term.
+     *  @param[in] radius The radius of the new error term.
+     *
+     *  @throw None No throw guarantee.
+     */
     void add_error_term(error_term_t error_term, value_t radius) {
+        if(empty()) set_center(value_t{0});
         m_error_terms_[error_term] = radius;
     }
 
