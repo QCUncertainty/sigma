@@ -497,29 +497,90 @@ public:
         return Affine(*this) -= other;
     }
 
-    /// Multiplication
+    /** @brief Overwrites *this with the product of *this and @p value.
+     *
+     *  The product of an affine form @f$x@f$ and a scalar @f$\alpha@f$ is
+     *  defined as:
+     *  @f[
+     *  \alpha x = \alpha x_0 + \sum_{i=1}^n \alpha x_i \epsilon_i
+     *  @f]
+     *
+     *  @param[in] value The value to multiply *this by.
+     *
+     *  @return Reference to this affine form after multiplication.
+     *
+     *  @throw None No throw guarantee.
+     */
     Affine& operator*=(value_t value) {
         if(empty()) { return *this; }
-        m_center_ *= value;
+        (*m_center_) *= value;
         for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
             error_term_i *= value;
         }
         return *this;
     }
 
+    /** @brief Overwrites *this with the product of *this and @p other.
+     *
+     *  The product of two affine forms @f$x@f$ and @f$y@f$ is defined as:
+     *  @f[
+     *  x y = x_0 y_0 + \sum_{i=1}^n (x_0 y_i + x_i y_0) \epsilon_i +
+     *        xy_{n+1} \epsilon_{n+1}
+     *  @f]
+     *  where @f$xy_{n+1}@f$ is an error term that captures the error from the
+     *  nonlinearity of multiplication. The current implementation of the Affine
+     *  class uses:
+     *  @f[
+     *  xy_{n+1} = \sum_{i=1}^n \sum_{j=1}^n |x_i y_j|
+     *  @f]
+     *  which is the product of the radii of the error terms of @f$x@f$ and
+     *  @f$y@f$.
+     *
+     *  @param[in] other The affine form to multiply *this by.
+     *
+     *  @return Reference to this affine form after multiplication.
+     *
+     *  @throw None No throw guarantee.
+     */
+    Affine& operator*=(const Affine& other);
+
+    /** @brief Returns the product of *this and @p value.
+     *
+     *  This is a convenience method for calling Affine(*this) *= value. See
+     *  the documentation for operator*=(value_t) for details on how
+     *  multiplication with a scalar works.
+     *
+     *  @param[in] value The value to multiply *this by.
+     *
+     *  @return The product of *this and @p value.
+     *
+     *  @throw std::bad_alloc If memory allocation for the new affine form
+     *                        fails. Strong throw guarantee.
+     */
     Affine operator*(value_t value) const { return Affine(*this) *= value; }
 
+    /** @brief Returns the product of *this and @p other.
+     *
+     *  This is a convenience method for calling Affine(*this) *= other. See
+     *  the documentation for operator*=(Affine) for details on how
+     *  multiplication with another affine form works.
+     *
+     *  @param[in] other The affine form to multiply *this by.
+     *
+     *  @return The product of *this and @p other.
+     *
+     *  @throw std::bad_alloc If memory allocation for the new affine form
+     *                        fails. Strong throw guarantee.
+     */
     Affine operator*(const Affine& other) const {
         return Affine(*this) *= other;
     }
-
-    Affine& operator*=(const Affine& other);
 
     /// Division
     Affine& operator/=(value_t value) {
         if(value == 0) { throw std::domain_error("Division by zero"); }
         if(empty()) { return *this; }
-        m_center_ /= value;
+        (*m_center_) /= value;
         for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
             error_term_i /= value;
         }

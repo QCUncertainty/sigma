@@ -458,31 +458,84 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         test_affine(diff_interval, value_t(-3.0), value_t(-1.0));
     }
 
-    // SECTION("operator*=") {
-    //     SECTION("Value") {
-    //         auto value = affine_t(one, two);
-    //         value *= value_t(3.0);
-    //         test_interval(value.range(), three, value_t(6.0));
-    //     }
+    SECTION("operator*=(value)") {
+        affine_t empty;
+        auto pempty = &(empty *= one);
+        REQUIRE(pempty == &empty);
+        REQUIRE(empty.empty());
 
-    //     SECTION("Independent") {
-    //         auto value = affine_t(one, two);
-    //         value *= affine_t(three, four);
-    //         // Tight range is [3, 8]
-    //         test_interval(value.range(), value_t(2.5), value_t(8.0));
-    //     }
-    //     SECTION("Dependent") {
-    //         auto value = affine_t(one, two);
-    //         value *= value;
-    //         // Tight range is [1, 4]
-    //         test_interval(value.range(), value_t(0.5), value_t(4.0));
+        affine_t point(one);
+        auto ppoint = &(point *= two);
+        REQUIRE(ppoint == &point);
+        test_affine(point, two, two);
 
-    //         affine_t value2(-two, two);
-    //         value2 *= value2;
-    //         // Tight range is [-4, 4]
-    //         test_interval(value2.range(), -four, four);
-    //     }
-    // }
+        affine_t interval(one, two);
+        auto pinterval = &(interval *= two);
+        REQUIRE(pinterval == &interval);
+        test_affine(interval, two, four);
+    }
+
+    SECTION("operator*=(Affine)") {
+        affine_t empty;
+        auto pempty = &(empty *= affine_t(one, two));
+        REQUIRE(pempty == &empty);
+        REQUIRE(empty.empty());
+
+        affine_t point(one);
+        auto ppoint = &(point *= affine_t(two, three));
+        REQUIRE(ppoint == &point);
+        test_affine(point, two, three);
+
+        affine_t interval(one, two);
+        auto pinterval = &(interval *= affine_t(three, four));
+        REQUIRE(pinterval == &interval);
+        // N.b. the tight range is [3, 8], but the correct answer is [2.5, 8]
+        // due to nonlinearity bound overestimating the error.
+        test_affine(interval, value_t(2.5), value_t(8.0));
+
+        // Test the multiplication of dependent errors
+        affine_t dependent(one, two);
+        auto pdependent = &(dependent *= dependent);
+        REQUIRE(pdependent == &dependent);
+        // N.b. the tight range is [1, 4], but the correct answer is [0.5, 4]
+        // due to nonlinearity bound overestimating the error.
+        test_affine(dependent, value_t(0.5), value_t(4.0));
+
+        affine_t other_dependent(-two, two);
+        auto pother_dependent = &(other_dependent *= other_dependent);
+        REQUIRE(pother_dependent == &other_dependent);
+        test_affine(other_dependent, value_t(-4.0), value_t(4.0));
+    }
+
+    SECTION("operator*(value)") {
+        // Implemented in terms of operator*= so just spot check
+        affine_t empty;
+        auto prod_empty = empty * one;
+        REQUIRE(prod_empty.empty());
+
+        affine_t point(one);
+        auto prod_point = point * two;
+        test_affine(prod_point, two, two);
+
+        affine_t interval(one, two);
+        auto prod_interval = interval * two;
+        test_affine(prod_interval, two, four);
+    }
+
+    SECTION("operator*(Affine)") {
+        // Implemented in terms of operator*= so just spot check
+        affine_t empty;
+        auto prod_empty = empty * affine_t(one, two);
+        REQUIRE(prod_empty.empty());
+
+        affine_t point(one);
+        auto prod_point = point * affine_t(two, three);
+        test_affine(prod_point, two, three);
+
+        affine_t interval(one, two);
+        auto prod_interval = interval * affine_t(three, four);
+        test_affine(prod_interval, value_t(2.5), value_t(8.0));
+    }
 
     // SECTION("operator/=") {
     //     SECTION("Value") {
