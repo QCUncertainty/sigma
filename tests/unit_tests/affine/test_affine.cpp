@@ -349,23 +349,114 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         test_affine(dependent, two, three);
     }
 
-    // SECTION("operator-=") {
-    //     SECTION("Value") {
-    //         auto value = affine_t(one, two);
-    //         value -= value_t(3.0);
-    //         test_interval(value.range(), -two, -one);
-    //     }
-    //     SECTION("Independent") {
-    //         auto value = affine_t(one, two);
-    //         value -= affine_t(three, four);
-    //         test_interval(value.range(), -three, -one);
-    //     }
-    //     SECTION("Dependent") {
-    //         auto value = affine_t(one, two);
-    //         value -= value;
-    //         test_interval(value.range(), zero, zero);
-    //     }
-    // }
+    SECTION("operator+(value)") {
+        // Implemented in terms of operator+= so just spot check
+        affine_t empty;
+        auto sum_empty = empty + one;
+        test_affine(sum_empty, one, one);
+
+        affine_t point(one);
+        auto sum_point = point + two;
+        test_affine(sum_point, three, three);
+
+        affine_t interval(one, two);
+        auto sum_interval = interval + three;
+        test_affine(sum_interval, four, value_t(5.0));
+    }
+
+    SECTION("operator+(Affine)") {
+        // Implemented in terms of operator+= so just spot check
+        affine_t empty;
+        auto sum_empty = empty + affine_t(one, two);
+        test_affine(sum_empty, one, two);
+
+        affine_t point(one);
+        auto sum_point = point + affine_t(two, three);
+        test_affine(sum_point, three, four);
+
+        affine_t interval(one, two);
+        auto sum_interval = interval + affine_t(three, four);
+        test_affine(sum_interval, four, value_t(6.0));
+    }
+
+    SECTION("operator-=(value)") {
+        affine_t empty;
+        auto pempty = &(empty -= one);
+        REQUIRE(pempty == &empty);
+        test_affine(empty, -one, -one);
+
+        affine_t point(one);
+        auto ppoint = &(point -= two);
+        REQUIRE(ppoint == &point);
+        test_affine(point, -one, -one);
+
+        affine_t interval(one, two);
+        auto pinterval = &(interval -= three);
+        REQUIRE(pinterval == &interval);
+        test_affine(interval, value_t(-2.0), value_t(-1.0));
+    }
+
+    SECTION("operator-=(Affine)") {
+        affine_t empty;
+        auto pempty = &(empty -= affine_t(one, two));
+        REQUIRE(pempty == &empty);
+        test_affine(*pempty, value_t(-2.0), value_t(-1.0));
+
+        affine_t point(one);
+        auto ppoint = &(point -= affine_t(two, three));
+        REQUIRE(ppoint == &point);
+        test_affine(point, value_t(-2.0), value_t(-1.0));
+
+        affine_t point2(one);
+        auto ppoint2 = &(point2 -= affine_t{});
+        REQUIRE(ppoint2 == &point2);
+        test_affine(point2, one, one);
+
+        affine_t interval(one, two);
+        auto pinterval = &(interval -= affine_t(three, four));
+        REQUIRE(pinterval == &interval);
+        test_affine(interval, value_t(-3.0), value_t(-1.0));
+
+        // Test the subtraction of dependent errors
+        affine_t dependent(one, two);
+        auto pdependent = &(dependent -= dependent);
+        REQUIRE(pdependent == &dependent);
+        test_affine(dependent, zero, zero);
+    }
+
+    SECTION("operator-(value)") {
+        // Implemented in terms of operator-= so just spot check
+        affine_t empty;
+        auto diff_empty = empty - one;
+        test_affine(diff_empty, -one, -one);
+
+        affine_t point(one);
+        auto diff_point = point - two;
+        test_affine(diff_point, -one, -one);
+
+        affine_t interval(one, two);
+        auto diff_interval = interval - three;
+        test_affine(diff_interval, value_t(-2.0), value_t(-1.0));
+    }
+
+    SECTION("operator-(Affine)") {
+        // Implemented in terms of operator-= so just spot check
+        affine_t empty;
+        auto diff_empty = empty - affine_t(one, two);
+        test_affine(diff_empty, value_t(-2.0), value_t(-1.0));
+
+        affine_t point(one);
+        auto diff_point = point - affine_t(two, three);
+        test_affine(diff_point, value_t(-2.0), value_t(-1.0));
+
+        affine_t point2(one);
+        auto diff_point2 = point2 - affine_t{};
+        test_affine(diff_point2, one, one);
+
+        affine_t interval(one, two);
+        auto diff_interval = interval - affine_t(three, four);
+        test_affine(diff_interval, value_t(-3.0), value_t(-1.0));
+    }
 
     // SECTION("operator*=") {
     //     SECTION("Value") {

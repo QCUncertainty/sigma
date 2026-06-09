@@ -396,23 +396,103 @@ public:
      */
     Affine& operator+=(const Affine& other);
 
+    /** @brief Returns the sum of *this and @p value.
+     *
+     *  This is a convenience method for calling Affine(*this) += value. See
+     *  the documentation for operator+=(value_t) for details on how addition
+     *  with a scalar works.
+     *
+     *  @param[in] value The value to add to *this.
+     *
+     *  @return The sum of *this and @p value.
+     *
+     *  @throw std::bad_alloc If memory allocation for the new affine form
+     *                        fails. Strong throw guarantee.
+     */
     Affine operator+(value_t value) const { return Affine(*this) += value; }
 
+    /** @brief Returns the sum of *this and @p other.
+     *
+     *  This is a convenience method for calling Affine(*this) += other. See
+     *  the documentation for operator+=(Affine) for details on how addition
+     *  with another affine form works.
+     *
+     *  @param[in] other The affine form to add to *this.
+     *
+     *  @return The sum of *this and @p other.
+     *
+     *  @throw std::bad_alloc If memory allocation for the new affine form
+     *                        fails. Strong throw guarantee.
+     */
     Affine operator+(const Affine& other) const {
         return Affine(*this) += other;
     }
 
-    /// Subtraction
+    /** @brief Overwrites *this with the difference of *this and @p value.
+     *
+     *  If *this is empty, the resulting affine form will have a center of
+     *  @p value and no error terms. Otherwise this method will subtract
+     *  @p value from the center of *this and leave the error terms unchanged.
+     *
+     *  @param[in] value The value to subtract from *this.
+     *
+     *  @return Reference to this affine form after subtraction.
+     *
+     *  @throw None No throw guarantee.
+     */
     Affine& operator-=(value_t value) {
         if(empty()) { return *this = Affine(-value); }
         (*m_center_) -= value;
         return *this;
     }
 
+    /** @brief Overwrites *this with the difference of *this and @p other.
+     *
+     *  Subtraction of affine forms @f$x@f$ and @f$y@f$ is defined as:
+     *  @f[
+     *  x - y = (x_0 - y_0) + \sum_{i=1}^n (x_i - y_i) \epsilon_i
+     *  @f]
+     *  Critically, the error terms are only subtracted if they have the same
+     *  symbol. If an error term appears in one affine form but not the other,
+     *  the resulting affine form will have an error term with the same symbol
+     *  and the same radius as the original affine form.
+     *
+     *  @param[in] other The affine form to subtract from *this.
+     *
+     *  @return Reference to this affine form after subtraction.
+     *
+     *  @throw None No throw guarantee.
+     */
     Affine& operator-=(const Affine& other);
 
+    /** @brief Returns the difference of *this and @p value.
+     *
+     *  This is a convenience method for calling Affine(*this) -= value. See
+     *  the documentation for operator-=(value_t) for details on how subtraction
+     *  with a scalar works.
+     *
+     *  @param[in] value The value to subtract from *this.
+     *
+     *  @return The difference of *this and @p value.
+     *
+     *  @throw std::bad_alloc If memory allocation for the new affine form
+     *                        fails. Strong throw guarantee.
+     */
     Affine operator-(value_t value) const { return Affine(*this) -= value; }
 
+    /** @brief Returns the difference of *this and @p other.
+     *
+     *  This is a convenience method for calling Affine(*this) -= other. See
+     *  the documentation for operator-=(Affine) for details on how subtraction
+     *  with another affine form works.
+     *
+     *  @param[in] other The affine form to subtract from *this.
+     *
+     *  @return The difference of *this and @p other.
+     *
+     *  @throw std::bad_alloc If memory allocation for the new affine form
+     *                        fails. Strong throw guarantee.
+     */
     Affine operator-(const Affine& other) const {
         return Affine(*this) -= other;
     }
