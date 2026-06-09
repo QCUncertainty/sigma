@@ -758,19 +758,55 @@ private:
         return std::make_shared<size_type>(m_error_terms_.size());
     }
 
+    /// This is the center of the affine form. If empty, m_center_ = nullopt.
     std::optional<value_t> m_center_;
 
+    /// Map from error symbols to their radii. If empty, m_error_terms_ = {}.
     error_terms_t m_error_terms_;
 };
 
 // -- Non-member functions ---------------------------------------------------
 
+/** @brief Outputs the range of an affine form to an output stream.
+ *
+ *  @related Affine
+ *  @tparam ValueType The type of the values in the affine form.
+ *
+ *  This method will defer to the output operator for interval_t to print the
+ *  value of the affine form. See the documentation for interval_t for details
+ *  on how intervals are printed.
+ *
+ *  @param[in] os The output stream to write to.
+ *  @param[in] a The affine form to output.
+ *
+ *  @return The output stream.
+ *
+ *  @throw none No throw guarantee.
+ */
 template<typename ValueType>
 std::ostream& operator<<(std::ostream& os, const Affine<ValueType>& a) {
     os << a.range();
     return os;
 }
 
+/** @brief Multiplies a scalar by an affine form.
+ *
+ *  @related Affine
+ *  @tparam ValueType The type of the values in the affine form.
+ *
+ *  This method implements multiplication of a scalar by an affine form. It
+ *  is a convenience method for calling Affine(*this) *= value. See the
+ *  documentation for operator*=(value_t) for details on how multiplication with
+ *  a scalar works.
+ *
+ *  @param[in] value The scalar to multiply by.
+ *  @param[in] a The affine form to multiply.
+ *
+ *  @return The product of the scalar and the affine form.
+ *
+ *  @throw std::bad_alloc If memory allocation for the new affine form fails.
+ *                        Strong throw guarantee.
+ */
 template<typename ValueType>
 Affine<ValueType> operator*(ValueType value, const Affine<ValueType>& a) {
     return a * value;

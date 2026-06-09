@@ -705,4 +705,35 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         affine_t interval2(interval.center(), interval.error_terms());
         REQUIRE_FALSE(interval2 != interval);
     }
+
+    SECTION("operator<<") {
+        affine_t empty;
+        std::stringstream ss_empty;
+        ss_empty << empty;
+        REQUIRE(ss_empty.str() == "∅");
+
+        affine_t point(one);
+        std::stringstream ss_point;
+        ss_point << point;
+        REQUIRE(ss_point.str() == "1+/-0");
+
+        affine_t interval(one, two);
+        std::stringstream ss_interval;
+        ss_interval << interval;
+        REQUIRE(ss_interval.str() == "1.5+/-0.5");
+    }
+
+    SECTION("operator*(value, affine)") {
+        affine_t empty;
+        auto prod_empty = one * empty;
+        REQUIRE(prod_empty.empty());
+
+        affine_t point(one);
+        auto prod_point = two * point;
+        test_affine(prod_point, two, two);
+
+        affine_t interval(one, two);
+        auto prod_interval = two * interval;
+        test_affine(prod_interval, two, four);
+    }
 }
