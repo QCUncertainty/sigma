@@ -21,6 +21,16 @@ namespace sigma {
  * opaque object that uniquely identifies the error term) and a radius (a value
  * that represents the maximum error from the center value for that error term).
  *
+ * Mathematically, an affine form can be represented as:
+ * @f[
+ *   x = x_0 + \sum_{i=1}^n x_i \epsilon_i
+ * @f]
+ * where @f$x_0@f$ is the center, @f$x_i@f$ are the error term radii, and
+ * @f$\epsilon_i@f$ are the error term symbols. The error term symbols are
+ * assumed to be independent and can take on any value in the range [-1, 1].
+ * Therefore, the affine form represents all values that can be obtained by
+ * substituting any value in [-1, 1] for each error term symbol.
+ *
  * Unlike traditional intervals, affine arithmetic can capture dependencies
  * between variables. For example, if we have an affine value x that represents
  * the range [1, 2], we can represent it as x = 1.5 + 0.5*e1, where e1 is an
@@ -29,6 +39,9 @@ namespace sigma {
  * always 0 regardless of the value of e1. In contrast, if we were to represent
  * x and y as traditional intervals, we would have x = [1, 2] and y = [-1, 1],
  * because intervals do not track the dependency between x and y.
+ *
+ * N.b. The current implementation of the Affine class does not track
+ * uncertainty from floating point arithmetic.
  */
 template<typename ValueType>
 class Affine {
@@ -332,15 +345,55 @@ public:
 
     // -- Arithmetic Operators ------------------------------------------------
 
-    /// Additive inverse
+    /** @brief Returns the additive inverse of *this.
+     *
+     *  The additive inverse of an affine form is the affine form:
+     *  @f[
+     *   -x = -x_0 + \sum_{i=1}^n -x_i \epsilon_i
+     *  @f]
+     *
+     *  @return The additive inverse of *this.
+     *
+     *  @throw std::bad_alloc If memory allocation for the new affine form
+     *                        fails. Strong throw guarantee.
+     */
     Affine operator-() const;
 
-    /// Addition
+    /** @brief Overwrites *this with the sum of *this and @p value.
+     *
+     *  If *this is empty, the resulting affine form will have a center of
+     *  @p value and no error terms. Otherwise this method will add @p value to
+     *  the center of *this and leave the error terms unchanged.
+     *
+     *  @param[in] value The value to add to *this.
+     *
+     *  @return Reference to this affine form after addition.
+     *
+     *  @throw None No throw guarantee.
+     */
     Affine& operator+=(value_t value) {
         if(empty()) { return *this = Affine(value); }
         (*m_center_) += value;
         return *this;
     }
+
+    /** @brief Overwrites *this with the sum of *this and @p other.
+     *
+     *  Addition of affine forms @f$x@f$ and @f$y@f$ is defined as:
+     *  @f[
+     *  x + y = (x_0 + y_0) + \sum_{i=1}^n (x_i + y_i) \epsilon_i
+     *  @f]
+     *  Critically, the error terms are only summed if they have the same
+     *  symbol. If an error term appears in one affine form but not the other,
+     *  the resulting affine form will have an error term with the same symbol
+     *  and the same radius as the original affine form.
+     *
+     *  @param[in] other The affine form to add to *this.
+     *
+     *  @return Reference to this affine form after addition.
+     *
+     *  @throw None No throw guarantee.
+     */
     Affine& operator+=(const Affine& other);
 
     Affine operator+(value_t value) const { return Affine(*this) += value; }

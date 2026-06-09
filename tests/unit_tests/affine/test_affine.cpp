@@ -289,29 +289,65 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         REQUIRE(interval.print_interval_form() == corr2.str());
     }
 
-    // SECTION("operator-") {
-    //     auto value  = affine_t(one, two);
-    //     auto value2 = -value;
-    //     test_interval(value2.range(), -two, -one);
-    // }
+    SECTION("operator-") {
+        affine_t empty;
+        REQUIRE((-empty).empty());
 
-    // SECTION("operator+=") {
-    //     SECTION("Value") {
-    //         auto value = affine_t(one, two);
-    //         value += value_t(3.0);
-    //         test_interval(value.range(), four, value_t(5.0));
-    //     }
-    //     SECTION("Independent") {
-    //         auto value = affine_t(one, two);
-    //         value += affine_t(three, four);
-    //         test_interval(value.range(), four, value_t(6.0));
-    //     }
-    //     SECTION("Dependent") {
-    //         auto value = affine_t(one, two);
-    //         value += value;
-    //         test_interval(value.range(), two, four);
-    //     }
-    // }
+        affine_t point(one);
+        auto neg_point = -point;
+        test_affine(neg_point, -one, -one);
+
+        affine_t interval(one, two);
+        auto neg_interval = -interval;
+        test_affine(neg_interval, -two, -one);
+    }
+
+    SECTION("operator+=(value)") {
+        affine_t empty;
+        auto pempty = &(empty += one);
+        REQUIRE(pempty == &empty);
+        test_affine(empty, one, one);
+
+        affine_t point(one);
+        auto ppoint = &(point += two);
+        REQUIRE(ppoint == &point);
+        test_affine(point, three, three);
+
+        affine_t interval(one, two);
+        auto pinterval = &(interval += three);
+        REQUIRE(pinterval == &interval);
+        test_affine(interval, four, value_t(5.0));
+    }
+
+    SECTION("operator+=(Affine)") {
+        affine_t empty;
+        auto pempty = &(empty += affine_t(one, two));
+        REQUIRE(pempty == &empty);
+        test_affine(*pempty, one, two);
+
+        affine_t point(one);
+        auto ppoint = &(point += affine_t(two, three));
+        REQUIRE(ppoint == &point);
+        test_affine(point, three, four);
+
+        affine_t interval(one, two);
+        auto pinterval = &(interval += affine_t(three, four));
+        REQUIRE(pinterval == &interval);
+        test_affine(interval, four, value_t(6.0));
+
+        // Test the addition of dependent errors
+        // x = 1.5 +/- 0.5 e_0 +/- 1.0 e_1
+        affine_t dependent(one, two);
+        dependent.add_error_term(error_term_t{}, one);
+
+        // y = 1 -/+ 1 e_1
+        affine_t other_dependent;
+        other_dependent.set_center(one);
+        other_dependent.add_error_term(error_term_t{}, -one);
+        auto pdependent = &(dependent += other_dependent);
+        REQUIRE(pdependent == &dependent);
+        test_affine(dependent, two, three);
+    }
 
     // SECTION("operator-=") {
     //     SECTION("Value") {
