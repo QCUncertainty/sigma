@@ -161,6 +161,9 @@ public:
 
     /** @brief Returns the interval represented by the affine form.
      *
+     *  Note that the interval returned by this method is always closed on both
+     *  ends.
+     *
      *  @return The interval represented by the affine form.
      *
      *  @throw none No throw guarantee
@@ -236,8 +239,49 @@ public:
         m_error_terms_[error_term] = radius;
     }
 
+    /** @brief Checks if the interval represented by *this contains @p value.
+     *
+     *  This method checks if a single value is contained within this->range().
+     *  By definition, if *this is empty, this method will return false for all
+     *  values.
+     *
+     *  @param[in] value The value to check.
+     *
+     *  @return True if the interval contains the value, false otherwise.
+     *
+     *  @throw none No throw guarantee
+     */
     bool contains(value_t value) const;
+
+    /** @brief Checks if @p interval is contained within *this.
+     *
+     *  This method will ensure that each point in @p interval is contained
+     *  in *this. Conceptually, this is equivalent to looping over values in
+     *  @p interval and calling contains(value) for each value. In practice,
+     *  this method only checks the endpoints of @p interval.
+     *
+     *  @param[in] interval The interval to check.
+     *
+     *  @return True if the interval contains the other interval, false
+     * otherwise.
+     *
+     *  @throw none No throw guarantee
+     */
     bool contains(const interval_t& interval) const;
+
+    /** @brief Checks if @p affine is contained within *this.
+     *
+     *  This method will ensure that each point in @p affine is contained
+     *  in *this. In practice, this method is a convenience method for
+     *  calling contains(affine.range()).
+     *
+     *  @param[in] affine The affine form to check.
+     *
+     *  @return True if the affine form contains the other affine form, false
+     * otherwise.
+     *
+     *  @throw none No throw guarantee
+     */
     bool contains(const Affine& affine) const {
         return contains(affine.range());
     }
@@ -254,23 +298,39 @@ public:
      */
     bool empty() const noexcept { return !m_center_; }
 
-    bool strictly_less(value_t value) const {
-        return strictly_less(interval_t(value, value));
-    }
-    bool strictly_greater(value_t value) const {
-        return strictly_greater(interval_t(value, value));
-    }
-    bool strictly_less(const Affine& other) const {
-        return range() < other.range();
-    }
-    bool strictly_greater(const Affine& other) const {
-        return range() > other.range();
-    }
-
+    /** @brief Creates a string of the affine form of *this.
+     *
+     *  The affine form is written as the center value +/- each of the error
+     *  terms. If *this contains multiple error terms, the order in which the
+     *  error terms are printed is NOT guaranteed to be the same across
+     *  multiple runs of the program.
+     *
+     *  @return A string representation of the affine form of *this.
+     *
+     *  @throw std::bad_alloc If memory allocation for the string fails.
+     *                      Strong throw guarantee.
+     */
     std::string print_affine_form() const;
+
+    /** @brief Creates a string of the interval form of *this.
+     *
+     *  The interval form of *this is the same as the affine form, except that
+     *  the error terms are combined into a single radius term. Following,
+     *  usual convention, the interval form is written in the form [center -
+     *  radius, center + radius].
+     *
+     *  This is a convenience method for calling range().print_interval_form().
+     *
+     *  @return A string representation of the interval form of *this.
+     *
+     *  @throw std::bad_alloc If memory allocation for the string fails.
+     *                      Strong throw guarantee.
+     */
     std::string print_interval_form() const {
         return range().print_interval_form();
     }
+
+    // -- Arithmetic Operators ------------------------------------------------
 
     /// Additive inverse
     Affine operator-() const;
@@ -396,6 +456,8 @@ private:
     error_terms_t m_error_terms_;
 };
 
+// -- Non-member functions ---------------------------------------------------
+
 template<typename ValueType>
 std::ostream& operator<<(std::ostream& os, const Affine<ValueType>& a) {
     os << a.range();
@@ -406,6 +468,8 @@ template<typename ValueType>
 Affine<ValueType> operator*(ValueType value, const Affine<ValueType>& a) {
     return a * value;
 }
+
+// -- Out-of-line definitions ------------------------------------------------
 
 template<typename ValueType>
 auto Affine<ValueType>::range() const -> interval_t {
@@ -432,24 +496,20 @@ auto Affine<ValueType>::contains(value_t value) const -> bool {
 
 template<typename ValueType>
 auto Affine<ValueType>::contains(const interval_t& interval) const -> bool {
+    if(interval.empty()) { return true; }
     if(empty()) { return false; }
-    auto lo = interval.lower();
-    auto hi = interval.upper();
-    auto a  = range();
-    return a.contains(lo) && a.contains(hi);
+    return range().contains(interval);
 }
 
 template<typename ValueType>
 std::string Affine<ValueType>::print_affine_form() const {
     if(empty()) { return "∅"; }
     std::stringstream ss;
-    ss << center() << " + ";
+    ss << center();
     for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
-        ss << error_term_i << " + ";
+        ss << " +/- " << error_term_i;
     }
-    auto temp = ss.str();
-    temp.erase(temp.end() - 2, temp.end());
-    return temp;
+    return ss.str();
 }
 
 template<typename ValueType>

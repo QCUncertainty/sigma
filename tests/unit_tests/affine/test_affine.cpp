@@ -198,22 +198,96 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         test_affine(interval, value_t(0.75), value_t(2.25));
     }
 
-    // SECTION("contains") {
-    //     auto value = affine_t(one, two);
-    //     REQUIRE(value.contains(one));
-    //     REQUIRE(value.contains(value_t(1.5)));
-    //     REQUIRE(value.contains(two));
-    //     REQUIRE_FALSE(value.contains(value_t(0.5)));
+    SECTION("contains(value)") {
+        affine_t empty;
+        REQUIRE_FALSE(empty.contains(zero));
 
-    //     REQUIRE(value.contains(interval_t(one, two)));
-    //     REQUIRE(value.contains(interval_t(value_t(1.5), value_t(1.5))));
-    //     REQUIRE_FALSE(value.contains(interval_t(one, three)));
-    //     REQUIRE_FALSE(value.contains(interval_t(zero, one)));
+        affine_t point(one);
+        REQUIRE_FALSE(point.contains(zero));
+        REQUIRE(point.contains(one));
+        REQUIRE_FALSE(point.contains(two));
 
-    //     REQUIRE(value.contains(affine_t(one, two)));
-    //     REQUIRE_FALSE(value.contains(affine_t(one, three)));
-    //     REQUIRE_FALSE(value.contains(affine_t(zero, one)));
-    // }
+        affine_t interval(one, two);
+        REQUIRE_FALSE(interval.contains(zero));
+        REQUIRE(interval.contains(one));
+        REQUIRE(interval.contains(value_t(1.5)));
+        REQUIRE(interval.contains(two));
+        REQUIRE_FALSE(interval.contains(three));
+    }
+
+    SECTION("contains(interval)") {
+        affine_t empty;
+        REQUIRE_FALSE(empty.contains(interval_t(zero, one)));
+
+        affine_t point(one);
+        REQUIRE_FALSE(point.contains(interval_t(zero, one)));
+        REQUIRE(point.contains(interval_t(one, one)));
+        REQUIRE(point.contains(interval_t{}));
+        REQUIRE_FALSE(point.contains(interval_t(one, two)));
+
+        affine_t interval(one, two);
+        REQUIRE_FALSE(interval.contains(interval_t(zero, one)));
+        REQUIRE(interval.contains(interval_t(one, one)));
+        REQUIRE(interval.contains(interval_t(value_t(1.5), value_t(1.75))));
+        REQUIRE(interval.contains(interval_t(two, two)));
+        REQUIRE_FALSE(interval.contains(interval_t(two, three)));
+    }
+
+    SECTION("contains(affine)") {
+        affine_t empty;
+        affine_t point(one);
+        affine_t interval(one, two);
+
+        REQUIRE_FALSE(empty.contains(point));
+        REQUIRE_FALSE(empty.contains(interval));
+
+        REQUIRE(point.contains(empty));
+        REQUIRE(point.contains(point));
+        REQUIRE_FALSE(point.contains(interval));
+
+        REQUIRE(interval.contains(empty));
+        REQUIRE(interval.contains(point));
+        REQUIRE(interval.contains(interval));
+    }
+
+    SECTION("empty") {
+        affine_t empty;
+        REQUIRE(empty.empty());
+
+        affine_t point(one);
+        REQUIRE_FALSE(point.empty());
+
+        affine_t interval(one, two);
+        REQUIRE_FALSE(interval.empty());
+    }
+
+    SECTION("print_affine_form") {
+        affine_t empty;
+        REQUIRE(empty.print_affine_form() == "∅");
+
+        affine_t point(one);
+        REQUIRE(point.print_affine_form() == "1");
+
+        affine_t interval(one, two);
+        REQUIRE(interval.print_affine_form() == "1.5 +/- 0.5");
+    }
+
+    SECTION("print_interval_form") {
+        affine_t empty;
+        REQUIRE(empty.print_interval_form() == "[∅]");
+
+        affine_t point(one);
+        std::stringstream corr;
+        auto one_str = std::to_string(one);
+        corr << "[" << one_str << ", " << one_str << "]";
+        REQUIRE(point.print_interval_form() == corr.str());
+
+        affine_t interval(one, two);
+        std::stringstream corr2;
+        auto two_str = std::to_string(two);
+        corr2 << "[" << one_str << ", " << two_str << "]";
+        REQUIRE(interval.print_interval_form() == corr2.str());
+    }
 
     // SECTION("operator-") {
     //     auto value  = affine_t(one, two);
