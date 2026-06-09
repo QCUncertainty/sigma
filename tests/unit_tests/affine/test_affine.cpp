@@ -537,26 +537,90 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         test_affine(prod_interval, value_t(2.5), value_t(8.0));
     }
 
-    // SECTION("operator/=") {
-    //     SECTION("Value") {
-    //         auto value = affine_t(one, two);
-    //         value /= value_t(3.0);
-    //         test_interval(value.range(), value_t(1.0 / 3.0),
-    //                       value_t(2.0 / 3.0));
-    //     }
-    //     SECTION("Independent") {
-    //         auto value = affine_t(one, two);
-    //         value /= affine_t(three, four);
-    //         // Tight range is [1/4, 2/3]
-    //         test_interval(value.range(), value_t(0.2083333),
-    //                       value_t(2.0 / 3.0));
-    //     }
-    //     SECTION("Dependent") {
-    //         auto value = affine_t(one, two);
-    //         value /= value;
-    //         // Tight range is [1, 1]
-    //         test_interval(value.range(), value_t(5.0 / 8.0),
-    //                       value_t(13.0 / 8.0));
-    //     }
-    // }
+    SECTION("operator/=(value)") {
+        affine_t empty;
+        auto pempty = &(empty /= one);
+        REQUIRE(pempty == &empty);
+        REQUIRE(empty.empty());
+
+        affine_t point(one);
+        auto ppoint = &(point /= two);
+        REQUIRE(ppoint == &point);
+        test_affine(point, value_t(0.5), value_t(0.5));
+
+        affine_t interval(one, two);
+        auto pinterval = &(interval /= two);
+        REQUIRE(pinterval == &interval);
+        test_affine(interval, value_t(0.5), value_t(1.0));
+
+        REQUIRE_THROWS_AS(point /= zero, std::domain_error);
+    }
+
+    SECTION("operator/=(Affine)") {
+        affine_t empty;
+        auto pempty = &(empty /= affine_t(one, two));
+        REQUIRE(pempty == &empty);
+        REQUIRE(empty.empty());
+
+        affine_t point(one);
+        auto ppoint = &(point /= affine_t(two, three));
+        REQUIRE(ppoint == &point);
+        test_affine(point, value_t(1.0 / 3.0), value_t(0.5));
+
+        affine_t interval(one, two);
+        auto pinterval = &(interval /= affine_t(three, four));
+        REQUIRE(pinterval == &interval);
+        // N.b. the tight range is [1/4, 2/3], but the correct answer is
+        // [0.2083333, 0.6666667] due to nonlinearity bound overestimating the
+        // error.
+        test_affine(interval, value_t(0.2083333), value_t(2.0 / 3.0));
+
+        affine_t interval2(one, two);
+        auto pinterval2 = &(interval2 /= interval2);
+        REQUIRE(pinterval2 == &interval2);
+        // N.b. the tight range is [1, 1] but the correct answer is [5/8, 13/8]
+        // due to nonlinearity bound overestimating the error.
+        test_affine(interval2, value_t(5.0 / 8.0), value_t(13.0 / 8.0));
+
+        REQUIRE_THROWS_AS(point /= affine_t(zero, zero), std::domain_error);
+    }
+
+    SECTION("operator/(value)") {
+        // Implemented in terms of operator/= so just spot check
+        affine_t empty;
+        auto quot_empty = empty / one;
+        REQUIRE(quot_empty.empty());
+
+        affine_t point(one);
+        auto quot_point = point / two;
+        test_affine(quot_point, value_t(0.5), value_t(0.5));
+
+        affine_t interval(one, two);
+        auto quot_interval = interval / two;
+        test_affine(quot_interval, value_t(0.5), value_t(1.0));
+
+        affine_t interval2(one, two);
+        REQUIRE_THROWS_AS(interval2 / zero, std::domain_error);
+    }
+
+    SECTION("operator/(Affine)") {
+        // Implemented in terms of operator/= so just spot check
+        affine_t empty;
+        auto quot_empty = empty / affine_t(one, two);
+        REQUIRE(quot_empty.empty());
+
+        affine_t point(one);
+        auto quot_point = point / affine_t(two, three);
+        test_affine(quot_point, value_t(1.0 / 3.0), value_t(0.5));
+
+        affine_t interval(one, two);
+        auto quot_interval = interval / affine_t(three, four);
+        test_affine(quot_interval, value_t(0.2083333), value_t(2.0 / 3.0));
+
+        affine_t interval2(one, two);
+        auto quot_interval2 = interval2 / interval2;
+        test_affine(quot_interval2, value_t(5.0 / 8.0), value_t(13.0 / 8.0));
+
+        REQUIRE_THROWS_AS(point / affine_t(zero, zero), std::domain_error);
+    }
 }

@@ -576,33 +576,76 @@ public:
         return Affine(*this) *= other;
     }
 
-    /// Division
+    /** @brief Overwrites *this with the quotient of *this and @p value.
+     *
+     *  The quotient of an affine form @f$x@f$ and a scalar @f$\alpha@f$ is
+     *  defined as:
+     *  @f[
+     *    \frac{x}{\alpha} = \frac{x_0}{\alpha} +
+     *    \sum_{i=1}^n \frac{x_i}{\alpha} \epsilon_i
+     *  @f]
+     *
+     *  @param[in] value The value to divide *this by.
+     *
+     *  @return Reference to this affine form after division.
+     *
+     *  @throw std::domain_error If @p value is zero.
+     */
     Affine& operator/=(value_t value) {
         if(value == 0) { throw std::domain_error("Division by zero"); }
-        if(empty()) { return *this; }
-        (*m_center_) /= value;
-        for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
-            error_term_i /= value;
-        }
-        return *this;
+        return *this *= value_t(1.0 / value);
     }
 
+    /** @brief Overwrites *this with the quotient of *this and @p other.
+     *
+     *  This method is implemented as the product of *this and
+     *  other.multiplicative_inverse(). See the documentation for
+     *  operator*=(Affine) and multiplicative_inverse() for more details on how
+     *  these operations work.
+     *
+     *  @param[in] other The affine form to divide *this by.
+     *
+     *  @return Reference to this affine form after division.
+     *
+     *  @throw std::domain_error If @p other is empty or has a zero center.
+     *                           Strong throw guarantee.
+     *  @throw std::bad_alloc If memory allocation for the multiplicative
+     *                        inverse of @p other fails. Strong throw guarantee.
+     */
     Affine& operator/=(const Affine& other);
 
+    /** @brief Returns the quotient of *this and @p value.
+     *
+     *  This is a convenience method for calling Affine(*this) /= value. See
+     *  the documentation for operator/=(value_t) for details on how division
+     *  with a scalar works.
+     *
+     *  @param[in] value The value to divide *this by.
+     *
+     *  @return The quotient of *this and @p value.
+     *
+     *  @throw std::domain_error If @p value is zero.
+     */
     Affine operator/(value_t value) const { return Affine(*this) /= value; }
 
+    /** @brief Returns the quotient of *this and @p other.
+     *
+     *  This is a convenience method for calling Affine(*this) /= other. See
+     *  the documentation for operator/=(Affine) for details on how division
+     *  with another affine form works.
+     *
+     *  @param[in] other The affine form to divide *this by.
+     *
+     *  @return The quotient of *this and @p other.
+     *
+     *  @throw std::domain_error If @p other is empty or has a zero center.
+     *                           Strong throw guarantee.
+     *  @throw std::bad_alloc If memory allocation for the multiplicative
+     *                        inverse of @p other fails. Strong throw guarantee.
+     */
     Affine operator/(const Affine& other) const {
         return Affine(*this) /= other;
     }
-
-    bool operator==(const Affine& other) const {
-        if(empty() != other.empty()) { return false; }
-        if(empty()) { return true; }
-        return m_center_ == other.m_center_ &&
-               m_error_terms_ == other.m_error_terms_;
-    }
-
-    bool operator!=(const Affine& other) const { return !(*this == other); }
 
     /** @brief Applies an affine transformation to *this.
      *
@@ -621,7 +664,7 @@ public:
      */
     Affine apply_affine_transform(value_t alpha, value_t zeta,
                                   value_t delta) const {
-        value_t new_center = alpha * m_center_ + zeta;
+        value_t new_center = alpha * center() + zeta;
         error_terms_t new_error_terms;
         for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
             new_error_terms[error_symbol] = alpha * error_term_i;
@@ -631,6 +674,16 @@ public:
     }
 
     Affine multiplicative_inverse() const;
+
+    // -- Comparison Operators ------------------------------------------------
+    bool operator==(const Affine& other) const {
+        if(empty() != other.empty()) { return false; }
+        if(empty()) { return true; }
+        return m_center_ == other.m_center_ &&
+               m_error_terms_ == other.m_error_terms_;
+    }
+
+    bool operator!=(const Affine& other) const { return !(*this == other); }
 
 private:
     /// Asserts that *this is not empty and throws domain_error if it is.
