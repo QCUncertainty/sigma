@@ -656,15 +656,22 @@ public:
      *  and a shift for the approximate transformation) and an estimate of the
      *  error from using the approximate transformation.
      *
+     *  N.b. applying an affine transformation to an empty affine form will
+     *  result in the affine form @f$\zeta \pm \delta@f$.
+     *
      *  @param[in] alpha The scale factor.
      *  @param[in] zeta The shift.
      *  @param[in] delta The error term.
      *
-     *  @return The new center and radii.
+     *  @return The affine form resulting from applying the affine
+     *          transformation to *this.
+     *
+     *  @throw std::bad_alloc If memory allocation for the new affine form
+     *                        fails. Strong throw guarantee.
      */
     Affine apply_affine_transform(value_t alpha, value_t zeta,
                                   value_t delta) const {
-        value_t new_center = alpha * center() + zeta;
+        value_t new_center = empty() ? zeta : alpha * center() + zeta;
         error_terms_t new_error_terms;
         for(auto&& [error_symbol, error_term_i] : m_error_terms_) {
             new_error_terms[error_symbol] = alpha * error_term_i;
@@ -673,9 +680,48 @@ public:
         return Affine(new_center, std::move(new_error_terms));
     }
 
+    /** @brief Returns the multiplicative inverse of *this.
+     *
+     *  The multiplicative inverse of an affine form @f$x@f$ is obtained by
+     *  applying an affine transformation to *this. The parameters of this
+     *  transformation are given by:
+     *  @f[
+     *  \begin{align}
+     *    a      &= \min(|lo|, |hi|) \\
+     *    b      &= \max(|lo|, |hi|) \\
+     *    \alpha &= -\frac{1}{b^2} \\
+     *    i &= \left[\frac{1}{a} - \alpha a, \frac{2}{b}\right]\\
+     *    \zeta &= |midpoint(i)|\\
+     *    \delta &= radius(i)
+     *   \end{align}
+     *  @f]
+     *
+     *  Where @f$lo@f$ and @f$hi@f$ are the lower and upper bounds of *this.
+     *
+     *  @return The multiplicative inverse of *this.
+     *
+     *  @throw std::domain_error If *this is empty or contains zero. Strong
+     *                           throw guarantee.
+     */
     Affine multiplicative_inverse() const;
 
     // -- Comparison Operators ------------------------------------------------
+
+    /** @brief Checks if *this and @p other represent the same affine form.
+     *
+     *  Two affine forms are considered equal if they are both empty or if they
+     *  have the same center and the same error terms. Note that the order in
+     *  which the error terms are stored in the error_terms_t map is not
+     *  guaranteed to be the same, but this method does not check the order of
+     *  the error terms, only that each symbol is present.
+     *
+     *  @param[in] other The affine form to compare with *this.
+     *
+     *  @return True if *this and @p other represent the same affine form, false
+     *          otherwise.
+     *
+     *  @throw none No throw guarantee.
+     */
     bool operator==(const Affine& other) const {
         if(empty() != other.empty()) { return false; }
         if(empty()) { return true; }
@@ -683,6 +729,20 @@ public:
                m_error_terms_ == other.m_error_terms_;
     }
 
+    /** @brief Checks if *this and @p other represent different affine forms.
+     *
+     *  Two affine forms are considered different if they are not equal
+     *  according to the definition of equality given in operator==. See the
+     *  documentation for operator== for details on how affine forms are
+     *  compared.
+     *
+     *  @param[in] other The affine form to compare with *this.
+     *
+     *  @return True if *this and @p other represent different affine forms,
+     *          false otherwise.
+     *
+     *  @throw none No throw guarantee.
+     */
     bool operator!=(const Affine& other) const { return !(*this == other); }
 
 private:

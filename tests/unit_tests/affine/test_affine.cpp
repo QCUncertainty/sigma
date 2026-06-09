@@ -623,4 +623,86 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
 
         REQUIRE_THROWS_AS(point / affine_t(zero, zero), std::domain_error);
     }
+
+    SECTION("apply_affine_transform") {
+        affine_t empty;
+        auto transform_empty = empty.apply_affine_transform(one, one, one);
+        test_affine(transform_empty, zero, two);
+
+        affine_t point(one);
+        auto transform_point = point.apply_affine_transform(two, three, four);
+        test_affine(transform_point, value_t(1.0), value_t(9.0));
+
+        // interval = 1.5 +/- 0.5 e_0
+        // 2 * 1.5 + 3 +/- 2 * 0.5 e_0 +/- 4 e_1 = 6 +/- 1 e_0 +/- 4 e_1
+        affine_t interval(one, two);
+        auto transform_interval =
+          interval.apply_affine_transform(two, three, four);
+        test_affine(transform_interval, value_t(1.0), value_t(11.0));
+    }
+
+    SECTION("multiplicative_inverse") {
+        affine_t empty;
+        REQUIRE_THROWS_AS(empty.multiplicative_inverse(), std::domain_error);
+
+        affine_t point(one);
+        auto inv_point = point.multiplicative_inverse();
+        test_affine(inv_point, one, one);
+
+        affine_t interval(one, two);
+        auto inv_interval = interval.multiplicative_inverse();
+        test_affine(inv_interval, value_t(0.5), value_t(1.0));
+
+        affine_t interval2(-two, two);
+        REQUIRE_THROWS_AS(interval2.multiplicative_inverse(),
+                          std::domain_error);
+    }
+
+    SECTION("operator==") {
+        affine_t empty;
+        affine_t point(one);
+        affine_t interval(one, two);
+
+        REQUIRE(empty == empty);
+        REQUIRE(empty == affine_t{});
+        REQUIRE_FALSE(empty == point);
+        REQUIRE_FALSE(empty == interval);
+
+        REQUIRE(point == point);
+        REQUIRE(point == affine_t(one, one));
+        REQUIRE_FALSE(point == empty);
+        REQUIRE_FALSE(point == interval);
+
+        REQUIRE(interval == interval);
+        REQUIRE_FALSE(interval == affine_t(one, two)); // Different error terms
+        REQUIRE_FALSE(interval == empty);
+        REQUIRE_FALSE(interval == point);
+
+        affine_t interval2(interval.center(), interval.error_terms());
+        REQUIRE(interval2 == interval);
+    }
+
+    SECTION("operator!=") {
+        affine_t empty;
+        affine_t point(one);
+        affine_t interval(one, two);
+
+        REQUIRE_FALSE(empty != empty);
+        REQUIRE_FALSE(empty != affine_t{});
+        REQUIRE(empty != point);
+        REQUIRE(empty != interval);
+
+        REQUIRE_FALSE(point != point);
+        REQUIRE_FALSE(point != affine_t(one, one));
+        REQUIRE(point != empty);
+        REQUIRE(point != interval);
+
+        REQUIRE_FALSE(interval != interval);
+        REQUIRE(interval != affine_t(one, two)); // Different error terms
+        REQUIRE(interval != empty);
+        REQUIRE(interval != point);
+
+        affine_t interval2(interval.center(), interval.error_terms());
+        REQUIRE_FALSE(interval2 != interval);
+    }
 }
