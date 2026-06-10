@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <optional>
 #include <sigma/interval/interval.hpp>
 #include <sstream>
