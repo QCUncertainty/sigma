@@ -468,7 +468,7 @@ public:
 
     /** @brief Returns the difference of *this and @p value.
      *
-     *  This is a convenience method for calling Affine(*this) -= value. See
+     *  This is a convenience method for calling `Affine(*this) -= value`. See
      *  the documentation for operator-=(value_t) for details on how subtraction
      *  with a scalar works.
      *
@@ -483,7 +483,7 @@ public:
 
     /** @brief Returns the difference of *this and @p other.
      *
-     *  This is a convenience method for calling Affine(*this) -= other. See
+     *  This is a convenience method for calling `Affine(*this) -= other`. See
      *  the documentation for operator-=(Affine) for details on how subtraction
      *  with another affine form works.
      *
@@ -547,7 +547,7 @@ public:
 
     /** @brief Returns the product of *this and @p value.
      *
-     *  This is a convenience method for calling Affine(*this) *= value. See
+     *  This is a convenience method for calling `Affine(*this) *= value`. See
      *  the documentation for `operator*=(value_t)` for details on how
      *  multiplication with a scalar works.
      *
@@ -800,7 +800,7 @@ std::ostream& operator<<(std::ostream& os, const Affine<ValueType>& a) {
  *  @tparam ValueType The type of the values in the affine form.
  *
  *  This method implements multiplication of a scalar by an affine form. It
- *  is a convenience method for calling Affine(*this) *= value. See the
+ *  is a convenience method for calling `Affine(*this) *= value`. See the
  *  documentation for `operator*=(value_t)` for details on how multiplication
  * with a scalar works.
  *
