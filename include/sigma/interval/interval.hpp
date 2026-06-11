@@ -627,7 +627,7 @@ std::string Interval<ValueType>::print_interval_form() const {
 template<typename ValueType>
 std::ostream& operator<<(std::ostream& os, const Interval<ValueType>& i) {
     if(i.empty()) {
-        os << " ∅";
+        os << "∅";
         return os;
     }
     os << i.median() << "+/-" << i.radius();
