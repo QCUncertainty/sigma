@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['literal_0',['Literal',['../structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01float_01_4_01_4.html#a4ae5eda549be901b2790ca77bf372c7b',1,'Eigen::NumTraits&lt; sigma::Interval&lt; float &gt; &gt;::Literal'],['../structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html#a34ec8dc7ffe77bd62f205e119febece8',1,'Eigen::NumTraits&lt; sigma::Interval&lt; double &gt; &gt;::Literal'],['../structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html#a3f8a1a6726958a1347d1251912791823',1,'Eigen::NumTraits&lt; sigma::Uncertain&lt; float &gt; &gt;::Literal'],['../structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01double_01_4_01_4.html#a7ac042ada697f71b71d3a6bc93f52a73',1,'Eigen::NumTraits&lt; sigma::Uncertain&lt; double &gt; &gt;::Literal']]]
+  ['error_5fterm_5ft_0',['error_term_t',['../classsigma_1_1Affine.html#adae88bf403937e838477d515fbdad58a',1,'sigma::Affine']]],
+  ['error_5fterms_5ft_1',['error_terms_t',['../classsigma_1_1Affine.html#a62b440448fdc35ce351531dbc26688bc',1,'sigma::Affine']]]
 ];

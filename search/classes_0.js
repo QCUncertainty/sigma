@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['hash_3c_20sigma_3a_3ainterval_3c_20valuetype_20_3e_20_3e_0',['hash&lt; sigma::Interval&lt; ValueType &gt; &gt;',['../structstd_1_1hash_3_01sigma_1_1Interval_3_01ValueType_01_4_01_4.html',1,'std']]]
+  ['affine_0',['Affine',['../classsigma_1_1Affine.html',1,'sigma']]],
+  ['affine_3c_20double_20_3e_1',['Affine&lt; double &gt;',['../classsigma_1_1Affine.html',1,'sigma']]],
+  ['affine_3c_20float_20_3e_2',['Affine&lt; float &gt;',['../classsigma_1_1Affine.html',1,'sigma']]]
 ];

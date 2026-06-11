@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['idouble_0',['IDouble',['../namespacesigma.html#ab126639cc3e0c6982521627290a6139d',1,'sigma']]],
-  ['ifloat_1',['IFloat',['../namespacesigma.html#a39fce2e2c854ce7cafbc61b57c1e90a6',1,'sigma']]],
-  ['interval_2',['Interval',['../structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01float_01_4_01_4.html#aafad52b1ada0c02a29304106521de935',1,'Eigen::NumTraits&lt; sigma::Interval&lt; float &gt; &gt;::Interval'],['../structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html#adae696ceb2f1ea7dfc7c9bed04fbee26',1,'Eigen::NumTraits&lt; sigma::Interval&lt; double &gt; &gt;::Interval']]]
+  ['dep_5fsd_5fptr_0',['dep_sd_ptr',['../classsigma_1_1detail___1_1Setter.html#a317752307a6665ce2ab3c577755599e7',1,'sigma::detail_::Setter::dep_sd_ptr'],['../classsigma_1_1Uncertain.html#acc40534d87fdba24215242f6021babe0',1,'sigma::Uncertain::dep_sd_ptr']]],
+  ['dep_5fsd_5ft_1',['dep_sd_t',['../classsigma_1_1detail___1_1Setter.html#acd92e5a8d988dd83e97926c58f4d5ebb',1,'sigma::detail_::Setter::dep_sd_t'],['../classsigma_1_1Uncertain.html#a603fe75d1c25677f33be269015a61639',1,'sigma::Uncertain::dep_sd_t']]],
+  ['deps_5fmap_5ft_2',['deps_map_t',['../classsigma_1_1detail___1_1Setter.html#ad786977eb876807acd9fb35bae3f84fc',1,'sigma::detail_::Setter::deps_map_t'],['../classsigma_1_1Uncertain.html#ac5023c85420e385ea040950654b700fa',1,'sigma::Uncertain::deps_map_t']]],
+  ['deps_5fvector_5ft_3',['deps_vector_t',['../classsigma_1_1detail___1_1Setter.html#af469b99c4a9e2c9a2fbb46558690cc64',1,'sigma::detail_::Setter']]]
 ];
