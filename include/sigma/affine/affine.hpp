@@ -562,7 +562,7 @@ public:
 
     /** @brief Returns the product of *this and @p other.
      *
-     *  This is a convenience method for calling Affine(*this) *= other. See
+     *  This is a convenience method for calling `Affine(*this) *= other`. See
      *  the documentation for `operator*=(Affine)` for details on how
      *  multiplication with another affine form works.
      *
@@ -601,8 +601,8 @@ public:
      *
      *  This method is implemented as the product of *this and
      *  other.multiplicative_inverse(). See the documentation for
-     *  operator*=(Affine) and multiplicative_inverse() for more details on how
-     *  these operations work.
+     *  `operator*=(Affine)` and multiplicative_inverse() for more details on
+     *  how these operations work.
      *
      *  @param[in] other The affine form to divide *this by.
      *
@@ -617,7 +617,7 @@ public:
 
     /** @brief Returns the quotient of *this and @p value.
      *
-     *  This is a convenience method for calling Affine(*this) /= value. See
+     *  This is a convenience method for calling `Affine(*this) /= value`. See
      *  the documentation for operator/=(value_t) for details on how division
      *  with a scalar works.
      *
@@ -631,7 +631,7 @@ public:
 
     /** @brief Returns the quotient of *this and @p other.
      *
-     *  This is a convenience method for calling Affine(*this) /= other. See
+     *  This is a convenience method for calling `Affine(*this) /= other`. See
      *  the documentation for operator/=(Affine) for details on how division
      *  with another affine form works.
      *
