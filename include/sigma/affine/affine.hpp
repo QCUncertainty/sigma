@@ -726,11 +726,12 @@ public:
     bool operator==(const Affine& other) const {
         if(empty() != other.empty()) { return false; }
         if(empty()) { return true; }
-        return m_center_ == other.m_center_ &&
-               m_error_terms_ == other.m_error_terms_;
+        if(m_center_ != other.m_center_) { return false; }
+        return m_error_terms_ == other.m_error_terms_;
     }
 
-    /** @brief Checks if *this and @p other represent different affine forms.
+    /** @brief Checks if *this and @p other represent different affine
+     * forms.
      *
      *  Two affine forms are considered different if they are not equal
      *  according to the definition of equality given in operator==. See the
@@ -759,23 +760,26 @@ private:
         return std::make_shared<size_type>(m_error_terms_.size());
     }
 
-    /// This is the center of the affine form. If empty, m_center_ = nullopt.
+    /// This is the center of the affine form. If empty, m_center_ =
+    /// nullopt.
     std::optional<value_t> m_center_;
 
-    /// Map from error symbols to their radii. If empty, m_error_terms_ = {}.
+    /// Map from error symbols to their radii. If empty, m_error_terms_ =
+    /// {}.
     error_terms_t m_error_terms_;
 };
 
-// -- Non-member functions ---------------------------------------------------
+// -- Non-member functions
+// ---------------------------------------------------
 
 /** @brief Outputs the range of an affine form to an output stream.
  *
  *  @related Affine
  *  @tparam ValueType The type of the values in the affine form.
  *
- *  This method will defer to the output operator for interval_t to print the
- *  value of the affine form. See the documentation for interval_t for details
- *  on how intervals are printed.
+ *  This method will defer to the output operator for interval_t to print
+ * the value of the affine form. See the documentation for interval_t for
+ * details on how intervals are printed.
  *
  *  @param[in] os The output stream to write to.
  *  @param[in] a The affine form to output.
@@ -797,23 +801,24 @@ std::ostream& operator<<(std::ostream& os, const Affine<ValueType>& a) {
  *
  *  This method implements multiplication of a scalar by an affine form. It
  *  is a convenience method for calling Affine(*this) *= value. See the
- *  documentation for operator*=(value_t) for details on how multiplication with
- *  a scalar works.
+ *  documentation for operator*=(value_t) for details on how multiplication
+ * with a scalar works.
  *
  *  @param[in] value The scalar to multiply by.
  *  @param[in] a The affine form to multiply.
  *
  *  @return The product of the scalar and the affine form.
  *
- *  @throw std::bad_alloc If memory allocation for the new affine form fails.
- *                        Strong throw guarantee.
+ *  @throw std::bad_alloc If memory allocation for the new affine form
+ * fails. Strong throw guarantee.
  */
 template<typename ValueType>
 Affine<ValueType> operator*(ValueType value, const Affine<ValueType>& a) {
     return a * value;
 }
 
-// -- Out-of-line definitions ------------------------------------------------
+// -- Out-of-line definitions
+// ------------------------------------------------
 
 template<typename ValueType>
 auto Affine<ValueType>::range() const -> interval_t {
@@ -935,25 +940,6 @@ using AFloat = Affine<float>;
 using ADouble = Affine<double>;
 
 } // namespace sigma
-
-namespace std {
-
-/// Specializes std::hash for Intervals
-// template<typename ValueType>
-// struct hash<sigma::Interval<ValueType>> {
-//     /// Hashes the lower and upper bounds of an interval and then combines
-//     them
-//     /// using a simple XOR operation.
-//     size_t operator()(const sigma::Interval<ValueType>& i) const {
-//         std::size_t hash_low  = std::hash<ValueType>()(i.lower());
-//         std::size_t hash_high = std::hash<ValueType>()(i.upper());
-//         std::size_t seed      = hash_low;
-//         seed ^= hash_high + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-//         return seed;
-//     }
-// };
-
-} // namespace std
 
 #include <sigma/affine/eigen_compat.hpp>
 #include <sigma/affine/operations/operations.hpp>

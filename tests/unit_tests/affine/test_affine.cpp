@@ -58,14 +58,17 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
             affine_t empty;
             affine_t copy_empty(empty);
             REQUIRE(copy_empty.empty());
+            REQUIRE(copy_empty == empty);
 
             affine_t point(one);
             affine_t copy_point(point);
             test_affine(copy_point, one, one);
+            REQUIRE(copy_point == point);
 
             affine_t interval(one, two);
             affine_t copy_interval(interval);
             test_affine(copy_interval, one, two);
+            REQUIRE(copy_interval == interval);
         }
 
         SECTION("Move Constructor") {
@@ -88,18 +91,21 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
             auto pcopy_empty = &(copy_empty = empty);
             REQUIRE(pcopy_empty == &copy_empty);
             REQUIRE(copy_empty.empty());
+            REQUIRE(copy_empty == empty);
 
             affine_t point(one);
             affine_t copy_point;
             auto pcopy_point = &(copy_point = point);
             REQUIRE(pcopy_point == &copy_point);
             test_affine(copy_point, one, one);
+            REQUIRE(copy_point == point);
 
             affine_t interval(one, two);
             affine_t copy_interval;
             auto pcopy_interval = &(copy_interval = interval);
             REQUIRE(pcopy_interval == &copy_interval);
             test_affine(copy_interval, one, two);
+            REQUIRE(copy_interval == interval);
         }
 
         SECTION("Move Assignment") {
