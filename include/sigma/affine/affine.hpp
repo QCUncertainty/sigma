@@ -548,7 +548,7 @@ public:
     /** @brief Returns the product of *this and @p value.
      *
      *  This is a convenience method for calling Affine(*this) *= value. See
-     *  the documentation for operator*=(value_t) for details on how
+     *  the documentation for `operator*=(value_t)` for details on how
      *  multiplication with a scalar works.
      *
      *  @param[in] value The value to multiply *this by.
@@ -563,7 +563,7 @@ public:
     /** @brief Returns the product of *this and @p other.
      *
      *  This is a convenience method for calling Affine(*this) *= other. See
-     *  the documentation for operator*=(Affine) for details on how
+     *  the documentation for `operator*=(Affine)` for details on how
      *  multiplication with another affine form works.
      *
      *  @param[in] other The affine form to multiply *this by.
@@ -801,7 +801,7 @@ std::ostream& operator<<(std::ostream& os, const Affine<ValueType>& a) {
  *
  *  This method implements multiplication of a scalar by an affine form. It
  *  is a convenience method for calling Affine(*this) *= value. See the
- *  documentation for operator*=(value_t) for details on how multiplication
+ *  documentation for `operator*=(value_t)` for details on how multiplication
  * with a scalar works.
  *
  *  @param[in] value The scalar to multiply by.
