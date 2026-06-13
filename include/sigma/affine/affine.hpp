@@ -1,5 +1,5 @@
 #pragma once
-#include <memory>
+#include <atomic>
 #include <optional>
 #include <sigma/interval/interval.hpp>
 #include <sstream>
@@ -54,7 +54,7 @@ public:
     using value_t = ValueType;
 
     /// Opaque type used to store error term information
-    using error_term_t = std::shared_ptr<size_type>;
+    using error_term_t = size_type;
 
     /// Type used to map error terms to their radii
     using error_terms_t = std::unordered_map<error_term_t, value_t>;
@@ -747,17 +747,16 @@ public:
      */
     bool operator!=(const Affine& other) const { return !(*this == other); }
 
+    /// Returns a process-wide unique integer ID for a new error term symbol.
+    static error_term_t make_error_term() {
+        static std::atomic<size_type> s_next_id{0};
+        return s_next_id.fetch_add(1);
+    }
+
 private:
     /// Asserts that *this is not empty and throws domain_error if it is.
     void assert_not_empty_() const {
         if(empty()) { throw std::domain_error("Affine form is empty"); }
-    }
-
-    /// Creates an opaque object that uniquely identifies an error term.
-    /// At present it's the address of the object that is important;
-    // could switch to a hash or uuid.
-    error_term_t make_error_term() const {
-        return std::make_shared<size_type>(m_error_terms_.size());
     }
 
     /// This is the center of the affine form. If empty, m_center_ =

@@ -79,8 +79,7 @@ public:
      *  @throw none No throw guarantee
      */
     ThresholdedAffine() :
-      m_lump_term_(std::make_shared<size_type>(0)),
-      m_threshold_(value_t(0.01)) {}
+      m_lump_term_(affine_t::make_error_term()), m_threshold_(value_t(0.01)) {}
 
     /** @brief Constructs a ThresholdedAffine from a center value.
      *
@@ -92,7 +91,7 @@ public:
     explicit ThresholdedAffine(value_t center,
                                Threshold t = Threshold{value_t(0.01)}) :
       m_affine_(center),
-      m_lump_term_(std::make_shared<size_type>(0)),
+      m_lump_term_(affine_t::make_error_term()),
       m_threshold_(t.value) {
         apply_threshold_();
     }
@@ -108,7 +107,7 @@ public:
     ThresholdedAffine(value_t lo, value_t hi,
                       Threshold t = Threshold{value_t(0.01)}) :
       m_affine_(lo, hi),
-      m_lump_term_(std::make_shared<size_type>(0)),
+      m_lump_term_(affine_t::make_error_term()),
       m_threshold_(t.value) {
         apply_threshold_();
     }
@@ -123,7 +122,7 @@ public:
     explicit ThresholdedAffine(const interval_t& interval,
                                Threshold t = Threshold{value_t(0.01)}) :
       m_affine_(interval),
-      m_lump_term_(std::make_shared<size_type>(0)),
+      m_lump_term_(affine_t::make_error_term()),
       m_threshold_(t.value) {
         apply_threshold_();
     }
@@ -139,7 +138,7 @@ public:
     ThresholdedAffine(value_t center, error_terms_t radii,
                       Threshold t = Threshold{value_t(0.01)}) :
       m_affine_(center, std::move(radii)),
-      m_lump_term_(std::make_shared<size_type>(0)),
+      m_lump_term_(affine_t::make_error_term()),
       m_threshold_(t.value) {
         apply_threshold_();
     }
@@ -156,7 +155,7 @@ public:
      */
     ThresholdedAffine(affine_t a, value_t threshold) :
       m_affine_(std::move(a)),
-      m_lump_term_(std::make_shared<size_type>(0)),
+      m_lump_term_(affine_t::make_error_term()),
       m_threshold_(threshold) {
         apply_threshold_();
     }
@@ -473,10 +472,10 @@ private:
     void apply_threshold_() {
         if(m_affine_.empty()) return;
         auto total_r = m_affine_.radius();
-        if(total_r == value_t(0)) return;
 
         // Work on a snapshot to avoid modifying while iterating
         auto terms = m_affine_.error_terms();
+        if(terms.size() == 0) return; // No error terms to threshold
 
         value_t lump_delta          = value_t(0);
         value_t existing_lump_coeff = value_t(0);
@@ -487,7 +486,12 @@ private:
                 existing_lump_coeff = coeff;
                 continue;
             }
-            if(std::fabs(coeff) / total_r < m_threshold_) {
+            if(std::fabs(coeff) < std::numeric_limits<value_t>::epsilon()) {
+                // Skip zero terms to avoid unnecessary lumping and preserve
+                // sparsity.
+                continue;
+            } else if(total_r != value_t(0) &&
+                      std::fabs(coeff) / total_r < m_threshold_) {
                 lump_delta += std::fabs(coeff);
             } else {
                 new_terms[sym] = coeff;

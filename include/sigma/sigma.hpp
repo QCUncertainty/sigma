@@ -1,5 +1,6 @@
 #pragma once
 #include "affine/affine.hpp"
+#include "affine/thresholded_affine.hpp"
 #include "interval/interval.hpp"
 #include "uncertain/uncertain.hpp"
 

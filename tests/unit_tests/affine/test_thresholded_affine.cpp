@@ -71,8 +71,8 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
         }
 
         SECTION("From Center and Error Terms") {
-            using error_term_t = typename ta_t::error_term_t;
-            ta_t value(one, {{error_term_t{}, one}});
+            auto sym = affine_t::make_error_term();
+            ta_t value(one, {{sym, one}});
             test_affine(value, zero, two);
         }
 
@@ -110,7 +110,7 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
         REQUIRE(interval.radius() == value_t(0.5));
         REQUIRE_FALSE(interval.empty());
         REQUIRE(interval.threshold() == value_t(0.01));
-        REQUIRE(interval.lump_term() != nullptr);
+        // lump_term() is a size_t ID, always valid (no null concept)
     }
 
     SECTION("Threshold") {
