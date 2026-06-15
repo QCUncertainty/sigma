@@ -14,7 +14,7 @@ namespace sigma {
  *
  * ThresholdedAffine extends standard affine arithmetic with a mechanism to
  * control the number of error symbols carried in an affine form. Each
- * arithmetic operation can introduce new error symbols (e.g. multiplication
+ * non-affine operation can introduce new error symbols (e.g. multiplication
  * creates a nonlinearity symbol); without pruning, the symbol count grows
  * unboundedly.
  *
@@ -68,7 +68,9 @@ public:
      *  @endcode
      */
     struct Threshold {
+        /// The relative threshold value (e.g. 0.01 for 1%)
         value_t value;
+        /// Constructs a Threshold with the given value.
         explicit Threshold(value_t v) : value(v) {}
     };
 
@@ -76,51 +78,53 @@ public:
 
     /** @brief Constructs an empty ThresholdedAffine.
      *
+     *  The resulting ThresholdedAffine represents the empty set. The lump term
+     *  is initialized but has zero radius, and the threshold is set to the
+     *  default value.
+     *
      *  @throw none No throw guarantee
      */
     ThresholdedAffine() :
-      m_lump_term_(affine_t::make_error_term()), m_threshold_(value_t(0.01)) {}
+      m_lump_term_(affine_t::make_error_term()),
+      m_threshold_(default_threshold().value) {}
 
     /** @brief Constructs a ThresholdedAffine from a center value.
      *
      *  @param[in] center The center value.
-     *  @param[in] t      The relative threshold (default 1%).
+     *  @param[in] t      The relative threshold, defaults to
+     *                    default_threshold().
      *
      *  @throw none No throw guarantee
      */
     explicit ThresholdedAffine(value_t center,
-                               Threshold t = Threshold{value_t(0.01)}) :
-      m_affine_(center),
-      m_lump_term_(affine_t::make_error_term()),
-      m_threshold_(t.value) {
-        apply_threshold_();
-    }
+                               Threshold t = default_threshold()) :
+      ThresholdedAffine(interval_t(center), t) {}
 
     /** @brief Constructs a ThresholdedAffine from a lower and upper bound.
      *
      *  @param[in] lo The lower bound.
      *  @param[in] hi The upper bound.
-     *  @param[in] t  The relative threshold (default 1%).
+     *  @param[in] t  The relative threshold, defaults to
+     *                default_threshold().
      *
      *  @throw std::bad_alloc If memory allocation for the error term fails.
      */
     ThresholdedAffine(value_t lo, value_t hi,
-                      Threshold t = Threshold{value_t(0.01)}) :
-      m_affine_(lo, hi),
-      m_lump_term_(affine_t::make_error_term()),
-      m_threshold_(t.value) {
+                      Threshold t = default_threshold()) :
+      ThresholdedAffine(interval_t(lo, hi), t) {
         apply_threshold_();
     }
 
     /** @brief Constructs a ThresholdedAffine from an interval.
      *
      *  @param[in] interval The interval.
-     *  @param[in] t        The relative threshold (default 1%).
+     *  @param[in] t        The relative threshold, defaults to
+     *                      default_threshold().
      *
      *  @throw std::bad_alloc If memory allocation for the error term fails.
      */
     explicit ThresholdedAffine(const interval_t& interval,
-                               Threshold t = Threshold{value_t(0.01)}) :
+                               Threshold t = default_threshold()) :
       m_affine_(interval),
       m_lump_term_(affine_t::make_error_term()),
       m_threshold_(t.value) {
@@ -131,12 +135,13 @@ public:
      *
      *  @param[in] center The center value.
      *  @param[in] radii  Map of error symbols to their radii.
-     *  @param[in] t      The relative threshold (default 1%).
+     *  @param[in] t      The relative threshold, defaults to
+     *                    default_threshold().
      *
      *  @throw none No throw guarantee
      */
     ThresholdedAffine(value_t center, error_terms_t radii,
-                      Threshold t = Threshold{value_t(0.01)}) :
+                      Threshold t = default_threshold()) :
       m_affine_(center, std::move(radii)),
       m_lump_term_(affine_t::make_error_term()),
       m_threshold_(t.value) {
@@ -151,7 +156,8 @@ public:
      *  @param[in] a         The Affine form to wrap.
      *  @param[in] threshold The relative threshold.
      *
-     *  @throw std::bad_alloc If memory allocation for the lump term fails.
+     *  @throw std::bad_alloc If memory allocation for the error term fails.
+     *                        Strong throw guarantee.
      */
     ThresholdedAffine(affine_t a, value_t threshold) :
       m_affine_(std::move(a)),
@@ -160,12 +166,55 @@ public:
         apply_threshold_();
     }
 
-    ThresholdedAffine(const ThresholdedAffine&)                = default;
-    ThresholdedAffine(ThresholdedAffine&&) noexcept            = default;
-    ThresholdedAffine& operator=(const ThresholdedAffine&)     = default;
+    /** @brief Copy constructor.
+     *
+     *  @param[in] other The ThresholdedAffine to copy.
+     *
+     *  @throw std::bad_alloc If memory allocation for the error terms fails.
+     *                        Strong throw guarantee.
+     */
+    ThresholdedAffine(const ThresholdedAffine&) = default;
+
+    /** @brief Move constructor.
+     *
+     *  @param[in] other The ThresholdedAffine to move.
+     *  @throw none No throw guarantee
+     */
+    ThresholdedAffine(ThresholdedAffine&&) noexcept = default;
+
+    /** @brief Copy assignment operator.
+     *
+     *  @param[in] other The ThresholdedAffine to copy.
+     *
+     *  @return Reference to this ThresholdedAffine after assignment.
+     *
+     *  @throw std::bad_alloc If memory allocation for the error terms fails.
+     *                        Strong throw guarantee.
+     */
+    ThresholdedAffine& operator=(const ThresholdedAffine&) = default;
+
+    /** @brief Move assignment operator.
+     *
+     *  @param[in] other The ThresholdedAffine to move.
+     *
+     *  @return Reference to this ThresholdedAffine after assignment.
+     *
+     *  @throw none No throw guarantee
+     */
     ThresholdedAffine& operator=(ThresholdedAffine&&) noexcept = default;
 
     // -- State Accessors -----------------------------------------------------
+
+    /** @brief Returns the default threshold value.
+     *
+     *  This is a state method that ensures the default threshold is defined
+     *  in a single place and can be easily changed if needed. The default
+     *  threshold is currently set to 0.01 (1%).
+     *
+     *  @return The default threshold.
+     *  @throw none No throw guarantee
+     */
+    static constexpr Threshold default_threshold() { return Threshold(0.01); }
 
     /** @brief Returns the interval represented by *this.
      *
@@ -213,7 +262,7 @@ public:
         apply_threshold_();
     }
 
-    /** @brief Returns whether *this contains a scalar value.
+    /** @brief Returns whether *this contains a scalar value @p v.
      *
      *  @param[in] v The value to test.
      *  @return True if the value is in range().
@@ -249,7 +298,8 @@ public:
     /** @brief Returns a string of the affine form.
      *
      *  @return Affine form string.
-     *  @throw std::bad_alloc
+     *  @throw std::bad_alloc If memory allocation for the string fails.
+     *                        Strong throw guarantee.
      */
     std::string print_affine_form() const {
         return m_affine_.print_affine_form();
@@ -328,10 +378,24 @@ public:
         return *this;
     }
 
+    /** @brief Returns the sum of *this and a scalar.
+     *
+     *  @param[in] value The scalar to add.
+     *  @return The sum of *this and @p value.
+     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
+     *                        fails. Strong throw guarantee.
+     */
     ThresholdedAffine operator+(value_t value) const {
         return ThresholdedAffine(*this) += value;
     }
 
+    /** @brief Returns the sum of *this and another ThresholdedAffine.
+     *
+     *  @param[in] other The ThresholdedAffine to add.
+     *  @return The sum of *this and @p other.
+     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
+     *                        fails. Strong throw guarantee.
+     */
     ThresholdedAffine operator+(const ThresholdedAffine& other) const {
         return ThresholdedAffine(*this) += other;
     }
@@ -359,10 +423,24 @@ public:
         return *this;
     }
 
+    /** @brief Returns the difference of *this and a scalar.
+     *
+     *  @param[in] value The scalar to subtract.
+     *  @return The difference of *this and @p value.
+     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
+     *                        fails. Strong throw guarantee.
+     */
     ThresholdedAffine operator-(value_t value) const {
         return ThresholdedAffine(*this) -= value;
     }
 
+    /** @brief Returns the difference of *this and another ThresholdedAffine.
+     *
+     *  @param[in] other The ThresholdedAffine to subtract.
+     *  @return The difference of *this and @p other.
+     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
+     *                        fails. Strong throw guarantee.
+     */
     ThresholdedAffine operator-(const ThresholdedAffine& other) const {
         return ThresholdedAffine(*this) -= other;
     }
@@ -395,10 +473,24 @@ public:
         return *this;
     }
 
+    /** @brief Multiplies *this by a scalar.
+     *
+     *  @param[in] value The scalar to multiply by.
+     *  @return The product of *this and @p value.
+     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
+     *                        fails. Strong throw guarantee.
+     */
     ThresholdedAffine operator*(value_t value) const {
         return ThresholdedAffine(*this) *= value;
     }
 
+    /** @brief Multiplies *this by another ThresholdedAffine.
+     *
+     *  @param[in] other The ThresholdedAffine to multiply by.
+     *  @return The product of *this and @p other.
+     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
+     *                        fails. Strong throw guarantee.
+     */
     ThresholdedAffine operator*(const ThresholdedAffine& other) const {
         return ThresholdedAffine(*this) *= other;
     }
@@ -427,10 +519,26 @@ public:
         return *this;
     }
 
+    /** @brief Divides *this by a scalar.
+     *
+     *  @param[in] value The scalar to divide by.
+     *  @return The quotient of *this and @p value.
+     *  @throw std::domain_error If @p value is zero.
+     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
+     *                        fails. Strong throw guarantee.
+     */
     ThresholdedAffine operator/(value_t value) const {
         return ThresholdedAffine(*this) /= value;
     }
 
+    /** @brief Divides *this by another ThresholdedAffine.
+     *
+     *  @param[in] other The ThresholdedAffine to divide by.
+     *  @return The quotient of *this and @p other.
+     *  @throw std::domain_error If @p other is empty or contains zero.
+     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
+     *                        fails. Strong throw guarantee.
+     */
     ThresholdedAffine operator/(const ThresholdedAffine& other) const {
         return ThresholdedAffine(*this) /= other;
     }
