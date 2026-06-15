@@ -44,6 +44,7 @@ class ThresholdedAffine;
             MulCost               = 3                                     \
         };                                                                \
     };                                                                    \
+    /** @brief Numeric traits for ThresholdedAffine<float_type> */        \
     template<>                                                            \
     struct NumTraits<sigma::ThresholdedAffine<float_type>>                \
       : NumTraits<float_type> {                                           \
