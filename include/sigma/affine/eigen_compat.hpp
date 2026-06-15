@@ -11,6 +11,10 @@
 namespace sigma {
 template<typename T>
 class Affine;
+
+template<typename T>
+class ThresholdedAffine;
+
 } // namespace sigma
 
 /** @def EIGEN_NUMTRAITS(float_type)
@@ -22,6 +26,30 @@ class Affine;
     struct NumTraits<sigma::Affine<float_type>> : NumTraits<float_type> { \
         /** The affine type */                                            \
         using Affine = sigma::Affine<float_type>;                         \
+        /** The corresponding real type */                                \
+        using Real = Affine;                                              \
+        /** The corresponding non-integer type */                         \
+        using NonInteger = Affine;                                        \
+        /** The corresponding literal type */                             \
+        using Literal = Affine;                                           \
+        /** The corresponding nested type */                              \
+        using Nested = Affine;                                            \
+        enum {                                                            \
+            IsComplex             = 0,                                    \
+            IsInteger             = 0,                                    \
+            IsSigned              = 1,                                    \
+            RequireInitialization = 1,                                    \
+            ReadCost              = 1,                                    \
+            AddCost               = 3,                                    \
+            MulCost               = 3                                     \
+        };                                                                \
+    };                                                                    \
+    /** @brief Numeric traits for ThresholdedAffine<float_type> */        \
+    template<>                                                            \
+    struct NumTraits<sigma::ThresholdedAffine<float_type>>                \
+      : NumTraits<float_type> {                                           \
+        /** The affine type */                                            \
+        using Affine = sigma::ThresholdedAffine<float_type>;              \
         /** The corresponding real type */                                \
         using Real = Affine;                                              \
         /** The corresponding non-integer type */                         \

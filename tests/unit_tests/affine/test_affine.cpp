@@ -5,10 +5,9 @@
 using testing::test_affine;
 
 TEMPLATE_TEST_CASE("Affine", "", float, double) {
-    using value_t      = TestType;
-    using affine_t     = sigma::Affine<TestType>;
-    using interval_t   = typename affine_t::interval_t;
-    using error_term_t = typename affine_t::error_term_t;
+    using value_t    = TestType;
+    using affine_t   = sigma::Affine<TestType>;
+    using interval_t = typename affine_t::interval_t;
 
     value_t zero  = 0.0;
     value_t one   = 1.0;
@@ -50,7 +49,8 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         }
 
         SECTION("From Center and Error Terms") {
-            affine_t value(one, {{error_term_t{}, one}});
+            auto sym = affine_t::make_error_term();
+            affine_t value(one, {{sym, one}});
             test_affine(value, zero, two);
         }
 
@@ -172,7 +172,7 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         affine_t interval(one, two);
         REQUIRE(interval.radius() == value_t(0.5));
 
-        interval.add_error_term(error_term_t{}, value_t(-0.1));
+        interval.add_error_term(affine_t::make_error_term(), value_t(-0.1));
         REQUIRE(interval.radius() == value_t(0.6));
     }
 
@@ -192,15 +192,15 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
 
     SECTION("add_error_term") {
         affine_t empty;
-        empty.add_error_term(error_term_t{}, one);
+        empty.add_error_term(affine_t::make_error_term(), one);
         test_affine(empty, -one, one);
 
         affine_t point(one);
-        point.add_error_term(error_term_t{}, value_t(0.5));
+        point.add_error_term(affine_t::make_error_term(), value_t(0.5));
         test_affine(point, value_t(0.5), value_t(1.5));
 
         affine_t interval(one, two);
-        interval.add_error_term(error_term_t{}, value_t(0.25));
+        interval.add_error_term(affine_t::make_error_term(), value_t(0.25));
         test_affine(interval, value_t(0.75), value_t(2.25));
     }
 
@@ -344,12 +344,13 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         // Test the addition of dependent errors
         // x = 1.5 +/- 0.5 e_0 +/- 1.0 e_1
         affine_t dependent(one, two);
-        dependent.add_error_term(error_term_t{}, one);
+        auto shared_sym = affine_t::make_error_term();
+        dependent.add_error_term(shared_sym, one);
 
-        // y = 1 -/+ 1 e_1
+        // y = 1 -/+ 1 e_1 (same e_1, so it cancels with dependent's e_1)
         affine_t other_dependent;
         other_dependent.set_center(one);
-        other_dependent.add_error_term(error_term_t{}, -one);
+        other_dependent.add_error_term(shared_sym, -one);
         auto pdependent = &(dependent += other_dependent);
         REQUIRE(pdependent == &dependent);
         test_affine(dependent, two, three);
