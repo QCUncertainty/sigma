@@ -173,14 +173,14 @@ public:
      *  @throw std::bad_alloc If memory allocation for the error terms fails.
      *                        Strong throw guarantee.
      */
-    ThresholdedAffine(const ThresholdedAffine&) = default;
+    ThresholdedAffine(const ThresholdedAffine& other) = default;
 
     /** @brief Move constructor.
      *
      *  @param[in] other The ThresholdedAffine to move.
      *  @throw none No throw guarantee
      */
-    ThresholdedAffine(ThresholdedAffine&&) noexcept = default;
+    ThresholdedAffine(ThresholdedAffine&& other) noexcept = default;
 
     /** @brief Copy assignment operator.
      *
@@ -191,7 +191,7 @@ public:
      *  @throw std::bad_alloc If memory allocation for the error terms fails.
      *                        Strong throw guarantee.
      */
-    ThresholdedAffine& operator=(const ThresholdedAffine&) = default;
+    ThresholdedAffine& operator=(const ThresholdedAffine& other) = default;
 
     /** @brief Move assignment operator.
      *
@@ -201,7 +201,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    ThresholdedAffine& operator=(ThresholdedAffine&&) noexcept = default;
+    ThresholdedAffine& operator=(ThresholdedAffine&& other) noexcept = default;
 
     // -- State Accessors -----------------------------------------------------
 
