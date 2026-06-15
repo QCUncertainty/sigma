@@ -123,11 +123,11 @@ using&#160;</td><td class="memItemRight"><b>size_type</b> = std::size_t</td></tr
 <tr class="memitem:a57fcf1e33221557694902844edf844f5" id="r_a57fcf1e33221557694902844edf844f5"><td class="memItemLeft"><a id="a57fcf1e33221557694902844edf844f5" name="a57fcf1e33221557694902844edf844f5"></a>
 using&#160;</td><td class="memItemRight"><b>value_t</b> = ValueType</td></tr>
 <tr class="memdesc:a57fcf1e33221557694902844edf844f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type used for storing floating point values. <br /></td></tr>
-<tr class="memitem:adae88bf403937e838477d515fbdad58a" id="r_adae88bf403937e838477d515fbdad58a"><td class="memItemLeft"><a id="adae88bf403937e838477d515fbdad58a" name="adae88bf403937e838477d515fbdad58a"></a>
-using&#160;</td><td class="memItemRight"><b>error_term_t</b> = std::shared_ptr&lt;<a class="el" href="#ac4b5d9284d1ba1e0983518be61f26762">size_type</a>&gt;</td></tr>
-<tr class="memdesc:adae88bf403937e838477d515fbdad58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque type used to store error term information. <br /></td></tr>
+<tr class="memitem:a819d8b542ca1415d9b3816d4ad36d56c" id="r_a819d8b542ca1415d9b3816d4ad36d56c"><td class="memItemLeft"><a id="a819d8b542ca1415d9b3816d4ad36d56c" name="a819d8b542ca1415d9b3816d4ad36d56c"></a>
+using&#160;</td><td class="memItemRight"><b>error_term_t</b> = <a class="el" href="#ac4b5d9284d1ba1e0983518be61f26762">size_type</a></td></tr>
+<tr class="memdesc:a819d8b542ca1415d9b3816d4ad36d56c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque type used to store error term information. <br /></td></tr>
 <tr class="memitem:a62b440448fdc35ce351531dbc26688bc" id="r_a62b440448fdc35ce351531dbc26688bc"><td class="memItemLeft"><a id="a62b440448fdc35ce351531dbc26688bc" name="a62b440448fdc35ce351531dbc26688bc"></a>
-using&#160;</td><td class="memItemRight"><b>error_terms_t</b> = std::unordered_map&lt;<a class="el" href="#adae88bf403937e838477d515fbdad58a">error_term_t</a>, <a class="el" href="#a57fcf1e33221557694902844edf844f5">value_t</a>&gt;</td></tr>
+using&#160;</td><td class="memItemRight"><b>error_terms_t</b> = std::unordered_map&lt;<a class="el" href="#a819d8b542ca1415d9b3816d4ad36d56c">error_term_t</a>, <a class="el" href="#a57fcf1e33221557694902844edf844f5">value_t</a>&gt;</td></tr>
 <tr class="memdesc:a62b440448fdc35ce351531dbc26688bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type used to map error terms to their radii. <br /></td></tr>
 <tr class="memitem:a8d05bb3802fc1752b7bdad0353b96c84" id="r_a8d05bb3802fc1752b7bdad0353b96c84"><td class="memItemLeft"><a id="a8d05bb3802fc1752b7bdad0353b96c84" name="a8d05bb3802fc1752b7bdad0353b96c84"></a>
 using&#160;</td><td class="memItemRight"><b>interval_t</b> = <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt;<a class="el" href="#a57fcf1e33221557694902844edf844f5">value_t</a>&gt;</td></tr>
@@ -163,7 +163,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af8eae6ec6036dd16aeb0d431180d87e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the radius of the affine form.  <br /></td></tr>
 <tr class="memitem:a89831002500412932d7d649f39f057b4" id="r_a89831002500412932d7d649f39f057b4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a89831002500412932d7d649f39f057b4">set_center</a> (<a class="el" href="#a57fcf1e33221557694902844edf844f5">value_t</a> <a class="el" href="#a71e99a57bddc3043b2a0894e4a46edfd">center</a>)</td></tr>
 <tr class="memdesc:a89831002500412932d7d649f39f057b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the center of the affine form.  <br /></td></tr>
-<tr class="memitem:acc904944dcf58156b7803a0ba80b97cc" id="r_acc904944dcf58156b7803a0ba80b97cc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acc904944dcf58156b7803a0ba80b97cc">add_error_term</a> (<a class="el" href="#adae88bf403937e838477d515fbdad58a">error_term_t</a> error_term, <a class="el" href="#a57fcf1e33221557694902844edf844f5">value_t</a> <a class="el" href="#af8eae6ec6036dd16aeb0d431180d87e1">radius</a>)</td></tr>
+<tr class="memitem:acc904944dcf58156b7803a0ba80b97cc" id="r_acc904944dcf58156b7803a0ba80b97cc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acc904944dcf58156b7803a0ba80b97cc">add_error_term</a> (<a class="el" href="#a819d8b542ca1415d9b3816d4ad36d56c">error_term_t</a> error_term, <a class="el" href="#a57fcf1e33221557694902844edf844f5">value_t</a> <a class="el" href="#af8eae6ec6036dd16aeb0d431180d87e1">radius</a>)</td></tr>
 <tr class="memdesc:acc904944dcf58156b7803a0ba80b97cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an error term to the affine form.  <br /></td></tr>
 <tr class="memitem:ae1dcfa1e11fd7119872188390a5a3369" id="r_ae1dcfa1e11fd7119872188390a5a3369"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae1dcfa1e11fd7119872188390a5a3369">contains</a> (<a class="el" href="#a57fcf1e33221557694902844edf844f5">value_t</a> value) const</td></tr>
 <tr class="memdesc:ae1dcfa1e11fd7119872188390a5a3369"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the interval represented by *this contains <code class="param">value</code>.  <br /></td></tr>
@@ -219,6 +219,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a235e97df6fd49c5360d468feb2c88041"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if *this and <code class="param">other</code> represent the same affine form.  <br /></td></tr>
 <tr class="memitem:aa52bd38d5cef982f659259d97c0884fa" id="r_aa52bd38d5cef982f659259d97c0884fa"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa52bd38d5cef982f659259d97c0884fa">operator!=</a> (const <a class="el" href="#a5738343390c391eff51fa728ab55f199">Affine</a> &amp;other) const</td></tr>
 <tr class="memdesc:aa52bd38d5cef982f659259d97c0884fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if *this and <code class="param">other</code> represent different affine forms.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aa2ba23b435ab7a4d3ec6a0a2c53d547d" id="r_aa2ba23b435ab7a4d3ec6a0a2c53d547d"><td class="memItemLeft"><a id="aa2ba23b435ab7a4d3ec6a0a2c53d547d" name="aa2ba23b435ab7a4d3ec6a0a2c53d547d"></a>
+static <a class="el" href="#a819d8b542ca1415d9b3816d4ad36d56c">error_term_t</a>&#160;</td><td class="memItemRight"><b>make_error_term</b> ()</td></tr>
+<tr class="memdesc:aa2ba23b435ab7a4d3ec6a0a2c53d547d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a process-wide unique integer ID for a new error term symbol. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-related" class="groupheader"><a id="related" name="related"></a>
 Related Symbols</h2></td></tr>
@@ -561,7 +567,7 @@ template&lt;typename ValueType&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classsigma_1_1Affine.html">sigma::Affine</a>&lt; ValueType &gt;::add_error_term </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#adae88bf403937e838477d515fbdad58a">error_term_t</a></td>          <td class="paramname"><span class="paramname"><em>error_term</em></span>, </td>
+          <td class="paramtype"><a class="el" href="#a819d8b542ca1415d9b3816d4ad36d56c">error_term_t</a></td>          <td class="paramname"><span class="paramname"><em>error_term</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

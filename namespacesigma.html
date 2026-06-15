@@ -122,6 +122,8 @@ Namespaces</h2></td></tr>
 Classes</h2></td></tr>
 <tr class="memitem:Affine" id="r_Affine"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Affine.html">Affine</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements affine arithmetic.  <a href="classsigma_1_1Affine.html#details">More...</a><br /></td></tr>
+<tr class="memitem:ThresholdedAffine" id="r_ThresholdedAffine"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements affine arithmetic with small-term lumping.  <a href="classsigma_1_1ThresholdedAffine.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Interval" id="r_Interval"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Interval.html">Interval</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Models a numeric interval.  <a href="classsigma_1_1Interval.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Uncertain" id="r_Uncertain"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a></td></tr>
@@ -135,6 +137,12 @@ using&#160;</td><td class="memItemRight"><b>AFloat</b> = <a class="el" href="cla
 <tr class="memitem:a19b53286565e3e813fa451b08028ad28" id="r_a19b53286565e3e813fa451b08028ad28"><td class="memItemLeft"><a id="a19b53286565e3e813fa451b08028ad28" name="a19b53286565e3e813fa451b08028ad28"></a>
 using&#160;</td><td class="memItemRight"><b>ADouble</b> = <a class="el" href="classsigma_1_1Affine.html">Affine</a>&lt;double&gt;</td></tr>
 <tr class="memdesc:a19b53286565e3e813fa451b08028ad28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for an affine form of doubles. <br /></td></tr>
+<tr class="memitem:a8aa6dc11c2681c4f0ebcb6ca997452da" id="r_a8aa6dc11c2681c4f0ebcb6ca997452da"><td class="memItemLeft"><a id="a8aa6dc11c2681c4f0ebcb6ca997452da" name="a8aa6dc11c2681c4f0ebcb6ca997452da"></a>
+using&#160;</td><td class="memItemRight"><b>TAFloat</b> = <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt;float&gt;</td></tr>
+<tr class="memdesc:a8aa6dc11c2681c4f0ebcb6ca997452da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for a thresholded affine form of floats. <br /></td></tr>
+<tr class="memitem:a1084a7ef55ef1146b9d42d1ea8a94f47" id="r_a1084a7ef55ef1146b9d42d1ea8a94f47"><td class="memItemLeft"><a id="a1084a7ef55ef1146b9d42d1ea8a94f47" name="a1084a7ef55ef1146b9d42d1ea8a94f47"></a>
+using&#160;</td><td class="memItemRight"><b>TADouble</b> = <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt;double&gt;</td></tr>
+<tr class="memdesc:a1084a7ef55ef1146b9d42d1ea8a94f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for a thresholded affine form of doubles. <br /></td></tr>
 <tr class="memitem:a39fce2e2c854ce7cafbc61b57c1e90a6" id="r_a39fce2e2c854ce7cafbc61b57c1e90a6"><td class="memItemLeft"><a id="a39fce2e2c854ce7cafbc61b57c1e90a6" name="a39fce2e2c854ce7cafbc61b57c1e90a6"></a>
 using&#160;</td><td class="memItemRight"><b>IFloat</b> = <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt;float&gt;</td></tr>
 <tr class="memdesc:a39fce2e2c854ce7cafbc61b57c1e90a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for an interval of floats. <br /></td></tr>
@@ -410,6 +418,30 @@ Functions</h2></td></tr>
 <tr class="memitem:a1625ce19f08c3c1e313c834e65ad00b2" id="r_a1625ce19f08c3c1e313c834e65ad00b2"><td class="memTemplParams" colspan="2">template&lt;typename ValueType&gt; </td></tr>
 <tr class="memitem:a1625ce19f08c3c1e313c834e65ad00b2 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Affine.html">Affine</a>&lt; ValueType &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Affine.html#a1625ce19f08c3c1e313c834e65ad00b2">operator*</a> (ValueType value, const <a class="el" href="classsigma_1_1Affine.html">Affine</a>&lt; ValueType &gt; &amp;a)</td></tr>
 <tr class="memdesc:a1625ce19f08c3c1e313c834e65ad00b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a scalar by an affine form.  <br /></td></tr>
+<tr class="memitem:afcc27dab06fe1e821227ed937b9eed25" id="r_afcc27dab06fe1e821227ed937b9eed25"><td class="memTemplParams" colspan="2">template&lt;typename ValueType&gt; </td></tr>
+<tr class="memitem:afcc27dab06fe1e821227ed937b9eed25 template"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1ThresholdedAffine.html#afcc27dab06fe1e821227ed937b9eed25">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; ValueType &gt; &amp;a)</td></tr>
+<tr class="memdesc:afcc27dab06fe1e821227ed937b9eed25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the range of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to a stream.  <br /></td></tr>
+<tr class="memitem:a8de6203d7c015d74c09192263a2ac7f9" id="r_a8de6203d7c015d74c09192263a2ac7f9"><td class="memTemplParams" colspan="2">template&lt;typename ValueType&gt; </td></tr>
+<tr class="memitem:a8de6203d7c015d74c09192263a2ac7f9 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; ValueType &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1ThresholdedAffine.html#a8de6203d7c015d74c09192263a2ac7f9">operator*</a> (ValueType value, const <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; ValueType &gt; &amp;a)</td></tr>
+<tr class="memdesc:a8de6203d7c015d74c09192263a2ac7f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a scalar by a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memitem:adf2f5e481a33c6b0723a7a0969abc6ff" id="r_adf2f5e481a33c6b0723a7a0969abc6ff"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:adf2f5e481a33c6b0723a7a0969abc6ff template"><td class="memItemLeft"><a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1ThresholdedAffine.html#adf2f5e481a33c6b0723a7a0969abc6ff">abs</a> (const <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:adf2f5e481a33c6b0723a7a0969abc6ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute value of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memitem:add22905d00add377981cb93e966526ea" id="r_add22905d00add377981cb93e966526ea"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:add22905d00add377981cb93e966526ea template"><td class="memItemLeft"><a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1ThresholdedAffine.html#add22905d00add377981cb93e966526ea">fabs</a> (const <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:add22905d00add377981cb93e966526ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute value of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> (alias for abs).  <br /></td></tr>
+<tr class="memitem:a8fbe83513f3819707698cea15eb3e9b1" id="r_a8fbe83513f3819707698cea15eb3e9b1"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a8fbe83513f3819707698cea15eb3e9b1 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1ThresholdedAffine.html#a8fbe83513f3819707698cea15eb3e9b1">sqrt</a> (const <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a8fbe83513f3819707698cea15eb3e9b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square root of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memitem:a5d4e151ec0b9d004a228df2debefb1d5" id="r_a5d4e151ec0b9d004a228df2debefb1d5"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a5d4e151ec0b9d004a228df2debefb1d5 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1ThresholdedAffine.html#a5d4e151ec0b9d004a228df2debefb1d5">exp</a> (const <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a5d4e151ec0b9d004a228df2debefb1d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponential of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memitem:a6e3189aeed25e8f39de7c5549cba8e80" id="r_a6e3189aeed25e8f39de7c5549cba8e80"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a6e3189aeed25e8f39de7c5549cba8e80 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1ThresholdedAffine.html#a6e3189aeed25e8f39de7c5549cba8e80">log</a> (const <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a6e3189aeed25e8f39de7c5549cba8e80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Natural logarithm of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memitem:a22015ab95cb704a3b46e0db23e2ead97" id="r_a22015ab95cb704a3b46e0db23e2ead97"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:a22015ab95cb704a3b46e0db23e2ead97 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1ThresholdedAffine.html#a22015ab95cb704a3b46e0db23e2ead97">pow</a> (const <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt; &amp;a, const U &amp;<a class="el" href="#a1f0fc9200525ff76e74575128a9de259">exp</a>)</td></tr>
+<tr class="memdesc:a22015ab95cb704a3b46e0db23e2ead97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Power of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
 <tr class="memitem:a795d1a141720ed26b84cd372ed855987" id="r_a795d1a141720ed26b84cd372ed855987"><td class="memTemplParams" colspan="2">template&lt;typename ValueType&gt; </td></tr>
 <tr class="memitem:a795d1a141720ed26b84cd372ed855987 template"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Interval.html#a795d1a141720ed26b84cd372ed855987">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; ValueType &gt; &amp;i)</td></tr>
 <tr class="memdesc:a795d1a141720ed26b84cd372ed855987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload stream insertion to print an interval.  <br /></td></tr>
@@ -458,7 +490,7 @@ Functions</h2></td></tr>
 <p>This is the primary namespace that contains the class used to represent uncertain variables and the functions that act on them. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a503cdf5d87ccd500483119ad06c33df5" name="a503cdf5d87ccd500483119ad06c33df5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a503cdf5d87ccd500483119ad06c33df5">&#9670;&#160;</a></span>abs() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a503cdf5d87ccd500483119ad06c33df5">&#9670;&#160;</a></span>abs() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -507,7 +539,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a3ea8a8ec91205acbf995d458fbf19105" name="a3ea8a8ec91205acbf995d458fbf19105"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ea8a8ec91205acbf995d458fbf19105">&#9670;&#160;</a></span>abs() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ea8a8ec91205acbf995d458fbf19105">&#9670;&#160;</a></span>abs() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -552,7 +584,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="add954174f373873d59d093ceb3e82af5" name="add954174f373873d59d093ceb3e82af5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add954174f373873d59d093ceb3e82af5">&#9670;&#160;</a></span>abs() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#add954174f373873d59d093ceb3e82af5">&#9670;&#160;</a></span>abs() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1468,7 +1500,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a1f0fc9200525ff76e74575128a9de259" name="a1f0fc9200525ff76e74575128a9de259"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f0fc9200525ff76e74575128a9de259">&#9670;&#160;</a></span>exp() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f0fc9200525ff76e74575128a9de259">&#9670;&#160;</a></span>exp() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1517,7 +1549,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="abd4d114d01f89ba6b65bb6661722e152" name="abd4d114d01f89ba6b65bb6661722e152"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd4d114d01f89ba6b65bb6661722e152">&#9670;&#160;</a></span>exp() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abd4d114d01f89ba6b65bb6661722e152">&#9670;&#160;</a></span>exp() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1557,7 +1589,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ad8957603ced9a2feb2c82973b5bb1da9" name="ad8957603ced9a2feb2c82973b5bb1da9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8957603ced9a2feb2c82973b5bb1da9">&#9670;&#160;</a></span>exp() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8957603ced9a2feb2c82973b5bb1da9">&#9670;&#160;</a></span>exp() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1677,7 +1709,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a791bc74e56cca4cbc40757a60e82d233" name="a791bc74e56cca4cbc40757a60e82d233"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a791bc74e56cca4cbc40757a60e82d233">&#9670;&#160;</a></span>fabs() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a791bc74e56cca4cbc40757a60e82d233">&#9670;&#160;</a></span>fabs() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1718,7 +1750,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a1e51b493c47ce761af8c6947bc94ca8b" name="a1e51b493c47ce761af8c6947bc94ca8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e51b493c47ce761af8c6947bc94ca8b">&#9670;&#160;</a></span>fabs() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e51b493c47ce761af8c6947bc94ca8b">&#9670;&#160;</a></span>fabs() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1758,7 +1790,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ac4d519de22722a51cda0bc3c92960e89" name="ac4d519de22722a51cda0bc3c92960e89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac4d519de22722a51cda0bc3c92960e89">&#9670;&#160;</a></span>fabs() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4d519de22722a51cda0bc3c92960e89">&#9670;&#160;</a></span>fabs() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2150,7 +2182,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a6b4cb2eb59313bad642280864499f747" name="a6b4cb2eb59313bad642280864499f747"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b4cb2eb59313bad642280864499f747">&#9670;&#160;</a></span>log() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b4cb2eb59313bad642280864499f747">&#9670;&#160;</a></span>log() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2206,7 +2238,7 @@ y_s &amp;= \alpha * (x_s - a) + \log(a)
 </div>
 </div>
 <a id="a05ed885aa305fef4a9b2a14e5a374b48" name="a05ed885aa305fef4a9b2a14e5a374b48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05ed885aa305fef4a9b2a14e5a374b48">&#9670;&#160;</a></span>log() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a05ed885aa305fef4a9b2a14e5a374b48">&#9670;&#160;</a></span>log() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2246,7 +2278,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a52fd9cd9f3190f6cb34b0752b4927b7e" name="a52fd9cd9f3190f6cb34b0752b4927b7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52fd9cd9f3190f6cb34b0752b4927b7e">&#9670;&#160;</a></span>log() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a52fd9cd9f3190f6cb34b0752b4927b7e">&#9670;&#160;</a></span>log() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2406,7 +2438,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="aad6843bd1c16f459b4d09ca515bc677d" name="aad6843bd1c16f459b4d09ca515bc677d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad6843bd1c16f459b4d09ca515bc677d">&#9670;&#160;</a></span>operator*() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aad6843bd1c16f459b4d09ca515bc677d">&#9670;&#160;</a></span>operator*() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2451,7 +2483,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ab15114e4948864693c0384f79a23897a" name="ab15114e4948864693c0384f79a23897a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab15114e4948864693c0384f79a23897a">&#9670;&#160;</a></span>operator*() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab15114e4948864693c0384f79a23897a">&#9670;&#160;</a></span>operator*() <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2475,7 +2507,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a2197d22cf204728006d82f03962a8191" name="a2197d22cf204728006d82f03962a8191"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2197d22cf204728006d82f03962a8191">&#9670;&#160;</a></span>operator*() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2197d22cf204728006d82f03962a8191">&#9670;&#160;</a></span>operator*() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2499,7 +2531,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a52c096ac39f822287d282bd2269e127b" name="a52c096ac39f822287d282bd2269e127b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52c096ac39f822287d282bd2269e127b">&#9670;&#160;</a></span>operator*() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a52c096ac39f822287d282bd2269e127b">&#9670;&#160;</a></span>operator*() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2523,7 +2555,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="addde4102630832a0c002fcf82af380b0" name="addde4102630832a0c002fcf82af380b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#addde4102630832a0c002fcf82af380b0">&#9670;&#160;</a></span>operator*() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#addde4102630832a0c002fcf82af380b0">&#9670;&#160;</a></span>operator*() <span class="overload">[5/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3286,7 +3318,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a24fe469f5d0da2716b5be3d1ff8d12a3" name="a24fe469f5d0da2716b5be3d1ff8d12a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24fe469f5d0da2716b5be3d1ff8d12a3">&#9670;&#160;</a></span>pow() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a24fe469f5d0da2716b5be3d1ff8d12a3">&#9670;&#160;</a></span>pow() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3338,7 +3370,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="a35f137fea763cf0d93250a9b758381b3" name="a35f137fea763cf0d93250a9b758381b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35f137fea763cf0d93250a9b758381b3">&#9670;&#160;</a></span>pow() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a35f137fea763cf0d93250a9b758381b3">&#9670;&#160;</a></span>pow() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3384,7 +3416,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="ac240ea50be68f2eb2ee4b6abf0d063c7" name="ac240ea50be68f2eb2ee4b6abf0d063c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac240ea50be68f2eb2ee4b6abf0d063c7">&#9670;&#160;</a></span>pow() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac240ea50be68f2eb2ee4b6abf0d063c7">&#9670;&#160;</a></span>pow() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3430,7 +3462,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="a0b3162c4a58cc30e72f7c4ddf3dfc1f6" name="a0b3162c4a58cc30e72f7c4ddf3dfc1f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b3162c4a58cc30e72f7c4ddf3dfc1f6">&#9670;&#160;</a></span>pow() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b3162c4a58cc30e72f7c4ddf3dfc1f6">&#9670;&#160;</a></span>pow() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3676,7 +3708,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a7f1f2cb573fe5fb6c76bb32c204c0c7a" name="a7f1f2cb573fe5fb6c76bb32c204c0c7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f1f2cb573fe5fb6c76bb32c204c0c7a">&#9670;&#160;</a></span>sqrt() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f1f2cb573fe5fb6c76bb32c204c0c7a">&#9670;&#160;</a></span>sqrt() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3726,7 +3758,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ae6ce659ec97fb6dcb2e582be33e059a1" name="ae6ce659ec97fb6dcb2e582be33e059a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6ce659ec97fb6dcb2e582be33e059a1">&#9670;&#160;</a></span>sqrt() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6ce659ec97fb6dcb2e582be33e059a1">&#9670;&#160;</a></span>sqrt() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3766,7 +3798,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a18639ffce7e2664f8f6cc4ca85213fd1" name="a18639ffce7e2664f8f6cc4ca85213fd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18639ffce7e2664f8f6cc4ca85213fd1">&#9670;&#160;</a></span>sqrt() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a18639ffce7e2664f8f6cc4ca85213fd1">&#9670;&#160;</a></span>sqrt() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

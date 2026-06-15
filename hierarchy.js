@@ -8,9 +8,13 @@ var hierarchy =
       [ "Eigen::NumTraits< sigma::Affine< float > >", "structEigen_1_1NumTraits_3_01sigma_1_1Affine_3_01float_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::Interval< double > >", "structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::Interval< float > >", "structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01float_01_4_01_4.html", null ],
+      [ "Eigen::NumTraits< sigma::ThresholdedAffine< double > >", "structEigen_1_1NumTraits_3_01sigma_1_1ThresholdedAffine_3_01double_01_4_01_4.html", null ],
+      [ "Eigen::NumTraits< sigma::ThresholdedAffine< float > >", "structEigen_1_1NumTraits_3_01sigma_1_1ThresholdedAffine_3_01float_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::Uncertain< double > >", "structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01double_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::Uncertain< float > >", "structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html", null ]
     ] ],
     [ "sigma::detail_::Setter&lt; UncertainType &gt;", "classsigma_1_1detail___1_1Setter.html", null ],
+    [ "sigma::ThresholdedAffine&lt; ValueType &gt;::Threshold", "structsigma_1_1ThresholdedAffine_1_1Threshold.html", null ],
+    [ "sigma::ThresholdedAffine&lt; ValueType &gt;", "classsigma_1_1ThresholdedAffine.html", null ],
     [ "sigma::Uncertain&lt; ValueType &gt;", "classsigma_1_1Uncertain.html", null ]
 ];

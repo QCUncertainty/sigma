@@ -1,6 +1,6 @@
 var classsigma_1_1Affine =
 [
-    [ "error_term_t", "classsigma_1_1Affine.html#adae88bf403937e838477d515fbdad58a", null ],
+    [ "error_term_t", "classsigma_1_1Affine.html#a819d8b542ca1415d9b3816d4ad36d56c", null ],
     [ "error_terms_t", "classsigma_1_1Affine.html#a62b440448fdc35ce351531dbc26688bc", null ],
     [ "interval_t", "classsigma_1_1Affine.html#a8d05bb3802fc1752b7bdad0353b96c84", null ],
     [ "size_type", "classsigma_1_1Affine.html#ac4b5d9284d1ba1e0983518be61f26762", null ],

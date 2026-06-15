@@ -11,5 +11,5 @@ var searchData=
   ['interval_3c_20double_20_3e_8',['Interval&lt; double &gt;',['../classsigma_1_1Interval.html',1,'sigma']]],
   ['interval_3c_20float_20_3e_9',['Interval&lt; float &gt;',['../classsigma_1_1Interval.html',1,'sigma']]],
   ['interval_3c_20value_5ft_20_3e_10',['Interval&lt; value_t &gt;',['../classsigma_1_1Interval.html',1,'sigma']]],
-  ['interval_5ft_11',['interval_t',['../classsigma_1_1Affine.html#a8d05bb3802fc1752b7bdad0353b96c84',1,'sigma::Affine']]]
+  ['interval_5ft_11',['interval_t',['../classsigma_1_1Affine.html#a8d05bb3802fc1752b7bdad0353b96c84',1,'sigma::Affine::interval_t'],['../classsigma_1_1ThresholdedAffine.html#a5bb8bb59e4e290859fafae5c0cd08896',1,'sigma::ThresholdedAffine::interval_t']]]
 ];
