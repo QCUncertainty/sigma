@@ -110,7 +110,6 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
         REQUIRE(interval.radius() == value_t(0.5));
         REQUIRE_FALSE(interval.empty());
         REQUIRE(interval.threshold() == value_t(0.01));
-        // lump_term() is a size_t ID, always valid (no null concept)
     }
 
     SECTION("Threshold") {
@@ -324,33 +323,53 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
         }
     }
 
-    SECTION("Lump term behavior") {
-        SECTION("Lump term shared across copies (cancellation)") {
-            // When x is copied to y and both have the same lump symbol,
-            // y - x should have a small lump contribution.
-            // With no_lump threshold, no lumping occurs and the cancellation
-            // is exact (as in Affine).
+    SECTION("Absorption soundness") {
+        SECTION("No lumping when threshold is zero") {
+            // With threshold 0, nothing is absorbed: x - x cancels exactly.
             ta_t x(one, two, no_lump);
-            ta_t y    = x; // shares lump symbol via copy
-            ta_t diff = y - x;
+            ta_t diff = x - x;
             REQUIRE(diff.radius() == zero);
         }
 
-        SECTION("Independent forms have distinct lump symbols") {
-            // Two independently created forms with distinct lump symbols
-            // should not cancel their lump contributions.
-            ta_t x(one, two, big_t);
-            ta_t z(one, two, big_t); // fresh construction: new lump symbol
-            // Force some lumping by multiplying
-            x *= ta_t(one, value_t(1.01), big_t);
-            z *= ta_t(one, value_t(1.01), big_t);
-            // x and z are independent — their difference should NOT be zero
-            // (the lump symbols differ).
-            // We just verify the forms are conservative.
-            affine_t ax(one, two), az(one, two);
-            affine_t ax2(one, value_t(1.01)), az2(one, value_t(1.01));
-            contains_affine_range(x, ax * ax2);
-            contains_affine_range(z, az * az2);
+        SECTION("Absorbed terms from independent sources never cancel") {
+            // This tests that the fresh-symbol-per-absorption design is sound.
+            // The old single-symbol design had a bug where absorbed independent
+            // errors could subtract rather than add:
+            //
+            //   a has {sym1: R, sym2: ds} where sym2/total < threshold →
+            //   absorbed b = a (copy), then scaled and augmented with an
+            //   independent error c a - b: with a shared lump symbol, c's
+            //   absorbed contribution subtracted from a's lump instead of
+            //   adding, giving a radius smaller than the plain Affine radius —
+            //   an unsound result.
+            //
+            // With fresh symbols each absorption is independent, so no such
+            // cancellation can occur.
+
+            const value_t R     = value_t(1.0);
+            const value_t ds    = value_t(0.05);
+            const value_t alpha = value_t(0.9);
+            const value_t dn    = value_t(0.03);
+            const threshold_t T{value_t(0.1)};
+
+            auto sym1 = affine_t::make_error_term();
+            auto sym2 = affine_t::make_error_term();
+
+            ta_t a(value_t(2.5),
+                   typename ta_t::error_terms_t{{sym1, R}, {sym2, ds}}, T);
+            ta_t b = a;
+            b *= alpha;
+            ta_t c(-dn, dn, T);
+            b += c;
+            ta_t diff_ta = a - b;
+
+            affine_t a_af(value_t(2.5), {{sym1, R}, {sym2, ds}});
+            affine_t b_af = a_af * alpha;
+            affine_t c_af(-dn, dn);
+            affine_t diff_af = a_af - (b_af + c_af);
+
+            REQUIRE(diff_ta.radius() >= diff_af.radius());
+            REQUIRE(diff_ta.contains(diff_af.range()));
         }
     }
 }

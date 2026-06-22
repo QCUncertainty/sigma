@@ -18,19 +18,22 @@ namespace sigma {
  * creates a nonlinearity symbol); without pruning, the symbol count grows
  * unboundedly.
  *
- * This class reduces symbol proliferation by collapsing small error terms into
- * a single persistent "lump" symbol. After each operation, any error term
- * whose relative contribution to the total radius falls below a user-specified
- * threshold @f$t@f$ is folded into the lump:
+ * This class reduces symbol proliferation by replacing small error terms with
+ * fresh independent symbols. After each operation, any error term whose
+ * relative contribution to the total radius falls below a user-specified
+ * threshold @f$t@f$ is replaced by a new unique noise symbol carrying the same
+ * magnitude:
  * @f[
- *   \frac{|x_i|}{\sum_j |x_j|} < t \implies x_i \text{ is lumped}
+ *   \frac{|x_i|}{\sum_j |x_j|} < t \implies x_i \epsilon_i \to |x_i|
+ * \epsilon_\text{fresh}
  * @f]
  *
- * The resulting interval is always a superset of the interval that would be
- * produced by an unthresholded Affine form, so the approach is conservative
- * (sound). The only loss relative to full affine arithmetic is that small
- * dependent error terms that would otherwise cancel may no longer cancel after
- * lumping.
+ * Each absorption event creates a globally unique symbol, so absorbed terms
+ * from independent sources can never cancel each other. The resulting interval
+ * is always a superset of the interval produced by an unthresholded Affine
+ * form (conservative/sound). The only loss relative to full affine arithmetic
+ * is that small terms whose symbols were shared with other forms will no longer
+ * cancel exactly after absorption.
  *
  * Constructors accept a @ref Threshold tag type to distinguish the threshold
  * parameter from ordinary value parameters and avoid constructor ambiguity.
@@ -84,9 +87,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    ThresholdedAffine() :
-      m_lump_term_(affine_t::make_error_term()),
-      m_threshold_(default_threshold().value) {}
+    ThresholdedAffine() : m_threshold_(default_threshold().value) {}
 
     /** @brief Constructs a ThresholdedAffine from a center value.
      *
@@ -125,9 +126,7 @@ public:
      */
     explicit ThresholdedAffine(const interval_t& interval,
                                Threshold t = default_threshold()) :
-      m_affine_(interval),
-      m_lump_term_(affine_t::make_error_term()),
-      m_threshold_(t.value) {
+      m_affine_(interval), m_threshold_(t.value) {
         apply_threshold_();
     }
 
@@ -142,9 +141,7 @@ public:
      */
     ThresholdedAffine(value_t center, error_terms_t radii,
                       Threshold t = default_threshold()) :
-      m_affine_(center, std::move(radii)),
-      m_lump_term_(affine_t::make_error_term()),
-      m_threshold_(t.value) {
+      m_affine_(center, std::move(radii)), m_threshold_(t.value) {
         apply_threshold_();
     }
 
@@ -160,9 +157,7 @@ public:
      *                        Strong throw guarantee.
      */
     ThresholdedAffine(affine_t a, value_t threshold) :
-      m_affine_(std::move(a)),
-      m_lump_term_(affine_t::make_error_term()),
-      m_threshold_(threshold) {
+      m_affine_(std::move(a)), m_threshold_(threshold) {
         apply_threshold_();
     }
 
@@ -331,13 +326,6 @@ public:
      *  @throw none No throw guarantee
      */
     value_t threshold() const { return m_threshold_; }
-
-    /** @brief Returns the lump error symbol.
-     *
-     *  @return The shared error_term_t used for lumped small contributions.
-     *  @throw none No throw guarantee
-     */
-    error_term_t lump_term() const { return m_lump_term_; }
 
     // -- Arithmetic Operators ------------------------------------------------
 
@@ -570,63 +558,40 @@ public:
     }
 
 private:
-    /** @brief Collapses error terms whose relative contribution is below the
-     *         threshold into the persistent lump symbol.
+    /** @brief Replaces error terms below the threshold with fresh symbols.
      *
-     *  After each arithmetic operation, scans all non-lump error terms. Terms
-     *  with @f$|x_i| / \text{total\_radius} < t@f$ are removed and their
-     *  absolute coefficient is added to the lump term's magnitude.
+     *  After each arithmetic operation, scans all error terms. Terms with
+     *  @f$|x_i| / \text{total\_radius} < t@f$ are replaced by a new globally
+     *  unique symbol carrying @f$|x_i|@f$. Because each absorption event
+     *  produces a distinct symbol, absorbed terms from independent sources
+     *  can never cancel each other in subsequent operations.
      */
     void apply_threshold_() {
         if(m_affine_.empty()) return;
         auto total_r = m_affine_.radius();
 
-        // Work on a snapshot to avoid modifying while iterating
         auto terms = m_affine_.error_terms();
-        if(terms.size() == 0) return; // No error terms to threshold
+        if(terms.empty()) return;
 
-        value_t lump_delta          = value_t(0);
-        value_t existing_lump_coeff = value_t(0);
         error_terms_t new_terms;
-
         for(auto&& [sym, coeff] : terms) {
-            if(sym == m_lump_term_) {
-                existing_lump_coeff = coeff;
-                continue;
-            }
             if(std::fabs(coeff) < std::numeric_limits<value_t>::epsilon()) {
-                // Skip zero terms to avoid unnecessary lumping and preserve
-                // sparsity.
                 continue;
             } else if(total_r != value_t(0) &&
                       std::fabs(coeff) / total_r < m_threshold_) {
-                lump_delta += std::fabs(coeff);
+                new_terms[affine_t::make_error_term()] = std::fabs(coeff);
             } else {
                 new_terms[sym] = coeff;
             }
         }
-
-        if(lump_delta > value_t(0) || existing_lump_coeff != value_t(0)) {
-            // Increase |existing_lump_coeff| by lump_delta, preserving sign.
-            // This ensures that if the lump was negated (e.g. via operator-),
-            // cancellation still works when equal forms are subtracted.
-            if(existing_lump_coeff >= value_t(0)) {
-                new_terms[m_lump_term_] = existing_lump_coeff + lump_delta;
-            } else {
-                new_terms[m_lump_term_] = existing_lump_coeff - lump_delta;
-            }
-        }
-
         m_affine_ = affine_t(m_affine_.center(), std::move(new_terms));
     }
 
-    /// The internal affine form holding all error terms (including lump).
+    /// The internal affine form holding all error terms.
     affine_t m_affine_;
 
-    /// Persistent error symbol for aggregated small terms.
-    error_term_t m_lump_term_;
-
-    /// Relative threshold: terms with |x_i| / radius < m_threshold_ are lumped.
+    /// Relative threshold: terms with |x_i| / radius < m_threshold_ are
+    /// replaced.
     value_t m_threshold_;
 };
 
