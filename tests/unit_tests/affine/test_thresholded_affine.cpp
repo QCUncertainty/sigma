@@ -110,6 +110,7 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
         REQUIRE(interval.radius() == value_t(0.5));
         REQUIRE_FALSE(interval.empty());
         REQUIRE(interval.threshold() == value_t(0.01));
+        REQUIRE(interval.lump_radius() == value_t(0));
     }
 
     SECTION("Threshold") {
@@ -323,52 +324,104 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
         }
     }
 
-    SECTION("Absorption soundness") {
+    SECTION("Lump radius behavior") {
         SECTION("No lumping when threshold is zero") {
-            // With threshold 0, nothing is absorbed: x - x cancels exactly.
+            // With no_lump threshold the lump radius stays zero and x - x
+            // cancels exactly (all error terms are tracked symbols).
             ta_t x(one, two, no_lump);
-            ta_t diff = x - x;
+            ta_t y    = x;
+            ta_t diff = y - x;
             REQUIRE(diff.radius() == zero);
+            REQUIRE(diff.lump_radius() == zero);
         }
 
-        SECTION("Absorbed terms from independent sources never cancel") {
-            // This tests that the fresh-symbol-per-absorption design is sound.
-            // The old single-symbol design had a bug where absorbed independent
-            // errors could subtract rather than add:
-            //
-            //   a has {sym1: R, sym2: ds} where sym2/total < threshold →
-            //   absorbed b = a (copy), then scaled and augmented with an
-            //   independent error c a - b: with a shared lump symbol, c's
-            //   absorbed contribution subtracted from a's lump instead of
-            //   adding, giving a radius smaller than the plain Affine radius —
-            //   an unsound result.
-            //
-            // With fresh symbols each absorption is independent, so no such
-            // cancellation can occur.
+        SECTION("Lump radius accumulates after lumping") {
+            // With big_t, small nonlinearity terms are absorbed into the
+            // unsigned lump radius.
+            ta_t x(one, two, big_t);
+            ta_t bump(one, value_t(1.01), big_t);
+            x *= bump;
+            REQUIRE(x.lump_radius() > zero);
+        }
 
-            const value_t R     = value_t(1.0);
-            const value_t ds    = value_t(0.05);
+        SECTION("Lump radii add in subtraction (no cancellation)") {
+            // With big_t, both x and y have non-zero lump radii after
+            // multiplication. Their difference has lump ≥ x.lump + y.lump
+            // because unsigned lumps always add.
+            ta_t x(one, two, big_t);
+            ta_t bump(one, value_t(1.01), big_t);
+            x *= bump;
+            ta_t y    = x; // copy, same lump radius value
+            ta_t diff = x - y;
+            REQUIRE(diff.lump_radius() >= x.lump_radius() + y.lump_radius());
+        }
+
+        SECTION("Signed lump can produce interval smaller than true range") {
+            // This test proved that the first implementation using signed lump
+            // violates the upper-bound guarantee. The root cause:
+            //
+            //   The copy constructor shares m_lump_term_ between a and its
+            //   copy b.  When an independent error is absorbed into the shared
+            //   lump of b (because it falls below the relative threshold), and
+            //   then a - b is computed, that absorbed error SUBTRACTS from the
+            //   shared lump contribution instead of ADDING to the radius.
+            //
+            // Concrete trace:
+            //   a: center=2.5, {sym1: R=1.0, L_a: ds=0.05}
+            //      (sym2 with coeff ds was lumped on construction because
+            //       ds/(R+ds) = 0.048 < threshold=0.10)
+            //   b = a (copy, shares L_a), then scaled by alpha=0.9:
+            //      b: {sym1: 0.9, L_a: 0.045}
+            //   c = [-dn, dn] = [-0.03, 0.03] independent error; its single
+            //      term has relative contribution dn/0.975 ≈ 0.031 < 0.10 →
+            //      absorbed into L_a when b += c:
+            //      b: {sym1: 0.9, L_a: 0.075}
+            //   diff = a - b:
+            //      L_a coeff: 0.05 - 0.075 = -0.025 → |contrib| = 0.025
+            //      sym1 coeff: 1.0 - 0.9   =  0.100 → |contrib| = 0.100
+            //      ThresholdedAffine radius = 0.125
+            //
+            // Plain Affine (sym2 and ε_c tracked separately):
+            //   diff: {sym1: 0.10, sym2: 0.005, ε_c: -0.03} → radius = 0.135
+            //
+            // The independent error dn=0.03 cancelled (net -0.025) instead of
+            // contributing +0.03, giving 0.125 < 0.135.  The true extremal
+            // value (sym2 and ε_c extremised in opposite directions) lies
+            // outside the ThresholdedAffine interval.
+
+            const value_t R  = value_t(1.0);
+            const value_t ds = value_t(0.05); // lumped: 0.05/1.05 ≈ 4.8% < 10%
             const value_t alpha = value_t(0.9);
-            const value_t dn    = value_t(0.03);
+            const value_t dn =
+              value_t(0.03); // lumped into b: 0.03/0.975 ≈ 3.1% < 10%
             const threshold_t T{value_t(0.1)};
 
             auto sym1 = affine_t::make_error_term();
             auto sym2 = affine_t::make_error_term();
 
-            ta_t a(value_t(2.5),
-                   typename ta_t::error_terms_t{{sym1, R}, {sym2, ds}}, T);
-            ta_t b = a;
-            b *= alpha;
-            ta_t c(-dn, dn, T);
-            b += c;
-            ta_t diff_ta = a - b;
+            // ThresholdedAffine path: sym2 is lumped into L_a on construction.
+            ta_t a_ta(value_t(2.5),
+                      typename ta_t::error_terms_t{{sym1, R}, {sym2, ds}}, T);
+            ta_t b_ta = a_ta;      // copy — shares lump symbol L_a
+            b_ta *= alpha;         // {sym1: 0.9, L_a: 0.045}
+            ta_t c_ta(-dn, dn, T); // single-term interval; not lumped within c
+            b_ta += c_ta;          // c's term absorbed into shared L_a → 0.075
+            ta_t diff_ta = a_ta - b_ta;
 
+            // Plain Affine path: every term tracked individually, no lumping.
             affine_t a_af(value_t(2.5), {{sym1, R}, {sym2, ds}});
             affine_t b_af = a_af * alpha;
             affine_t c_af(-dn, dn);
             affine_t diff_af = a_af - (b_af + c_af);
 
+            // After the fix: the unsigned lump never cancels, so the
+            // ThresholdedAffine radius is at least as large as the plain Affine
+            // radius (it may be larger because the lump from a and the lump
+            // from b both add, even though the sym2 part is correlated).
             REQUIRE(diff_ta.radius() >= diff_af.radius());
+
+            // The ThresholdedAffine interval contains the correct range,
+            // satisfying the upper-bound guarantee.
             REQUIRE(diff_ta.contains(diff_af.range()));
         }
     }
