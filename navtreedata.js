@@ -95,7 +95,7 @@ var NAVTREEINDEX =
 [
 "affine_2eigen__compat_8hpp.html",
 "classsigma_1_1ThresholdedAffine.html#a652b76d51580dcee913d73c46cde3836",
-"namespacesigma.html#a18639ffce7e2664f8f6cc4ca85213fd1"
+"namespacesigma.html#a1a67952d3cafca8724de91347623a2c7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

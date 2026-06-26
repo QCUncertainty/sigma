@@ -1,7 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"namespacesigma.html#a18639ffce7e2664f8f6cc4ca85213fd1":[9,0,1,123],
-"namespacesigma.html#a19b53286565e3e813fa451b08028ad28":[9,0,1,5],
 "namespacesigma.html#a1a67952d3cafca8724de91347623a2c7":[9,0,1,92],
 "namespacesigma.html#a1e51b493c47ce761af8c6947bc94ca8b":[9,0,1,45],
 "namespacesigma.html#a1f0fc9200525ff76e74575128a9de259":[9,0,1,38],

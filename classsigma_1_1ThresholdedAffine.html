@@ -110,7 +110,7 @@ $(function(){initNavTree('classsigma_1_1ThresholdedAffine.html','','classsigma_1
 </div><!--header-->
 <div class="contents">
 
-<p>Implements affine arithmetic with small-term lumping.  
+<p>Implements affine arithmetic that drops negligible error terms.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="thresholded__affine_8hpp_source.html">thresholded_affine.hpp</a>&gt;</code></p>
@@ -144,17 +144,17 @@ using&#160;</td><td class="memItemRight"><b>affine_t</b> = <a class="el" href="c
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afbe76e468a7b33b13a79095c446b4155" id="r_afbe76e468a7b33b13a79095c446b4155"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> ()</td></tr>
-<tr class="memdesc:afbe76e468a7b33b13a79095c446b4155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an empty <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memdesc:afbe76e468a7b33b13a79095c446b4155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an empty <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>.  <br /></td></tr>
 <tr class="memitem:a609bfcf1f0fcdefb54d3fd9579ad4be1" id="r_a609bfcf1f0fcdefb54d3fd9579ad4be1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a609bfcf1f0fcdefb54d3fd9579ad4be1">ThresholdedAffine</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> <a class="el" href="#af7d1d3255f9b597dd239826eb648c9ce">center</a>, <a class="el" href="structsigma_1_1ThresholdedAffine_1_1Threshold.html">Threshold</a> t=<a class="el" href="#a1f76e0cfda7406b6c8b0bfa6041f8946">default_threshold</a>())</td></tr>
-<tr class="memdesc:a609bfcf1f0fcdefb54d3fd9579ad4be1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> from a center value.  <br /></td></tr>
+<tr class="memdesc:a609bfcf1f0fcdefb54d3fd9579ad4be1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> from a center value.  <br /></td></tr>
 <tr class="memitem:a628a93ab90026e47b8b1bf8e8840dc47" id="r_a628a93ab90026e47b8b1bf8e8840dc47"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a628a93ab90026e47b8b1bf8e8840dc47">ThresholdedAffine</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> lo, <a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> hi, <a class="el" href="structsigma_1_1ThresholdedAffine_1_1Threshold.html">Threshold</a> t=<a class="el" href="#a1f76e0cfda7406b6c8b0bfa6041f8946">default_threshold</a>())</td></tr>
-<tr class="memdesc:a628a93ab90026e47b8b1bf8e8840dc47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> from a lower and upper bound.  <br /></td></tr>
+<tr class="memdesc:a628a93ab90026e47b8b1bf8e8840dc47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> from a lower and upper bound.  <br /></td></tr>
 <tr class="memitem:a35a4391aa92c402ca2114cfb643d5cbe" id="r_a35a4391aa92c402ca2114cfb643d5cbe"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a35a4391aa92c402ca2114cfb643d5cbe">ThresholdedAffine</a> (const <a class="el" href="#a5bb8bb59e4e290859fafae5c0cd08896">interval_t</a> &amp;interval, <a class="el" href="structsigma_1_1ThresholdedAffine_1_1Threshold.html">Threshold</a> t=<a class="el" href="#a1f76e0cfda7406b6c8b0bfa6041f8946">default_threshold</a>())</td></tr>
-<tr class="memdesc:a35a4391aa92c402ca2114cfb643d5cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> from an interval.  <br /></td></tr>
+<tr class="memdesc:a35a4391aa92c402ca2114cfb643d5cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> from an interval.  <br /></td></tr>
 <tr class="memitem:a7d07f7fd82366188a0cca7e228b5a9ad" id="r_a7d07f7fd82366188a0cca7e228b5a9ad"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7d07f7fd82366188a0cca7e228b5a9ad">ThresholdedAffine</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> <a class="el" href="#af7d1d3255f9b597dd239826eb648c9ce">center</a>, <a class="el" href="#ae436deb1333b8323b90352f861baa27b">error_terms_t</a> radii, <a class="el" href="structsigma_1_1ThresholdedAffine_1_1Threshold.html">Threshold</a> t=<a class="el" href="#a1f76e0cfda7406b6c8b0bfa6041f8946">default_threshold</a>())</td></tr>
-<tr class="memdesc:a7d07f7fd82366188a0cca7e228b5a9ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> from a center and error terms.  <br /></td></tr>
+<tr class="memdesc:a7d07f7fd82366188a0cca7e228b5a9ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> from a center and error terms.  <br /></td></tr>
 <tr class="memitem:a5897481aebf155f0b9bdf16ee67d5402" id="r_a5897481aebf155f0b9bdf16ee67d5402"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5897481aebf155f0b9bdf16ee67d5402">ThresholdedAffine</a> (<a class="el" href="#a3a9e09297c627df54c72936f0b67291a">affine_t</a> a, <a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> <a class="el" href="#a298214f80037d9585cbc4e09f8eee5b3">threshold</a>)</td></tr>
-<tr class="memdesc:a5897481aebf155f0b9bdf16ee67d5402"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> by wrapping an <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form.  <br /></td></tr>
+<tr class="memdesc:a5897481aebf155f0b9bdf16ee67d5402"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> by wrapping an <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form.  <br /></td></tr>
 <tr class="memitem:a456c8711ec9fff75b9c9817b484be05c" id="r_a456c8711ec9fff75b9c9817b484be05c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a456c8711ec9fff75b9c9817b484be05c">ThresholdedAffine</a> (const ThresholdedAffine &amp;other)=default</td></tr>
 <tr class="memdesc:a456c8711ec9fff75b9c9817b484be05c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <br /></td></tr>
 <tr class="memitem:a311d07fc9d3ce161db1160e31ef0ab09" id="r_a311d07fc9d3ce161db1160e31ef0ab09"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a311d07fc9d3ce161db1160e31ef0ab09">ThresholdedAffine</a> (ThresholdedAffine &amp;&amp;other) noexcept=default</td></tr>
@@ -168,9 +168,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af7d1d3255f9b597dd239826eb648c9ce" id="r_af7d1d3255f9b597dd239826eb648c9ce"><td class="memItemLeft"><a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#af7d1d3255f9b597dd239826eb648c9ce">center</a> () const</td></tr>
 <tr class="memdesc:af7d1d3255f9b597dd239826eb648c9ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the center of the affine form.  <br /></td></tr>
 <tr class="memitem:ac8e006e7f5813def20e8840c787427e2" id="r_ac8e006e7f5813def20e8840c787427e2"><td class="memItemLeft">const <a class="el" href="#ae436deb1333b8323b90352f861baa27b">error_terms_t</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac8e006e7f5813def20e8840c787427e2">error_terms</a> () const</td></tr>
-<tr class="memdesc:ac8e006e7f5813def20e8840c787427e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the error terms, including the lump term.  <br /></td></tr>
+<tr class="memdesc:ac8e006e7f5813def20e8840c787427e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the error terms of the tracked affine form.  <br /></td></tr>
 <tr class="memitem:a87ff751f2348268d5f91e9b796d5ace0" id="r_a87ff751f2348268d5f91e9b796d5ace0"><td class="memItemLeft"><a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a87ff751f2348268d5f91e9b796d5ace0">radius</a> () const</td></tr>
-<tr class="memdesc:a87ff751f2348268d5f91e9b796d5ace0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sum of absolute values of all error term radii.  <br /></td></tr>
+<tr class="memdesc:a87ff751f2348268d5f91e9b796d5ace0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the total radius: the sum of the tracked terms.  <br /></td></tr>
 <tr class="memitem:abfe2ba5438e04a128bc293e57e4bb32d" id="r_abfe2ba5438e04a128bc293e57e4bb32d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abfe2ba5438e04a128bc293e57e4bb32d">set_center</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> c)</td></tr>
 <tr class="memdesc:abfe2ba5438e04a128bc293e57e4bb32d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the center of the affine form.  <br /></td></tr>
 <tr class="memitem:a63222a061277ef57adb38715b1a2125b" id="r_a63222a061277ef57adb38715b1a2125b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a63222a061277ef57adb38715b1a2125b">add_error_term</a> (<a class="el" href="#aab47e94ebe9bc94c8af29a068a9f2856">error_term_t</a> error_term, <a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> r)</td></tr>
@@ -180,57 +180,63 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a751ff377df473a8b888523d37385ac1b" id="r_a751ff377df473a8b888523d37385ac1b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a751ff377df473a8b888523d37385ac1b">contains</a> (const <a class="el" href="#a5bb8bb59e4e290859fafae5c0cd08896">interval_t</a> &amp;i) const</td></tr>
 <tr class="memdesc:a751ff377df473a8b888523d37385ac1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether *this contains an interval.  <br /></td></tr>
 <tr class="memitem:aed16601b45e750a7d52e7cd4b58b5e63" id="r_aed16601b45e750a7d52e7cd4b58b5e63"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aed16601b45e750a7d52e7cd4b58b5e63">contains</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other) const</td></tr>
-<tr class="memdesc:aed16601b45e750a7d52e7cd4b58b5e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether *this contains another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>'s range.  <br /></td></tr>
+<tr class="memdesc:aed16601b45e750a7d52e7cd4b58b5e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether *this contains another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>'s range.  <br /></td></tr>
 <tr class="memitem:adffa0df6a812c03fa15641ad2af37030" id="r_adffa0df6a812c03fa15641ad2af37030"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#adffa0df6a812c03fa15641ad2af37030">empty</a> () const noexcept</td></tr>
 <tr class="memdesc:adffa0df6a812c03fa15641ad2af37030"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether *this is empty.  <br /></td></tr>
 <tr class="memitem:a17efdc1d69fe66d4ed191109ab825625" id="r_a17efdc1d69fe66d4ed191109ab825625"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a17efdc1d69fe66d4ed191109ab825625">print_affine_form</a> () const</td></tr>
-<tr class="memdesc:a17efdc1d69fe66d4ed191109ab825625"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a string of the affine form.  <br /></td></tr>
+<tr class="memdesc:a17efdc1d69fe66d4ed191109ab825625"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a string of the affine form (tracked terms only).  <br /></td></tr>
 <tr class="memitem:ae294efaba50c3f3ff0db5f5ff25d5d06" id="r_ae294efaba50c3f3ff0db5f5ff25d5d06"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#ae294efaba50c3f3ff0db5f5ff25d5d06">print_interval_form</a> () const</td></tr>
 <tr class="memdesc:ae294efaba50c3f3ff0db5f5ff25d5d06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a string of the interval form.  <br /></td></tr>
 <tr class="memitem:aeb7dffcc0621b34e1c2b2c7121cfc04d" id="r_aeb7dffcc0621b34e1c2b2c7121cfc04d"><td class="memItemLeft">const <a class="el" href="#a3a9e09297c627df54c72936f0b67291a">affine_t</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aeb7dffcc0621b34e1c2b2c7121cfc04d">affine</a> () const</td></tr>
-<tr class="memdesc:aeb7dffcc0621b34e1c2b2c7121cfc04d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the underlying <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form (read-only).  <br /></td></tr>
+<tr class="memdesc:aeb7dffcc0621b34e1c2b2c7121cfc04d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the underlying <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form (tracked terms only).  <br /></td></tr>
 <tr class="memitem:a298214f80037d9585cbc4e09f8eee5b3" id="r_a298214f80037d9585cbc4e09f8eee5b3"><td class="memItemLeft"><a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a298214f80037d9585cbc4e09f8eee5b3">threshold</a> () const</td></tr>
 <tr class="memdesc:a298214f80037d9585cbc4e09f8eee5b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the relative threshold.  <br /></td></tr>
-<tr class="memitem:ab5d221256fd57a8daa33a1b0792fa7f0" id="r_ab5d221256fd57a8daa33a1b0792fa7f0"><td class="memItemLeft"><a class="el" href="#aab47e94ebe9bc94c8af29a068a9f2856">error_term_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab5d221256fd57a8daa33a1b0792fa7f0">lump_term</a> () const</td></tr>
-<tr class="memdesc:ab5d221256fd57a8daa33a1b0792fa7f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the lump error symbol.  <br /></td></tr>
 <tr class="memitem:a1d23e65b997925d4f6e55e4cb2945ebf" id="r_a1d23e65b997925d4f6e55e4cb2945ebf"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1d23e65b997925d4f6e55e4cb2945ebf">operator-</a> () const</td></tr>
 <tr class="memdesc:a1d23e65b997925d4f6e55e4cb2945ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the additive inverse of *this.  <br /></td></tr>
 <tr class="memitem:ac69275bcf0811d3151c128ffe2c7c325" id="r_ac69275bcf0811d3151c128ffe2c7c325"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac69275bcf0811d3151c128ffe2c7c325">operator+=</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value)</td></tr>
 <tr class="memdesc:ac69275bcf0811d3151c128ffe2c7c325"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a scalar to *this.  <br /></td></tr>
 <tr class="memitem:a8806567fdcd8f8f88aee8619ea639721" id="r_a8806567fdcd8f8f88aee8619ea639721"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8806567fdcd8f8f88aee8619ea639721">operator+=</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other)</td></tr>
-<tr class="memdesc:a8806567fdcd8f8f88aee8619ea639721"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to *this.  <br /></td></tr>
-<tr class="memitem:a4d0501f05d22097c92c52aa8b3112957" id="r_a4d0501f05d22097c92c52aa8b3112957"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4d0501f05d22097c92c52aa8b3112957">operator+</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value) const</td></tr>
-<tr class="memdesc:a4d0501f05d22097c92c52aa8b3112957"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sum of *this and a scalar.  <br /></td></tr>
-<tr class="memitem:a38f372141f78bea1b1eee3bd466690b2" id="r_a38f372141f78bea1b1eee3bd466690b2"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><a class="el" href="#a38f372141f78bea1b1eee3bd466690b2">operator+</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other) const</td></tr>
-<tr class="memdesc:a38f372141f78bea1b1eee3bd466690b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sum of *this and another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memdesc:a8806567fdcd8f8f88aee8619ea639721"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> to *this.  <br /></td></tr>
+<tr class="memitem:a4d0501f05d22097c92c52aa8b3112957" id="r_a4d0501f05d22097c92c52aa8b3112957"><td class="memItemLeft"><a id="a4d0501f05d22097c92c52aa8b3112957" name="a4d0501f05d22097c92c52aa8b3112957"></a>
+<a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><b>operator+</b> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value) const</td></tr>
+<tr class="memdesc:a4d0501f05d22097c92c52aa8b3112957"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sum of *this and a scalar. <br /></td></tr>
+<tr class="memitem:a38f372141f78bea1b1eee3bd466690b2" id="r_a38f372141f78bea1b1eee3bd466690b2"><td class="memItemLeft"><a id="a38f372141f78bea1b1eee3bd466690b2" name="a38f372141f78bea1b1eee3bd466690b2"></a>
+<a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><b>operator+</b> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other) const</td></tr>
+<tr class="memdesc:a38f372141f78bea1b1eee3bd466690b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the sum of *this and another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. <br /></td></tr>
 <tr class="memitem:a726ab9501f264641714ee65bbafb6cab" id="r_a726ab9501f264641714ee65bbafb6cab"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a726ab9501f264641714ee65bbafb6cab">operator-=</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value)</td></tr>
 <tr class="memdesc:a726ab9501f264641714ee65bbafb6cab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtracts a scalar from *this.  <br /></td></tr>
 <tr class="memitem:adc991cbcd81cd62e9d24b233ada26e3f" id="r_adc991cbcd81cd62e9d24b233ada26e3f"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#adc991cbcd81cd62e9d24b233ada26e3f">operator-=</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other)</td></tr>
-<tr class="memdesc:adc991cbcd81cd62e9d24b233ada26e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtracts another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> from *this.  <br /></td></tr>
-<tr class="memitem:a382754dfb8f9e476795ed3cded4ffc9f" id="r_a382754dfb8f9e476795ed3cded4ffc9f"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><a class="el" href="#a382754dfb8f9e476795ed3cded4ffc9f">operator-</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value) const</td></tr>
-<tr class="memdesc:a382754dfb8f9e476795ed3cded4ffc9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the difference of *this and a scalar.  <br /></td></tr>
-<tr class="memitem:af32cd41e1e592bad2f5e2083e70e9354" id="r_af32cd41e1e592bad2f5e2083e70e9354"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><a class="el" href="#af32cd41e1e592bad2f5e2083e70e9354">operator-</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other) const</td></tr>
-<tr class="memdesc:af32cd41e1e592bad2f5e2083e70e9354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the difference of *this and another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memdesc:adc991cbcd81cd62e9d24b233ada26e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtracts another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> from *this.  <br /></td></tr>
+<tr class="memitem:a382754dfb8f9e476795ed3cded4ffc9f" id="r_a382754dfb8f9e476795ed3cded4ffc9f"><td class="memItemLeft"><a id="a382754dfb8f9e476795ed3cded4ffc9f" name="a382754dfb8f9e476795ed3cded4ffc9f"></a>
+<a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><b>operator-</b> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value) const</td></tr>
+<tr class="memdesc:a382754dfb8f9e476795ed3cded4ffc9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the difference of *this and a scalar. <br /></td></tr>
+<tr class="memitem:af32cd41e1e592bad2f5e2083e70e9354" id="r_af32cd41e1e592bad2f5e2083e70e9354"><td class="memItemLeft"><a id="af32cd41e1e592bad2f5e2083e70e9354" name="af32cd41e1e592bad2f5e2083e70e9354"></a>
+<a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><b>operator-</b> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other) const</td></tr>
+<tr class="memdesc:af32cd41e1e592bad2f5e2083e70e9354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the difference of *this and another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. <br /></td></tr>
 <tr class="memitem:abae9c86c8611a66313fe3f26c4dac08f" id="r_abae9c86c8611a66313fe3f26c4dac08f"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#abae9c86c8611a66313fe3f26c4dac08f">operator*=</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value)</td></tr>
 <tr class="memdesc:abae9c86c8611a66313fe3f26c4dac08f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies *this by a scalar.  <br /></td></tr>
 <tr class="memitem:aba2e5299b7f6fd3089c5a3b7eb0505f1" id="r_aba2e5299b7f6fd3089c5a3b7eb0505f1"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aba2e5299b7f6fd3089c5a3b7eb0505f1">operator*=</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other)</td></tr>
-<tr class="memdesc:aba2e5299b7f6fd3089c5a3b7eb0505f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
-<tr class="memitem:ad4c6d1ae50a463bfcf47b5e7b134f68b" id="r_ad4c6d1ae50a463bfcf47b5e7b134f68b"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad4c6d1ae50a463bfcf47b5e7b134f68b">operator*</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value) const</td></tr>
-<tr class="memdesc:ad4c6d1ae50a463bfcf47b5e7b134f68b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies *this by a scalar.  <br /></td></tr>
-<tr class="memitem:a34a4a7ddbd3b3cc3a2efc407422cd79f" id="r_a34a4a7ddbd3b3cc3a2efc407422cd79f"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><a class="el" href="#a34a4a7ddbd3b3cc3a2efc407422cd79f">operator*</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other) const</td></tr>
-<tr class="memdesc:a34a4a7ddbd3b3cc3a2efc407422cd79f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memdesc:aba2e5299b7f6fd3089c5a3b7eb0505f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memitem:ad4c6d1ae50a463bfcf47b5e7b134f68b" id="r_ad4c6d1ae50a463bfcf47b5e7b134f68b"><td class="memItemLeft"><a id="ad4c6d1ae50a463bfcf47b5e7b134f68b" name="ad4c6d1ae50a463bfcf47b5e7b134f68b"></a>
+<a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><b>operator*</b> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value) const</td></tr>
+<tr class="memdesc:ad4c6d1ae50a463bfcf47b5e7b134f68b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies *this by a scalar. <br /></td></tr>
+<tr class="memitem:a34a4a7ddbd3b3cc3a2efc407422cd79f" id="r_a34a4a7ddbd3b3cc3a2efc407422cd79f"><td class="memItemLeft"><a id="a34a4a7ddbd3b3cc3a2efc407422cd79f" name="a34a4a7ddbd3b3cc3a2efc407422cd79f"></a>
+<a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><b>operator*</b> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other) const</td></tr>
+<tr class="memdesc:a34a4a7ddbd3b3cc3a2efc407422cd79f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. <br /></td></tr>
 <tr class="memitem:a2939704b3e20dec388a8089a7d778b55" id="r_a2939704b3e20dec388a8089a7d778b55"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2939704b3e20dec388a8089a7d778b55">operator/=</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value)</td></tr>
 <tr class="memdesc:a2939704b3e20dec388a8089a7d778b55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides *this by a scalar.  <br /></td></tr>
 <tr class="memitem:aa84eb791051b05476830c101e16d67ab" id="r_aa84eb791051b05476830c101e16d67ab"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa84eb791051b05476830c101e16d67ab">operator/=</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other)</td></tr>
-<tr class="memdesc:aa84eb791051b05476830c101e16d67ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
-<tr class="memitem:a652b76d51580dcee913d73c46cde3836" id="r_a652b76d51580dcee913d73c46cde3836"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><a class="el" href="#a652b76d51580dcee913d73c46cde3836">operator/</a> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value) const</td></tr>
-<tr class="memdesc:a652b76d51580dcee913d73c46cde3836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides *this by a scalar.  <br /></td></tr>
-<tr class="memitem:a84b1d88551be08aa719f4bc1a1860b5a" id="r_a84b1d88551be08aa719f4bc1a1860b5a"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><a class="el" href="#a84b1d88551be08aa719f4bc1a1860b5a">operator/</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other) const</td></tr>
-<tr class="memdesc:a84b1d88551be08aa719f4bc1a1860b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memdesc:aa84eb791051b05476830c101e16d67ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memitem:a652b76d51580dcee913d73c46cde3836" id="r_a652b76d51580dcee913d73c46cde3836"><td class="memItemLeft"><a id="a652b76d51580dcee913d73c46cde3836" name="a652b76d51580dcee913d73c46cde3836"></a>
+<a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><b>operator/</b> (<a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a> value) const</td></tr>
+<tr class="memdesc:a652b76d51580dcee913d73c46cde3836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides *this by a scalar. <br /></td></tr>
+<tr class="memitem:a84b1d88551be08aa719f4bc1a1860b5a" id="r_a84b1d88551be08aa719f4bc1a1860b5a"><td class="memItemLeft"><a id="a84b1d88551be08aa719f4bc1a1860b5a" name="a84b1d88551be08aa719f4bc1a1860b5a"></a>
+<a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&#160;</td><td class="memItemRight"><b>operator/</b> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other) const</td></tr>
+<tr class="memdesc:a84b1d88551be08aa719f4bc1a1860b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. <br /></td></tr>
 <tr class="memitem:a364f4fa3d5815f011984c5f7af117bff" id="r_a364f4fa3d5815f011984c5f7af117bff"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a364f4fa3d5815f011984c5f7af117bff">operator==</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other) const</td></tr>
-<tr class="memdesc:a364f4fa3d5815f011984c5f7af117bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks equality of two <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> forms.  <br /></td></tr>
+<tr class="memdesc:a364f4fa3d5815f011984c5f7af117bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks equality of two <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> forms.  <br /></td></tr>
 <tr class="memitem:aef5754e9edc582bd9f12928f2fc31ae4" id="r_aef5754e9edc582bd9f12928f2fc31ae4"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aef5754e9edc582bd9f12928f2fc31ae4">operator!=</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> &amp;other) const</td></tr>
-<tr class="memdesc:aef5754e9edc582bd9f12928f2fc31ae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks inequality of two <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> forms.  <br /></td></tr>
+<tr class="memdesc:aef5754e9edc582bd9f12928f2fc31ae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks inequality of two <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> forms.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -243,44 +249,40 @@ Related Symbols</h2></td></tr>
 </td></tr>
 <tr class="memitem:afcc27dab06fe1e821227ed937b9eed25" id="r_afcc27dab06fe1e821227ed937b9eed25"><td class="memTemplParams" colspan="2">template&lt;typename ValueType&gt; </td></tr>
 <tr class="memitem:afcc27dab06fe1e821227ed937b9eed25 template"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="#afcc27dab06fe1e821227ed937b9eed25">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; ValueType &gt; &amp;a)</td></tr>
-<tr class="memdesc:afcc27dab06fe1e821227ed937b9eed25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the range of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to a stream.  <br /></td></tr>
+<tr class="memdesc:afcc27dab06fe1e821227ed937b9eed25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the range of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> to a stream.  <br /></td></tr>
 <tr class="memitem:a8de6203d7c015d74c09192263a2ac7f9" id="r_a8de6203d7c015d74c09192263a2ac7f9"><td class="memTemplParams" colspan="2">template&lt;typename ValueType&gt; </td></tr>
 <tr class="memitem:a8de6203d7c015d74c09192263a2ac7f9 template"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; ValueType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a8de6203d7c015d74c09192263a2ac7f9">operator*</a> (ValueType value, const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; ValueType &gt; &amp;a)</td></tr>
-<tr class="memdesc:a8de6203d7c015d74c09192263a2ac7f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a scalar by a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memdesc:a8de6203d7c015d74c09192263a2ac7f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a scalar by a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>.  <br /></td></tr>
 <tr class="memitem:adf2f5e481a33c6b0723a7a0969abc6ff" id="r_adf2f5e481a33c6b0723a7a0969abc6ff"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:adf2f5e481a33c6b0723a7a0969abc6ff template"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#adf2f5e481a33c6b0723a7a0969abc6ff">abs</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt; &amp;a)</td></tr>
-<tr class="memdesc:adf2f5e481a33c6b0723a7a0969abc6ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute value of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memdesc:adf2f5e481a33c6b0723a7a0969abc6ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute value of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>.  <br /></td></tr>
 <tr class="memitem:add22905d00add377981cb93e966526ea" id="r_add22905d00add377981cb93e966526ea"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:add22905d00add377981cb93e966526ea template"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#add22905d00add377981cb93e966526ea">fabs</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt; &amp;a)</td></tr>
-<tr class="memdesc:add22905d00add377981cb93e966526ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute value of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> (alias for abs).  <br /></td></tr>
+<tr class="memdesc:add22905d00add377981cb93e966526ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute value of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> (alias for abs).  <br /></td></tr>
 <tr class="memitem:a8fbe83513f3819707698cea15eb3e9b1" id="r_a8fbe83513f3819707698cea15eb3e9b1"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a8fbe83513f3819707698cea15eb3e9b1 template"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a8fbe83513f3819707698cea15eb3e9b1">sqrt</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt; &amp;a)</td></tr>
-<tr class="memdesc:a8fbe83513f3819707698cea15eb3e9b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square root of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memdesc:a8fbe83513f3819707698cea15eb3e9b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Square root of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>.  <br /></td></tr>
 <tr class="memitem:a5d4e151ec0b9d004a228df2debefb1d5" id="r_a5d4e151ec0b9d004a228df2debefb1d5"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a5d4e151ec0b9d004a228df2debefb1d5 template"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a5d4e151ec0b9d004a228df2debefb1d5">exp</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt; &amp;a)</td></tr>
-<tr class="memdesc:a5d4e151ec0b9d004a228df2debefb1d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponential of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memdesc:a5d4e151ec0b9d004a228df2debefb1d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponential of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>.  <br /></td></tr>
 <tr class="memitem:a6e3189aeed25e8f39de7c5549cba8e80" id="r_a6e3189aeed25e8f39de7c5549cba8e80"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a6e3189aeed25e8f39de7c5549cba8e80 template"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a6e3189aeed25e8f39de7c5549cba8e80">log</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt; &amp;a)</td></tr>
-<tr class="memdesc:a6e3189aeed25e8f39de7c5549cba8e80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Natural logarithm of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memdesc:a6e3189aeed25e8f39de7c5549cba8e80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Natural logarithm of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>.  <br /></td></tr>
 <tr class="memitem:a22015ab95cb704a3b46e0db23e2ead97" id="r_a22015ab95cb704a3b46e0db23e2ead97"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
 <tr class="memitem:a22015ab95cb704a3b46e0db23e2ead97 template"><td class="memItemLeft"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a22015ab95cb704a3b46e0db23e2ead97">pow</a> (const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; T &gt; &amp;a, const U &amp;<a class="el" href="#a5d4e151ec0b9d004a228df2debefb1d5">exp</a>)</td></tr>
-<tr class="memdesc:a22015ab95cb704a3b46e0db23e2ead97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Power of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memdesc:a22015ab95cb704a3b46e0db23e2ead97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Power of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename ValueType&gt;<br />
-class sigma::ThresholdedAffine&lt; ValueType &gt;</div><p>Implements affine arithmetic with small-term lumping. </p>
+class sigma::ThresholdedAffine&lt; ValueType &gt;</div><p>Implements affine arithmetic that drops negligible error terms. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>The numeric type of the center and error term radii.</td></tr>
   </table>
   </dd>
 </dl>
-<p><a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> extends standard affine arithmetic with a mechanism to control the number of error symbols carried in an affine form. Each non-affine operation can introduce new error symbols (e.g. multiplication creates a nonlinearity symbol); without pruning, the symbol count grows unboundedly.</p>
-<p>This class reduces symbol proliferation by collapsing small error terms into a single persistent "lump" symbol. After each operation, any error term whose relative contribution to the total radius falls below a user-specified threshold \(t\) is folded into the lump:   </p><p class="formulaDsp">
-\[  \frac{|x_i|}{\sum_j |x_j|} &lt; t \implies x_i \text{ is lumped}
-\]
-</p>
-<p>The resulting interval is always a superset of the interval that would be produced by an unthresholded <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form, so the approach is conservative (sound). The only loss relative to full affine arithmetic is that small dependent error terms that would otherwise cancel may no longer cancel after lumping.</p>
+<p><a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> extends standard affine arithmetic with a mechanism to control the number of error symbols carried in an affine form. Each non-affine operation can introduce new error symbols (e.g. multiplication creates a nonlinearity symbol); without pruning, the symbol count grows unboundedly.</p>
+<p>This class reduces symbol count by deleting error terms whose relative contribution falls below the threshold. Dropped terms are simply discarded; no separate "lump" radius is retained to account for them.</p>
 <p>Constructors accept a <a class="el" href="structsigma_1_1ThresholdedAffine_1_1Threshold.html" title="Threshold">Threshold</a> tag type to distinguish the threshold parameter from ordinary value parameters and avoid constructor ambiguity. </p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afbe76e468a7b33b13a79095c446b4155" name="afbe76e468a7b33b13a79095c446b4155"></a>
@@ -308,8 +310,8 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs an empty <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
-<p>The resulting <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> represents the empty set. The lump term is initialized but has zero radius, and the threshold is set to the default value.</p>
+<p>Constructs an empty <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. </p>
+<p>The resulting <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> represents the empty set and the threshold is set to the default value.</p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
@@ -348,7 +350,7 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> from a center value. </p>
+<p>Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> from a center value. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="#af7d1d3255f9b597dd239826eb648c9ce" title="Returns the center of the affine form.">center</a></td><td>The center value. </td></tr>
@@ -399,7 +401,7 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> from a lower and upper bound. </p>
+<p>Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> from a lower and upper bound. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">lo</td><td>The lower bound. </td></tr>
@@ -446,7 +448,7 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> from an interval. </p>
+<p>Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> from an interval. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">interval</td><td>The interval. </td></tr>
@@ -497,7 +499,7 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> from a center and error terms. </p>
+<p>Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> from a center and error terms. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="#af7d1d3255f9b597dd239826eb648c9ce" title="Returns the center of the affine form.">center</a></td><td>The center value. </td></tr>
@@ -544,8 +546,8 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> by wrapping an <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form. </p>
-<p>Used internally by operations that produce an <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> result and need to re-wrap it as a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>.</p>
+<p>Constructs a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> by wrapping an <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form. </p>
+<p>Used internally by operations that produce an <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> result and need to re-wrap it as a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>The <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form to wrap. </td></tr>
@@ -590,7 +592,7 @@ template&lt;typename ValueType&gt; </div>
 <p>Copy constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to copy.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> to copy.</td></tr>
   </table>
   </dd>
 </dl>
@@ -631,7 +633,7 @@ template&lt;typename ValueType&gt; </div>
 <p>Move constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to move. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> to move. </td></tr>
   </table>
   </dd>
 </dl>
@@ -716,8 +718,7 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the underlying <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form (read-only). </p>
-<p>Used by operations that need to call Affine-specific functions (e.g. apply_affine_transform) and then re-wrap the result.</p>
+<p>Returns the underlying <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form (tracked terms only). </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the internal <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form. </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
@@ -831,10 +832,10 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns whether *this contains another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>'s range. </p>
+<p>Returns whether *this contains another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>'s range. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to test. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> to test. </td></tr>
   </table>
   </dd>
 </dl>
@@ -916,8 +917,7 @@ template&lt;typename ValueType&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the default threshold value. </p>
-<p>This is a state method that ensures the default threshold is defined in a single place and can be easily changed if needed. The default threshold is currently set to 0.01 (1%).</p>
-<dl class="section return"><dt>Returns</dt><dd>The default threshold. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The default threshold (0.1%). </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
@@ -988,47 +988,11 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the error terms, including the lump term. </p>
+<p>Returns the error terms of the tracked affine form. </p>
 <dl class="section return"><dt>Returns</dt><dd>Const reference to the error terms map. </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">None</td><td>No throw guarantee. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ab5d221256fd57a8daa33a1b0792fa7f0" name="ab5d221256fd57a8daa33a1b0792fa7f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5d221256fd57a8daa33a1b0792fa7f0">&#9670;&#160;</a></span>lump_term()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#aab47e94ebe9bc94c8af29a068a9f2856">error_term_t</a> <a class="el" href="classsigma_1_1ThresholdedAffine.html">sigma::ThresholdedAffine</a>&lt; ValueType &gt;::lump_term </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the lump error symbol. </p>
-<dl class="section return"><dt>Returns</dt><dd>The shared <a class="el" href="#aab47e94ebe9bc94c8af29a068a9f2856" title="Opaque type used to store error term information.">error_term_t</a> used for lumped small contributions. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
   </table>
   </dd>
 </dl>
@@ -1060,7 +1024,7 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Checks inequality of two <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> forms. </p>
+<p>Checks inequality of two <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> forms. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The form to compare. </td></tr>
@@ -1071,90 +1035,6 @@ template&lt;typename ValueType&gt; </div>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">none</td><td>No throw guarantee. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a34a4a7ddbd3b3cc3a2efc407422cd79f" name="a34a4a7ddbd3b3cc3a2efc407422cd79f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34a4a7ddbd3b3cc3a2efc407422cd79f">&#9670;&#160;</a></span>operator*() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> <a class="el" href="classsigma_1_1ThresholdedAffine.html">sigma::ThresholdedAffine</a>&lt; ValueType &gt;::operator* </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; ValueType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Multiplies *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to multiply by. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The product of *this and <code class="param">other</code>. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation for the new <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> fails. Strong throw guarantee. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ad4c6d1ae50a463bfcf47b5e7b134f68b" name="ad4c6d1ae50a463bfcf47b5e7b134f68b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4c6d1ae50a463bfcf47b5e7b134f68b">&#9670;&#160;</a></span>operator*() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> <a class="el" href="classsigma_1_1ThresholdedAffine.html">sigma::ThresholdedAffine</a>&lt; ValueType &gt;::operator* </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Multiplies *this by a scalar. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The scalar to multiply by. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The product of *this and <code class="param">value</code>. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation for the new <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> fails. Strong throw guarantee. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1186,8 +1066,8 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Multiplies *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
-<p>Multiplication introduces a new nonlinearity error term; thresholding is applied afterward so that small terms (including the new one, if its relative contribution is negligible) are folded into the lump.</p>
+<p>Multiplies *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. </p>
+<p>Multiplication introduces a new nonlinearity error term via affine arithmetic, after which sub-threshold terms are dropped.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The form to multiply by. </td></tr>
@@ -1246,90 +1126,6 @@ template&lt;typename ValueType&gt; </div>
 
 </div>
 </div>
-<a id="a38f372141f78bea1b1eee3bd466690b2" name="a38f372141f78bea1b1eee3bd466690b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38f372141f78bea1b1eee3bd466690b2">&#9670;&#160;</a></span>operator+() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> <a class="el" href="classsigma_1_1ThresholdedAffine.html">sigma::ThresholdedAffine</a>&lt; ValueType &gt;::operator+ </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; ValueType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the sum of *this and another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to add. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The sum of *this and <code class="param">other</code>. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation for the new <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> fails. Strong throw guarantee. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a4d0501f05d22097c92c52aa8b3112957" name="a4d0501f05d22097c92c52aa8b3112957"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d0501f05d22097c92c52aa8b3112957">&#9670;&#160;</a></span>operator+() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> <a class="el" href="classsigma_1_1ThresholdedAffine.html">sigma::ThresholdedAffine</a>&lt; ValueType &gt;::operator+ </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the sum of *this and a scalar. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The scalar to add. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The sum of *this and <code class="param">value</code>. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation for the new <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> fails. Strong throw guarantee. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a8806567fdcd8f8f88aee8619ea639721" name="a8806567fdcd8f8f88aee8619ea639721"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8806567fdcd8f8f88aee8619ea639721">&#9670;&#160;</a></span>operator+=() <span class="overload">[1/2]</span></h2>
 
@@ -1355,7 +1151,8 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Adds another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to *this. </p>
+<p>Adds another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> to *this. </p>
+<p>The tracked affine terms are combined with normal affine addition (shared symbols may cancel), after which sub-threshold terms are dropped.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The form to add. </td></tr>
@@ -1415,7 +1212,7 @@ template&lt;typename ValueType&gt; </div>
 </div>
 </div>
 <a id="a1d23e65b997925d4f6e55e4cb2945ebf" name="a1d23e65b997925d4f6e55e4cb2945ebf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d23e65b997925d4f6e55e4cb2945ebf">&#9670;&#160;</a></span>operator-() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d23e65b997925d4f6e55e4cb2945ebf">&#9670;&#160;</a></span>operator-()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1440,95 +1237,11 @@ template&lt;typename ValueType&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the additive inverse of *this. </p>
-<p>Negation preserves relative error-term magnitudes, so no re-thresholding is needed.</p>
-<dl class="section return"><dt>Returns</dt><dd>The negated <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </dd></dl>
+<p>Negation flips the tracked affine terms.</p>
+<dl class="section return"><dt>Returns</dt><dd>The negated <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation fails. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="af32cd41e1e592bad2f5e2083e70e9354" name="af32cd41e1e592bad2f5e2083e70e9354"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af32cd41e1e592bad2f5e2083e70e9354">&#9670;&#160;</a></span>operator-() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> <a class="el" href="classsigma_1_1ThresholdedAffine.html">sigma::ThresholdedAffine</a>&lt; ValueType &gt;::operator- </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; ValueType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the difference of *this and another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to subtract. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The difference of *this and <code class="param">other</code>. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation for the new <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> fails. Strong throw guarantee. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a382754dfb8f9e476795ed3cded4ffc9f" name="a382754dfb8f9e476795ed3cded4ffc9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a382754dfb8f9e476795ed3cded4ffc9f">&#9670;&#160;</a></span>operator-() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> <a class="el" href="classsigma_1_1ThresholdedAffine.html">sigma::ThresholdedAffine</a>&lt; ValueType &gt;::operator- </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the difference of *this and a scalar. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The scalar to subtract. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The difference of *this and <code class="param">value</code>. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation for the new <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> fails. Strong throw guarantee. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1560,7 +1273,8 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Subtracts another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> from *this. </p>
+<p>Subtracts another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> from *this. </p>
+<p>Tracked affine terms are combined with normal affine subtraction (shared symbols cancel, capturing dependency), after which sub-threshold terms are dropped.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The form to subtract. </td></tr>
@@ -1619,92 +1333,6 @@ template&lt;typename ValueType&gt; </div>
 
 </div>
 </div>
-<a id="a84b1d88551be08aa719f4bc1a1860b5a" name="a84b1d88551be08aa719f4bc1a1860b5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84b1d88551be08aa719f4bc1a1860b5a">&#9670;&#160;</a></span>operator/() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> <a class="el" href="classsigma_1_1ThresholdedAffine.html">sigma::ThresholdedAffine</a>&lt; ValueType &gt;::operator/ </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a>&lt; ValueType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Divides *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to divide by. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The quotient of *this and <code class="param">other</code>. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::domain_error</td><td>If <code class="param">other</code> is empty or contains zero. </td></tr>
-    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation for the new <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> fails. Strong throw guarantee. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a652b76d51580dcee913d73c46cde3836" name="a652b76d51580dcee913d73c46cde3836"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a652b76d51580dcee913d73c46cde3836">&#9670;&#160;</a></span>operator/() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#afbe76e468a7b33b13a79095c446b4155">ThresholdedAffine</a> <a class="el" href="classsigma_1_1ThresholdedAffine.html">sigma::ThresholdedAffine</a>&lt; ValueType &gt;::operator/ </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="#a9e5d7ee9b861396ba562272db7ff90f9">value_t</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Divides *this by a scalar. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The scalar to divide by. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The quotient of *this and <code class="param">value</code>. </dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::domain_error</td><td>If <code class="param">value</code> is zero. </td></tr>
-    <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation for the new <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> fails. Strong throw guarantee. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="aa84eb791051b05476830c101e16d67ab" name="aa84eb791051b05476830c101e16d67ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa84eb791051b05476830c101e16d67ab">&#9670;&#160;</a></span>operator/=() <span class="overload">[1/2]</span></h2>
 
@@ -1730,7 +1358,8 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Divides *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
+<p>Divides *this by another <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. </p>
+<p>Division is performed by affine arithmetic, after which sub-threshold terms are dropped. The divisor's interval must not contain zero.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The form to divide by. </td></tr>
@@ -1740,7 +1369,7 @@ template&lt;typename ValueType&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>Reference to *this. </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::domain_error</td><td>If <code class="param">other</code> is empty or contains zero. </td></tr>
+    <tr><td class="paramname">std::domain_error</td><td>If <code class="param">other</code> is empty or its interval contains zero. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1817,11 +1446,11 @@ template&lt;typename ValueType&gt; </div>
 <p>Copy assignment operator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to copy.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> to copy.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to this <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> after assignment.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> after assignment.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">std::bad_alloc</td><td>If memory allocation for the error terms fails. Strong throw guarantee. </td></tr>
@@ -1859,11 +1488,11 @@ template&lt;typename ValueType&gt; </div>
 <p>Move assignment operator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to move.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> to move.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to this <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> after assignment.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to this <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> after assignment.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
@@ -1898,8 +1527,7 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Checks equality of two <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> forms. </p>
-<p>Two <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> forms are equal if they have the same internal <a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form and the same threshold.</p>
+<p>Checks equality of two <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> forms. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The form to compare. </td></tr>
@@ -1941,7 +1569,7 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a string of the affine form. </p>
+<p>Returns a string of the affine form (tracked terms only). </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> form string. </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
@@ -2013,8 +1641,8 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the sum of absolute values of all error term radii. </p>
-<dl class="section return"><dt>Returns</dt><dd>The radius. </dd></dl>
+<p>Returns the total radius: the sum of the tracked terms. </p>
+<dl class="section return"><dt>Returns</dt><dd>The total radius. </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">std::domain_error</td><td>If *this is empty. </td></tr>
@@ -2050,7 +1678,8 @@ template&lt;typename ValueType&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the interval represented by *this. </p>
-<dl class="section return"><dt>Returns</dt><dd>The interval [center - radius, center + radius]. </dd></dl>
+<p>The interval is [center - <a class="el" href="#a87ff751f2348268d5f91e9b796d5ace0" title="Returns the total radius: the sum of the tracked terms.">radius()</a>, center + <a class="el" href="#a87ff751f2348268d5f91e9b796d5ace0" title="Returns the total radius: the sum of the tracked terms.">radius()</a>], where <a class="el" href="#a87ff751f2348268d5f91e9b796d5ace0" title="Returns the total radius: the sum of the tracked terms.">radius()</a> is the sum of the tracked affine terms.</p>
+<dl class="section return"><dt>Returns</dt><dd>The interval. </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
@@ -2127,7 +1756,7 @@ template&lt;typename ValueType&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the relative threshold. </p>
-<dl class="section return"><dt>Returns</dt><dd>The threshold \(t\) such that terms with \(|x_i|/\text{radius} &lt; t\) are lumped. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The threshold \(t\). </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
@@ -2163,7 +1792,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Absolute value of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
+<p>Absolute value of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type. </td></tr>
@@ -2198,7 +1827,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Exponential of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
+<p>Exponential of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type. </td></tr>
@@ -2233,7 +1862,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Absolute value of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> (alias for abs). </p>
+<p>Absolute value of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> (alias for abs). </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type. </td></tr>
@@ -2268,7 +1897,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Natural logarithm of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
+<p>Natural logarithm of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type. </td></tr>
@@ -2313,7 +1942,7 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Multiplies a scalar by a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
+<p>Multiplies a scalar by a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>The value type. </td></tr>
@@ -2352,7 +1981,7 @@ template&lt;typename ValueType&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Outputs the range of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a> to a stream. </p>
+<p>Outputs the range of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a> to a stream. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>The value type. </td></tr>
@@ -2391,7 +2020,7 @@ template&lt;typename T, typename U&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Power of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
+<p>Power of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type. </td></tr>
@@ -2433,7 +2062,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Square root of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic with small-term lumping.">ThresholdedAffine</a>. </p>
+<p>Square root of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type. </td></tr>

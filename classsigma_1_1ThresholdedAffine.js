@@ -23,7 +23,6 @@ var classsigma_1_1ThresholdedAffine =
     [ "contains", "classsigma_1_1ThresholdedAffine.html#a3bde3e85f0ea3e35945295d0dd8c84fa", null ],
     [ "empty", "classsigma_1_1ThresholdedAffine.html#adffa0df6a812c03fa15641ad2af37030", null ],
     [ "error_terms", "classsigma_1_1ThresholdedAffine.html#ac8e006e7f5813def20e8840c787427e2", null ],
-    [ "lump_term", "classsigma_1_1ThresholdedAffine.html#ab5d221256fd57a8daa33a1b0792fa7f0", null ],
     [ "operator!=", "classsigma_1_1ThresholdedAffine.html#aef5754e9edc582bd9f12928f2fc31ae4", null ],
     [ "operator*", "classsigma_1_1ThresholdedAffine.html#a34a4a7ddbd3b3cc3a2efc407422cd79f", null ],
     [ "operator*", "classsigma_1_1ThresholdedAffine.html#ad4c6d1ae50a463bfcf47b5e7b134f68b", null ],
