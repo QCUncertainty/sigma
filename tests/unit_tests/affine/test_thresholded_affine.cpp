@@ -10,7 +10,8 @@ using TAFloat  = sigma::TAFloat;
 using TADouble = sigma::TADouble;
 
 // Helper: verify that a ThresholdedAffine's range contains the equivalent
-// Affine range. Used to assert conservatism.
+// Affine range. Note that dropping terms is not conservative in general; this
+// holds only when nothing significant is dropped (small thresholds / inputs).
 template<typename TA>
 void contains_affine_range(const TA& ta,
                            const sigma::Affine<typename TA::value_t>& a) {
@@ -30,11 +31,11 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
     const value_t three = value_t(3.0);
     const value_t four  = value_t(4.0);
 
-    // A threshold low enough that single-term forms never get lumped.
-    const threshold_t no_lump{value_t(0.0)};
-    // A threshold high enough to lump almost everything.
+    // A threshold of zero so that no error terms are ever dropped.
+    const threshold_t no_drop{value_t(0.0)};
+    // A threshold high enough to drop almost everything.
     const threshold_t big_t{value_t(0.5)};
-    // The default threshold (1%).
+    // An explicit threshold of 1% used by several cases below.
     const threshold_t def_t{value_t(0.01)};
 
     SECTION("Constructors") {
@@ -109,16 +110,14 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
         REQUIRE(interval.center() == value_t(1.5));
         REQUIRE(interval.radius() == value_t(0.5));
         REQUIRE_FALSE(interval.empty());
-        REQUIRE(interval.threshold() == value_t(0.01));
-        // lump_term() is a size_t ID, always valid (no null concept)
+        REQUIRE(interval.threshold() == value_t(0.001));
     }
 
     SECTION("Threshold") {
-        SECTION("No lumping for a single-term form") {
-            // A single-term form has relative contribution 1.0, never lumped.
+        SECTION("No dropping for a single-term form") {
+            // A single-term form has relative contribution 1.0, never dropped.
             ta_t x(one, two, def_t);
             // Should have exactly one error term (the interval's epsilon).
-            // The lump term should NOT be present (or have zero coefficient).
             auto terms = x.error_terms();
             // Count non-zero terms
             std::size_t nonzero = 0;
@@ -128,11 +127,11 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
             REQUIRE(nonzero == 1);
         }
 
-        SECTION("Lumping reduces term count after multiplication") {
+        SECTION("Dropping reduces term count after multiplication") {
             // x in [1, 2], y in [1, 2] — multiply to get nonlinearity term.
             // With a tight threshold the nonlinearity correction (0.25) is
-            // small relative to the main terms (~0.5 each), so it may be
-            // lumped at threshold > ~0.2.
+            // small relative to the main terms (~0.5 each), so it is dropped
+            // at threshold > ~0.2.
             ta_t x(one, two, big_t);
             ta_t y(one, two, big_t);
             ta_t z = x * y;
@@ -141,33 +140,29 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
             affine_t ax(one, two), ay(one, two);
             affine_t az = ax * ay;
 
-            // ThresholdedAffine result must contain the Affine result.
-            contains_affine_range(z, az);
-
-            // With big threshold, the new nonlinearity term is likely lumped.
-            // Verify that z has fewer unique symbols than az (or at most
-            // equal).
+            // With a big threshold the new nonlinearity term is dropped, so z
+            // has no more unique symbols than az.
             REQUIRE(z.error_terms().size() <= az.error_terms().size());
         }
 
-        SECTION("Lumped lump term grows monotonically") {
+        SECTION("Dropping keeps the term count bounded") {
             // Start with [1, 2] and multiply repeatedly; each multiplication
-            // adds a nonlinearity term.  With a high threshold, these get
-            // absorbed into the lump, so the total term count stays small.
+            // adds a nonlinearity term.  With a high threshold, these are
+            // dropped, so the total term count stays small.
             ta_t x(one, two, big_t);
             std::size_t prev_count = x.error_terms().size();
             for(int i = 0; i < 5; ++i) {
                 ta_t bump(value_t(1.0), value_t(1.01), big_t);
                 x *= bump;
                 // Symbol count should stay bounded (≤ prev + 1 at most,
-                // and often stays the same due to lumping).
+                // and often stays the same because terms are dropped).
                 REQUIRE(x.error_terms().size() <= prev_count + 2);
                 prev_count = x.error_terms().size();
             }
         }
     }
 
-    SECTION("Conservatism: range always contains Affine range") {
+    SECTION("range contains Affine range when nothing significant is dropped") {
         affine_t ax(one, two), ay(two, three);
         ta_t tx(one, two, def_t), ty(two, three, def_t);
 
@@ -193,49 +188,49 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
 
     SECTION("Arithmetic") {
         SECTION("Scalar add") {
-            ta_t x(one, two, no_lump);
+            ta_t x(one, two, no_drop);
             x += two;
             test_affine(x, three, four);
         }
 
         SECTION("Scalar subtract") {
-            ta_t x(one, two, no_lump);
+            ta_t x(one, two, no_drop);
             x -= one;
             test_affine(x, zero, one);
         }
 
         SECTION("Scalar multiply") {
-            ta_t x(one, two, no_lump);
+            ta_t x(one, two, no_drop);
             x *= two;
             test_affine(x, two, four);
         }
 
         SECTION("Scalar divide") {
-            ta_t x(two, four, no_lump);
+            ta_t x(two, four, no_drop);
             x /= two;
             test_affine(x, one, two);
         }
 
         SECTION("Affine add") {
-            ta_t x(one, two, no_lump), y(two, three, no_lump);
+            ta_t x(one, two, no_drop), y(two, three, no_drop);
             test_affine(x + y, three, value_t(5.0));
         }
 
         SECTION("Unary minus") {
-            ta_t x(one, two, no_lump);
+            ta_t x(one, two, no_drop);
             test_affine(-x, -two, -one);
         }
 
         SECTION("Dependent subtraction: x - x") {
-            // With no_lump, x shares its error symbol with its copy, so
-            // x - x = 0 exactly (same as Affine).
-            ta_t x(one, two, no_lump);
+            // With no_drop, no terms are dropped, so x shares its error symbol
+            // with its copy and x - x = 0 exactly (same as Affine).
+            ta_t x(one, two, no_drop);
             ta_t result = x - x;
             REQUIRE(result.radius() == zero);
         }
 
         SECTION("Scalar right multiply") {
-            ta_t x(one, two, no_lump);
+            ta_t x(one, two, no_drop);
             ta_t result = two * x;
             test_affine(result, two, four);
         }
@@ -251,7 +246,7 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
     }
 
     SECTION("Contains") {
-        ta_t x(one, two, no_lump);
+        ta_t x(one, two, no_drop);
         REQUIRE(x.contains(one));
         REQUIRE(x.contains(two));
         REQUIRE(x.contains(value_t(1.5)));
@@ -262,9 +257,9 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
         REQUIRE(x.contains(interval_t(one, value_t(1.5))));
         REQUIRE_FALSE(x.contains(interval_t(zero, two)));
 
-        ta_t y(one, value_t(1.5), no_lump);
+        ta_t y(one, value_t(1.5), no_drop);
         REQUIRE(x.contains(y));
-        ta_t z(zero, two, no_lump);
+        ta_t z(zero, two, no_drop);
         REQUIRE_FALSE(x.contains(z));
     }
 
@@ -276,14 +271,14 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
     }
 
     SECTION("Stream output") {
-        ta_t x(one, two, no_lump);
+        ta_t x(one, two, no_drop);
         std::ostringstream os;
         os << x;
         REQUIRE_FALSE(os.str().empty());
     }
 
     SECTION("Operations") {
-        ta_t x(one, two, no_lump);
+        ta_t x(one, two, no_drop);
 
         SECTION("sqrt") {
             test_affine(sigma::sqrt(x), one, value_t(1.43198051533946));
@@ -306,13 +301,13 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
         }
 
         SECTION("abs negative") {
-            ta_t neg(-two, -one, no_lump);
+            ta_t neg(-two, -one, no_drop);
             auto result = sigma::abs(neg);
             test_affine(result, one, two);
         }
 
         SECTION("fabs") {
-            ta_t neg(-two, -one, no_lump);
+            ta_t neg(-two, -one, no_drop);
             auto result = sigma::fabs(neg);
             test_affine(result, one, two);
         }
@@ -324,33 +319,77 @@ TEMPLATE_TEST_CASE("ThresholdedAffine", "", TAFloat, TADouble) {
         }
     }
 
-    SECTION("Lump term behavior") {
-        SECTION("Lump term shared across copies (cancellation)") {
-            // When x is copied to y and both have the same lump symbol,
-            // y - x should have a small lump contribution.
-            // With no_lump threshold, no lumping occurs and the cancellation
-            // is exact (as in Affine).
-            ta_t x(one, two, no_lump);
-            ta_t y    = x; // shares lump symbol via copy
+    SECTION("Dropping behavior") {
+        SECTION("Nothing dropped when threshold is zero") {
+            // With the no_drop threshold every error term is kept, so x - x
+            // cancels exactly (all error terms are shared tracked symbols).
+            ta_t x(one, two, no_drop);
+            ta_t y    = x;
             ta_t diff = y - x;
             REQUIRE(diff.radius() == zero);
         }
 
-        SECTION("Independent forms have distinct lump symbols") {
-            // Two independently created forms with distinct lump symbols
-            // should not cancel their lump contributions.
-            ta_t x(one, two, big_t);
-            ta_t z(one, two, big_t); // fresh construction: new lump symbol
-            // Force some lumping by multiplying
-            x *= ta_t(one, value_t(1.01), big_t);
-            z *= ta_t(one, value_t(1.01), big_t);
-            // x and z are independent — their difference should NOT be zero
-            // (the lump symbols differ).
-            // We just verify the forms are conservative.
-            affine_t ax(one, two), az(one, two);
-            affine_t ax2(one, value_t(1.01)), az2(one, value_t(1.01));
-            contains_affine_range(x, ax * ax2);
-            contains_affine_range(z, az * az2);
+        SECTION("Sub-threshold terms are discarded") {
+            // sym2's relative contribution is 0.05/1.05 ≈ 4.8%, below the 10%
+            // threshold, so it is dropped on construction. Only sym1 survives
+            // and the radius reflects the kept term alone.
+            const threshold_t T{value_t(0.1)};
+            auto sym1 = affine_t::make_error_term();
+            auto sym2 = affine_t::make_error_term();
+            ta_t x(
+              value_t(2.5),
+              typename ta_t::error_terms_t{{sym1, one}, {sym2, value_t(0.05)}},
+              T);
+            REQUIRE(x.error_terms().size() == 1);
+            REQUIRE(x.radius() == one);
+        }
+
+        SECTION("Dropping is not conservative") {
+            // Because dropped terms are discarded rather than retained in a
+            // lump, a ThresholdedAffine range may be SMALLER than the
+            // corresponding Affine range — the upper-bound guarantee does not
+            // hold for the drop strategy.
+            //
+            // Trace (threshold = 10%):
+            //   a: center=2.5, {sym1: 1.0, sym2: 0.05}; sym2 dropped on
+            //      construction (0.05/1.05 ≈ 4.8% < 10%) → {sym1: 1.0}
+            //   b = a (copy), scaled by 0.9 → {sym1: 0.9}
+            //   c = [-0.03, 0.03]; on b += c the term 0.03/0.93 ≈ 3.2% < 10%
+            //      is dropped → b stays {sym1: 0.9}
+            //   diff = a - b = {sym1: 0.1} → radius = 0.1
+            //
+            // Plain Affine (every term tracked):
+            //   diff: {sym1: 0.10, sym2: 0.005, ε_c: -0.03} → radius = 0.135
+            //
+            // 0.1 < 0.135: the discarded uncertainty shrinks the range.
+
+            const value_t R     = value_t(1.0);
+            const value_t ds    = value_t(0.05); // dropped: 0.05/1.05 ≈ 4.8%
+            const value_t alpha = value_t(0.9);
+            const value_t dn    = value_t(0.03); // dropped from b: ≈ 3.2%
+            const threshold_t T{value_t(0.1)};
+
+            auto sym1 = affine_t::make_error_term();
+            auto sym2 = affine_t::make_error_term();
+
+            // ThresholdedAffine path: sym2 is dropped on construction.
+            ta_t a_ta(value_t(2.5),
+                      typename ta_t::error_terms_t{{sym1, R}, {sym2, ds}}, T);
+            ta_t b_ta = a_ta;
+            b_ta *= alpha;
+            ta_t c_ta(-dn, dn, T); // single-term interval; not dropped within c
+            b_ta += c_ta;          // c's term dropped on combine
+            ta_t diff_ta = a_ta - b_ta;
+
+            // Plain Affine path: every term tracked individually, no dropping.
+            affine_t a_af(value_t(2.5), {{sym1, R}, {sym2, ds}});
+            affine_t b_af = a_af * alpha;
+            affine_t c_af(-dn, dn);
+            affine_t diff_af = a_af - (b_af + c_af);
+
+            // Dropping discarded uncertainty, so the thresholded radius is the
+            // smaller of the two.
+            REQUIRE(diff_ta.radius() < diff_af.radius());
         }
     }
 }

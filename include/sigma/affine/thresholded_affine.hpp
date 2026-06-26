@@ -8,7 +8,7 @@
 
 namespace sigma {
 
-/** @brief Implements affine arithmetic with small-term lumping.
+/** @brief Implements affine arithmetic that drops negligible error terms.
  *
  * @tparam ValueType The numeric type of the center and error term radii.
  *
@@ -18,19 +18,9 @@ namespace sigma {
  * creates a nonlinearity symbol); without pruning, the symbol count grows
  * unboundedly.
  *
- * This class reduces symbol proliferation by collapsing small error terms into
- * a single persistent "lump" symbol. After each operation, any error term
- * whose relative contribution to the total radius falls below a user-specified
- * threshold @f$t@f$ is folded into the lump:
- * @f[
- *   \frac{|x_i|}{\sum_j |x_j|} < t \implies x_i \text{ is lumped}
- * @f]
- *
- * The resulting interval is always a superset of the interval that would be
- * produced by an unthresholded Affine form, so the approach is conservative
- * (sound). The only loss relative to full affine arithmetic is that small
- * dependent error terms that would otherwise cancel may no longer cancel after
- * lumping.
+ * This class reduces symbol count by deleting error terms whose relative
+ * contribution falls below the threshold. Dropped terms are simply discarded;
+ * no separate "lump" radius is retained to account for them.
  *
  * Constructors accept a @ref Threshold tag type to distinguish the threshold
  * parameter from ordinary value parameters and avoid constructor ambiguity.
@@ -78,15 +68,12 @@ public:
 
     /** @brief Constructs an empty ThresholdedAffine.
      *
-     *  The resulting ThresholdedAffine represents the empty set. The lump term
-     *  is initialized but has zero radius, and the threshold is set to the
-     *  default value.
+     *  The resulting ThresholdedAffine represents the empty set and the
+     *  threshold is set to the default value.
      *
      *  @throw none No throw guarantee
      */
-    ThresholdedAffine() :
-      m_lump_term_(affine_t::make_error_term()),
-      m_threshold_(default_threshold().value) {}
+    ThresholdedAffine() : m_threshold_(default_threshold().value) {}
 
     /** @brief Constructs a ThresholdedAffine from a center value.
      *
@@ -125,9 +112,7 @@ public:
      */
     explicit ThresholdedAffine(const interval_t& interval,
                                Threshold t = default_threshold()) :
-      m_affine_(interval),
-      m_lump_term_(affine_t::make_error_term()),
-      m_threshold_(t.value) {
+      m_affine_(interval), m_threshold_(t.value) {
         apply_threshold_();
     }
 
@@ -142,9 +127,7 @@ public:
      */
     ThresholdedAffine(value_t center, error_terms_t radii,
                       Threshold t = default_threshold()) :
-      m_affine_(center, std::move(radii)),
-      m_lump_term_(affine_t::make_error_term()),
-      m_threshold_(t.value) {
+      m_affine_(center, std::move(radii)), m_threshold_(t.value) {
         apply_threshold_();
     }
 
@@ -160,9 +143,7 @@ public:
      *                        Strong throw guarantee.
      */
     ThresholdedAffine(affine_t a, value_t threshold) :
-      m_affine_(std::move(a)),
-      m_lump_term_(affine_t::make_error_term()),
-      m_threshold_(threshold) {
+      m_affine_(std::move(a)), m_threshold_(threshold) {
         apply_threshold_();
     }
 
@@ -207,21 +188,24 @@ public:
 
     /** @brief Returns the default threshold value.
      *
-     *  This is a state method that ensures the default threshold is defined
-     *  in a single place and can be easily changed if needed. The default
-     *  threshold is currently set to 0.01 (1%).
-     *
-     *  @return The default threshold.
+     *  @return The default threshold (0.1%).
      *  @throw none No throw guarantee
      */
-    static constexpr Threshold default_threshold() { return Threshold(0.01); }
+    static constexpr Threshold default_threshold() { return Threshold(0.001); }
 
     /** @brief Returns the interval represented by *this.
      *
-     *  @return The interval [center - radius, center + radius].
+     *  The interval is [center - radius(), center + radius()], where radius()
+     *  is the sum of the tracked affine terms.
+     *
+     *  @return The interval.
      *  @throw none No throw guarantee
      */
-    interval_t range() const { return m_affine_.range(); }
+    interval_t range() const {
+        if(m_affine_.empty()) return interval_t{};
+        auto r = m_affine_.radius();
+        return interval_t(m_affine_.center() - r, m_affine_.center() + r);
+    }
 
     /** @brief Returns the center of the affine form.
      *
@@ -230,16 +214,16 @@ public:
      */
     value_t center() const { return m_affine_.center(); }
 
-    /** @brief Returns the error terms, including the lump term.
+    /** @brief Returns the error terms of the tracked affine form.
      *
      *  @return Const reference to the error terms map.
      *  @throw None No throw guarantee.
      */
     const error_terms_t& error_terms() const { return m_affine_.error_terms(); }
 
-    /** @brief Returns the sum of absolute values of all error term radii.
+    /** @brief Returns the total radius: the sum of the tracked terms.
      *
-     *  @return The radius.
+     *  @return The total radius.
      *  @throw std::domain_error If *this is empty.
      */
     value_t radius() const { return m_affine_.radius(); }
@@ -268,7 +252,7 @@ public:
      *  @return True if the value is in range().
      *  @throw none No throw guarantee
      */
-    bool contains(value_t v) const { return m_affine_.contains(v); }
+    bool contains(value_t v) const { return range().contains(v); }
 
     /** @brief Returns whether *this contains an interval.
      *
@@ -276,7 +260,7 @@ public:
      *  @return True if every point in @p i is in range().
      *  @throw none No throw guarantee
      */
-    bool contains(const interval_t& i) const { return m_affine_.contains(i); }
+    bool contains(const interval_t& i) const { return range().contains(i); }
 
     /** @brief Returns whether *this contains another ThresholdedAffine's range.
      *
@@ -285,7 +269,7 @@ public:
      *  @throw none No throw guarantee
      */
     bool contains(const ThresholdedAffine& other) const {
-        return m_affine_.contains(other.m_affine_.range());
+        return range().contains(other.range());
     }
 
     /** @brief Returns whether *this is empty.
@@ -295,7 +279,7 @@ public:
      */
     bool empty() const noexcept { return m_affine_.empty(); }
 
-    /** @brief Returns a string of the affine form.
+    /** @brief Returns a string of the affine form (tracked terms only).
      *
      *  @return Affine form string.
      *  @throw std::bad_alloc If memory allocation for the string fails.
@@ -311,13 +295,10 @@ public:
      *  @throw std::bad_alloc
      */
     std::string print_interval_form() const {
-        return m_affine_.print_interval_form();
+        return range().print_interval_form();
     }
 
-    /** @brief Returns the underlying Affine form (read-only).
-     *
-     *  Used by operations that need to call Affine-specific functions (e.g.
-     *  apply_affine_transform) and then re-wrap the result.
+    /** @brief Returns the underlying Affine form (tracked terms only).
      *
      *  @return Const reference to the internal Affine form.
      *  @throw none No throw guarantee
@@ -326,25 +307,16 @@ public:
 
     /** @brief Returns the relative threshold.
      *
-     *  @return The threshold @f$t@f$ such that terms with
-     *          @f$|x_i|/\text{radius} < t@f$ are lumped.
+     *  @return The threshold @f$t@f$.
      *  @throw none No throw guarantee
      */
     value_t threshold() const { return m_threshold_; }
-
-    /** @brief Returns the lump error symbol.
-     *
-     *  @return The shared error_term_t used for lumped small contributions.
-     *  @throw none No throw guarantee
-     */
-    error_term_t lump_term() const { return m_lump_term_; }
 
     // -- Arithmetic Operators ------------------------------------------------
 
     /** @brief Returns the additive inverse of *this.
      *
-     *  Negation preserves relative error-term magnitudes, so no re-thresholding
-     *  is needed.
+     *  Negation flips the tracked affine terms.
      *
      *  @return The negated ThresholdedAffine.
      *  @throw std::bad_alloc If memory allocation fails.
@@ -368,6 +340,10 @@ public:
 
     /** @brief Adds another ThresholdedAffine to *this.
      *
+     *  The tracked affine terms are combined with normal affine addition
+     *  (shared symbols may cancel), after which sub-threshold terms are
+     *  dropped.
+     *
      *  @param[in] other The form to add.
      *  @return Reference to *this.
      *  @throw None No throw guarantee.
@@ -378,24 +354,12 @@ public:
         return *this;
     }
 
-    /** @brief Returns the sum of *this and a scalar.
-     *
-     *  @param[in] value The scalar to add.
-     *  @return The sum of *this and @p value.
-     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
-     *                        fails. Strong throw guarantee.
-     */
+    /** @brief Returns the sum of *this and a scalar.  */
     ThresholdedAffine operator+(value_t value) const {
         return ThresholdedAffine(*this) += value;
     }
 
-    /** @brief Returns the sum of *this and another ThresholdedAffine.
-     *
-     *  @param[in] other The ThresholdedAffine to add.
-     *  @return The sum of *this and @p other.
-     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
-     *                        fails. Strong throw guarantee.
-     */
+    /** @brief Returns the sum of *this and another ThresholdedAffine.  */
     ThresholdedAffine operator+(const ThresholdedAffine& other) const {
         return ThresholdedAffine(*this) += other;
     }
@@ -413,6 +377,10 @@ public:
 
     /** @brief Subtracts another ThresholdedAffine from *this.
      *
+     *  Tracked affine terms are combined with normal affine subtraction
+     *  (shared symbols cancel, capturing dependency), after which sub-threshold
+     *  terms are dropped.
+     *
      *  @param[in] other The form to subtract.
      *  @return Reference to *this.
      *  @throw None No throw guarantee.
@@ -423,24 +391,12 @@ public:
         return *this;
     }
 
-    /** @brief Returns the difference of *this and a scalar.
-     *
-     *  @param[in] value The scalar to subtract.
-     *  @return The difference of *this and @p value.
-     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
-     *                        fails. Strong throw guarantee.
-     */
+    /** @brief Returns the difference of *this and a scalar.  */
     ThresholdedAffine operator-(value_t value) const {
         return ThresholdedAffine(*this) -= value;
     }
 
-    /** @brief Returns the difference of *this and another ThresholdedAffine.
-     *
-     *  @param[in] other The ThresholdedAffine to subtract.
-     *  @return The difference of *this and @p other.
-     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
-     *                        fails. Strong throw guarantee.
-     */
+    /** @brief Returns the difference of *this and another ThresholdedAffine. */
     ThresholdedAffine operator-(const ThresholdedAffine& other) const {
         return ThresholdedAffine(*this) -= other;
     }
@@ -459,9 +415,8 @@ public:
 
     /** @brief Multiplies *this by another ThresholdedAffine.
      *
-     *  Multiplication introduces a new nonlinearity error term; thresholding
-     *  is applied afterward so that small terms (including the new one, if its
-     *  relative contribution is negligible) are folded into the lump.
+     *  Multiplication introduces a new nonlinearity error term via affine
+     *  arithmetic, after which sub-threshold terms are dropped.
      *
      *  @param[in] other The form to multiply by.
      *  @return Reference to *this.
@@ -473,24 +428,12 @@ public:
         return *this;
     }
 
-    /** @brief Multiplies *this by a scalar.
-     *
-     *  @param[in] value The scalar to multiply by.
-     *  @return The product of *this and @p value.
-     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
-     *                        fails. Strong throw guarantee.
-     */
+    /** @brief Multiplies *this by a scalar.  */
     ThresholdedAffine operator*(value_t value) const {
         return ThresholdedAffine(*this) *= value;
     }
 
-    /** @brief Multiplies *this by another ThresholdedAffine.
-     *
-     *  @param[in] other The ThresholdedAffine to multiply by.
-     *  @return The product of *this and @p other.
-     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
-     *                        fails. Strong throw guarantee.
-     */
+    /** @brief Multiplies *this by another ThresholdedAffine.  */
     ThresholdedAffine operator*(const ThresholdedAffine& other) const {
         return ThresholdedAffine(*this) *= other;
     }
@@ -509,36 +452,35 @@ public:
 
     /** @brief Divides *this by another ThresholdedAffine.
      *
+     *  Division is performed by affine arithmetic, after which sub-threshold
+     *  terms are dropped. The divisor's interval must not contain zero.
+     *
      *  @param[in] other The form to divide by.
      *  @return Reference to *this.
-     *  @throw std::domain_error If @p other is empty or contains zero.
+     *  @throw std::domain_error If @p other is empty or its interval
+     *                           contains zero.
      */
     ThresholdedAffine& operator/=(const ThresholdedAffine& other) {
+        // Minimum absolute value of other over its interval.
+        value_t other_total = other.m_affine_.radius();
+        value_t b_min       = std::fabs(other.m_affine_.center()) - other_total;
+        if(b_min <= value_t(0)) {
+            throw std::domain_error(
+              "ThresholdedAffine division by interval containing zero");
+        }
+
         m_affine_ /= other.m_affine_;
+
         apply_threshold_();
         return *this;
     }
 
-    /** @brief Divides *this by a scalar.
-     *
-     *  @param[in] value The scalar to divide by.
-     *  @return The quotient of *this and @p value.
-     *  @throw std::domain_error If @p value is zero.
-     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
-     *                        fails. Strong throw guarantee.
-     */
+    /** @brief Divides *this by a scalar.  */
     ThresholdedAffine operator/(value_t value) const {
         return ThresholdedAffine(*this) /= value;
     }
 
-    /** @brief Divides *this by another ThresholdedAffine.
-     *
-     *  @param[in] other The ThresholdedAffine to divide by.
-     *  @return The quotient of *this and @p other.
-     *  @throw std::domain_error If @p other is empty or contains zero.
-     *  @throw std::bad_alloc If memory allocation for the new ThresholdedAffine
-     *                        fails. Strong throw guarantee.
-     */
+    /** @brief Divides *this by another ThresholdedAffine.  */
     ThresholdedAffine operator/(const ThresholdedAffine& other) const {
         return ThresholdedAffine(*this) /= other;
     }
@@ -546,9 +488,6 @@ public:
     // -- Comparison Operators ------------------------------------------------
 
     /** @brief Checks equality of two ThresholdedAffine forms.
-     *
-     *  Two ThresholdedAffine forms are equal if they have the same internal
-     *  Affine form and the same threshold.
      *
      *  @param[in] other The form to compare.
      *  @return True if equal.
@@ -570,63 +509,39 @@ public:
     }
 
 private:
-    /** @brief Collapses error terms whose relative contribution is below the
-     *         threshold into the persistent lump symbol.
+    /** @brief Drops error terms whose relative contribution is below the
+     *         threshold.
      *
-     *  After each arithmetic operation, scans all non-lump error terms. Terms
-     *  with @f$|x_i| / \text{total\_radius} < t@f$ are removed and their
-     *  absolute coefficient is added to the lump term's magnitude.
+     *  After each arithmetic operation, scans all error terms in m_affine_.
+     *  Terms with @f$|x_i| / \text{total\_radius} < t@f$ are removed and
+     *  discarded; their contribution is not retained anywhere.
      */
     void apply_threshold_() {
         if(m_affine_.empty()) return;
         auto total_r = m_affine_.radius();
 
-        // Work on a snapshot to avoid modifying while iterating
         auto terms = m_affine_.error_terms();
-        if(terms.size() == 0) return; // No error terms to threshold
+        if(terms.empty()) return;
 
-        value_t lump_delta          = value_t(0);
-        value_t existing_lump_coeff = value_t(0);
         error_terms_t new_terms;
-
         for(auto&& [sym, coeff] : terms) {
-            if(sym == m_lump_term_) {
-                existing_lump_coeff = coeff;
-                continue;
-            }
             if(std::fabs(coeff) < std::numeric_limits<value_t>::epsilon()) {
-                // Skip zero terms to avoid unnecessary lumping and preserve
-                // sparsity.
                 continue;
             } else if(total_r != value_t(0) &&
                       std::fabs(coeff) / total_r < m_threshold_) {
-                lump_delta += std::fabs(coeff);
+                continue;
             } else {
                 new_terms[sym] = coeff;
             }
         }
-
-        if(lump_delta > value_t(0) || existing_lump_coeff != value_t(0)) {
-            // Increase |existing_lump_coeff| by lump_delta, preserving sign.
-            // This ensures that if the lump was negated (e.g. via operator-),
-            // cancellation still works when equal forms are subtracted.
-            if(existing_lump_coeff >= value_t(0)) {
-                new_terms[m_lump_term_] = existing_lump_coeff + lump_delta;
-            } else {
-                new_terms[m_lump_term_] = existing_lump_coeff - lump_delta;
-            }
-        }
-
         m_affine_ = affine_t(m_affine_.center(), std::move(new_terms));
     }
 
-    /// The internal affine form holding all error terms (including lump).
+    /// The tracked affine form.
     affine_t m_affine_;
 
-    /// Persistent error symbol for aggregated small terms.
-    error_term_t m_lump_term_;
-
-    /// Relative threshold: terms with |x_i| / radius < m_threshold_ are lumped.
+    /// Relative threshold: terms with |x_i| / total_radius < m_threshold_ are
+    /// dropped.
     value_t m_threshold_;
 };
 
@@ -656,7 +571,6 @@ ThresholdedAffine<ValueType> operator*(ValueType value,
 }
 
 // -- Operations --------------------------------------------------------------
-// These delegate to the corresponding Affine operations and re-wrap the result.
 
 /** @brief Absolute value of a ThresholdedAffine.
  *
