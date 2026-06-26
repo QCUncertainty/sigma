@@ -529,6 +529,7 @@ private:
                 continue;
             } else if(total_r != value_t(0) &&
                       std::fabs(coeff) / total_r < m_threshold_) {
+                continue;
             } else {
                 new_terms[sym] = coeff;
             }
