@@ -8,7 +8,7 @@
 
 namespace sigma {
 
-/** @brief Implements affine arithmetic with small-term lumping.
+/** @brief Implements affine arithmetic that drops negligible error terms.
  *
  * @tparam ValueType The numeric type of the center and error term radii.
  *
@@ -18,24 +18,9 @@ namespace sigma {
  * creates a nonlinearity symbol); without pruning, the symbol count grows
  * unboundedly.
  *
- * This class reduces symbol proliferation by collapsing small error terms into
- * a non-negative unsigned lump radius @f$R_\ell@f$. After each operation, any
- * error term whose relative contribution to the total radius falls below a
- * user-specified threshold @f$t@f$ is folded into the lump:
- * @f[
- *   \frac{|x_i|}{\text{total\_radius}} < t \implies |x_i| \text{ is added to }
- * R_\ell
- * @f]
- *
- * The lump is stored as a plain non-negative radius, not as a signed affine
- * coefficient. It always contributes @f$+R_\ell@f$ to the total radius and is
- * combined by addition in both addition and subtraction of two
- * ThresholdedAffine values. This guarantees that absorbed independent errors
- * can never cancel against each other.
- *
- * The total interval represented is
- * @f$[\text{center} - \text{radius}(),\, \text{center} + \text{radius}()]@f$
- * where @f$\text{radius}() = \sum_i |x_i| + R_\ell@f$.
+ * This class reduces symbol count by deleting error terms whose relative
+ * contribution falls below the threshold. Dropped terms are simply discarded;
+ * no separate "lump" radius is retained to account for them.
  *
  * Constructors accept a @ref Threshold tag type to distinguish the threshold
  * parameter from ordinary value parameters and avoid constructor ambiguity.
@@ -83,8 +68,8 @@ public:
 
     /** @brief Constructs an empty ThresholdedAffine.
      *
-     *  The resulting ThresholdedAffine represents the empty set. The lump
-     *  radius is zero and the threshold is set to the default value.
+     *  The resulting ThresholdedAffine represents the empty set and the
+     *  threshold is set to the default value.
      *
      *  @throw none No throw guarantee
      */
@@ -149,21 +134,16 @@ public:
     /** @brief Constructs a ThresholdedAffine by wrapping an Affine form.
      *
      *  Used internally by operations that produce an Affine result and need to
-     *  re-wrap it as a ThresholdedAffine, optionally carrying an existing lump
-     *  radius.
+     *  re-wrap it as a ThresholdedAffine.
      *
-     *  @param[in] a            The Affine form to wrap.
-     *  @param[in] threshold    The relative threshold.
-     *  @param[in] lump_radius  Initial non-negative lump radius to carry over.
+     *  @param[in] a         The Affine form to wrap.
+     *  @param[in] threshold The relative threshold.
      *
      *  @throw std::bad_alloc If memory allocation for the error term fails.
      *                        Strong throw guarantee.
      */
-    ThresholdedAffine(affine_t a, value_t threshold,
-                      value_t lump_radius = value_t(0)) :
-      m_affine_(std::move(a)),
-      m_lump_radius_(lump_radius),
-      m_threshold_(threshold) {
+    ThresholdedAffine(affine_t a, value_t threshold) :
+      m_affine_(std::move(a)), m_threshold_(threshold) {
         apply_threshold_();
     }
 
@@ -208,22 +188,22 @@ public:
 
     /** @brief Returns the default threshold value.
      *
-     *  @return The default threshold (1%).
+     *  @return The default threshold (0.1%).
      *  @throw none No throw guarantee
      */
-    static constexpr Threshold default_threshold() { return Threshold(0.01); }
+    static constexpr Threshold default_threshold() { return Threshold(0.001); }
 
     /** @brief Returns the interval represented by *this.
      *
      *  The interval is [center - radius(), center + radius()], where radius()
-     *  includes both the tracked affine terms and the unsigned lump radius.
+     *  is the sum of the tracked affine terms.
      *
      *  @return The interval.
      *  @throw none No throw guarantee
      */
     interval_t range() const {
         if(m_affine_.empty()) return interval_t{};
-        auto r = m_affine_.radius() + m_lump_radius_;
+        auto r = m_affine_.radius();
         return interval_t(m_affine_.center() - r, m_affine_.center() + r);
     }
 
@@ -236,26 +216,17 @@ public:
 
     /** @brief Returns the error terms of the tracked affine form.
      *
-     *  Does not include the unsigned lump radius; use lump_radius() for that.
-     *
      *  @return Const reference to the error terms map.
      *  @throw None No throw guarantee.
      */
     const error_terms_t& error_terms() const { return m_affine_.error_terms(); }
 
-    /** @brief Returns the total radius: sum of tracked terms plus lump radius.
+    /** @brief Returns the total radius: the sum of the tracked terms.
      *
      *  @return The total radius.
      *  @throw std::domain_error If *this is empty.
      */
-    value_t radius() const { return m_affine_.radius() + m_lump_radius_; }
-
-    /** @brief Returns the unsigned lump radius accumulated so far.
-     *
-     *  @return Non-negative lump radius.
-     *  @throw none No throw guarantee.
-     */
-    value_t lump_radius() const { return m_lump_radius_; }
+    value_t radius() const { return m_affine_.radius(); }
 
     /** @brief Sets the center of the affine form.
      *
@@ -320,7 +291,7 @@ public:
 
     /** @brief Returns a string of the interval form.
      *
-     *  @return Interval form string, e.g. [lo, hi], including the lump.
+     *  @return Interval form string, e.g. [lo, hi].
      *  @throw std::bad_alloc
      */
     std::string print_interval_form() const {
@@ -345,8 +316,7 @@ public:
 
     /** @brief Returns the additive inverse of *this.
      *
-     *  Negation flips the tracked affine terms; the unsigned lump radius is
-     *  unchanged because it represents a magnitude, not a signed coefficient.
+     *  Negation flips the tracked affine terms.
      *
      *  @return The negated ThresholdedAffine.
      *  @throw std::bad_alloc If memory allocation fails.
@@ -354,7 +324,6 @@ public:
     ThresholdedAffine operator-() const {
         auto result      = *this;
         result.m_affine_ = -m_affine_;
-        // m_lump_radius_ is unsigned; it does not negate.
         return result;
     }
 
@@ -372,8 +341,8 @@ public:
     /** @brief Adds another ThresholdedAffine to *this.
      *
      *  The tracked affine terms are combined with normal affine addition
-     *  (shared symbols may cancel). The lump radii are added unconditionally
-     *  because they represent unsigned independent uncertainty.
+     *  (shared symbols may cancel), after which sub-threshold terms are
+     *  dropped.
      *
      *  @param[in] other The form to add.
      *  @return Reference to *this.
@@ -381,7 +350,6 @@ public:
      */
     ThresholdedAffine& operator+=(const ThresholdedAffine& other) {
         m_affine_ += other.m_affine_;
-        m_lump_radius_ += other.m_lump_radius_;
         apply_threshold_();
         return *this;
     }
@@ -410,9 +378,8 @@ public:
     /** @brief Subtracts another ThresholdedAffine from *this.
      *
      *  Tracked affine terms are combined with normal affine subtraction
-     *  (shared symbols cancel, capturing dependency). The lump radii are
-     *  *added* — not subtracted — because the lump is an unsigned bound on
-     *  independent accumulated errors that cannot cancel.
+     *  (shared symbols cancel, capturing dependency), after which sub-threshold
+     *  terms are dropped.
      *
      *  @param[in] other The form to subtract.
      *  @return Reference to *this.
@@ -420,7 +387,6 @@ public:
      */
     ThresholdedAffine& operator-=(const ThresholdedAffine& other) {
         m_affine_ -= other.m_affine_;
-        m_lump_radius_ += other.m_lump_radius_;
         apply_threshold_();
         return *this;
     }
@@ -437,15 +403,12 @@ public:
 
     /** @brief Multiplies *this by a scalar.
      *
-     *  The lump radius is scaled by @p |value|.
-     *
      *  @param[in] value The scalar to multiply by.
      *  @return Reference to *this.
      *  @throw None No throw guarantee.
      */
     ThresholdedAffine& operator*=(value_t value) {
         m_affine_ *= value;
-        m_lump_radius_ *= std::fabs(value);
         apply_threshold_();
         return *this;
     }
@@ -453,33 +416,14 @@ public:
     /** @brief Multiplies *this by another ThresholdedAffine.
      *
      *  Multiplication introduces a new nonlinearity error term via affine
-     *  arithmetic, plus contributions from each operand's lump radius
-     * interacting with the other operand's affine bound.
+     *  arithmetic, after which sub-threshold terms are dropped.
      *
      *  @param[in] other The form to multiply by.
      *  @return Reference to *this.
      *  @throw None No throw guarantee.
      */
     ThresholdedAffine& operator*=(const ThresholdedAffine& other) {
-        // Save pre-multiplication bounds needed for lump propagation.
-        value_t a_max = m_affine_.empty() ?
-                          value_t(0) :
-                          std::fabs(m_affine_.center()) + m_affine_.radius();
-        value_t b_max =
-          other.m_affine_.empty() ?
-            value_t(0) :
-            std::fabs(other.m_affine_.center()) + other.m_affine_.radius();
-        value_t a_lump = m_lump_radius_;
-        value_t b_lump = other.m_lump_radius_;
-
         m_affine_ *= other.m_affine_;
-
-        // Lump contributions from the product:
-        //   a_affine × b_lump  bounded by a_max × b_lump
-        //   a_lump × b_affine  bounded by a_lump × b_max
-        //   a_lump × b_lump
-        m_lump_radius_ = a_lump * (b_max + b_lump) + a_max * b_lump;
-
         apply_threshold_();
         return *this;
     }
@@ -502,43 +446,30 @@ public:
      */
     ThresholdedAffine& operator/=(value_t value) {
         m_affine_ /= value;
-        m_lump_radius_ /= std::fabs(value);
         apply_threshold_();
         return *this;
     }
 
     /** @brief Divides *this by another ThresholdedAffine.
      *
-     *  The lump radius of the divisor expands its interval, contributing
-     *  additional uncertainty to the quotient.  A conservative bound is used:
-     *  the divisor's full interval (affine ± lump) determines the minimum
-     *  absolute value @f$b_\min@f$ used to scale the result's lump.
+     *  Division is performed by affine arithmetic, after which sub-threshold
+     *  terms are dropped. The divisor's interval must not contain zero.
      *
      *  @param[in] other The form to divide by.
      *  @return Reference to *this.
-     *  @throw std::domain_error If @p other is empty or its full interval
+     *  @throw std::domain_error If @p other is empty or its interval
      *                           contains zero.
      */
     ThresholdedAffine& operator/=(const ThresholdedAffine& other) {
-        // Minimum absolute value of other over its full interval (affine +
-        // lump).
-        value_t other_total = other.m_affine_.radius() + other.m_lump_radius_;
+        // Minimum absolute value of other over its interval.
+        value_t other_total = other.m_affine_.radius();
         value_t b_min       = std::fabs(other.m_affine_.center()) - other_total;
         if(b_min <= value_t(0)) {
             throw std::domain_error(
               "ThresholdedAffine division by interval containing zero");
         }
 
-        value_t pre_lump = m_lump_radius_;
-
         m_affine_ /= other.m_affine_;
-
-        // this's lump scaled by 1/|b_min|, plus additional uncertainty from
-        // other's lump acting on the result: result_bound × b_lump / b_min.
-        value_t result_bound =
-          std::fabs(m_affine_.center()) + m_affine_.radius() + m_lump_radius_;
-        m_lump_radius_ =
-          pre_lump / b_min + result_bound * other.m_lump_radius_ / b_min;
 
         apply_threshold_();
         return *this;
@@ -564,7 +495,6 @@ public:
      */
     bool operator==(const ThresholdedAffine& other) const {
         return m_affine_ == other.m_affine_ &&
-               m_lump_radius_ == other.m_lump_radius_ &&
                m_threshold_ == other.m_threshold_;
     }
 
@@ -579,17 +509,16 @@ public:
     }
 
 private:
-    /** @brief Absorbs error terms below the relative threshold into the
-     *         unsigned lump radius.
+    /** @brief Drops error terms whose relative contribution is below the
+     *         threshold.
      *
      *  After each arithmetic operation, scans all error terms in m_affine_.
      *  Terms with @f$|x_i| / \text{total\_radius} < t@f$ are removed and
-     *  their absolute coefficient is added to @p m_lump_radius_.
-     *  total_radius includes the existing lump radius.
+     *  discarded; their contribution is not retained anywhere.
      */
     void apply_threshold_() {
         if(m_affine_.empty()) return;
-        auto total_r = m_affine_.radius() + m_lump_radius_;
+        auto total_r = m_affine_.radius();
 
         auto terms = m_affine_.error_terms();
         if(terms.empty()) return;
@@ -600,7 +529,6 @@ private:
                 continue;
             } else if(total_r != value_t(0) &&
                       std::fabs(coeff) / total_r < m_threshold_) {
-                m_lump_radius_ += std::fabs(coeff);
             } else {
                 new_terms[sym] = coeff;
             }
@@ -608,14 +536,11 @@ private:
         m_affine_ = affine_t(m_affine_.center(), std::move(new_terms));
     }
 
-    /// The tracked affine form (does not contain the lump).
+    /// The tracked affine form.
     affine_t m_affine_;
 
-    /// Non-negative accumulated radius for absorbed small terms.
-    value_t m_lump_radius_{value_t(0)};
-
     /// Relative threshold: terms with |x_i| / total_radius < m_threshold_ are
-    /// lumped.
+    /// dropped.
     value_t m_threshold_;
 };
 
@@ -648,15 +573,12 @@ ThresholdedAffine<ValueType> operator*(ValueType value,
 
 /** @brief Absolute value of a ThresholdedAffine.
  *
- *  The lump radius is unchanged (abs is Lipschitz-1).
- *
  *  @related ThresholdedAffine
  *  @tparam T The value type.
  */
 template<typename T>
 ThresholdedAffine<T> abs(const ThresholdedAffine<T>& a) {
-    return ThresholdedAffine<T>(abs(a.affine()), a.threshold(),
-                                a.lump_radius());
+    return ThresholdedAffine<T>(abs(a.affine()), a.threshold());
 }
 
 /** @brief Absolute value of a ThresholdedAffine (alias for abs).
@@ -666,15 +588,10 @@ ThresholdedAffine<T> abs(const ThresholdedAffine<T>& a) {
  */
 template<typename T>
 ThresholdedAffine<T> fabs(const ThresholdedAffine<T>& a) {
-    return ThresholdedAffine<T>(fabs(a.affine()), a.threshold(),
-                                a.lump_radius());
+    return ThresholdedAffine<T>(fabs(a.affine()), a.threshold());
 }
 
 /** @brief Square root of a ThresholdedAffine.
- *
- *  The lump is propagated by the Lipschitz constant of sqrt over a's range:
- *  @f$1 / (2 \sqrt{x_\min})@f$ where @f$x_\min@f$ is the lower bound of a's
- *  full interval.
  *
  *  @related ThresholdedAffine
  *  @tparam T The value type.
@@ -682,32 +599,20 @@ ThresholdedAffine<T> fabs(const ThresholdedAffine<T>& a) {
  */
 template<typename T>
 ThresholdedAffine<T> sqrt(const ThresholdedAffine<T>& a) {
-    T x_min = a.center() - a.radius();
-    T lip   = x_min > T(0) ? T(1) / (T(2) * std::sqrt(x_min)) : T(1);
-    return ThresholdedAffine<T>(sqrt(a.affine()), a.threshold(),
-                                a.lump_radius() * lip);
+    return ThresholdedAffine<T>(sqrt(a.affine()), a.threshold());
 }
 
 /** @brief Exponential of a ThresholdedAffine.
- *
- *  The lump is propagated by the Lipschitz constant of exp over a's range:
- *  @f$\exp(x_\max)@f$ where @f$x_\max@f$ is the upper bound of a's full
- *  interval.
  *
  *  @related ThresholdedAffine
  *  @tparam T The value type.
  */
 template<typename T>
 ThresholdedAffine<T> exp(const ThresholdedAffine<T>& a) {
-    T x_max = a.center() + a.radius();
-    return ThresholdedAffine<T>(exp(a.affine()), a.threshold(),
-                                a.lump_radius() * std::exp(x_max));
+    return ThresholdedAffine<T>(exp(a.affine()), a.threshold());
 }
 
 /** @brief Natural logarithm of a ThresholdedAffine.
- *
- *  The lump is propagated by the Lipschitz constant of log over a's range:
- *  @f$1/x_\min@f$ where @f$x_\min@f$ is the lower bound of a's full interval.
  *
  *  @related ThresholdedAffine
  *  @tparam T The value type.
@@ -715,16 +620,10 @@ ThresholdedAffine<T> exp(const ThresholdedAffine<T>& a) {
  */
 template<typename T>
 ThresholdedAffine<T> log(const ThresholdedAffine<T>& a) {
-    T x_min = a.center() - a.radius();
-    T lip   = x_min > T(0) ? T(1) / x_min : T(1);
-    return ThresholdedAffine<T>(log(a.affine()), a.threshold(),
-                                a.lump_radius() * lip);
+    return ThresholdedAffine<T>(log(a.affine()), a.threshold());
 }
 
 /** @brief Power of a ThresholdedAffine.
- *
- *  The lump is propagated conservatively using the maximum of @f$|n \cdot
- *  x^{n-1}|@f$ over a's full interval.
  *
  *  @related ThresholdedAffine
  *  @tparam T The value type.
@@ -733,14 +632,7 @@ ThresholdedAffine<T> log(const ThresholdedAffine<T>& a) {
  */
 template<typename T, typename U>
 ThresholdedAffine<T> pow(const ThresholdedAffine<T>& a, const U& exp) {
-    T x_hi = a.center() + a.radius();
-    T x_lo = a.center() - a.radius();
-    // |d(x^n)/dx| = |n| * |x|^(n-1); max over [x_lo, x_hi]
-    T lip = std::fabs(static_cast<T>(exp)) *
-            std::max(std::pow(std::fabs(x_lo), static_cast<T>(exp) - T(1)),
-                     std::pow(std::fabs(x_hi), static_cast<T>(exp) - T(1)));
-    return ThresholdedAffine<T>(pow(a.affine(), exp), a.threshold(),
-                                a.lump_radius() * lip);
+    return ThresholdedAffine<T>(pow(a.affine(), exp), a.threshold());
 }
 
 /// Typedef for a thresholded affine form of floats
