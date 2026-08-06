@@ -1,5 +1,10 @@
 # Background
 
+This page covers the theory behind Sigma's `Uncertain` class. For the set-valued
+representations, which enclose a result rather than estimating its distribution,
+see [Interval Arithmetic](./interval.md), [Affine Arithmetic](./affine.md), and
+[Taylor Models](./taylor.md).
+
 ## Linear Error Propagation
 
 Like the [uncertainties](https://github.com/lmfit/uncertainties) and

@@ -24,7 +24,12 @@ C++ is an important language in the development of scientific software and
 high-performance computing, Sigma has been developed in an attempt to fill this
 gap.
 
-See [Background](./docs/background.md) for methodological details.
+See [Background](./docs/background.md) for methodological details. Sigma also
+provides set-valued representations that enclose a result rather than estimating
+its distribution, described in order of increasing accuracy in
+[Interval Arithmetic](./docs/interval.md),
+[Affine Arithmetic](./docs/affine.md), and
+[Taylor Models](./docs/taylor.md).
 
 ## Features
 - Propagate uncertainty throughout calculations

@@ -30,6 +30,9 @@ macro(cxx_api_docs)
 
         # Doxygen Settinggs
         set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "README.md")
+        # Without this, docs/README.md would be absorbed as the docs directory's
+        # description instead of becoming a page of its own.
+        set(DOXYGEN_IMPLICIT_DIR_DOCS "NO")
         set(DOXYGEN_GENERATE_TREEVIEW "YES")
         set(DOXYGEN_DISABLE_INDEX "NO")
         set(DOXYGEN_FULL_SIDEBAR "NO")
@@ -39,6 +42,11 @@ macro(cxx_api_docs)
         set(DOXYGEN_MATHJAX_RELPATH
             "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5"
         )
+        # AMSmath supplies \tag (equation numbering) and the align environment;
+        # AMSsymbols supplies \mathbb and friends. Neither is loaded by default.
+        set(DOXYGEN_MATHJAX_EXTENSIONS "TeX/AMSmath" "TeX/AMSsymbols")
+        # Turns on automatic equation numbering; see the file for details.
+        set(DOXYGEN_MATHJAX_CODEFILE "${CUSTOM_DIR}/mathjax-config.js")
         set(DOXYGEN_HTML_COLORSTYLE "LIGHT")
         set(DOXYGEN_HTML_HEADER "${CUSTOM_DIR}/header.html")
         set(DOXYGEN_HTML_EXTRA_FILES
