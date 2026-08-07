@@ -22,7 +22,7 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
         SECTION("Default") {
             taylor_t empty;
             REQUIRE(empty.empty());
-            REQUIRE(empty.order() == 2); // default_order()
+            REQUIRE(empty.max_order() == 2); // default_max_order()
         }
 
         SECTION("From Center") {
@@ -41,7 +41,7 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
 
         SECTION("From Lower and Upper, Order 0 Drops the Term") {
             taylor_t value(one, three, order_t(0));
-            REQUIRE(value.order() == 0);
+            REQUIRE(value.max_order() == 0);
             REQUIRE(value.coefficients().empty());
             test_taylor(value, two, two); // collapses to the median
         }
@@ -101,7 +101,7 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
         REQUIRE(empty.n_terms() == 0);
 
         taylor_t value(one, three);
-        REQUIRE(value.order() == 2);
+        REQUIRE(value.max_order() == 2);
         REQUIRE(value.constant() == two);
         REQUIRE(value.coefficients().size() == 1);
         REQUIRE(value.n_terms() == 2);
@@ -182,7 +182,7 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
             taylor_t value;
             value += five;
             test_taylor(value, five, five);
-            REQUIRE(value.order() == 2);
+            REQUIRE(value.max_order() == 2);
         }
 
         SECTION("operator+=(value_t) shifts the constant") {
@@ -230,7 +230,7 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
             taylor_t x(one, three, order_t(2)); // const 2, coeff on vx^1 = 1
             taylor_t y(two, four, order_t(2));  // const 3, coeff on vy^1 = 1
             auto z = x * y;
-            REQUIRE(z.order() == 2);
+            REQUIRE(z.max_order() == 2);
             REQUIRE(z.constant() == value_t(6.0));
             REQUIRE(z.coefficients().size() == 3); // vx, vy, vx*vy
             test_taylor(z, zero, value_t(12.0));
@@ -240,7 +240,7 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
             taylor_t x(one, three, order_t(2));
             taylor_t y(two, four, order_t(1));
             auto z = x * y;
-            REQUIRE(z.order() == 1);
+            REQUIRE(z.max_order() == 1);
             REQUIRE(z.constant() == value_t(6.0));
             REQUIRE(z.coefficients().size() == 2); // cross term dropped
             test_taylor(z, one, value_t(11.0));
@@ -262,7 +262,7 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
 
         auto d = p.derivative(v);
         // d/dv (5 + 2v + 3v^2) = 2 + 6v
-        REQUIRE(d.order() == 2);
+        REQUIRE(d.max_order() == 2);
         REQUIRE(d.constant() == two);
         REQUIRE(d.coefficients().size() == 1);
         REQUIRE(d.coefficients().at(monomial_t(v, 1)) == value_t(6.0));
@@ -275,12 +275,12 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
         taylor_t p(five, coeffs, order_t(2));
 
         auto t = p.truncate(1);
-        REQUIRE(t.order() == 1);
+        REQUIRE(t.max_order() == 1);
         REQUIRE(t.coefficients().size() == 1);
         REQUIRE(t.coefficients().at(monomial_t(v, 1)) == two);
 
         auto same = p.truncate(5); // raising the order drops nothing
-        REQUIRE(same.order() == 5);
+        REQUIRE(same.max_order() == 5);
         REQUIRE(same.coefficients().size() == 2);
     }
 
@@ -295,7 +295,7 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
 
         SECTION("Construction preserves order 3") {
             taylor_t value(one, three, order_t(3));
-            REQUIRE(value.order() == 3);
+            REQUIRE(value.max_order() == 3);
             test_taylor(value, one, three);
         }
 
@@ -312,7 +312,7 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
             taylor_t y(three, y_coeffs, order_t(3));
 
             auto z = x * y;
-            REQUIRE(z.order() == 3);
+            REQUIRE(z.max_order() == 3);
             REQUIRE(z.constant() == value_t(6.0));
             // vx, vx^2, vy, vx*vy, vx^2*vy: the last is the degree-3 cross
             // term (deg(vx^2) + deg(vy) == 3) that a lower order would drop.
@@ -332,7 +332,7 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
             taylor_t y(two, four, order_t(2));
 
             auto z = x * y;
-            REQUIRE(z.order() == 2);
+            REQUIRE(z.max_order() == 2);
             // The vx^2 term of x is itself kept (degree 2 <= 2), but
             // vx^2 * vy (degree 3) is not.
             REQUIRE(z.coefficients().size() == 4);
@@ -349,7 +349,7 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
             SECTION("derivative") {
                 auto d = p.derivative(v);
                 // d/dv (5 + 2v + 3v^2 + 4v^3) = 2 + 6v + 12v^2
-                REQUIRE(d.order() == 3);
+                REQUIRE(d.max_order() == 3);
                 REQUIRE(d.constant() == two);
                 REQUIRE(d.coefficients().size() == 2);
                 REQUIRE(d.coefficients().at(monomial_t(v, 1)) == value_t(6.0));
@@ -358,16 +358,16 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
 
             SECTION("truncate") {
                 auto t2 = p.truncate(2);
-                REQUIRE(t2.order() == 2);
+                REQUIRE(t2.max_order() == 2);
                 REQUIRE(t2.coefficients().size() == 2);
                 REQUIRE(t2.coefficients().count(monomial_t(v, 3)) == 0);
 
                 auto t3 = p.truncate(3); // no-op, nothing exceeds order 3
-                REQUIRE(t3.order() == 3);
+                REQUIRE(t3.max_order() == 3);
                 REQUIRE(t3.coefficients().size() == 3);
 
                 auto t4 = p.truncate(4); // raising the order drops nothing
-                REQUIRE(t4.order() == 4);
+                REQUIRE(t4.max_order() == 4);
                 REQUIRE(t4.coefficients().size() == 3);
             }
 

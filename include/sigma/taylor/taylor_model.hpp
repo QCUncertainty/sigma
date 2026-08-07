@@ -67,7 +67,9 @@ public:
     using Order = typename taylor_t::Order;
 
     /// The truncation order used when none is specified.
-    static constexpr Order default_order() { return taylor_t::default_order(); }
+    static constexpr Order default_max_order() {
+        return taylor_t::default_max_order();
+    }
 
     // --- Constructors and Assignment ----------------------------------------
 
@@ -86,23 +88,23 @@ public:
      *  remainder, and represents the single value given by @p center.
      *
      *  @param[in] center The constant term of the polynomial.
-     *  @param[in] order  The truncation order, defaults to default_order().
+     *  @param[in] order  The truncation order, defaults to default_max_order().
      *
      *  @throw none No throw guarantee
      */
-    TaylorModel(value_t center, Order order = default_order()) :
+    TaylorModel(value_t center, Order order = default_max_order()) :
       TaylorModel(interval_t(center, center), order) {}
 
     /** @brief Constructs a TaylorModel from a lower and upper bound.
      *
      *  @param[in] lo    The lower bound.
      *  @param[in] hi    The upper bound.
-     *  @param[in] order The truncation order, defaults to default_order().
+     *  @param[in] order The truncation order, defaults to default_max_order().
      *
      *  @throw std::bad_alloc If memory allocation for the coefficient fails.
      *                        Strong throw guarantee.
      */
-    TaylorModel(value_t lo, value_t hi, Order order = default_order()) :
+    TaylorModel(value_t lo, value_t hi, Order order = default_max_order()) :
       TaylorModel(interval_t(lo, hi), order) {}
 
     /** @brief Constructs a TaylorModel from an interval.
@@ -120,13 +122,13 @@ public:
      *
      *  @param[in] interval The interval represented by the model.
      *  @param[in] order    The truncation order, defaults to
-     *                      default_order().
+     *                      default_max_order().
      *
      *  @throw std::bad_alloc If memory allocation for the coefficient fails.
      *                        Strong throw guarantee.
      */
     explicit TaylorModel(const interval_t& interval,
-                         Order order = default_order()) :
+                         Order order = default_max_order()) :
       m_polynomial_(interval, order) {
         if(interval.empty()) { return; }
         auto radius = interval.radius();
@@ -185,8 +187,8 @@ public:
      */
     const interval_t& remainder() const noexcept { return m_remainder_; }
 
-    /// Forwards to `polynomial().order()`.
-    size_type order() const noexcept { return m_polynomial_.order(); }
+    /// Forwards to `polynomial().max_order()`.
+    size_type max_order() const noexcept { return m_polynomial_.max_order(); }
 
     /// Forwards to `polynomial().constant()`.
     value_t constant() const { return m_polynomial_.constant(); }
@@ -323,7 +325,7 @@ public:
      */
     TaylorModel& operator+=(value_t value) {
         if(empty()) {
-            m_polynomial_ = taylor_t(value, Order(m_polynomial_.order()));
+            m_polynomial_ = taylor_t(value, Order(m_polynomial_.max_order()));
             m_remainder_  = interval_t(value_t{0}, value_t{0});
             return *this;
         }
@@ -390,7 +392,7 @@ public:
      */
     TaylorModel& operator-=(value_t value) {
         if(empty()) {
-            m_polynomial_ = taylor_t(-value, Order(m_polynomial_.order()));
+            m_polynomial_ = taylor_t(-value, Order(m_polynomial_.max_order()));
             m_remainder_  = interval_t(value_t{0}, value_t{0});
             return *this;
         }
@@ -532,8 +534,8 @@ public:
      *  with Taylor::bound() and added to the remainder. Unlike
      *  Taylor::truncate(), which simply discards those terms, this preserves
      *  Eq. \f$\eqref{eq:tm-inclusion}\f$ -- the enclosure gets wider, never
-     *  invalid. If @p new_order is greater than or equal to order(), nothing
-     *  is removed and the remainder is unchanged.
+     *  invalid. If @p new_order is greater than or equal to max_order(),
+     * nothing is removed and the remainder is unchanged.
      *
      *  @param[in] new_order The truncation order of the result.
      *
@@ -669,7 +671,7 @@ auto TaylorModel<ValueType>::operator+=(const TaylorModel& other)
   -> TaylorModel& {
     if(empty()) { return *this = other; }
     if(other.empty()) { return *this; }
-    auto new_order = std::min(order(), other.order());
+    auto new_order = std::min(max_order(), other.max_order());
     auto lhs       = sweep_to_order(new_order);
     auto rhs       = other.sweep_to_order(new_order);
     return *this   = TaylorModel(lhs.m_polynomial_ + rhs.m_polynomial_,
@@ -680,7 +682,7 @@ template<typename ValueType>
 auto TaylorModel<ValueType>::operator*=(const TaylorModel& other)
   -> TaylorModel& {
     if(empty() || other.empty()) { return *this = TaylorModel(); }
-    auto new_order = std::min(order(), other.order());
+    auto new_order = std::min(max_order(), other.max_order());
     auto lhs       = sweep_to_order(new_order);
     auto rhs       = other.sweep_to_order(new_order);
 
@@ -730,7 +732,7 @@ auto TaylorModel<ValueType>::sweep_to_order(size_type new_order) const
         }
     }
     taylor_t tail_poly(value_t{0}, std::move(tail),
-                       Order(m_polynomial_.order()));
+                       Order(m_polynomial_.max_order()));
     auto new_remainder = m_remainder_ + tail_poly.bound();
     taylor_t new_poly(m_polynomial_.constant(), std::move(kept),
                       Order(new_order));
@@ -751,10 +753,10 @@ auto TaylorModel<ValueType>::sweep_small(value_t threshold) const
         }
     }
     taylor_t swept_poly(value_t{0}, std::move(swept),
-                        Order(m_polynomial_.order()));
+                        Order(m_polynomial_.max_order()));
     auto new_remainder = m_remainder_ + swept_poly.bound();
     taylor_t new_poly(m_polynomial_.constant(), std::move(kept),
-                      Order(m_polynomial_.order()));
+                      Order(m_polynomial_.max_order()));
     return TaylorModel(std::move(new_poly), std::move(new_remainder));
 }
 

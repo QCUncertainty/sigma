@@ -80,19 +80,19 @@ public:
     };
 
     /// The truncation order used when none is specified.
-    static constexpr Order default_order() { return Order(2); }
+    static constexpr Order default_max_order() { return Order(2); }
 
     // --- Constructors and Assignment ----------------------------------------
 
     /** @brief Constructs an empty Taylor polynomial.
      *
      *  An empty Taylor represents the empty set, exactly as an empty Affine
-     *  does. Its order is set to default_order(), though this is moot until
+     *  does. Its order is set to default_max_order(), though this is moot until
      *  the object becomes non-empty.
      *
      *  @throw none No throw guarantee
      */
-    Taylor() : m_order_(default_order().value) {}
+    Taylor() : m_order_(default_max_order().value) {}
 
     /** @brief Constructs a Taylor polynomial from a constant value.
      *
@@ -100,11 +100,11 @@ public:
      *  represents the single value given by @p center.
      *
      *  @param[in] center The constant term of the polynomial.
-     *  @param[in] order  The truncation order, defaults to default_order().
+     *  @param[in] order  The truncation order, defaults to default_max_order().
      *
      *  @throw none No throw guarantee
      */
-    Taylor(value_t center, Order order = default_order()) :
+    Taylor(value_t center, Order order = default_max_order()) :
       Taylor(interval_t(center, center), order) {}
 
     /** @brief Constructs a Taylor polynomial from a lower and upper bound.
@@ -117,12 +117,12 @@ public:
      *
      *  @param[in] lo    The lower bound.
      *  @param[in] hi    The upper bound.
-     *  @param[in] order The truncation order, defaults to default_order().
+     *  @param[in] order The truncation order, defaults to default_max_order().
      *
      *  @throw std::bad_alloc If memory allocation for the coefficient fails.
      *                        Strong throw guarantee.
      */
-    Taylor(value_t lo, value_t hi, Order order = default_order()) :
+    Taylor(value_t lo, value_t hi, Order order = default_max_order()) :
       Taylor(interval_t(lo, hi), order) {}
 
     /** @brief Constructs a Taylor polynomial from an interval.
@@ -134,12 +134,13 @@ public:
      *
      *  @param[in] interval The interval represented by the polynomial.
      *  @param[in] order    The truncation order, defaults to
-     *                      default_order().
+     *                      default_max_order().
      *
      *  @throw std::bad_alloc If memory allocation for the coefficient fails.
      *                        Strong throw guarantee.
      */
-    explicit Taylor(const interval_t& interval, Order order = default_order()) :
+    explicit Taylor(const interval_t& interval,
+                    Order order = default_max_order()) :
       m_order_(order.value) {
         if(interval.empty()) { return; }
         m_constant_ = interval.median();
@@ -164,11 +165,12 @@ public:
      *  @param[in] constant The constant term of the polynomial.
      *  @param[in] coeffs   The non-constant coefficients of the polynomial.
      *  @param[in] order    The truncation order, defaults to
-     *                      default_order().
+     *                      default_max_order().
      *
      *  @throw none No throw guarantee
      */
-    Taylor(value_t constant, coeffs_t coeffs, Order order = default_order()) :
+    Taylor(value_t constant, coeffs_t coeffs,
+           Order order = default_max_order()) :
       m_constant_(constant), m_order_(order.value) {
         for(auto&& [mono, coeff] : coeffs) {
             if(mono.degree() <= m_order_) { m_coeffs_[mono] = coeff; }
@@ -206,7 +208,7 @@ public:
      *
      *  @throw none No throw guarantee
      */
-    size_type order() const noexcept { return m_order_; }
+    size_type max_order() const noexcept { return m_order_; }
 
     /** @brief Returns the constant term of *this.
      *
@@ -334,7 +336,7 @@ public:
 
     /** @brief Returns *this with every term above @p new_order dropped.
      *
-     *  If @p new_order is greater than or equal to order(), this simply
+     *  If @p new_order is greater than or equal to max_order(), this simply
      *  relabels the truncation order; no coefficients are dropped, since
      *  none exceed it.
      *

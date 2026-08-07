@@ -24,7 +24,7 @@ TEMPLATE_TEST_CASE("TaylorModel", "", float, double) {
         SECTION("Default") {
             taylor_model_t empty;
             REQUIRE(empty.empty());
-            REQUIRE(empty.order() == 2); // default_order()
+            REQUIRE(empty.max_order() == 2); // default_max_order()
         }
 
         SECTION("From Center") {
@@ -46,7 +46,7 @@ TEMPLATE_TEST_CASE("TaylorModel", "", float, double) {
         SECTION("From Lower and Upper, Order 0 Puts the Radius in the "
                 "Remainder") {
             taylor_model_t value(one, three, order_t(0));
-            REQUIRE(value.order() == 0);
+            REQUIRE(value.max_order() == 0);
             REQUIRE(value.coefficients().empty());
             REQUIRE(value.constant() == two);
             REQUIRE(value.remainder() == interval_t(-one, one));
@@ -104,7 +104,7 @@ TEMPLATE_TEST_CASE("TaylorModel", "", float, double) {
         REQUIRE(empty.n_terms() == 0);
 
         taylor_model_t value(one, three);
-        REQUIRE(value.order() == 2);
+        REQUIRE(value.max_order() == 2);
         REQUIRE(value.constant() == two);
         REQUIRE(value.coefficients().size() == 1);
         REQUIRE(value.n_terms() == 2);
@@ -149,7 +149,7 @@ TEMPLATE_TEST_CASE("TaylorModel", "", float, double) {
             taylor_model_t value;
             value += five;
             test_taylor(value, five, five);
-            REQUIRE(value.order() == 2);
+            REQUIRE(value.max_order() == 2);
             REQUIRE(value.remainder() == interval_t(zero, zero));
         }
 
@@ -204,7 +204,7 @@ TEMPLATE_TEST_CASE("TaylorModel", "", float, double) {
             taylor_model_t x(one, three); // 2 + vx, order 2
             taylor_model_t y(two, four);  // 3 + vy, order 2
             auto z = x * y;
-            REQUIRE(z.order() == 2);
+            REQUIRE(z.max_order() == 2);
             REQUIRE(z.remainder() == interval_t(zero, zero));
             REQUIRE(z.constant() == value_t(6.0));
             REQUIRE(z.coefficients().size() == 3); // vx, vy, vx*vy
@@ -221,7 +221,7 @@ TEMPLATE_TEST_CASE("TaylorModel", "", float, double) {
             taylor_model_t x(one, three, order_t(1)); // 2 + vx
             taylor_model_t y(two, four, order_t(1));  // 3 + vy
             auto z = x * y;
-            REQUIRE(z.order() == 1);
+            REQUIRE(z.max_order() == 1);
             // vx*vy bounds to [-1,1] * [-1,1] = [-1,1] (naive fallback).
             REQUIRE(z.remainder() == interval_t(-one, one));
             REQUIRE(z.coefficients().size() == 2); // vx, vy only
@@ -248,7 +248,7 @@ TEMPLATE_TEST_CASE("TaylorModel", "", float, double) {
         taylor_model_t model(p, interval_t(zero, zero));
 
         auto swept = model.sweep_to_order(1);
-        REQUIRE(swept.order() == 1);
+        REQUIRE(swept.max_order() == 1);
         REQUIRE(swept.coefficients().size() == 1);
         REQUIRE(swept.coefficients().count(monomial_t(v, 2)) == 0);
         // The dropped 3v^2 term bounds to [0, 3] (min at v=0, max at
@@ -263,7 +263,7 @@ TEMPLATE_TEST_CASE("TaylorModel", "", float, double) {
 
         auto same = model.sweep_to_order(5); // raising the order sweeps
                                              // nothing
-        REQUIRE(same.order() == 5);
+        REQUIRE(same.max_order() == 5);
         REQUIRE(same.coefficients().size() == 2);
         REQUIRE(same.remainder() == interval_t(zero, zero));
     }
