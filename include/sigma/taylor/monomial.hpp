@@ -332,6 +332,9 @@ namespace std {
 /// unordered associative container.
 template<>
 struct hash<sigma::Monomial> {
+    /// @brief  Does the hashing
+    /// @param m The monomial to hash
+    /// @return The hash value of the monomial
     std::size_t operator()(const sigma::Monomial& m) const noexcept {
         std::size_t seed = 0;
         for(auto&& [var, exp] : m.exponents()) {
