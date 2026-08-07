@@ -22,9 +22,11 @@ It is the same differential algebra that underpins
 [COSY INFINITY](https://www.bmtdynamics.org/cosy/) and, more recently,
 [DACE](https://github.com/dacelib/dace).
 
-The classes described here, `Taylor` and `TaylorModel`, are **not yet
-implemented**. This page specifies the mathematics and the intended design so
-the implementation can follow.
+The classes described here, `Taylor` and `TaylorModel`, are implemented, with
+the exception of the elementary functions (`compose_` and everything built on
+it, e.g. `exp`, `log`, `sqrt`), antiderivation, division, and Eigen support --
+those are noted as deferred where they come up below. This page specifies the
+mathematics and the design those implementations follow.
 
 ## The Taylor model
 
@@ -412,10 +414,13 @@ truncation; they are bounded into the remainder instead
 
 where \f$ w_i \f$ is the width of the domain in the \f$ i \f$-th variable. Note
 that Eq. \f$\eqref{eq:tm-antideriv}\f$ is stated for \f$(P, I)\f$, i.e. it
-belongs to `TaylorModel` (not yet implemented), where the overflowing terms
-have a remainder to be bounded into. `Taylor` alone has no such remainder, and
-nothing else on this page depends on antiderivation — elementary functions
-need only `compose_` plus Taylor model addition and multiplication (Eq.
+belongs to `TaylorModel`, where the overflowing terms have a remainder to be
+bounded into, but `TaylorModel`'s antiderivative is not implemented (only
+`sweep_to_order` and `sweep_small` are, of the members "Achieving rigorous
+bounds" below describes). `Taylor` alone has no remainder to bound into
+either way, and nothing else on this page depends on antiderivation —
+elementary functions need only `compose_` plus Taylor model addition and
+multiplication (Eq.
 \f$\eqref{eq:tm-add}\f$, Eq. \f$\eqref{eq:tm-mul}\f$) — so it was left out of
 `Taylor`'s implementation and can be added later, alongside `TaylorModel`,
 if verified integration is actually needed.

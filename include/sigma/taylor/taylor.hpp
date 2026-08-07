@@ -656,19 +656,26 @@ private:
  *  @related Taylor
  *  @tparam ValueType The type of the values in the polynomial.
  *
- *  This method defers to the output operator for interval_t to print the
- *  value of range(). See Taylor::print_polynomial_form() for a string
- *  representation showing the individual terms instead.
+ *  For a non-empty polynomial, this method defers to the output operator
+ *  for interval_t to print the value of range(). An empty polynomial is
+ *  printed as "&#8709;", matching Interval's own operator<<, rather than
+ *  throwing (range() throws for an empty polynomial). See
+ *  Taylor::print_polynomial_form() for a string representation showing the
+ *  individual terms instead.
  *
  *  @param[in] os The output stream to write to.
  *  @param[in] t The Taylor polynomial to output.
  *
  *  @return The output stream.
  *
- *  @throw std::domain_error If @p t is empty. Strong throw guarantee.
+ *  @throw none No throw guarantee
  */
 template<typename ValueType>
 std::ostream& operator<<(std::ostream& os, const Taylor<ValueType>& t) {
+    if(t.empty()) {
+        os << "∅";
+        return os;
+    }
     os << t.range();
     return os;
 }

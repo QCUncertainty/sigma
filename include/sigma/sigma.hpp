@@ -4,6 +4,7 @@
 #include "interval/interval.hpp"
 #include "taylor/monomial.hpp"
 #include "taylor/taylor.hpp"
+#include "taylor/taylor_model.hpp"
 #include "uncertain/uncertain.hpp"
 
 /** @file sigma.hpp

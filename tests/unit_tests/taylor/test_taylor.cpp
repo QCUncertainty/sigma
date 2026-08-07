@@ -436,5 +436,12 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
 
         taylor_t empty;
         REQUIRE(empty.print_polynomial_form() == "∅");
+
+        // Streaming an empty Taylor must not throw, even though range()
+        // does -- operator<< special-cases it, matching Interval's own
+        // operator<< instead of propagating range()'s exception.
+        std::stringstream empty_ss;
+        REQUIRE_NOTHROW(empty_ss << empty);
+        REQUIRE(empty_ss.str() == "∅");
     }
 }
