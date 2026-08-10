@@ -398,6 +398,99 @@ TEMPLATE_TEST_CASE("Taylor", "", float, double) {
         }
     }
 
+    SECTION("Division") {
+        using monomial_t = typename taylor_t::monomial_t;
+
+        SECTION("operator/=(value_t) and operator/(value_t)") {
+            taylor_t empty;
+            auto pempty = &(empty /= one);
+            REQUIRE(pempty == &empty);
+            REQUIRE(empty.empty());
+
+            taylor_t value(one, three);
+            auto pvalue = &(value /= two);
+            REQUIRE(pvalue == &value);
+            test_taylor(value, value_t(0.5), value_t(1.5));
+
+            REQUIRE_THROWS_AS(value /= zero, std::domain_error);
+
+            taylor_t other(one, three);
+            auto quot = other / two;
+            test_taylor(quot, value_t(0.5), value_t(1.5));
+            REQUIRE_THROWS_AS(other / zero, std::domain_error);
+        }
+
+        SECTION("multiplicative_inverse") {
+            taylor_t empty;
+            REQUIRE_THROWS_AS(empty.multiplicative_inverse(),
+                              std::domain_error);
+
+            taylor_t zero_constant(zero, coeffs_t{}, order_t(2));
+            REQUIRE_THROWS_AS(zero_constant.multiplicative_inverse(),
+                              std::domain_error);
+
+            // x = 2 + v (order 2): the series for 1/x about c=2 is
+            // (-1)^k / c^(k+1), i.e. 1/2 - v/4 + v^2/8.
+            auto v = taylor_t::make_deviation();
+            coeffs_t coeffs{{monomial_t(v, 1), one}};
+            taylor_t x(two, coeffs, order_t(2));
+
+            auto inv = x.multiplicative_inverse();
+            REQUIRE(inv.constant() == Catch::Approx(0.5));
+            REQUIRE(inv.coefficients().at(monomial_t(v, 1)) ==
+                    Catch::Approx(-0.25));
+            REQUIRE(inv.coefficients().at(monomial_t(v, 2)) ==
+                    Catch::Approx(0.125));
+        }
+
+        SECTION("operator/=(Taylor) and operator/(Taylor)") {
+            auto v = taylor_t::make_deviation();
+            auto w = taylor_t::make_deviation();
+            coeffs_t x_coeffs{{monomial_t(v, 1), one}};
+            taylor_t x(two, x_coeffs, order_t(2)); // 2 + v
+            coeffs_t y_coeffs{{monomial_t(w, 1), one}};
+            taylor_t y(three, y_coeffs, order_t(2)); // 3 + w
+
+            // x / y == x * y.multiplicative_inverse(), truncated at order
+            // 2: v*w is kept (degree 2) but v*w^2 (degree 3) is dropped,
+            // exactly as operator*(Taylor) drops any cross term above
+            // order.
+            auto z = x / y;
+            REQUIRE(z.constant() == Catch::Approx(2.0 / 3.0));
+            REQUIRE(z.coefficients().at(monomial_t(v, 1)) ==
+                    Catch::Approx(1.0 / 3.0));
+            REQUIRE(z.coefficients().at(monomial_t(w, 1)) ==
+                    Catch::Approx(-2.0 / 9.0));
+            REQUIRE(z.coefficients().at(monomial_t(w, 2)) ==
+                    Catch::Approx(2.0 / 27.0));
+            REQUIRE(z.coefficients().at(monomial_t(v, 1) * monomial_t(w, 1)) ==
+                    Catch::Approx(-1.0 / 9.0));
+
+            taylor_t empty;
+            REQUIRE((empty / y).empty());
+        }
+    }
+
+    SECTION("compose_") {
+        using monomial_t = typename taylor_t::monomial_t;
+        auto v           = taylor_t::make_deviation();
+        coeffs_t coeffs{{monomial_t(v, 1), one}};
+        taylor_t x(two, coeffs, order_t(2)); // 2 + v
+
+        // Composing outer_coeffs = {1, 2, 3} about x's constant (2)
+        // evaluates 1 + 2*bar + 3*bar^2 with bar = x - 2 = v; since bar^1
+        // and bar^2 are both exact (no truncation at order 2), the result
+        // is exactly that quadratic in v.
+        auto composed = x.compose_({one, two, three});
+        REQUIRE(composed.max_order() == 2);
+        REQUIRE(composed.constant() == one);
+        REQUIRE(composed.coefficients().at(monomial_t(v, 1)) == two);
+        REQUIRE(composed.coefficients().at(monomial_t(v, 2)) == three);
+
+        taylor_t empty;
+        REQUIRE_THROWS_AS(empty.compose_({one}), std::domain_error);
+    }
+
     SECTION("Comparison Operators") {
         taylor_t x(one, three);
         taylor_t same_x(one, three);

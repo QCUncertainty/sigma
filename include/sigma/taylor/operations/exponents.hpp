@@ -71,11 +71,15 @@ Taylor<T> log(const Taylor<T>& a);
  *  @tparam T The value type of the polynomial
  *  @tparam U The type of the exponent
  *
- *  This method takes advantage of the fact that:
+ *  For a strictly one-signed bound this method takes advantage of the fact
+ *  that:
  *  @f[
  *  x^y = e^{y \log(x)}
  *  @f]
- *  mirroring Affine::pow.
+ *  mirroring Affine::pow. If bound(a) straddles or touches 0 (and is not
+ *  exactly the point 0, where @f$0^y = 0@f$ for any @f$y > 0@f$), neither
+ *  @f$\log@f$ branch is valid, so @p exp must be a positive integer, and the
+ *  result is computed by repeated multiplication instead.
  *
  *  @param[in] a The Taylor polynomial whose power is computed
  *  @param[in] exp The exponent
@@ -83,8 +87,9 @@ Taylor<T> log(const Taylor<T>& a);
  *  @return A Taylor polynomial approximating @p a raised to @p exp
  *
  *  @throw std::domain_error If bound(a) contains 0 and @p exp is negative, or
- *                           if bound(a) is strictly negative and @p exp is
- *                           not an integer. Strong throw guarantee.
+ *                           if bound(a) contains non-positive values (and is
+ *                           not exactly the point 0) and @p exp is not an
+ *                           integer. Strong throw guarantee.
  *  @throw std::bad_alloc If memory allocation fails. Strong throw guarantee.
  */
 template<typename T, typename U>

@@ -1,4 +1,9 @@
 #pragma once
+#include <algorithm>
+#include <cmath>
+#include <functional>
+#include <sigma/detail/pow.hpp>
+#include <sigma/taylor/operations/series_detail.hpp>
 #include <sigma/taylor/taylor.hpp>
 #include <utility>
 
@@ -31,12 +36,16 @@ namespace sigma {
  * \f$\eqref{eq:tm-inclusion}\f$ demands: dropping a term without bounding it
  * would invalidate the model, not merely loosen it.
  *
- * N.b. elementary functions (exp, log, sqrt, ...) are not implemented here:
- * they need `Taylor::compose_`, which does not exist yet (see
- * include/sigma/taylor/taylor.hpp). Antiderivation is likewise deferred; see
- * docs/taylor.md's note on Eq. \f$\eqref{eq:tm-antideriv}\f$. Division and an
- * `eigen_compat.hpp` are deferred for the same reason. Those arrive together
- * in a later pass, alongside the elementary functions that need them.
+ * Elementary functions (`sqrt`, `exp`, `log`, `pow`) and division are
+ * implemented as free functions and a `multiplicative_inverse` member,
+ * respectively, using the private `compose_` hook: it evaluates the
+ * polynomial part exactly as `Taylor::compose_` does, then bounds the
+ * discarded tail of the outer series with the Lagrange remainder of Eq.
+ * \f$\eqref{eq:tm-outer-rem}\f$ and folds it into the returned model's
+ * remainder, so Eq. \f$\eqref{eq:tm-inclusion}\f$ survives the operation
+ * (see docs/taylor.md's "Elementary functions" section). Antiderivation is
+ * still deferred; see docs/taylor.md's note on Eq.
+ * \f$\eqref{eq:tm-antideriv}\f$ -- nothing on this page depends on it.
  */
 template<typename ValueType>
 class TaylorModel {
@@ -524,6 +533,122 @@ public:
         return TaylorModel(*this) *= other;
     }
 
+    /** @brief Overwrites *this with the quotient of *this and @p value.
+     *
+     *  @param[in] value The value to divide *this by.
+     *
+     *  @return Reference to this model after division.
+     *
+     *  @throw std::domain_error If @p value is zero.
+     */
+    TaylorModel& operator/=(value_t value) {
+        if(value == 0) { throw std::domain_error("Division by zero"); }
+        return *this *= value_t(1.0 / value);
+    }
+
+    /** @brief Overwrites *this with the quotient of *this and @p other.
+     *
+     *  Implemented as the product of *this and
+     *  other.multiplicative_inverse(). See the documentation for
+     *  operator*=(TaylorModel) and multiplicative_inverse() for details.
+     *
+     *  @param[in] other The model to divide *this by.
+     *
+     *  @return Reference to this model after division.
+     *
+     *  @throw std::domain_error If @p other is empty or 0 is in its range().
+     *  @throw std::bad_alloc If memory allocation for the new model fails.
+     *                        Strong throw guarantee.
+     */
+    TaylorModel& operator/=(const TaylorModel& other) {
+        return *this *= other.multiplicative_inverse();
+    }
+
+    /** @brief Returns the quotient of *this and @p value.
+     *
+     *  This is a convenience method for calling `TaylorModel(*this) /= value`.
+     *
+     *  @param[in] value The value to divide *this by.
+     *
+     *  @return The quotient of *this and @p value.
+     *
+     *  @throw std::domain_error If @p value is zero.
+     */
+    TaylorModel operator/(value_t value) const {
+        return TaylorModel(*this) /= value;
+    }
+
+    /** @brief Returns the quotient of *this and @p other.
+     *
+     *  This is a convenience method for calling `TaylorModel(*this) /= other`.
+     *
+     *  @param[in] other The model to divide *this by.
+     *
+     *  @return The quotient of *this and @p other.
+     *
+     *  @throw std::domain_error If @p other is empty or 0 is in its range().
+     *  @throw std::bad_alloc If memory allocation for the new model fails.
+     *                        Strong throw guarantee.
+     */
+    TaylorModel operator/(const TaylorModel& other) const {
+        return TaylorModel(*this) /= other;
+    }
+
+    /** @brief Returns the multiplicative inverse of *this.
+     *
+     *  Composes the outer series of @f$1/x@f$ about constant() with *this via
+     *  compose_(), which folds the Lagrange remainder into the result. See
+     *  compose_() for details.
+     *
+     *  @return The multiplicative inverse of *this.
+     *
+     *  @throw std::domain_error If *this is empty or 0 is in range().
+     *                           Strong throw guarantee.
+     *  @throw std::bad_alloc If memory allocation for the new model fails.
+     *                        Strong throw guarantee.
+     */
+    TaylorModel multiplicative_inverse() const;
+
+    /** @brief Evaluates a Taylor-model outer series about constant(), with a
+     *         Lagrange remainder bound.
+     *
+     *  This is the TaylorModel analogue of Taylor::compose_ -- the hook every
+     *  elementary function is built from. It computes the polynomial part
+     *  exactly as `polynomial().compose_(outer_coeffs)` does (see
+     *  Taylor::compose_), then bounds the discarded tail of the outer series
+     *  with the Lagrange remainder of Eq. \f$\eqref{eq:tm-outer-rem}\f$
+     *
+     *  @f[
+     *  R_{n} \in
+     *  \frac{1}{\left(n+1\right)!}
+     *  \left(B\left(\bar{P}\right) + I\right)^{n+1}
+     *  \frac{d^{n+1}g}{df^{n+1}}\Big(
+     *    c_f + \left[0, 1\right] \cdot \left(B\left(\bar{P}\right) +
+     *    I\right)
+     *  \Big)
+     *  @f]
+     *
+     *  @param[in] outer_coeffs The Taylor coefficients of the outer function
+     *                          @f$g@f$ about constant(), starting from k=0;
+     *                          forwarded verbatim to
+     *                          `polynomial().compose_`.
+     *  @param[in] nth_derivative A callable computing @f$\frac{d^{n+1}g}
+     *                            {df^{n+1}}@f$, evaluated in interval
+     *                            arithmetic over the argument range in Eq.
+     *                            \f$\eqref{eq:tm-outer-rem}\f$ above, where
+     *                            @f$n@f$ = max_order().
+     *
+     *  @return A TaylorModel of @f$g(f)@f$, where @f$f@f$ is the function
+     *          modeled by *this.
+     *
+     *  @throw std::domain_error If *this is empty. Strong throw guarantee.
+     *  @throw std::bad_alloc If memory allocation for the new model fails.
+     *                        Strong throw guarantee.
+     */
+    TaylorModel compose_(
+      const std::vector<value_t>& outer_coeffs,
+      const std::function<interval_t(const interval_t&)>& nth_derivative) const;
+
     // -- Rigorous Term Control (no Affine analogue) ---------------------------
 
     /** @brief Reduces *this to a lower truncation order, bounding the
@@ -720,6 +845,41 @@ auto TaylorModel<ValueType>::operator*=(const TaylorModel& other)
 }
 
 template<typename ValueType>
+auto TaylorModel<ValueType>::compose_(
+  const std::vector<value_t>& outer_coeffs,
+  const std::function<interval_t(const interval_t&)>& nth_derivative) const
+  -> TaylorModel {
+    assert_not_empty_();
+    auto order           = max_order();
+    taylor_t new_poly    = m_polynomial_.compose_(outer_coeffs);
+    interval_t bar_bound = m_polynomial_.bound() - m_polynomial_.constant();
+    interval_t enclosure = bar_bound + m_remainder_;
+    interval_t xi_range =
+      m_polynomial_.constant() + interval_t(value_t{0}, value_t{1}) * enclosure;
+    interval_t deriv_val = nth_derivative(xi_range);
+    value_t fact         = detail::factorial<value_t>(order + 1);
+    interval_t new_remainder =
+      deriv_val * pow(enclosure, static_cast<int>(order + 1)) / fact;
+    return TaylorModel(std::move(new_poly), std::move(new_remainder));
+}
+
+template<typename ValueType>
+auto TaylorModel<ValueType>::multiplicative_inverse() const -> TaylorModel {
+    assert_not_empty_();
+    if(range().contains(value_t{0})) {
+        throw std::domain_error("Division by zero");
+    }
+    auto order = max_order();
+    auto outer_coeffs =
+      detail::reciprocal_outer_coeffs(m_polynomial_.constant(), order);
+    return compose_(outer_coeffs, [order](const interval_t& xi) {
+        value_t sign = ((order + 1) % 2 == 0) ? value_t{1} : value_t{-1};
+        return sign * detail::factorial<value_t>(order + 1) /
+               pow(xi, static_cast<int>(order + 2));
+    });
+}
+
+template<typename ValueType>
 auto TaylorModel<ValueType>::sweep_to_order(size_type new_order) const
   -> TaylorModel {
     assert_not_empty_();
@@ -758,6 +918,197 @@ auto TaylorModel<ValueType>::sweep_small(value_t threshold) const
     taylor_t new_poly(m_polynomial_.constant(), std::move(kept),
                       Order(m_polynomial_.max_order()));
     return TaylorModel(std::move(new_poly), std::move(new_remainder));
+}
+
+// -- Elementary functions ---------------------------------------------------
+
+/** @brief Absolute value of a TaylorModel.
+ *
+ *  @related TaylorModel
+ *  @tparam T The value type of the model.
+ *
+ *  Unlike the elementary functions below, @f$|\cdot|@f$ has no Taylor series
+ *  at points where its argument's range straddles 0, so it is not built from
+ *  compose_(). If range() lies entirely on one side of 0, @f$|\cdot|@f$ is
+ *  linear there and *this (or its negation) is returned unchanged. Otherwise,
+ *  mirroring `Affine::abs` and `Taylor::abs`, the exact range of
+ *  @f$|\cdot|@f$ is returned directly: for @f$f \in [\mathrm{lo},
+ *  \mathrm{hi}]@f$ with @f$\mathrm{lo} < 0 < \mathrm{hi}@f$,
+ *  @f$|f| \in [0, \max(|\mathrm{lo}|, \mathrm{hi})]@f$, which the interval
+ *  constructor turns directly into a model (per Eq.
+ *  \f$\eqref{eq:tm-inclusion}\f$'s `Interval` row), preserving inclusion
+ *  rigorously.
+ *
+ *  @param[in] a The TaylorModel.
+ *
+ *  @return The absolute value of @p a.
+ *
+ *  @throw std::bad_alloc If memory allocation for the new model fails.
+ *                        Strong throw guarantee.
+ */
+template<typename T>
+TaylorModel<T> abs(const TaylorModel<T>& a) {
+    if(a.empty()) { return a; }
+    auto a_range = a.range();
+    if(a_range.lower() >= T(0.0)) { return a; }
+    if(a_range.upper() <= T(0.0)) { return -a; }
+    auto m = std::max(std::fabs(a_range.lower()), a_range.upper());
+    return TaylorModel<T>(typename TaylorModel<T>::interval_t(T(0.0), m),
+                          typename TaylorModel<T>::Order(a.max_order()));
+}
+
+/** @brief Absolute value of a TaylorModel.
+ *
+ *  @related TaylorModel
+ *  @tparam T The value type of the model.
+ *
+ *  This function is an alias for abs(const TaylorModel<T>&). See its
+ *  documentation for details.
+ *
+ *  @param[in] a The TaylorModel.
+ *
+ *  @return The absolute value of @p a.
+ *
+ *  @throw std::bad_alloc If memory allocation for the new model fails.
+ *                        Strong throw guarantee.
+ */
+template<typename T>
+TaylorModel<T> fabs(const TaylorModel<T>& a) {
+    return abs(a);
+}
+
+/** @brief Square root of a TaylorModel.
+ *
+ *  @related TaylorModel
+ *  @tparam T The value type of the model.
+ *
+ *  Composes the binomial series of sqrt about constant() with @p a, per
+ *  Eq. \f$\eqref{eq:tm-outer-split}\f$, folding the Lagrange remainder into
+ *  the result. See TaylorModel::compose_.
+ *
+ *  @param[in] a The TaylorModel whose square root is computed.
+ *
+ *  @return A TaylorModel enclosing the square root of the function modeled
+ *          by @p a.
+ *
+ *  @throw std::domain_error If @p a is empty or range() contains
+ *                           non-positive values. Strong throw guarantee.
+ *  @throw std::bad_alloc If memory allocation for the new model fails.
+ *                        Strong throw guarantee.
+ */
+template<typename T>
+TaylorModel<T> sqrt(const TaylorModel<T>& a) {
+    if(a.empty()) { return a; }
+    if(a.range().lower() <= T(0.0)) {
+        throw std::domain_error("TaylorModel has non-positive values.");
+    }
+    auto order        = a.max_order();
+    auto outer_coeffs = detail::sqrt_outer_coeffs(a.constant(), order);
+    using interval_t  = typename TaylorModel<T>::interval_t;
+    return a.compose_(outer_coeffs, [order](const interval_t& xi) {
+        T coeff = detail::half_falling_factorial<T>(order + 1);
+        return coeff * pow(xi, T(0.5) - static_cast<T>(order + 1));
+    });
+}
+
+/** @brief Exponential of a TaylorModel.
+ *
+ *  @related TaylorModel
+ *  @tparam T The value type of the model.
+ *
+ *  Composes the Taylor series of exp about constant() with @p a, per Eq.
+ *  \f$\eqref{eq:tm-exp}\f$, folding the Lagrange remainder of Eq.
+ *  \f$\eqref{eq:tm-exp-rem}\f$ into the result. See TaylorModel::compose_.
+ *
+ *  @param[in] a The TaylorModel whose exponential is computed.
+ *
+ *  @return A TaylorModel enclosing the exponential of the function modeled by
+ *          @p a.
+ *
+ *  @throw std::domain_error If @p a is empty. Strong throw guarantee.
+ *  @throw std::bad_alloc If memory allocation for the new model fails.
+ *                        Strong throw guarantee.
+ */
+template<typename T>
+TaylorModel<T> exp(const TaylorModel<T>& a) {
+    if(a.empty()) { return a; }
+    auto order        = a.max_order();
+    auto outer_coeffs = detail::exp_outer_coeffs(a.constant(), order);
+    using interval_t  = typename TaylorModel<T>::interval_t;
+    return a.compose_(outer_coeffs,
+                      [](const interval_t& xi) { return sigma::exp(xi); });
+}
+
+/** @brief Natural logarithm of a TaylorModel.
+ *
+ *  @related TaylorModel
+ *  @tparam T The value type of the model.
+ *
+ *  Composes the series of log about constant() with @p a, folding the
+ *  Lagrange remainder into the result. See TaylorModel::compose_.
+ *
+ *  @param[in] a The TaylorModel whose natural logarithm is computed.
+ *
+ *  @return A TaylorModel enclosing the natural logarithm of the function
+ *          modeled by @p a.
+ *
+ *  @throw std::domain_error If @p a is empty or range() contains
+ *                           non-positive values. Strong throw guarantee.
+ *  @throw std::bad_alloc If memory allocation for the new model fails.
+ *                        Strong throw guarantee.
+ */
+template<typename T>
+TaylorModel<T> log(const TaylorModel<T>& a) {
+    if(a.empty()) { return a; }
+    if(a.range().lower() <= T(0.0)) {
+        throw std::domain_error("TaylorModel has non-positive values.");
+    }
+    auto order        = a.max_order();
+    auto outer_coeffs = detail::log_outer_coeffs(a.constant(), order);
+    using interval_t  = typename TaylorModel<T>::interval_t;
+    return a.compose_(outer_coeffs, [order](const interval_t& xi) {
+        T sign = (order % 2 == 0) ? T{1} : T{-1};
+        return sign * detail::factorial<T>(order) /
+               pow(xi, static_cast<int>(order + 1));
+    });
+}
+
+/** @brief Power of a TaylorModel.
+ *
+ *  @related TaylorModel
+ *  @tparam T The value type of the model.
+ *  @tparam U The type of the exponent.
+ *
+ *  For a strictly one-signed range this method takes advantage of the fact
+ *  that:
+ *  @f[
+ *  x^y = e^{y \log(x)}
+ *  @f]
+ *  mirroring Affine::pow. If range() straddles or touches 0 (and is not
+ *  exactly the point 0, where @f$0^y = 0@f$ for any @f$y > 0@f$), neither
+ *  @f$\log@f$ branch is valid, so @p exp must be a positive integer, and the
+ *  result is computed by repeated multiplication instead -- which stays
+ *  rigorous (Eq. \f$\eqref{eq:tm-mul}\f$) across a zero-containing range,
+ *  unlike the @f$\log@f$/@f$\exp@f$ route.
+ *
+ *  @param[in] a The TaylorModel whose power is computed.
+ *  @param[in] exp The exponent.
+ *
+ *  @return A TaylorModel enclosing @p a raised to @p exp.
+ *
+ *  @throw std::domain_error If range() contains 0 and @p exp is negative, or
+ *                           if range() contains non-positive values (and is
+ *                           not exactly the point 0) and @p exp is not an
+ *                           integer. Strong throw guarantee.
+ *  @throw std::bad_alloc If memory allocation for the new model fails.
+ *                        Strong throw guarantee.
+ */
+template<typename T, typename U>
+TaylorModel<T> pow(const TaylorModel<T>& a, const U& exp) {
+    auto order = a.max_order();
+    return detail::pow_impl(a, exp, [order](T v) {
+        return TaylorModel<T>(v, typename TaylorModel<T>::Order(order));
+    });
 }
 
 /// Typedef for a Taylor model of floats

@@ -1,5 +1,6 @@
 #include "catch2/catch_test_macros.hpp"
 #include "testing.hpp"
+#include <cmath>
 #include <sstream>
 
 using testing::test_taylor;
@@ -240,6 +241,87 @@ TEMPLATE_TEST_CASE("TaylorModel", "", float, double) {
         }
     }
 
+    SECTION("Division") {
+        SECTION("operator/=(value_t) and operator/(value_t)") {
+            taylor_model_t empty;
+            auto pempty = &(empty /= one);
+            REQUIRE(pempty == &empty);
+            REQUIRE(empty.empty());
+
+            taylor_model_t value(one, three);
+            auto pvalue = &(value /= two);
+            REQUIRE(pvalue == &value);
+            test_taylor(value, value_t(0.5), value_t(1.5));
+
+            REQUIRE_THROWS_AS(value /= zero, std::domain_error);
+
+            taylor_model_t other(one, three);
+            auto quot = other / two;
+            test_taylor(quot, value_t(0.5), value_t(1.5));
+            REQUIRE_THROWS_AS(other / zero, std::domain_error);
+        }
+
+        SECTION("multiplicative_inverse") {
+            taylor_model_t empty;
+            REQUIRE_THROWS_AS(empty.multiplicative_inverse(),
+                              std::domain_error);
+
+            taylor_model_t containing_zero(-one, one);
+            REQUIRE_THROWS_AS(containing_zero.multiplicative_inverse(),
+                              std::domain_error);
+
+            // range() = [1, 3], order 2, empty remainder: sample the true
+            // 1/x at points spanning that exact range and require the
+            // result to enclose every one of them, per Eq.
+            // \eqref{eq:tm-inclusion}.
+            taylor_model_t x(one, three);
+            auto inv = x.multiplicative_inverse();
+            for(int i = 0; i <= 8; ++i) {
+                value_t t  = value_t(i) / value_t(8);
+                value_t xv = one + t * two; // samples [1, 3]
+                REQUIRE(inv.contains(one / xv));
+            }
+        }
+
+        SECTION("operator/=(TaylorModel) and operator/(TaylorModel)") {
+            taylor_model_t x(one, three); // [1, 3]
+            taylor_model_t y(two, four);  // [2, 4]
+            auto z = x / y;
+            for(int i = 0; i <= 4; ++i) {
+                value_t s = one + value_t(i) / value_t(4) * two; // [1, 3]
+                for(int j = 0; j <= 4; ++j) {
+                    value_t t = two + value_t(j) / value_t(4) * two; // [2,4]
+                    REQUIRE(z.contains(s / t));
+                }
+            }
+
+            taylor_model_t empty;
+            REQUIRE((empty / y).empty());
+        }
+    }
+
+    SECTION("compose_") {
+        taylor_model_t x(one, three); // [1, 3], order 2, empty remainder
+
+        // A g whose Taylor coefficients about c_f are exactly {1, 2, 3} is
+        // itself a degree-2 polynomial, so a (3rd-)derivative of
+        // identically 0 is the correct Lagrange remainder term: the
+        // composed model's remainder should stay [0, 0] and its polynomial
+        // should match Taylor::compose_'s exactly.
+        auto composed = x.compose_({one, two, three}, [=](const interval_t&) {
+            return interval_t(zero, zero);
+        });
+        REQUIRE(composed.polynomial() ==
+                x.polynomial().compose_({one, two, three}));
+        REQUIRE(composed.remainder() == interval_t(zero, zero));
+
+        taylor_model_t empty;
+        REQUIRE_THROWS_AS(
+          empty.compose_(
+            {one}, [=](const interval_t&) { return interval_t(zero, zero); }),
+          std::domain_error);
+    }
+
     SECTION("sweep_to_order") {
         auto v = taylor_model_t::make_deviation();
         // p = 5 + 2v + 3v^2, order 2, no pre-existing remainder.
@@ -288,6 +370,119 @@ TEMPLATE_TEST_CASE("TaylorModel", "", float, double) {
 
         // The original model's range must still be contained.
         REQUIRE(swept.contains(model.range()));
+    }
+
+    SECTION("Elementary Functions") {
+        // Samples n+1 evenly-spaced points across [lo, hi] and requires
+        // model to contain f() evaluated at each -- the model's range() is
+        // exactly [lo, hi] (order >= 1, empty remainder) for every fixture
+        // below, so this exercises Eq. \eqref{eq:tm-inclusion} at more than
+        // just the endpoints.
+        auto check_contains = [](auto&& model, value_t lo, value_t hi,
+                                 auto&& f) {
+            for(int i = 0; i <= 8; ++i) {
+                value_t t = value_t(i) / value_t(8);
+                value_t x = lo + t * (hi - lo);
+                REQUIRE(model.contains(f(x)));
+            }
+        };
+
+        SECTION("sqrt") {
+            taylor_model_t empty;
+            REQUIRE(sigma::sqrt(empty).empty());
+            REQUIRE_THROWS_AS(sigma::sqrt(taylor_model_t(-one, one)),
+                              std::domain_error);
+
+            taylor_model_t x(one, three);
+            check_contains(sigma::sqrt(x), one, three,
+                           [](value_t v) { return std::sqrt(v); });
+        }
+
+        SECTION("exp") {
+            taylor_model_t empty;
+            REQUIRE(sigma::exp(empty).empty());
+
+            taylor_model_t x(one, three);
+            check_contains(sigma::exp(x), one, three,
+                           [](value_t v) { return std::exp(v); });
+        }
+
+        SECTION("log") {
+            taylor_model_t empty;
+            REQUIRE(sigma::log(empty).empty());
+            REQUIRE_THROWS_AS(sigma::log(taylor_model_t(-one, one)),
+                              std::domain_error);
+
+            taylor_model_t x(one, three);
+            check_contains(sigma::log(x), one, three,
+                           [](value_t v) { return std::log(v); });
+        }
+
+        SECTION("pow") {
+            taylor_model_t empty;
+            REQUIRE(sigma::pow(empty, 2).empty());
+            REQUIRE_THROWS_AS(sigma::pow(taylor_model_t(-one, one), -2),
+                              std::domain_error);
+
+            taylor_model_t x(one, three);
+            check_contains(sigma::pow(x, 2), one, three,
+                           [](value_t v) { return v * v; });
+
+            taylor_model_t negative(-three, -one);
+            check_contains(sigma::pow(negative, 3), -three, -one,
+                           [](value_t v) { return v * v * v; });
+
+            // range() = [-1, 1] straddles 0 without being exactly the
+            // point 0: log/exp is not valid here, so pow must fall back to
+            // repeated multiplication (Eq. \eqref{eq:tm-mul}) and still
+            // rigorously enclose the true range [0, 1] of x^2 -- not
+            // collapse to the single point 0, which is what this branch
+            // used to (incorrectly) return.
+            taylor_model_t straddling(-one, one);
+            auto squared = sigma::pow(straddling, 2);
+            REQUIRE_FALSE(squared.range() == interval_t(zero, zero));
+            check_contains(squared, -one, one, [](value_t v) { return v * v; });
+
+            REQUIRE_THROWS_AS(sigma::pow(straddling, 0.5), std::domain_error);
+        }
+
+        SECTION("abs") {
+            taylor_model_t empty;
+            REQUIRE(sigma::abs(empty).empty());
+
+            taylor_model_t positive(one, two);
+            REQUIRE(sigma::abs(positive) == positive);
+
+            taylor_model_t negative(-two, -one);
+            test_taylor(sigma::abs(negative), one, two);
+
+            // Straddles 0 asymmetrically: [0, max(|-2|, 1)] = [0, 2].
+            taylor_model_t straddling(-two, one);
+            auto abs_straddling = sigma::abs(straddling);
+            test_taylor(abs_straddling, zero, two);
+            check_contains(abs_straddling, -two, one,
+                           [](value_t v) { return std::fabs(v); });
+        }
+
+        SECTION("fabs is an alias for abs") {
+            // Equality is structural (see "Comparison Operators" above), and
+            // the straddling-0 case of abs mints a fresh deviation variable
+            // per call, so fabs(x) and abs(x) are equal in value but not
+            // structurally == to each other; compare ranges instead.
+            taylor_model_t x(-two, one);
+            REQUIRE(sigma::fabs(x).range() == sigma::abs(x).range());
+        }
+
+        SECTION("Remainder does not grow with increasing order") {
+            // Order-(n+1) scaling (docs/taylor.md's "Order scaling"): for a
+            // fixed nonlinear function and domain, a higher truncation
+            // order must not produce a looser enclosure.
+            taylor_model_t low_order(value_t(0.9), value_t(1.1), order_t(1));
+            taylor_model_t high_order(value_t(0.9), value_t(1.1), order_t(5));
+            auto low  = sigma::log(low_order);
+            auto high = sigma::log(high_order);
+            REQUIRE(high.remainder().width() <= low.remainder().width());
+        }
     }
 
     SECTION("Comparison Operators") {
