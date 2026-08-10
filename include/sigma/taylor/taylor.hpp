@@ -4,8 +4,10 @@
 #include <optional>
 #include <sigma/interval/interval.hpp>
 #include <sigma/taylor/monomial.hpp>
+#include <sigma/taylor/operations/series_detail.hpp>
 #include <sstream>
 #include <utility>
+#include <vector>
 
 /** @file taylor.hpp
  *  @brief Defines the Taylor class
@@ -570,6 +572,115 @@ public:
         return Taylor(*this) *= other;
     }
 
+    /** @brief Overwrites *this with the quotient of *this and @p value.
+     *
+     *  @param[in] value The value to divide *this by.
+     *
+     *  @return Reference to this polynomial after division.
+     *
+     *  @throw std::domain_error If @p value is zero.
+     */
+    Taylor& operator/=(value_t value) {
+        if(value == 0) { throw std::domain_error("Division by zero"); }
+        return *this *= value_t(1.0 / value);
+    }
+
+    /** @brief Overwrites *this with the quotient of *this and @p other.
+     *
+     *  This method is implemented as the product of *this and
+     *  other.multiplicative_inverse(). See the documentation for
+     *  operator*=(Taylor) and multiplicative_inverse() for more details on how
+     *  these operations work.
+     *
+     *  @param[in] other The polynomial to divide *this by.
+     *
+     *  @return Reference to this polynomial after division.
+     *
+     *  @throw std::domain_error If @p other is empty or has a zero constant
+     *                           term.
+     *  @throw std::bad_alloc If memory allocation for the multiplicative
+     *                        inverse of @p other fails. Strong throw
+     *                        guarantee.
+     */
+    Taylor& operator/=(const Taylor& other) {
+        return *this *= other.multiplicative_inverse();
+    }
+
+    /** @brief Returns the quotient of *this and @p value.
+     *
+     *  This is a convenience method for calling `Taylor(*this) /= value`.
+     *
+     *  @param[in] value The value to divide *this by.
+     *
+     *  @return The quotient of *this and @p value.
+     *
+     *  @throw std::domain_error If @p value is zero.
+     */
+    Taylor operator/(value_t value) const { return Taylor(*this) /= value; }
+
+    /** @brief Returns the quotient of *this and @p other.
+     *
+     *  This is a convenience method for calling `Taylor(*this) /= other`.
+     *
+     *  @param[in] other The polynomial to divide *this by.
+     *
+     *  @return The quotient of *this and @p other.
+     *
+     *  @throw std::domain_error If @p other is empty or has a zero constant
+     *                           term.
+     *  @throw std::bad_alloc If memory allocation for the multiplicative
+     *                        inverse of @p other fails. Strong throw
+     *                        guarantee.
+     */
+    Taylor operator/(const Taylor& other) const {
+        return Taylor(*this) /= other;
+    }
+
+    /** @brief Evaluates a truncated outer Taylor series about the constant
+     *         term of *this.
+     *
+     *  This is the hook every elementary function (`sqrt`, `exp`, `log`,
+     *  `pow`, `multiplicative_inverse`, ...) is built from -- the direct
+     *  generalization of `Affine::apply_affine_transform` to arbitrary order.
+     *  Given the Taylor coefficients of an outer function @f$g@f$ about
+     *  @f$c_f@f$ = constant(), i.e. @p outer_coeffs[k] =
+     *  @f$\frac{1}{k!}\frac{d^k g}{df^k}(c_f)@f$, this computes
+     *  @f[
+     *    \sum_{k=0}^{n} \texttt{outer\_coeffs}[k]\, \bar{P}^{\,k}
+     *  @f]
+     *  where @f$\bar{P}@f$ = *this - constant() and @f$n@f$ = max_order(),
+     *  using ordinary Taylor polynomial addition and multiplication (which
+     *  truncate at @f$n@f$). Because @f$\bar{P}@f$ has no constant term,
+     *  @f$\bar{P}^{k}@f$ has no terms below degree @f$k@f$, so entries of
+     *  @p outer_coeffs beyond index @f$n@f$ would only ever multiply terms
+     *  that are truncated away; callers need not (but may) supply them.
+     *
+     *  @param[in] outer_coeffs The Taylor coefficients of the outer function
+     *                          about constant(), starting from k=0.
+     *
+     *  @return The truncated composition of the outer function with *this.
+     *
+     *  @throw std::domain_error If *this is empty. Strong throw guarantee.
+     *  @throw std::bad_alloc If memory allocation for the new polynomial
+     *                        fails. Strong throw guarantee.
+     */
+    Taylor compose_(const std::vector<value_t>& outer_coeffs) const;
+
+    /** @brief Returns the multiplicative inverse of *this.
+     *
+     *  The multiplicative inverse is obtained by composing the Taylor series
+     *  of @f$1/x@f$ about constant() with *this, via compose_(). See
+     *  compose_() for details on how the composition works.
+     *
+     *  @return The multiplicative inverse of *this.
+     *
+     *  @throw std::domain_error If *this is empty or its constant term is 0.
+     *                           Strong throw guarantee.
+     *  @throw std::bad_alloc If memory allocation for the new polynomial
+     *                        fails. Strong throw guarantee.
+     */
+    Taylor multiplicative_inverse() const;
+
     // -- Comparison Operators ------------------------------------------------
 
     /** @brief Checks if *this and @p other represent the same polynomial.
@@ -834,6 +945,30 @@ auto Taylor<ValueType>::operator*=(const Taylor& other) -> Taylor& {
              Taylor(new_constant, std::move(new_coeffs), Order(new_order));
 }
 
+template<typename ValueType>
+auto Taylor<ValueType>::compose_(const std::vector<value_t>& outer_coeffs) const
+  -> Taylor {
+    assert_not_empty_();
+    Taylor bar(value_t{0}, m_coeffs_, Order(m_order_));
+    value_t c0    = outer_coeffs.empty() ? value_t{0} : outer_coeffs[0];
+    Taylor result = Taylor(c0, Order(m_order_));
+    Taylor power  = bar;
+    for(size_type k = 1; k < outer_coeffs.size(); ++k) {
+        result += power * outer_coeffs[k];
+        if(k + 1 < outer_coeffs.size()) { power *= bar; }
+    }
+    return result;
+}
+
+template<typename ValueType>
+auto Taylor<ValueType>::multiplicative_inverse() const -> Taylor {
+    assert_not_empty_();
+    if(constant() == value_t{0}) {
+        throw std::domain_error("Division by zero");
+    }
+    return compose_(detail::reciprocal_outer_coeffs(constant(), m_order_));
+}
+
 /// Typedef for a Taylor polynomial of floats
 using TFloat = Taylor<float>;
 
@@ -841,3 +976,6 @@ using TFloat = Taylor<float>;
 using TDouble = Taylor<double>;
 
 } // namespace sigma
+
+#include <sigma/taylor/eigen_compat.hpp>
+#include <sigma/taylor/operations/operations.hpp>

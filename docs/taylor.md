@@ -22,10 +22,10 @@ It is the same differential algebra that underpins
 [COSY INFINITY](https://www.bmtdynamics.org/cosy/) and, more recently,
 [DACE](https://github.com/dacelib/dace).
 
-The classes described here, `Taylor` and `TaylorModel`, are implemented, with
-the exception of the elementary functions (`compose_` and everything built on
-it, e.g. `exp`, `log`, `sqrt`), antiderivation, division, and Eigen support --
-those are noted as deferred where they come up below. This page specifies the
+The classes described here, `Taylor` and `TaylorModel`, are implemented,
+including `compose_` and the elementary functions built on it (`sqrt`, `exp`,
+`log`, `pow`), division, and Eigen support. Antiderivation is the sole
+exception, noted as deferred where it comes up below. This page specifies the
 mathematics and the design those implementations follow.
 
 ## The Taylor model

@@ -8,8 +8,9 @@ TEMPLATE_TEST_CASE("Basic", "", sigma::AFloat, sigma::ADouble) {
     using affine_t = TestType;
     using value_t  = typename affine_t::value_t;
 
-    value_t one = 1.0;
-    value_t two = 2.0;
+    value_t zero = 0.0;
+    value_t one  = 1.0;
+    value_t two  = 2.0;
     SECTION("abs") {
         TestType empty;
         REQUIRE(sigma::abs(empty).empty());
@@ -26,8 +27,10 @@ TEMPLATE_TEST_CASE("Basic", "", sigma::AFloat, sigma::ADouble) {
         TestType negative_interval(-two, -one);
         test_affine(sigma::abs(negative_interval), one, two);
 
+        // Straddles 0 asymmetrically: the exact range of |x| for
+        // x in [-2, 1] is [0, 2], i.e. [0, max(|-2|, 1)].
         TestType straddling_interval(-two, one);
-        test_affine(sigma::abs(straddling_interval), value_t(-0.5), one);
+        test_affine(sigma::abs(straddling_interval), zero, two);
     }
 
     SECTION("fabs") {
@@ -47,6 +50,6 @@ TEMPLATE_TEST_CASE("Basic", "", sigma::AFloat, sigma::ADouble) {
         test_affine(sigma::fabs(negative_interval), one, two);
 
         TestType straddling_interval(-two, one);
-        test_affine(sigma::fabs(straddling_interval), value_t(-0.5), one);
+        test_affine(sigma::fabs(straddling_interval), zero, two);
     }
 }

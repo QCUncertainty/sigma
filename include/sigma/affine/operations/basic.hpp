@@ -11,16 +11,25 @@ namespace sigma {
  *
  *  @tparam T The value type of the interval
  *
- *  Let @f$\hat{x}@f$ be an affine form. The absolute value of the affine form
- *  is defined as:
+ *  Let @f$\hat{x}@f$ be an affine form with range @f$[\mathrm{lo},
+ *  \mathrm{hi}]@f$. The absolute value of the affine form is defined as:
  *  @f[
  *     |\hat{x}| = \begin{cases}
- *       \hat{x} & \text{if } \hat{x}_0 > 0 \\
- *       -\hat{x}& \text{if } \hat{x}_0 < 0 \\
- *       \frac{x_0}{2} + \sum_{i=1}^n \frac{x_i}{2} \epsilon_i &
- * \text{otherwise}
+ *       \hat{x} & \text{if } \mathrm{lo} \geq 0 \\
+ *       -\hat{x}& \text{if } \mathrm{hi} \leq 0 \\
+ *       [0,\, \max(|\mathrm{lo}|, \mathrm{hi})] & \text{otherwise}
  *    \end{cases}
  *  @f]
+ *  The first two cases are exact, since @f$|\cdot|@f$ is linear (the identity
+ *  or its negation) once its sign is fixed. The third case is not built from
+ *  an affine transformation of @f$\hat{x}@f$ at all: @f$|\cdot|@f$ is not
+ *  differentiable at 0, so no such transformation both agrees with it locally
+ *  and stays a valid enclosure, and picking one anyway (e.g. naively halving
+ *  the center and every error term) produces a result that does not actually
+ *  contain every value @f$|\hat{x}|@f$ can take. @f$[0, \max(|\mathrm{lo}|,
+ *  \mathrm{hi})]@f$ is instead the exact range of @f$|\cdot|@f$ over
+ *  @f$[\mathrm{lo}, \mathrm{hi}]@f$, returned as a fresh single-error-term
+ *  affine form via the interval constructor.
  *
  *  @param[in] a The interval
  *

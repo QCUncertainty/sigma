@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include <cmath>
 #include <sigma/affine/affine.hpp>
 
@@ -13,12 +14,8 @@ Affine<T> abs(const Affine<T>& a) {
     } else if(a_range.upper() <= T(0.0)) {
         return -a;
     }
-    auto new_center      = std::abs(a.center()) / 2.0;
-    auto new_error_terms = a.error_terms();
-    for(auto&& [error_symbol, error_term_i] : new_error_terms) {
-        error_term_i = error_term_i / 2.0;
-    }
-    return Affine<T>(new_center, new_error_terms);
+    auto m = std::max(std::abs(a_range.lower()), a_range.upper());
+    return Affine<T>(typename Affine<T>::interval_t(T(0.0), m));
 }
 
 template<typename T>
