@@ -40,6 +40,8 @@ namespace sigma::detail {
  *                    rather than the one visible at this template's own
  *                    definition point, i.e. wherever `pow.hpp` happens to
  *                    first get included -- aren't shadowed by the parameter.
+ *  @param[in] make_point A callable that constructs a new @p X at a given
+ *                        value.
  *
  *  @return @p a raised to @p power.
  *

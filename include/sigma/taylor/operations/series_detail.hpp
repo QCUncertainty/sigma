@@ -28,8 +28,9 @@ T factorial(std::size_t k) {
     return result;
 }
 
-/// Returns the k-th binomial-series coefficient C(1/2, k) = \prod_{i=0}^{k-1}
-/// (1/2 - i) / k!, used by the Taylor series of sqrt.
+/// Returns the k-th binomial-series coefficient
+/// @f$C(1/2, k) = \prod_{i=0}^{k-1}(1/2 - i) / k!@f$, used by the Taylor series
+/// of sqrt.
 template<typename T>
 T half_binomial_coefficient(std::size_t k) {
     if(k == 0) { return T{1}; }
