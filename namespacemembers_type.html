@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -113,6 +128,10 @@ $(function(){initNavTree('namespacemembers_type.html','',''); });
 <li>IFloat&#160;:&#160;<a class="el" href="namespacesigma.html#a39fce2e2c854ce7cafbc61b57c1e90a6">sigma</a></li>
 <li>TADouble&#160;:&#160;<a class="el" href="namespacesigma.html#a1084a7ef55ef1146b9d42d1ea8a94f47">sigma</a></li>
 <li>TAFloat&#160;:&#160;<a class="el" href="namespacesigma.html#a8aa6dc11c2681c4f0ebcb6ca997452da">sigma</a></li>
+<li>TDouble&#160;:&#160;<a class="el" href="namespacesigma.html#a79955d82ba1a40786d9bbdaa995527b6">sigma</a></li>
+<li>TFloat&#160;:&#160;<a class="el" href="namespacesigma.html#a3c2e89773dac6499c514d57dfc7eb8a0">sigma</a></li>
+<li>TMDouble&#160;:&#160;<a class="el" href="namespacesigma.html#af795a6bbfd0022d3f9b632d25b953cce">sigma</a></li>
+<li>TMFloat&#160;:&#160;<a class="el" href="namespacesigma.html#a3ac511d1d352ed5af08b3583e26183b9">sigma</a></li>
 <li>UDouble&#160;:&#160;<a class="el" href="namespacesigma.html#a4208b27a7ef51017bd313e6009915c84">sigma</a></li>
 <li>UFloat&#160;:&#160;<a class="el" href="namespacesigma.html#a6224a8003e248c3ed971b85f6aef2f7d">sigma</a></li>
 </ul>

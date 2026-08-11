@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['udouble_0',['UDouble',['../namespacesigma.html#a4208b27a7ef51017bd313e6009915c84',1,'sigma']]],
-  ['ufloat_1',['UFloat',['../namespacesigma.html#a6224a8003e248c3ed971b85f6aef2f7d',1,'sigma']]],
-  ['uncertain_2',['Uncertain',['../structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html#a11fc90ab63ca0f2e95e8ff7219cd6f55',1,'Eigen::NumTraits&lt; sigma::Uncertain&lt; float &gt; &gt;::Uncertain'],['../structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01double_01_4_01_4.html#a794a55823076bd7781dca7e1845988f3',1,'Eigen::NumTraits&lt; sigma::Uncertain&lt; double &gt; &gt;::Uncertain']]],
-  ['uncertain_5ft_3',['uncertain_t',['../classsigma_1_1detail___1_1Setter.html#a155e265ac4e84126191bbab847afaff1',1,'sigma::detail_::Setter']]]
+  ['size_5ftype_0',['size_type',['../classsigma_1_1Affine.html#ac4b5d9284d1ba1e0983518be61f26762',1,'sigma::Affine::size_type'],['../classsigma_1_1ThresholdedAffine.html#a033cb029014d9cc72d08816492ff581d',1,'sigma::ThresholdedAffine::size_type'],['../classsigma_1_1Monomial.html#afdef1d361ec0203b5ec3ee72c89b2d8d',1,'sigma::Monomial::size_type'],['../classsigma_1_1Taylor.html#a280143850aaf3758f04179d8036588eb',1,'sigma::Taylor::size_type'],['../classsigma_1_1TaylorModel.html#a92f987b404599269d6e0db20057b4bf3',1,'sigma::TaylorModel::size_type']]]
 ];

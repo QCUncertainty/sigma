@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -111,10 +126,14 @@ $(function(){initNavTree('pages.html','',''); });
 <div class="contents">
 <div class="textblock">Here is a list of all related documentation pages:</div><div class="directory">
 <table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2background.html" target="_self">Background</a></td><td class="desc"></td></tr>
-<tr id="row_1_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2code__of__conduct.html" target="_self">Contributor Covenant Code of Conduct</a></td><td class="desc"></td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2contributing.html" target="_self">Contributor Guidelines</a></td><td class="desc"></td></tr>
-<tr id="row_3_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2examples.html" target="_self">Examples</a></td><td class="desc"></td></tr>
+<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2affine.html" target="_self">Affine Arithmetic</a></td><td class="desc"></td></tr>
+<tr id="row_1_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2background.html" target="_self">Background</a></td><td class="desc"></td></tr>
+<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2code__of__conduct.html" target="_self">Contributor Covenant Code of Conduct</a></td><td class="desc"></td></tr>
+<tr id="row_3_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2contributing.html" target="_self">Contributor Guidelines</a></td><td class="desc"></td></tr>
+<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2examples.html" target="_self">Examples</a></td><td class="desc"></td></tr>
+<tr id="row_5_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2interval.html" target="_self">Interval Arithmetic</a></td><td class="desc"></td></tr>
+<tr id="row_6_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2README.html" target="_self">Building the Documentation</a></td><td class="desc"></td></tr>
+<tr id="row_7_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_docs_2taylor.html" target="_self">Taylor Models</a></td><td class="desc"></td></tr>
 </table>
 </div><!-- directory -->
 </div><!-- contents -->

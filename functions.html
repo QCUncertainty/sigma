@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -109,7 +124,7 @@ $(function(){initNavTree('functions.html','',''); });
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
 
 <h3 class="doxsection"><a id="index_a" name="index_a"></a>- a -</h3><ul>
-<li>abs()&#160;:&#160;<a class="el" href="classsigma_1_1ThresholdedAffine.html#adf2f5e481a33c6b0723a7a0969abc6ff">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
+<li>abs()&#160;:&#160;<a class="el" href="classsigma_1_1TaylorModel.html#a157cf307b42875a34b324c09d8572a7f">sigma::TaylorModel&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#adf2f5e481a33c6b0723a7a0969abc6ff">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
 <li>add_error_term()&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#acc904944dcf58156b7803a0ba80b97cc">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#a63222a061277ef57adb38715b1a2125b">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
 <li>Affine&#160;:&#160;<a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Affine_3_01double_01_4_01_4.html#a8d073a40b89f62382da44f09dfabd252">Eigen::NumTraits&lt; sigma::Affine&lt; double &gt; &gt;</a>, <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Affine_3_01float_01_4_01_4.html#a7d4c315677c8c8f9322f8df20b83f825">Eigen::NumTraits&lt; sigma::Affine&lt; float &gt; &gt;</a>, <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1ThresholdedAffine_3_01double_01_4_01_4.html#a4e96b4820abe888c44533e425c72725f">Eigen::NumTraits&lt; sigma::ThresholdedAffine&lt; double &gt; &gt;</a>, <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1ThresholdedAffine_3_01float_01_4_01_4.html#a8e0844c1a2ea852d3cc1b2f2d92e6d92">Eigen::NumTraits&lt; sigma::ThresholdedAffine&lt; float &gt; &gt;</a>, <a class="el" href="classsigma_1_1Affine.html#a5738343390c391eff51fa728ab55f199">sigma::Affine&lt; ValueType &gt;</a></li>
 <li>affine()&#160;:&#160;<a class="el" href="classsigma_1_1ThresholdedAffine.html#aeb7dffcc0621b34e1c2b2c7121cfc04d">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>

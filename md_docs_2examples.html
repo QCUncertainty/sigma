@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -168,7 +183,7 @@ Mathematical Operations</h1>
 <div class="line"><span class="keyword">auto</span> c = a - b;                 <span class="comment">// c = -1+/-0.223607</span></div>
 <div class="line"><span class="keyword">auto</span> d = <a class="code hl_function" href="namespacesigma.html#acd31fdaf16ebab84607b4f004204a556">sigma::copysign</a>(b, c); <span class="comment">// d = -2+/-0.2</span></div>
 <div class="line"><span class="keyword">auto</span> e = <a class="code hl_function" href="namespacesigma.html#a24fe469f5d0da2716b5be3d1ff8d12a3">sigma::pow</a>(a, 2);      <span class="comment">// e = 1+/-0.2</span></div>
-<div class="ttc" id="anamespacesigma_html_a24fe469f5d0da2716b5be3d1ff8d12a3"><div class="ttname"><a href="namespacesigma.html#a24fe469f5d0da2716b5be3d1ff8d12a3">sigma::pow</a></div><div class="ttdeci">Affine&lt; T &gt; pow(const Affine&lt; T &gt; &amp;a, const U &amp;exp)</div><div class="ttdoc">Calculate the power of an affine form.</div><div class="ttdef"><b>Definition</b> exponents.ipp:71</div></div>
+<div class="ttc" id="anamespacesigma_html_a24fe469f5d0da2716b5be3d1ff8d12a3"><div class="ttname"><a href="namespacesigma.html#a24fe469f5d0da2716b5be3d1ff8d12a3">sigma::pow</a></div><div class="ttdeci">Affine&lt; T &gt; pow(const Affine&lt; T &gt; &amp;a, const U &amp;exp)</div><div class="ttdoc">Calculate the power of an affine form.</div><div class="ttdef"><b>Definition</b> exponents.ipp:72</div></div>
 <div class="ttc" id="anamespacesigma_html_acd31fdaf16ebab84607b4f004204a556"><div class="ttname"><a href="namespacesigma.html#acd31fdaf16ebab84607b4f004204a556">sigma::copysign</a></div><div class="ttdeci">Uncertain&lt; T &gt; copysign(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;b)</div><div class="ttdoc">Copy the sign of one value to another.</div><div class="ttdef"><b>Definition</b> basic.ipp:59</div></div>
 </div><!-- fragment --><p> For a complete list of functions, see <a class="el" href="namespacesigma.html" title="sigma">here</a>.</p>
 <h1 class="doxsection"><a class="anchor" id="linear-algebra"></a>

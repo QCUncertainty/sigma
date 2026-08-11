@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -110,7 +125,7 @@ $(function(){initNavTree('functions_i.html','',''); });
 
 <h3 class="doxsection"><a id="index_i" name="index_i"></a>- i -</h3><ul>
 <li>Interval&#160;:&#160;<a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html#adae696ceb2f1ea7dfc7c9bed04fbee26">Eigen::NumTraits&lt; sigma::Interval&lt; double &gt; &gt;</a>, <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01float_01_4_01_4.html#aafad52b1ada0c02a29304106521de935">Eigen::NumTraits&lt; sigma::Interval&lt; float &gt; &gt;</a>, <a class="el" href="classsigma_1_1Interval.html#a7ac13e1f8ae3655b7dace5a654c8135e">sigma::Interval&lt; ValueType &gt;</a></li>
-<li>interval_t&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#a8d05bb3802fc1752b7bdad0353b96c84">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#a5bb8bb59e4e290859fafae5c0cd08896">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
+<li>interval_t&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#a8d05bb3802fc1752b7bdad0353b96c84">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1Taylor.html#a589f2c8e5c0c1dda3f0e4f0d6afe49c3">sigma::Taylor&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1TaylorModel.html#a0c1983fd807727dbf1e593222abc29fa">sigma::TaylorModel&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#a5bb8bb59e4e290859fafae5c0cd08896">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

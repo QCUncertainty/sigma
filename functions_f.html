@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -109,7 +124,7 @@ $(function(){initNavTree('functions_f.html','',''); });
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
 
 <h3 class="doxsection"><a id="index_f" name="index_f"></a>- f -</h3><ul>
-<li>fabs()&#160;:&#160;<a class="el" href="classsigma_1_1ThresholdedAffine.html#add22905d00add377981cb93e966526ea">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
+<li>fabs()&#160;:&#160;<a class="el" href="classsigma_1_1TaylorModel.html#a25c32266457f09b683f439c1b87e9662">sigma::TaylorModel&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#add22905d00add377981cb93e966526ea">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

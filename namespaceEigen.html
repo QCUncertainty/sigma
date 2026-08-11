@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -127,6 +142,14 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numeric traits for <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01float_01_4_01_4.html#aafad52b1ada0c02a29304106521de935">Interval&lt;float&gt;</a>.  <a href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01float_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="memitem:NumTraits_3C_20sigma_3A_3AInterval_3C_20double_20_3E_20_3E" id="r_NumTraits_3C_20sigma_3A_3AInterval_3C_20double_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html">NumTraits&lt; sigma::Interval&lt; double &gt; &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numeric traits for <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html#adae696ceb2f1ea7dfc7c9bed04fbee26">Interval&lt;double&gt;</a>.  <a href="structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:NumTraits_3C_20sigma_3A_3ATaylor_3C_20float_20_3E_20_3E" id="r_NumTraits_3C_20sigma_3A_3ATaylor_3C_20float_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01float_01_4_01_4.html">NumTraits&lt; sigma::Taylor&lt; float &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numeric traits for <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01float_01_4_01_4.html#aec3c8f393f987f5f99933b980173692c">Taylor&lt;float&gt;</a>.  <a href="structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01float_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:NumTraits_3C_20sigma_3A_3ATaylorModel_3C_20float_20_3E_20_3E" id="r_NumTraits_3C_20sigma_3A_3ATaylorModel_3C_20float_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01float_01_4_01_4.html">NumTraits&lt; sigma::TaylorModel&lt; float &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numeric traits for TaylorModel&lt;float&gt;.  <a href="structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01float_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:NumTraits_3C_20sigma_3A_3ATaylor_3C_20double_20_3E_20_3E" id="r_NumTraits_3C_20sigma_3A_3ATaylor_3C_20double_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01double_01_4_01_4.html">NumTraits&lt; sigma::Taylor&lt; double &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numeric traits for <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01double_01_4_01_4.html#a54b61fbb0084735d6a4367effbedce25">Taylor&lt;double&gt;</a>.  <a href="structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01double_01_4_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:NumTraits_3C_20sigma_3A_3ATaylorModel_3C_20double_20_3E_20_3E" id="r_NumTraits_3C_20sigma_3A_3ATaylorModel_3C_20double_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01double_01_4_01_4.html">NumTraits&lt; sigma::TaylorModel&lt; double &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numeric traits for TaylorModel&lt;double&gt;.  <a href="structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01double_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="memitem:NumTraits_3C_20sigma_3A_3AUncertain_3C_20float_20_3E_20_3E" id="r_NumTraits_3C_20sigma_3A_3AUncertain_3C_20float_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html">NumTraits&lt; sigma::Uncertain&lt; float &gt; &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Numeric traits for <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html#a11fc90ab63ca0f2e95e8ff7219cd6f55">Uncertain&lt;float&gt;</a>.  <a href="structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="memitem:NumTraits_3C_20sigma_3A_3AUncertain_3C_20double_20_3E_20_3E" id="r_NumTraits_3C_20sigma_3A_3AUncertain_3C_20double_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01double_01_4_01_4.html">NumTraits&lt; sigma::Uncertain&lt; double &gt; &gt;</a></td></tr>
@@ -136,6 +159,7 @@ Classes</h2></td></tr>
 <div class="textblock"><p>The namespace of the <a class="el" href="namespaceEigen.html" title="The namespace of the Eigen library.">Eigen</a> library. </p>
 <p>Used here to overload the numeric traits struct for Affine values</p>
 <p>Used here to overload the numeric traits struct for Interval values</p>
+<p>Used here to overload the numeric traits struct for Taylor and TaylorModel values</p>
 <p>Used here to overload the numeric traits struct for Uncertain values </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->

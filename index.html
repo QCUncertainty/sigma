@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -116,7 +131,7 @@ $(function(){initNavTree('index.html','',''); });
 <h1 class="doxsection"><a class="anchor" id="statement-of-need"></a>
 Statement of Need</h1>
 <p>Scientific analysis, whether based on experiment or simulation, often uses values that are paired with some representation of their accuracy or reliability. Oftentimes, this representation is a value's standard deviation or a similar metric. The uncertainty in a value can be derived from a number of sources, including instrument accuracy, limitations from approximations, or the statistical nature of the value itself. New values resulting from operations on uncertain inputs will have uncertainties derived from the input uncertainties, but the process of propagating those relationships can become tedious and complicated. To the best of our knowledge, there is no currently maintained C++ library to facilitate this kind of uncertainty propagation. As C++ is an important language in the development of scientific software and high-performance computing, Sigma has been developed in an attempt to fill this gap.</p>
-<p>See <a class="el" href="md_docs_2background.html" title="Background">Background</a> for methodological details.</p>
+<p>See <a class="el" href="md_docs_2background.html" title="Background">Background</a> for methodological details. Sigma also provides set-valued representations that enclose a result rather than estimating its distribution, described in order of increasing accuracy in <a class="el" href="md_docs_2interval.html" title="Interval Arithmetic">Interval Arithmetic</a>, <a class="el" href="md_docs_2affine.html" title="Affine Arithmetic">Affine Arithmetic</a>, and <a class="el" href="md_docs_2taylor.html" title="Taylor Models">Taylor Models</a>.</p>
 <h1 class="doxsection"><a class="anchor" id="features"></a>
 Features</h1>
 <ul>

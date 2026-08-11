@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -110,6 +125,7 @@ $(function(){initNavTree('md_docs_2background.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="background"></a></p>
+<p>This page covers the theory behind Sigma's <span class="tt">Uncertain</span> class. For the set-valued representations, which enclose a result rather than estimating its distribution, see <a class="el" href="md_docs_2interval.html" title="Interval Arithmetic">Interval Arithmetic</a>, <a class="el" href="md_docs_2affine.html" title="Affine Arithmetic">Affine Arithmetic</a>, and <a class="el" href="md_docs_2taylor.html" title="Taylor Models">Taylor Models</a>.</p>
 <h1 class="doxsection"><a class="anchor" id="linear-error-propagation"></a>
 Linear Error Propagation</h1>
 <p>Like the <a href="https://github.com/lmfit/uncertainties">uncertainties</a> and <a href="https://github.com/JuliaPhysics/Measurements.jl">Measurements.jl</a> libraries, Sigma is based on the <a href="https://en.wikipedia.org/wiki/Propagation_of_uncertainty">theory of linear error propagation</a>. Here we will provide a brief summary of that theory.</p>

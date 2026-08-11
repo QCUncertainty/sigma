@@ -1,7 +1,14 @@
 var searchData=
 [
-  ['fabs_0',['fabs',['../classsigma_1_1ThresholdedAffine.html#add22905d00add377981cb93e966526ea',1,'sigma::ThresholdedAffine::fabs()'],['../namespacesigma.html#a791bc74e56cca4cbc40757a60e82d233',1,'sigma::fabs(const Affine&lt; T &gt; &amp;a)'],['../namespacesigma.html#a1e51b493c47ce761af8c6947bc94ca8b',1,'sigma::fabs(const Interval&lt; T &gt; &amp;a)'],['../namespacesigma.html#ac4d519de22722a51cda0bc3c92960e89',1,'sigma::fabs(const Uncertain&lt; T &gt; &amp;a)'],['../classsigma_1_1ThresholdedAffine.html#add22905d00add377981cb93e966526ea',1,'sigma::fabs(const ThresholdedAffine&lt; T &gt; &amp;a)']]],
-  ['features_1',['Features',['../index.html#features',1,'']]],
-  ['floor_2',['floor',['../namespacesigma.html#aa33c27c2144a61b5061e6a4902349123',1,'sigma']]],
-  ['fmod_3',['fmod',['../namespacesigma.html#aff47e6b43a710dc89637c5e6ae1e1c60',1,'sigma::fmod(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;b)'],['../namespacesigma.html#a09be7785a22e02bd9b1ff1e44f3b5072',1,'sigma::fmod(const Uncertain&lt; T &gt; &amp;a, double b)'],['../namespacesigma.html#a878dc31b111a5c5db62a8985188b8247',1,'sigma::fmod(double a, const Uncertain&lt; T &gt; &amp;b)']]]
+  ['fabs_0',['fabs',['../classsigma_1_1ThresholdedAffine.html#add22905d00add377981cb93e966526ea',1,'sigma::ThresholdedAffine::fabs()'],['../classsigma_1_1TaylorModel.html#a25c32266457f09b683f439c1b87e9662',1,'sigma::TaylorModel::fabs()'],['../namespacesigma.html#a791bc74e56cca4cbc40757a60e82d233',1,'sigma::fabs(const Affine&lt; T &gt; &amp;a)'],['../namespacesigma.html#a1e51b493c47ce761af8c6947bc94ca8b',1,'sigma::fabs(const Interval&lt; T &gt; &amp;a)'],['../namespacesigma.html#a65ea82ce6443ead2023dfb42ee279f2b',1,'sigma::fabs(const Taylor&lt; T &gt; &amp;a)'],['../namespacesigma.html#ac4d519de22722a51cda0bc3c92960e89',1,'sigma::fabs(const Uncertain&lt; T &gt; &amp;a)'],['../classsigma_1_1ThresholdedAffine.html#add22905d00add377981cb93e966526ea',1,'sigma::fabs(const ThresholdedAffine&lt; T &gt; &amp;a)'],['../classsigma_1_1TaylorModel.html#a25c32266457f09b683f439c1b87e9662',1,'sigma::fabs(const TaylorModel&lt; T &gt; &amp;a)']]],
+  ['factorial_1',['factorial',['../series__detail_8hpp.html#a56cb8a31f528e616619d9ff2de982c59',1,'sigma::detail']]],
+  ['failure_20modes_20that_20produce_20no_20warning_2',['Two failure modes that produce no warning',['../md_docs_2README.html#two-failure-modes-that-produce-no-warning',1,'']]],
+  ['fast_20bounders_3',['Dominated and fast bounders',['../md_docs_2taylor.html#dominated-and-fast-bounders',1,'']]],
+  ['features_4',['Features',['../index.html#features',1,'']]],
+  ['floor_5',['floor',['../namespacesigma.html#aa33c27c2144a61b5061e6a4902349123',1,'sigma']]],
+  ['fmod_6',['fmod',['../namespacesigma.html#aff47e6b43a710dc89637c5e6ae1e1c60',1,'sigma::fmod(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;b)'],['../namespacesigma.html#a09be7785a22e02bd9b1ff1e44f3b5072',1,'sigma::fmod(const Uncertain&lt; T &gt; &amp;a, double b)'],['../namespacesigma.html#a878dc31b111a5c5db62a8985188b8247',1,'sigma::fmod(double a, const Uncertain&lt; T &gt; &amp;b)']]],
+  ['form_7',['form',['../md_docs_2taylor.html#horner-form',1,'Horner form'],['../md_docs_2affine.html#the-affine-form',1,'The affine form']]],
+  ['functions_8',['functions',['../md_docs_2interval.html#elementary-functions',1,'Elementary functions'],['../md_docs_2taylor.html#elementary-functions-1',1,'Elementary functions']]],
+  ['fundamental_20limitations_9',['Two fundamental limitations',['../md_docs_2interval.html#two-fundamental-limitations',1,'']]],
+  ['future_20work_10',['Future work',['../md_docs_2taylor.html#future-work',1,'']]]
 ];

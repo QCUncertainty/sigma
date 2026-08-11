@@ -1,4 +1,11 @@
 var searchData=
 [
-  ['value_5ft_0',['value_t',['../classsigma_1_1Affine.html#a57fcf1e33221557694902844edf844f5',1,'sigma::Affine::value_t'],['../classsigma_1_1ThresholdedAffine.html#a9e5d7ee9b861396ba562272db7ff90f9',1,'sigma::ThresholdedAffine::value_t'],['../classsigma_1_1Interval.html#a1cdf797e6b73fd01b5a01569ccf1e23b',1,'sigma::Interval::value_t'],['../classsigma_1_1detail___1_1Setter.html#ab5be0d3fe3e4ca83389a05fd75a0886c',1,'sigma::detail_::Setter::value_t'],['../classsigma_1_1Uncertain.html#ab9d55c3ae3c72960a33db279c96cb952',1,'sigma::Uncertain::value_t']]]
+  ['tadouble_0',['TADouble',['../namespacesigma.html#a1084a7ef55ef1146b9d42d1ea8a94f47',1,'sigma']]],
+  ['tafloat_1',['TAFloat',['../namespacesigma.html#a8aa6dc11c2681c4f0ebcb6ca997452da',1,'sigma']]],
+  ['taylor_2',['Taylor',['../structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01float_01_4_01_4.html#aec3c8f393f987f5f99933b980173692c',1,'Eigen::NumTraits&lt; sigma::Taylor&lt; float &gt; &gt;::Taylor'],['../structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01float_01_4_01_4.html#a9d3af20d036b8541504446cd6801162b',1,'Eigen::NumTraits&lt; sigma::TaylorModel&lt; float &gt; &gt;::Taylor'],['../structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01double_01_4_01_4.html#a54b61fbb0084735d6a4367effbedce25',1,'Eigen::NumTraits&lt; sigma::Taylor&lt; double &gt; &gt;::Taylor'],['../structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01double_01_4_01_4.html#ae9cf006f0b715038cccf93121b15dee0',1,'Eigen::NumTraits&lt; sigma::TaylorModel&lt; double &gt; &gt;::Taylor']]],
+  ['taylor_5ft_3',['taylor_t',['../classsigma_1_1TaylorModel.html#abfb86703b1352b6065e0cc50d82d8679',1,'sigma::TaylorModel']]],
+  ['tdouble_4',['TDouble',['../namespacesigma.html#a79955d82ba1a40786d9bbdaa995527b6',1,'sigma']]],
+  ['tfloat_5',['TFloat',['../namespacesigma.html#a3c2e89773dac6499c514d57dfc7eb8a0',1,'sigma']]],
+  ['tmdouble_6',['TMDouble',['../namespacesigma.html#af795a6bbfd0022d3f9b632d25b953cce',1,'sigma']]],
+  ['tmfloat_7',['TMFloat',['../namespacesigma.html#a3ac511d1d352ed5af08b3583e26183b9',1,'sigma']]]
 ];

@@ -1,4 +1,15 @@
 var searchData=
 [
-  ['setter_0',['Setter',['../classsigma_1_1detail___1_1Setter.html',1,'sigma::detail_']]]
+  ['numtraits_3c_20sigma_3a_3aaffine_3c_20double_20_3e_20_3e_0',['NumTraits&lt; sigma::Affine&lt; double &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1Affine_3_01double_01_4_01_4.html',1,'Eigen']]],
+  ['numtraits_3c_20sigma_3a_3aaffine_3c_20float_20_3e_20_3e_1',['NumTraits&lt; sigma::Affine&lt; float &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1Affine_3_01float_01_4_01_4.html',1,'Eigen']]],
+  ['numtraits_3c_20sigma_3a_3ainterval_3c_20double_20_3e_20_3e_2',['NumTraits&lt; sigma::Interval&lt; double &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html',1,'Eigen']]],
+  ['numtraits_3c_20sigma_3a_3ainterval_3c_20float_20_3e_20_3e_3',['NumTraits&lt; sigma::Interval&lt; float &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01float_01_4_01_4.html',1,'Eigen']]],
+  ['numtraits_3c_20sigma_3a_3ataylor_3c_20double_20_3e_20_3e_4',['NumTraits&lt; sigma::Taylor&lt; double &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01double_01_4_01_4.html',1,'Eigen']]],
+  ['numtraits_3c_20sigma_3a_3ataylor_3c_20float_20_3e_20_3e_5',['NumTraits&lt; sigma::Taylor&lt; float &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01float_01_4_01_4.html',1,'Eigen']]],
+  ['numtraits_3c_20sigma_3a_3ataylormodel_3c_20double_20_3e_20_3e_6',['NumTraits&lt; sigma::TaylorModel&lt; double &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01double_01_4_01_4.html',1,'Eigen']]],
+  ['numtraits_3c_20sigma_3a_3ataylormodel_3c_20float_20_3e_20_3e_7',['NumTraits&lt; sigma::TaylorModel&lt; float &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01float_01_4_01_4.html',1,'Eigen']]],
+  ['numtraits_3c_20sigma_3a_3athresholdedaffine_3c_20double_20_3e_20_3e_8',['NumTraits&lt; sigma::ThresholdedAffine&lt; double &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1ThresholdedAffine_3_01double_01_4_01_4.html',1,'Eigen']]],
+  ['numtraits_3c_20sigma_3a_3athresholdedaffine_3c_20float_20_3e_20_3e_9',['NumTraits&lt; sigma::ThresholdedAffine&lt; float &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1ThresholdedAffine_3_01float_01_4_01_4.html',1,'Eigen']]],
+  ['numtraits_3c_20sigma_3a_3auncertain_3c_20double_20_3e_20_3e_10',['NumTraits&lt; sigma::Uncertain&lt; double &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01double_01_4_01_4.html',1,'Eigen']]],
+  ['numtraits_3c_20sigma_3a_3auncertain_3c_20float_20_3e_20_3e_11',['NumTraits&lt; sigma::Uncertain&lt; float &gt; &gt;',['../structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html',1,'Eigen']]]
 ];

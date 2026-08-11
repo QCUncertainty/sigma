@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -109,9 +124,13 @@ $(function(){initNavTree('functions_t.html','',''); });
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
 
 <h3 class="doxsection"><a id="index_t" name="index_t"></a>- t -</h3><ul>
+<li>Taylor&#160;:&#160;<a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01double_01_4_01_4.html#a54b61fbb0084735d6a4367effbedce25">Eigen::NumTraits&lt; sigma::Taylor&lt; double &gt; &gt;</a>, <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01float_01_4_01_4.html#aec3c8f393f987f5f99933b980173692c">Eigen::NumTraits&lt; sigma::Taylor&lt; float &gt; &gt;</a>, <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01double_01_4_01_4.html#ae9cf006f0b715038cccf93121b15dee0">Eigen::NumTraits&lt; sigma::TaylorModel&lt; double &gt; &gt;</a>, <a class="el" href="structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01float_01_4_01_4.html#a9d3af20d036b8541504446cd6801162b">Eigen::NumTraits&lt; sigma::TaylorModel&lt; float &gt; &gt;</a>, <a class="el" href="classsigma_1_1Taylor.html#aaa07bfca02779a7057ed285127a4856a">sigma::Taylor&lt; ValueType &gt;</a></li>
+<li>taylor_t&#160;:&#160;<a class="el" href="classsigma_1_1TaylorModel.html#abfb86703b1352b6065e0cc50d82d8679">sigma::TaylorModel&lt; ValueType &gt;</a></li>
+<li>TaylorModel()&#160;:&#160;<a class="el" href="classsigma_1_1TaylorModel.html#ad94c1ddd1b8328804ea3fa2d54d96f0e">sigma::TaylorModel&lt; ValueType &gt;</a></li>
 <li>Threshold()&#160;:&#160;<a class="el" href="structsigma_1_1ThresholdedAffine_1_1Threshold.html#a4b2ced2712819f1f39154982631b74e4">sigma::ThresholdedAffine&lt; ValueType &gt;::Threshold</a></li>
 <li>threshold()&#160;:&#160;<a class="el" href="classsigma_1_1ThresholdedAffine.html#a298214f80037d9585cbc4e09f8eee5b3">sigma::ThresholdedAffine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1Uncertain.html#af1806c76fcdb09aadbaf17ca7a26dad1">sigma::Uncertain&lt; ValueType &gt;</a></li>
 <li>ThresholdedAffine()&#160;:&#160;<a class="el" href="classsigma_1_1ThresholdedAffine.html#afbe76e468a7b33b13a79095c446b4155">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
+<li>truncate()&#160;:&#160;<a class="el" href="classsigma_1_1Taylor.html#aa7999fbc5bac8aec45096ee07f2ff074">sigma::Taylor&lt; ValueType &gt;</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

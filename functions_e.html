@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -109,11 +124,15 @@ $(function(){initNavTree('functions_e.html','',''); });
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
 
 <h3 class="doxsection"><a id="index_e" name="index_e"></a>- e -</h3><ul>
-<li>empty()&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#ad0aca387e7fd5631e0f9cb7fe4ce5b26">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1Interval.html#a90c6009af9e26cc7aa934d9c0f420a7a">sigma::Interval&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#adffa0df6a812c03fa15641ad2af37030">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
+<li>empty()&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#ad0aca387e7fd5631e0f9cb7fe4ce5b26">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1Interval.html#a90c6009af9e26cc7aa934d9c0f420a7a">sigma::Interval&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1Monomial.html#aaaef6e86f0f604b6b9d614aa05a808ad">sigma::Monomial</a>, <a class="el" href="classsigma_1_1Taylor.html#a2e5e00b424d02d0921a720089bc15e6b">sigma::Taylor&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1TaylorModel.html#a9986acc075ff6948e03f9e5c3376da25">sigma::TaylorModel&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#adffa0df6a812c03fa15641ad2af37030">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
 <li>error_term_t&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#a819d8b542ca1415d9b3816d4ad36d56c">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#aab47e94ebe9bc94c8af29a068a9f2856">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
 <li>error_terms()&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#a6a1407be13182e76b07fd420d5bd4875">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#ac8e006e7f5813def20e8840c787427e2">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
 <li>error_terms_t&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#a62b440448fdc35ce351531dbc26688bc">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#ae436deb1333b8323b90352f861baa27b">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
-<li>exp()&#160;:&#160;<a class="el" href="classsigma_1_1ThresholdedAffine.html#a5d4e151ec0b9d004a228df2debefb1d5">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
+<li>exp()&#160;:&#160;<a class="el" href="classsigma_1_1TaylorModel.html#af1eece774b4b5d78eb821bc0decd239d">sigma::TaylorModel&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#a5d4e151ec0b9d004a228df2debefb1d5">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
+<li>exponent()&#160;:&#160;<a class="el" href="classsigma_1_1Monomial.html#a0a22f9f46fc6017a93f4c6634df73eb9">sigma::Monomial</a></li>
+<li>exponent_t&#160;:&#160;<a class="el" href="classsigma_1_1Monomial.html#a795f0d7e95e127a125175a24f8b102ab">sigma::Monomial</a></li>
+<li>exponents()&#160;:&#160;<a class="el" href="classsigma_1_1Monomial.html#ac4ba2635563086ddc867564be5c38b37">sigma::Monomial</a></li>
+<li>exponents_t&#160;:&#160;<a class="el" href="classsigma_1_1Monomial.html#a497f67dc71b9ab6dfd733c9b836d0dfb">sigma::Monomial</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

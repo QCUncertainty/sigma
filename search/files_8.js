@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['thresholded_5faffine_2ehpp_0',['thresholded_affine.hpp',['../thresholded__affine_8hpp.html',1,'']]],
-  ['trigonometry_2ehpp_1',['trigonometry.hpp',['../trigonometry_8hpp.html',1,'']]]
+  ['operation_5fcommon_2ehpp_0',['operation_common.hpp',['../operation__common_8hpp.html',1,'']]],
+  ['operations_2ehpp_1',['operations.hpp',['../affine_2operations_2operations_8hpp.html',1,'(Global Namespace)'],['../interval_2operations_2operations_8hpp.html',1,'(Global Namespace)'],['../taylor_2operations_2operations_8hpp.html',1,'(Global Namespace)'],['../uncertain_2operations_2operations_8hpp.html',1,'(Global Namespace)']]]
 ];

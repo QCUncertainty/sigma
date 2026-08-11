@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -114,8 +129,10 @@ $(function(){initNavTree('functions_s.html','',''); });
 <li>set_intersection()&#160;:&#160;<a class="el" href="classsigma_1_1Interval.html#a063bb414e612e797946667691d65d873">sigma::Interval&lt; ValueType &gt;</a></li>
 <li>set_union()&#160;:&#160;<a class="el" href="classsigma_1_1Interval.html#a67d91b325bd0f1bad3fa3f2bec618200">sigma::Interval&lt; ValueType &gt;</a></li>
 <li>Setter()&#160;:&#160;<a class="el" href="classsigma_1_1detail___1_1Setter.html#a53b7d8051c5d5d34b095b393f1bb1624">sigma::detail_::Setter&lt; UncertainType &gt;</a></li>
-<li>size_type&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#ac4b5d9284d1ba1e0983518be61f26762">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#a033cb029014d9cc72d08816492ff581d">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
-<li>sqrt()&#160;:&#160;<a class="el" href="classsigma_1_1ThresholdedAffine.html#a8fbe83513f3819707698cea15eb3e9b1">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
+<li>size_type&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#ac4b5d9284d1ba1e0983518be61f26762">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1Monomial.html#afdef1d361ec0203b5ec3ee72c89b2d8d">sigma::Monomial</a>, <a class="el" href="classsigma_1_1Taylor.html#a280143850aaf3758f04179d8036588eb">sigma::Taylor&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1TaylorModel.html#a92f987b404599269d6e0db20057b4bf3">sigma::TaylorModel&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#a033cb029014d9cc72d08816492ff581d">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
+<li>sqrt()&#160;:&#160;<a class="el" href="classsigma_1_1TaylorModel.html#ae33bd527c16a853375dbb278a6011874">sigma::TaylorModel&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#a8fbe83513f3819707698cea15eb3e9b1">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
+<li>sweep_small()&#160;:&#160;<a class="el" href="classsigma_1_1TaylorModel.html#a564044967a98299d4dec355f94c8fe7d">sigma::TaylorModel&lt; ValueType &gt;</a></li>
+<li>sweep_to_order()&#160;:&#160;<a class="el" href="classsigma_1_1TaylorModel.html#aafcc1cc4881b31e240c3a8891dea9d65">sigma::TaylorModel&lt; ValueType &gt;</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

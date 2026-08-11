@@ -30,6 +30,18 @@ var NAVTREE =
     [ "Installation", "index.html#installation", null ],
     [ "Contributing", "index.html#contributing", null ],
     [ "Acknowledgments", "index.html#acknowledgments", null ],
+    [ "Affine Arithmetic", "md_docs_2affine.html", [
+      [ "Motivation", "md_docs_2affine.html#motivation", null ],
+      [ "The affine form", "md_docs_2affine.html#the-affine-form", null ],
+      [ "Why sharing symbols solves the dependency problem", "md_docs_2affine.html#why-sharing-symbols-solves-the-dependency-problem", null ],
+      [ "Exact operations", "md_docs_2affine.html#exact-operations", null ],
+      [ "Where linearization enters", "md_docs_2affine.html#where-linearization-enters", null ],
+      [ "Constructing the transform", "md_docs_2affine.html#constructing-the-transform", null ],
+      [ "What is gained, and what remains", "md_docs_2affine.html#what-is-gained-and-what-remains", null ],
+      [ "Thresholding", "md_docs_2affine.html#thresholding", null ],
+      [ "Class design", "md_docs_2affine.html#class-design", null ],
+      [ "Next", "md_docs_2affine.html#next", null ]
+    ] ],
     [ "Background", "md_docs_2background.html", [
       [ "Linear Error Propagation", "md_docs_2background.html#linear-error-propagation", null ]
     ] ],
@@ -60,6 +72,40 @@ var NAVTREE =
       [ "Mathematical Operations", "md_docs_2examples.html#mathematical-operations", null ],
       [ "Linear Algebra", "md_docs_2examples.html#linear-algebra", null ]
     ] ],
+    [ "Interval Arithmetic", "md_docs_2interval.html", [
+      [ "Motivation", "md_docs_2interval.html#motivation-1", null ],
+      [ "Definition", "md_docs_2interval.html#definition", null ],
+      [ "Arithmetic", "md_docs_2interval.html#arithmetic", null ],
+      [ "Elementary functions", "md_docs_2interval.html#elementary-functions", null ],
+      [ "Two fundamental limitations", "md_docs_2interval.html#two-fundamental-limitations", null ],
+      [ "Class design", "md_docs_2interval.html#class-design-1", null ],
+      [ "Next", "md_docs_2interval.html#next-1", null ]
+    ] ],
+    [ "Building the Documentation", "md_docs_2README.html", [
+      [ "Prerequisites", "md_docs_2README.html#prerequisites", null ],
+      [ "Building the documentation", "md_docs_2README.html#building-the-documentation-1", null ],
+      [ "Adding a page", "md_docs_2README.html#adding-a-page", null ],
+      [ "Conventions", "md_docs_2README.html#conventions", null ],
+      [ "Two failure modes that produce no warning", "md_docs_2README.html#two-failure-modes-that-produce-no-warning", null ]
+    ] ],
+    [ "Taylor Models", "md_docs_2taylor.html", [
+      [ "Motivation", "md_docs_2taylor.html#motivation-2", null ],
+      [ "The Taylor model", "md_docs_2taylor.html#the-taylor-model", null ],
+      [ "Truncation and range bounding", "md_docs_2taylor.html#truncation-and-range-bounding", [
+        [ "Naive baseline", "md_docs_2taylor.html#naive-baseline", null ],
+        [ "Horner form", "md_docs_2taylor.html#horner-form", null ],
+        [ "Dominated and fast bounders", "md_docs_2taylor.html#dominated-and-fast-bounders", null ]
+      ] ],
+      [ "Arithmetic", "md_docs_2taylor.html#arithmetic-1", null ],
+      [ "Elementary functions", "md_docs_2taylor.html#elementary-functions-1", null ],
+      [ "Order scaling", "md_docs_2taylor.html#order-scaling", null ],
+      [ "Design of the <span class=\"tt\">Taylor</span> class", "md_docs_2taylor.html#design-of-the-taylor-class", [
+        [ "Internal state", "md_docs_2taylor.html#internal-state", null ],
+        [ "Interface", "md_docs_2taylor.html#interface", null ]
+      ] ],
+      [ "Achieving rigorous bounds", "md_docs_2taylor.html#achieving-rigorous-bounds", null ],
+      [ "Future work", "md_docs_2taylor.html#future-work", null ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -75,7 +121,7 @@ var NAVTREE =
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", null ],
+        [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
         [ "Typedefs", "functions_type.html", null ],
         [ "Related Symbols", "functions_rela.html", null ]
@@ -94,8 +140,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "affine_2eigen__compat_8hpp.html",
-"classsigma_1_1ThresholdedAffine.html#a652b76d51580dcee913d73c46cde3836",
-"namespacesigma.html#a1a67952d3cafca8724de91347623a2c7"
+"classsigma_1_1Taylor.html#a07ed581795d9bb95df704c39ba169b13",
+"classsigma_1_1ThresholdedAffine.html#a298214f80037d9585cbc4e09f8eee5b3",
+"index.html#statement-of-need",
+"structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html#a34ec8dc7ffe77bd62f205e119febece8"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

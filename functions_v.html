@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -109,8 +124,9 @@ $(function(){initNavTree('functions_v.html','',''); });
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
 
 <h3 class="doxsection"><a id="index_v" name="index_v"></a>- v -</h3><ul>
-<li>value&#160;:&#160;<a class="el" href="structsigma_1_1ThresholdedAffine_1_1Threshold.html#acf132ea9dddcd75e28b2a9da8f61410c">sigma::ThresholdedAffine&lt; ValueType &gt;::Threshold</a></li>
-<li>value_t&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#a57fcf1e33221557694902844edf844f5">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1detail___1_1Setter.html#ab5be0d3fe3e4ca83389a05fd75a0886c">sigma::detail_::Setter&lt; UncertainType &gt;</a>, <a class="el" href="classsigma_1_1Interval.html#a1cdf797e6b73fd01b5a01569ccf1e23b">sigma::Interval&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#a9e5d7ee9b861396ba562272db7ff90f9">sigma::ThresholdedAffine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1Uncertain.html#ab9d55c3ae3c72960a33db279c96cb952">sigma::Uncertain&lt; ValueType &gt;</a></li>
+<li>value&#160;:&#160;<a class="el" href="structsigma_1_1Taylor_1_1Order.html#a16df91af4b6a15fe0b6f146439abf841">sigma::Taylor&lt; ValueType &gt;::Order</a>, <a class="el" href="structsigma_1_1ThresholdedAffine_1_1Threshold.html#acf132ea9dddcd75e28b2a9da8f61410c">sigma::ThresholdedAffine&lt; ValueType &gt;::Threshold</a></li>
+<li>value_t&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#a57fcf1e33221557694902844edf844f5">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1detail___1_1Setter.html#ab5be0d3fe3e4ca83389a05fd75a0886c">sigma::detail_::Setter&lt; UncertainType &gt;</a>, <a class="el" href="classsigma_1_1Interval.html#a1cdf797e6b73fd01b5a01569ccf1e23b">sigma::Interval&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1Taylor.html#ae99c5aa4885e959b387f2b158ff12bf4">sigma::Taylor&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1TaylorModel.html#a0cedea46c65c3c4f366f3b7654101ce2">sigma::TaylorModel&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1ThresholdedAffine.html#a9e5d7ee9b861396ba562272db7ff90f9">sigma::ThresholdedAffine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1Uncertain.html#ab9d55c3ae3c72960a33db279c96cb952">sigma::Uncertain&lt; ValueType &gt;</a></li>
+<li>variable_t&#160;:&#160;<a class="el" href="classsigma_1_1Monomial.html#ac5d2a24995ab50001182a5da18a0aab4">sigma::Monomial</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

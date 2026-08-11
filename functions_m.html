@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -109,10 +124,15 @@ $(function(){initNavTree('functions_m.html','',''); });
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
 
 <h3 class="doxsection"><a id="index_m" name="index_m"></a>- m -</h3><ul>
+<li>make_deviation()&#160;:&#160;<a class="el" href="classsigma_1_1Taylor.html#a2600489ad78ce3fbc75b13dd47f9d188">sigma::Taylor&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1TaylorModel.html#aab34ae9ca3773800628bb01b9fdcb3e5">sigma::TaylorModel&lt; ValueType &gt;</a></li>
 <li>make_error_term()&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#aa2ba23b435ab7a4d3ec6a0a2c53d547d">sigma::Affine&lt; ValueType &gt;</a></li>
+<li>make_variable()&#160;:&#160;<a class="el" href="classsigma_1_1Monomial.html#ac052b81534b3bd144f41c9c514e59bc1">sigma::Monomial</a></li>
+<li>max_order()&#160;:&#160;<a class="el" href="classsigma_1_1Taylor.html#afab66497fc819c6ff4779499236d4842">sigma::Taylor&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1TaylorModel.html#a17e61321c9667f08d83787ba7d8eb450">sigma::TaylorModel&lt; ValueType &gt;</a></li>
 <li>mean()&#160;:&#160;<a class="el" href="classsigma_1_1Uncertain.html#a43412df1d1f48b62f0981b999fe74d10">sigma::Uncertain&lt; ValueType &gt;</a></li>
 <li>median()&#160;:&#160;<a class="el" href="classsigma_1_1Interval.html#a07ccf245cb4e86bdcb732233d0875920">sigma::Interval&lt; ValueType &gt;</a></li>
-<li>multiplicative_inverse()&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#a6bc4171daae24f918abafc1d5e2b4094">sigma::Affine&lt; ValueType &gt;</a></li>
+<li>Monomial()&#160;:&#160;<a class="el" href="classsigma_1_1Monomial.html#a146c77a5b7d96984f39ba3ab35bd963c">sigma::Monomial</a></li>
+<li>monomial_t&#160;:&#160;<a class="el" href="classsigma_1_1Taylor.html#a147d82513237111afbfa737daca5d995">sigma::Taylor&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1TaylorModel.html#a46f42c476f4ab4082a7fce0c962d9ad2">sigma::TaylorModel&lt; ValueType &gt;</a></li>
+<li>multiplicative_inverse()&#160;:&#160;<a class="el" href="classsigma_1_1Affine.html#a6bc4171daae24f918abafc1d5e2b4094">sigma::Affine&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1Taylor.html#a8ff4caff5289bb7e1191c9ba098376a8">sigma::Taylor&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1TaylorModel.html#a54da3803cd923e668cb6ed01728378ab">sigma::TaylorModel&lt; ValueType &gt;</a></li>
 <li>my_t&#160;:&#160;<a class="el" href="classsigma_1_1detail___1_1Setter.html#a9d8f2a08b59b86adaf046973ffeed554">sigma::detail_::Setter&lt; UncertainType &gt;</a>, <a class="el" href="classsigma_1_1Uncertain.html#a9a53bd3a0c03873388fbb4f8b4699f83">sigma::Uncertain&lt; ValueType &gt;</a></li>
 </ul>
 </div><!-- contents -->

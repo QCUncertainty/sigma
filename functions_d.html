@@ -20,8 +20,23 @@
 <script type="text/javascript" src="search/search.js"></script>
     <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  extensions: ["tex2jax.js"],
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
   jax: ["input/TeX","output/HTML-CSS"],
+});
+// Appended after the MathJax.Hub.Config block that Doxygen generates, so this
+// has to be a complete statement rather than a bare property. MathJax merges
+// successive Hub.Config calls, so this augments the generated configuration.
+//
+// autoNumber "AMS" numbers equation/align environments automatically, which
+// keeps pages from numbering equations by hand and keeps \eqref in sync.
+// Numbering restarts on each generated HTML page.
+MathJax.Hub.Config({
+    TeX: {
+        equationNumbers: {
+            autoNumber: "AMS",
+            useLabelIds: false
+        }
+    }
 });
 </script>
 <script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
@@ -109,13 +124,17 @@ $(function(){initNavTree('functions_d.html','',''); });
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
 
 <h3 class="doxsection"><a id="index_d" name="index_d"></a>- d -</h3><ul>
+<li>default_max_order()&#160;:&#160;<a class="el" href="classsigma_1_1Taylor.html#aca1fa18cd8f2a9c92a376212f8a59c9b">sigma::Taylor&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1TaylorModel.html#afb2b273e632e40a149fea74f8909acf0">sigma::TaylorModel&lt; ValueType &gt;</a></li>
 <li>default_threshold()&#160;:&#160;<a class="el" href="classsigma_1_1ThresholdedAffine.html#a1f76e0cfda7406b6c8b0bfa6041f8946">sigma::ThresholdedAffine&lt; ValueType &gt;</a></li>
+<li>degree()&#160;:&#160;<a class="el" href="classsigma_1_1Monomial.html#a19a6eced084790c6085f43b0a289ea96">sigma::Monomial</a></li>
 <li>dep_sd_ptr&#160;:&#160;<a class="el" href="classsigma_1_1detail___1_1Setter.html#a317752307a6665ce2ab3c577755599e7">sigma::detail_::Setter&lt; UncertainType &gt;</a>, <a class="el" href="classsigma_1_1Uncertain.html#acc40534d87fdba24215242f6021babe0">sigma::Uncertain&lt; ValueType &gt;</a></li>
 <li>dep_sd_t&#160;:&#160;<a class="el" href="classsigma_1_1detail___1_1Setter.html#acd92e5a8d988dd83e97926c58f4d5ebb">sigma::detail_::Setter&lt; UncertainType &gt;</a>, <a class="el" href="classsigma_1_1Uncertain.html#a603fe75d1c25677f33be269015a61639">sigma::Uncertain&lt; ValueType &gt;</a></li>
 <li>deps()&#160;:&#160;<a class="el" href="classsigma_1_1Uncertain.html#a8f8c4a9313c5cb54e1eb0949a5214f13">sigma::Uncertain&lt; ValueType &gt;</a></li>
 <li>deps_map_t&#160;:&#160;<a class="el" href="classsigma_1_1detail___1_1Setter.html#ad786977eb876807acd9fb35bae3f84fc">sigma::detail_::Setter&lt; UncertainType &gt;</a>, <a class="el" href="classsigma_1_1Uncertain.html#ac5023c85420e385ea040950654b700fa">sigma::Uncertain&lt; ValueType &gt;</a></li>
 <li>deps_vector_t&#160;:&#160;<a class="el" href="classsigma_1_1detail___1_1Setter.html#af469b99c4a9e2c9a2fbb46558690cc64">sigma::detail_::Setter&lt; UncertainType &gt;</a></li>
+<li>derivative()&#160;:&#160;<a class="el" href="classsigma_1_1Taylor.html#aabe629eecdff32ee12b84d7c66f33884">sigma::Taylor&lt; ValueType &gt;</a></li>
 <li>detail_::Setter&#160;:&#160;<a class="el" href="classsigma_1_1Uncertain.html#a7591e2d7ef0c929d5e9b38697c7c8f4f">sigma::Uncertain&lt; ValueType &gt;</a></li>
+<li>deviation_t&#160;:&#160;<a class="el" href="classsigma_1_1Taylor.html#ae666cb21016383a591784ac4362ec1ec">sigma::Taylor&lt; ValueType &gt;</a>, <a class="el" href="classsigma_1_1TaylorModel.html#a8ab485f7589dbc20abdcce043850c5c1">sigma::TaylorModel&lt; ValueType &gt;</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
