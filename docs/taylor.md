@@ -22,9 +22,11 @@ It is the same differential algebra that underpins
 [COSY INFINITY](https://www.bmtdynamics.org/cosy/) and, more recently,
 [DACE](https://github.com/dacelib/dace).
 
-The classes described here, `Taylor` and `TaylorModel`, are **not yet
-implemented**. This page specifies the mathematics and the intended design so
-the implementation can follow.
+The classes described here, `Taylor` and `TaylorModel`, are implemented,
+including `compose_` and the elementary functions built on it (`sqrt`, `exp`,
+`log`, `pow`), division, and Eigen support. Antiderivation is the sole
+exception, noted as deferred where it comes up below. This page specifies the
+mathematics and the design those implementations follow.
 
 ## The Taylor model
 
@@ -115,9 +117,110 @@ B(Q) \supseteq
 
 Any valid \f$ B \f$ makes the arithmetic below correct, but a sharper \f$ B \f$
 makes it more useful. The requirement is that \f$ B \f$ be at least as sharp as
-evaluating \f$ Q \f$ directly in interval arithmetic. Sigma's intended
-implementation evaluates the polynomial in Horner form using
-[`Interval`](./interval.md), which satisfies that requirement cheaply.
+evaluating \f$ Q \f$ directly in interval arithmetic. Sigma's current
+implementation is Berz and Makino's quadratic fast bounder (QFB): it bounds
+each variable's own linear and quadratic contribution exactly, in closed
+form, and falls back to evaluating every other term separately in
+[`Interval`](./interval.md) arithmetic for the rest. The rest of this section
+builds up to that implementation — the naive per-term baseline it falls back
+on, an alternative (Horner form) that was considered and rejected, and QFB
+itself.
+
+### Naive baseline
+
+The simplest valid \f$ B \f$ substitutes \f$[-1,1]\f$ for every expansion
+variable, evaluates each monomial's power via [`Interval`](./interval.md)'s
+`pow`, multiplies by its coefficient, and sums the resulting intervals term by
+term. It is cheap and always valid, but it is not tight, because it is
+susceptible to the classic interval-arithmetic *dependency problem*: if the
+same variable appears in more than one term, each occurrence is bounded
+independently, so the bound implicitly (and wrongly) allows different
+occurrences of the same symbol to take different values at once. This naive
+evaluation is still what Sigma's actual implementation, described below,
+falls back to for whatever it cannot bound exactly.
+
+A minimal example makes this concrete. Multiply two order-1 models with
+independent expansion variables, \f$x = 2 + \delta_x\f$ (representing
+\f$x \in [1,3]\f$) and \f$y = 3 + \delta_y\f$ (representing
+\f$y \in [2,4]\f$); the exact product expands to
+
+\f{equation}{ \normalsize
+P(\delta_x, \delta_y) = 6 + 3\delta_x + 2\delta_y + \delta_x \delta_y
+\label{eq:tm-bound-example}
+\f}
+
+The true range of Eq. \f$\eqref{eq:tm-bound-example}\f$ over the box
+\f$[-1,1]^2\f$ is \f$[2, 12]\f$ (a bilinear function's extrema occur at the
+box's corners; e.g. \f$\delta_x = \delta_y = -1 \Rightarrow 6-3-2+1=2\f$,
+matching \f$x=1, y=2 \Rightarrow xy=2\f$). The naive baseline instead
+computes \f$6 + [-3,3] + [-2,2] + [-1,1] = [0, 12]\f$: loose on the lower end,
+because it sums the \f$-3\f$ attained by \f$3\delta_x\f$ at
+\f$\delta_x = -1\f$ with the \f$-1\f$ attained by \f$\delta_x\delta_y\f$ at
+\f$\delta_x = 1, \delta_y = -1\f$ — the *opposite* sign of \f$\delta_x\f$ —
+as if both could hold at once. This is exactly what computing
+`bound(x * y)` for `Taylor(1,3) * Taylor(2,4)` returns today.
+
+### Horner form
+
+A tighter option for a univariate polynomial is to evaluate it in nested
+(Horner) form,
+
+\f{equation}{ \normalsize
+P(\delta) = c_0 + \delta\left(c_1 + \delta\left(c_2 + \cdots +
+\delta\, c_n\right)\right)
+\label{eq:tm-horner}
+\f}
+
+substituting a single \f$[-1,1]\f$ interval and reusing that same interval
+object at every nesting level, rather than computing each power
+independently. This reduces the dependency problem — reusing one interval
+through repeated multiplication is tighter than bounding \f$c_k\delta^k\f$
+separately for every \f$k\f$ — but it does not eliminate it: a polynomial
+whose terms cancel, such as \f$\delta - \delta\f$, still evaluates to
+\f$[-1,1] - [-1,1] = [-2,2]\f$ rather than the true value \f$0\f$, because
+the two occurrences of \f$\delta\f$ are still bounded as if independent.
+
+More importantly for Sigma, Horner form is naturally a *single-variable*
+nesting: it has no canonical generalization to a sparse polynomial over
+arbitrarily many expansion variables, the way \f$P\f$ in Eq.
+\f$\eqref{eq:tm-poly}\f$ is. That mismatch is why Sigma looked to Berz and
+Makino's dominated and fast bounders instead.
+
+### Dominated and fast bounders
+
+Berz and Makino's survey (linked above) describes a family of sharper
+bounders, each splitting \f$P = L + R\f$ so that \f$L\f$, some low-order part
+of \f$P\f$, is bounded exactly, leaving only the (typically smaller,
+higher-order) remainder \f$R\f$ for the naive fallback above. The **linear
+dominated bounder (LDB)** takes \f$L\f$ to be \f$P\f$'s constant and linear
+(\f$|\beta| \leq 1\f$) part; because each \f$\delta_i\f$ appears exactly once
+in \f$L\f$, its exact range over \f$[-1,1]^v\f$ has a closed form with *zero*
+dependency-problem overestimation
+
+\f{equation}{ \normalsize
+B_{\mathrm{LDB}}(P) =
+\left[c_0 - \sum_i \left|c_{e_i}\right|,\;\;
+c_0 + \sum_i \left|c_{e_i}\right|\right] + B(R)
+\label{eq:tm-ldb}
+\f}
+
+Sigma implements the next refinement in the family, the **quadratic fast
+bounder (QFB)**, directly (`Taylor::bound()`), rather than LDB itself: it
+extends \f$L\f$ one degree further, to each variable \f$\delta_i\f$'s
+diagonal contribution \f$c_{e_i}\delta_i + c_{2e_i}\delta_i^2\f$ (the linear
+and pure-quadratic terms in \f$\delta_i\f$ alone). That diagonal contribution
+still has an exact, closed-form extremum over \f$\delta_i \in [-1,1]\f$, found
+by completing the square: the parabola's vertex, clipped to \f$[-1,1]\f$, or
+an endpoint if the vertex falls outside it. Summing these exact per-variable
+extrema still incurs no cross-variable dependency-problem overestimation,
+since each is evaluated on its own independent \f$\delta_i\f$; only
+cross-quadratic and degree-\f$\geq 3\f$ terms are left in \f$R\f$, bounded by
+the naive fallback described above — which is exactly why the `x*y` example
+there still comes out to \f$[0,12]\f$ under QFB: neither \f$\delta_x\f$ nor
+\f$\delta_y\f$ has a pure-quadratic term of its own, so QFB's diagonal split
+captures nothing there and the whole product falls to the naive fallback,
+unchanged. LDB itself was never implemented, since QFB is a strict
+refinement of it and was adopted directly.
 
 ## Arithmetic
 
@@ -309,7 +412,18 @@ truncation; they are bounded into the remainder instead
 \label{eq:tm-antideriv}
 \f}
 
-where \f$ w_i \f$ is the width of the domain in the \f$ i \f$-th variable.
+where \f$ w_i \f$ is the width of the domain in the \f$ i \f$-th variable. Note
+that Eq. \f$\eqref{eq:tm-antideriv}\f$ is stated for \f$(P, I)\f$, i.e. it
+belongs to `TaylorModel`, where the overflowing terms have a remainder to be
+bounded into, but `TaylorModel`'s antiderivative is not implemented (only
+`sweep_to_order` and `sweep_small` are, of the members "Achieving rigorous
+bounds" below describes). `Taylor` alone has no remainder to bound into
+either way, and nothing else on this page depends on antiderivation —
+elementary functions need only `compose_` plus Taylor model addition and
+multiplication (Eq.
+\f$\eqref{eq:tm-add}\f$, Eq. \f$\eqref{eq:tm-mul}\f$) — so it was left out of
+`Taylor`'s implementation and can be added later, alongside `TaylorModel`,
+if verified integration is actually needed.
 
 ## Order scaling
 
@@ -416,7 +530,7 @@ and `TFloat`/`TDouble` typedefs. Beyond that it adds
 | `constant` | \f$ c_f \f$, the order-0 coefficient |
 | `coefficients`, `n_terms` | access to Eq. \f$\eqref{eq:tm-poly}\f$ |
 | `bound` | \f$ B(P) \f$ of Eq. \f$\eqref{eq:tm-bound}\f$ |
-| `derivative`, `antiderivative` | Eq. \f$\eqref{eq:tm-antideriv}\f$ and its inverse |
+| `derivative` | ordinary term-by-term polynomial differentiation |
 | `truncate` | drop terms above a given order |
 | `make_deviation` | mint a fresh expansion variable |
 
@@ -509,12 +623,14 @@ Rigor with respect to rounding, as just described, is the most significant.
 Until it is addressed, `TaylorModel` should be documented as enclosing the
 modeled function under exact arithmetic.
 
-Sharper range bounding would improve every operation, since \f$ B \f$ appears
-throughout Eq. \f$\eqref{eq:tm-mul}\f$, Eq. \f$\eqref{eq:tm-exp-rem}\f$, and Eq.
-\f$\eqref{eq:tm-antideriv}\f$. Horner-form interval evaluation is the natural
-starting point, but it is not tight for polynomials whose terms cancel. Berz and
-Makino's linear dominated bounder and quadratic fast bounder are the established
-refinements and would slot in behind the same `bound` interface.
+Sharper range bounding would still improve every operation, since \f$ B \f$
+appears throughout Eq. \f$\eqref{eq:tm-mul}\f$, Eq. \f$\eqref{eq:tm-exp-rem}\f$,
+and Eq. \f$\eqref{eq:tm-antideriv}\f$. "Truncation and range bounding" above
+walks through the naive baseline, and Sigma's quadratic fast bounder (QFB),
+which now bounds every polynomial's diagonal linear and quadratic terms
+exactly. What's left is what QFB leaves to the naive fallback: cross terms
+and terms of degree \f$\geq 3\f$. Extending the same exact-bounding idea to
+cross terms is the natural next refinement.
 
 Term count grows combinatorially. A model of order \f$ n \f$ in \f$ v \f$
 variables admits

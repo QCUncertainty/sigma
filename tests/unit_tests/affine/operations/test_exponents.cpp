@@ -8,8 +8,9 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::AFloat, sigma::ADouble) {
     using affine_t = TestType;
     using value_t  = typename affine_t::value_t;
 
-    value_t one = 1.0;
-    value_t two = 2.0;
+    value_t zero = 0.0;
+    value_t one  = 1.0;
+    value_t two  = 2.0;
 
     SECTION("sqrt") {
         affine_t empty;
@@ -95,5 +96,36 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::AFloat, sigma::ADouble) {
         // Can't raise negative values to a non-integer power.
         REQUIRE_THROWS_AS(sigma::pow(negative_interval, 0.5),
                           std::domain_error);
+
+        SECTION("Range straddling 0 (not the exact point 0), positive "
+                "integer exponent") {
+            // range = [-1, 2]: contains 0 without being exactly the point
+            // 0. The true range of x^2 over [-1, 2] is [0, 4]; squaring via
+            // operator* is not tight (unlike Taylor's QFB-based bound), but
+            // it must still enclose the true range rather than collapsing
+            // to the single point 0.
+            affine_t straddling(-one, two);
+            auto squared = sigma::pow(straddling, 2);
+            test_affine(squared, value_t(-3.5), value_t(4.0));
+            REQUIRE(squared.contains(zero));
+            REQUIRE(squared.contains(value_t(4.0)));
+
+            // Range touching 0 from one side only (not straddling) is the
+            // same code path (a.contains(zero) is true either way).
+            affine_t touching(zero, two);
+            auto touching_squared = sigma::pow(touching, 2);
+            REQUIRE(touching_squared.contains(zero));
+            REQUIRE(touching_squared.contains(value_t(4.0)));
+
+            // Odd exponent, same idea.
+            auto cubed = sigma::pow(straddling, 3);
+            REQUIRE(cubed.contains(value_t(-1.0)));
+            REQUIRE(cubed.contains(value_t(8.0)));
+        }
+
+        SECTION("Range straddling 0, non-integer exponent throws") {
+            affine_t straddling(-one, two);
+            REQUIRE_THROWS_AS(sigma::pow(straddling, 0.5), std::domain_error);
+        }
     }
 }

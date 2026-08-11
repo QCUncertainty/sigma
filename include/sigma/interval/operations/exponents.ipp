@@ -31,6 +31,33 @@ Interval<T> log(const Interval<T>& a) {
 template<typename T, typename U>
 Interval<T> pow(const Interval<T>& a, const U& exp) {
     if(a.empty()) { return Interval<T>(); }
+    if(exp == U(0)) { return Interval<T>(T(1), T(1)); }
+
+    // x^exp is monotonic across [a.lower(), a.upper()] -- and therefore
+    // attains its extrema at the endpoints, which is all the code below
+    // checks -- EXCEPT when a spans 0 and exp is a positive even integer: x^2
+    // (for example) decreases from a.lower() down to 0 and then increases
+    // back up to a.upper(), so 0 (an interior point, not either endpoint) is
+    // the true minimum. Handle that case directly; every other combination
+    // of sign and exponent is already monotonic end-to-end.
+    bool spans_zero = a.lower() < T(0) && a.upper() > T(0);
+    bool is_integer = std::floor(exp) == exp;
+    if(spans_zero && exp > U(0) && is_integer &&
+       static_cast<long long>(exp) % 2 == 0) {
+        auto abs_lo = -a.lower();
+        auto abs_hi = a.upper();
+        if(abs_lo > abs_hi) {
+            return Interval<T>(T(0), std::pow(abs_lo, exp), false,
+                                a.left_open());
+        }
+        if(abs_hi > abs_lo) {
+            return Interval<T>(T(0), std::pow(abs_hi, exp), false,
+                                a.right_open());
+        }
+        return Interval<T>(T(0), std::pow(abs_hi, exp), false,
+                            a.left_open() && a.right_open());
+    }
+
     auto low  = std::pow(a.lower(), exp);
     auto high = std::pow(a.upper(), exp);
     if(low > high) {

@@ -98,10 +98,16 @@ Affine<T> log(const Affine<T>& a);
  *  @tparam T The value type of the affine form
  *  @tparam U The type of the exponent
  *
- *  This method takes advantage of the fact that:
+ *  For a strictly one-signed range this method takes advantage of the fact
+ *  that:
  *  @f[
  *  x^y = e^{y \log(x)}
  *  @f]
+ *  If the range of @p a straddles or touches 0 (and is not exactly the
+ *  point 0, where @f$0^y = 0@f$ for any @f$y > 0@f$), neither @f$\log(x)@f$
+ *  nor @f$\log(-x)@f$ is valid, so @p exp must be a positive integer -- a
+ *  negative base raised to a fractional power is not a real number -- and
+ *  the result is computed by repeated multiplication instead.
  *
  *  @param[in] a The affine form whose power is computed
  *  @param[in] exp The exponent
@@ -109,7 +115,8 @@ Affine<T> log(const Affine<T>& a);
  *  @return An affine form whose bounds are the power of @p a
  *
  *  @throw std::domain_error if the range of @p a contains non-positive values
- *                           and the exponent is not an integer. Strong throw
+ *                           (and is not exactly the point 0) and the
+ *                           exponent is not an integer. Strong throw
  *                           guarantee.
  *  @throw std::domain_error if the range of @p a contains 0 and the exponent is
  *                           negative. Strong throw guarantee.

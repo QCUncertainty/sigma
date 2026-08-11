@@ -1,6 +1,7 @@
 #pragma once
 #include <cmath>
 #include <sigma/affine/affine.hpp>
+#include <sigma/detail/pow.hpp>
 
 namespace sigma {
 
@@ -69,39 +70,7 @@ Affine<T> log(const Affine<T>& a) {
 
 template<typename T, typename U>
 Affine<T> pow(const Affine<T>& a, const U& exp) {
-    U zero(0);
-    if(a.empty()) { return a; }
-    if(exp == zero) { return Affine<T>(T(1.0)); }
-
-    // Handle cases where the affine form contains 0
-    if(a.contains(zero) && exp < zero) {
-        throw std::domain_error(
-          "Can not raise an affine form containing 0 to a negative power.");
-    } else if(a.contains(zero) && exp > zero) {
-        return Affine<T>(zero);
-    }
-
-    // Handle cases where affine form is strictly negative
-    if(a.range().upper() < zero) {
-        using clean_u_t = std::decay_t<U>;
-        if constexpr(std::is_floating_point_v<clean_u_t>) {
-            clean_u_t exp_int;
-            if(std::modf(exp, &exp_int) != zero) {
-                throw std::domain_error(
-                  "Can not raise an affine form with negative values to a "
-                  "non-integer power.");
-            }
-        }
-
-        auto abs_log           = sigma::log(-a);
-        auto pow_abs           = sigma::exp(T(exp) * abs_log);
-        const bool exp_is_even = static_cast<long long>(exp) % 2 == 0;
-        return exp_is_even ? pow_abs : -pow_abs;
-    }
-
-    // Handle cases where affine form is strictly positive
-    auto loga = sigma::log(a);
-    return sigma::exp(loga * exp);
+    return detail::pow_impl(a, exp, [](T v) { return Affine<T>(v); });
 }
 
 } // namespace sigma

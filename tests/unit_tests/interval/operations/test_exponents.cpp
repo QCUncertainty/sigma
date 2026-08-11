@@ -42,5 +42,26 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::IFloat, sigma::IDouble) {
         // pow([1, 2], -1) = [0.5, 1]
         auto c = testing_t(value_t{1}, value_t{2});
         test_interval(sigma::pow(c, -1), 0.5, 1.0);
+
+        // Even exponents are not monotonic across an interval spanning 0:
+        // the minimum is the interior point x == 0, not either endpoint.
+        // pow([-1, 1], 2) = [0, 1], NOT [1, 1] (what naively evaluating just
+        // the endpoints would give).
+        auto d = testing_t(value_t{-1}, value_t{1});
+        test_interval(sigma::pow(d, 2), 0.0, 1.0);
+
+        // pow([-2, 3], 2) = [0, 9], since |lower| < |upper|.
+        auto e = testing_t(value_t{-2}, value_t{3});
+        test_interval(sigma::pow(e, 2), 0.0, 9.0);
+
+        // pow([-3, 1], 2) = [0, 9], since |lower| > |upper|.
+        auto f = testing_t(value_t{-3}, value_t{1});
+        test_interval(sigma::pow(f, 2), 0.0, 9.0);
+
+        // Odd exponents ARE monotonic across all of R, so a spanning
+        // interval is unaffected by the even-exponent fix above.
+        // pow([-3, 1], 3) = [-27, 1]
+        auto g = testing_t(value_t{-3}, value_t{1});
+        test_interval(sigma::pow(g, 3), -27.0, 1.0);
     }
 }
