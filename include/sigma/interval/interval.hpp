@@ -1,4 +1,5 @@
 #pragma once
+#include "sigma/interval/detail_/policies.hpp"
 #include <algorithm>
 #include <boost/numeric/interval.hpp>
 #include <iostream>
@@ -311,8 +312,9 @@ private:
         if(empty()) { throw std::domain_error("Interval is empty"); }
     }
 
-    /// The underlying interval type
-    using interval_t = boost::numeric::interval<value_t>;
+    /// The underlying interval type. See detail_/policies.hpp for why the
+    /// default boost policies are not used.
+    using interval_t = detail_::boost_interval_t<value_t>;
 
     /// Whether the lower bound is open
     bool m_is_left_open_ = false;

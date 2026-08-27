@@ -1,4 +1,6 @@
 #include "../testing.hpp"
+#include <cmath>
+#include <limits>
 
 using testing::test_interval;
 
@@ -63,5 +65,53 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::IFloat, sigma::IDouble) {
         // pow([-3, 1], 3) = [-27, 1]
         auto g = testing_t(value_t{-3}, value_t{1});
         test_interval(sigma::pow(g, 3), -27.0, 1.0);
+    }
+    SECTION("Outward Rounding") {
+        // log(v), exp(v), and sqrt(v) are almost never representable, so a
+        // degenerate argument must NOT give a degenerate result: a zero-width
+        // result asserts the function is exact, and excludes the true value.
+        for(auto v : {value_t{0.3}, value_t{0.5}, value_t{1.1}, value_t{1.5},
+                      value_t{2}, value_t{7.25}}) {
+            auto a = testing_t(v);
+            REQUIRE(a.width() == value_t{0});
+
+            REQUIRE(sigma::log(a).width() > value_t{0});
+            REQUIRE(sigma::log(a).contains(std::log(v)));
+
+            REQUIRE(sigma::exp(a).width() > value_t{0});
+            REQUIRE(sigma::exp(a).contains(std::exp(v)));
+
+            REQUIRE(sigma::sqrt(a).width() > value_t{0});
+            REQUIRE(sigma::sqrt(a).contains(std::sqrt(v)));
+
+            // A fractional power is evaluated as exp(power * log(a)), so it is
+            // inexact for the same reason.
+            REQUIRE(sigma::pow(a, 0.5).width() > value_t{0});
+            REQUIRE(sigma::pow(a, 0.5).contains(std::pow(v, value_t{0.5})));
+
+            // An integer power is repeated multiplication, which may well be
+            // exact, so only containment is required of it. Containment is
+            // still a real requirement: the multiplications have to round
+            // outward, which they only do if the compiler has been told the
+            // rounding mode is not fixed (see the -frounding-math flag the
+            // sigma target attaches).
+            REQUIRE(sigma::pow(a, 3).contains(std::pow(v, value_t{3})));
+        }
+    }
+    SECTION("Domain Edges") {
+        // The square root and the logarithm are undefined on the negatives,
+        // and an interval with nothing else in it encloses nothing.
+        REQUIRE(sigma::sqrt(testing_t(value_t{-4}, value_t{-1})).empty());
+        REQUIRE(sigma::log(testing_t(value_t{-2}, value_t{-1})).empty());
+
+        // The part of the argument outside the domain is discarded
+        test_interval(sigma::sqrt(testing_t(value_t{-4}, value_t{9})), 0.0,
+                      3.0);
+
+        // The logarithm is unbounded below at zero
+        auto a = sigma::log(testing_t(value_t{0}, value_t{1}));
+        REQUIRE(a.lower() == -std::numeric_limits<value_t>::infinity());
+        REQUIRE(a.left_open());
+        REQUIRE(a.contains(value_t{0}));
     }
 }

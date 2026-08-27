@@ -134,6 +134,29 @@ is not a bound on the range, it *is* the range. Sigma applies the corresponding
 form for decreasing functions, and for `abs` it handles the non-monotonic case
 by splitting at zero and taking the union of the pieces.
 
+Not every elementary function is monotonic, and a non-monotonic one attains
+extremes that no endpoint reports. The trigonometric functions are the standard
+example. Evaluating the endpoints of \f$ \sin([0, 2\pi]) \f$ gives the single
+point \f$ [0, 0] \f$, whereas the true range is all of \f$ [-1, 1] \f$: the
+argument spans an entire period, and both extremes are interior to it. Sigma
+reduces the argument against the period and encloses whichever extremes it
+spans, which is also why the bounds of a trigonometric result are reported
+closed: they may come from an interior extremum rather than from a bound of the
+argument. The same reasoning covers
+the interior minimum of \f$ \cosh \f$ at the origin and of an even power at
+zero.
+
+There is a second, subtler way for Eq. \f$\eqref{eq:iv-monotone}\f$ to fail.
+The true \f$ f(a) \f$ is a real number, and it is almost never one of the
+finitely many representable ones, so a floating-point evaluation of it returns a
+*nearby* value that may lie inside the true range rather than outside it. An
+interval built from those two values is then not an enclosure at all: it can
+exclude the very result it was supposed to bracket, and for a degenerate
+argument it claims the function is exact. Sigma therefore rounds each bound
+outward, away from the interval, by enough to cover the error of the underlying
+math library. This costs a few units in the last place of width and buys the
+guarantee of Eq. \f$\eqref{eq:iv-enclosure}\f$ back.
+
 ## Two fundamental limitations
 
 Interval arithmetic is exact for a single operation, in the sense that Eq.
@@ -174,6 +197,21 @@ rounding-aware bound arithmetic of Eq. \f$\eqref{eq:iv-add}\f$ through Eq.
 \f$\eqref{eq:iv-monotone}\f$, and adds the two pieces of state boost does not
 track.
 
+Boost's default configuration covers only the arithmetic operators, so sigma
+supplies its own rounding policy in `detail_/policies.hpp`. It keeps boost's
+hardware-directed rounding for the arithmetic, which IEEE-754 requires to be
+correctly rounded, and adds the transcendental functions on top: those are
+evaluated in to-nearest mode -- the mode a math library is written and tested
+for -- and then widened outward to cover the library's error. Asking libm to
+round in a direction is not a reliable alternative; implementations are not
+required to honor the mode, and one that partially honors it can return a
+result on the *wrong* side of the correctly rounded one. Because directed
+rounding depends on a rounding mode the compiler is otherwise entitled to
+assume never changes, the `sigma` target attaches `-frounding-math` (or
+`/fp:strict`) to everything that includes these headers. Without it a compiler
+will fold the directed operations back to round-to-nearest and the bounds
+quietly stop enclosing.
+
 The first is emptiness. The wrapped boost interval is held in a `std::optional`,
 and an empty `std::optional` represents the empty set. The empty interval arises
 naturally from `set_intersection` of disjoint intervals, and it propagates
@@ -192,9 +230,15 @@ The remaining interface divides into the derived quantities of Eq.
 `set_union`, `set_intersection`, and the two `contains` overloads for testing a
 value or another interval, and the arithmetic of Eq. \f$\eqref{eq:iv-add}\f$
 through Eq. \f$\eqref{eq:iv-recip}\f$ exposed as the usual compound-assignment
-and free operators. Because a `radius` of zero means the value is known exactly,
-`Interval` also serves as the degenerate case of the representations that
-follow. Convenience typedefs `IFloat` and `IDouble` cover the two common
+and free operators. The elementary functions are free functions in the `sigma`
+namespace, found through argument-dependent lookup like their `std`
+counterparts: `abs`, `sqrt`, `exp`, `log`, and `pow`, the trigonometric `sin`,
+`cos`, `tan`, `asin`, `acos`, and `atan`, and the hyperbolic `sinh`, `cosh`,
+`tanh`, `asinh`, `acosh`, and `atanh`. A function given an argument outside its
+domain intersects the argument with the domain, which for an argument entirely
+outside it yields the empty interval. Because a `radius` of zero means the
+value is known exactly, `Interval` also serves as the degenerate case of the
+representations that follow. Convenience typedefs `IFloat` and `IDouble` cover the two common
 instantiations, and [sigma::Interval](@ref sigma::Interval) documents the full
 API.
 

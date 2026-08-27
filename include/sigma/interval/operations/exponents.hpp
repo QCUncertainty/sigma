@@ -3,16 +3,23 @@
 
 /** @file exponents.hpp
  *  @brief Exponent operations for interval variables
+ *
+ *  The bounds of every result are rounded outward, so the returned interval is
+ *  guaranteed to enclose the image of the argument.
  */
 
 namespace sigma {
 
 /** @brief Calculate the square root of an interval
  *
+ *  The square root is only defined for non-negative values. The part of @p a
+ *  below zero is discarded, and an entirely negative @p a gives the empty
+ *  interval.
+ *
  *  @tparam T The value type of the interval
  *  @param a The interval whose square root is computed
  *
- *  @return An interval whose bounds are the square root of @p a
+ *  @return An interval enclosing the square root of every value in @p a
  *
  *  @throw none No throw guarantee
  */
@@ -33,10 +40,15 @@ Interval<T> exp(const Interval<T>& a);
 
 /** @brief Calculate the natural logarithm of an interval
  *
+ *  The logarithm is only defined for positive values, and is unbounded below
+ *  at zero. An @p a whose lower bound is non-positive therefore has a result
+ *  unbounded below, and an entirely non-positive @p a gives the empty
+ *  interval.
+ *
  *  @tparam T The value type of the interval
  *  @param a The interval whose logarithm is determined
  *
- *  @return An interval whose bounds are the natural logarithm of @p a
+ *  @return An interval enclosing the natural logarithm of every value in @p a
  *
  *  @throw none No throw guarantee
  */
