@@ -114,7 +114,17 @@ Division is defined as multiplication by the reciprocal of the divisor
 
 where the stated condition is essential. If the divisor contains zero the
 reciprocal is unbounded and no finite interval encloses the result, so Sigma
-throws rather than returning a misleading answer.
+throws rather than returning a misleading answer. A divisor merely *bounded* by
+zero, such as \f$ (0, 1] \f$, does not contain it and is divided by normally.
+
+Each of Eq. \f$\eqref{eq:iv-add}\f$ through Eq. \f$\eqref{eq:iv-recip}\f$
+combines representable bounds into results that are generally not
+representable, so all four operations round their bounds outward for the reason
+given under [elementary functions](#elementary-functions) below. Unlike the
+transcendental case this costs nothing in accuracy: addition, subtraction,
+multiplication, and division are correctly rounded in hardware, so the bound is
+the tightest representable one on either side, and an exactly representable
+result such as \f$ [2, 2] \cdot [3, 3] \f$ stays a single point.
 
 ## Elementary functions
 
@@ -238,9 +248,9 @@ counterparts: `abs`, `sqrt`, `exp`, `log`, and `pow`, the trigonometric `sin`,
 domain intersects the argument with the domain, which for an argument entirely
 outside it yields the empty interval. Because a `radius` of zero means the
 value is known exactly, `Interval` also serves as the degenerate case of the
-representations that follow. Convenience typedefs `IFloat` and `IDouble` cover the two common
-instantiations, and [sigma::Interval](@ref sigma::Interval) documents the full
-API.
+representations that follow. Convenience typedefs `IFloat` and `IDouble` cover
+the two common instantiations, and [sigma::Interval](@ref sigma::Interval)
+documents the full API.
 
 ## Next
 

@@ -45,6 +45,12 @@ namespace sigma::detail_ {
  *  IEEE-754 does require to be correctly rounded, so they stay exactly as
  *  tight as they were.
  *
+ *  Every function below is named with an explicit `std::`. Boost's own
+ *  policies reach them through the BOOST_NUMERIC_INTERVAL_using_math and
+ *  _using_ahyp macros, which expand to nothing on some platforms (MSVC among
+ *  them); the call is then unqualified and finds sigma's overload for Interval
+ *  rather than the scalar one.
+ *
  *  @tparam T The floating point type being rounded.
  */
 template<typename T>
@@ -63,57 +69,392 @@ private:
      */
     static constexpr int k_error_ulps_ = 4;
 
-    /// @p y moved @p k_error_ulps_ ulps toward negative infinity
+    /** @brief Moves @p y k_error_ulps_ ulps toward negative infinity.
+     *
+     *  @param[in] y The value to widen.
+     *
+     *  @return The widened value. Negative infinity is a fixed point.
+     *
+     *  @throw none No throw guarantee.
+     */
     static T down_(T y) {
         constexpr auto inf = std::numeric_limits<T>::infinity();
         for(int i = 0; i < k_error_ulps_; ++i) { y = std::nextafter(y, -inf); }
         return y;
     }
 
-    /// @p y moved @p k_error_ulps_ ulps toward positive infinity
+    /** @brief Moves @p y k_error_ulps_ ulps toward positive infinity.
+     *
+     *  @param[in] y The value to widen.
+     *
+     *  @return The widened value. Positive infinity is a fixed point.
+     *
+     *  @throw none No throw guarantee.
+     */
     static T up_(T y) {
         constexpr auto inf = std::numeric_limits<T>::infinity();
         for(int i = 0; i < k_error_ulps_; ++i) { y = std::nextafter(y, inf); }
         return y;
     }
 
-public:
-/// Generates the pair of bounds for one function, following the same pattern
-/// boost's own BOOST_NUMERIC_INTERVAL_new_func macro uses. The rounding mode
-/// is restored to upward afterwards because that is the invariant
-/// rounded_arith_opp maintains for the arithmetic operators.
-#define SIGMA_ROUNDED_TRANSC(f, using_decl) \
-    T f##_down(const T& x) {                \
-        using_decl(f);                      \
-        this->to_nearest();                 \
-        T y = this->force_rounding(f(x));   \
-        this->upward();                     \
-        return down_(y);                    \
-    }                                       \
-    T f##_up(const T& x) {                  \
-        using_decl(f);                      \
-        this->to_nearest();                 \
-        T y = this->force_rounding(f(x));   \
-        this->upward();                     \
-        return up_(y);                      \
+    /** @brief Evaluates @p f with the FPU rounding to nearest.
+     *
+     *  The mode is put back to upward on the way out because that is the
+     *  invariant rounded_arith_opp maintains for the arithmetic operators.
+     *
+     *  @tparam FunctionType The type of a callable taking no arguments and
+     *                       returning a T.
+     *
+     *  @param[in] f The libm call to evaluate.
+     *
+     *  @return The value @p f returned, rounded to nearest.
+     *
+     *  @throw none No throw guarantee, assuming @p f does not throw.
+     */
+    template<typename FunctionType>
+    T nearest_(FunctionType&& f) {
+        this->to_nearest();
+        T y = this->force_rounding(f());
+        this->upward();
+        return y;
     }
 
-    SIGMA_ROUNDED_TRANSC(exp, BOOST_NUMERIC_INTERVAL_using_math)
-    SIGMA_ROUNDED_TRANSC(log, BOOST_NUMERIC_INTERVAL_using_math)
-    SIGMA_ROUNDED_TRANSC(sin, BOOST_NUMERIC_INTERVAL_using_math)
-    SIGMA_ROUNDED_TRANSC(cos, BOOST_NUMERIC_INTERVAL_using_math)
-    SIGMA_ROUNDED_TRANSC(tan, BOOST_NUMERIC_INTERVAL_using_math)
-    SIGMA_ROUNDED_TRANSC(asin, BOOST_NUMERIC_INTERVAL_using_math)
-    SIGMA_ROUNDED_TRANSC(acos, BOOST_NUMERIC_INTERVAL_using_math)
-    SIGMA_ROUNDED_TRANSC(atan, BOOST_NUMERIC_INTERVAL_using_math)
-    SIGMA_ROUNDED_TRANSC(sinh, BOOST_NUMERIC_INTERVAL_using_math)
-    SIGMA_ROUNDED_TRANSC(cosh, BOOST_NUMERIC_INTERVAL_using_math)
-    SIGMA_ROUNDED_TRANSC(tanh, BOOST_NUMERIC_INTERVAL_using_math)
-    SIGMA_ROUNDED_TRANSC(asinh, BOOST_NUMERIC_INTERVAL_using_ahyp)
-    SIGMA_ROUNDED_TRANSC(acosh, BOOST_NUMERIC_INTERVAL_using_ahyp)
-    SIGMA_ROUNDED_TRANSC(atanh, BOOST_NUMERIC_INTERVAL_using_ahyp)
+public:
+    /** @brief A lower bound for the exponential of @p x.
+     *
+     *  @param[in] x The argument to std::exp.
+     *
+     *  @return A value no greater than the true value of exp(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T exp_down(const T& x) {
+        return down_(nearest_([&x] { return std::exp(x); }));
+    }
 
-#undef SIGMA_ROUNDED_TRANSC
+    /** @brief A upper bound for the exponential of @p x.
+     *
+     *  @param[in] x The argument to std::exp.
+     *
+     *  @return A value no less than the true value of exp(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T exp_up(const T& x) {
+        return up_(nearest_([&x] { return std::exp(x); }));
+    }
+
+    /** @brief A lower bound for the natural logarithm of @p x.
+     *
+     *  @param[in] x The argument to std::log.
+     *
+     *  @return A value no greater than the true value of log(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T log_down(const T& x) {
+        return down_(nearest_([&x] { return std::log(x); }));
+    }
+
+    /** @brief A upper bound for the natural logarithm of @p x.
+     *
+     *  @param[in] x The argument to std::log.
+     *
+     *  @return A value no less than the true value of log(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T log_up(const T& x) {
+        return up_(nearest_([&x] { return std::log(x); }));
+    }
+
+    /** @brief A lower bound for the sine of @p x.
+     *
+     *  @param[in] x The argument to std::sin.
+     *
+     *  @return A value no greater than the true value of sin(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T sin_down(const T& x) {
+        return down_(nearest_([&x] { return std::sin(x); }));
+    }
+
+    /** @brief A upper bound for the sine of @p x.
+     *
+     *  @param[in] x The argument to std::sin.
+     *
+     *  @return A value no less than the true value of sin(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T sin_up(const T& x) {
+        return up_(nearest_([&x] { return std::sin(x); }));
+    }
+
+    /** @brief A lower bound for the cosine of @p x.
+     *
+     *  @param[in] x The argument to std::cos.
+     *
+     *  @return A value no greater than the true value of cos(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T cos_down(const T& x) {
+        return down_(nearest_([&x] { return std::cos(x); }));
+    }
+
+    /** @brief A upper bound for the cosine of @p x.
+     *
+     *  @param[in] x The argument to std::cos.
+     *
+     *  @return A value no less than the true value of cos(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T cos_up(const T& x) {
+        return up_(nearest_([&x] { return std::cos(x); }));
+    }
+
+    /** @brief A lower bound for the tangent of @p x.
+     *
+     *  @param[in] x The argument to std::tan.
+     *
+     *  @return A value no greater than the true value of tan(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T tan_down(const T& x) {
+        return down_(nearest_([&x] { return std::tan(x); }));
+    }
+
+    /** @brief A upper bound for the tangent of @p x.
+     *
+     *  @param[in] x The argument to std::tan.
+     *
+     *  @return A value no less than the true value of tan(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T tan_up(const T& x) {
+        return up_(nearest_([&x] { return std::tan(x); }));
+    }
+
+    /** @brief A lower bound for the arcsine of @p x.
+     *
+     *  @param[in] x The argument to std::asin.
+     *
+     *  @return A value no greater than the true value of asin(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T asin_down(const T& x) {
+        return down_(nearest_([&x] { return std::asin(x); }));
+    }
+
+    /** @brief A upper bound for the arcsine of @p x.
+     *
+     *  @param[in] x The argument to std::asin.
+     *
+     *  @return A value no less than the true value of asin(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T asin_up(const T& x) {
+        return up_(nearest_([&x] { return std::asin(x); }));
+    }
+
+    /** @brief A lower bound for the arccosine of @p x.
+     *
+     *  @param[in] x The argument to std::acos.
+     *
+     *  @return A value no greater than the true value of acos(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T acos_down(const T& x) {
+        return down_(nearest_([&x] { return std::acos(x); }));
+    }
+
+    /** @brief A upper bound for the arccosine of @p x.
+     *
+     *  @param[in] x The argument to std::acos.
+     *
+     *  @return A value no less than the true value of acos(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T acos_up(const T& x) {
+        return up_(nearest_([&x] { return std::acos(x); }));
+    }
+
+    /** @brief A lower bound for the arctangent of @p x.
+     *
+     *  @param[in] x The argument to std::atan.
+     *
+     *  @return A value no greater than the true value of atan(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T atan_down(const T& x) {
+        return down_(nearest_([&x] { return std::atan(x); }));
+    }
+
+    /** @brief A upper bound for the arctangent of @p x.
+     *
+     *  @param[in] x The argument to std::atan.
+     *
+     *  @return A value no less than the true value of atan(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T atan_up(const T& x) {
+        return up_(nearest_([&x] { return std::atan(x); }));
+    }
+
+    /** @brief A lower bound for the hyperbolic sine of @p x.
+     *
+     *  @param[in] x The argument to std::sinh.
+     *
+     *  @return A value no greater than the true value of sinh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T sinh_down(const T& x) {
+        return down_(nearest_([&x] { return std::sinh(x); }));
+    }
+
+    /** @brief A upper bound for the hyperbolic sine of @p x.
+     *
+     *  @param[in] x The argument to std::sinh.
+     *
+     *  @return A value no less than the true value of sinh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T sinh_up(const T& x) {
+        return up_(nearest_([&x] { return std::sinh(x); }));
+    }
+
+    /** @brief A lower bound for the hyperbolic cosine of @p x.
+     *
+     *  @param[in] x The argument to std::cosh.
+     *
+     *  @return A value no greater than the true value of cosh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T cosh_down(const T& x) {
+        return down_(nearest_([&x] { return std::cosh(x); }));
+    }
+
+    /** @brief A upper bound for the hyperbolic cosine of @p x.
+     *
+     *  @param[in] x The argument to std::cosh.
+     *
+     *  @return A value no less than the true value of cosh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T cosh_up(const T& x) {
+        return up_(nearest_([&x] { return std::cosh(x); }));
+    }
+
+    /** @brief A lower bound for the hyperbolic tangent of @p x.
+     *
+     *  @param[in] x The argument to std::tanh.
+     *
+     *  @return A value no greater than the true value of tanh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T tanh_down(const T& x) {
+        return down_(nearest_([&x] { return std::tanh(x); }));
+    }
+
+    /** @brief A upper bound for the hyperbolic tangent of @p x.
+     *
+     *  @param[in] x The argument to std::tanh.
+     *
+     *  @return A value no less than the true value of tanh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T tanh_up(const T& x) {
+        return up_(nearest_([&x] { return std::tanh(x); }));
+    }
+
+    /** @brief A lower bound for the inverse hyperbolic sine of @p x.
+     *
+     *  @param[in] x The argument to std::asinh.
+     *
+     *  @return A value no greater than the true value of asinh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T asinh_down(const T& x) {
+        return down_(nearest_([&x] { return std::asinh(x); }));
+    }
+
+    /** @brief A upper bound for the inverse hyperbolic sine of @p x.
+     *
+     *  @param[in] x The argument to std::asinh.
+     *
+     *  @return A value no less than the true value of asinh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T asinh_up(const T& x) {
+        return up_(nearest_([&x] { return std::asinh(x); }));
+    }
+
+    /** @brief A lower bound for the inverse hyperbolic cosine of @p x.
+     *
+     *  @param[in] x The argument to std::acosh.
+     *
+     *  @return A value no greater than the true value of acosh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T acosh_down(const T& x) {
+        return down_(nearest_([&x] { return std::acosh(x); }));
+    }
+
+    /** @brief A upper bound for the inverse hyperbolic cosine of @p x.
+     *
+     *  @param[in] x The argument to std::acosh.
+     *
+     *  @return A value no less than the true value of acosh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T acosh_up(const T& x) {
+        return up_(nearest_([&x] { return std::acosh(x); }));
+    }
+
+    /** @brief A lower bound for the inverse hyperbolic tangent of @p x.
+     *
+     *  @param[in] x The argument to std::atanh.
+     *
+     *  @return A value no greater than the true value of atanh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T atanh_down(const T& x) {
+        return down_(nearest_([&x] { return std::atanh(x); }));
+    }
+
+    /** @brief A upper bound for the inverse hyperbolic tangent of @p x.
+     *
+     *  @param[in] x The argument to std::atanh.
+     *
+     *  @return A value no less than the true value of atanh(@p x).
+     *
+     *  @throw none No throw guarantee.
+     */
+    T atanh_up(const T& x) {
+        return up_(nearest_([&x] { return std::atanh(x); }));
+    }
 };
 
 /** @brief The policies the boost interval underlying sigma::Interval uses.
