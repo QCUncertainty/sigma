@@ -60,6 +60,18 @@ cmaize_add_library(
     DEPENDS eigen Boost::boost
 )
 
+# boost::numeric::interval, which sigma::Interval wraps, gets its outward
+# rounding by changing the FPU's rounding mode around each operation. A compiler
+# is allowed to assume the mode never changes, and clang does exactly that:
+# without this flag it folds the directed operations back to round-to-nearest
+# and the computed bounds silently stop enclosing the true result. Sigma is
+# header-only, so the flag has to reach every translation unit that uses it.
+if(MSVC)
+    target_compile_options(${PROJECT_NAME} INTERFACE /fp:strict)
+else()
+    target_compile_options(${PROJECT_NAME} INTERFACE -frounding-math)
+endif()
+
 # Add ENABLE_EIGEN_SUPPORT compile definition to the main target, since it does
 # not appear to be propagated from the eigen target. This is necessary for the
 # compile definition to appear in the Sigma installation properly for

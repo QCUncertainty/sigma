@@ -1,9 +1,12 @@
 #pragma once
+#include "sigma/interval/detail_/policies.hpp"
 #include <algorithm>
 #include <boost/numeric/interval.hpp>
 #include <iostream>
+#include <limits>
 #include <optional>
 #include <type_traits>
+#include <utility>
 
 /** @file interval.hpp
  *  @brief Defines the Interval class
@@ -311,8 +314,54 @@ private:
         if(empty()) { throw std::domain_error("Interval is empty"); }
     }
 
-    /// The underlying interval type
-    using interval_t = boost::numeric::interval<value_t>;
+    /** @brief The openness of the bounds of a product or a quotient.
+     *
+     *  Multiplying or dividing [a, b] by [c, d] combines the bounds four ways,
+     *  and the result's bounds are the smallest and largest of those four
+     *  corners. A corner is in the result exactly when both of the bounds it
+     *  came from are in their intervals, so its openness is the OR of theirs.
+     *  This determines which corner produced each bound and reports the
+     *  openness that follows.
+     *
+     *  @param[in] low The lower bound of the result.
+     *  @param[in] high The upper bound of the result.
+     *  @param[in] ll The corner combining both lower bounds.
+     *  @param[in] lh The corner combining @p lhs's lower and @p rhs's upper.
+     *  @param[in] hl The corner combining @p lhs's upper and @p rhs's lower.
+     *  @param[in] hh The corner combining both upper bounds.
+     *  @param[in] lhs The left-hand operand.
+     *  @param[in] rhs The right-hand operand.
+     *
+     *  @return Whether the lower and the upper bound, respectively, are open.
+     *
+     *  @throw none No throw guarantee.
+     */
+    static std::pair<bool, bool> corner_openness_(value_t low, value_t high,
+                                                  value_t ll, value_t lh,
+                                                  value_t hl, value_t hh,
+                                                  const Interval& lhs,
+                                                  const Interval& rhs);
+
+    /** @brief The reciprocal of an interval that does not contain zero.
+     *
+     *  Used by operator/= for the one case boost's division cannot express: a
+     *  divisor with an open bound at zero. Such an interval does not contain
+     *  zero, so its reciprocal is a single unbounded interval, whereas boost
+     *  -- which does not track openness -- sees a zero bound and gives up on
+     *  the whole real line.
+     *
+     *  @param[in] a The interval to invert. Must not be empty and must not
+     *               contain zero, though a bound of it may be an open zero.
+     *
+     *  @return An interval enclosing the reciprocal of every value in @p a.
+     *
+     *  @throw std::domain_error if @p a is empty. Strong throw guarantee.
+     */
+    static Interval reciprocal_(const Interval& a);
+
+    /// The underlying interval type. See detail_/policies.hpp for why the
+    /// default boost policies are not used.
+    using interval_t = detail_::boost_interval_t<value_t>;
 
     /// Whether the lower bound is open
     bool m_is_left_open_ = false;
@@ -540,64 +589,106 @@ Interval<ValueType>& Interval<ValueType>::operator*=(const Interval& rhs) {
      *   target interval is not possible.
      */
 
-    if(empty() || rhs.empty()) {
-        return *this = Interval();
-    } else if(width() == 0 && rhs.width() == 0) { // Both points
-        value_t prod = lower() * rhs.lower();
-        return *this = Interval(prod);
-    } else if(width() == 0) { // *this is a point, rhs is an interval
-        auto l             = lower();
-        auto ll            = l * rhs.lower();
-        auto lh            = l * rhs.upper();
-        value_t low        = std::min(ll, lh);
-        value_t high       = std::max(ll, lh);
-        bool lower_is_open = rhs.left_open();
-        bool upper_is_open = rhs.right_open();
-        if(low != ll) {
-            lower_is_open = rhs.right_open();
-            upper_is_open = rhs.right_open();
-        }
-        return *this = Interval(low, high, lower_is_open, upper_is_open);
-    } else if(rhs.width() == 0) { // rhs is point, *this is an interval
-        // Dispatch to *this is point, rhs is interval
-        return *this = (rhs * (*this));
-    }
-    auto ll            = lower() * rhs.lower();
-    auto lh            = lower() * rhs.upper();
-    auto hl            = upper() * rhs.lower();
-    auto hh            = upper() * rhs.upper();
-    auto low           = std::min(std::min(ll, lh), std::min(hl, hh));
-    auto high          = std::max(std::max(ll, lh), std::max(hl, hh));
-    bool lower_is_open = left_open() || rhs.left_open();
-    bool upper_is_open = right_open() || rhs.right_open();
+    if(empty() || rhs.empty()) { return *this = Interval(); }
+
+    // The bounds themselves come from boost, which rounds each of the four
+    // sub-products outward before taking the extremes. Recomputing the
+    // sub-products here in the ambient rounding mode is only to identify which
+    // corner each bound came from, which is what decides its openness; a
+    // corner that ties with another to within a rounding is interchangeable
+    // with it for that purpose.
+    auto product = *m_interval_ * *rhs.m_interval_;
+
+    auto ll   = lower() * rhs.lower();
+    auto lh   = lower() * rhs.upper();
+    auto hl   = upper() * rhs.lower();
+    auto hh   = upper() * rhs.upper();
+    auto low  = std::min(std::min(ll, lh), std::min(hl, hh));
+    auto high = std::max(std::max(ll, lh), std::max(hl, hh));
+
+    auto [lower_is_open, upper_is_open] =
+      corner_openness_(low, high, ll, lh, hl, hh, *this, rhs);
+
+    return *this = Interval(product.lower(), product.upper(), lower_is_open,
+                            upper_is_open);
+}
+
+template<typename ValueType>
+std::pair<bool, bool> Interval<ValueType>::corner_openness_(
+  value_t low, value_t high, value_t ll, value_t lh, value_t hl, value_t hh,
+  const Interval& lhs, const Interval& rhs) {
+    bool lower_is_open = lhs.left_open() || rhs.left_open();
+    bool upper_is_open = lhs.right_open() || rhs.right_open();
+
     // if(low == ll) // default is correct for this case
     if(low == lh) {
-        lower_is_open = left_open() || rhs.right_open();
+        lower_is_open = lhs.left_open() || rhs.right_open();
     } else if(low == hl) {
-        lower_is_open = right_open() || rhs.left_open();
+        lower_is_open = lhs.right_open() || rhs.left_open();
     } else if(low == hh) {
-        lower_is_open = right_open() || rhs.right_open();
+        lower_is_open = lhs.right_open() || rhs.right_open();
     }
 
     // if(high == hh) // default is correct for this case
     if(high == lh) {
-        upper_is_open = left_open() || rhs.right_open();
+        upper_is_open = lhs.left_open() || rhs.right_open();
     } else if(high == hl) {
-        upper_is_open = right_open() || rhs.left_open();
+        upper_is_open = lhs.right_open() || rhs.left_open();
     } else if(high == ll) {
-        upper_is_open = left_open() || rhs.left_open();
+        upper_is_open = lhs.left_open() || rhs.left_open();
     }
 
-    return *this = Interval(low, high, lower_is_open, upper_is_open);
+    return {lower_is_open, upper_is_open};
+}
+
+template<typename ValueType>
+Interval<ValueType> Interval<ValueType>::reciprocal_(const Interval& a) {
+    constexpr auto inf = std::numeric_limits<value_t>::infinity();
+    const interval_t one(value_t(1));
+
+    // A zero bound is necessarily an open one here, and the reciprocal runs
+    // off to infinity in that direction. Everything else is a directed
+    // division by a point.
+    value_t low =
+      a.upper() == value_t(0) ? -inf : (one / interval_t(a.upper())).lower();
+    value_t high =
+      a.lower() == value_t(0) ? inf : (one / interval_t(a.lower())).upper();
+
+    // The reciprocal is decreasing, so the bounds trade places
+    return Interval(low, high, a.right_open(), a.left_open());
 }
 
 template<typename ValueType>
 Interval<ValueType>& Interval<ValueType>::operator/=(const Interval& rhs) {
-    if(empty() || rhs.empty()) {
-        *this = Interval();
-        return *this;
+    if(empty() || rhs.empty()) { return *this = Interval(); }
+    if(rhs.contains(value_t(0))) {
+        throw std::domain_error("Division by zero");
     }
-    return *this *= value_t(1.0) / rhs;
+
+    // Boost has no notion of an open bound, so a divisor bounded by zero looks
+    // to it like a divisor containing zero and it answers with the whole real
+    // line. Sigma knows better, and multiplying by the reciprocal keeps the
+    // information at the cost of one extra rounding.
+    if(rhs.lower() == value_t(0) || rhs.upper() == value_t(0)) {
+        return *this *= reciprocal_(rhs);
+    }
+
+    // As in operator*=, boost computes the bounds and the quotients below only
+    // say which corner each of them came from.
+    auto quotient = *m_interval_ / *rhs.m_interval_;
+
+    auto ll   = lower() / rhs.lower();
+    auto lh   = lower() / rhs.upper();
+    auto hl   = upper() / rhs.lower();
+    auto hh   = upper() / rhs.upper();
+    auto low  = std::min(std::min(ll, lh), std::min(hl, hh));
+    auto high = std::max(std::max(ll, lh), std::max(hl, hh));
+
+    auto [lower_is_open, upper_is_open] =
+      corner_openness_(low, high, ll, lh, hl, hh, *this, rhs);
+
+    return *this = Interval(quotient.lower(), quotient.upper(), lower_is_open,
+                            upper_is_open);
 }
 
 template<typename ValueType>
@@ -778,7 +869,7 @@ Interval<T> operator/(Interval<T> lhs, const Interval<T>& rhs) {
 template<typename T>
 Interval<T> operator/(Interval<T> lhs, T rhs) {
     if(rhs == 0) { throw std::domain_error("Division by zero"); }
-    return lhs *= T(1.0 / rhs);
+    return lhs /= Interval<T>(rhs);
 }
 
 /** @overload */
@@ -786,8 +877,7 @@ template<typename T>
 Interval<T> operator/(T lhs, const Interval<T>& rhs) {
     if(rhs.empty()) { return rhs; }
     if(rhs.contains(0)) { throw std::domain_error("Division by zero"); }
-    return Interval<T>(lhs / rhs.upper(), lhs / rhs.lower(), rhs.right_open(),
-                       rhs.left_open());
+    return Interval<T>(lhs) / rhs;
 }
 
 /// Typedef for an interval of floats

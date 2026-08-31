@@ -1,5 +1,6 @@
 #include "catch2/catch_test_macros.hpp"
 #include "testing.hpp"
+#include <limits>
 #include <sstream>
 
 using testing::test_interval;
@@ -1198,6 +1199,56 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
             REQUIRE_THROWS_AS(one_two / value_t(0.0), std::domain_error);
             REQUIRE_THROWS_AS(two / testing_t(-1.0, 1.0), std::domain_error);
         }
+    }
+
+    SECTION("Outward Rounding") {
+        // A product or a quotient of representable values is usually not
+        // itself representable, so the bounds have to round outward. Computing
+        // them in the ambient round-to-nearest mode instead gives a result
+        // that can exclude the true value, and for point operands claims the
+        // operation is exact.
+        auto two   = testing_t(value_t{2});
+        auto three = testing_t(value_t{3});
+
+        auto quotient = two / three;
+        REQUIRE(quotient.width() > value_t{0});
+        REQUIRE(quotient.contains(value_t{2} / value_t{3}));
+
+        auto product = testing_t(value_t{0.1}) * testing_t(value_t{0.3});
+        REQUIRE(product.width() > value_t{0});
+        REQUIRE(product.contains(value_t{0.1} * value_t{0.3}));
+
+        // Addition and subtraction have always gone through boost, and are
+        // covered here so the whole of the arithmetic is pinned in one place.
+        auto sum = testing_t(value_t{0.1}) + testing_t(value_t{0.2});
+        REQUIRE(sum.width() > value_t{0});
+        REQUIRE(sum.contains(value_t{0.1} + value_t{0.2}));
+
+        // An exact result stays exact -- the bounds are directed, not padded
+        REQUIRE((two * three).width() == value_t{0});
+        REQUIRE((two * three) == testing_t(value_t{6}));
+    }
+
+    SECTION("Division by an interval bounded by zero") {
+        // Zero is not in (0, 1], so [1, 2] / (0, 1] is defined even though
+        // boost, which does not track openness, would report the whole line.
+        testing_t open_at_zero(value_t{0}, value_t{1}, true, false);
+        auto quotient = one_two / open_at_zero;
+        REQUIRE(quotient.lower() == value_t{1});
+        REQUIRE(quotient.upper() == std::numeric_limits<value_t>::infinity());
+        REQUIRE(quotient.right_open());
+
+        // Zero in the divisor is still an error
+        REQUIRE_THROWS_AS(one_two / testing_t(value_t{0}, value_t{1}),
+                          std::domain_error);
+    }
+
+    SECTION("Multiplication by a negative scalar") {
+        // -2 * [1, 2) == (-4, -2]: the lower bound of the result comes from
+        // the OPEN upper bound of the interval, and the upper bound from its
+        // closed lower bound, so the openness swaps rather than being copied.
+        auto result = value_t{-2} * one_two_right_open;
+        REQUIRE(result == testing_t(value_t{-4}, value_t{-2}, true, false));
     }
 
     SECTION("print_interval_form") {
