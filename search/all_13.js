@@ -14,5 +14,6 @@ var searchData=
   ['right_5fclosed_11',['right_closed',['../classsigma_1_1Interval.html#a1b4144e91986d46462f5ed08f07824fc',1,'sigma::Interval']]],
   ['right_5fopen_12',['right_open',['../classsigma_1_1Interval.html#a4f5c7005a7a517d109b8ebe4ae849f7f',1,'sigma::Interval']]],
   ['rigorous_20bounds_13',['Achieving rigorous bounds',['../md_docs_2taylor.html#achieving-rigorous-bounds',1,'']]],
-  ['round_14',['round',['../namespacesigma.html#a940424e34df1bad854b05c139ce73648',1,'sigma']]]
+  ['round_14',['round',['../namespacesigma.html#a940424e34df1bad854b05c139ce73648',1,'sigma']]],
+  ['rounded_5ftransc_5fguarded_15',['rounded_transc_guarded',['../structsigma_1_1detail___1_1rounded__transc__guarded.html',1,'sigma::detail_']]]
 ];

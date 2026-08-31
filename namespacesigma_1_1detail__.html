@@ -130,11 +130,38 @@ $(function(){initNavTree('namespacesigma_1_1detail__.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:rounded_5Ftransc_5Fguarded" id="r_rounded_5Ftransc_5Fguarded"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsigma_1_1detail___1_1rounded__transc__guarded.html">rounded_transc_guarded</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outward rounding for the transcendental functions.  <a href="structsigma_1_1detail___1_1rounded__transc__guarded.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Setter" id="r_Setter"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1detail___1_1Setter.html">Setter</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies an unceratin variable.  <a href="classsigma_1_1detail___1_1Setter.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aa4049ed4dc3cc89445be2aeaadfaec9d" id="r_aa4049ed4dc3cc89445be2aeaadfaec9d"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:aa4049ed4dc3cc89445be2aeaadfaec9d template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#aa4049ed4dc3cc89445be2aeaadfaec9d">interval_policies_t</a></td></tr>
+<tr class="memdesc:aa4049ed4dc3cc89445be2aeaadfaec9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The policies the boost interval underlying <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a> uses.  <br /></td></tr>
+<tr class="memitem:ac21206656810233d272b239d985cc606" id="r_ac21206656810233d272b239d985cc606"><td class="memTemplParams" colspan="2"><a id="ac21206656810233d272b239d985cc606" name="ac21206656810233d272b239d985cc606"></a>
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ac21206656810233d272b239d985cc606 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><b>boost_interval_t</b> = boost::numeric::interval&lt;T, <a class="el" href="#aa4049ed4dc3cc89445be2aeaadfaec9d">interval_policies_t</a>&lt;T&gt;&gt;</td></tr>
+<tr class="memdesc:ac21206656810233d272b239d985cc606"><td class="mdescLeft">&#160;</td><td class="mdescRight">The boost interval type <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a> wraps. <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:abbb559314099aa63835e76bf1acee1ba" id="r_abbb559314099aa63835e76bf1acee1ba"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:abbb559314099aa63835e76bf1acee1ba template"><td class="memItemLeft"><a class="el" href="#ac21206656810233d272b239d985cc606">boost_interval_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abbb559314099aa63835e76bf1acee1ba">to_boost_</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:abbb559314099aa63835e76bf1acee1ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a> into the boost interval it wraps.  <br /></td></tr>
+<tr class="memitem:a00c6efad2b9cb3b1af9bede1b6d99145" id="r_a00c6efad2b9cb3b1af9bede1b6d99145"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a00c6efad2b9cb3b1af9bede1b6d99145 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a00c6efad2b9cb3b1af9bede1b6d99145">from_boost_</a> (const <a class="el" href="#ac21206656810233d272b239d985cc606">boost_interval_t</a>&lt; T &gt; &amp;x, bool left_open=false, bool right_open=false)</td></tr>
+<tr class="memdesc:a00c6efad2b9cb3b1af9bede1b6d99145"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a boost interval into a <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a>.  <br /></td></tr>
+<tr class="memitem:a7fb4226499df683754e2377c9507554f" id="r_a7fb4226499df683754e2377c9507554f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a7fb4226499df683754e2377c9507554f template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7fb4226499df683754e2377c9507554f">assert_within_unit_</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a, bool open, const std::string &amp;name)</td></tr>
+<tr class="memdesc:a7fb4226499df683754e2377c9507554f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Throws unless every value in <code class="param">a</code> lies in the unit interval.  <br /></td></tr>
+<tr class="memitem:ae14a10b001de8ce0d9412cbc8ca58ef1" id="r_ae14a10b001de8ce0d9412cbc8ca58ef1"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ae14a10b001de8ce0d9412cbc8ca58ef1 template"><td class="memItemLeft">std::pair&lt; bool, bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae14a10b001de8ce0d9412cbc8ca58ef1">integer_pow_openness_</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a, long long n)</td></tr>
+<tr class="memdesc:ae14a10b001de8ce0d9412cbc8ca58ef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The openness of the bounds of pow(<code class="param">a</code>, <code class="param">n</code>) for a positive integer <code class="param">n</code>.  <br /></td></tr>
+<tr class="memitem:a3ea5a6bce19f65926a6f0c61060fa1bd" id="r_a3ea5a6bce19f65926a6f0c61060fa1bd"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:a3ea5a6bce19f65926a6f0c61060fa1bd template"><td class="memItemLeft"><a class="el" href="#ac21206656810233d272b239d985cc606">boost_interval_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3ea5a6bce19f65926a6f0c61060fa1bd">exponent_interval_</a> (const U &amp;<a class="el" href="namespacesigma.html#a1f0fc9200525ff76e74575128a9de259">exp</a>)</td></tr>
+<tr class="memdesc:a3ea5a6bce19f65926a6f0c61060fa1bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The exponent of a non-integer <a class="el" href="namespacesigma.html#a24fe469f5d0da2716b5be3d1ff8d12a3" title="Calculate the power of an affine form.">pow()</a>, as an interval.  <br /></td></tr>
 <tr class="memitem:a4e7bb3552d85f228e20613973d6f101b" id="r_a4e7bb3552d85f228e20613973d6f101b"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a4e7bb3552d85f228e20613973d6f101b template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4e7bb3552d85f228e20613973d6f101b">inplace_unary</a> (<a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;c, T mean, T dcda)</td></tr>
 <tr class="memdesc:a4e7bb3552d85f228e20613973d6f101b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generalized Inplace Unary Changes.  <br /></td></tr>
@@ -157,7 +184,186 @@ constexpr double&#160;</td><td class="memItemRight"><b>pi</b> = 3.14159265358979
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The namespace that contains the implementation details of the library. </p>
 <p>This is the namespace details not intended for user interaction. </p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="aa4049ed4dc3cc89445be2aeaadfaec9d" name="aa4049ed4dc3cc89445be2aeaadfaec9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4049ed4dc3cc89445be2aeaadfaec9d">&#9670;&#160;</a></span>interval_policies_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#aa4049ed4dc3cc89445be2aeaadfaec9d">sigma::detail_::interval_policies_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">boost::numeric::interval_lib::policies&lt;</div>
+<div class="line"> boost::numeric::interval_lib::save_state&lt;rounded_transc_guarded&lt;T&gt;&gt;,</div>
+<div class="line"> boost::numeric::interval_lib::checking_base&lt;T&gt;&gt;</div>
+</div><!-- fragment -->
+<p>The policies the boost interval underlying <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a> uses. </p>
+<p>Two deviations from boost's defaults:</p>
+<ul>
+<li>The rounding policy is <a class="el" href="structsigma_1_1detail___1_1rounded__transc__guarded.html" title="Outward rounding for the transcendental functions.">rounded_transc_guarded</a>, so the transcendental functions of boost/numeric/interval/transc.hpp are available at all, and outwardly rounded when they are used. It extends, rather than replaces, the rounded_arith_opp arithmetic boost defaults to.</li>
+<li>The checking policy is checking_base rather than boost's default checking_strict. checking_strict inherits checking_no_empty, whose empty_lower() <em>throws</em>, and boost's <a class="el" href="namespacesigma.html#a6b4cb2eb59313bad642280864499f747" title="Calculate the natural logarithm of an affine form.">log()</a>/sqrt()/asin() signal a domain violation by returning an empty interval. checking_base lets that empty interval come back as a value, which <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a> then maps onto its own representation of the empty set.</li>
+</ul>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The floating point type of the bounds. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a7fb4226499df683754e2377c9507554f" name="a7fb4226499df683754e2377c9507554f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fb4226499df683754e2377c9507554f">&#9670;&#160;</a></span>assert_within_unit_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void sigma::detail_::assert_within_unit_ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>open</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Throws unless every value in <code class="param">a</code> lies in the unit interval. </p>
+<p>Code factorization for the three functions whose domain is the unit interval: arcsine and arccosine take the closed \( [-1, 1] \), and the inverse hyperbolic tangent the open \( (-1, 1) \).</p>
+<p>Whether a bound <em>at</em> plus or minus one is in domain depends on both <code class="param">open</code> and the openness of that bound, since an open bound is not a value the interval contains: \( (-1, 1) \) is an acceptable argument to the inverse hyperbolic tangent, and \( [-1, 1] \) is not.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>The interval to check. Must not be empty. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">open</td><td>Is the domain the open unit interval? False for the closed one. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>The name of the function being checked, for the error message.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a value outside the domain. Strong throw guarantee. </td></tr>
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> is empty. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3ea5a6bce19f65926a6f0c61060fa1bd" name="a3ea5a6bce19f65926a6f0c61060fa1bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ea5a6bce19f65926a6f0c61060fa1bd">&#9670;&#160;</a></span>exponent_interval_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ac21206656810233d272b239d985cc606">boost_interval_t</a>&lt; T &gt; sigma::detail_::exponent_interval_ </td>
+          <td>(</td>
+          <td class="paramtype">const U &amp;</td>          <td class="paramname"><span class="paramname"><em>exp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The exponent of a non-integer <a class="el" href="namespacesigma.html#a24fe469f5d0da2716b5be3d1ff8d12a3" title="Calculate the power of an affine form.">pow()</a>, as an interval. </p>
+<p>Converting <code class="param">exp</code> to the interval's value type may not be exact, e.g., when a double exponent is applied to an <a class="el" href="namespacesigma.html#a39fce2e2c854ce7cafbc61b57c1e90a6" title="Typedef for an interval of floats.">IFloat</a>. When it is not, the exponent is widened to the pair of representable values bracketing it so the enclosure remains valid.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval. </td></tr>
+    <tr><td class="paramname">U</td><td>The numeric type of the exponent.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="namespacesigma.html#a1f0fc9200525ff76e74575128a9de259" title="Calculate the exponential of an affine form.">exp</a></td><td>The exponent to convert.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval containing <code class="param">exp</code>.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a00c6efad2b9cb3b1af9bede1b6d99145" name="a00c6efad2b9cb3b1af9bede1b6d99145"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00c6efad2b9cb3b1af9bede1b6d99145">&#9670;&#160;</a></span>from_boost_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; sigma::detail_::from_boost_ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ac21206656810233d272b239d985cc606">boost_interval_t</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>left_open</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>right_open</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a boost interval into a <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a>. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>The interval to convert. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">left_open</td><td>Should the lower bound of the result be open? </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">right_open</td><td>Should the upper bound of the result be open?</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval with the bounds of <code class="param">x</code> and the requested openness. An empty boost interval, which is how boost signals that a function was given an argument outside its domain, converts to the empty <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a>. An infinite bound is always open, regardless of what the caller requested, since it is not a value the interval contains.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a2ba8c119561a96410b163dfac31822e7" name="a2ba8c119561a96410b163dfac31822e7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2ba8c119561a96410b163dfac31822e7">&#9670;&#160;</a></span>inplace_binary()</h2>
 
@@ -270,6 +476,52 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ae14a10b001de8ce0d9412cbc8ca58ef1" name="ae14a10b001de8ce0d9412cbc8ca58ef1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae14a10b001de8ce0d9412cbc8ca58ef1">&#9670;&#160;</a></span>integer_pow_openness_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; bool, bool &gt; sigma::detail_::integer_pow_openness_ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long long</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The openness of the bounds of pow(<code class="param">a</code>, <code class="param">n</code>) for a positive integer <code class="param">n</code>. </p>
+<p>Mirrors the case analysis boost::numeric::pow performs on the sign of the bounds, since it is that analysis which decides where the bounds of the result come from.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>The base. Must not be empty. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>The exponent. Must be positive.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The openness of the lower and upper bound, respectively.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> is empty. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="af89195fa94db2c6ec59257dd2d890bde" name="af89195fa94db2c6ec59257dd2d890bde"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af89195fa94db2c6ec59257dd2d890bde">&#9670;&#160;</a></span>numeric_derivative()</h2>
 
@@ -310,6 +562,46 @@ template&lt;typename FunctionType, typename NumericType&gt; </div>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abbb559314099aa63835e76bf1acee1ba" name="abbb559314099aa63835e76bf1acee1ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbb559314099aa63835e76bf1acee1ba">&#9670;&#160;</a></span>to_boost_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ac21206656810233d272b239d985cc606">boost_interval_t</a>&lt; T &gt; sigma::detail_::to_boost_ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a> into the boost interval it wraps. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>The interval to convert. Must not be empty.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A boost interval with the same bounds as <code class="param">a</code>. The openness of <code class="param">a's</code> bounds is not represented in the result.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> is empty. Strong throw guarantee. </td></tr>
   </table>
   </dd>
 </dl>

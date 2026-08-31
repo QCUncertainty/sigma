@@ -1,4 +1,4 @@
-var trigonometry_8hpp =
+var uncertain_2operations_2trigonometry_8hpp =
 [
     [ "sigma::acos", "namespacesigma.html#af6eeba07517755fde0ced30d9ff56181", null ],
     [ "sigma::asin", "namespacesigma.html#ae48df01125f097867cd2144b958f3756", null ],

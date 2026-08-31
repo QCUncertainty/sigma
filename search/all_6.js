@@ -22,9 +22,14 @@ var searchData=
   ['contributor_20covenant_20code_20of_20conduct_19',['Contributor Covenant Code of Conduct',['../md_docs_2code__of__conduct.html',1,'']]],
   ['contributor_20guidelines_20',['Contributor Guidelines',['../md_docs_2contributing.html',1,'']]],
   ['conventions_21',['Conventions',['../md_docs_2README.html#conventions',1,'']]],
-  ['copysign_22',['copysign',['../namespacesigma.html#acd31fdaf16ebab84607b4f004204a556',1,'sigma::copysign(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;b)'],['../namespacesigma.html#aab0b028f2d1d0c35269b0d0c9f75ccfa',1,'sigma::copysign(const Uncertain&lt; T &gt; &amp;a, const U &amp;b)'],['../namespacesigma.html#a60742125f0d5c889ac848e306876404f',1,'sigma::copysign(const U &amp;a, const Uncertain&lt; T &gt; &amp;b)']]],
-  ['correction_23',['1. Correction',['../md_docs_2code__of__conduct.html#autotoc_md1-correction',1,'']]],
-  ['cos_24',['cos',['../namespacesigma.html#a8d0718197bd681b48cfbc005d6629920',1,'sigma']]],
-  ['cosh_25',['cosh',['../namespacesigma.html#a8f8ded25467d58703d7ec390526bb2bb',1,'sigma']]],
-  ['covenant_20code_20of_20conduct_26',['Contributor Covenant Code of Conduct',['../md_docs_2code__of__conduct.html',1,'']]]
+  ['convert_2ehpp_22',['convert.hpp',['../convert_8hpp.html',1,'']]],
+  ['copysign_23',['copysign',['../namespacesigma.html#acd31fdaf16ebab84607b4f004204a556',1,'sigma::copysign(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;b)'],['../namespacesigma.html#aab0b028f2d1d0c35269b0d0c9f75ccfa',1,'sigma::copysign(const Uncertain&lt; T &gt; &amp;a, const U &amp;b)'],['../namespacesigma.html#a60742125f0d5c889ac848e306876404f',1,'sigma::copysign(const U &amp;a, const Uncertain&lt; T &gt; &amp;b)']]],
+  ['correction_24',['1. Correction',['../md_docs_2code__of__conduct.html#autotoc_md1-correction',1,'']]],
+  ['cos_25',['cos',['../namespacesigma.html#a7296e91f14bb74a9a223e420e81b6997',1,'sigma::cos(const Interval&lt; T &gt; &amp;a)'],['../namespacesigma.html#a8d0718197bd681b48cfbc005d6629920',1,'sigma::cos(const Uncertain&lt; T &gt; &amp;a)']]],
+  ['cos_5fdown_26',['cos_down',['../structsigma_1_1detail___1_1rounded__transc__guarded.html#a98b0c1272bfd4c17269e8d9416659ef2',1,'sigma::detail_::rounded_transc_guarded']]],
+  ['cos_5fup_27',['cos_up',['../structsigma_1_1detail___1_1rounded__transc__guarded.html#aec73be3b53c210edbc49d98362c39a9f',1,'sigma::detail_::rounded_transc_guarded']]],
+  ['cosh_28',['cosh',['../namespacesigma.html#abb7d4d45671e530cc4a07e008b5afd1e',1,'sigma::cosh(const Interval&lt; T &gt; &amp;a)'],['../namespacesigma.html#a8f8ded25467d58703d7ec390526bb2bb',1,'sigma::cosh(const Uncertain&lt; T &gt; &amp;a)']]],
+  ['cosh_5fdown_29',['cosh_down',['../structsigma_1_1detail___1_1rounded__transc__guarded.html#a099294f78e20e9625c471cc3bd9f23c4',1,'sigma::detail_::rounded_transc_guarded']]],
+  ['cosh_5fup_30',['cosh_up',['../structsigma_1_1detail___1_1rounded__transc__guarded.html#ad62644e26020693a80d6dc0c5604ae9f',1,'sigma::detail_::rounded_transc_guarded']]],
+  ['covenant_20code_20of_20conduct_31',['Contributor Covenant Code of Conduct',['../md_docs_2code__of__conduct.html',1,'']]]
 ];

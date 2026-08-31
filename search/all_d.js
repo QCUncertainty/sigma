@@ -12,6 +12,8 @@ var searchData=
   ['log10_9',['log10',['../namespacesigma.html#a9146d79ed7ea7741bc579d6061d11b23',1,'sigma']]],
   ['log1p_10',['log1p',['../namespacesigma.html#a73a4c967a311eb8c5c83704c5742305f',1,'sigma']]],
   ['log2_11',['log2',['../namespacesigma.html#a76e7cbcb3b0bd1b3023fb771ff8d9cc5',1,'sigma']]],
-  ['log_5fouter_5fcoeffs_12',['log_outer_coeffs',['../series__detail_8hpp.html#a9a59def92b8f5502373519a30f376d0a',1,'sigma::detail']]],
-  ['lower_13',['lower',['../classsigma_1_1Interval.html#a44d6f08e940da1a6611bda507352abca',1,'sigma::Interval']]]
+  ['log_5fdown_12',['log_down',['../structsigma_1_1detail___1_1rounded__transc__guarded.html#afb6109b005155ef7d7f3c49dea3483f9',1,'sigma::detail_::rounded_transc_guarded']]],
+  ['log_5fouter_5fcoeffs_13',['log_outer_coeffs',['../series__detail_8hpp.html#a9a59def92b8f5502373519a30f376d0a',1,'sigma::detail']]],
+  ['log_5fup_14',['log_up',['../structsigma_1_1detail___1_1rounded__transc__guarded.html#a8be015c5fb442b225e76a1f9aef62db8',1,'sigma::detail_::rounded_transc_guarded']]],
+  ['lower_15',['lower',['../classsigma_1_1Interval.html#a44d6f08e940da1a6611bda507352abca',1,'sigma::Interval']]]
 ];

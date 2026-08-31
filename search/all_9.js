@@ -8,7 +8,8 @@ var searchData=
   ['floor_5',['floor',['../namespacesigma.html#aa33c27c2144a61b5061e6a4902349123',1,'sigma']]],
   ['fmod_6',['fmod',['../namespacesigma.html#aff47e6b43a710dc89637c5e6ae1e1c60',1,'sigma::fmod(const Uncertain&lt; T &gt; &amp;a, const Uncertain&lt; T &gt; &amp;b)'],['../namespacesigma.html#a09be7785a22e02bd9b1ff1e44f3b5072',1,'sigma::fmod(const Uncertain&lt; T &gt; &amp;a, double b)'],['../namespacesigma.html#a878dc31b111a5c5db62a8985188b8247',1,'sigma::fmod(double a, const Uncertain&lt; T &gt; &amp;b)']]],
   ['form_7',['form',['../md_docs_2taylor.html#horner-form',1,'Horner form'],['../md_docs_2affine.html#the-affine-form',1,'The affine form']]],
-  ['functions_8',['functions',['../md_docs_2interval.html#elementary-functions',1,'Elementary functions'],['../md_docs_2taylor.html#elementary-functions-1',1,'Elementary functions']]],
-  ['fundamental_20limitations_9',['Two fundamental limitations',['../md_docs_2interval.html#two-fundamental-limitations',1,'']]],
-  ['future_20work_10',['Future work',['../md_docs_2taylor.html#future-work',1,'']]]
+  ['from_5fboost_5f_8',['from_boost_',['../namespacesigma_1_1detail__.html#a00c6efad2b9cb3b1af9bede1b6d99145',1,'sigma::detail_']]],
+  ['functions_9',['functions',['../md_docs_2interval.html#elementary-functions',1,'Elementary functions'],['../md_docs_2taylor.html#elementary-functions-1',1,'Elementary functions']]],
+  ['fundamental_20limitations_10',['Two fundamental limitations',['../md_docs_2interval.html#two-fundamental-limitations',1,'']]],
+  ['future_20work_11',['Future work',['../md_docs_2taylor.html#future-work',1,'']]]
 ];

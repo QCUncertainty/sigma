@@ -16,6 +16,7 @@ var annotated_dup =
     ] ],
     [ "sigma", "namespacesigma.html", [
       [ "detail_", "namespacesigma_1_1detail__.html", [
+        [ "rounded_transc_guarded", "structsigma_1_1detail___1_1rounded__transc__guarded.html", "structsigma_1_1detail___1_1rounded__transc__guarded" ],
         [ "Setter", "classsigma_1_1detail___1_1Setter.html", "classsigma_1_1detail___1_1Setter" ]
       ] ],
       [ "Affine", "classsigma_1_1Affine.html", "classsigma_1_1Affine" ],

@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['dep_5fsd_5fptr_0',['dep_sd_ptr',['../classsigma_1_1detail___1_1Setter.html#a317752307a6665ce2ab3c577755599e7',1,'sigma::detail_::Setter::dep_sd_ptr'],['../classsigma_1_1Uncertain.html#acc40534d87fdba24215242f6021babe0',1,'sigma::Uncertain::dep_sd_ptr']]],
-  ['dep_5fsd_5ft_1',['dep_sd_t',['../classsigma_1_1detail___1_1Setter.html#acd92e5a8d988dd83e97926c58f4d5ebb',1,'sigma::detail_::Setter::dep_sd_t'],['../classsigma_1_1Uncertain.html#a603fe75d1c25677f33be269015a61639',1,'sigma::Uncertain::dep_sd_t']]],
-  ['deps_5fmap_5ft_2',['deps_map_t',['../classsigma_1_1detail___1_1Setter.html#ad786977eb876807acd9fb35bae3f84fc',1,'sigma::detail_::Setter::deps_map_t'],['../classsigma_1_1Uncertain.html#ac5023c85420e385ea040950654b700fa',1,'sigma::Uncertain::deps_map_t']]],
-  ['deps_5fvector_5ft_3',['deps_vector_t',['../classsigma_1_1detail___1_1Setter.html#af469b99c4a9e2c9a2fbb46558690cc64',1,'sigma::detail_::Setter']]],
-  ['deviation_5ft_4',['deviation_t',['../classsigma_1_1Taylor.html#ae666cb21016383a591784ac4362ec1ec',1,'sigma::Taylor::deviation_t'],['../classsigma_1_1TaylorModel.html#a8ab485f7589dbc20abdcce043850c5c1',1,'sigma::TaylorModel::deviation_t']]]
+  ['coeffs_5ft_0',['coeffs_t',['../classsigma_1_1Taylor.html#a5f675b6c495b0a5bc6409a88c96180a9',1,'sigma::Taylor::coeffs_t'],['../classsigma_1_1TaylorModel.html#a46fd2f1eb05ddabfe36877abc8b00d8e',1,'sigma::TaylorModel::coeffs_t']]]
 ];

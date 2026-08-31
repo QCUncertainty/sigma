@@ -1,4 +1,4 @@
-var hyperbolic_8hpp =
+var uncertain_2operations_2hyperbolic_8hpp =
 [
     [ "sigma::acosh", "namespacesigma.html#ae0468bc7af0c3d24c8ecc0c38d8f2ef6", null ],
     [ "sigma::asinh", "namespacesigma.html#aad587ce36b20a927d652a01148dc343c", null ],

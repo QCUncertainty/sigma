@@ -22,11 +22,14 @@ var searchData=
   ['examples_19',['Examples',['../md_docs_2examples.html',1,'']]],
   ['exp_20',['exp',['../classsigma_1_1ThresholdedAffine.html#a5d4e151ec0b9d004a228df2debefb1d5',1,'sigma::ThresholdedAffine::exp()'],['../classsigma_1_1TaylorModel.html#af1eece774b4b5d78eb821bc0decd239d',1,'sigma::TaylorModel::exp()'],['../namespacesigma.html#a1f0fc9200525ff76e74575128a9de259',1,'sigma::exp(const Affine&lt; T &gt; &amp;a)'],['../namespacesigma.html#abd4d114d01f89ba6b65bb6661722e152',1,'sigma::exp(const Interval&lt; T &gt; &amp;a)'],['../namespacesigma.html#a61f5ae228034f0ac76f7af5a0d615fe2',1,'sigma::exp(const Taylor&lt; T &gt; &amp;a)'],['../namespacesigma.html#ad8957603ced9a2feb2c82973b5bb1da9',1,'sigma::exp(const Uncertain&lt; T &gt; &amp;a)'],['../classsigma_1_1ThresholdedAffine.html#a5d4e151ec0b9d004a228df2debefb1d5',1,'sigma::exp(const ThresholdedAffine&lt; T &gt; &amp;a)'],['../classsigma_1_1TaylorModel.html#af1eece774b4b5d78eb821bc0decd239d',1,'sigma::exp(const TaylorModel&lt; T &gt; &amp;a)']]],
   ['exp2_21',['exp2',['../namespacesigma.html#a8b8bd16447e0de7576da03967ee39c1d',1,'sigma']]],
-  ['exp_5fouter_5fcoeffs_22',['exp_outer_coeffs',['../series__detail_8hpp.html#adc0dbe47812b162bf6f1d4c3861947b1',1,'sigma::detail']]],
-  ['expm1_23',['expm1',['../namespacesigma.html#a6e8a786a7e432384133805656a75084e',1,'sigma']]],
-  ['exponent_24',['exponent',['../classsigma_1_1Monomial.html#a0a22f9f46fc6017a93f4c6634df73eb9',1,'sigma::Monomial']]],
-  ['exponent_5ft_25',['exponent_t',['../classsigma_1_1Monomial.html#a795f0d7e95e127a125175a24f8b102ab',1,'sigma::Monomial']]],
-  ['exponents_26',['exponents',['../classsigma_1_1Monomial.html#ac4ba2635563086ddc867564be5c38b37',1,'sigma::Monomial']]],
-  ['exponents_2ehpp_27',['exponents.hpp',['../affine_2operations_2exponents_8hpp.html',1,'(Global Namespace)'],['../interval_2operations_2exponents_8hpp.html',1,'(Global Namespace)'],['../taylor_2operations_2exponents_8hpp.html',1,'(Global Namespace)'],['../uncertain_2operations_2exponents_8hpp.html',1,'(Global Namespace)']]],
-  ['exponents_5ft_28',['exponents_t',['../classsigma_1_1Monomial.html#a497f67dc71b9ab6dfd733c9b836d0dfb',1,'sigma::Monomial']]]
+  ['exp_5fdown_22',['exp_down',['../structsigma_1_1detail___1_1rounded__transc__guarded.html#a72983120e0d31ce2e49c78a3b2f257e3',1,'sigma::detail_::rounded_transc_guarded']]],
+  ['exp_5fouter_5fcoeffs_23',['exp_outer_coeffs',['../series__detail_8hpp.html#adc0dbe47812b162bf6f1d4c3861947b1',1,'sigma::detail']]],
+  ['exp_5fup_24',['exp_up',['../structsigma_1_1detail___1_1rounded__transc__guarded.html#acfda23d9a691df2f2b2d6639ba6e5783',1,'sigma::detail_::rounded_transc_guarded']]],
+  ['expm1_25',['expm1',['../namespacesigma.html#a6e8a786a7e432384133805656a75084e',1,'sigma']]],
+  ['exponent_26',['exponent',['../classsigma_1_1Monomial.html#a0a22f9f46fc6017a93f4c6634df73eb9',1,'sigma::Monomial']]],
+  ['exponent_5finterval_5f_27',['exponent_interval_',['../namespacesigma_1_1detail__.html#a3ea5a6bce19f65926a6f0c61060fa1bd',1,'sigma::detail_']]],
+  ['exponent_5ft_28',['exponent_t',['../classsigma_1_1Monomial.html#a795f0d7e95e127a125175a24f8b102ab',1,'sigma::Monomial']]],
+  ['exponents_29',['exponents',['../classsigma_1_1Monomial.html#ac4ba2635563086ddc867564be5c38b37',1,'sigma::Monomial']]],
+  ['exponents_2ehpp_30',['exponents.hpp',['../affine_2operations_2exponents_8hpp.html',1,'(Global Namespace)'],['../interval_2operations_2exponents_8hpp.html',1,'(Global Namespace)'],['../taylor_2operations_2exponents_8hpp.html',1,'(Global Namespace)'],['../uncertain_2operations_2exponents_8hpp.html',1,'(Global Namespace)']]],
+  ['exponents_5ft_31',['exponents_t',['../classsigma_1_1Monomial.html#a497f67dc71b9ab6dfd733c9b836d0dfb',1,'sigma::Monomial']]]
 ];

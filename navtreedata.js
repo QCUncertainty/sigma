@@ -143,7 +143,7 @@ var NAVTREEINDEX =
 "classsigma_1_1Taylor.html#a07ed581795d9bb95df704c39ba169b13",
 "classsigma_1_1ThresholdedAffine.html#a298214f80037d9585cbc4e09f8eee5b3",
 "index.html#statement-of-need",
-"structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html#a34ec8dc7ffe77bd62f205e119febece8"
+"structEigen_1_1NumTraits_3_01sigma_1_1Affine_3_01double_01_4_01_4.html#a8e067e5c15be3352526f6b40603b0a6c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

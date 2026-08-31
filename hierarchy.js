@@ -20,6 +20,9 @@ var hierarchy =
       [ "Eigen::NumTraits< sigma::Uncertain< float > >", "structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html", null ]
     ] ],
     [ "sigma::Taylor&lt; ValueType &gt;::Order", "structsigma_1_1Taylor_1_1Order.html", null ],
+    [ "boost::numeric::interval_lib::rounded_arith_opp", null, [
+      [ "sigma::detail_::rounded_transc_guarded< T >", "structsigma_1_1detail___1_1rounded__transc__guarded.html", null ]
+    ] ],
     [ "sigma::detail_::Setter&lt; UncertainType &gt;", "classsigma_1_1detail___1_1Setter.html", null ],
     [ "sigma::Taylor&lt; ValueType &gt;", "classsigma_1_1Taylor.html", null ],
     [ "sigma::TaylorModel&lt; ValueType &gt;", "classsigma_1_1TaylorModel.html", null ],
