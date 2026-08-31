@@ -1,6 +1,7 @@
 #include "../testing.hpp"
 #include <cmath>
 #include <limits>
+#include <stdexcept>
 
 using testing::test_interval;
 
@@ -41,25 +42,47 @@ TEMPLATE_TEST_CASE("Trigonometry", "", sigma::IFloat, sigma::IDouble) {
         test_interval(sigma::tan(testing_t(value_t{0}, pi / value_t{4})), 0.0,
                       1.0);
 
-        // Tangent is unbounded at pi/2, so an interval containing it has no
-        // finite enclosure.
-        auto a = sigma::tan(testing_t(value_t{1}, value_t{2}));
-        REQUIRE(a.lower() == -std::numeric_limits<value_t>::infinity());
-        REQUIRE(a.upper() == std::numeric_limits<value_t>::infinity());
-        REQUIRE(a.left_open());
-        REQUIRE(a.right_open());
+        // The tangent is undefined at pi/2, so an argument containing it is
+        // an error rather than an unbounded answer
+        REQUIRE_THROWS_AS(sigma::tan(testing_t(value_t{1}, value_t{2})),
+                          std::domain_error);
+
+        // An argument at least a period wide contains a pole whatever else it
+        // does
+        REQUIRE_THROWS_AS(sigma::tan(testing_t(value_t{0}, value_t{2} * pi)),
+                          std::domain_error);
+
+        // A branch other than the one around zero is fine:
+        // tan([pi, 5 pi / 4]) = [0, 1]
+        test_interval(sigma::tan(testing_t(pi, value_t{5} * pi / value_t{4})),
+                      0.0, 1.0);
+
+        // Approaching the pole without reaching it is fine too
+        auto a = sigma::tan(testing_t(value_t{1}, value_t{1.57}));
+        REQUIRE(a.lower() < a.upper());
+        REQUIRE(a.contains(std::tan(value_t{1.57})));
+
+        // Every acceptable argument is within one increasing branch, so the
+        // openness of each bound carries over
+        auto b = sigma::tan(testing_t(value_t{0}, value_t{1}, true, false));
+        REQUIRE(b.left_open());
+        REQUIRE_FALSE(b.right_open());
     }
     SECTION("Arcsine") {
         // asin([0, 1]) = [0, pi/2]
         test_interval(sigma::asin(testing_t(value_t{0}, value_t{1})), 0.0,
                       half_pi);
 
-        // The part of the argument outside [-1, 1] is discarded
-        test_interval(sigma::asin(testing_t(value_t{-2}, value_t{2})), -half_pi,
-                      half_pi);
+        // Arcsine is undefined outside [-1, 1], so an argument that reaches
+        // outside it is an error rather than something to trim back
+        REQUIRE_THROWS_AS(sigma::asin(testing_t(value_t{-2}, value_t{2})),
+                          std::domain_error);
+        REQUIRE_THROWS_AS(sigma::asin(testing_t(value_t{-3}, value_t{-2})),
+                          std::domain_error);
 
-        // An argument entirely outside the domain encloses nothing
-        REQUIRE(sigma::asin(testing_t(value_t{-3}, value_t{-2})).empty());
+        // The ends of the domain are themselves in it
+        test_interval(sigma::asin(testing_t(value_t{-1}, value_t{1})), -half_pi,
+                      half_pi);
     }
     SECTION("Arccosine") {
         // acos([-1, 1]) = [0, pi]
@@ -70,7 +93,10 @@ TEMPLATE_TEST_CASE("Trigonometry", "", sigma::IFloat, sigma::IDouble) {
         test_interval(sigma::acos(testing_t(value_t{0}, value_t{1})), 0.0,
                       half_pi);
 
-        REQUIRE(sigma::acos(testing_t(value_t{2}, value_t{3})).empty());
+        REQUIRE_THROWS_AS(sigma::acos(testing_t(value_t{2}, value_t{3})),
+                          std::domain_error);
+        REQUIRE_THROWS_AS(sigma::acos(testing_t(value_t{-1}, value_t{2})),
+                          std::domain_error);
     }
     SECTION("Arctangent") {
         // atan([0, 1]) = [0, pi/4]

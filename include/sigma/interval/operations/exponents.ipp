@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <stdexcept>
 #include <utility>
 
 namespace sigma {
@@ -88,11 +89,15 @@ boost_interval_t<T> exponent_interval_(const U& exp) {
 template<typename T>
 Interval<T> sqrt(const Interval<T>& a) {
     if(a.empty()) { return Interval<T>(); }
-    // A negative lower bound is clamped to zero by boost, and a bound that
-    // came from a clamp rather than from an input bound is closed.
-    auto left_open = a.lower() < T(0) ? false : a.left_open();
+    // Silently dropping the part of a that is out of domain would answer a
+    // question that was not asked, so say so instead. Boost would clamp the
+    // lower bound to zero.
+    if(a.lower() < T(0)) {
+        throw std::domain_error("Interval has negative values.");
+    }
+    // Square root is increasing, so the openness of each bound carries over.
     return detail_::from_boost_(boost::numeric::sqrt(detail_::to_boost_(a)),
-                                left_open, a.right_open());
+                                a.left_open(), a.right_open());
 }
 
 template<typename T>
@@ -105,8 +110,15 @@ Interval<T> exp(const Interval<T>& a) {
 template<typename T>
 Interval<T> log(const Interval<T>& a) {
     if(a.empty()) { return Interval<T>(); }
-    // A non-positive lower bound gives an unbounded result, whose lower bound
-    // from_boost_ opens for us.
+    // The domain is the strictly positive reals, so a closed bound at zero is
+    // out of domain while an open one is not: (0, 1] contains no non-positive
+    // value even though its lower bound is zero. Boost would clamp instead.
+    if(a.lower() < T(0) || (a.lower() == T(0) && a.left_closed())) {
+        throw std::domain_error("Interval has non-positive values.");
+    }
+    // An argument bounded below by an open zero is unbounded below in the
+    // result, and from_boost_ opens that infinite bound for us. Logarithm is
+    // increasing, so the openness of each bound otherwise carries over.
     return detail_::from_boost_(boost::numeric::log(detail_::to_boost_(a)),
                                 a.left_open(), a.right_open());
 }
@@ -116,12 +128,26 @@ Interval<T> pow(const Interval<T>& a, const U& exp) {
     if(a.empty()) { return Interval<T>(); }
     if(exp == U(0)) { return Interval<T>(T(1), T(1)); }
 
+    // A negative exponent is a reciprocal, and dividing by an interval that
+    // contains zero is the error operator/= already rejects.
+    if(exp < U(0) && a.contains(T(0))) {
+        throw std::domain_error(
+          "Can not raise an interval containing 0 to a negative power.");
+    }
+
     auto x = detail_::to_boost_(a);
 
     if(!detail::is_integer_exponent(exp)) {
-        // A non-integer power is only defined for a non-negative base, and is
-        // monotonic there: increasing for a positive exponent, decreasing for
-        // a negative one.
+        // A negative base raised to a fractional power is not a real number,
+        // so the base must be non-negative. Zero itself is fine for a positive
+        // exponent: the evaluation below runs through log, whose unbounded
+        // result exponentiates back to the 0 that 0^exp really is.
+        if(a.lower() < T(0)) {
+            throw std::domain_error("Can not raise an interval with negative "
+                                    "values to a non-integer power.");
+        }
+        // Away from that, a non-integer power is monotonic: increasing for a
+        // positive exponent, decreasing for a negative one.
         auto y = boost::numeric::exp(detail_::exponent_interval_<T>(exp) *
                                      boost::numeric::log(x));
         if(exp < U(0)) {

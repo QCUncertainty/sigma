@@ -1,6 +1,7 @@
 #include "../testing.hpp"
 #include <cmath>
 #include <limits>
+#include <stdexcept>
 
 using testing::test_interval;
 
@@ -46,25 +47,34 @@ TEMPLATE_TEST_CASE("Hyperbolic", "", sigma::IFloat, sigma::IDouble) {
         test_interval(sigma::acosh(testing_t(value_t{1}, value_t{2})), 0.0,
                       std::acosh(2.0));
 
-        // The part of the argument below one is discarded
-        test_interval(sigma::acosh(testing_t(value_t{0}, value_t{2})), 0.0,
-                      std::acosh(2.0));
-
-        // An argument entirely outside the domain encloses nothing
-        REQUIRE(sigma::acosh(testing_t(value_t{0}, value_t{0.5})).empty());
+        // The inverse hyperbolic cosine is undefined below one, so an
+        // argument that reaches below it is an error rather than something to
+        // trim back
+        REQUIRE_THROWS_AS(sigma::acosh(testing_t(value_t{0}, value_t{2})),
+                          std::domain_error);
+        REQUIRE_THROWS_AS(sigma::acosh(testing_t(value_t{0}, value_t{0.5})),
+                          std::domain_error);
     }
     SECTION("Inverse Hyperbolic Tangent") {
         // atanh([0, 0.5]) = [0, 0.5493]
         test_interval(sigma::atanh(testing_t(value_t{0}, value_t{0.5})), 0.0,
                       std::atanh(0.5));
 
-        // atanh is unbounded at the ends of its domain
-        auto a = sigma::atanh(testing_t(value_t{-1}, value_t{0}));
+        // The domain is open, so plus and minus one are themselves outside
+        // it, and a CLOSED bound there is an error
+        REQUIRE_THROWS_AS(sigma::atanh(testing_t(value_t{-1}, value_t{0})),
+                          std::domain_error);
+        REQUIRE_THROWS_AS(sigma::atanh(testing_t(value_t{0}, value_t{1})),
+                          std::domain_error);
+        REQUIRE_THROWS_AS(sigma::atanh(testing_t(value_t{2}, value_t{3})),
+                          std::domain_error);
+
+        // An OPEN bound there is not a value the interval contains, so the
+        // argument is in domain -- and the result is unbounded on that side
+        auto a = sigma::atanh(testing_t(value_t{-1}, value_t{0}, true, false));
         REQUIRE(a.lower() == -std::numeric_limits<value_t>::infinity());
         REQUIRE(a.left_open());
         REQUIRE(a.contains(value_t{0}));
-
-        REQUIRE(sigma::atanh(testing_t(value_t{2}, value_t{3})).empty());
     }
     SECTION("Outward Rounding") {
         // The hyperbolic functions of a representable value are almost never

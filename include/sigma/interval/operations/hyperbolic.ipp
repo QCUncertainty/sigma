@@ -1,6 +1,7 @@
 #pragma once
 #include "sigma/interval/detail_/convert.hpp"
 #include <algorithm>
+#include <stdexcept>
 
 namespace sigma {
 
@@ -55,18 +56,24 @@ Interval<T> asinh(const Interval<T>& a) {
 template<typename T>
 Interval<T> acosh(const Interval<T>& a) {
     if(a.empty()) { return Interval<T>(); }
-    // A lower bound below one is clamped to the edge of the domain, and a
-    // bound that came from a clamp rather than from a bound of a is closed.
-    auto left_open = a.lower() < T(1) ? false : a.left_open();
+    // Trimming the argument back to the domain would answer a narrower
+    // question than the one asked. Boost would clamp the lower bound to one.
+    if(a.lower() < T(1)) {
+        throw std::domain_error("Interval has values less than 1.");
+    }
+    // Increasing, so the openness of each bound carries over.
     return detail_::from_boost_(boost::numeric::acosh(detail_::to_boost_(a)),
-                                left_open, a.right_open());
+                                a.left_open(), a.right_open());
 }
 
 template<typename T>
 Interval<T> atanh(const Interval<T>& a) {
     if(a.empty()) { return Interval<T>(); }
-    // Reaching either end of the domain gives an infinite bound, which
-    // from_boost_ opens for us.
+    // The domain is open, so a bound AT plus or minus one is out of domain
+    // only if it is closed -- the same rule log() applies at zero.
+    detail_::assert_within_unit_(a, true, "inverse hyperbolic tangent");
+    // Increasing. An open bound at either end of the domain leaves the result
+    // unbounded on that side, and from_boost_ opens that infinite bound.
     return detail_::from_boost_(boost::numeric::atanh(detail_::to_boost_(a)),
                                 a.left_open(), a.right_open());
 }

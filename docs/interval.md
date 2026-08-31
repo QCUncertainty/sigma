@@ -244,13 +244,37 @@ and free operators. The elementary functions are free functions in the `sigma`
 namespace, found through argument-dependent lookup like their `std`
 counterparts: `abs`, `sqrt`, `exp`, `log`, and `pow`, the trigonometric `sin`,
 `cos`, `tan`, `asin`, `acos`, and `atan`, and the hyperbolic `sinh`, `cosh`,
-`tanh`, `asinh`, `acosh`, and `atanh`. A function given an argument outside its
-domain intersects the argument with the domain, which for an argument entirely
-outside it yields the empty interval. Because a `radius` of zero means the
-value is known exactly, `Interval` also serves as the degenerate case of the
-representations that follow. Convenience typedefs `IFloat` and `IDouble` cover
-the two common instantiations, and [sigma::Interval](@ref sigma::Interval)
-documents the full API.
+`tanh`, `asinh`, `acosh`, and `atanh`.
+
+Those with a restricted domain are strict about it. `sqrt`, `log`, `pow`,
+`tan`, `asin`, `acos`, `acosh`, and `atanh` throw `std::domain_error` if the
+argument contains a value they are not defined at, rather than trimming the
+argument back to the part that is in domain: an interval reaching outside the
+domain is a question the function cannot answer, and quietly answering a
+narrower one hides the error rather than reporting it. The empty interval
+contains nothing out of domain, so it is returned unchanged rather than
+throwing.
+
+Openness decides every boundary case, since an open bound is not a value the
+interval contains. So \f$ \log([0, 1]) \f$ throws while
+\f$ \log((0, 1]) \f$ is unbounded below, and \f$ \mathrm{atanh}([-1, 1]) \f$
+throws while \f$ \mathrm{atanh}((-1, 1)) \f$ is the whole line. The same rule
+governs `pow`, whose two impossible cases are a negative base under a
+fractional exponent and a zero base under a negative one.
+
+`tan` is the one function whose domain excludes points *interior* to the real
+line rather than bounding it, being undefined at every odd multiple of
+\f$ \pi/2 \f$. Openness cannot rescue the boundary case there, because those
+points are irrational and so not representable as a bound: an argument that
+comes within rounding distance of a pole cannot be shown to exclude it, and is
+refused along with the arguments that genuinely contain one. Every argument
+`tan` does accept lies within a single branch, on which it is increasing, so
+its result is as tight as any other monotonic function's.
+
+Because a `radius` of zero means the value is known exactly, `Interval` also
+serves as the degenerate case of the representations that follow. Convenience
+typedefs `IFloat` and `IDouble` cover the two common instantiations, and
+[sigma::Interval](@ref sigma::Interval) documents the full API.
 
 ## Next
 

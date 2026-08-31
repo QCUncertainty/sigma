@@ -1,6 +1,8 @@
 #pragma once
 #include "sigma/interval/detail_/policies.hpp"
 #include "sigma/interval/interval.hpp"
+#include <stdexcept>
+#include <string>
 
 /** @file convert.hpp
  *  @brief Conversions between sigma::Interval and the boost interval it wraps.
@@ -68,6 +70,43 @@ Interval<T> from_boost_(const boost_interval_t<T>& x, bool left_open = false,
     if(std::isinf(x.lower())) { left_open = true; }
     if(std::isinf(x.upper())) { right_open = true; }
     return Interval<T>(x.lower(), x.upper(), left_open, right_open);
+}
+
+/** @brief Throws unless every value in @p a lies in the unit interval.
+ *
+ *  Code factorization for the three functions whose domain is the unit
+ *  interval: arcsine and arccosine take the closed \f$ [-1, 1] \f$, and the
+ *  inverse hyperbolic tangent the open \f$ (-1, 1) \f$.
+ *
+ *  Whether a bound *at* plus or minus one is in domain depends on both @p open
+ *  and the openness of that bound, since an open bound is not a value the
+ *  interval contains: \f$ (-1, 1) \f$ is an acceptable argument to the
+ *  inverse hyperbolic tangent, and \f$ [-1, 1] \f$ is not.
+ *
+ *  @tparam T The value type of the interval.
+ *
+ *  @param[in] a The interval to check. Must not be empty.
+ *  @param[in] open Is the domain the open unit interval? False for the closed
+ *                  one.
+ *  @param[in] name The name of the function being checked, for the error
+ *                  message.
+ *
+ *  @throw std::domain_error if @p a contains a value outside the domain.
+ *         Strong throw guarantee.
+ *  @throw std::domain_error if @p a is empty. Strong throw guarantee.
+ */
+template<typename T>
+void assert_within_unit_(const Interval<T>& a, bool open,
+                         const std::string& name) {
+    auto below =
+      a.lower() < T(-1) || (open && a.lower() == T(-1) && a.left_closed());
+    auto above =
+      a.upper() > T(1) || (open && a.upper() == T(1) && a.right_closed());
+    if(below || above) {
+        throw std::domain_error("Interval has values outside the domain of " +
+                                name + ", " + (open ? "(-1, 1)" : "[-1, 1]") +
+                                ".");
+    }
 }
 
 } // namespace sigma::detail_
