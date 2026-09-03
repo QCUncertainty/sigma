@@ -83,6 +83,47 @@ Interval<T> log(const Interval<T>& a);
 template<typename T, typename U>
 Interval<T> pow(const Interval<T>& a, const U& exp);
 
+/** @brief Exponentiation of an interval by an interval-valued exponent
+ *
+ *  Overload of pow(const Interval<T>&, const U&) for the case where the
+ *  exponent is itself an Interval<T> rather than a plain scalar -- as
+ *  happens, for example, when a caller's exponent is a tuning parameter
+ *  stored as the same type T as the base rather than as a raw scalar (a
+ *  common pattern for values that don't need their own uncertainty
+ *  tracking but end up typed T anyway for API convenience). A general real
+ *  power with a real exponent is computed as @f$ x^y = e^{y \ln x} @f$,
+ *  which only needs exp/log/multiplication -- all already sound
+ *  enclosures -- so this holds for any exponent range, not just the
+ *  integer/scalar cases the other overload special-cases; the tradeoff is
+ *  that it's looser than the scalar overload's tighter, case-analyzed
+ *  bounds, and it inherits log's domain restriction to strictly positive
+ *  bases (a negative or zero base has no general real power).
+ *
+ *  A point exponent (@p exponent has zero width) is expected to be the
+ *  common case -- a caller passing a genuinely uncertain exponent is the
+ *  exception -- so it is forwarded to the scalar overload instead of going
+ *  through log/exp, both for tighter bounds and to avoid needlessly
+ *  rejecting a negative base raised to, e.g., an integer point exponent.
+ *  The strictly-positive-base restriction below therefore only kicks in
+ *  once @p exponent actually has width; a point exponent instead follows
+ *  the scalar overload's domain restrictions.
+ *
+ *  @tparam T The value type of the base and exponent
+ *  @param a The interval base
+ *  @param exponent The interval exponent to raise the base by
+ *
+ *  @return An interval enclosing every value in @p a raised to every power
+ *          in @p exponent
+ *
+ *  @throw std::domain_error if @p exponent has width and @p a contains a
+ *         non-positive value, i.e., if its lower bound is negative, or is a
+ *         closed zero. If @p exponent is a point, throws under the same
+ *         conditions as the scalar overload instead. Strong throw
+ *         guarantee.
+ */
+template<typename T>
+Interval<T> pow(const Interval<T>& a, const Interval<T>& exponent);
+
 } // namespace sigma
 
 #include "exponents.ipp"

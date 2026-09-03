@@ -713,6 +713,29 @@ TEMPLATE_TEST_CASE("Affine", "", float, double) {
         REQUIRE_FALSE(interval2 != interval);
     }
 
+    SECTION("Relational operators (ordering by center, not a rigorous "
+            "enclosure comparison)") {
+        affine_t empty;
+        affine_t point(one);
+        affine_t point_two(two);
+
+        REQUIRE(point < point_two);
+        REQUIRE_FALSE(point_two < point);
+        REQUIRE(point_two > point);
+        REQUIRE(point <= affine_t(one));
+        REQUIRE(point >= affine_t(one));
+
+        // The error terms do not affect the ordering; only the center does.
+        REQUIRE_FALSE(point < affine_t(one, one));
+        REQUIRE_FALSE(affine_t(one, one) < point);
+
+        // The empty affine form sorts before every non-empty one, and is
+        // equivalent only to itself.
+        REQUIRE(empty < point);
+        REQUIRE_FALSE(point < empty);
+        REQUIRE_FALSE(empty < affine_t{});
+    }
+
     SECTION("operator<<") {
         affine_t empty;
         std::stringstream ss_empty;

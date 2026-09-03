@@ -747,6 +747,39 @@ public:
      */
     bool operator!=(const Affine& other) const { return !(*this == other); }
 
+    /** @brief Whether *this's center precedes @p other's.
+     *
+     *  Affine forms, like intervals, have no total order that reflects
+     *  containment (overlapping ranges are neither less than, greater than,
+     *  nor equal to one another under it). This comparison is a deliberately
+     *  weaker, total one, meant only for consumers that need *some*
+     *  consistent ordering to sort by and not a rigorous enclosure relation.
+     *  The empty
+     *  affine form sorts before every non-empty one and is equal only to
+     *  itself.
+     *
+     *  @param[in] other The affine form to compare with *this.
+     *
+     *  @return Whether *this's center is less than @p other's, treating the
+     *          empty affine form as less than every non-empty one.
+     *
+     *  @throw none No throw guarantee.
+     */
+    bool operator<(const Affine& other) const {
+        if(other.empty()) { return false; }
+        if(empty()) { return true; }
+        return center() < other.center();
+    }
+
+    /// Same ordering as operator<, with the operands reversed.
+    bool operator>(const Affine& other) const { return other < *this; }
+
+    /// Same ordering as operator<, negated.
+    bool operator<=(const Affine& other) const { return !(other < *this); }
+
+    /// Same ordering as operator<, negated and reversed.
+    bool operator>=(const Affine& other) const { return !(*this < other); }
+
     /// Returns a process-wide unique integer ID for a new error term symbol.
     static error_term_t make_error_term() {
         static std::atomic<size_type> s_next_id{0};

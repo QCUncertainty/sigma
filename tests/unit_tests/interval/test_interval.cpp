@@ -1310,4 +1310,25 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
         REQUIRE(one_two != one_two_left_open);
         REQUIRE_FALSE(one_two != one_two);
     }
+
+    SECTION("Relational operators (ordering by median, not a rigorous "
+            "enclosure comparison)") {
+        testing_t two_three(2.0, 3.0);
+
+        REQUIRE(one_two < two_three);
+        REQUIRE_FALSE(two_three < one_two);
+        REQUIRE(two_three > one_two);
+        REQUIRE(one_two <= testing_t(1.0, 2.0));
+        REQUIRE(one_two >= testing_t(1.0, 2.0));
+
+        // Openness does not affect the ordering; only the median does.
+        REQUIRE_FALSE(one_two < one_two_open);
+        REQUIRE_FALSE(one_two_open < one_two);
+
+        // The empty interval sorts before every non-empty one, and is
+        // equivalent only to itself.
+        REQUIRE(empty < one_two);
+        REQUIRE_FALSE(one_two < empty);
+        REQUIRE_FALSE(empty < testing_t());
+    }
 }
