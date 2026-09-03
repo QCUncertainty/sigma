@@ -234,6 +234,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a235e97df6fd49c5360d468feb2c88041"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if *this and <code class="param">other</code> represent the same affine form.  <br /></td></tr>
 <tr class="memitem:aa52bd38d5cef982f659259d97c0884fa" id="r_aa52bd38d5cef982f659259d97c0884fa"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa52bd38d5cef982f659259d97c0884fa">operator!=</a> (const <a class="el" href="#a5738343390c391eff51fa728ab55f199">Affine</a> &amp;other) const</td></tr>
 <tr class="memdesc:aa52bd38d5cef982f659259d97c0884fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if *this and <code class="param">other</code> represent different affine forms.  <br /></td></tr>
+<tr class="memitem:a5cdfbd04e256407520f56e990b3d748f" id="r_a5cdfbd04e256407520f56e990b3d748f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5cdfbd04e256407520f56e990b3d748f">operator&lt;</a> (const <a class="el" href="#a5738343390c391eff51fa728ab55f199">Affine</a> &amp;other) const</td></tr>
+<tr class="memdesc:a5cdfbd04e256407520f56e990b3d748f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether *this's center precedes <code class="param">other's</code>.  <br /></td></tr>
+<tr class="memitem:a75e846a68e79e6d7c56a68fb5323f58c" id="r_a75e846a68e79e6d7c56a68fb5323f58c"><td class="memItemLeft"><a id="a75e846a68e79e6d7c56a68fb5323f58c" name="a75e846a68e79e6d7c56a68fb5323f58c"></a>
+bool&#160;</td><td class="memItemRight"><b>operator&gt;</b> (const <a class="el" href="#a5738343390c391eff51fa728ab55f199">Affine</a> &amp;other) const</td></tr>
+<tr class="memdesc:a75e846a68e79e6d7c56a68fb5323f58c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, with the operands reversed. <br /></td></tr>
+<tr class="memitem:a5621559767ddc028e3aaa7267a57e5e3" id="r_a5621559767ddc028e3aaa7267a57e5e3"><td class="memItemLeft"><a id="a5621559767ddc028e3aaa7267a57e5e3" name="a5621559767ddc028e3aaa7267a57e5e3"></a>
+bool&#160;</td><td class="memItemRight"><b>operator&lt;=</b> (const <a class="el" href="#a5738343390c391eff51fa728ab55f199">Affine</a> &amp;other) const</td></tr>
+<tr class="memdesc:a5621559767ddc028e3aaa7267a57e5e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated. <br /></td></tr>
+<tr class="memitem:addb17705aefab0ac90f4cb6eaa1b5c2a" id="r_addb17705aefab0ac90f4cb6eaa1b5c2a"><td class="memItemLeft"><a id="addb17705aefab0ac90f4cb6eaa1b5c2a" name="addb17705aefab0ac90f4cb6eaa1b5c2a"></a>
+bool&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (const <a class="el" href="#a5738343390c391eff51fa728ab55f199">Affine</a> &amp;other) const</td></tr>
+<tr class="memdesc:addb17705aefab0ac90f4cb6eaa1b5c2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated and reversed. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -1684,6 +1695,49 @@ template&lt;typename ValueType&gt; </div>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">std::domain_error</td><td>If <code class="param">value</code> is zero. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5cdfbd04e256407520f56e990b3d748f" name="a5cdfbd04e256407520f56e990b3d748f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cdfbd04e256407520f56e990b3d748f">&#9670;&#160;</a></span>operator&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ValueType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classsigma_1_1Affine.html">sigma::Affine</a>&lt; ValueType &gt;::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a5738343390c391eff51fa728ab55f199">Affine</a>&lt; ValueType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Whether *this's center precedes <code class="param">other's</code>. </p>
+<p><a class="el" href="classsigma_1_1Affine.html" title="Implements affine arithmetic.">Affine</a> forms, like intervals, have no total order that reflects containment (overlapping ranges are neither less than, greater than, nor equal to one another under it). This comparison is a deliberately weaker, total one, meant only for consumers that need <em>some</em> consistent ordering to sort by and not a rigorous enclosure relation. The empty affine form sorts before every non-empty one and is equal only to itself.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">other</td><td>The affine form to compare with *this.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether *this's center is less than <code class="param">other's</code>, treating the empty affine form as less than every non-empty one.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee. </td></tr>
   </table>
   </dd>
 </dl>

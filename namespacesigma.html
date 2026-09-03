@@ -243,6 +243,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a35f137fea763cf0d93250a9b758381b3" id="r_a35f137fea763cf0d93250a9b758381b3"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
 <tr class="memitem:a35f137fea763cf0d93250a9b758381b3 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a35f137fea763cf0d93250a9b758381b3">pow</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a, const U &amp;<a class="el" href="#a1f0fc9200525ff76e74575128a9de259">exp</a>)</td></tr>
 <tr class="memdesc:a35f137fea763cf0d93250a9b758381b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponentiation of a variable.  <br /></td></tr>
+<tr class="memitem:ac5f7805ba899775b78642bdcf18f0bd7" id="r_ac5f7805ba899775b78642bdcf18f0bd7"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ac5f7805ba899775b78642bdcf18f0bd7 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac5f7805ba899775b78642bdcf18f0bd7">pow</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;exponent)</td></tr>
+<tr class="memdesc:ac5f7805ba899775b78642bdcf18f0bd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponentiation of an interval by an interval-valued exponent.  <br /></td></tr>
 <tr class="memitem:a99aa192b7a9a760854b2e9a080d15bd1" id="r_a99aa192b7a9a760854b2e9a080d15bd1"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a99aa192b7a9a760854b2e9a080d15bd1 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a99aa192b7a9a760854b2e9a080d15bd1">sinh</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a)</td></tr>
 <tr class="memdesc:a99aa192b7a9a760854b2e9a080d15bd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the hyperbolic sine of an interval.  <br /></td></tr>
@@ -538,6 +541,21 @@ Functions</h2></td></tr>
 <tr class="memitem:af062ee3c64807e17e70355925051c35d" id="r_af062ee3c64807e17e70355925051c35d"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2&gt; </td></tr>
 <tr class="memitem:af062ee3c64807e17e70355925051c35d template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Interval.html#af062ee3c64807e17e70355925051c35d">operator!=</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T1 &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T2 &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:af062ee3c64807e17e70355925051c35d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two intervals for inequality.  <br /></td></tr>
+<tr class="memitem:aaab00619c4a60d94daa244143195a047" id="r_aaab00619c4a60d94daa244143195a047"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:aaab00619c4a60d94daa244143195a047 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Interval.html#aaab00619c4a60d94daa244143195a047">operator&lt;</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:aaab00619c4a60d94daa244143195a047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders two intervals by their median.  <br /></td></tr>
+<tr class="memitem:ab8f66e9cc4243c725f732e0e827c881c" id="r_ab8f66e9cc4243c725f732e0e827c881c"><td class="memTemplParams" colspan="2"><a id="ab8f66e9cc4243c725f732e0e827c881c" name="ab8f66e9cc4243c725f732e0e827c881c"></a>
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ab8f66e9cc4243c725f732e0e827c881c template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;</b> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ab8f66e9cc4243c725f732e0e827c881c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, with the operands reversed. <br /></td></tr>
+<tr class="memitem:aa9e98eedafe30f28ef020bbfc9814634" id="r_aa9e98eedafe30f28ef020bbfc9814634"><td class="memTemplParams" colspan="2"><a id="aa9e98eedafe30f28ef020bbfc9814634" name="aa9e98eedafe30f28ef020bbfc9814634"></a>
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:aa9e98eedafe30f28ef020bbfc9814634 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&lt;=</b> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:aa9e98eedafe30f28ef020bbfc9814634"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated. <br /></td></tr>
+<tr class="memitem:a8c63545c28565c1aa37b61dbcc248a66" id="r_a8c63545c28565c1aa37b61dbcc248a66"><td class="memTemplParams" colspan="2"><a id="a8c63545c28565c1aa37b61dbcc248a66" name="a8c63545c28565c1aa37b61dbcc248a66"></a>
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a8c63545c28565c1aa37b61dbcc248a66 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a8c63545c28565c1aa37b61dbcc248a66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated and reversed. <br /></td></tr>
 <tr class="memitem:abb7bdb211be63335fd48ecb5726d1f02" id="r_abb7bdb211be63335fd48ecb5726d1f02"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:abb7bdb211be63335fd48ecb5726d1f02 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Interval.html#abb7bdb211be63335fd48ecb5726d1f02">operator+</a> (<a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; lhs, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:abb7bdb211be63335fd48ecb5726d1f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Addition of two intervals.  <br /></td></tr>
@@ -3942,7 +3960,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a24fe469f5d0da2716b5be3d1ff8d12a3" name="a24fe469f5d0da2716b5be3d1ff8d12a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24fe469f5d0da2716b5be3d1ff8d12a3">&#9670;&#160;</a></span>pow() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a24fe469f5d0da2716b5be3d1ff8d12a3">&#9670;&#160;</a></span>pow() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3994,8 +4012,55 @@ template&lt;typename T, typename U&gt; </div>
 
 </div>
 </div>
+<a id="ac5f7805ba899775b78642bdcf18f0bd7" name="ac5f7805ba899775b78642bdcf18f0bd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5f7805ba899775b78642bdcf18f0bd7">&#9670;&#160;</a></span>pow() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; sigma::pow </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>exponent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exponentiation of an interval by an interval-valued exponent. </p>
+<p>Overload of <a class="el" href="#a35f137fea763cf0d93250a9b758381b3" title="Exponentiation of a variable.">pow(const Interval&lt;T&gt;&amp;, const U&amp;)</a> for the case where the exponent is itself an <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">Interval&lt;T&gt;</a> rather than a plain scalar &ndash; as happens, for example, when a caller's exponent is a tuning parameter stored as the same type T as the base rather than as a raw scalar (a common pattern for values that don't need their own uncertainty tracking but end up typed T anyway for API convenience). A general real power with a real exponent is computed as \( x^y = e^{y \ln x} \), which only needs exp/log/multiplication &ndash; all already sound enclosures &ndash; so this holds for any exponent range, not just the integer/scalar cases the other overload special-cases; the tradeoff is that it's looser than the scalar overload's tighter, case-analyzed bounds, and it inherits log's domain restriction to strictly positive bases (a negative or zero base has no general real power).</p>
+<p>A point exponent (<code class="param">exponent</code> has zero width) is expected to be the common case &ndash; a caller passing a genuinely uncertain exponent is the exception &ndash; so it is forwarded to the scalar overload instead of going through log/exp, both for tighter bounds and to avoid needlessly rejecting a negative base raised to, e.g., an integer point exponent. The strictly-positive-base restriction below therefore only kicks in once <code class="param">exponent</code> actually has width; a point exponent instead follows the scalar overload's domain restrictions.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the base and exponent </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval base </td></tr>
+    <tr><td class="paramname">exponent</td><td>The interval exponent to raise the base by</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing every value in <code class="param">a</code> raised to every power in <code class="param">exponent</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">exponent</code> has width and <code class="param">a</code> contains a non-positive value, i.e., if its lower bound is negative, or is a closed zero. If <code class="param">exponent</code> is a point, throws under the same conditions as the scalar overload instead. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a35f137fea763cf0d93250a9b758381b3" name="a35f137fea763cf0d93250a9b758381b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35f137fea763cf0d93250a9b758381b3">&#9670;&#160;</a></span>pow() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a35f137fea763cf0d93250a9b758381b3">&#9670;&#160;</a></span>pow() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4042,7 +4107,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="a733e3b1bcc4491f206dd708083b90654" name="a733e3b1bcc4491f206dd708083b90654"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a733e3b1bcc4491f206dd708083b90654">&#9670;&#160;</a></span>pow() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a733e3b1bcc4491f206dd708083b90654">&#9670;&#160;</a></span>pow() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4094,7 +4159,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="ac240ea50be68f2eb2ee4b6abf0d063c7" name="ac240ea50be68f2eb2ee4b6abf0d063c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac240ea50be68f2eb2ee4b6abf0d063c7">&#9670;&#160;</a></span>pow() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac240ea50be68f2eb2ee4b6abf0d063c7">&#9670;&#160;</a></span>pow() <span class="overload">[5/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4140,7 +4205,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="a0b3162c4a58cc30e72f7c4ddf3dfc1f6" name="a0b3162c4a58cc30e72f7c4ddf3dfc1f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b3162c4a58cc30e72f7c4ddf3dfc1f6">&#9670;&#160;</a></span>pow() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b3162c4a58cc30e72f7c4ddf3dfc1f6">&#9670;&#160;</a></span>pow() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

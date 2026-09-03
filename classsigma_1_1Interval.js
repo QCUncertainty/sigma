@@ -33,6 +33,10 @@ var classsigma_1_1Interval =
     [ "operator+", "classsigma_1_1Interval.html#abb7bdb211be63335fd48ecb5726d1f02", null ],
     [ "operator-", "classsigma_1_1Interval.html#a386f961b6d8074c7b57750e399cd366b", null ],
     [ "operator/", "classsigma_1_1Interval.html#a0b82951652767024fd9e5637adfb3b91", null ],
+    [ "operator<", "classsigma_1_1Interval.html#aaab00619c4a60d94daa244143195a047", null ],
     [ "operator<<", "classsigma_1_1Interval.html#a795d1a141720ed26b84cd372ed855987", null ],
-    [ "operator==", "classsigma_1_1Interval.html#a772f8145b75d0dcc41b5a8a8d6ef19e9", null ]
+    [ "operator<=", "classsigma_1_1Interval.html#aa9e98eedafe30f28ef020bbfc9814634", null ],
+    [ "operator==", "classsigma_1_1Interval.html#a772f8145b75d0dcc41b5a8a8d6ef19e9", null ],
+    [ "operator>", "classsigma_1_1Interval.html#ab8f66e9cc4243c725f732e0e827c881c", null ],
+    [ "operator>=", "classsigma_1_1Interval.html#a8c63545c28565c1aa37b61dbcc248a66", null ]
 ];
