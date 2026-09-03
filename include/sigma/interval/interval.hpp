@@ -760,6 +760,53 @@ bool operator!=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
     return !(lhs == rhs);
 }
 
+/** @relates Interval
+ *  @brief Orders two intervals by their median.
+ *
+ *  Interval containment does not give a total order (overlapping intervals
+ *  are neither less than, greater than, nor equal to one another under it),
+ *  so this comparison is a deliberately weaker, total one, meant only for
+ *  consumers that need *some* consistent ordering to sort by and not a rigorous
+ *  enclosure relation. The empty interval sorts before every non-empty one
+ *  and is equal only to itself.
+ *
+ *  @tparam T The numerical type of the bounds
+ *  @param lhs The first interval
+ *  @param rhs The second interval
+ *
+ *  @return Whether @p lhs's median precedes @p rhs's, treating the empty
+ *          interval as less than every non-empty one.
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+bool operator<(const Interval<T>& lhs, const Interval<T>& rhs) {
+    if(rhs.empty()) { return false; }
+    if(lhs.empty()) { return true; }
+    return lhs.median() < rhs.median();
+}
+
+/// @relates Interval
+/// @brief Same ordering as operator<, with the operands reversed.
+template<typename T>
+bool operator>(const Interval<T>& lhs, const Interval<T>& rhs) {
+    return rhs < lhs;
+}
+
+/// @relates Interval
+/// @brief Same ordering as operator<, negated.
+template<typename T>
+bool operator<=(const Interval<T>& lhs, const Interval<T>& rhs) {
+    return !(rhs < lhs);
+}
+
+/// @relates Interval
+/// @brief Same ordering as operator<, negated and reversed.
+template<typename T>
+bool operator>=(const Interval<T>& lhs, const Interval<T>& rhs) {
+    return !(lhs < rhs);
+}
+
 // -- Arithmetic free functions ------------------------------------------------
 
 /** @relates Interval
