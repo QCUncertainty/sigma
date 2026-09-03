@@ -152,4 +152,28 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::IFloat, sigma::IDouble) {
         REQUIRE(sigma::log(testing_t()).empty());
         REQUIRE(sigma::pow(testing_t(), 0.5).empty());
     }
+    SECTION("Power (interval exponent)") {
+        // A point exponent should agree with the plain-scalar overload
+        // (loosely -- this overload goes through exp(exponent * log(a)),
+        // which is not as tight as the scalar overload's case analysis).
+        auto a           = testing_t(value_t{1}, value_t{2});
+        auto point_exp   = testing_t(value_t{2}, value_t{2});
+        auto from_ivl    = sigma::pow(a, point_exp);
+        auto from_scalar = sigma::pow(a, 2);
+        REQUIRE(from_ivl.contains(from_scalar));
+
+        // pow([2, 2], [0, 1]) = [1, 2]
+        auto base_point = testing_t(value_t{2}, value_t{2});
+        auto exp_range  = testing_t(value_t{0}, value_t{1});
+        test_interval(sigma::pow(base_point, exp_range), 1.0, 2.0);
+
+        // Empty base or empty exponent gives the empty interval
+        REQUIRE(sigma::pow(testing_t(), point_exp).empty());
+        REQUIRE(sigma::pow(a, testing_t()).empty());
+
+        // Inherits log's domain restriction to strictly positive bases
+        REQUIRE_THROWS_AS(
+          sigma::pow(testing_t(value_t{-1}, value_t{1}), point_exp),
+          std::domain_error);
+    }
 }

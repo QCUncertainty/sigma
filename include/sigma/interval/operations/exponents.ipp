@@ -167,4 +167,14 @@ Interval<T> pow(const Interval<T>& a, const U& exp) {
                                 left_open, right_open);
 }
 
+template<typename T>
+Interval<T> pow(const Interval<T>& a, const Interval<T>& exponent) {
+    if(a.empty() || exponent.empty()) { return Interval<T>(); }
+    if(exponent().width() == T(0)) { return pow(a, exponent.lower()); }
+    // log() enforces the strictly-positive-base domain restriction and
+    // throws std::domain_error itself, so there's nothing left to check
+    // here.
+    return sigma::exp(exponent * sigma::log(a));
+}
+
 } // namespace sigma

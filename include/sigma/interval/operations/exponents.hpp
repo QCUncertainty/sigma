@@ -83,6 +83,36 @@ Interval<T> log(const Interval<T>& a);
 template<typename T, typename U>
 Interval<T> pow(const Interval<T>& a, const U& exp);
 
+/** @brief Exponentiation of an interval by an interval-valued exponent
+ *
+ *  Overload of pow(const Interval<T>&, const U&) for the case where the
+ *  exponent is itself an Interval<T> rather than a plain scalar -- as
+ *  happens, for example, when a caller's exponent is a tuning parameter
+ *  stored as the same type T as the base rather than as a raw scalar (a
+ *  common pattern for values that don't need their own uncertainty
+ *  tracking but end up typed T anyway for API convenience). A general real
+ *  power with a real exponent is computed as @f$ x^y = e^{y \ln x} @f$,
+ *  which only needs exp/log/multiplication -- all already sound
+ *  enclosures -- so this holds for any exponent range, not just the
+ *  integer/scalar cases the other overload special-cases; the tradeoff is
+ *  that it's looser than the scalar overload's tighter, case-analyzed
+ *  bounds, and it inherits log's domain restriction to strictly positive
+ *  bases (a negative or zero base has no general real power).
+ *
+ *  @tparam T The value type of the base and exponent
+ *  @param a The interval base
+ *  @param exponent The interval exponent to raise the base by
+ *
+ *  @return An interval enclosing every value in @p a raised to every power
+ *          in @p exponent
+ *
+ *  @throw std::domain_error if @p a contains a non-positive value, i.e., if
+ *         its lower bound is negative, or is a closed zero. Strong throw
+ *         guarantee.
+ */
+template<typename T>
+Interval<T> pow(const Interval<T>& a, const Interval<T>& exponent);
+
 } // namespace sigma
 
 #include "exponents.ipp"
