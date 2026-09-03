@@ -99,6 +99,15 @@ Interval<T> pow(const Interval<T>& a, const U& exp);
  *  bounds, and it inherits log's domain restriction to strictly positive
  *  bases (a negative or zero base has no general real power).
  *
+ *  A point exponent (@p exponent has zero width) is expected to be the
+ *  common case -- a caller passing a genuinely uncertain exponent is the
+ *  exception -- so it is forwarded to the scalar overload instead of going
+ *  through log/exp, both for tighter bounds and to avoid needlessly
+ *  rejecting a negative base raised to, e.g., an integer point exponent.
+ *  The strictly-positive-base restriction below therefore only kicks in
+ *  once @p exponent actually has width; a point exponent instead follows
+ *  the scalar overload's domain restrictions.
+ *
  *  @tparam T The value type of the base and exponent
  *  @param a The interval base
  *  @param exponent The interval exponent to raise the base by
@@ -106,8 +115,10 @@ Interval<T> pow(const Interval<T>& a, const U& exp);
  *  @return An interval enclosing every value in @p a raised to every power
  *          in @p exponent
  *
- *  @throw std::domain_error if @p a contains a non-positive value, i.e., if
- *         its lower bound is negative, or is a closed zero. Strong throw
+ *  @throw std::domain_error if @p exponent has width and @p a contains a
+ *         non-positive value, i.e., if its lower bound is negative, or is a
+ *         closed zero. If @p exponent is a point, throws under the same
+ *         conditions as the scalar overload instead. Strong throw
  *         guarantee.
  */
 template<typename T>

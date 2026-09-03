@@ -170,6 +170,11 @@ Interval<T> pow(const Interval<T>& a, const U& exp) {
 template<typename T>
 Interval<T> pow(const Interval<T>& a, const Interval<T>& exponent) {
     if(a.empty() || exponent.empty()) { return Interval<T>(); }
+    // The point-exponent case is expected to be far more common than a
+    // genuinely uncertain exponent, so it is forwarded to the scalar
+    // overload for tighter bounds and that overload's more permissive
+    // domain restriction (e.g., a negative base raised to an integer power
+    // is fine, even though it is not a valid base for log()).
     if(exponent.width() == T(0)) { return pow(a, exponent.lower()); }
     // log() enforces the strictly-positive-base domain restriction and
     // throws std::domain_error itself, so there's nothing left to check

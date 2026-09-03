@@ -153,14 +153,15 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::IFloat, sigma::IDouble) {
         REQUIRE(sigma::pow(testing_t(), 0.5).empty());
     }
     SECTION("Power (interval exponent)") {
-        // A point exponent should agree with the plain-scalar overload
-        // (loosely -- this overload goes through exp(exponent * log(a)),
-        // which is not as tight as the scalar overload's case analysis).
+        // A point exponent is forwarded to the plain-scalar overload
+        // outright, so the two must agree exactly rather than merely
+        // enclose one another.
         auto a           = testing_t(value_t{1}, value_t{2});
         auto point_exp   = testing_t(value_t{2}, value_t{2});
         auto from_ivl    = sigma::pow(a, point_exp);
         auto from_scalar = sigma::pow(a, 2);
-        REQUIRE(from_ivl.contains(from_scalar));
+        REQUIRE(from_ivl.lower() == from_scalar.lower());
+        REQUIRE(from_ivl.upper() == from_scalar.upper());
 
         // pow([2, 2], [0, 1]) = [1, 2]
         auto base_point = testing_t(value_t{2}, value_t{2});
@@ -171,9 +172,17 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::IFloat, sigma::IDouble) {
         REQUIRE(sigma::pow(testing_t(), point_exp).empty());
         REQUIRE(sigma::pow(a, testing_t()).empty());
 
-        // Inherits log's domain restriction to strictly positive bases
+        // A point exponent's domain restriction is that of the scalar
+        // overload, not log's: a negative base raised to an integer point
+        // exponent is fine even though it is out of domain for log.
+        test_interval(sigma::pow(testing_t(value_t{-1}, value_t{1}), point_exp),
+                      0.0, 1.0);
+
+        // A genuinely-widened exponent, on the other hand, does inherit
+        // log's domain restriction to strictly positive bases.
+        auto wide_exp = testing_t(value_t{1}, value_t{2});
         REQUIRE_THROWS_AS(
-          sigma::pow(testing_t(value_t{-1}, value_t{1}), point_exp),
+          sigma::pow(testing_t(value_t{-1}, value_t{1}), wide_exp),
           std::domain_error);
     }
 }
