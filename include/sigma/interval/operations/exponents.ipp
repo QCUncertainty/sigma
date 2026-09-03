@@ -170,7 +170,7 @@ Interval<T> pow(const Interval<T>& a, const U& exp) {
 template<typename T>
 Interval<T> pow(const Interval<T>& a, const Interval<T>& exponent) {
     if(a.empty() || exponent.empty()) { return Interval<T>(); }
-    if(exponent().width() == T(0)) { return pow(a, exponent.lower()); }
+    if(exponent.width() == T(0)) { return pow(a, exponent.lower()); }
     // log() enforces the strictly-positive-base domain restriction and
     // throws std::domain_error itself, so there's nothing left to check
     // here.
