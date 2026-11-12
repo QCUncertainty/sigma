@@ -29,7 +29,10 @@ provides set-valued representations that enclose a result rather than estimating
 its distribution, described in order of increasing accuracy in
 [Interval Arithmetic](./docs/interval.md),
 [Affine Arithmetic](./docs/affine.md), and
-[Taylor Models](./docs/taylor.md).
+[Taylor Models](./docs/taylor.md). An interval that also carries a separately
+tracked best estimate is described in
+[Triplex Arithmetic](./docs/triplex.md), and intervals with open bounds in
+[General Intervals](./docs/general_interval.md).
 
 ## Features
 - Propagate uncertainty throughout calculations
