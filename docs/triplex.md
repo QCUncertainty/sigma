@@ -145,13 +145,14 @@ A unary function \f$ f \f$ works the same way, with mean
 \f$ \mathrm{fl}(f(m)) \f$.
 
 Eq. \f$\eqref{eq:tp-binary}\f$ keeps the ordering of Eq.
-\f$\eqref{eq:tp-def}\f$ for the four arithmetic operations without any extra
-work. Since \f$ m_x \in [a, b] \f$ and \f$ m_y \in [c, d] \f$, the exact
-\f$ m_x \circ m_y \f$ lies in the exact interval result, and the outward
+\f$\eqref{eq:tp-def}\f$ for the four arithmetic operations with closed bounds
+and finite means. Since \f$ m_x \in [a, b] \f$ and \f$ m_y \in [c, d] \f$, the
+exact \f$ m_x \circ m_y \f$ lies in the exact interval result, and the outward
 rounded bounds are representable numbers on either side of it. Rounding to
-nearest is monotonic, so it cannot carry the mean past a representable number
-that brackets it. The same argument does not quite cover the elementary
-functions, because the math library's \f$ f(m) \f$ may be off by a few units
+nearest cannot carry the mean past a representable number that brackets it.
+With open bounds it can land on an excluded endpoint, so the widening/closing
+rule below also applies to arithmetic. Elementary functions have another hazard:
+the math library's \f$ f(m) \f$ may be off by a few units
 in the last place. When this pushes the mean outside the computed bounds, or
 onto an open bound, the implementation **widens the bound** to include the mean,
 and closes it if it was open. It does not move the mean. Widening never

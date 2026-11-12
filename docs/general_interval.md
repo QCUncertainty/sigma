@@ -105,13 +105,18 @@ logical OR of theirs
 \f}
 
 where \f$ \mathrm{open}(a) \f$ is true when the bound \f$ a \f$ is not a member
-of its interval. Multiplication and division take each result bound from one
-of four corners (the products or quotients of one bound of each operand), and
-the same rule applies to whichever corner produced it. More than one corner can
-produce the same extreme value. In \f$ [0, 1] \cdot \lbrack 0, 1) \f$ the lower
-bound \f$ 0 \f$ comes from both \f$ 0 \cdot 0 \f$ and \f$ 0 \cdot 1 \f$. The
-bound is a member if *any* corner that attains it is, so in that case it is
-closed if any of the tying corners is closed.
+of its interval. For nonzero result bounds, multiplication and division use
+the four corners (the products or quotients of one bound of each operand),
+and apply the same rule to the corners attaining the extreme. A bound is
+closed if any of the tying corners uses two included bounds. For example,
+the lower bound of \f$ [0, 1] \cdot \lbrack 0, 1) \f$ is closed because the
+corner \f$ 0 \cdot 0 \f$ uses two included bounds.
+
+Zero requires an additional attainment check: a zero extreme of a product is
+closed whenever either operand contains zero and the other is nonempty,
+even if neither bound of the other operand is included. Similarly, a zero
+extreme of a quotient is closed whenever the numerator contains zero and the
+admissible divisor is nonempty. Thus \f$ [0,0] \cdot (0,1) = [0,0] \f$.
 
 Openness also changes which divisors are allowed. A divisor merely *bounded* by
 zero, such as \f$ (0, 1\rbrack \f$, does not contain it, so it is divided by
