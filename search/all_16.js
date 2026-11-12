@@ -9,7 +9,8 @@ var searchData=
   ['uncertain_3c_20double_20_3e_6',['Uncertain&lt; double &gt;',['../classsigma_1_1Uncertain.html',1,'sigma']]],
   ['uncertain_3c_20float_20_3e_7',['Uncertain&lt; float &gt;',['../classsigma_1_1Uncertain.html',1,'sigma']]],
   ['uncertain_5ft_8',['uncertain_t',['../classsigma_1_1detail___1_1Setter.html#a155e265ac4e84126191bbab847afaff1',1,'sigma::detail_::Setter']]],
-  ['update_5fderivatives_9',['update_derivatives',['../classsigma_1_1detail___1_1Setter.html#a2130464380818977ab4c55c9d3c33da7',1,'sigma::detail_::Setter::update_derivatives(value_t dxda)'],['../classsigma_1_1detail___1_1Setter.html#a34d4c236e3ff78d070195c5c9005b54d',1,'sigma::detail_::Setter::update_derivatives(const deps_map_t &amp;deps, value_t dxda)']]],
-  ['update_5fmean_10',['update_mean',['../classsigma_1_1detail___1_1Setter.html#aa65aa6d2469f71301275074e5d443d47',1,'sigma::detail_::Setter']]],
-  ['upper_11',['upper',['../classsigma_1_1Interval.html#a2c86dd285670913250888b4b48be65e2',1,'sigma::Interval']]]
+  ['under_20arithmetic_9',['Openness under arithmetic',['../md_docs_2general__interval.html#openness-under-arithmetic',1,'']]],
+  ['update_5fderivatives_10',['update_derivatives',['../classsigma_1_1detail___1_1Setter.html#a2130464380818977ab4c55c9d3c33da7',1,'sigma::detail_::Setter::update_derivatives(value_t dxda)'],['../classsigma_1_1detail___1_1Setter.html#a34d4c236e3ff78d070195c5c9005b54d',1,'sigma::detail_::Setter::update_derivatives(const deps_map_t &amp;deps, value_t dxda)']]],
+  ['update_5fmean_11',['update_mean',['../classsigma_1_1detail___1_1Setter.html#aa65aa6d2469f71301275074e5d443d47',1,'sigma::detail_::Setter']]],
+  ['upper_12',['upper',['../classsigma_1_1Interval.html#a2c86dd285670913250888b4b48be65e2',1,'sigma::Interval']]]
 ];

@@ -72,13 +72,23 @@ var NAVTREE =
       [ "Mathematical Operations", "md_docs_2examples.html#mathematical-operations", null ],
       [ "Linear Algebra", "md_docs_2examples.html#linear-algebra", null ]
     ] ],
+    [ "General Intervals", "md_docs_2general__interval.html", [
+      [ "Motivation", "md_docs_2general__interval.html#motivation-1", null ],
+      [ "Naming", "md_docs_2general__interval.html#naming", null ],
+      [ "Definition", "md_docs_2general__interval.html#definition", null ],
+      [ "Closed in, closed out", "md_docs_2general__interval.html#closed-in-closed-out", null ],
+      [ "Openness under arithmetic", "md_docs_2general__interval.html#openness-under-arithmetic", null ],
+      [ "Openness of elementary functions", "md_docs_2general__interval.html#openness-of-elementary-functions", null ],
+      [ "Openness in set operations", "md_docs_2general__interval.html#openness-in-set-operations", null ],
+      [ "Class design", "md_docs_2general__interval.html#class-design-1", null ]
+    ] ],
     [ "Interval Arithmetic", "md_docs_2interval.html", [
-      [ "Motivation", "md_docs_2interval.html#motivation-1", null ],
-      [ "Definition", "md_docs_2interval.html#definition", null ],
+      [ "Motivation", "md_docs_2interval.html#motivation-2", null ],
+      [ "Definition", "md_docs_2interval.html#definition-1", null ],
       [ "Arithmetic", "md_docs_2interval.html#arithmetic", null ],
       [ "Elementary functions", "md_docs_2interval.html#elementary-functions", null ],
       [ "Two fundamental limitations", "md_docs_2interval.html#two-fundamental-limitations", null ],
-      [ "Class design", "md_docs_2interval.html#class-design-1", null ],
+      [ "Class design", "md_docs_2interval.html#class-design-2", null ],
       [ "Next", "md_docs_2interval.html#next-1", null ]
     ] ],
     [ "Building the Documentation", "md_docs_2README.html", [
@@ -89,7 +99,7 @@ var NAVTREE =
       [ "Two failure modes that produce no warning", "md_docs_2README.html#two-failure-modes-that-produce-no-warning", null ]
     ] ],
     [ "Taylor Models", "md_docs_2taylor.html", [
-      [ "Motivation", "md_docs_2taylor.html#motivation-2", null ],
+      [ "Motivation", "md_docs_2taylor.html#motivation-3", null ],
       [ "The Taylor model", "md_docs_2taylor.html#the-taylor-model", null ],
       [ "Truncation and range bounding", "md_docs_2taylor.html#truncation-and-range-bounding", [
         [ "Naive baseline", "md_docs_2taylor.html#naive-baseline", null ],
@@ -105,6 +115,16 @@ var NAVTREE =
       ] ],
       [ "Achieving rigorous bounds", "md_docs_2taylor.html#achieving-rigorous-bounds", null ],
       [ "Future work", "md_docs_2taylor.html#future-work", null ]
+    ] ],
+    [ "Triplex Arithmetic", "md_docs_2triplex.html", [
+      [ "Motivation", "md_docs_2triplex.html#motivation-4", null ],
+      [ "Prior art and naming", "md_docs_2triplex.html#prior-art-and-naming", null ],
+      [ "Definition", "md_docs_2triplex.html#definition-2", null ],
+      [ "Arithmetic", "md_docs_2triplex.html#arithmetic-2", null ],
+      [ "What is gained, and what remains", "md_docs_2triplex.html#what-is-gained-and-what-remains-1", null ],
+      [ "Class design", "md_docs_2triplex.html#class-design-3", null ],
+      [ "Future work", "md_docs_2triplex.html#future-work-1", null ],
+      [ "References", "md_docs_2triplex.html#references", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -143,8 +163,8 @@ var NAVTREEINDEX =
 "classsigma_1_1Monomial.html#aaad858b535c79e9be21059b1f374be76",
 "classsigma_1_1TaylorModel.html#af1eece774b4b5d78eb821bc0decd239d",
 "functions_n.html",
-"numeric_8hpp.html",
-"uncertain_2eigen__compat_8hpp.html"
+"namespacesigma.html#af795a6bbfd0022d3f9b632d25b953cce",
+"structstd_1_1hash_3_01sigma_1_1Monomial_01_4.html#a22fb37b80f455a47c5b840ac35dd1d8c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

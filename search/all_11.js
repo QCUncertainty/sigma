@@ -14,7 +14,8 @@ var searchData=
   ['print_5faffine_5fform_11',['print_affine_form',['../classsigma_1_1Affine.html#a6ed9fd98d09ceec7c3758022fa70e2a1',1,'sigma::Affine::print_affine_form()'],['../classsigma_1_1ThresholdedAffine.html#a17efdc1d69fe66d4ed191109ab825625',1,'sigma::ThresholdedAffine::print_affine_form()']]],
   ['print_5finterval_5fform_12',['print_interval_form',['../classsigma_1_1Affine.html#a64bb830c27319b1f5a87fc0a3b851a3d',1,'sigma::Affine::print_interval_form()'],['../classsigma_1_1ThresholdedAffine.html#ae294efaba50c3f3ff0db5f5ff25d5d06',1,'sigma::ThresholdedAffine::print_interval_form()'],['../classsigma_1_1Interval.html#a42800829851d0d7f6f8ec460c64ed39d',1,'sigma::Interval::print_interval_form()'],['../classsigma_1_1Taylor.html#ab1b37aac12c56e55fe6c46d6ed81cc5d',1,'sigma::Taylor::print_interval_form()'],['../classsigma_1_1TaylorModel.html#a80f9f3ca301ee8b84708fbf6a723b0d8',1,'sigma::TaylorModel::print_interval_form()']]],
   ['print_5fpolynomial_5fform_13',['print_polynomial_form',['../classsigma_1_1Taylor.html#a19d97dad1fb069bdc06d8becdddb7c61',1,'sigma::Taylor::print_polynomial_form()'],['../classsigma_1_1TaylorModel.html#a214fc45acd845395d71e3db710bc77e2',1,'sigma::TaylorModel::print_polynomial_form()']]],
-  ['problem_14',['Why sharing symbols solves the dependency problem',['../md_docs_2affine.html#why-sharing-symbols-solves-the-dependency-problem',1,'']]],
-  ['produce_20no_20warning_15',['Two failure modes that produce no warning',['../md_docs_2README.html#two-failure-modes-that-produce-no-warning',1,'']]],
-  ['propagation_16',['Linear Error Propagation',['../md_docs_2background.html#linear-error-propagation',1,'']]]
+  ['prior_20art_20and_20naming_14',['Prior art and naming',['../md_docs_2triplex.html#prior-art-and-naming',1,'']]],
+  ['problem_15',['Why sharing symbols solves the dependency problem',['../md_docs_2affine.html#why-sharing-symbols-solves-the-dependency-problem',1,'']]],
+  ['produce_20no_20warning_16',['Two failure modes that produce no warning',['../md_docs_2README.html#two-failure-modes-that-produce-no-warning',1,'']]],
+  ['propagation_17',['Linear Error Propagation',['../md_docs_2background.html#linear-error-propagation',1,'']]]
 ];

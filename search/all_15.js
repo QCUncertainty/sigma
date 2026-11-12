@@ -45,9 +45,10 @@ var searchData=
   ['to_5fboost_5f_42',['to_boost_',['../namespacesigma_1_1detail__.html#abbb559314099aa63835e76bf1acee1ba',1,'sigma::detail_']]],
   ['transform_43',['Constructing the transform',['../md_docs_2affine.html#constructing-the-transform',1,'']]],
   ['trigonometry_2ehpp_44',['trigonometry.hpp',['../interval_2operations_2trigonometry_8hpp.html',1,'(Global Namespace)'],['../uncertain_2operations_2trigonometry_8hpp.html',1,'(Global Namespace)']]],
-  ['trunc_45',['trunc',['../namespacesigma.html#ae431d0534d90713daf06f763dd523277',1,'sigma']]],
-  ['truncate_46',['truncate',['../classsigma_1_1Taylor.html#aa7999fbc5bac8aec45096ee07f2ff074',1,'sigma::Taylor']]],
-  ['truncation_20and_20range_20bounding_47',['Truncation and range bounding',['../md_docs_2taylor.html#truncation-and-range-bounding',1,'']]],
-  ['two_20failure_20modes_20that_20produce_20no_20warning_48',['Two failure modes that produce no warning',['../md_docs_2README.html#two-failure-modes-that-produce-no-warning',1,'']]],
-  ['two_20fundamental_20limitations_49',['Two fundamental limitations',['../md_docs_2interval.html#two-fundamental-limitations',1,'']]]
+  ['triplex_20arithmetic_45',['Triplex Arithmetic',['../md_docs_2triplex.html',1,'']]],
+  ['trunc_46',['trunc',['../namespacesigma.html#ae431d0534d90713daf06f763dd523277',1,'sigma']]],
+  ['truncate_47',['truncate',['../classsigma_1_1Taylor.html#aa7999fbc5bac8aec45096ee07f2ff074',1,'sigma::Taylor']]],
+  ['truncation_20and_20range_20bounding_48',['Truncation and range bounding',['../md_docs_2taylor.html#truncation-and-range-bounding',1,'']]],
+  ['two_20failure_20modes_20that_20produce_20no_20warning_49',['Two failure modes that produce no warning',['../md_docs_2README.html#two-failure-modes-that-produce-no-warning',1,'']]],
+  ['two_20fundamental_20limitations_50',['Two fundamental limitations',['../md_docs_2interval.html#two-fundamental-limitations',1,'']]]
 ];

@@ -8,12 +8,13 @@ var searchData=
   ['real_5',['real',['../namespacesigma.html#a540e8a4d513c66343c7f7f0b60b3fbde',1,'sigma']]],
   ['recalculate_5fsd_6',['recalculate_sd',['../classsigma_1_1detail___1_1Setter.html#ae0f7763f2470d230a3e8636e3008c773',1,'sigma::detail_::Setter']]],
   ['reciprocal_5fouter_5fcoeffs_7',['reciprocal_outer_coeffs',['../series__detail_8hpp.html#abeae5e3a5c87be173b01fb9e685732f0',1,'sigma::detail']]],
-  ['remainder_8',['remainder',['../classsigma_1_1TaylorModel.html#a55e7c9f80b5c0742823559708f3fc006',1,'sigma::TaylorModel']]],
-  ['remains_9',['What is gained, and what remains',['../md_docs_2affine.html#what-is-gained-and-what-remains',1,'']]],
-  ['responsibilities_10',['Enforcement Responsibilities',['../md_docs_2code__of__conduct.html#enforcement-responsibilities',1,'']]],
-  ['right_5fclosed_11',['right_closed',['../classsigma_1_1Interval.html#a1b4144e91986d46462f5ed08f07824fc',1,'sigma::Interval']]],
-  ['right_5fopen_12',['right_open',['../classsigma_1_1Interval.html#a4f5c7005a7a517d109b8ebe4ae849f7f',1,'sigma::Interval']]],
-  ['rigorous_20bounds_13',['Achieving rigorous bounds',['../md_docs_2taylor.html#achieving-rigorous-bounds',1,'']]],
-  ['round_14',['round',['../namespacesigma.html#a940424e34df1bad854b05c139ce73648',1,'sigma']]],
-  ['rounded_5ftransc_5fguarded_15',['rounded_transc_guarded',['../structsigma_1_1detail___1_1rounded__transc__guarded.html',1,'sigma::detail_']]]
+  ['references_8',['References',['../md_docs_2triplex.html#references',1,'']]],
+  ['remainder_9',['remainder',['../classsigma_1_1TaylorModel.html#a55e7c9f80b5c0742823559708f3fc006',1,'sigma::TaylorModel']]],
+  ['remains_10',['remains',['../md_docs_2affine.html#what-is-gained-and-what-remains',1,'What is gained, and what remains'],['../md_docs_2triplex.html#what-is-gained-and-what-remains-1',1,'What is gained, and what remains']]],
+  ['responsibilities_11',['Enforcement Responsibilities',['../md_docs_2code__of__conduct.html#enforcement-responsibilities',1,'']]],
+  ['right_5fclosed_12',['right_closed',['../classsigma_1_1Interval.html#a1b4144e91986d46462f5ed08f07824fc',1,'sigma::Interval']]],
+  ['right_5fopen_13',['right_open',['../classsigma_1_1Interval.html#a4f5c7005a7a517d109b8ebe4ae849f7f',1,'sigma::Interval']]],
+  ['rigorous_20bounds_14',['Achieving rigorous bounds',['../md_docs_2taylor.html#achieving-rigorous-bounds',1,'']]],
+  ['round_15',['round',['../namespacesigma.html#a940424e34df1bad854b05c139ce73648',1,'sigma']]],
+  ['rounded_5ftransc_5fguarded_16',['rounded_transc_guarded',['../structsigma_1_1detail___1_1rounded__transc__guarded.html',1,'sigma::detail_']]]
 ];

@@ -15,7 +15,8 @@ var searchData=
   ['thresholding_12',['Thresholding',['../md_docs_2affine.html#thresholding',1,'']]],
   ['to_20contribute_13',['Ways to Contribute',['../md_docs_2contributing.html#ways-to-contribute',1,'']]],
   ['transform_14',['Constructing the transform',['../md_docs_2affine.html#constructing-the-transform',1,'']]],
-  ['truncation_20and_20range_20bounding_15',['Truncation and range bounding',['../md_docs_2taylor.html#truncation-and-range-bounding',1,'']]],
-  ['two_20failure_20modes_20that_20produce_20no_20warning_16',['Two failure modes that produce no warning',['../md_docs_2README.html#two-failure-modes-that-produce-no-warning',1,'']]],
-  ['two_20fundamental_20limitations_17',['Two fundamental limitations',['../md_docs_2interval.html#two-fundamental-limitations',1,'']]]
+  ['triplex_20arithmetic_15',['Triplex Arithmetic',['../md_docs_2triplex.html',1,'']]],
+  ['truncation_20and_20range_20bounding_16',['Truncation and range bounding',['../md_docs_2taylor.html#truncation-and-range-bounding',1,'']]],
+  ['two_20failure_20modes_20that_20produce_20no_20warning_17',['Two failure modes that produce no warning',['../md_docs_2README.html#two-failure-modes-that-produce-no-warning',1,'']]],
+  ['two_20fundamental_20limitations_18',['Two fundamental limitations',['../md_docs_2interval.html#two-fundamental-limitations',1,'']]]
 ];
