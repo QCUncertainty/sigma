@@ -78,7 +78,9 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.x"
+          # cmakelang (the cmake-format hook) is unmaintained and crashes on
+          # Python 3.15, which forbids capturing groups in re.Scanner.
+          python-version: "3.14"
       - name: Install and Run pre-commit
         run: |
           pip install -r requirements.txt
