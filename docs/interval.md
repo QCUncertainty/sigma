@@ -44,10 +44,10 @@ whose exact value is unknown, but which is known to lie between \f$ a \f$ and
 assumption is made: every value in the set is considered possible, and no value
 outside it is.
 
-Sigma additionally tracks whether each bound is itself a member of the set, so
-the half-open interval \f$ \lbrack a, b) \f$ and the open interval
-\f$ (a, b) \f$ are also representable. The bounds are tracked independently, and
-the openness of a bound does not affect the interval's width.
+Both bounds of an `Interval` are members of the set, as Eq.
+\f$\eqref{eq:iv-def}\f$ says. Intervals with open bounds, such as
+\f$ \lbrack a, b) \f$, are represented by a separate class described on the
+[general interval](./general_interval.md) page.
 
 Two derived quantities appear throughout the library. The width is the distance
 between the bounds, and the radius is half of it
@@ -61,7 +61,9 @@ w\left([a,b]\right) = b - a
 
 along with the median, \f$ (a + b)/2 \f$, which is the midpoint of the set. The
 median and radius pair is an equivalent description of a closed interval, and it
-is the form the [affine](./affine.md) representation generalizes.
+is the form the [affine](./affine.md) representation generalizes. The median is
+not always a good best estimate of the enclosed quantity, and the
+[triplex](./triplex.md) representation stores one separately.
 
 ## Arithmetic
 
@@ -114,8 +116,8 @@ Division is defined as multiplication by the reciprocal of the divisor
 
 where the stated condition is essential. If the divisor contains zero the
 reciprocal is unbounded and no finite interval encloses the result, so Sigma
-throws rather than returning a misleading answer. A divisor merely *bounded* by
-zero, such as \f$ (0, 1] \f$, does not contain it and is divided by normally.
+throws rather than returning a misleading answer. A closed divisor with a bound
+at zero, such as \f$ [0, 1] \f$, contains zero and also throws.
 
 Each of Eq. \f$\eqref{eq:iv-add}\f$ through Eq. \f$\eqref{eq:iv-recip}\f$
 combines representable bounds into results that are generally not
@@ -150,11 +152,8 @@ example. Evaluating the endpoints of \f$ \sin([0, 2\pi]) \f$ gives the single
 point \f$ [0, 0] \f$, whereas the true range is all of \f$ [-1, 1] \f$: the
 argument spans an entire period, and both extremes are interior to it. Sigma
 reduces the argument against the period and encloses whichever extremes it
-spans, which is also why the bounds of a trigonometric result are reported
-closed: they may come from an interior extremum rather than from a bound of the
-argument. The same reasoning covers
-the interior minimum of \f$ \cosh \f$ at the origin and of an even power at
-zero.
+spans. The same reasoning covers the interior minimum of \f$ \cosh \f$ at the
+origin and of an even power at zero.
 
 There is a second, subtler way for Eq. \f$\eqref{eq:iv-monotone}\f$ to fail.
 The true \f$ f(a) \f$ is a real number, and it is almost never one of the
@@ -204,7 +203,7 @@ what motivates carrying higher-order information, as described on the
 
 `sigma::Interval` wraps `boost::numeric::interval`, which supplies the
 rounding-aware bound arithmetic of Eq. \f$\eqref{eq:iv-add}\f$ through Eq.
-\f$\eqref{eq:iv-monotone}\f$, and adds the two pieces of state boost does not
+\f$\eqref{eq:iv-monotone}\f$, and adds the one piece of state boost does not
 track.
 
 Boost's default configuration covers only the arithmetic operators, so sigma
@@ -222,18 +221,13 @@ assume never changes, the `sigma` target attaches `-frounding-math` (or
 will fold the directed operations back to round-to-nearest and the bounds
 quietly stop enclosing.
 
-The first is emptiness. The wrapped boost interval is held in a `std::optional`,
-and an empty `std::optional` represents the empty set. The empty interval arises
-naturally from `set_intersection` of disjoint intervals, and it propagates
+That piece is emptiness. The wrapped boost interval is held in a
+`std::optional`, and an empty `std::optional` represents the empty set. The
+empty interval arises naturally from `set_intersection` of disjoint intervals,
+and it propagates
 through subsequent operations. Accessors that have no meaningful value on the
 empty set — `lower`, `upper`, `width`, `median` — funnel through a private
 `assert_not_empty_` helper and throw `std::domain_error`.
-
-The second is bound openness, stored as two independent booleans and queried
-through the `left_open`, `left_closed`, `right_open`, and `right_closed`
-accessors. Sigma keeps these separate from the numeric bounds so that
-\f$ [a, b] \f$ and \f$ \lbrack a, b) \f$ are distinguishable even though their
-widths agree.
 
 The remaining interface divides into the derived quantities of Eq.
 \f$\eqref{eq:iv-width}\f$ — `width`, `median`, and `radius` — the set operations
@@ -255,17 +249,19 @@ narrower one hides the error rather than reporting it. The empty interval
 contains nothing out of domain, so it is returned unchanged rather than
 throwing.
 
-Openness decides every boundary case, since an open bound is not a value the
-interval contains. So \f$ \log([0, 1]) \f$ throws while
-\f$ \log((0, 1]) \f$ is unbounded below, and \f$ \mathrm{atanh}([-1, 1]) \f$
-throws while \f$ \mathrm{atanh}((-1, 1)) \f$ is the whole line. The same rule
-governs `pow`, whose two impossible cases are a negative base under a
-fractional exponent and a zero base under a negative one.
+A bound is a value the interval contains, so an argument that merely touches
+the edge of a domain is out of it. \f$ \log([0, 1]) \f$ and
+\f$ \mathrm{atanh}([-1, 1]) \f$ both throw. The same rule governs `pow`, whose
+two impossible cases are a negative base under a fractional exponent and a zero
+base under a negative one. An argument that approaches the edge without
+reaching it needs an open bound, and the
+[general interval](./general_interval.md) page describes how those cases are
+handled.
 
 `tan` is the one function whose domain excludes points *interior* to the real
 line rather than bounding it, being undefined at every odd multiple of
-\f$ \pi/2 \f$. Openness cannot rescue the boundary case there, because those
-points are irrational and so not representable as a bound: an argument that
+\f$ \pi/2 \f$. Those points are irrational and so not representable as a
+bound, which means an argument that
 comes within rounding distance of a pole cannot be shown to exclude it, and is
 refused along with the arguments that genuinely contain one. Every argument
 `tan` does accept lies within a single branch, on which it is increasing, so
