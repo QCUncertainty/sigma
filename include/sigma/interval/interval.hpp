@@ -2,6 +2,7 @@
 #include "sigma/interval/detail_/policies.hpp"
 #include <algorithm>
 #include <boost/numeric/interval.hpp>
+#include <cmath>
 #include <iostream>
 #include <optional>
 #include <type_traits>
@@ -129,15 +130,19 @@ public:
 
     /** @brief Whether a scalar lies in this interval
      *
+     *  An infinite bound marks an unbounded direction, not a member, so no
+     *  interval contains an infinite (or NaN) @p value.
+     *
      *  @param value The scalar to test
      *
-     *  @return True if lower() <= @p value <= upper(), and false otherwise or
-     *          if *this is empty.
+     *  @return True if @p value is finite and lower() <= @p value <= upper(),
+     *          and false otherwise or if *this is empty.
      *
      *  @throw none No throw guarantee
      */
     bool contains(value_t value) const {
-        return !empty() && lower() <= value && value <= upper();
+        return !empty() && std::isfinite(value) && lower() <= value &&
+               value <= upper();
     }
 
     /** @brief Is @p other fully contained in this interval?
@@ -151,7 +156,9 @@ public:
      */
     bool contains(const Interval& other) const {
         if(other.empty()) { return true; }
-        return contains(other.lower()) && contains(other.upper());
+        // Compare bounds directly, since contains(value) rejects an infinite
+        // bound and an unbounded interval must still contain itself.
+        return !empty() && lower() <= other.lower() && other.upper() <= upper();
     }
 
     /** @brief Returns the union of this interval and another interval
@@ -673,8 +680,10 @@ namespace std {
 template<typename ValueType>
 struct hash<sigma::Interval<ValueType>> {
     /// Hashes the lower and upper bounds of an interval and then combines them
-    /// using a simple XOR operation.
+    /// using a simple XOR operation. The empty interval, which has no bounds,
+    /// hashes to zero.
     size_t operator()(const sigma::Interval<ValueType>& i) const {
+        if(i.empty()) { return 0; }
         std::size_t hash_low  = std::hash<ValueType>()(i.lower());
         std::size_t hash_high = std::hash<ValueType>()(i.upper());
         std::size_t seed      = hash_low;

@@ -1373,6 +1373,46 @@ TEMPLATE_TEST_CASE("GeneralInterval", "", sigma::GIFloat, sigma::GIDouble) {
         REQUIRE(unbounded.left_closed());
         REQUIRE(unbounded.right_open());
         REQUIRE_FALSE(unbounded.contains(inf));
+        REQUIRE(unbounded.contains(unbounded));
+
+        // Every construction path opens an infinite bound
+        using closed_t = sigma::Interval<value_t>;
+        REQUIRE(testing_t(closed_t(value_t{0}, inf)) == unbounded);
+
+        // A single infinite value contains no real number
+        REQUIRE(testing_t(inf).empty());
+        REQUIRE(testing_t(inf, inf).empty());
+        REQUIRE(testing_t(-inf, -inf).empty());
+    }
+
+    SECTION("Union of intervals that touch at one point") {
+        // The shared point only needs to belong to one of the operands
+        testing_t zero_one_right_open(value_t{0}, value_t{1}, false, true);
+        testing_t one_two_closed(value_t{1}, value_t{2});
+        testing_t zero_two(value_t{0}, value_t{2});
+        REQUIRE(zero_one_right_open.set_union(one_two_closed) == zero_two);
+        REQUIRE(one_two_closed.set_union(zero_one_right_open) == zero_two);
+
+        // ... and it is not an interval if neither operand contains it
+        REQUIRE_THROWS_AS(zero_one_right_open.set_union(one_two_left_open),
+                          std::domain_error);
+        REQUIRE_THROWS_AS(one_two_left_open.set_union(zero_one_right_open),
+                          std::domain_error);
+    }
+
+    SECTION("Zero times an unbounded interval") {
+        constexpr auto inf = std::numeric_limits<value_t>::infinity();
+        testing_t zero(value_t{0});
+        testing_t everything(-inf, inf);
+        REQUIRE(zero * everything == zero);
+        REQUIRE(everything * zero == zero);
+    }
+
+    SECTION("std::hash") {
+        std::hash<testing_t> hasher;
+        REQUIRE_NOTHROW(hasher(empty));
+        REQUIRE(hasher(empty) == hasher(testing_t()));
+        REQUIRE(hasher(one_two) != hasher(one_two_open));
     }
 
     SECTION("Conversion from and to Interval") {

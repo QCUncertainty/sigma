@@ -28,15 +28,17 @@ namespace detail_ {
  *  @throw std::domain_error if @p a is empty. Strong throw guarantee.
  */
 template<typename T>
-std::pair<bool, bool> integer_pow_openness_(const GeneralInterval<T>& a, long long n) {
+std::pair<bool, bool> integer_pow_openness_(const GeneralInterval<T>& a,
+                                            long long n) {
     const bool is_odd = (n % 2 != 0);
     bool left_open    = a.left_open();
     bool right_open   = a.right_open();
 
-    if(a.upper() < T(0)) {
-        // Entirely negative. An odd power is increasing, an even one is
+    if(a.upper() <= T(0)) {
+        // Entirely non-positive. An odd power is increasing, an even one is
         // decreasing, which swaps which input bound each output bound came
-        // from.
+        // from. A zero upper bound belongs here, not to the next branch: it
+        // is an input bound, so it is attained only if it is closed.
         if(!is_odd) { std::swap(left_open, right_open); }
     } else if(a.lower() < T(0)) {
         // Spans zero. An odd power is still increasing across all of it, but
@@ -72,15 +74,17 @@ GeneralInterval<T> sqrt(const GeneralInterval<T>& a) {
         throw std::domain_error("Interval has negative values.");
     }
     // Square root is increasing, so the openness of each bound carries over.
-    return detail_::general_from_boost_(boost::numeric::sqrt(detail_::to_boost_(a)),
-                                a.left_open(), a.right_open());
+    return detail_::general_from_boost_(
+      boost::numeric::sqrt(detail_::to_boost_(a)), a.left_open(),
+      a.right_open());
 }
 
 template<typename T>
 GeneralInterval<T> exp(const GeneralInterval<T>& a) {
     if(a.empty()) { return GeneralInterval<T>(); }
-    return detail_::general_from_boost_(boost::numeric::exp(detail_::to_boost_(a)),
-                                a.left_open(), a.right_open());
+    return detail_::general_from_boost_(
+      boost::numeric::exp(detail_::to_boost_(a)), a.left_open(),
+      a.right_open());
 }
 
 template<typename T>
@@ -95,8 +99,9 @@ GeneralInterval<T> log(const GeneralInterval<T>& a) {
     // An argument bounded below by an open zero is unbounded below in the
     // result, and from_boost_ opens that infinite bound for us. Logarithm is
     // increasing, so the openness of each bound otherwise carries over.
-    return detail_::general_from_boost_(boost::numeric::log(detail_::to_boost_(a)),
-                                a.left_open(), a.right_open());
+    return detail_::general_from_boost_(
+      boost::numeric::log(detail_::to_boost_(a)), a.left_open(),
+      a.right_open());
 }
 
 template<typename T, typename U>
@@ -127,7 +132,8 @@ GeneralInterval<T> pow(const GeneralInterval<T>& a, const U& exp) {
         auto y = boost::numeric::exp(detail_::exponent_interval_<T>(exp) *
                                      boost::numeric::log(x));
         if(exp < U(0)) {
-            return detail_::general_from_boost_(y, a.right_open(), a.left_open());
+            return detail_::general_from_boost_(y, a.right_open(),
+                                                a.left_open());
         }
         return detail_::general_from_boost_(y, a.left_open(), a.right_open());
     }
@@ -139,12 +145,13 @@ GeneralInterval<T> pow(const GeneralInterval<T>& a, const U& exp) {
     // the interval and so exchanges the openness of its bounds.
     if(power < 0) { std::swap(left_open, right_open); }
 
-    return detail_::general_from_boost_(boost::numeric::pow(x, static_cast<int>(power)),
-                                left_open, right_open);
+    return detail_::general_from_boost_(
+      boost::numeric::pow(x, static_cast<int>(power)), left_open, right_open);
 }
 
 template<typename T>
-GeneralInterval<T> pow(const GeneralInterval<T>& a, const GeneralInterval<T>& exponent) {
+GeneralInterval<T> pow(const GeneralInterval<T>& a,
+                       const GeneralInterval<T>& exponent) {
     if(a.empty() || exponent.empty()) { return GeneralInterval<T>(); }
     // The point-exponent case is expected to be far more common than a
     // genuinely uncertain exponent, so it is forwarded to the scalar

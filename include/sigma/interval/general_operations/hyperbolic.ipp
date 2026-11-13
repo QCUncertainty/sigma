@@ -8,8 +8,9 @@ namespace sigma {
 template<typename T>
 GeneralInterval<T> sinh(const GeneralInterval<T>& a) {
     if(a.empty()) { return GeneralInterval<T>(); }
-    return detail_::general_from_boost_(boost::numeric::sinh(detail_::to_boost_(a)),
-                                a.left_open(), a.right_open());
+    return detail_::general_from_boost_(
+      boost::numeric::sinh(detail_::to_boost_(a)), a.left_open(),
+      a.right_open());
 }
 
 template<typename T>
@@ -18,8 +19,9 @@ GeneralInterval<T> cosh(const GeneralInterval<T>& a) {
 
     bool left_open  = a.left_open();
     bool right_open = a.right_open();
-    if(a.upper() < T(0)) {
-        // Entirely negative, where cosh is decreasing
+    if(a.upper() <= T(0)) {
+        // Entirely non-positive, where cosh is decreasing. A zero upper bound
+        // is an input bound, attained only if it is closed.
         std::swap(left_open, right_open);
     } else if(a.lower() < T(0)) {
         // Spans zero, so the minimum is the interior point cosh(0) == 1 and
@@ -35,22 +37,24 @@ GeneralInterval<T> cosh(const GeneralInterval<T>& a) {
         }
     }
 
-    return detail_::general_from_boost_(boost::numeric::cosh(detail_::to_boost_(a)),
-                                left_open, right_open);
+    return detail_::general_from_boost_(
+      boost::numeric::cosh(detail_::to_boost_(a)), left_open, right_open);
 }
 
 template<typename T>
 GeneralInterval<T> tanh(const GeneralInterval<T>& a) {
     if(a.empty()) { return GeneralInterval<T>(); }
-    return detail_::general_from_boost_(boost::numeric::tanh(detail_::to_boost_(a)),
-                                a.left_open(), a.right_open());
+    return detail_::general_from_boost_(
+      boost::numeric::tanh(detail_::to_boost_(a)), a.left_open(),
+      a.right_open());
 }
 
 template<typename T>
 GeneralInterval<T> asinh(const GeneralInterval<T>& a) {
     if(a.empty()) { return GeneralInterval<T>(); }
-    return detail_::general_from_boost_(boost::numeric::asinh(detail_::to_boost_(a)),
-                                a.left_open(), a.right_open());
+    return detail_::general_from_boost_(
+      boost::numeric::asinh(detail_::to_boost_(a)), a.left_open(),
+      a.right_open());
 }
 
 template<typename T>
@@ -62,8 +66,9 @@ GeneralInterval<T> acosh(const GeneralInterval<T>& a) {
         throw std::domain_error("Interval has values less than 1.");
     }
     // Increasing, so the openness of each bound carries over.
-    return detail_::general_from_boost_(boost::numeric::acosh(detail_::to_boost_(a)),
-                                a.left_open(), a.right_open());
+    return detail_::general_from_boost_(
+      boost::numeric::acosh(detail_::to_boost_(a)), a.left_open(),
+      a.right_open());
 }
 
 template<typename T>
@@ -74,8 +79,9 @@ GeneralInterval<T> atanh(const GeneralInterval<T>& a) {
     detail_::assert_within_unit_(a, true, "inverse hyperbolic tangent");
     // Increasing. An open bound at either end of the domain leaves the result
     // unbounded on that side, and from_boost_ opens that infinite bound.
-    return detail_::general_from_boost_(boost::numeric::atanh(detail_::to_boost_(a)),
-                                a.left_open(), a.right_open());
+    return detail_::general_from_boost_(
+      boost::numeric::atanh(detail_::to_boost_(a)), a.left_open(),
+      a.right_open());
 }
 
 } // namespace sigma

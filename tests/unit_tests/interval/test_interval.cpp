@@ -158,6 +158,23 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
         REQUIRE_FALSE(one_two.contains(outside_right));
     }
 
+    SECTION("contains with an infinite bound") {
+        // An infinite bound marks an unbounded direction, not a member
+        constexpr auto inf = std::numeric_limits<value_t>::infinity();
+        testing_t unbounded(value_t{0}, inf);
+        REQUIRE(unbounded.contains(value_t{1}));
+        REQUIRE_FALSE(unbounded.contains(inf));
+        REQUIRE(unbounded.contains(unbounded));
+        REQUIRE(unbounded.contains(one_two));
+        REQUIRE_FALSE(one_two.contains(unbounded));
+    }
+
+    SECTION("std::hash") {
+        std::hash<testing_t> hasher;
+        REQUIRE_NOTHROW(hasher(empty));
+        REQUIRE(hasher(empty) == hasher(testing_t()));
+    }
+
     SECTION("set_union") {
         SECTION("Union with Empty") {
             REQUIRE(empty.set_union(empty) == empty);

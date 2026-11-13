@@ -31,6 +31,25 @@ TEMPLATE_TEST_CASE("General interval operations", "", sigma::GIFloat,
         REQUIRE(b.lower() == value_t{1});
         REQUIRE(b.upper() == inf);
         REQUIRE(b.right_open());
+
+        // An open zero upper bound is not attained, so an even power swaps
+        // it to an open lower bound rather than treating it as an interior
+        // minimum
+        testing_t open_neg(value_t{-1}, value_t{0}, true, true);
+        REQUIRE(sigma::pow(open_neg, 2) ==
+                testing_t(value_t{0}, value_t{1}, true, true));
+        testing_t right_open_neg(value_t{-1}, value_t{0}, false, true);
+        REQUIRE(sigma::pow(right_open_neg, 2) ==
+                testing_t(value_t{0}, value_t{1}, true, false));
+    }
+
+    SECTION("Hyperbolic Cosine") {
+        // Decreasing on [-1, 0), so the open zero carries over to the lower
+        // bound of the result
+        auto a = sigma::cosh(testing_t(value_t{-1}, value_t{0}, false, true));
+        REQUIRE(a.lower() == value_t{1});
+        REQUIRE(a.left_open());
+        REQUIRE(a.right_closed());
     }
 
     SECTION("Tangent") {

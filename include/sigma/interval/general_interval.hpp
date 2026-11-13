@@ -25,9 +25,9 @@ namespace sigma {
  *  same bounds. An infinite bound is never a member, so it is always open.
  *
  *  An Interval converts implicitly, and losslessly, to a GeneralInterval with
- *  both bounds closed, so arithmetic that mixes the two types promotes to
- *  GeneralInterval. The reverse conversion discards information and is
- *  spelled out with closure().
+ *  both bounds closed (save an infinite one), so arithmetic that mixes the two
+ *  types promotes to GeneralInterval. The reverse conversion discards
+ *  information and is spelled out with closure().
  *
  *  @tparam ValueType The floating-point type of the bounds
  */
@@ -50,28 +50,36 @@ public:
 
     /** @brief Construct a degenerate interval from a single value
      *
-     *  @param value The value to set both bounds to. Both bounds are closed.
+     *  @param value The value to set both bounds to. Both bounds are closed,
+     *               unless @p value is infinite, in which case the interval
+     *               is empty.
      *
      *  @throw none No throw guarantee
      */
-    GeneralInterval(value_t value) : m_closure_(value) {}
+    GeneralInterval(value_t value) : GeneralInterval(value, value) {}
 
     /** @brief Construct from a closed interval
      *
      *  Every closed interval is a general interval with two closed bounds, so
-     *  this conversion is implicit and loses nothing.
+     *  this conversion is implicit and loses nothing. The exception is an
+     *  infinite bound, which is opened, as for every other constructor.
      *
      *  @param closed The closed interval to convert
      *
      *  @throw none No throw guarantee
      */
-    GeneralInterval(const closure_t& closed) : m_closure_(closed) {}
+    GeneralInterval(const closure_t& closed) {
+        if(!closed.empty()) {
+            *this = GeneralInterval(closed.lower(), closed.upper());
+        }
+    }
 
     /** @brief Construct an interval from two bounds and their openness
      *
-     *  For convenience, the bounds are sorted so that lower() <= upper(). A
-     *  single value with an open bound contains nothing, so it constructs the
-     *  empty interval. An infinite bound is always open, whatever is requested.
+     *  For convenience, the bounds are sorted so that lower() <= upper(). An
+     *  infinite bound is always open, whatever is requested. A single value
+     *  with an open bound contains nothing, so it constructs the empty
+     *  interval; this includes a single infinite value.
      *
      *  @param lower The lower bound of the interval
      *  @param upper The upper bound of the interval
@@ -207,14 +215,16 @@ public:
 
     /** @brief Returns the union of this interval and another interval
      *
-     *  Because the result must be an interval, union is only defined when the
-     *  intervals share at least one point.
+     *  Because the result must be an interval, union is only defined when
+     *  there is no gap between the intervals: they must overlap, or touch at a
+     *  point that at least one of them contains, as in
+     *  \f$ \lbrack 0, 1) \cup [1, 2] = [0, 2] \f$.
      *
      *  @param other The interval to union with
      *  @return The union of this interval and @p other
      *
-     *  @throw std::domain_error if the intervals do not overlap. Strong throw
-     *          guarantee.
+     *  @throw std::domain_error if there is a gap between the intervals.
+     *         Strong throw guarantee.
      */
     GeneralInterval set_union(const GeneralInterval& other) const;
 
@@ -388,8 +398,8 @@ private:
      *  Away from zero, an extreme of \f$ xy \f$ or \f$ x/y \f$ is only reached
      *  at a corner, since moving an interior factor would move the value past
      *  it. Zero is the exception: a zero factor makes the product zero whatever
-     *  the other factor is, as in \f$ [0, 0] \cdot (0, 1) = [0, 0] \f$, so a
-     *  zero bound is also closed whenever zero is attained.
+     *  the other factor is, as in \f$ [0, 0] \cdot (0, 1) = [0, 0] \f$. That
+     *  case is handled by from_corners_, not here.
      *
      *  @param[in] value The bound of the result.
      *  @param[in] ll The corner combining both lower bounds.
@@ -398,7 +408,6 @@ private:
      *  @param[in] hh The corner combining both upper bounds.
      *  @param[in] lhs The left-hand operand.
      *  @param[in] rhs The right-hand operand.
-     *  @param[in] zero_attained Is zero a value of the result?
      *
      *  @return Whether @p value is NOT a member of the result.
      *
@@ -407,8 +416,7 @@ private:
     static bool corner_bound_open_(value_t value, value_t ll, value_t lh,
                                    value_t hl, value_t hh,
                                    const GeneralInterval& lhs,
-                                   const GeneralInterval& rhs,
-                                   bool zero_attained);
+                                   const GeneralInterval& rhs);
 
     /** @brief Builds a product or a quotient from its bounds and corners.
      *
@@ -424,7 +432,8 @@ private:
      *  @param[in] hh The corner combining both upper bounds.
      *  @param[in] lhs The left-hand operand.
      *  @param[in] rhs The right-hand operand.
-     *  @param[in] zero_attained Is zero a value of the result?
+     *  @param[in] zero_attained Is zero a value of the result? If so, a zero
+     *                           bound of @p result is closed.
      *
      *  @return The result with the openness of each bound set.
      *
@@ -469,16 +478,13 @@ template<typename ValueType>
 GeneralInterval<ValueType>::GeneralInterval(value_t lower, value_t upper,
                                             bool left_open, bool right_open) :
   m_closure_(lower, upper),
-  m_is_left_open_(left_open),
-  m_is_right_open_(right_open) {
+  // Infinity is not a real number, so it is never a member
+  m_is_left_open_(left_open || std::isinf(m_closure_.lower())),
+  m_is_right_open_(right_open || std::isinf(m_closure_.upper())) {
     // A single value in an open interval is actually empty
-    if((left_open || right_open) && lower == upper) {
+    if((m_is_left_open_ || m_is_right_open_) && lower == upper) {
         *this = GeneralInterval();
-        return;
     }
-    // Infinity is not a real number, so it is never a member
-    if(std::isinf(m_closure_.lower())) { m_is_left_open_ = true; }
-    if(std::isinf(m_closure_.upper())) { m_is_right_open_ = true; }
 }
 
 template<typename ValueType>
@@ -517,7 +523,16 @@ GeneralInterval<ValueType> GeneralInterval<ValueType>::set_union(
   const GeneralInterval& other) const {
     if(empty()) { return other; }
     if(other.empty()) { return *this; }
-    if(set_intersection(other).empty()) {
+    // The intervals need not share a point: [0, 1) and [1, 2] only touch, but
+    // their union is [0, 2]. What breaks the union is a gap, i.e., bounds that
+    // are separated or that coincide at a point neither interval contains.
+    const auto separated = [](const GeneralInterval& left,
+                              const GeneralInterval& right) {
+        if(left.upper() < right.lower()) { return true; }
+        return left.upper() == right.lower() && left.right_open() &&
+               right.left_open();
+    };
+    if(separated(*this, other) || separated(other, *this)) {
         throw std::domain_error("Intervals do not overlap");
     }
     value_t low        = lower();
@@ -589,9 +604,7 @@ GeneralInterval<ValueType>& GeneralInterval<ValueType>::operator+=(
 template<typename ValueType>
 bool GeneralInterval<ValueType>::corner_bound_open_(
   value_t value, value_t ll, value_t lh, value_t hl, value_t hh,
-  const GeneralInterval& lhs, const GeneralInterval& rhs, bool zero_attained) {
-    if(zero_attained && value == value_t(0)) { return false; }
-
+  const GeneralInterval& lhs, const GeneralInterval& rhs) {
     bool is_open = true;
     if(value == ll) { is_open &= lhs.left_open() || rhs.left_open(); }
     if(value == lh) { is_open &= lhs.left_open() || rhs.right_open(); }
@@ -609,10 +622,12 @@ GeneralInterval<ValueType> GeneralInterval<ValueType>::from_corners_(
     auto low  = std::fmin(std::fmin(ll, lh), std::fmin(hl, hh));
     auto high = std::fmax(std::fmax(ll, lh), std::fmax(hl, hh));
 
-    bool lower_is_open =
-      corner_bound_open_(low, ll, lh, hl, hh, lhs, rhs, zero_attained);
-    bool upper_is_open =
-      corner_bound_open_(high, ll, lh, hl, hh, lhs, rhs, zero_attained);
+    // An attained zero is checked against the result rather than the corners,
+    // which are all NaN for, e.g., [0, 0] * (-inf, inf).
+    bool lower_is_open = !(zero_attained && result.lower() == value_t(0)) &&
+                         corner_bound_open_(low, ll, lh, hl, hh, lhs, rhs);
+    bool upper_is_open = !(zero_attained && result.upper() == value_t(0)) &&
+                         corner_bound_open_(high, ll, lh, hl, hh, lhs, rhs);
 
     return GeneralInterval(result.lower(), result.upper(), lower_is_open,
                            upper_is_open);
