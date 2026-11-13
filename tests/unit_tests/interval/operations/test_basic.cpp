@@ -2,7 +2,8 @@
 
 using testing::test_interval;
 
-TEMPLATE_TEST_CASE("Basic", "", sigma::IFloat, sigma::IDouble) {
+TEMPLATE_TEST_CASE("Basic", "", sigma::IFloat, sigma::IDouble, sigma::GIFloat,
+                   sigma::GIDouble) {
     using testing_t = TestType;
     using value_t   = typename testing_t::value_t;
 

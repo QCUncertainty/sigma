@@ -1,6 +1,7 @@
 #pragma once
 #include "affine/affine.hpp"
 #include "affine/thresholded_affine.hpp"
+#include "interval/general_interval.hpp"
 #include "interval/interval.hpp"
 #include "taylor/monomial.hpp"
 #include "taylor/taylor.hpp"

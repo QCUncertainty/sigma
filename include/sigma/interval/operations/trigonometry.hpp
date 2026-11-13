@@ -13,8 +13,7 @@ namespace sigma {
 /** @brief Calculate the sine of an interval
  *
  *  Sine is not monotonic, so the result is not in general the sine of the
- *  bounds: an interval spanning a peak encloses the peak. The bounds of the
- *  result are always closed.
+ *  bounds: an interval spanning a peak encloses the peak.
  *
  *  @tparam T The value type of the interval
  *  @param a The interval whose sine is computed
@@ -29,8 +28,7 @@ Interval<T> sin(const Interval<T>& a);
 /** @brief Calculate the cosine of an interval
  *
  *  Cosine is not monotonic, so the result is not in general the cosine of the
- *  bounds: an interval spanning a peak encloses the peak. The bounds of the
- *  result are always closed.
+ *  bounds: an interval spanning a peak encloses the peak.
  *
  *  @tparam T The value type of the interval
  *  @param a The interval whose cosine is computed
@@ -51,7 +49,7 @@ Interval<T> cos(const Interval<T>& a);
  *  returned unchanged.
  *
  *  Every acceptable argument lies within a single branch, on which the tangent
- *  is increasing, so the openness of each bound carries over.
+ *  is increasing.
  *
  *  @tparam T The value type of the interval
  *  @param a The interval whose tangent is computed

@@ -1,9 +1,5 @@
 # General Intervals
 
-> **Status:** design only. Today `sigma::Interval` still tracks open bounds
-> itself; this page records the design that moves that responsibility into a
-> separate `sigma::GeneralInterval` class.
-
 ## Motivation
 
 The [interval](./interval.md) page describes `Interval`, whose bounds are always
@@ -183,54 +179,57 @@ equal only to itself.
 Wrapping alone is not enough. Openness changes which arguments are in the
 domain, so `GeneralInterval` cannot compute its result by calling `Interval` on
 its closure: `log((0, 1])` would become `log([0, 1])`, which throws. Each
-`Interval` operation is therefore split into two layers. The lower layer is an
-unchecked core in `detail_` that performs the boost call with Sigma's rounding
-policy. The upper layer is the domain check. `Interval` composes its closed
-domain check with the core. `GeneralInterval` composes an openness-aware domain
-check with the same core, and then applies the openness rules above to the
-result. The rounding code, the hard part, exists once. The openness helpers
-that today live in `Interval` — the corner rule for products and quotients, the
-reciprocal of a divisor bounded by zero, the openness of integer powers, and
-the opening of infinite bounds in the conversion from boost — move to
-`GeneralInterval`.
+elementary function is therefore two layers. The lower layer is the round trip
+through boost in `detail_`: convert the closure to a boost interval, evaluate
+the boost function under Sigma's rounding policy, and convert back. The upper
+layer is the domain check. Both classes share the lower layer, so the rounding
+code, the hard part, exists once. `Interval` puts its closed domain check on
+top of it. `GeneralInterval` puts an openness-aware domain check on top of it,
+and then applies the openness rules above to the result. The arithmetic
+operators work the same way, delegating the bounds to the closure's operators
+except for a divisor bounded by an open zero, whose closure cannot be divided
+by and which is handled as multiplication by its reciprocal.
 
 The interface is `Interval`'s, plus openness:
 
 - **Construction.** The default constructor makes the empty interval, and a
   single value makes a degenerate closed one, as for `Interval`.
   `GeneralInterval(lower, upper, left_open, right_open)` takes the bounds and
-  their openness, which is the signature `Interval` has today. An `Interval`
-  converts **implicitly** to a `GeneralInterval` with both bounds closed, which
-  is lossless, so arithmetic that mixes the two types promotes to
-  `GeneralInterval`. The reverse conversion loses information and is spelled
-  out with `closure()`.
+  their openness. An `Interval` converts **implicitly** to a `GeneralInterval`
+  with both bounds closed, which is lossless, so arithmetic that mixes the two
+  types promotes to `GeneralInterval`. The reverse conversion loses
+  information and is spelled out with `closure()`.
 - **Accessors.** Everything `Interval` provides, plus `left_open`,
   `left_closed`, `right_open`, and `right_closed`, and `closure()`, which
   returns the closure as an `Interval`.
 - **Arithmetic and elementary functions.** The same operators and the same
   free functions as `Interval`, found through argument-dependent lookup, with
-  the domain and openness rules above.
+  the domain and openness rules above. The binary arithmetic operators are
+  hidden friends rather than free templates, because template argument
+  deduction ignores conversions and so would not accept an `Interval` or a
+  scalar operand.
 - **Set operations.** `set_union`, `set_intersection`, and the two `contains`
   overloads, with the openness rules above.
 - **Comparison and hashing.** `==` compares the bounds and their openness,
   so \f$ [a, b] \neq \lbrack a, b) \f$. The ordering operators order by median,
   as `Interval`'s do, and the `std::hash` specialization includes the openness.
-- **Output.** Stream insertion prints a parenthesis in place of the bracket
-  for an open bound, as `Interval` does today.
+- **Output.** `print_interval_form` prints a parenthesis in place of the
+  bracket for an open bound. Stream insertion prints the median and radius, as
+  it does for `Interval`.
 
-`Interval` correspondingly loses its two booleans, the four openness
-accessors, and the openness arguments of its constructor, which becomes
-`Interval(lower, upper)`. Its stream insertion always prints brackets. Its set
-operations and `contains` overloads compare bounds only. No code outside Sigma
-uses the openness accessors, so the change does not break downstream code.
+`Interval` correspondingly has no openness. Its constructor is
+`Interval(lower, upper)`, `print_interval_form` always prints brackets, and its
+set operations and `contains` overloads compare bounds only.
 
 `GeneralInterval` lives alongside `Interval` in
-`include/sigma/interval/general_interval.hpp`, since the two share the
-`detail_` core, and specializes `Eigen::NumTraits` the same way. The
-convenience typedefs are `GIFloat` and `GIDouble`. The openness tests move from
-the `Interval` tests to tests of `GeneralInterval`.
+`include/sigma/interval/general_interval.hpp`, with its elementary functions in
+`include/sigma/interval/general_operations/` and its conversions in
+`detail_/general_convert.hpp`, since the two classes share the round trip
+through boost. It specializes `Eigen::NumTraits` the same way `Interval` does,
+and the convenience typedefs are `GIFloat` and `GIDouble`.
 
 Representations built on intervals choose which one they need. `Affine` and
 `Taylor` use intervals only to bound ranges, never produce an open bound, and
-use `Interval`. [Triplex](./triplex.md) numbers are templated on their interval
-type, so the same class provides both a closed and a general triplex.
+use `Interval`. The planned [Triplex](./triplex.md) numbers are templated on
+their interval type, so the same class provides both a closed and a general
+triplex.

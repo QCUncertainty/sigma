@@ -5,7 +5,8 @@
 
 using testing::test_interval;
 
-TEMPLATE_TEST_CASE("Hyperbolic", "", sigma::IFloat, sigma::IDouble) {
+TEMPLATE_TEST_CASE("Hyperbolic", "", sigma::IFloat, sigma::IDouble,
+                   sigma::GIFloat, sigma::GIDouble) {
     using testing_t = TestType;
     using value_t   = typename testing_t::value_t;
 
@@ -68,13 +69,6 @@ TEMPLATE_TEST_CASE("Hyperbolic", "", sigma::IFloat, sigma::IDouble) {
                           std::domain_error);
         REQUIRE_THROWS_AS(sigma::atanh(testing_t(value_t{2}, value_t{3})),
                           std::domain_error);
-
-        // An OPEN bound there is not a value the interval contains, so the
-        // argument is in domain -- and the result is unbounded on that side
-        auto a = sigma::atanh(testing_t(value_t{-1}, value_t{0}, true, false));
-        REQUIRE(a.lower() == -std::numeric_limits<value_t>::infinity());
-        REQUIRE(a.left_open());
-        REQUIRE(a.contains(value_t{0}));
     }
     SECTION("Outward Rounding") {
         // The hyperbolic functions of a representable value are almost never

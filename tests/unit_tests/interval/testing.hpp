@@ -2,6 +2,7 @@
 #include <catch2/catch_approx.hpp>
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
+#include <sigma/interval/general_interval.hpp>
 #include <sigma/interval/interval.hpp>
 #include <type_traits>
 
@@ -18,6 +19,16 @@ struct test_traits<sigma::IFloat> {
 template<>
 struct test_traits<sigma::IDouble> {
     using other_t = sigma::IFloat;
+};
+
+template<>
+struct test_traits<sigma::GIFloat> {
+    using other_t = sigma::GIDouble;
+};
+
+template<>
+struct test_traits<sigma::GIDouble> {
+    using other_t = sigma::GIFloat;
 };
 
 template<typename TestType>
