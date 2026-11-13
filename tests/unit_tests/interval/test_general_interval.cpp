@@ -1,7 +1,10 @@
 #include "catch2/catch_test_macros.hpp"
 #include "testing.hpp"
+#include <cmath>
 #include <limits>
+#include <set>
 #include <sstream>
+#include <vector>
 
 using testing::test_interval;
 
@@ -1321,15 +1324,92 @@ TEMPLATE_TEST_CASE("GeneralInterval", "", sigma::GIFloat, sigma::GIDouble) {
         REQUIRE(one_two <= testing_t(1.0, 2.0));
         REQUIRE(one_two >= testing_t(1.0, 2.0));
 
-        // Openness does not affect the ordering; only the median does.
-        REQUIRE_FALSE(one_two < one_two_open);
+        // The median decides first, whatever the openness
+        REQUIRE(one_two_open < two_three);
+        REQUIRE_FALSE(two_three < one_two_open);
+
+        // With the same closure, openness breaks the tie: a closed bound
+        // sorts before an open one, the lower bound first
+        REQUIRE(one_two < one_two_right_open);
+        REQUIRE(one_two_right_open < one_two_left_open);
+        REQUIRE(one_two_left_open < one_two_open);
         REQUIRE_FALSE(one_two_open < one_two);
+
+        // Same median, different bounds
+        testing_t zero_three(0.0, 3.0);
+        REQUIRE(zero_three < one_two_open);
+        REQUIRE_FALSE(one_two < zero_three);
+        REQUIRE(zero_three.median() == one_two.median());
 
         // The empty interval sorts before every non-empty one, and is
         // equivalent only to itself.
         REQUIRE(empty < one_two);
         REQUIRE_FALSE(one_two < empty);
         REQUIRE_FALSE(empty < testing_t());
+    }
+
+    SECTION("Equivalent under < exactly when ==") {
+        std::vector<testing_t> values{empty,
+                                      one_two,
+                                      one_two_left_open,
+                                      one_two_right_open,
+                                      one_two_open,
+                                      testing_t(0.0, 3.0),
+                                      testing_t(0.0, 3.0, true, false),
+                                      testing_t(1.5),
+                                      testing_t(-5.0, 8.0, false, true)};
+        for(const auto& a : values) {
+            for(const auto& b : values) {
+                REQUIRE((!(a < b) && !(b < a)) == (a == b));
+                REQUIRE((a <= b) == (a < b || a == b));
+                REQUIRE((a >= b) == (b < a || a == b));
+            }
+        }
+
+        std::set<testing_t> keys{one_two, one_two_left_open, one_two_right_open,
+                                 one_two_open, one_two};
+        REQUIRE(keys.size() == 4);
+    }
+
+    SECTION("widen") {
+        SECTION("Point inside is a no-op") {
+            REQUIRE(sigma::widen(one_two_open, value_t{1.5}) == one_two_open);
+            REQUIRE(sigma::widen(one_two, value_t{1}) == one_two);
+            REQUIRE(sigma::widen(one_two_left_open, value_t{2}) ==
+                    one_two_left_open);
+        }
+        SECTION("Point on an open bound closes it") {
+            REQUIRE(sigma::widen(one_two_open, value_t{1}) ==
+                    one_two_right_open);
+            REQUIRE(sigma::widen(one_two_open, value_t{2}) ==
+                    one_two_left_open);
+        }
+        SECTION("Point outside moves the bound and closes it") {
+            REQUIRE(sigma::widen(one_two_open, value_t{0}) ==
+                    testing_t(0.0, 2.0, false, true));
+            REQUIRE(sigma::widen(one_two_open, value_t{3}) ==
+                    testing_t(1.0, 3.0, true, false));
+        }
+        SECTION("The other bound keeps its openness") {
+            REQUIRE(sigma::widen(one_two_left_open, value_t{3}) ==
+                    testing_t(1.0, 3.0, true, false));
+            REQUIRE(sigma::widen(one_two_right_open, value_t{0}) ==
+                    testing_t(0.0, 2.0, false, true));
+        }
+        SECTION("Empty becomes the point") {
+            REQUIRE(sigma::widen(empty, value_t{3}) == testing_t(3.0));
+        }
+        SECTION("Point need not be a value_t") {
+            REQUIRE(sigma::widen(one_two_open, 0) ==
+                    testing_t(0.0, 2.0, false, true));
+        }
+        SECTION("Infinite point is never contained") {
+            constexpr auto inf = std::numeric_limits<value_t>::infinity();
+            auto r             = sigma::widen(one_two, inf);
+            REQUIRE(std::isinf(r.upper()));
+            REQUIRE(r.right_open());
+            REQUIRE_FALSE(r.contains(inf));
+        }
     }
 
     SECTION("Corners that tie for a bound") {

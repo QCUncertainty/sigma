@@ -1,7 +1,10 @@
 #include "catch2/catch_test_macros.hpp"
 #include "testing.hpp"
+#include <cmath>
 #include <limits>
+#include <set>
 #include <sstream>
+#include <vector>
 
 using testing::test_interval;
 
@@ -545,5 +548,64 @@ TEMPLATE_TEST_CASE("Interval", "", sigma::IFloat, sigma::IDouble) {
         REQUIRE(empty < one_two);
         REQUIRE_FALSE(one_two < empty);
         REQUIRE_FALSE(empty < testing_t());
+    }
+
+    SECTION("Ties in median are broken by the bounds") {
+        // [0, 2] and [-1, 3] share a median but are not equal, so one must
+        // precede the other
+        testing_t narrow(0.0, 2.0);
+        testing_t wide(-1.0, 3.0);
+        REQUIRE(narrow.median() == wide.median());
+        REQUIRE(wide < narrow);
+        REQUIRE_FALSE(narrow < wide);
+
+        // ...but the median still decides first
+        REQUIRE(narrow < testing_t(-10.0, 13.0));
+
+        std::set<testing_t> keys{narrow, wide, narrow};
+        REQUIRE(keys.size() == 2);
+    }
+
+    SECTION("Equivalent under < exactly when ==") {
+        std::vector<testing_t> values{empty,
+                                      one_two,
+                                      testing_t(0.0, 2.0),
+                                      testing_t(-1.0, 3.0),
+                                      testing_t(1.0),
+                                      testing_t(1.0, 1.5),
+                                      testing_t(-5.0, 7.0)};
+        for(const auto& a : values) {
+            for(const auto& b : values) {
+                REQUIRE((!(a < b) && !(b < a)) == (a == b));
+                REQUIRE((a <= b) == (a < b || a == b));
+                REQUIRE((a >= b) == (b < a || a == b));
+            }
+        }
+    }
+
+    SECTION("widen") {
+        SECTION("Point inside is a no-op") {
+            REQUIRE(sigma::widen(one_two, value_t{1.5}) == one_two);
+            REQUIRE(sigma::widen(one_two, value_t{1}) == one_two);
+            REQUIRE(sigma::widen(one_two, value_t{2}) == one_two);
+        }
+        SECTION("Point below moves the lower bound") {
+            REQUIRE(sigma::widen(one_two, value_t{0}) == testing_t(0.0, 2.0));
+        }
+        SECTION("Point above moves the upper bound") {
+            REQUIRE(sigma::widen(one_two, value_t{3}) == testing_t(1.0, 3.0));
+        }
+        SECTION("Empty becomes the point") {
+            REQUIRE(sigma::widen(empty, value_t{3}) == testing_t(3.0));
+        }
+        SECTION("Point need not be a value_t") {
+            REQUIRE(sigma::widen(one_two, 0) == testing_t(0.0, 2.0));
+        }
+        SECTION("Infinite point is never contained") {
+            constexpr auto inf = std::numeric_limits<value_t>::infinity();
+            auto r             = sigma::widen(one_two, inf);
+            REQUIRE(std::isinf(r.upper()));
+            REQUIRE_FALSE(r.contains(inf));
+        }
     }
 }
