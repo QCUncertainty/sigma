@@ -140,7 +140,9 @@ Classes</h2></td></tr>
 <tr class="memitem:ThresholdedAffine" id="r_ThresholdedAffine"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements affine arithmetic that drops negligible error terms.  <a href="classsigma_1_1ThresholdedAffine.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Interval" id="r_Interval"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Interval.html">Interval</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Models a numeric interval.  <a href="classsigma_1_1Interval.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Models a closed numeric interval.  <a href="classsigma_1_1Interval.html#details">More...</a><br /></td></tr>
+<tr class="memitem:GeneralInterval" id="r_GeneralInterval"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Models an interval whose bounds may be open.  <a href="classsigma_1_1GeneralInterval.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Taylor" id="r_Taylor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Taylor.html">Taylor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements truncated multivariate polynomial algebra.  <a href="classsigma_1_1Taylor.html#details">More...</a><br /></td></tr>
 <tr class="memitem:TaylorModel" id="r_TaylorModel"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1TaylorModel.html">TaylorModel</a></td></tr>
@@ -164,6 +166,12 @@ using&#160;</td><td class="memItemRight"><b>TAFloat</b> = <a class="el" href="cl
 <tr class="memitem:a1084a7ef55ef1146b9d42d1ea8a94f47" id="r_a1084a7ef55ef1146b9d42d1ea8a94f47"><td class="memItemLeft"><a id="a1084a7ef55ef1146b9d42d1ea8a94f47" name="a1084a7ef55ef1146b9d42d1ea8a94f47"></a>
 using&#160;</td><td class="memItemRight"><b>TADouble</b> = <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt;double&gt;</td></tr>
 <tr class="memdesc:a1084a7ef55ef1146b9d42d1ea8a94f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for a thresholded affine form of doubles. <br /></td></tr>
+<tr class="memitem:aa285f5f568d87d88a540bc2c8ca0d904" id="r_aa285f5f568d87d88a540bc2c8ca0d904"><td class="memItemLeft"><a id="aa285f5f568d87d88a540bc2c8ca0d904" name="aa285f5f568d87d88a540bc2c8ca0d904"></a>
+using&#160;</td><td class="memItemRight"><b>GIFloat</b> = <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt;float&gt;</td></tr>
+<tr class="memdesc:aa285f5f568d87d88a540bc2c8ca0d904"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for a general interval of floats. <br /></td></tr>
+<tr class="memitem:a777ea6d65032184c31a1983b7246cdbd" id="r_a777ea6d65032184c31a1983b7246cdbd"><td class="memItemLeft"><a id="a777ea6d65032184c31a1983b7246cdbd" name="a777ea6d65032184c31a1983b7246cdbd"></a>
+using&#160;</td><td class="memItemRight"><b>GIDouble</b> = <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt;double&gt;</td></tr>
+<tr class="memdesc:a777ea6d65032184c31a1983b7246cdbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for a general interval of doubles. <br /></td></tr>
 <tr class="memitem:a39fce2e2c854ce7cafbc61b57c1e90a6" id="r_a39fce2e2c854ce7cafbc61b57c1e90a6"><td class="memItemLeft"><a id="a39fce2e2c854ce7cafbc61b57c1e90a6" name="a39fce2e2c854ce7cafbc61b57c1e90a6"></a>
 using&#160;</td><td class="memItemRight"><b>IFloat</b> = <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt;float&gt;</td></tr>
 <tr class="memdesc:a39fce2e2c854ce7cafbc61b57c1e90a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for an interval of floats. <br /></td></tr>
@@ -209,6 +217,63 @@ Functions</h2></td></tr>
 <tr class="memitem:a24fe469f5d0da2716b5be3d1ff8d12a3" id="r_a24fe469f5d0da2716b5be3d1ff8d12a3"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
 <tr class="memitem:a24fe469f5d0da2716b5be3d1ff8d12a3 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Affine.html">Affine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a24fe469f5d0da2716b5be3d1ff8d12a3">pow</a> (const <a class="el" href="classsigma_1_1Affine.html">Affine</a>&lt; T &gt; &amp;a, const U &amp;<a class="el" href="#a1f0fc9200525ff76e74575128a9de259">exp</a>)</td></tr>
 <tr class="memdesc:a24fe469f5d0da2716b5be3d1ff8d12a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the power of an affine form.  <br /></td></tr>
+<tr class="memitem:a7aa388897db29738459ce91208e21409" id="r_a7aa388897db29738459ce91208e21409"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a7aa388897db29738459ce91208e21409 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a7aa388897db29738459ce91208e21409">abs</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a7aa388897db29738459ce91208e21409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute Value of a general interval.  <br /></td></tr>
+<tr class="memitem:a4ca00e8dbab1b033fcb1315fa8cddaeb" id="r_a4ca00e8dbab1b033fcb1315fa8cddaeb"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a4ca00e8dbab1b033fcb1315fa8cddaeb template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4ca00e8dbab1b033fcb1315fa8cddaeb">fabs</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a4ca00e8dbab1b033fcb1315fa8cddaeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute Value of a general interval.  <br /></td></tr>
+<tr class="memitem:a42dc57d9880dccd1df9d125c498266c1" id="r_a42dc57d9880dccd1df9d125c498266c1"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a42dc57d9880dccd1df9d125c498266c1 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a42dc57d9880dccd1df9d125c498266c1">sqrt</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a42dc57d9880dccd1df9d125c498266c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the square root of a general interval.  <br /></td></tr>
+<tr class="memitem:ade1e8570f555998ff7d02ac6c5e84db4" id="r_ade1e8570f555998ff7d02ac6c5e84db4"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ade1e8570f555998ff7d02ac6c5e84db4 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ade1e8570f555998ff7d02ac6c5e84db4">exp</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:ade1e8570f555998ff7d02ac6c5e84db4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate Euler's number raised to the power of a general interval.  <br /></td></tr>
+<tr class="memitem:a0c36aaf164306254171ac882d8976247" id="r_a0c36aaf164306254171ac882d8976247"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a0c36aaf164306254171ac882d8976247 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0c36aaf164306254171ac882d8976247">log</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a0c36aaf164306254171ac882d8976247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the natural logarithm of a general interval.  <br /></td></tr>
+<tr class="memitem:ae69ca2a01c6d054da3ba7b59332c9c3b" id="r_ae69ca2a01c6d054da3ba7b59332c9c3b"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
+<tr class="memitem:ae69ca2a01c6d054da3ba7b59332c9c3b template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae69ca2a01c6d054da3ba7b59332c9c3b">pow</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a, const U &amp;<a class="el" href="#a1f0fc9200525ff76e74575128a9de259">exp</a>)</td></tr>
+<tr class="memdesc:ae69ca2a01c6d054da3ba7b59332c9c3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponentiation of a general interval.  <br /></td></tr>
+<tr class="memitem:ae0129a192138d3b328b3b1d9ed8410dd" id="r_ae0129a192138d3b328b3b1d9ed8410dd"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ae0129a192138d3b328b3b1d9ed8410dd template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae0129a192138d3b328b3b1d9ed8410dd">pow</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a, const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;exponent)</td></tr>
+<tr class="memdesc:ae0129a192138d3b328b3b1d9ed8410dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponentiation of a general interval by an interval exponent.  <br /></td></tr>
+<tr class="memitem:adff5d65a6b356a26c6ba302870c1f7a6" id="r_adff5d65a6b356a26c6ba302870c1f7a6"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:adff5d65a6b356a26c6ba302870c1f7a6 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#adff5d65a6b356a26c6ba302870c1f7a6">sinh</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:adff5d65a6b356a26c6ba302870c1f7a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the hyperbolic sine of a general interval.  <br /></td></tr>
+<tr class="memitem:a492a1312b07d422ed1c20e83380a5304" id="r_a492a1312b07d422ed1c20e83380a5304"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a492a1312b07d422ed1c20e83380a5304 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a492a1312b07d422ed1c20e83380a5304">cosh</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a492a1312b07d422ed1c20e83380a5304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the hyperbolic cosine of a general interval.  <br /></td></tr>
+<tr class="memitem:a41320fb24398e0f4f5a6f1a7989f97c4" id="r_a41320fb24398e0f4f5a6f1a7989f97c4"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a41320fb24398e0f4f5a6f1a7989f97c4 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a41320fb24398e0f4f5a6f1a7989f97c4">tanh</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a41320fb24398e0f4f5a6f1a7989f97c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the hyperbolic tangent of a general interval.  <br /></td></tr>
+<tr class="memitem:aa16fad9e082b505df0fa9add2ccf9bf2" id="r_aa16fad9e082b505df0fa9add2ccf9bf2"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:aa16fad9e082b505df0fa9add2ccf9bf2 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa16fad9e082b505df0fa9add2ccf9bf2">asinh</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:aa16fad9e082b505df0fa9add2ccf9bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the inverse hyperbolic sine of a general interval.  <br /></td></tr>
+<tr class="memitem:a9ebdd1a3eb42e0d52e7f1c951f17322b" id="r_a9ebdd1a3eb42e0d52e7f1c951f17322b"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a9ebdd1a3eb42e0d52e7f1c951f17322b template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9ebdd1a3eb42e0d52e7f1c951f17322b">acosh</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a9ebdd1a3eb42e0d52e7f1c951f17322b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the inverse hyperbolic cosine of a general interval.  <br /></td></tr>
+<tr class="memitem:a40d4934c558412fd8e23ea6f0526e8b6" id="r_a40d4934c558412fd8e23ea6f0526e8b6"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a40d4934c558412fd8e23ea6f0526e8b6 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a40d4934c558412fd8e23ea6f0526e8b6">atanh</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a40d4934c558412fd8e23ea6f0526e8b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the inverse hyperbolic tangent of a general interval.  <br /></td></tr>
+<tr class="memitem:a75eaae474ad407ef62a7eeeb0fd18c56" id="r_a75eaae474ad407ef62a7eeeb0fd18c56"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a75eaae474ad407ef62a7eeeb0fd18c56 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a75eaae474ad407ef62a7eeeb0fd18c56">sin</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a75eaae474ad407ef62a7eeeb0fd18c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the sine of a general interval.  <br /></td></tr>
+<tr class="memitem:ac04dddcba8ce928923f6cf3a8f3abb39" id="r_ac04dddcba8ce928923f6cf3a8f3abb39"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ac04dddcba8ce928923f6cf3a8f3abb39 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac04dddcba8ce928923f6cf3a8f3abb39">cos</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:ac04dddcba8ce928923f6cf3a8f3abb39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the cosine of a general interval.  <br /></td></tr>
+<tr class="memitem:afe33d93ff64a08247f708229e3b59c8a" id="r_afe33d93ff64a08247f708229e3b59c8a"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:afe33d93ff64a08247f708229e3b59c8a template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#afe33d93ff64a08247f708229e3b59c8a">tan</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:afe33d93ff64a08247f708229e3b59c8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the tangent of a general interval.  <br /></td></tr>
+<tr class="memitem:ad0095779334db1d59ebd4002b4a383c4" id="r_ad0095779334db1d59ebd4002b4a383c4"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ad0095779334db1d59ebd4002b4a383c4 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ad0095779334db1d59ebd4002b4a383c4">asin</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:ad0095779334db1d59ebd4002b4a383c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the arcsine of a general interval.  <br /></td></tr>
+<tr class="memitem:ad0809f56f17a9957e67115e810ef7e59" id="r_ad0809f56f17a9957e67115e810ef7e59"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ad0809f56f17a9957e67115e810ef7e59 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ad0809f56f17a9957e67115e810ef7e59">acos</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:ad0809f56f17a9957e67115e810ef7e59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the arccosine of a general interval.  <br /></td></tr>
+<tr class="memitem:a9d1f4f923e52dfebb9f4226a0e2df3f9" id="r_a9d1f4f923e52dfebb9f4226a0e2df3f9"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a9d1f4f923e52dfebb9f4226a0e2df3f9 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9d1f4f923e52dfebb9f4226a0e2df3f9">atan</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a)</td></tr>
+<tr class="memdesc:a9d1f4f923e52dfebb9f4226a0e2df3f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the arctangent of a general interval.  <br /></td></tr>
 <tr class="memitem:aae3dda0f049be5b993ce136f23c640cf" id="r_aae3dda0f049be5b993ce136f23c640cf"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:aae3dda0f049be5b993ce136f23c640cf template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aae3dda0f049be5b993ce136f23c640cf">operator+</a> (<a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; lhs, T rhs)</td></tr>
 <tr class="memitem:acbad39ed6eda2da67b2089fa9bb0811d" id="r_acbad39ed6eda2da67b2089fa9bb0811d"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
@@ -532,6 +597,30 @@ Functions</h2></td></tr>
 <tr class="memitem:a22015ab95cb704a3b46e0db23e2ead97" id="r_a22015ab95cb704a3b46e0db23e2ead97"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
 <tr class="memitem:a22015ab95cb704a3b46e0db23e2ead97 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1ThresholdedAffine.html#a22015ab95cb704a3b46e0db23e2ead97">pow</a> (const <a class="el" href="classsigma_1_1ThresholdedAffine.html">ThresholdedAffine</a>&lt; T &gt; &amp;a, const U &amp;<a class="el" href="#a1f0fc9200525ff76e74575128a9de259">exp</a>)</td></tr>
 <tr class="memdesc:a22015ab95cb704a3b46e0db23e2ead97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Power of a <a class="el" href="classsigma_1_1ThresholdedAffine.html" title="Implements affine arithmetic that drops negligible error terms.">ThresholdedAffine</a>.  <br /></td></tr>
+<tr class="memitem:a46b55fff3a58ddc83310c381f1cc647d" id="r_a46b55fff3a58ddc83310c381f1cc647d"><td class="memTemplParams" colspan="2">template&lt;typename ValueType&gt; </td></tr>
+<tr class="memitem:a46b55fff3a58ddc83310c381f1cc647d template"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1GeneralInterval.html#a46b55fff3a58ddc83310c381f1cc647d">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; ValueType &gt; &amp;i)</td></tr>
+<tr class="memdesc:a46b55fff3a58ddc83310c381f1cc647d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload stream insertion to print an interval.  <br /></td></tr>
+<tr class="memitem:aa5dc47381b64277592a1a12f9b724ba7" id="r_aa5dc47381b64277592a1a12f9b724ba7"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2&gt; </td></tr>
+<tr class="memitem:aa5dc47381b64277592a1a12f9b724ba7 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1GeneralInterval.html#aa5dc47381b64277592a1a12f9b724ba7">operator==</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T1 &gt; &amp;lhs, const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T2 &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:aa5dc47381b64277592a1a12f9b724ba7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two intervals for equality.  <br /></td></tr>
+<tr class="memitem:a2bffcd94d01403a93627d78921a409f1" id="r_a2bffcd94d01403a93627d78921a409f1"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2&gt; </td></tr>
+<tr class="memitem:a2bffcd94d01403a93627d78921a409f1 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1GeneralInterval.html#a2bffcd94d01403a93627d78921a409f1">operator!=</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T1 &gt; &amp;lhs, const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T2 &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a2bffcd94d01403a93627d78921a409f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two intervals for inequality.  <br /></td></tr>
+<tr class="memitem:abed8635709fed22e1c2f6a840adf73a0" id="r_abed8635709fed22e1c2f6a840adf73a0"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:abed8635709fed22e1c2f6a840adf73a0 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1GeneralInterval.html#abed8635709fed22e1c2f6a840adf73a0">operator&lt;</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:abed8635709fed22e1c2f6a840adf73a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders two intervals by their median.  <br /></td></tr>
+<tr class="memitem:af60ca3e08005ea2491fa1cfac9507d9d" id="r_af60ca3e08005ea2491fa1cfac9507d9d"><td class="memTemplParams" colspan="2"><a id="af60ca3e08005ea2491fa1cfac9507d9d" name="af60ca3e08005ea2491fa1cfac9507d9d"></a>
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:af60ca3e08005ea2491fa1cfac9507d9d template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;</b> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:af60ca3e08005ea2491fa1cfac9507d9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, with the operands reversed. <br /></td></tr>
+<tr class="memitem:ac1c1c94d122e108fb692bf9a79ec24c0" id="r_ac1c1c94d122e108fb692bf9a79ec24c0"><td class="memTemplParams" colspan="2"><a id="ac1c1c94d122e108fb692bf9a79ec24c0" name="ac1c1c94d122e108fb692bf9a79ec24c0"></a>
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ac1c1c94d122e108fb692bf9a79ec24c0 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&lt;=</b> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ac1c1c94d122e108fb692bf9a79ec24c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated. <br /></td></tr>
+<tr class="memitem:acbffd264630ba3d9e17966947479920e" id="r_acbffd264630ba3d9e17966947479920e"><td class="memTemplParams" colspan="2"><a id="acbffd264630ba3d9e17966947479920e" name="acbffd264630ba3d9e17966947479920e"></a>
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:acbffd264630ba3d9e17966947479920e template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:acbffd264630ba3d9e17966947479920e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated and reversed. <br /></td></tr>
 <tr class="memitem:a795d1a141720ed26b84cd372ed855987" id="r_a795d1a141720ed26b84cd372ed855987"><td class="memTemplParams" colspan="2">template&lt;typename ValueType&gt; </td></tr>
 <tr class="memitem:a795d1a141720ed26b84cd372ed855987 template"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Interval.html#a795d1a141720ed26b84cd372ed855987">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; ValueType &gt; &amp;i)</td></tr>
 <tr class="memdesc:a795d1a141720ed26b84cd372ed855987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload stream insertion to print an interval.  <br /></td></tr>
@@ -627,7 +716,7 @@ template&lt;typename T&gt; </td></tr>
 <p>This is the primary namespace that contains the class used to represent uncertain variables and the functions that act on them. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a503cdf5d87ccd500483119ad06c33df5" name="a503cdf5d87ccd500483119ad06c33df5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a503cdf5d87ccd500483119ad06c33df5">&#9670;&#160;</a></span>abs() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a503cdf5d87ccd500483119ad06c33df5">&#9670;&#160;</a></span>abs() <span class="overload">[1/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -677,8 +766,49 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a7aa388897db29738459ce91208e21409" name="a7aa388897db29738459ce91208e21409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aa388897db29738459ce91208e21409">&#9670;&#160;</a></span>abs() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::abs </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Absolute Value of a general interval. </p>
+<p>As for <a class="el" href="#a3ea8a8ec91205acbf995d458fbf19105" title="Absolute Value of an interval.">abs(const Interval&lt;T&gt;&amp;)</a>. When <code class="param">a</code> straddles zero the lower bound of the result is the attained zero, and so is closed.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The absolute value of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a3ea8a8ec91205acbf995d458fbf19105" name="a3ea8a8ec91205acbf995d458fbf19105"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ea8a8ec91205acbf995d458fbf19105">&#9670;&#160;</a></span>abs() <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ea8a8ec91205acbf995d458fbf19105">&#9670;&#160;</a></span>abs() <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -723,7 +853,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a17dad268d18998e7e458d1368d1fe758" name="a17dad268d18998e7e458d1368d1fe758"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17dad268d18998e7e458d1368d1fe758">&#9670;&#160;</a></span>abs() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a17dad268d18998e7e458d1368d1fe758">&#9670;&#160;</a></span>abs() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -773,7 +903,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="add954174f373873d59d093ceb3e82af5" name="add954174f373873d59d093ceb3e82af5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add954174f373873d59d093ceb3e82af5">&#9670;&#160;</a></span>abs() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#add954174f373873d59d093ceb3e82af5">&#9670;&#160;</a></span>abs() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -852,8 +982,49 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ad0809f56f17a9957e67115e810ef7e59" name="ad0809f56f17a9957e67115e810ef7e59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0809f56f17a9957e67115e810ef7e59">&#9670;&#160;</a></span>acos() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::acos </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the arccosine of a general interval. </p>
+<p>Arccosine is decreasing, so the openness of the bounds exchanges places.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose arccosine is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the arccosine of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a value outside \( [-1, 1] \). Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad50317778c3d0d026d6403893839edb2" name="ad50317778c3d0d026d6403893839edb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad50317778c3d0d026d6403893839edb2">&#9670;&#160;</a></span>acos() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad50317778c3d0d026d6403893839edb2">&#9670;&#160;</a></span>acos() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -894,7 +1065,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="af6eeba07517755fde0ced30d9ff56181" name="af6eeba07517755fde0ced30d9ff56181"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6eeba07517755fde0ced30d9ff56181">&#9670;&#160;</a></span>acos() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af6eeba07517755fde0ced30d9ff56181">&#9670;&#160;</a></span>acos() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -933,8 +1104,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a9ebdd1a3eb42e0d52e7f1c951f17322b" name="a9ebdd1a3eb42e0d52e7f1c951f17322b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ebdd1a3eb42e0d52e7f1c951f17322b">&#9670;&#160;</a></span>acosh() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::acosh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the inverse hyperbolic cosine of a general interval. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose inverse hyperbolic cosine is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the inverse hyperbolic cosine of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a value below one. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="afe9944336557d5b254dc94b159fd07f4" name="afe9944336557d5b254dc94b159fd07f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe9944336557d5b254dc94b159fd07f4">&#9670;&#160;</a></span>acosh() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afe9944336557d5b254dc94b159fd07f4">&#9670;&#160;</a></span>acosh() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -975,7 +1186,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ae0468bc7af0c3d24c8ecc0c38d8f2ef6" name="ae0468bc7af0c3d24c8ecc0c38d8f2ef6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0468bc7af0c3d24c8ecc0c38d8f2ef6">&#9670;&#160;</a></span>acosh() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0468bc7af0c3d24c8ecc0c38d8f2ef6">&#9670;&#160;</a></span>acosh() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1014,8 +1225,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ad0095779334db1d59ebd4002b4a383c4" name="ad0095779334db1d59ebd4002b4a383c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0095779334db1d59ebd4002b4a383c4">&#9670;&#160;</a></span>asin() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::asin </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the arcsine of a general interval. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose arcsine is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the arcsine of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a value outside \( [-1, 1] \). Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aa28bf2018b343c27ea5588f41211187c" name="aa28bf2018b343c27ea5588f41211187c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa28bf2018b343c27ea5588f41211187c">&#9670;&#160;</a></span>asin() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa28bf2018b343c27ea5588f41211187c">&#9670;&#160;</a></span>asin() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1056,7 +1307,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ae48df01125f097867cd2144b958f3756" name="ae48df01125f097867cd2144b958f3756"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae48df01125f097867cd2144b958f3756">&#9670;&#160;</a></span>asin() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae48df01125f097867cd2144b958f3756">&#9670;&#160;</a></span>asin() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1095,8 +1346,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="aa16fad9e082b505df0fa9add2ccf9bf2" name="aa16fad9e082b505df0fa9add2ccf9bf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa16fad9e082b505df0fa9add2ccf9bf2">&#9670;&#160;</a></span>asinh() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::asinh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the inverse hyperbolic sine of a general interval. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose inverse hyperbolic sine is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the inverse hyperbolic sine of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a42810e5f2ced3176eccb756f7b5180bf" name="a42810e5f2ced3176eccb756f7b5180bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42810e5f2ced3176eccb756f7b5180bf">&#9670;&#160;</a></span>asinh() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a42810e5f2ced3176eccb756f7b5180bf">&#9670;&#160;</a></span>asinh() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1136,7 +1427,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="aad587ce36b20a927d652a01148dc343c" name="aad587ce36b20a927d652a01148dc343c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad587ce36b20a927d652a01148dc343c">&#9670;&#160;</a></span>asinh() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aad587ce36b20a927d652a01148dc343c">&#9670;&#160;</a></span>asinh() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1175,8 +1466,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a9d1f4f923e52dfebb9f4226a0e2df3f9" name="a9d1f4f923e52dfebb9f4226a0e2df3f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d1f4f923e52dfebb9f4226a0e2df3f9">&#9670;&#160;</a></span>atan() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::atan </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the arctangent of a general interval. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose arctangent is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the arctangent of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad9f0a5c9f91bac03fad67eb63ec593c9" name="ad9f0a5c9f91bac03fad67eb63ec593c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9f0a5c9f91bac03fad67eb63ec593c9">&#9670;&#160;</a></span>atan() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9f0a5c9f91bac03fad67eb63ec593c9">&#9670;&#160;</a></span>atan() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1216,7 +1547,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a29ac0ccb509ea16a5f8f2d69318af050" name="a29ac0ccb509ea16a5f8f2d69318af050"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29ac0ccb509ea16a5f8f2d69318af050">&#9670;&#160;</a></span>atan() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a29ac0ccb509ea16a5f8f2d69318af050">&#9670;&#160;</a></span>atan() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1392,8 +1723,49 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a40d4934c558412fd8e23ea6f0526e8b6" name="a40d4934c558412fd8e23ea6f0526e8b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40d4934c558412fd8e23ea6f0526e8b6">&#9670;&#160;</a></span>atanh() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::atanh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the inverse hyperbolic tangent of a general interval. </p>
+<p>The domain is the open \( (-1, 1) \), so a bound at plus or minus one is only out of domain if it is closed, and an open bound there leaves the result unbounded on that side.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose inverse hyperbolic tangent is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the inverse hyperbolic tangent of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a value outside \( (-1, 1) \). Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aa45a99b84e7f016c816d77191b751097" name="aa45a99b84e7f016c816d77191b751097"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa45a99b84e7f016c816d77191b751097">&#9670;&#160;</a></span>atanh() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa45a99b84e7f016c816d77191b751097">&#9670;&#160;</a></span>atanh() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1410,7 +1782,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>Calculate the inverse hyperbolic tangent of an interval. </p>
-<p>Inverse hyperbolic tangent is only defined on the OPEN interval \( (-1, 1) \), so <code class="param">a</code> must not contain a value outside it &ndash; plus and minus one included. A bound at either of those is only out of domain if it is closed, since an open bound is not a value the interval contains, and an open bound there leaves the result unbounded on that side. The empty interval contains nothing and is returned unchanged.</p>
+<p>Inverse hyperbolic tangent is only defined on the OPEN interval \( (-1, 1) \), so <code class="param">a</code> must not contain a value outside it &ndash; plus and minus one included. A bound is a member of the interval, so a bound at either of those is out of domain; an argument that only approaches them needs a <a class="el" href="classsigma_1_1GeneralInterval.html" title="Models an interval whose bounds may be open.">GeneralInterval</a>. The empty interval contains nothing and is returned unchanged.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
@@ -1434,7 +1806,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ad13293749576a5d73b834c598e2936c6" name="ad13293749576a5d73b834c598e2936c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad13293749576a5d73b834c598e2936c6">&#9670;&#160;</a></span>atanh() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad13293749576a5d73b834c598e2936c6">&#9670;&#160;</a></span>atanh() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1732,8 +2104,49 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ac04dddcba8ce928923f6cf3a8f3abb39" name="ac04dddcba8ce928923f6cf3a8f3abb39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac04dddcba8ce928923f6cf3a8f3abb39">&#9670;&#160;</a></span>cos() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::cos </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the cosine of a general interval. </p>
+<p>The bounds of the result are always closed, since either may come from a peak interior to <code class="param">a</code>.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose cosine is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the cosine of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7296e91f14bb74a9a223e420e81b6997" name="a7296e91f14bb74a9a223e420e81b6997"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7296e91f14bb74a9a223e420e81b6997">&#9670;&#160;</a></span>cos() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7296e91f14bb74a9a223e420e81b6997">&#9670;&#160;</a></span>cos() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1750,7 +2163,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>Calculate the cosine of an interval. </p>
-<p>Cosine is not monotonic, so the result is not in general the cosine of the bounds: an interval spanning a peak encloses the peak. The bounds of the result are always closed.</p>
+<p>Cosine is not monotonic, so the result is not in general the cosine of the bounds: an interval spanning a peak encloses the peak.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
@@ -1774,7 +2187,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a8d0718197bd681b48cfbc005d6629920" name="a8d0718197bd681b48cfbc005d6629920"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d0718197bd681b48cfbc005d6629920">&#9670;&#160;</a></span>cos() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d0718197bd681b48cfbc005d6629920">&#9670;&#160;</a></span>cos() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1813,8 +2226,49 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a492a1312b07d422ed1c20e83380a5304" name="a492a1312b07d422ed1c20e83380a5304"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a492a1312b07d422ed1c20e83380a5304">&#9670;&#160;</a></span>cosh() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::cosh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the hyperbolic cosine of a general interval. </p>
+<p>An argument spanning zero has a result whose lower bound is the attained minimum, one, which is closed.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose hyperbolic cosine is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the hyperbolic cosine of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="abb7d4d45671e530cc4a07e008b5afd1e" name="abb7d4d45671e530cc4a07e008b5afd1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb7d4d45671e530cc4a07e008b5afd1e">&#9670;&#160;</a></span>cosh() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abb7d4d45671e530cc4a07e008b5afd1e">&#9670;&#160;</a></span>cosh() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1855,7 +2309,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a8f8ded25467d58703d7ec390526bb2bb" name="a8f8ded25467d58703d7ec390526bb2bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f8ded25467d58703d7ec390526bb2bb">&#9670;&#160;</a></span>cosh() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f8ded25467d58703d7ec390526bb2bb">&#9670;&#160;</a></span>cosh() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2015,7 +2469,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a1f0fc9200525ff76e74575128a9de259" name="a1f0fc9200525ff76e74575128a9de259"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f0fc9200525ff76e74575128a9de259">&#9670;&#160;</a></span>exp() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f0fc9200525ff76e74575128a9de259">&#9670;&#160;</a></span>exp() <span class="overload">[1/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2063,8 +2517,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ade1e8570f555998ff7d02ac6c5e84db4" name="ade1e8570f555998ff7d02ac6c5e84db4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade1e8570f555998ff7d02ac6c5e84db4">&#9670;&#160;</a></span>exp() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::exp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate Euler's number raised to the power of a general interval. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval that is the exponent</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval whose bounds are Euler's number raised by <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="abd4d114d01f89ba6b65bb6661722e152" name="abd4d114d01f89ba6b65bb6661722e152"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd4d114d01f89ba6b65bb6661722e152">&#9670;&#160;</a></span>exp() <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abd4d114d01f89ba6b65bb6661722e152">&#9670;&#160;</a></span>exp() <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2104,7 +2598,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a61f5ae228034f0ac76f7af5a0d615fe2" name="a61f5ae228034f0ac76f7af5a0d615fe2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61f5ae228034f0ac76f7af5a0d615fe2">&#9670;&#160;</a></span>exp() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a61f5ae228034f0ac76f7af5a0d615fe2">&#9670;&#160;</a></span>exp() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2146,7 +2640,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ad8957603ced9a2feb2c82973b5bb1da9" name="ad8957603ced9a2feb2c82973b5bb1da9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8957603ced9a2feb2c82973b5bb1da9">&#9670;&#160;</a></span>exp() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8957603ced9a2feb2c82973b5bb1da9">&#9670;&#160;</a></span>exp() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2266,7 +2760,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a791bc74e56cca4cbc40757a60e82d233" name="a791bc74e56cca4cbc40757a60e82d233"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a791bc74e56cca4cbc40757a60e82d233">&#9670;&#160;</a></span>fabs() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a791bc74e56cca4cbc40757a60e82d233">&#9670;&#160;</a></span>fabs() <span class="overload">[1/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2306,8 +2800,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a4ca00e8dbab1b033fcb1315fa8cddaeb" name="a4ca00e8dbab1b033fcb1315fa8cddaeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ca00e8dbab1b033fcb1315fa8cddaeb">&#9670;&#160;</a></span>fabs() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::fabs </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Absolute Value of a general interval. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The absolute value of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a1e51b493c47ce761af8c6947bc94ca8b" name="a1e51b493c47ce761af8c6947bc94ca8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e51b493c47ce761af8c6947bc94ca8b">&#9670;&#160;</a></span>fabs() <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e51b493c47ce761af8c6947bc94ca8b">&#9670;&#160;</a></span>fabs() <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2347,7 +2881,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a65ea82ce6443ead2023dfb42ee279f2b" name="a65ea82ce6443ead2023dfb42ee279f2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65ea82ce6443ead2023dfb42ee279f2b">&#9670;&#160;</a></span>fabs() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a65ea82ce6443ead2023dfb42ee279f2b">&#9670;&#160;</a></span>fabs() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2389,7 +2923,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ac4d519de22722a51cda0bc3c92960e89" name="ac4d519de22722a51cda0bc3c92960e89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac4d519de22722a51cda0bc3c92960e89">&#9670;&#160;</a></span>fabs() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4d519de22722a51cda0bc3c92960e89">&#9670;&#160;</a></span>fabs() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2781,7 +3315,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a6b4cb2eb59313bad642280864499f747" name="a6b4cb2eb59313bad642280864499f747"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b4cb2eb59313bad642280864499f747">&#9670;&#160;</a></span>log() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b4cb2eb59313bad642280864499f747">&#9670;&#160;</a></span>log() <span class="overload">[1/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2836,8 +3370,8 @@ y_s &amp;= \alpha * (x_s - a) + \log(a)
 
 </div>
 </div>
-<a id="a05ed885aa305fef4a9b2a14e5a374b48" name="a05ed885aa305fef4a9b2a14e5a374b48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05ed885aa305fef4a9b2a14e5a374b48">&#9670;&#160;</a></span>log() <span class="overload">[2/6]</span></h2>
+<a id="a0c36aaf164306254171ac882d8976247" name="a0c36aaf164306254171ac882d8976247"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c36aaf164306254171ac882d8976247">&#9670;&#160;</a></span>log() <span class="overload">[2/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2845,16 +3379,16 @@ y_s &amp;= \alpha * (x_s - a) + \log(a)
 template&lt;typename T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; sigma::log </td>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::log </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Calculate the natural logarithm of an interval. </p>
-<p>The logarithm is only defined for positive values, so <code class="param">a</code> must not contain zero or any negative value. A bound <em>at</em> zero is only out of domain if it is closed: \( (0, 1] \) contains no non-positive value, and its logarithm is unbounded below. The empty interval contains nothing and is returned unchanged.</p>
+<p>Calculate the natural logarithm of a general interval. </p>
+<p>A bound <em>at</em> zero is only out of domain if it is closed: \( (0, 1\rbrack \) contains no non-positive value, and its logarithm is unbounded below.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
@@ -2877,8 +3411,49 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a05ed885aa305fef4a9b2a14e5a374b48" name="a05ed885aa305fef4a9b2a14e5a374b48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05ed885aa305fef4a9b2a14e5a374b48">&#9670;&#160;</a></span>log() <span class="overload">[3/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; sigma::log </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the natural logarithm of an interval. </p>
+<p>The logarithm is only defined for positive values, so <code class="param">a</code> must not contain zero or any negative value. A bound is a member of the interval, so a lower bound <em>at</em> zero is out of domain; an argument that only approaches zero needs a <a class="el" href="classsigma_1_1GeneralInterval.html" title="Models an interval whose bounds may be open.">GeneralInterval</a>. The empty interval contains nothing and is returned unchanged.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose logarithm is determined</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the natural logarithm of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a non-positive value, i.e., if its lower bound is not positive. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aa8ee4efe0efc3d81db84f8f43a847872" name="aa8ee4efe0efc3d81db84f8f43a847872"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8ee4efe0efc3d81db84f8f43a847872">&#9670;&#160;</a></span>log() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8ee4efe0efc3d81db84f8f43a847872">&#9670;&#160;</a></span>log() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2920,7 +3495,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a52fd9cd9f3190f6cb34b0752b4927b7e" name="a52fd9cd9f3190f6cb34b0752b4927b7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52fd9cd9f3190f6cb34b0752b4927b7e">&#9670;&#160;</a></span>log() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a52fd9cd9f3190f6cb34b0752b4927b7e">&#9670;&#160;</a></span>log() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3960,7 +4535,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a24fe469f5d0da2716b5be3d1ff8d12a3" name="a24fe469f5d0da2716b5be3d1ff8d12a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24fe469f5d0da2716b5be3d1ff8d12a3">&#9670;&#160;</a></span>pow() <span class="overload">[1/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a24fe469f5d0da2716b5be3d1ff8d12a3">&#9670;&#160;</a></span>pow() <span class="overload">[1/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4012,8 +4587,101 @@ template&lt;typename T, typename U&gt; </div>
 
 </div>
 </div>
+<a id="ae0129a192138d3b328b3b1d9ed8410dd" name="ae0129a192138d3b328b3b1d9ed8410dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0129a192138d3b328b3b1d9ed8410dd">&#9670;&#160;</a></span>pow() <span class="overload">[2/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::pow </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>exponent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exponentiation of a general interval by an interval exponent. </p>
+<p>As for <a class="el" href="#ac5f7805ba899775b78642bdcf18f0bd7" title="Exponentiation of an interval by an interval-valued exponent.">pow(const Interval&lt;T&gt;&amp;, const Interval&lt;T&gt;&amp;)</a>: a point exponent is forwarded to the scalar overload, and any other exponent is evaluated as \( e^{y \ln x} \), which restricts the base to positive values.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the base and exponent </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval base </td></tr>
+    <tr><td class="paramname">exponent</td><td>The interval exponent to raise the base by</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing every value in <code class="param">a</code> raised to every power in <code class="param">exponent</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">exponent</code> has width and <code class="param">a</code> contains a non-positive value. If <code class="param">exponent</code> is a point, throws under the same conditions as the scalar overload instead. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae69ca2a01c6d054da3ba7b59332c9c3b" name="ae69ca2a01c6d054da3ba7b59332c9c3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae69ca2a01c6d054da3ba7b59332c9c3b">&#9670;&#160;</a></span>pow() <span class="overload">[3/10]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::pow </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const U &amp;</td>          <td class="paramname"><span class="paramname"><em>exp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exponentiation of a general interval. </p>
+<p>A negative base has no real fractional power, and a zero base has no negative power. An open bound is not a value the interval contains, so \( (0, 1\rbrack \) may be raised to a negative power even though \( [0, 1] \) may not.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
+    <tr><td class="paramname">U</td><td>The numeric type of the exponent </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval base </td></tr>
+    <tr><td class="paramname"><a class="el" href="#a1f0fc9200525ff76e74575128a9de259" title="Calculate the exponential of an affine form.">exp</a></td><td>The exponent to raise the base by</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing every value in <code class="param">a</code> raised to the power <code class="param">exp</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">exp</code> is negative and <code class="param">a</code> contains zero, or if <code class="param">exp</code> is not an integer and <code class="param">a</code> contains a negative value. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac5f7805ba899775b78642bdcf18f0bd7" name="ac5f7805ba899775b78642bdcf18f0bd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5f7805ba899775b78642bdcf18f0bd7">&#9670;&#160;</a></span>pow() <span class="overload">[2/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5f7805ba899775b78642bdcf18f0bd7">&#9670;&#160;</a></span>pow() <span class="overload">[4/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4034,7 +4702,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>Exponentiation of an interval by an interval-valued exponent. </p>
-<p>Overload of <a class="el" href="#a35f137fea763cf0d93250a9b758381b3" title="Exponentiation of a variable.">pow(const Interval&lt;T&gt;&amp;, const U&amp;)</a> for the case where the exponent is itself an <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">Interval&lt;T&gt;</a> rather than a plain scalar &ndash; as happens, for example, when a caller's exponent is a tuning parameter stored as the same type T as the base rather than as a raw scalar (a common pattern for values that don't need their own uncertainty tracking but end up typed T anyway for API convenience). A general real power with a real exponent is computed as \( x^y = e^{y \ln x} \), which only needs exp/log/multiplication &ndash; all already sound enclosures &ndash; so this holds for any exponent range, not just the integer/scalar cases the other overload special-cases; the tradeoff is that it's looser than the scalar overload's tighter, case-analyzed bounds, and it inherits log's domain restriction to strictly positive bases (a negative or zero base has no general real power).</p>
+<p>Overload of <a class="el" href="#a35f137fea763cf0d93250a9b758381b3" title="Exponentiation of a variable.">pow(const Interval&lt;T&gt;&amp;, const U&amp;)</a> for the case where the exponent is itself an <a class="el" href="classsigma_1_1Interval.html" title="Models a closed numeric interval.">Interval&lt;T&gt;</a> rather than a plain scalar &ndash; as happens, for example, when a caller's exponent is a tuning parameter stored as the same type T as the base rather than as a raw scalar (a common pattern for values that don't need their own uncertainty tracking but end up typed T anyway for API convenience). A general real power with a real exponent is computed as \( x^y = e^{y \ln x} \), which only needs exp/log/multiplication &ndash; all already sound enclosures &ndash; so this holds for any exponent range, not just the integer/scalar cases the other overload special-cases; the tradeoff is that it's looser than the scalar overload's tighter, case-analyzed bounds, and it inherits log's domain restriction to strictly positive bases (a negative or zero base has no general real power).</p>
 <p>A point exponent (<code class="param">exponent</code> has zero width) is expected to be the common case &ndash; a caller passing a genuinely uncertain exponent is the exception &ndash; so it is forwarded to the scalar overload instead of going through log/exp, both for tighter bounds and to avoid needlessly rejecting a negative base raised to, e.g., an integer point exponent. The strictly-positive-base restriction below therefore only kicks in once <code class="param">exponent</code> actually has width; a point exponent instead follows the scalar overload's domain restrictions.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -4052,7 +4720,7 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>An interval enclosing every value in <code class="param">a</code> raised to every power in <code class="param">exponent</code> </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">exponent</code> has width and <code class="param">a</code> contains a non-positive value, i.e., if its lower bound is negative, or is a closed zero. If <code class="param">exponent</code> is a point, throws under the same conditions as the scalar overload instead. Strong throw guarantee. </td></tr>
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">exponent</code> has width and <code class="param">a</code> contains a non-positive value, i.e., if its lower bound is not positive. If <code class="param">exponent</code> is a point, throws under the same conditions as the scalar overload instead. Strong throw guarantee. </td></tr>
   </table>
   </dd>
 </dl>
@@ -4060,7 +4728,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a35f137fea763cf0d93250a9b758381b3" name="a35f137fea763cf0d93250a9b758381b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35f137fea763cf0d93250a9b758381b3">&#9670;&#160;</a></span>pow() <span class="overload">[3/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a35f137fea763cf0d93250a9b758381b3">&#9670;&#160;</a></span>pow() <span class="overload">[5/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4081,7 +4749,7 @@ template&lt;typename T, typename U&gt; </div>
 </div><div class="memdoc">
 
 <p>Exponentiation of a variable. </p>
-<p>Two combinations of base and exponent have no real value, and <code class="param">a</code> must not contain a value in either. A negative base has no real fractional power, and a zero base has no negative power. As elsewhere, an open bound is not a value the interval contains, so \( (0, 1] \) may be raised to a negative power even though \( [0, 1] \) may not. The empty interval contains nothing and is returned unchanged.</p>
+<p>Two combinations of base and exponent have no real value, and <code class="param">a</code> must not contain a value in either. A negative base has no real fractional power, and a zero base has no negative power, so \( [0, 1] \) may not be raised to a negative power. The empty interval contains nothing and is returned unchanged.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type of the variable </td></tr>
@@ -4107,7 +4775,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="a733e3b1bcc4491f206dd708083b90654" name="a733e3b1bcc4491f206dd708083b90654"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a733e3b1bcc4491f206dd708083b90654">&#9670;&#160;</a></span>pow() <span class="overload">[4/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a733e3b1bcc4491f206dd708083b90654">&#9670;&#160;</a></span>pow() <span class="overload">[6/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4159,7 +4827,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="ac240ea50be68f2eb2ee4b6abf0d063c7" name="ac240ea50be68f2eb2ee4b6abf0d063c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac240ea50be68f2eb2ee4b6abf0d063c7">&#9670;&#160;</a></span>pow() <span class="overload">[5/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac240ea50be68f2eb2ee4b6abf0d063c7">&#9670;&#160;</a></span>pow() <span class="overload">[7/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4205,7 +4873,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="a0b3162c4a58cc30e72f7c4ddf3dfc1f6" name="a0b3162c4a58cc30e72f7c4ddf3dfc1f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b3162c4a58cc30e72f7c4ddf3dfc1f6">&#9670;&#160;</a></span>pow() <span class="overload">[6/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b3162c4a58cc30e72f7c4ddf3dfc1f6">&#9670;&#160;</a></span>pow() <span class="overload">[8/10]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4370,8 +5038,49 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a75eaae474ad407ef62a7eeeb0fd18c56" name="a75eaae474ad407ef62a7eeeb0fd18c56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75eaae474ad407ef62a7eeeb0fd18c56">&#9670;&#160;</a></span>sin() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::sin </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the sine of a general interval. </p>
+<p>The bounds of the result are always closed, since either may come from a peak interior to <code class="param">a</code>.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose sine is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the sine of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac6640bdeacf0caa40230b25787f033cf" name="ac6640bdeacf0caa40230b25787f033cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6640bdeacf0caa40230b25787f033cf">&#9670;&#160;</a></span>sin() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6640bdeacf0caa40230b25787f033cf">&#9670;&#160;</a></span>sin() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4388,7 +5097,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>Calculate the sine of an interval. </p>
-<p>Sine is not monotonic, so the result is not in general the sine of the bounds: an interval spanning a peak encloses the peak. The bounds of the result are always closed.</p>
+<p>Sine is not monotonic, so the result is not in general the sine of the bounds: an interval spanning a peak encloses the peak.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
@@ -4412,7 +5121,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a174b5d94bc2a10f4a256eab8ee5a342d" name="a174b5d94bc2a10f4a256eab8ee5a342d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a174b5d94bc2a10f4a256eab8ee5a342d">&#9670;&#160;</a></span>sin() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a174b5d94bc2a10f4a256eab8ee5a342d">&#9670;&#160;</a></span>sin() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4451,8 +5160,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="adff5d65a6b356a26c6ba302870c1f7a6" name="adff5d65a6b356a26c6ba302870c1f7a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adff5d65a6b356a26c6ba302870c1f7a6">&#9670;&#160;</a></span>sinh() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::sinh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the hyperbolic sine of a general interval. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose hyperbolic sine is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the hyperbolic sine of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a99aa192b7a9a760854b2e9a080d15bd1" name="a99aa192b7a9a760854b2e9a080d15bd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99aa192b7a9a760854b2e9a080d15bd1">&#9670;&#160;</a></span>sinh() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a99aa192b7a9a760854b2e9a080d15bd1">&#9670;&#160;</a></span>sinh() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4492,7 +5241,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a2e4a33ee5b89ddb9a1f023d6341d75a3" name="a2e4a33ee5b89ddb9a1f023d6341d75a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e4a33ee5b89ddb9a1f023d6341d75a3">&#9670;&#160;</a></span>sinh() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e4a33ee5b89ddb9a1f023d6341d75a3">&#9670;&#160;</a></span>sinh() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4532,7 +5281,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a7f1f2cb573fe5fb6c76bb32c204c0c7a" name="a7f1f2cb573fe5fb6c76bb32c204c0c7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f1f2cb573fe5fb6c76bb32c204c0c7a">&#9670;&#160;</a></span>sqrt() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f1f2cb573fe5fb6c76bb32c204c0c7a">&#9670;&#160;</a></span>sqrt() <span class="overload">[1/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4581,8 +5330,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a42dc57d9880dccd1df9d125c498266c1" name="a42dc57d9880dccd1df9d125c498266c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42dc57d9880dccd1df9d125c498266c1">&#9670;&#160;</a></span>sqrt() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::sqrt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the square root of a general interval. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose square root is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the square root of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a negative value. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae6ce659ec97fb6dcb2e582be33e059a1" name="ae6ce659ec97fb6dcb2e582be33e059a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6ce659ec97fb6dcb2e582be33e059a1">&#9670;&#160;</a></span>sqrt() <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6ce659ec97fb6dcb2e582be33e059a1">&#9670;&#160;</a></span>sqrt() <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4623,7 +5412,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a7601224e60827cd8ca210b648fd88534" name="a7601224e60827cd8ca210b648fd88534"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7601224e60827cd8ca210b648fd88534">&#9670;&#160;</a></span>sqrt() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7601224e60827cd8ca210b648fd88534">&#9670;&#160;</a></span>sqrt() <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4665,7 +5454,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a18639ffce7e2664f8f6cc4ca85213fd1" name="a18639ffce7e2664f8f6cc4ca85213fd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18639ffce7e2664f8f6cc4ca85213fd1">&#9670;&#160;</a></span>sqrt() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a18639ffce7e2664f8f6cc4ca85213fd1">&#9670;&#160;</a></span>sqrt() <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4704,8 +5493,49 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="afe33d93ff64a08247f708229e3b59c8a" name="afe33d93ff64a08247f708229e3b59c8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe33d93ff64a08247f708229e3b59c8a">&#9670;&#160;</a></span>tan() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::tan </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the tangent of a general interval. </p>
+<p>Openness cannot rescue an argument that reaches a pole: the poles are not representable, so a bound within rounding distance of one cannot be shown to exclude it.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose tangent is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the tangent of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains, or cannot be shown to exclude, an odd multiple of \( \pi/2 \). Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a050257d9cf405664f386bdcf9ae56ed3" name="a050257d9cf405664f386bdcf9ae56ed3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a050257d9cf405664f386bdcf9ae56ed3">&#9670;&#160;</a></span>tan() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a050257d9cf405664f386bdcf9ae56ed3">&#9670;&#160;</a></span>tan() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4723,7 +5553,7 @@ template&lt;typename T&gt; </div>
 
 <p>Calculate the tangent of an interval. </p>
 <p>Tangent is undefined at odd multiples of \( \pi/2 \), so <code class="param">a</code> must not contain one. Such a point is not representable, so an argument whose bound falls within rounding distance of one is refused as well: it cannot be shown to exclude the pole. The empty interval contains nothing and is returned unchanged.</p>
-<p>Every acceptable argument lies within a single branch, on which the tangent is increasing, so the openness of each bound carries over.</p>
+<p>Every acceptable argument lies within a single branch, on which the tangent is increasing.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
@@ -4747,7 +5577,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ac02929276a036dc441d88bf47027fbde" name="ac02929276a036dc441d88bf47027fbde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac02929276a036dc441d88bf47027fbde">&#9670;&#160;</a></span>tan() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac02929276a036dc441d88bf47027fbde">&#9670;&#160;</a></span>tan() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4786,8 +5616,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a41320fb24398e0f4f5a6f1a7989f97c4" name="a41320fb24398e0f4f5a6f1a7989f97c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41320fb24398e0f4f5a6f1a7989f97c4">&#9670;&#160;</a></span>tanh() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; sigma::tanh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the hyperbolic tangent of a general interval. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The value type of the interval </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval whose hyperbolic tangent is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An interval enclosing the hyperbolic tangent of every value in <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a243bebeea5d479fc5ddb0519de76b221" name="a243bebeea5d479fc5ddb0519de76b221"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a243bebeea5d479fc5ddb0519de76b221">&#9670;&#160;</a></span>tanh() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a243bebeea5d479fc5ddb0519de76b221">&#9670;&#160;</a></span>tanh() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4827,7 +5697,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="aa5a3cb36953c116658b16ddc790db42d" name="aa5a3cb36953c116658b16ddc790db42d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5a3cb36953c116658b16ddc790db42d">&#9670;&#160;</a></span>tanh() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5a3cb36953c116658b16ddc790db42d">&#9670;&#160;</a></span>tanh() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['interval_0',['Interval',['../classsigma_1_1Interval.html',1,'sigma']]],
-  ['interval_3c_20double_20_3e_1',['Interval&lt; double &gt;',['../classsigma_1_1Interval.html',1,'sigma']]],
-  ['interval_3c_20float_20_3e_2',['Interval&lt; float &gt;',['../classsigma_1_1Interval.html',1,'sigma']]],
-  ['interval_3c_20value_5ft_20_3e_3',['Interval&lt; value_t &gt;',['../classsigma_1_1Interval.html',1,'sigma']]]
+  ['hash_3c_20sigma_3a_3ageneralinterval_3c_20valuetype_20_3e_20_3e_0',['hash&lt; sigma::GeneralInterval&lt; ValueType &gt; &gt;',['../structstd_1_1hash_3_01sigma_1_1GeneralInterval_3_01ValueType_01_4_01_4.html',1,'std']]],
+  ['hash_3c_20sigma_3a_3ainterval_3c_20valuetype_20_3e_20_3e_1',['hash&lt; sigma::Interval&lt; ValueType &gt; &gt;',['../structstd_1_1hash_3_01sigma_1_1Interval_3_01ValueType_01_4_01_4.html',1,'std']]],
+  ['hash_3c_20sigma_3a_3amonomial_20_3e_2',['hash&lt; sigma::Monomial &gt;',['../structstd_1_1hash_3_01sigma_1_1Monomial_01_4.html',1,'std']]]
 ];

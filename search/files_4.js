@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['hyperbolic_2ehpp_0',['hyperbolic.hpp',['../interval_2operations_2hyperbolic_8hpp.html',1,'(Global Namespace)'],['../uncertain_2operations_2hyperbolic_8hpp.html',1,'(Global Namespace)']]]
+  ['general_5fconvert_2ehpp_0',['general_convert.hpp',['../general__convert_8hpp.html',1,'']]],
+  ['general_5finterval_2ehpp_1',['general_interval.hpp',['../general__interval_8hpp.html',1,'']]]
 ];

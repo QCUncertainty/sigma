@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['hash_3c_20sigma_3a_3ainterval_3c_20valuetype_20_3e_20_3e_0',['hash&lt; sigma::Interval&lt; ValueType &gt; &gt;',['../structstd_1_1hash_3_01sigma_1_1Interval_3_01ValueType_01_4_01_4.html',1,'std']]],
-  ['hash_3c_20sigma_3a_3amonomial_20_3e_1',['hash&lt; sigma::Monomial &gt;',['../structstd_1_1hash_3_01sigma_1_1Monomial_01_4.html',1,'std']]]
+  ['generalinterval_0',['GeneralInterval',['../classsigma_1_1GeneralInterval.html',1,'sigma']]],
+  ['generalinterval_3c_20double_20_3e_1',['GeneralInterval&lt; double &gt;',['../classsigma_1_1GeneralInterval.html',1,'sigma']]],
+  ['generalinterval_3c_20float_20_3e_2',['GeneralInterval&lt; float &gt;',['../classsigma_1_1GeneralInterval.html',1,'sigma']]]
 ];

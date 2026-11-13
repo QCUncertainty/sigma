@@ -125,7 +125,7 @@ $(function(){initNavTree('convert_8hpp.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>Conversions between <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a> and the boost interval it wraps.  
+<p>Conversions between <a class="el" href="classsigma_1_1Interval.html" title="Models a closed numeric interval.">sigma::Interval</a> and the boost interval it wraps.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="policies_8hpp_source.html">sigma/interval/detail_/policies.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="interval_8hpp_source.html">sigma/interval/interval.hpp</a>&quot;</code><br />
@@ -145,23 +145,17 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:abbb559314099aa63835e76bf1acee1ba" id="r_abbb559314099aa63835e76bf1acee1ba"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:abbb559314099aa63835e76bf1acee1ba template"><td class="memItemLeft"><a class="el" href="namespacesigma_1_1detail__.html#ac21206656810233d272b239d985cc606">boost_interval_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacesigma_1_1detail__.html#abbb559314099aa63835e76bf1acee1ba">sigma::detail_::to_boost_</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a)</td></tr>
-<tr class="memdesc:abbb559314099aa63835e76bf1acee1ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a> into the boost interval it wraps.  <br /></td></tr>
-<tr class="memitem:a00c6efad2b9cb3b1af9bede1b6d99145" id="r_a00c6efad2b9cb3b1af9bede1b6d99145"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:a00c6efad2b9cb3b1af9bede1b6d99145 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacesigma_1_1detail__.html#a00c6efad2b9cb3b1af9bede1b6d99145">sigma::detail_::from_boost_</a> (const <a class="el" href="namespacesigma_1_1detail__.html#ac21206656810233d272b239d985cc606">boost_interval_t</a>&lt; T &gt; &amp;x, bool left_open=false, bool right_open=false)</td></tr>
-<tr class="memdesc:a00c6efad2b9cb3b1af9bede1b6d99145"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a boost interval into a <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a>.  <br /></td></tr>
+<tr class="memdesc:abbb559314099aa63835e76bf1acee1ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a <a class="el" href="classsigma_1_1Interval.html" title="Models a closed numeric interval.">sigma::Interval</a> into the boost interval it wraps.  <br /></td></tr>
+<tr class="memitem:a2127a1e80405345582076c546dc41820" id="r_a2127a1e80405345582076c546dc41820"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a2127a1e80405345582076c546dc41820 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacesigma_1_1detail__.html#a2127a1e80405345582076c546dc41820">sigma::detail_::from_boost_</a> (const <a class="el" href="namespacesigma_1_1detail__.html#ac21206656810233d272b239d985cc606">boost_interval_t</a>&lt; T &gt; &amp;x)</td></tr>
+<tr class="memdesc:a2127a1e80405345582076c546dc41820"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a boost interval into a <a class="el" href="classsigma_1_1Interval.html" title="Models a closed numeric interval.">sigma::Interval</a>.  <br /></td></tr>
 <tr class="memitem:a7fb4226499df683754e2377c9507554f" id="r_a7fb4226499df683754e2377c9507554f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a7fb4226499df683754e2377c9507554f template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="namespacesigma_1_1detail__.html#a7fb4226499df683754e2377c9507554f">sigma::detail_::assert_within_unit_</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a, bool open, const std::string &amp;name)</td></tr>
 <tr class="memdesc:a7fb4226499df683754e2377c9507554f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Throws unless every value in <code class="param">a</code> lies in the unit interval.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Conversions between <a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">sigma::Interval</a> and the boost interval it wraps. </p>
-<p>The elementary functions of an Interval are implemented by handing the bounds to boost, which does the outwardly rounded numerics, and then restoring the two pieces of state boost does not track: emptiness and bound openness. These helpers are the two halves of that round trip.</p>
-<dl class="section note"><dt>Note</dt><dd>On openness. Boost has no notion of an open bound, so each caller states what the openness of the result should be:</dd></dl>
-<ul>
-<li>For a monotonically increasing function the bounds of the result come from the bounds of the input, so the input's openness carries over unchanged.</li>
-<li>For a monotonically decreasing function the bounds swap, and so does their openness.</li>
-<li>When a bound comes from an interior extremum (the maximum of cos, the minimum of cosh) or from a clamp (the 0 of sqrt, the \( \pm\pi/2 \) of asin), it does not correspond to an input bound at all. Such a bound is reported closed: the value really is attained, and in the cases where it is not, a closed bound is a superset of an open one and therefore still a valid enclosure. </li>
-</ul>
+<div class="textblock"><p>Conversions between <a class="el" href="classsigma_1_1Interval.html" title="Models a closed numeric interval.">sigma::Interval</a> and the boost interval it wraps. </p>
+<p>The elementary functions of an Interval are implemented by handing the bounds to boost, which does the outwardly rounded numerics, and then restoring the one piece of state boost does not track: emptiness. These helpers are the two halves of that round trip. The counterparts for GeneralInterval, which also restore the openness of the bounds, are in <a class="el" href="general__convert_8hpp.html" title="Conversions between sigma::GeneralInterval and the boost interval its closure wraps.">general_convert.hpp</a>. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

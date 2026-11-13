@@ -125,7 +125,7 @@ $(function(){initNavTree('classsigma_1_1Interval.html','','classsigma_1_1Interva
 </div><!--header-->
 <div class="contents">
 
-<p>Models a numeric interval.  
+<p>Models a closed numeric interval.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="interval_8hpp_source.html">interval.hpp</a>&gt;</code></p>
@@ -142,8 +142,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a7ac13e1f8ae3655b7dace5a654c8135e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="memitem:ada46432ead7ca2cd88379c28a8536880" id="r_ada46432ead7ca2cd88379c28a8536880"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ada46432ead7ca2cd88379c28a8536880">Interval</a> (<a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a> value)</td></tr>
 <tr class="memdesc:ada46432ead7ca2cd88379c28a8536880"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an interval from a single value.  <br /></td></tr>
-<tr class="memitem:ae0ec34c4e9cea2720b98cf7465ac5f26" id="r_ae0ec34c4e9cea2720b98cf7465ac5f26"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae0ec34c4e9cea2720b98cf7465ac5f26">Interval</a> (<a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a> <a class="el" href="#a44d6f08e940da1a6611bda507352abca">lower</a>, <a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a> <a class="el" href="#a2c86dd285670913250888b4b48be65e2">upper</a>, bool <a class="el" href="#a4109382a25834e2cb12b7ebf8caa278e">left_open</a>=false, bool <a class="el" href="#a4f5c7005a7a517d109b8ebe4ae849f7f">right_open</a>=false)</td></tr>
-<tr class="memdesc:ae0ec34c4e9cea2720b98cf7465ac5f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an interval from two bounds.  <br /></td></tr>
+<tr class="memitem:a54bad4aa3d1f32b65398c9e6108d302c" id="r_a54bad4aa3d1f32b65398c9e6108d302c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a54bad4aa3d1f32b65398c9e6108d302c">Interval</a> (<a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a> <a class="el" href="#a44d6f08e940da1a6611bda507352abca">lower</a>, <a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a> <a class="el" href="#a2c86dd285670913250888b4b48be65e2">upper</a>)</td></tr>
+<tr class="memdesc:a54bad4aa3d1f32b65398c9e6108d302c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an interval from two bounds.  <br /></td></tr>
 <tr class="memitem:a07ec232a04bd1af2984eed8900087756" id="r_a07ec232a04bd1af2984eed8900087756"><td class="memItemLeft"><a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a07ec232a04bd1af2984eed8900087756">width</a> () const</td></tr>
 <tr class="memdesc:a07ec232a04bd1af2984eed8900087756"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the distance between the interval's bounds.  <br /></td></tr>
 <tr class="memitem:a07ccf245cb4e86bdcb732233d0875920" id="r_a07ccf245cb4e86bdcb732233d0875920"><td class="memItemLeft"><a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a07ccf245cb4e86bdcb732233d0875920">median</a> () const</td></tr>
@@ -152,23 +152,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a7f8e6792358b52c74b80c1b8bd6ef229"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the half-width of the interval.  <br /></td></tr>
 <tr class="memitem:a90c6009af9e26cc7aa934d9c0f420a7a" id="r_a90c6009af9e26cc7aa934d9c0f420a7a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a90c6009af9e26cc7aa934d9c0f420a7a">empty</a> () const</td></tr>
 <tr class="memdesc:a90c6009af9e26cc7aa934d9c0f420a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is *this the empty interval?  <br /></td></tr>
-<tr class="memitem:a4109382a25834e2cb12b7ebf8caa278e" id="r_a4109382a25834e2cb12b7ebf8caa278e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4109382a25834e2cb12b7ebf8caa278e">left_open</a> () const</td></tr>
-<tr class="memdesc:a4109382a25834e2cb12b7ebf8caa278e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is <a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower()</a> NOT contained in the interval?  <br /></td></tr>
-<tr class="memitem:a7805d329848fd9460e9ad377c017c9e6" id="r_a7805d329848fd9460e9ad377c017c9e6"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7805d329848fd9460e9ad377c017c9e6">left_closed</a> () const</td></tr>
-<tr class="memdesc:a7805d329848fd9460e9ad377c017c9e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is <a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower()</a> contained in the interval?  <br /></td></tr>
-<tr class="memitem:a4f5c7005a7a517d109b8ebe4ae849f7f" id="r_a4f5c7005a7a517d109b8ebe4ae849f7f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4f5c7005a7a517d109b8ebe4ae849f7f">right_open</a> () const</td></tr>
-<tr class="memdesc:a4f5c7005a7a517d109b8ebe4ae849f7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is <a class="el" href="#a2c86dd285670913250888b4b48be65e2" title="Returns the upper bound of the interval.">upper()</a> NOT contained in the interval?  <br /></td></tr>
-<tr class="memitem:a1b4144e91986d46462f5ed08f07824fc" id="r_a1b4144e91986d46462f5ed08f07824fc"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a1b4144e91986d46462f5ed08f07824fc">right_closed</a> () const</td></tr>
-<tr class="memdesc:a1b4144e91986d46462f5ed08f07824fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is upeer contained in the interval?  <br /></td></tr>
 <tr class="memitem:a44d6f08e940da1a6611bda507352abca" id="r_a44d6f08e940da1a6611bda507352abca"><td class="memItemLeft"><a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a44d6f08e940da1a6611bda507352abca">lower</a> () const</td></tr>
 <tr class="memdesc:a44d6f08e940da1a6611bda507352abca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the lower bound of the interval.  <br /></td></tr>
 <tr class="memitem:a2c86dd285670913250888b4b48be65e2" id="r_a2c86dd285670913250888b4b48be65e2"><td class="memItemLeft"><a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2c86dd285670913250888b4b48be65e2">upper</a> () const</td></tr>
 <tr class="memdesc:a2c86dd285670913250888b4b48be65e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the upper bound of the interval.  <br /></td></tr>
 <tr class="memitem:a6c68bd56059a86ee764fcb3b27cbddec" id="r_a6c68bd56059a86ee764fcb3b27cbddec"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6c68bd56059a86ee764fcb3b27cbddec">contains</a> (<a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a> value) const</td></tr>
 <tr class="memdesc:a6c68bd56059a86ee764fcb3b27cbddec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether a scalar lies in this interval.  <br /></td></tr>
-<tr class="memitem:aa2ca8d499d214f1843229a847d4b8807" id="r_aa2ca8d499d214f1843229a847d4b8807"><td class="memItemLeft"><a id="aa2ca8d499d214f1843229a847d4b8807" name="aa2ca8d499d214f1843229a847d4b8807"></a>
-bool&#160;</td><td class="memItemRight"><b>contains</b> (const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a> &amp;other) const</td></tr>
-<tr class="memdesc:aa2ca8d499d214f1843229a847d4b8807"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is <code class="param">other</code> fully contained in this interval? <br /></td></tr>
+<tr class="memitem:aa2ca8d499d214f1843229a847d4b8807" id="r_aa2ca8d499d214f1843229a847d4b8807"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa2ca8d499d214f1843229a847d4b8807">contains</a> (const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a> &amp;other) const</td></tr>
+<tr class="memdesc:aa2ca8d499d214f1843229a847d4b8807"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is <code class="param">other</code> fully contained in this interval?  <br /></td></tr>
 <tr class="memitem:a67d91b325bd0f1bad3fa3f2bec618200" id="r_a67d91b325bd0f1bad3fa3f2bec618200"><td class="memItemLeft"><a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&#160;</td><td class="memItemRight"><a class="el" href="#a67d91b325bd0f1bad3fa3f2bec618200">set_union</a> (const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a> &amp;other) const</td></tr>
 <tr class="memdesc:a67d91b325bd0f1bad3fa3f2bec618200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the union of this interval and another interval.  <br /></td></tr>
 <tr class="memitem:a063bb414e612e797946667691d65d873" id="r_a063bb414e612e797946667691d65d873"><td class="memItemLeft"><a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&#160;</td><td class="memItemRight"><a class="el" href="#a063bb414e612e797946667691d65d873">set_intersection</a> (const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a> &amp;other) const</td></tr>
@@ -237,8 +228,8 @@ template&lt;typename T&gt; </td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename ValueType&gt;<br />
-class sigma::Interval&lt; ValueType &gt;</div><p>Models a numeric interval. </p>
-<p>An interval is defined by a lower and upper bound. This class wraps boost::numeric::interval and provides a median (midpoint) and radius (half-width) interface consistent with the rest of the sigma library.</p>
+class sigma::Interval&lt; ValueType &gt;</div><p>Models a closed numeric interval. </p>
+<p>An interval is defined by a lower and upper bound, both of which are members of the set. This class wraps boost::numeric::interval and provides a median (midpoint) and radius (half-width) interface consistent with the rest of the sigma library. An infinite bound means the interval is unbounded in that direction. Intervals whose bounds may be open are represented by <a class="el" href="classsigma_1_1GeneralInterval.html" title="Models an interval whose bounds may be open.">GeneralInterval</a>.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>The floating-point type of the bounds </td></tr>
@@ -324,13 +315,16 @@ template&lt;typename ValueType&gt; </div>
 
 </div>
 </div>
-<a id="ae0ec34c4e9cea2720b98cf7465ac5f26" name="ae0ec34c4e9cea2720b98cf7465ac5f26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0ec34c4e9cea2720b98cf7465ac5f26">&#9670;&#160;</a></span>Interval() <span class="overload">[3/3]</span></h2>
+<a id="a54bad4aa3d1f32b65398c9e6108d302c" name="a54bad4aa3d1f32b65398c9e6108d302c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54bad4aa3d1f32b65398c9e6108d302c">&#9670;&#160;</a></span>Interval() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename ValueType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classsigma_1_1Interval.html">sigma::Interval</a>&lt; ValueType &gt;::Interval </td>
@@ -340,19 +334,14 @@ template&lt;typename ValueType&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a></td>          <td class="paramname"><span class="paramname"><em>upper</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>left_open</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>right_open</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">value_t</a></td>          <td class="paramname"><span class="paramname"><em>upper</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Construct an interval from two bounds. </p>
@@ -361,8 +350,6 @@ template&lt;typename ValueType&gt; </div>
   <table class="params">
     <tr><td class="paramname"><a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower</a></td><td>The lower bound of the interval </td></tr>
     <tr><td class="paramname"><a class="el" href="#a2c86dd285670913250888b4b48be65e2" title="Returns the upper bound of the interval.">upper</a></td><td>The upper bound of the interval </td></tr>
-    <tr><td class="paramname"><a class="el" href="#a4109382a25834e2cb12b7ebf8caa278e" title="Is lower() NOT contained in the interval?">left_open</a></td><td>Is <code class="param">lower</code> just outside the interval? </td></tr>
-    <tr><td class="paramname"><a class="el" href="#a4f5c7005a7a517d109b8ebe4ae849f7f" title="Is upper() NOT contained in the interval?">right_open</a></td><td>Is <code class="param">upper</code> just outside the interval? </td></tr>
   </table>
   </dd>
 </dl>
@@ -376,13 +363,58 @@ template&lt;typename ValueType&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a6c68bd56059a86ee764fcb3b27cbddec" name="a6c68bd56059a86ee764fcb3b27cbddec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c68bd56059a86ee764fcb3b27cbddec">&#9670;&#160;</a></span>contains()</h2>
+<a id="aa2ca8d499d214f1843229a847d4b8807" name="aa2ca8d499d214f1843229a847d4b8807"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2ca8d499d214f1843229a847d4b8807">&#9670;&#160;</a></span>contains() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename ValueType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classsigma_1_1Interval.html">sigma::Interval</a>&lt; ValueType &gt;::contains </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; ValueType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Is <code class="param">other</code> fully contained in this interval? </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The interval to test. The empty interval is contained in every interval.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if every value in <code class="param">other</code> is in *this.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6c68bd56059a86ee764fcb3b27cbddec" name="a6c68bd56059a86ee764fcb3b27cbddec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c68bd56059a86ee764fcb3b27cbddec">&#9670;&#160;</a></span>contains() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ValueType&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool <a class="el" href="classsigma_1_1Interval.html">sigma::Interval</a>&lt; ValueType &gt;::contains </td>
@@ -391,17 +423,22 @@ template&lt;typename ValueType&gt; </div>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Whether a scalar lies in this interval. </p>
-<p>Returns true if <a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower()</a> &lt;= <code class="param">value</code> &lt;= <a class="el" href="#a2c86dd285670913250888b4b48be65e2" title="Returns the upper bound of the interval.">upper()</a>. Equality to <a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower()</a>/ <a class="el" href="#a2c86dd285670913250888b4b48be65e2" title="Returns the upper bound of the interval.">upper()</a> is only allowed if lower_closed()/upper_closed() is true, respectively.</p>
+<p>An infinite bound marks an unbounded direction, not a member, so no interval contains an infinite (or NaN) <code class="param">value</code>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The scalar to test</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if <code class="param">value</code> lies in the interval represented by *this and false otherwise.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if <code class="param">value</code> is finite and <a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower()</a> &lt;= <code class="param">value</code> &lt;= <a class="el" href="#a2c86dd285670913250888b4b48be65e2" title="Returns the upper bound of the interval.">upper()</a>, and false otherwise or if *this is empty.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
@@ -439,78 +476,6 @@ template&lt;typename ValueType&gt; </div>
 <p>Is *this the empty interval? </p>
 <p>The empty interval contains no values.</p>
 <dl class="section return"><dt>Returns</dt><dd>True if *this is the empty interval, false otherwise.</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a7805d329848fd9460e9ad377c017c9e6" name="a7805d329848fd9460e9ad377c017c9e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7805d329848fd9460e9ad377c017c9e6">&#9670;&#160;</a></span>left_closed()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classsigma_1_1Interval.html">sigma::Interval</a>&lt; ValueType &gt;::left_closed </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Is <a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower()</a> contained in the interval? </p>
-<dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower()</a> is contained in the interval.</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">none</td><td>No throw guarantee. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a4109382a25834e2cb12b7ebf8caa278e" name="a4109382a25834e2cb12b7ebf8caa278e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4109382a25834e2cb12b7ebf8caa278e">&#9670;&#160;</a></span>left_open()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classsigma_1_1Interval.html">sigma::Interval</a>&lt; ValueType &gt;::left_open </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Is <a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower()</a> NOT contained in the interval? </p>
-<dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower()</a> is NOT contained in the interval</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
@@ -770,7 +735,7 @@ template&lt;typename ValueType&gt; </div>
 </div><div class="memdoc">
 
 <p>Negation of an interval. </p>
-<p>Given the interval [a, b], the negation is [-b, -a]. The openness of the bounds is reversed, e.g., [a, b) becomes (-b, -a].</p>
+<p>Given the interval [a, b], the negation is [-b, -a].</p>
 <dl class="section return"><dt>Returns</dt><dd>A new interval with negated bounds</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
@@ -892,7 +857,7 @@ template&lt;typename ValueType&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>Reference to this interval after division</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">rhs</code> contains zero, including as a bound. Strong throw guarantee. </td></tr>
   </table>
   </dd>
 </dl>
@@ -959,7 +924,7 @@ template&lt;typename ValueType&gt; </div>
 </div><div class="memdoc">
 
 <p>Print the interval in interval form. </p>
-<p>The interval is printed in the form where closed bounds are represented by square brackets and open bounds are represented by parentheses.</p>
+<p>The interval is printed as "[lower, upper]".</p>
 <dl class="section return"><dt>Returns</dt><dd>A string representation of the interval.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
@@ -1001,78 +966,6 @@ template&lt;typename ValueType&gt; </div>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">std::domain_error</td><td>if the interval is empty </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a1b4144e91986d46462f5ed08f07824fc" name="a1b4144e91986d46462f5ed08f07824fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b4144e91986d46462f5ed08f07824fc">&#9670;&#160;</a></span>right_closed()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classsigma_1_1Interval.html">sigma::Interval</a>&lt; ValueType &gt;::right_closed </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Is upeer contained in the interval? </p>
-<dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="#a2c86dd285670913250888b4b48be65e2" title="Returns the upper bound of the interval.">upper()</a> is contained in the interval.</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a4f5c7005a7a517d109b8ebe4ae849f7f" name="a4f5c7005a7a517d109b8ebe4ae849f7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f5c7005a7a517d109b8ebe4ae849f7f">&#9670;&#160;</a></span>right_open()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ValueType&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classsigma_1_1Interval.html">sigma::Interval</a>&lt; ValueType &gt;::right_open </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Is <a class="el" href="#a2c86dd285670913250888b4b48be65e2" title="Returns the upper bound of the interval.">upper()</a> NOT contained in the interval? </p>
-<dl class="section return"><dt>Returns</dt><dd>True if <a class="el" href="#a2c86dd285670913250888b4b48be65e2" title="Returns the upper bound of the interval.">upper()</a> is NOT contained in the interval</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
   </table>
   </dd>
 </dl>
@@ -1132,7 +1025,7 @@ template&lt;typename ValueType&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the union of this interval and another interval. </p>
-<p>The union of two intervals is the smallest interval that contains both intervals. Because the result must be an interval, union is only defined when then the intervals overlap at least at one point.</p>
+<p>The union of two intervals is the smallest interval that contains both intervals. Because the result must be an interval, union is only defined when the intervals overlap at least at one point.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">other</td><td>The interval to union with </td></tr>
@@ -1211,7 +1104,7 @@ template&lt;typename ValueType&gt; </div>
 </div><div class="memdoc">
 
 <p>Returns the distance between the interval's bounds. </p>
-<p>The width of an interval is defined by |upper() - <a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower()</a>|. The width does NOT depend on the openness of the interval. The width of an empty interval is undefined (and calling this member on an empty interval will cause a domain_error to be thrown)</p>
+<p>The width of an interval is defined by |upper() - <a class="el" href="#a44d6f08e940da1a6611bda507352abca" title="Returns the lower bound of the interval.">lower()</a>|. The width of an empty interval is undefined (and calling this member on an empty interval will cause a domain_error to be thrown)</p>
 <dl class="section return"><dt>Returns</dt><dd>The width of the interval</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
@@ -1514,7 +1407,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>Orders two intervals by their median. </p>
-<p><a class="el" href="classsigma_1_1Interval.html" title="Models a numeric interval.">Interval</a> containment does not give a total order (overlapping intervals are neither less than, greater than, nor equal to one another under it), so this comparison is a deliberately weaker, total one, meant only for consumers that need <em>some</em> consistent ordering to sort by and not a rigorous enclosure relation. The empty interval sorts before every non-empty one and is equal only to itself.</p>
+<p><a class="el" href="classsigma_1_1Interval.html" title="Models a closed numeric interval.">Interval</a> containment does not give a total order (overlapping intervals are neither less than, greater than, nor equal to one another under it), so this comparison is a deliberately weaker, total one, meant only for consumers that need <em>some</em> consistent ordering to sort by and not a rigorous enclosure relation. The empty interval sorts before every non-empty one and is equal only to itself.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The numerical type of the bounds </td></tr>

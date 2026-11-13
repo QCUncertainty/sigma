@@ -1,6 +1,8 @@
 var hierarchy =
 [
     [ "sigma::Affine&lt; ValueType &gt;", "classsigma_1_1Affine.html", null ],
+    [ "sigma::GeneralInterval&lt; ValueType &gt;", "classsigma_1_1GeneralInterval.html", null ],
+    [ "std::hash&lt; sigma::GeneralInterval&lt; ValueType &gt; &gt;", "structstd_1_1hash_3_01sigma_1_1GeneralInterval_3_01ValueType_01_4_01_4.html", null ],
     [ "std::hash&lt; sigma::Interval&lt; ValueType &gt; &gt;", "structstd_1_1hash_3_01sigma_1_1Interval_3_01ValueType_01_4_01_4.html", null ],
     [ "std::hash&lt; sigma::Monomial &gt;", "structstd_1_1hash_3_01sigma_1_1Monomial_01_4.html", null ],
     [ "sigma::Interval&lt; ValueType &gt;", "classsigma_1_1Interval.html", null ],
@@ -8,6 +10,8 @@ var hierarchy =
     [ "NumTraits", null, [
       [ "Eigen::NumTraits< sigma::Affine< double > >", "structEigen_1_1NumTraits_3_01sigma_1_1Affine_3_01double_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::Affine< float > >", "structEigen_1_1NumTraits_3_01sigma_1_1Affine_3_01float_01_4_01_4.html", null ],
+      [ "Eigen::NumTraits< sigma::GeneralInterval< double > >", "structEigen_1_1NumTraits_3_01sigma_1_1GeneralInterval_3_01double_01_4_01_4.html", null ],
+      [ "Eigen::NumTraits< sigma::GeneralInterval< float > >", "structEigen_1_1NumTraits_3_01sigma_1_1GeneralInterval_3_01float_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::Interval< double > >", "structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01double_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::Interval< float > >", "structEigen_1_1NumTraits_3_01sigma_1_1Interval_3_01float_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::Taylor< double > >", "structEigen_1_1NumTraits_3_01sigma_1_1Taylor_3_01double_01_4_01_4.html", null ],

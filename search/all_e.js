@@ -6,7 +6,7 @@ var searchData=
   ['mathematical_20operations_3',['Mathematical Operations',['../md_docs_2examples.html#mathematical-operations',1,'']]],
   ['max_5forder_4',['max_order',['../classsigma_1_1Taylor.html#afab66497fc819c6ff4779499236d4842',1,'sigma::Taylor::max_order()'],['../classsigma_1_1TaylorModel.html#a17e61321c9667f08d83787ba7d8eb450',1,'sigma::TaylorModel::max_order()']]],
   ['mean_5',['mean',['../classsigma_1_1Uncertain.html#a43412df1d1f48b62f0981b999fe74d10',1,'sigma::Uncertain']]],
-  ['median_6',['median',['../classsigma_1_1Interval.html#a07ccf245cb4e86bdcb732233d0875920',1,'sigma::Interval']]],
+  ['median_6',['median',['../classsigma_1_1GeneralInterval.html#ad360f1238b7b1615172ccbb0617ba589',1,'sigma::GeneralInterval::median()'],['../classsigma_1_1Interval.html#a07ccf245cb4e86bdcb732233d0875920',1,'sigma::Interval::median()']]],
   ['model_7',['The Taylor model',['../md_docs_2taylor.html#the-taylor-model',1,'']]],
   ['models_8',['Taylor Models',['../md_docs_2taylor.html',1,'']]],
   ['modes_20that_20produce_20no_20warning_9',['Two failure modes that produce no warning',['../md_docs_2README.html#two-failure-modes-that-produce-no-warning',1,'']]],
