@@ -6,7 +6,7 @@
 using testing::test_interval;
 
 TEMPLATE_TEST_CASE("Eigen Matrix with Interval Elements", "", sigma::IFloat,
-                   sigma::IDouble) {
+                   sigma::IDouble, sigma::GIFloat, sigma::GIDouble) {
     using testing_t = TestType;
     using value_t   = typename testing_t::value_t;
     using imatrix_t = Eigen::Matrix<testing_t, Eigen::Dynamic, Eigen::Dynamic>;

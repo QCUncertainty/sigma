@@ -159,6 +159,19 @@ and closes it if it was open. It does not move the mean. Widening never
 invalidates an enclosure, and leaving the mean alone keeps the property below
 exact.
 
+The one exception is a mean that is not finite. Ordinary floating point can
+overflow where the interval does not fail: scaling
+\f$ \langle 10^{308}, 10^{308}, 10^{308} \rangle \f$ by \f$ 2 \f$ gives the
+floating-point mean \f$ +\infty \f$, and an infinite or NaN mean cannot be a
+member of any interval, since an infinite bound is never a member. The triplex
+keeps such a mean anyway. It is what the plain floating-point computation
+produces, so keeping it preserves the comparability property below, and it
+reports the overflow instead of hiding it. The membership invariant of Eq.
+\f$\eqref{eq:tp-def}\f$ is waived for a non-finite mean, no widening is
+attempted (an infinite bound stays unbounded), and callers can test for this
+case with `std::isfinite(mean())`. Construction still requires a finite mean
+in the set.
+
 Applying Eq. \f$\eqref{eq:tp-binary}\f$ to every operation gives the central
 guarantee of the type:
 

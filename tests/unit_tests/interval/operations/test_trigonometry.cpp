@@ -5,7 +5,8 @@
 
 using testing::test_interval;
 
-TEMPLATE_TEST_CASE("Trigonometry", "", sigma::IFloat, sigma::IDouble) {
+TEMPLATE_TEST_CASE("Trigonometry", "", sigma::IFloat, sigma::IDouble,
+                   sigma::GIFloat, sigma::GIDouble) {
     using testing_t = TestType;
     using value_t   = typename testing_t::value_t;
 
@@ -61,12 +62,6 @@ TEMPLATE_TEST_CASE("Trigonometry", "", sigma::IFloat, sigma::IDouble) {
         auto a = sigma::tan(testing_t(value_t{1}, value_t{1.57}));
         REQUIRE(a.lower() < a.upper());
         REQUIRE(a.contains(std::tan(value_t{1.57})));
-
-        // Every acceptable argument is within one increasing branch, so the
-        // openness of each bound carries over
-        auto b = sigma::tan(testing_t(value_t{0}, value_t{1}, true, false));
-        REQUIRE(b.left_open());
-        REQUIRE_FALSE(b.right_open());
     }
     SECTION("Arcsine") {
         // asin([0, 1]) = [0, pi/2]

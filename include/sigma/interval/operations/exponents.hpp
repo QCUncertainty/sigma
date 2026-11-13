@@ -42,9 +42,9 @@ Interval<T> exp(const Interval<T>& a);
 /** @brief Calculate the natural logarithm of an interval
  *
  *  The logarithm is only defined for positive values, so @p a must not contain
- *  zero or any negative value. A bound *at* zero is only out of domain if it
- *  is closed: \f$ (0, 1] \f$ contains no non-positive value, and its
- *  logarithm is unbounded below. The empty interval contains nothing and is
+ *  zero or any negative value. A bound is a member of the interval, so a lower
+ *  bound *at* zero is out of domain; an argument that only approaches zero
+ *  needs a GeneralInterval. The empty interval contains nothing and is
  *  returned unchanged.
  *
  *  @tparam T The value type of the interval
@@ -53,8 +53,7 @@ Interval<T> exp(const Interval<T>& a);
  *  @return An interval enclosing the natural logarithm of every value in @p a
  *
  *  @throw std::domain_error if @p a contains a non-positive value, i.e., if
- *         its lower bound is negative, or is a closed zero. Strong throw
- *         guarantee.
+ *         its lower bound is not positive. Strong throw guarantee.
  */
 template<typename T>
 Interval<T> log(const Interval<T>& a);
@@ -63,10 +62,9 @@ Interval<T> log(const Interval<T>& a);
  *
  *  Two combinations of base and exponent have no real value, and @p a must not
  *  contain a value in either. A negative base has no real fractional power,
- *  and a zero base has no negative power. As elsewhere, an open bound is not a
- *  value the interval contains, so \f$ (0, 1] \f$ may be raised to a negative
- *  power even though \f$ [0, 1] \f$ may not. The empty interval contains
- *  nothing and is returned unchanged.
+ *  and a zero base has no negative power, so \f$ [0, 1] \f$ may not be raised
+ *  to a negative power. The empty interval contains nothing and is returned
+ *  unchanged.
  *
  *  @tparam T The value type of the variable
  *  @tparam U The numeric type of the exponent
@@ -116,8 +114,8 @@ Interval<T> pow(const Interval<T>& a, const U& exp);
  *          in @p exponent
  *
  *  @throw std::domain_error if @p exponent has width and @p a contains a
- *         non-positive value, i.e., if its lower bound is negative, or is a
- *         closed zero. If @p exponent is a point, throws under the same
+ *         non-positive value, i.e., if its lower bound is not positive. If
+ *         @p exponent is a point, throws under the same
  *         conditions as the scalar overload instead. Strong throw
  *         guarantee.
  */

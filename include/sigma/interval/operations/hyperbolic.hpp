@@ -85,10 +85,10 @@ Interval<T> acosh(const Interval<T>& a);
  *
  *  Inverse hyperbolic tangent is only defined on the OPEN interval
  *  \f$ (-1, 1) \f$, so @p a must not contain a value outside it -- plus and
- *  minus one included. A bound at either of those is only out of domain if it
- *  is closed, since an open bound is not a value the interval contains, and an
- *  open bound there leaves the result unbounded on that side. The empty
- *  interval contains nothing and is returned unchanged.
+ *  minus one included. A bound is a member of the interval, so a bound at
+ *  either of those is out of domain; an argument that only approaches them
+ *  needs a GeneralInterval. The empty interval contains nothing and is
+ *  returned unchanged.
  *
  *  @tparam T The value type of the interval
  *  @param a The interval whose inverse hyperbolic tangent is computed

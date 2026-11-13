@@ -5,7 +5,8 @@
 
 using testing::test_interval;
 
-TEMPLATE_TEST_CASE("Exponents", "", sigma::IFloat, sigma::IDouble) {
+TEMPLATE_TEST_CASE("Exponents", "", sigma::IFloat, sigma::IDouble,
+                   sigma::GIFloat, sigma::GIDouble) {
     using testing_t = TestType;
     using value_t   = typename testing_t::value_t;
 
@@ -116,13 +117,6 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::IFloat, sigma::IDouble) {
         REQUIRE_THROWS_AS(sigma::log(testing_t(value_t{0}, value_t{1})),
                           std::domain_error);
 
-        // An OPEN bound at zero is not a value the interval contains, so the
-        // logarithm of it is defined -- and unbounded below.
-        auto a = sigma::log(testing_t(value_t{0}, value_t{1}, true, false));
-        REQUIRE(a.lower() == -std::numeric_limits<value_t>::infinity());
-        REQUIRE(a.left_open());
-        REQUIRE(a.contains(value_t{0}));
-
         // A non-integer power runs through the logarithm, so it inherits the
         // same domain: a negative base has no real fractional power.
         REQUIRE_THROWS_AS(sigma::pow(testing_t(value_t{-1}, value_t{4}), 0.5),
@@ -140,11 +134,6 @@ TEMPLATE_TEST_CASE("Exponents", "", sigma::IFloat, sigma::IDouble) {
                           std::domain_error);
         REQUIRE_THROWS_AS(sigma::pow(testing_t(value_t{0}, value_t{4}), -0.5),
                           std::domain_error);
-
-        // A bound merely AT zero, left open, does not contain zero
-        auto b = sigma::pow(testing_t(value_t{0}, value_t{1}, true, false), -1);
-        REQUIRE(b.lower() == value_t{1});
-        REQUIRE(b.upper() == std::numeric_limits<value_t>::infinity());
 
         // The empty interval contains nothing out of domain, so it is
         // returned rather than throwing

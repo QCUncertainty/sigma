@@ -8,8 +8,6 @@ namespace sigma {
 template<typename T>
 Interval<T> sin(const Interval<T>& a) {
     if(a.empty()) { return Interval<T>(); }
-    // Each bound may come from a peak interior to a rather than from a bound
-    // of a, so both are reported closed.
     return detail_::from_boost_(boost::numeric::sin(detail_::to_boost_(a)));
 }
 
@@ -41,9 +39,7 @@ Interval<T> tan(const Interval<T>& a) {
                                 "where the tangent is undefined.");
     }
 
-    // Every remaining argument lies strictly inside one branch, on which the
-    // tangent is increasing, so the openness of each bound carries over.
-    return detail_::from_boost_(y, a.left_open(), a.right_open());
+    return detail_::from_boost_(y);
 }
 
 template<typename T>
@@ -52,26 +48,20 @@ Interval<T> asin(const Interval<T>& a) {
     // Trimming the argument back to the domain would answer a narrower
     // question than the one asked. Boost would do exactly that.
     detail_::assert_within_unit_(a, false, "arcsine");
-    // Increasing, so the openness of each bound carries over.
-    return detail_::from_boost_(boost::numeric::asin(detail_::to_boost_(a)),
-                                a.left_open(), a.right_open());
+    return detail_::from_boost_(boost::numeric::asin(detail_::to_boost_(a)));
 }
 
 template<typename T>
 Interval<T> acos(const Interval<T>& a) {
     if(a.empty()) { return Interval<T>(); }
     detail_::assert_within_unit_(a, false, "arccosine");
-    // Decreasing, so the lower bound of the result comes from the upper bound
-    // of a and vice versa.
-    return detail_::from_boost_(boost::numeric::acos(detail_::to_boost_(a)),
-                                a.right_open(), a.left_open());
+    return detail_::from_boost_(boost::numeric::acos(detail_::to_boost_(a)));
 }
 
 template<typename T>
 Interval<T> atan(const Interval<T>& a) {
     if(a.empty()) { return Interval<T>(); }
-    return detail_::from_boost_(boost::numeric::atan(detail_::to_boost_(a)),
-                                a.left_open(), a.right_open());
+    return detail_::from_boost_(boost::numeric::atan(detail_::to_boost_(a)));
 }
 
 } // namespace sigma
