@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hyperbolic_2ehpp_0',['hyperbolic.hpp',['../interval_2general__operations_2hyperbolic_8hpp.html',1,'(Global Namespace)'],['../interval_2operations_2hyperbolic_8hpp.html',1,'(Global Namespace)'],['../uncertain_2operations_2hyperbolic_8hpp.html',1,'(Global Namespace)']]]
+  ['hyperbolic_2ehpp_0',['hyperbolic.hpp',['../interval_2general__operations_2hyperbolic_8hpp.html',1,'(Global Namespace)'],['../interval_2operations_2hyperbolic_8hpp.html',1,'(Global Namespace)'],['../triplex_2operations_2hyperbolic_8hpp.html',1,'(Global Namespace)'],['../uncertain_2operations_2hyperbolic_8hpp.html',1,'(Global Namespace)']]]
 ];

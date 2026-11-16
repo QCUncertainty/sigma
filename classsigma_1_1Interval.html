@@ -200,7 +200,7 @@ Related Symbols</h2></td></tr>
 <tr class="memdesc:af062ee3c64807e17e70355925051c35d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two intervals for inequality.  <br /></td></tr>
 <tr class="memitem:aaab00619c4a60d94daa244143195a047" id="r_aaab00619c4a60d94daa244143195a047"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:aaab00619c4a60d94daa244143195a047 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aaab00619c4a60d94daa244143195a047">operator&lt;</a> (const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
-<tr class="memdesc:aaab00619c4a60d94daa244143195a047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders two intervals by their median.  <br /></td></tr>
+<tr class="memdesc:aaab00619c4a60d94daa244143195a047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders two intervals, primarily by their median.  <br /></td></tr>
 <tr class="memitem:ab8f66e9cc4243c725f732e0e827c881c" id="r_ab8f66e9cc4243c725f732e0e827c881c"><td class="memTemplParams" colspan="2"><a id="ab8f66e9cc4243c725f732e0e827c881c" name="ab8f66e9cc4243c725f732e0e827c881c"></a>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ab8f66e9cc4243c725f732e0e827c881c template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;</b> (const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
@@ -213,6 +213,9 @@ template&lt;typename T&gt; </td></tr>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a8c63545c28565c1aa37b61dbcc248a66 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:a8c63545c28565c1aa37b61dbcc248a66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated and reversed. <br /></td></tr>
+<tr class="memitem:a25b618e956d409791022123edc28ffcb" id="r_a25b618e956d409791022123edc28ffcb"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a25b618e956d409791022123edc28ffcb template"><td class="memItemLeft"><a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a25b618e956d409791022123edc28ffcb">widen</a> (const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt; &amp;a, typename <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt;<a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">::value_t</a> point)</td></tr>
+<tr class="memdesc:a25b618e956d409791022123edc28ffcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Widens an interval just enough to contain a point.  <br /></td></tr>
 <tr class="memitem:abb7bdb211be63335fd48ecb5726d1f02" id="r_abb7bdb211be63335fd48ecb5726d1f02"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:abb7bdb211be63335fd48ecb5726d1f02 template"><td class="memItemLeft"><a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abb7bdb211be63335fd48ecb5726d1f02">operator+</a> (<a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt; lhs, const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:abb7bdb211be63335fd48ecb5726d1f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Addition of two intervals.  <br /></td></tr>
@@ -1406,8 +1409,8 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Orders two intervals by their median. </p>
-<p><a class="el" href="classsigma_1_1Interval.html" title="Models a closed numeric interval.">Interval</a> containment does not give a total order (overlapping intervals are neither less than, greater than, nor equal to one another under it), so this comparison is a deliberately weaker, total one, meant only for consumers that need <em>some</em> consistent ordering to sort by and not a rigorous enclosure relation. The empty interval sorts before every non-empty one and is equal only to itself.</p>
+<p>Orders two intervals, primarily by their median. </p>
+<p><a class="el" href="classsigma_1_1Interval.html" title="Models a closed numeric interval.">Interval</a> containment does not give a total order (overlapping intervals are neither less than, greater than, nor equal to one another under it), so this comparison is a deliberately weaker, total one, meant only for consumers that need <em>some</em> consistent ordering to sort by and not a rigorous enclosure relation. Intervals are compared lexicographically by median, then lower bound, then upper bound. The tie-breaks make the order consistent with operator==: neither of two intervals precedes the other exactly when they are equal, so, e.g., [0, 2] and [-1, 3] are ordered even though they share a median, and intervals can be keys of ordered containers. The empty interval sorts before every non-empty one.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The numerical type of the bounds </td></tr>
@@ -1421,7 +1424,7 @@ template&lt;typename T&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Whether <code class="param">lhs's</code> median precedes <code class="param">rhs's</code>, treating the empty interval as less than every non-empty one.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether <code class="param">lhs</code> precedes <code class="param">rhs</code>.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
@@ -1529,6 +1532,59 @@ template&lt;typename T1, typename T2&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Whether the instances are equivalent </dd></dl>
+
+</div>
+</div>
+<a id="a25b618e956d409791022123edc28ffcb" name="a25b618e956d409791022123edc28ffcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25b618e956d409791022123edc28ffcb">&#9670;&#160;</a></span>widen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt; widen </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename <a class="el" href="#a7ac13e1f8ae3655b7dace5a654c8135e">Interval</a>&lt; T &gt;<a class="el" href="#a1cdf797e6b73fd01b5a01569ccf1e23b">::value_t</a></td>          <td class="paramname"><span class="paramname"><em>point</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel related">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Widens an interval just enough to contain a point. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The numerical type of the bounds </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval to widen </td></tr>
+    <tr><td class="paramname">point</td><td>The value the result must contain. An infinite or NaN value is never a member of an interval, so for one of those the result cannot contain <code class="param">point</code>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code class="param">a</code> if it already contains <code class="param">point</code>. Otherwise <code class="param">a</code> with the bound on the side of <code class="param">point</code> moved to <code class="param">point</code>; the degenerate interval [<code class="param">point</code>, <code class="param">point</code>] if <code class="param">a</code> is empty.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

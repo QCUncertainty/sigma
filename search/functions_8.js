@@ -5,5 +5,6 @@ var searchData=
   ['inplace_5funary_2',['inplace_unary',['../namespacesigma_1_1detail__.html#a4e7bb3552d85f228e20613973d6f101b',1,'sigma::detail_']]],
   ['integer_5fpow_5fopenness_5f_3',['integer_pow_openness_',['../namespacesigma_1_1detail__.html#aec5db9390ec4915236878fc0cfd18137',1,'sigma::detail_']]],
   ['interval_4',['Interval',['../classsigma_1_1Interval.html#a7ac13e1f8ae3655b7dace5a654c8135e',1,'sigma::Interval::Interval()'],['../classsigma_1_1Interval.html#ada46432ead7ca2cd88379c28a8536880',1,'sigma::Interval::Interval(value_t value)'],['../classsigma_1_1Interval.html#a54bad4aa3d1f32b65398c9e6108d302c',1,'sigma::Interval::Interval(value_t lower, value_t upper)']]],
-  ['is_5finteger_5fexponent_5',['is_integer_exponent',['../numeric_8hpp.html#a6404f5a13a94874f8f7f83498abc70e8',1,'sigma::detail']]]
+  ['interval_5',['interval',['../classsigma_1_1Triplex.html#a8f40d24a92881ce53891caffc65eb599',1,'sigma::Triplex']]],
+  ['is_5finteger_5fexponent_6',['is_integer_exponent',['../numeric_8hpp.html#a6404f5a13a94874f8f7f83498abc70e8',1,'sigma::detail']]]
 ];

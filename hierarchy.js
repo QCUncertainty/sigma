@@ -1,10 +1,15 @@
 var hierarchy =
 [
     [ "sigma::Affine&lt; ValueType &gt;", "classsigma_1_1Affine.html", null ],
+    [ "std::false_type", null, [
+      [ "sigma::is_general_interval< GeneralInterval< T > >", "structsigma_1_1is__general__interval_3_01GeneralInterval_3_01T_01_4_01_4.html", null ],
+      [ "sigma::is_general_interval< T >", "structsigma_1_1is__general__interval.html", null ]
+    ] ],
     [ "sigma::GeneralInterval&lt; ValueType &gt;", "classsigma_1_1GeneralInterval.html", null ],
     [ "std::hash&lt; sigma::GeneralInterval&lt; ValueType &gt; &gt;", "structstd_1_1hash_3_01sigma_1_1GeneralInterval_3_01ValueType_01_4_01_4.html", null ],
     [ "std::hash&lt; sigma::Interval&lt; ValueType &gt; &gt;", "structstd_1_1hash_3_01sigma_1_1Interval_3_01ValueType_01_4_01_4.html", null ],
     [ "std::hash&lt; sigma::Monomial &gt;", "structstd_1_1hash_3_01sigma_1_1Monomial_01_4.html", null ],
+    [ "std::hash&lt; sigma::Triplex&lt; IntervalType &gt; &gt;", "structstd_1_1hash_3_01sigma_1_1Triplex_3_01IntervalType_01_4_01_4.html", null ],
     [ "sigma::Interval&lt; ValueType &gt;", "classsigma_1_1Interval.html", null ],
     [ "sigma::Monomial", "classsigma_1_1Monomial.html", null ],
     [ "NumTraits", null, [
@@ -20,6 +25,10 @@ var hierarchy =
       [ "Eigen::NumTraits< sigma::TaylorModel< float > >", "structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01float_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::ThresholdedAffine< double > >", "structEigen_1_1NumTraits_3_01sigma_1_1ThresholdedAffine_3_01double_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::ThresholdedAffine< float > >", "structEigen_1_1NumTraits_3_01sigma_1_1ThresholdedAffine_3_01float_01_4_01_4.html", null ],
+      [ "Eigen::NumTraits< sigma::Triplex< sigma::GeneralInterval< double > > >", "structEigen_1_1NumTraits_3_01sigma_1_1Triplex_3_01sigma_1_1GeneralInterval_3_01double_01_4_01_4_01_4.html", null ],
+      [ "Eigen::NumTraits< sigma::Triplex< sigma::GeneralInterval< float > > >", "structEigen_1_1NumTraits_3_01sigma_1_1Triplex_3_01sigma_1_1GeneralInterval_3_01float_01_4_01_4_01_4.html", null ],
+      [ "Eigen::NumTraits< sigma::Triplex< sigma::Interval< double > > >", "structEigen_1_1NumTraits_3_01sigma_1_1Triplex_3_01sigma_1_1Interval_3_01double_01_4_01_4_01_4.html", null ],
+      [ "Eigen::NumTraits< sigma::Triplex< sigma::Interval< float > > >", "structEigen_1_1NumTraits_3_01sigma_1_1Triplex_3_01sigma_1_1Interval_3_01float_01_4_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::Uncertain< double > >", "structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01double_01_4_01_4.html", null ],
       [ "Eigen::NumTraits< sigma::Uncertain< float > >", "structEigen_1_1NumTraits_3_01sigma_1_1Uncertain_3_01float_01_4_01_4.html", null ]
     ] ],
@@ -32,5 +41,9 @@ var hierarchy =
     [ "sigma::TaylorModel&lt; ValueType &gt;", "classsigma_1_1TaylorModel.html", null ],
     [ "sigma::ThresholdedAffine&lt; ValueType &gt;::Threshold", "structsigma_1_1ThresholdedAffine_1_1Threshold.html", null ],
     [ "sigma::ThresholdedAffine&lt; ValueType &gt;", "classsigma_1_1ThresholdedAffine.html", null ],
+    [ "sigma::Triplex&lt; IntervalType &gt;", "classsigma_1_1Triplex.html", null ],
+    [ "std::true_type", null, [
+      [ "sigma::is_general_interval< GeneralInterval< T > >", "structsigma_1_1is__general__interval_3_01GeneralInterval_3_01T_01_4_01_4.html", null ]
+    ] ],
     [ "sigma::Uncertain&lt; ValueType &gt;", "classsigma_1_1Uncertain.html", null ]
 ];

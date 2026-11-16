@@ -218,7 +218,7 @@ Related Symbols</h2></td></tr>
 <tr class="memdesc:a2bffcd94d01403a93627d78921a409f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two intervals for inequality.  <br /></td></tr>
 <tr class="memitem:abed8635709fed22e1c2f6a840adf73a0" id="r_abed8635709fed22e1c2f6a840adf73a0"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:abed8635709fed22e1c2f6a840adf73a0 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abed8635709fed22e1c2f6a840adf73a0">operator&lt;</a> (const <a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt; &amp;rhs)</td></tr>
-<tr class="memdesc:abed8635709fed22e1c2f6a840adf73a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders two intervals by their median.  <br /></td></tr>
+<tr class="memdesc:abed8635709fed22e1c2f6a840adf73a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders two intervals, primarily by their median.  <br /></td></tr>
 <tr class="memitem:af60ca3e08005ea2491fa1cfac9507d9d" id="r_af60ca3e08005ea2491fa1cfac9507d9d"><td class="memTemplParams" colspan="2"><a id="af60ca3e08005ea2491fa1cfac9507d9d" name="af60ca3e08005ea2491fa1cfac9507d9d"></a>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:af60ca3e08005ea2491fa1cfac9507d9d template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;</b> (const <a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt; &amp;rhs)</td></tr>
@@ -231,6 +231,9 @@ template&lt;typename T&gt; </td></tr>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:acbffd264630ba3d9e17966947479920e template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (const <a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:acbffd264630ba3d9e17966947479920e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated and reversed. <br /></td></tr>
+<tr class="memitem:a982d7c4a84fbdc099726366f0d5eb22a" id="r_a982d7c4a84fbdc099726366f0d5eb22a"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a982d7c4a84fbdc099726366f0d5eb22a template"><td class="memItemLeft"><a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a982d7c4a84fbdc099726366f0d5eb22a">widen</a> (const <a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt; &amp;a, typename <a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt;<a class="el" href="#a9129e345bb07cf85a3ba5d275ef833e7">::value_t</a> point)</td></tr>
+<tr class="memdesc:a982d7c4a84fbdc099726366f0d5eb22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Widens an interval just enough to contain a point.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename ValueType&gt;<br />
@@ -1434,8 +1437,8 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Orders two intervals by their median. </p>
-<p>The same deliberately weak, total ordering as for <a class="el" href="classsigma_1_1Interval.html" title="Models a closed numeric interval.">Interval</a>, meant only for consumers that need <em>some</em> consistent ordering to sort by and not a rigorous enclosure relation. The empty interval sorts before every non-empty one.</p>
+<p>Orders two intervals, primarily by their median. </p>
+<p>The same deliberately weak, total ordering as for <a class="el" href="classsigma_1_1Interval.html" title="Models a closed numeric interval.">Interval</a>, meant only for consumers that need <em>some</em> consistent ordering to sort by and not a rigorous enclosure relation: the closures are compared first. Intervals with the same closure are then ordered by the openness of the lower bound and then of the upper bound, with a closed bound before an open one, so that, as for <a class="el" href="classsigma_1_1Interval.html" title="Models a closed numeric interval.">Interval</a>, neither of two intervals precedes the other exactly when they are equal. The empty interval sorts before every non-empty one.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>The numerical type of the bounds </td></tr>
@@ -1449,7 +1452,7 @@ template&lt;typename T&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Whether <code class="param">lhs's</code> median precedes <code class="param">rhs's</code>.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether <code class="param">lhs</code> precedes <code class="param">rhs</code>.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
@@ -1558,6 +1561,60 @@ template&lt;typename T1, typename T2&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Whether the instances are equivalent </dd></dl>
+
+</div>
+</div>
+<a id="a982d7c4a84fbdc099726366f0d5eb22a" name="a982d7c4a84fbdc099726366f0d5eb22a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a982d7c4a84fbdc099726366f0d5eb22a">&#9670;&#160;</a></span>widen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt; widen </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename <a class="el" href="#a32109f3279cc6cbbbd73be1b4da22aa4">GeneralInterval</a>&lt; T &gt;<a class="el" href="#a9129e345bb07cf85a3ba5d275ef833e7">::value_t</a></td>          <td class="paramname"><span class="paramname"><em>point</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel related">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Widens an interval just enough to contain a point. </p>
+<p>As for widen(const Interval&lt;T&gt;&amp;, T), except that <code class="param">point</code> may also lie on an open bound of <code class="param">a</code>. Either way, the bound that <code class="param">point</code> moves or lands on is closed.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The numerical type of the bounds </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The interval to widen </td></tr>
+    <tr><td class="paramname">point</td><td>The value the result must contain. An infinite or NaN value is never a member of an interval, so for one of those the result cannot contain <code class="param">point</code>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code class="param">a</code> if it already contains <code class="param">point</code>. Otherwise <code class="param">a</code> with the bound on the side of <code class="param">point</code> moved to <code class="param">point</code> and closed; the degenerate interval [<code class="param">point</code>, <code class="param">point</code>] if <code class="param">a</code> is empty.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

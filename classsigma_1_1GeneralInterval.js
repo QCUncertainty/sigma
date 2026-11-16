@@ -37,5 +37,6 @@ var classsigma_1_1GeneralInterval =
     [ "operator<=", "classsigma_1_1GeneralInterval.html#ac1c1c94d122e108fb692bf9a79ec24c0", null ],
     [ "operator==", "classsigma_1_1GeneralInterval.html#aa5dc47381b64277592a1a12f9b724ba7", null ],
     [ "operator>", "classsigma_1_1GeneralInterval.html#af60ca3e08005ea2491fa1cfac9507d9d", null ],
-    [ "operator>=", "classsigma_1_1GeneralInterval.html#acbffd264630ba3d9e17966947479920e", null ]
+    [ "operator>=", "classsigma_1_1GeneralInterval.html#acbffd264630ba3d9e17966947479920e", null ],
+    [ "widen", "classsigma_1_1GeneralInterval.html#a982d7c4a84fbdc099726366f0d5eb22a", null ]
 ];

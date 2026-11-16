@@ -171,6 +171,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a3ea5a6bce19f65926a6f0c61060fa1bd" id="r_a3ea5a6bce19f65926a6f0c61060fa1bd"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
 <tr class="memitem:a3ea5a6bce19f65926a6f0c61060fa1bd template"><td class="memItemLeft"><a class="el" href="#ac21206656810233d272b239d985cc606">boost_interval_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3ea5a6bce19f65926a6f0c61060fa1bd">exponent_interval_</a> (const U &amp;<a class="el" href="namespacesigma.html#a1f0fc9200525ff76e74575128a9de259">exp</a>)</td></tr>
 <tr class="memdesc:a3ea5a6bce19f65926a6f0c61060fa1bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The exponent of a non-integer <a class="el" href="namespacesigma.html#a24fe469f5d0da2716b5be3d1ff8d12a3" title="Calculate the power of an affine form.">pow()</a>, as an interval.  <br /></td></tr>
+<tr class="memitem:af0500b50cb489bc4191b2022927303c0" id="r_af0500b50cb489bc4191b2022927303c0"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:af0500b50cb489bc4191b2022927303c0 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af0500b50cb489bc4191b2022927303c0">make_triplex_</a> (IntervalType bounds, typename IntervalType::value_t nominal)</td></tr>
+<tr class="memdesc:af0500b50cb489bc4191b2022927303c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles a triplex from the result of an operation.  <br /></td></tr>
+<tr class="memitem:a4e48194c53c819def570c7a273145903" id="r_a4e48194c53c819def570c7a273145903"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType, typename BoundsFunction, typename NominalFunction&gt; </td></tr>
+<tr class="memitem:a4e48194c53c819def570c7a273145903 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4e48194c53c819def570c7a273145903">apply_unary_</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a, BoundsFunction &amp;&amp;bounds_fxn, NominalFunction &amp;&amp;nominal_fxn)</td></tr>
+<tr class="memdesc:a4e48194c53c819def570c7a273145903"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies a unary function to a triplex.  <br /></td></tr>
 <tr class="memitem:a4e7bb3552d85f228e20613973d6f101b" id="r_a4e7bb3552d85f228e20613973d6f101b"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a4e7bb3552d85f228e20613973d6f101b template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4e7bb3552d85f228e20613973d6f101b">inplace_unary</a> (<a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;c, T mean, T dcda)</td></tr>
 <tr class="memdesc:a4e7bb3552d85f228e20613973d6f101b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generalized Inplace Unary Changes.  <br /></td></tr>
@@ -227,6 +233,60 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a4e48194c53c819def570c7a273145903" name="a4e48194c53c819def570c7a273145903"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e48194c53c819def570c7a273145903">&#9670;&#160;</a></span>apply_unary_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType, typename BoundsFunction, typename NominalFunction&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::detail_::apply_unary_ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BoundsFunction &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>bounds_fxn</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">NominalFunction &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>nominal_fxn</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applies a unary function to a triplex. </p>
+<p>Code factorization for the elementary functions.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex. </td></tr>
+    <tr><td class="paramname">BoundsFunction</td><td>The type of a callable taking an IntervalType and returning an IntervalType. </td></tr>
+    <tr><td class="paramname">NominalFunction</td><td>The type of a callable taking a value_t and returning something convertible to value_t.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>The argument. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bounds_fxn</td><td>Computes the bounds of the result from those of <code class="param">a</code>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nominal_fxn</td><td>Computes the nominal value of the result from that of <code class="param">a</code>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The function applied to <code class="param">a</code>.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">bounds_fxn</code> rejects the bounds of <code class="param">a</code>. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7a048e67e39af065f025b721ff7c6622" name="a7a048e67e39af065f025b721ff7c6622"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a048e67e39af065f025b721ff7c6622">&#9670;&#160;</a></span>assert_within_unit_() <span class="overload">[1/2]</span></h2>
 
@@ -616,6 +676,52 @@ template&lt;typename T&gt; </div>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> is empty. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af0500b50cb489bc4191b2022927303c0" name="af0500b50cb489bc4191b2022927303c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0500b50cb489bc4191b2022927303c0">&#9670;&#160;</a></span>make_triplex_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::detail_::make_triplex_ </td>
+          <td>(</td>
+          <td class="paramtype">IntervalType</td>          <td class="paramname"><span class="paramname"><em>bounds</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename IntervalType::value_t</td>          <td class="paramname"><span class="paramname"><em>nominal</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assembles a triplex from the result of an operation. </p>
+<p>Every operation on a triplex computes its bounds and its nominal value separately and then hands them to this function, which applies the widening rule: a finite <code class="param">nominal</code> that is not a member of <code class="param">bounds</code> widens <code class="param">bounds</code> to include it. The nominal value itself is never moved. A non-finite <code class="param">nominal</code> is kept as is and <code class="param">bounds</code> are left alone, so the result does not satisfy the class invariant, which is exactly what happens in ordinary floating point.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">bounds</td><td>The bounds the interval operation produced. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nominal</td><td>The nominal value the scalar operation produced.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The triplex with nominal value <code class="param">nominal</code> and bounds <code class="param">bounds</code>, widened if needed.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee. </td></tr>
   </table>
   </dd>
 </dl>

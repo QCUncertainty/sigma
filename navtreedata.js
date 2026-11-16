@@ -123,8 +123,7 @@ var NAVTREE =
       [ "Arithmetic", "md_docs_2triplex.html#arithmetic-2", null ],
       [ "What is gained, and what remains", "md_docs_2triplex.html#what-is-gained-and-what-remains-1", null ],
       [ "Class design", "md_docs_2triplex.html#class-design-3", null ],
-      [ "Future work", "md_docs_2triplex.html#future-work-1", null ],
-      [ "References", "md_docs_2triplex.html#references", null ]
+      [ "Future work", "md_docs_2triplex.html#future-work-1", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -160,11 +159,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "affine_2eigen__compat_8hpp.html",
-"classsigma_1_1Interval.html#a710620fb21f92b9b6145e2ae5a625a3d",
-"classsigma_1_1TaylorModel.html#a55e7c9f80b5c0742823559708f3fc006",
-"classsigma_1_1Uncertain.html#af1806c76fcdb09aadbaf17ca7a26dad1",
-"namespacesigma.html#a24fe469f5d0da2716b5be3d1ff8d12a3",
-"structEigen_1_1NumTraits_3_01sigma_1_1TaylorModel_3_01float_01_4_01_4.html#ace84b8d5a515ef791ab6db2d92f7a90a"
+"classsigma_1_1Interval.html#a54bad4aa3d1f32b65398c9e6108d302c",
+"classsigma_1_1TaylorModel.html#a516fb5942e99ea63325f608ad392d0a1",
+"classsigma_1_1Triplex.html#a839e1eba5abca0c05b6e3374413c6e92",
+"md_docs_2affine.html#the-affine-form",
+"namespacesigma_1_1detail__.html#a4e7bb3552d85f228e20613973d6f101b",
+"structsigma_1_1ThresholdedAffine_1_1Threshold.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

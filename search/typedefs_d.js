@@ -7,5 +7,8 @@ var searchData=
   ['tdouble_4',['TDouble',['../namespacesigma.html#a79955d82ba1a40786d9bbdaa995527b6',1,'sigma']]],
   ['tfloat_5',['TFloat',['../namespacesigma.html#a3c2e89773dac6499c514d57dfc7eb8a0',1,'sigma']]],
   ['tmdouble_6',['TMDouble',['../namespacesigma.html#af795a6bbfd0022d3f9b632d25b953cce',1,'sigma']]],
-  ['tmfloat_7',['TMFloat',['../namespacesigma.html#a3ac511d1d352ed5af08b3583e26183b9',1,'sigma']]]
+  ['tmfloat_7',['TMFloat',['../namespacesigma.html#a3ac511d1d352ed5af08b3583e26183b9',1,'sigma']]],
+  ['tpdouble_8',['TPDouble',['../namespacesigma.html#a3c5592290c91e4c054777ae94d93dadb',1,'sigma']]],
+  ['tpfloat_9',['TPFloat',['../namespacesigma.html#adf4a94ab590d9640510943833e262c5e',1,'sigma']]],
+  ['triplex_10',['Triplex',['../structEigen_1_1NumTraits_3_01sigma_1_1Triplex_3_01sigma_1_1Interval_3_01float_01_4_01_4_01_4.html#aaab638f7657b6f36fcfe61e90a6324e1',1,'Eigen::NumTraits&lt; sigma::Triplex&lt; sigma::Interval&lt; float &gt; &gt; &gt;::Triplex'],['../structEigen_1_1NumTraits_3_01sigma_1_1Triplex_3_01sigma_1_1Interval_3_01double_01_4_01_4_01_4.html#afdbdc7d4f3d80fcc1304f704ef276152',1,'Eigen::NumTraits&lt; sigma::Triplex&lt; sigma::Interval&lt; double &gt; &gt; &gt;::Triplex'],['../structEigen_1_1NumTraits_3_01sigma_1_1Triplex_3_01sigma_1_1GeneralInterval_3_01float_01_4_01_4_01_4.html#ae1aa98b067e204c0dd592123c62dabc4',1,'Eigen::NumTraits&lt; sigma::Triplex&lt; sigma::GeneralInterval&lt; float &gt; &gt; &gt;::Triplex'],['../structEigen_1_1NumTraits_3_01sigma_1_1Triplex_3_01sigma_1_1GeneralInterval_3_01double_01_4_01_4_01_4.html#a6c07cc7399b9ab923b7fce7618fc6479',1,'Eigen::NumTraits&lt; sigma::Triplex&lt; sigma::GeneralInterval&lt; double &gt; &gt; &gt;::Triplex']]]
 ];

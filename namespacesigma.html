@@ -143,12 +143,18 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Models a closed numeric interval.  <a href="classsigma_1_1Interval.html#details">More...</a><br /></td></tr>
 <tr class="memitem:GeneralInterval" id="r_GeneralInterval"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Models an interval whose bounds may be open.  <a href="classsigma_1_1GeneralInterval.html#details">More...</a><br /></td></tr>
+<tr class="memitem:is_5Fgeneral_5Finterval" id="r_is_5Fgeneral_5Finterval"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsigma_1_1is__general__interval.html">is_general_interval</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is <code class="param">T</code> a <a class="el" href="classsigma_1_1GeneralInterval.html" title="Models an interval whose bounds may be open.">GeneralInterval</a>? False for everything else.  <a href="structsigma_1_1is__general__interval.html#details">More...</a><br /></td></tr>
+<tr class="memitem:is_5Fgeneral_5Finterval_3C_20GeneralInterval_3C_20T_20_3E_20_3E" id="r_is_5Fgeneral_5Finterval_3C_20GeneralInterval_3C_20T_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsigma_1_1is__general__interval_3_01GeneralInterval_3_01T_01_4_01_4.html">is_general_interval&lt; GeneralInterval&lt; T &gt; &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialization of <a class="el" href="structsigma_1_1is__general__interval.html" title="Is T a GeneralInterval? False for everything else.">is_general_interval</a> for <a class="el" href="classsigma_1_1GeneralInterval.html" title="Models an interval whose bounds may be open.">GeneralInterval</a>.  <a href="structsigma_1_1is__general__interval_3_01GeneralInterval_3_01T_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Taylor" id="r_Taylor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Taylor.html">Taylor</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements truncated multivariate polynomial algebra.  <a href="classsigma_1_1Taylor.html#details">More...</a><br /></td></tr>
 <tr class="memitem:TaylorModel" id="r_TaylorModel"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1TaylorModel.html">TaylorModel</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pairs a <a class="el" href="classsigma_1_1Taylor.html" title="Implements truncated multivariate polynomial algebra.">Taylor</a> polynomial with a remainder interval to guarantee Eq. \(\eqref{eq:tm-inclusion}\).  <a href="classsigma_1_1TaylorModel.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Monomial" id="r_Monomial"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Monomial.html">Monomial</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a sparse multi-index exponent.  <a href="classsigma_1_1Monomial.html#details">More...</a><br /></td></tr>
+<tr class="memitem:Triplex" id="r_Triplex"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Models an interval together with a best estimate inside it.  <a href="classsigma_1_1Triplex.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Uncertain" id="r_Uncertain"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Models an unceratin variable.  <a href="classsigma_1_1Uncertain.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
@@ -190,6 +196,12 @@ using&#160;</td><td class="memItemRight"><b>TMFloat</b> = <a class="el" href="cl
 <tr class="memitem:af795a6bbfd0022d3f9b632d25b953cce" id="r_af795a6bbfd0022d3f9b632d25b953cce"><td class="memItemLeft"><a id="af795a6bbfd0022d3f9b632d25b953cce" name="af795a6bbfd0022d3f9b632d25b953cce"></a>
 using&#160;</td><td class="memItemRight"><b>TMDouble</b> = <a class="el" href="classsigma_1_1TaylorModel.html">TaylorModel</a>&lt;double&gt;</td></tr>
 <tr class="memdesc:af795a6bbfd0022d3f9b632d25b953cce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for a <a class="el" href="classsigma_1_1Taylor.html" title="Implements truncated multivariate polynomial algebra.">Taylor</a> model of doubles. <br /></td></tr>
+<tr class="memitem:adf4a94ab590d9640510943833e262c5e" id="r_adf4a94ab590d9640510943833e262c5e"><td class="memItemLeft"><a id="adf4a94ab590d9640510943833e262c5e" name="adf4a94ab590d9640510943833e262c5e"></a>
+using&#160;</td><td class="memItemRight"><b>TPFloat</b> = <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt;<a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt;float&gt;&gt;</td></tr>
+<tr class="memdesc:adf4a94ab590d9640510943833e262c5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for a triplex with closed float bounds. <br /></td></tr>
+<tr class="memitem:a3c5592290c91e4c054777ae94d93dadb" id="r_a3c5592290c91e4c054777ae94d93dadb"><td class="memItemLeft"><a id="a3c5592290c91e4c054777ae94d93dadb" name="a3c5592290c91e4c054777ae94d93dadb"></a>
+using&#160;</td><td class="memItemRight"><b>TPDouble</b> = <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt;<a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt;double&gt;&gt;</td></tr>
+<tr class="memdesc:a3c5592290c91e4c054777ae94d93dadb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for a triplex with closed double bounds. <br /></td></tr>
 <tr class="memitem:a6224a8003e248c3ed971b85f6aef2f7d" id="r_a6224a8003e248c3ed971b85f6aef2f7d"><td class="memItemLeft"><a id="a6224a8003e248c3ed971b85f6aef2f7d" name="a6224a8003e248c3ed971b85f6aef2f7d"></a>
 using&#160;</td><td class="memItemRight"><b>UFloat</b> = <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt;float&gt;</td></tr>
 <tr class="memdesc:a6224a8003e248c3ed971b85f6aef2f7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Typedef for an uncertain float. <br /></td></tr>
@@ -365,6 +377,63 @@ Functions</h2></td></tr>
 <tr class="memitem:a733e3b1bcc4491f206dd708083b90654" id="r_a733e3b1bcc4491f206dd708083b90654"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
 <tr class="memitem:a733e3b1bcc4491f206dd708083b90654 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Taylor.html">Taylor</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a733e3b1bcc4491f206dd708083b90654">pow</a> (const <a class="el" href="classsigma_1_1Taylor.html">Taylor</a>&lt; T &gt; &amp;a, const U &amp;<a class="el" href="#a1f0fc9200525ff76e74575128a9de259">exp</a>)</td></tr>
 <tr class="memdesc:a733e3b1bcc4491f206dd708083b90654"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the power of a <a class="el" href="classsigma_1_1Taylor.html" title="Implements truncated multivariate polynomial algebra.">Taylor</a> polynomial.  <br /></td></tr>
+<tr class="memitem:a739f600b93cce98ecb6fe8bd5600ab3e" id="r_a739f600b93cce98ecb6fe8bd5600ab3e"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:a739f600b93cce98ecb6fe8bd5600ab3e template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a739f600b93cce98ecb6fe8bd5600ab3e">abs</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:a739f600b93cce98ecb6fe8bd5600ab3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute value of a triplex.  <br /></td></tr>
+<tr class="memitem:ada6c9e311647f50f8ac1cca28b1b892f" id="r_ada6c9e311647f50f8ac1cca28b1b892f"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:ada6c9e311647f50f8ac1cca28b1b892f template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ada6c9e311647f50f8ac1cca28b1b892f">fabs</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:ada6c9e311647f50f8ac1cca28b1b892f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Absolute value of a triplex.  <br /></td></tr>
+<tr class="memitem:a76a3b9f6be6bb2c8c41e3ea0ffab003d" id="r_a76a3b9f6be6bb2c8c41e3ea0ffab003d"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:a76a3b9f6be6bb2c8c41e3ea0ffab003d template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a76a3b9f6be6bb2c8c41e3ea0ffab003d">sqrt</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:a76a3b9f6be6bb2c8c41e3ea0ffab003d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the square root of a triplex.  <br /></td></tr>
+<tr class="memitem:ac82478aa9728cddf8975a4f604c1fd22" id="r_ac82478aa9728cddf8975a4f604c1fd22"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:ac82478aa9728cddf8975a4f604c1fd22 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac82478aa9728cddf8975a4f604c1fd22">exp</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:ac82478aa9728cddf8975a4f604c1fd22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate Euler's number raised to the power of a triplex.  <br /></td></tr>
+<tr class="memitem:a741836edcd1cec2a5ef5a2b090379bd9" id="r_a741836edcd1cec2a5ef5a2b090379bd9"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:a741836edcd1cec2a5ef5a2b090379bd9 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a741836edcd1cec2a5ef5a2b090379bd9">log</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:a741836edcd1cec2a5ef5a2b090379bd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the natural logarithm of a triplex.  <br /></td></tr>
+<tr class="memitem:a074be4059e20680dcdeda95feb436bc0" id="r_a074be4059e20680dcdeda95feb436bc0"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType, typename U&gt; </td></tr>
+<tr class="memitem:a074be4059e20680dcdeda95feb436bc0 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a074be4059e20680dcdeda95feb436bc0">pow</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a, const U &amp;<a class="el" href="#a1f0fc9200525ff76e74575128a9de259">exp</a>)</td></tr>
+<tr class="memdesc:a074be4059e20680dcdeda95feb436bc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponentiation of a triplex by a scalar.  <br /></td></tr>
+<tr class="memitem:aba959f9a72742078db54ef102bf207ce" id="r_aba959f9a72742078db54ef102bf207ce"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:aba959f9a72742078db54ef102bf207ce template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aba959f9a72742078db54ef102bf207ce">pow</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a, const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;exponent)</td></tr>
+<tr class="memdesc:aba959f9a72742078db54ef102bf207ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exponentiation of a triplex by a triplex.  <br /></td></tr>
+<tr class="memitem:a2b616f32dd3b1d67b81cfc7f8c2bf529" id="r_a2b616f32dd3b1d67b81cfc7f8c2bf529"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:a2b616f32dd3b1d67b81cfc7f8c2bf529 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a2b616f32dd3b1d67b81cfc7f8c2bf529">sinh</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:a2b616f32dd3b1d67b81cfc7f8c2bf529"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the hyperbolic sine of a triplex.  <br /></td></tr>
+<tr class="memitem:aca0c48e2338a0c07f1a2bc9b11b63dd5" id="r_aca0c48e2338a0c07f1a2bc9b11b63dd5"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:aca0c48e2338a0c07f1a2bc9b11b63dd5 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aca0c48e2338a0c07f1a2bc9b11b63dd5">cosh</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:aca0c48e2338a0c07f1a2bc9b11b63dd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the hyperbolic cosine of a triplex.  <br /></td></tr>
+<tr class="memitem:ae2bbf24a26160916c46bd596f5227e9d" id="r_ae2bbf24a26160916c46bd596f5227e9d"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:ae2bbf24a26160916c46bd596f5227e9d template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae2bbf24a26160916c46bd596f5227e9d">tanh</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:ae2bbf24a26160916c46bd596f5227e9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the hyperbolic tangent of a triplex.  <br /></td></tr>
+<tr class="memitem:a75a37e701c7ee71f29502cf59d2953a2" id="r_a75a37e701c7ee71f29502cf59d2953a2"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:a75a37e701c7ee71f29502cf59d2953a2 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a75a37e701c7ee71f29502cf59d2953a2">asinh</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:a75a37e701c7ee71f29502cf59d2953a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the inverse hyperbolic sine of a triplex.  <br /></td></tr>
+<tr class="memitem:ae5c9182819093e42a548833107c3d2f4" id="r_ae5c9182819093e42a548833107c3d2f4"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:ae5c9182819093e42a548833107c3d2f4 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae5c9182819093e42a548833107c3d2f4">acosh</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:ae5c9182819093e42a548833107c3d2f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the inverse hyperbolic cosine of a triplex.  <br /></td></tr>
+<tr class="memitem:aaa646d954f65e15bf5f4d37c8ce0bca8" id="r_aaa646d954f65e15bf5f4d37c8ce0bca8"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:aaa646d954f65e15bf5f4d37c8ce0bca8 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aaa646d954f65e15bf5f4d37c8ce0bca8">atanh</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:aaa646d954f65e15bf5f4d37c8ce0bca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the inverse hyperbolic tangent of a triplex.  <br /></td></tr>
+<tr class="memitem:ae8e37969ec3ead639e3d3d219bd2d596" id="r_ae8e37969ec3ead639e3d3d219bd2d596"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:ae8e37969ec3ead639e3d3d219bd2d596 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae8e37969ec3ead639e3d3d219bd2d596">sin</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:ae8e37969ec3ead639e3d3d219bd2d596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the sine of a triplex.  <br /></td></tr>
+<tr class="memitem:ac73c5ddf5a6de803b79a11a78a8e2c8e" id="r_ac73c5ddf5a6de803b79a11a78a8e2c8e"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:ac73c5ddf5a6de803b79a11a78a8e2c8e template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac73c5ddf5a6de803b79a11a78a8e2c8e">cos</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:ac73c5ddf5a6de803b79a11a78a8e2c8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the cosine of a triplex.  <br /></td></tr>
+<tr class="memitem:a5325613a427b7bafd33154871eb7298e" id="r_a5325613a427b7bafd33154871eb7298e"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:a5325613a427b7bafd33154871eb7298e template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a5325613a427b7bafd33154871eb7298e">tan</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:a5325613a427b7bafd33154871eb7298e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the tangent of a triplex.  <br /></td></tr>
+<tr class="memitem:af2df3429a61932a3eb2e1f2ddcaf9476" id="r_af2df3429a61932a3eb2e1f2ddcaf9476"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:af2df3429a61932a3eb2e1f2ddcaf9476 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af2df3429a61932a3eb2e1f2ddcaf9476">asin</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:af2df3429a61932a3eb2e1f2ddcaf9476"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the arcsine of a triplex.  <br /></td></tr>
+<tr class="memitem:a84e4a14499ce3cca2214df57d9efd127" id="r_a84e4a14499ce3cca2214df57d9efd127"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:a84e4a14499ce3cca2214df57d9efd127 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a84e4a14499ce3cca2214df57d9efd127">acos</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:a84e4a14499ce3cca2214df57d9efd127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the arccosine of a triplex.  <br /></td></tr>
+<tr class="memitem:a825eaca04583aa3b9ade65331235d75e" id="r_a825eaca04583aa3b9ade65331235d75e"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:a825eaca04583aa3b9ade65331235d75e template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a825eaca04583aa3b9ade65331235d75e">atan</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;a)</td></tr>
+<tr class="memdesc:a825eaca04583aa3b9ade65331235d75e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the arctangent of a triplex.  <br /></td></tr>
 <tr class="memitem:a811affff347e8a90968dfdf8d39a030b" id="r_a811affff347e8a90968dfdf8d39a030b"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a811affff347e8a90968dfdf8d39a030b template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a811affff347e8a90968dfdf8d39a030b">operator-</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; T &gt; &amp;a)</td></tr>
 <tr class="memdesc:a811affff347e8a90968dfdf8d39a030b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Negation Operation.  <br /></td></tr>
@@ -608,7 +677,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a2bffcd94d01403a93627d78921a409f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two intervals for inequality.  <br /></td></tr>
 <tr class="memitem:abed8635709fed22e1c2f6a840adf73a0" id="r_abed8635709fed22e1c2f6a840adf73a0"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:abed8635709fed22e1c2f6a840adf73a0 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1GeneralInterval.html#abed8635709fed22e1c2f6a840adf73a0">operator&lt;</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;rhs)</td></tr>
-<tr class="memdesc:abed8635709fed22e1c2f6a840adf73a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders two intervals by their median.  <br /></td></tr>
+<tr class="memdesc:abed8635709fed22e1c2f6a840adf73a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders two intervals, primarily by their median.  <br /></td></tr>
 <tr class="memitem:af60ca3e08005ea2491fa1cfac9507d9d" id="r_af60ca3e08005ea2491fa1cfac9507d9d"><td class="memTemplParams" colspan="2"><a id="af60ca3e08005ea2491fa1cfac9507d9d" name="af60ca3e08005ea2491fa1cfac9507d9d"></a>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:af60ca3e08005ea2491fa1cfac9507d9d template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;</b> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;rhs)</td></tr>
@@ -621,6 +690,9 @@ template&lt;typename T&gt; </td></tr>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:acbffd264630ba3d9e17966947479920e template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:acbffd264630ba3d9e17966947479920e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated and reversed. <br /></td></tr>
+<tr class="memitem:a982d7c4a84fbdc099726366f0d5eb22a" id="r_a982d7c4a84fbdc099726366f0d5eb22a"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a982d7c4a84fbdc099726366f0d5eb22a template"><td class="memItemLeft"><a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1GeneralInterval.html#a982d7c4a84fbdc099726366f0d5eb22a">widen</a> (const <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt; &amp;a, typename <a class="el" href="classsigma_1_1GeneralInterval.html">GeneralInterval</a>&lt; T &gt;::value_t point)</td></tr>
+<tr class="memdesc:a982d7c4a84fbdc099726366f0d5eb22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Widens an interval just enough to contain a point.  <br /></td></tr>
 <tr class="memitem:a795d1a141720ed26b84cd372ed855987" id="r_a795d1a141720ed26b84cd372ed855987"><td class="memTemplParams" colspan="2">template&lt;typename ValueType&gt; </td></tr>
 <tr class="memitem:a795d1a141720ed26b84cd372ed855987 template"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Interval.html#a795d1a141720ed26b84cd372ed855987">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; ValueType &gt; &amp;i)</td></tr>
 <tr class="memdesc:a795d1a141720ed26b84cd372ed855987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload stream insertion to print an interval.  <br /></td></tr>
@@ -632,7 +704,7 @@ template&lt;typename T&gt; </td></tr>
 <tr class="memdesc:af062ee3c64807e17e70355925051c35d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two intervals for inequality.  <br /></td></tr>
 <tr class="memitem:aaab00619c4a60d94daa244143195a047" id="r_aaab00619c4a60d94daa244143195a047"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:aaab00619c4a60d94daa244143195a047 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Interval.html#aaab00619c4a60d94daa244143195a047">operator&lt;</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
-<tr class="memdesc:aaab00619c4a60d94daa244143195a047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders two intervals by their median.  <br /></td></tr>
+<tr class="memdesc:aaab00619c4a60d94daa244143195a047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders two intervals, primarily by their median.  <br /></td></tr>
 <tr class="memitem:ab8f66e9cc4243c725f732e0e827c881c" id="r_ab8f66e9cc4243c725f732e0e827c881c"><td class="memTemplParams" colspan="2"><a id="ab8f66e9cc4243c725f732e0e827c881c" name="ab8f66e9cc4243c725f732e0e827c881c"></a>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ab8f66e9cc4243c725f732e0e827c881c template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;</b> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
@@ -645,6 +717,9 @@ template&lt;typename T&gt; </td></tr>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a8c63545c28565c1aa37b61dbcc248a66 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:a8c63545c28565c1aa37b61dbcc248a66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated and reversed. <br /></td></tr>
+<tr class="memitem:a25b618e956d409791022123edc28ffcb" id="r_a25b618e956d409791022123edc28ffcb"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a25b618e956d409791022123edc28ffcb template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Interval.html#a25b618e956d409791022123edc28ffcb">widen</a> (const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;a, typename <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;::value_t point)</td></tr>
+<tr class="memdesc:a25b618e956d409791022123edc28ffcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Widens an interval just enough to contain a point.  <br /></td></tr>
 <tr class="memitem:abb7bdb211be63335fd48ecb5726d1f02" id="r_abb7bdb211be63335fd48ecb5726d1f02"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:abb7bdb211be63335fd48ecb5726d1f02 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Interval.html#abb7bdb211be63335fd48ecb5726d1f02">operator+</a> (<a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; lhs, const <a class="el" href="classsigma_1_1Interval.html">Interval</a>&lt; T &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:abb7bdb211be63335fd48ecb5726d1f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Addition of two intervals.  <br /></td></tr>
@@ -689,6 +764,30 @@ template&lt;typename T&gt; </td></tr>
 <tr class="memitem:aa31a337a9e32fd5525b6330222112643" id="r_aa31a337a9e32fd5525b6330222112643"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U&gt; </td></tr>
 <tr class="memitem:aa31a337a9e32fd5525b6330222112643 template"><td class="memItemLeft"><a class="el" href="classsigma_1_1TaylorModel.html">TaylorModel</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1TaylorModel.html#aa31a337a9e32fd5525b6330222112643">pow</a> (const <a class="el" href="classsigma_1_1TaylorModel.html">TaylorModel</a>&lt; T &gt; &amp;a, const U &amp;<a class="el" href="#a1f0fc9200525ff76e74575128a9de259">exp</a>)</td></tr>
 <tr class="memdesc:aa31a337a9e32fd5525b6330222112643"><td class="mdescLeft">&#160;</td><td class="mdescRight">Power of a <a class="el" href="classsigma_1_1TaylorModel.html" title="Pairs a Taylor polynomial with a remainder interval to guarantee Eq. .">TaylorModel</a>.  <br /></td></tr>
+<tr class="memitem:a65dd61814d2e55780a9ea7de2149d685" id="r_a65dd61814d2e55780a9ea7de2149d685"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:a65dd61814d2e55780a9ea7de2149d685 template"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Triplex.html#a65dd61814d2e55780a9ea7de2149d685">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;t)</td></tr>
+<tr class="memdesc:a65dd61814d2e55780a9ea7de2149d685"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload stream insertion to print a triplex.  <br /></td></tr>
+<tr class="memitem:afe8b835830a2b7d7fa09941629cb4383" id="r_afe8b835830a2b7d7fa09941629cb4383"><td class="memTemplParams" colspan="2">template&lt;typename I1, typename I2&gt; </td></tr>
+<tr class="memitem:afe8b835830a2b7d7fa09941629cb4383 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Triplex.html#afe8b835830a2b7d7fa09941629cb4383">operator==</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; I1 &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; I2 &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:afe8b835830a2b7d7fa09941629cb4383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two triplex numbers for equality.  <br /></td></tr>
+<tr class="memitem:a8ba1c0e59f5a228fc55a0ffcb8ecc0b6" id="r_a8ba1c0e59f5a228fc55a0ffcb8ecc0b6"><td class="memTemplParams" colspan="2">template&lt;typename I1, typename I2&gt; </td></tr>
+<tr class="memitem:a8ba1c0e59f5a228fc55a0ffcb8ecc0b6 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Triplex.html#a8ba1c0e59f5a228fc55a0ffcb8ecc0b6">operator!=</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; I1 &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; I2 &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a8ba1c0e59f5a228fc55a0ffcb8ecc0b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two triplex numbers for inequality.  <br /></td></tr>
+<tr class="memitem:ae90d7755781b27c3f7dce4dcef3e2094" id="r_ae90d7755781b27c3f7dce4dcef3e2094"><td class="memTemplParams" colspan="2">template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:ae90d7755781b27c3f7dce4dcef3e2094 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Triplex.html#ae90d7755781b27c3f7dce4dcef3e2094">operator&lt;</a> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ae90d7755781b27c3f7dce4dcef3e2094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders two triplex numbers, primarily by their nominal values.  <br /></td></tr>
+<tr class="memitem:a87d52819f3282e1af0cd22ab22ae67fa" id="r_a87d52819f3282e1af0cd22ab22ae67fa"><td class="memTemplParams" colspan="2"><a id="a87d52819f3282e1af0cd22ab22ae67fa" name="a87d52819f3282e1af0cd22ab22ae67fa"></a>
+template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:a87d52819f3282e1af0cd22ab22ae67fa template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;</b> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:a87d52819f3282e1af0cd22ab22ae67fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, with the operands reversed. <br /></td></tr>
+<tr class="memitem:adc63885d5cb770ddd25ff417d179f7f6" id="r_adc63885d5cb770ddd25ff417d179f7f6"><td class="memTemplParams" colspan="2"><a id="adc63885d5cb770ddd25ff417d179f7f6" name="adc63885d5cb770ddd25ff417d179f7f6"></a>
+template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:adc63885d5cb770ddd25ff417d179f7f6 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&lt;=</b> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:adc63885d5cb770ddd25ff417d179f7f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated. <br /></td></tr>
+<tr class="memitem:ade89d7fcd2031d2035e9f637d7fdd730" id="r_ade89d7fcd2031d2035e9f637d7fdd730"><td class="memTemplParams" colspan="2"><a id="ade89d7fcd2031d2035e9f637d7fdd730" name="ade89d7fcd2031d2035e9f637d7fdd730"></a>
+template&lt;typename IntervalType&gt; </td></tr>
+<tr class="memitem:ade89d7fcd2031d2035e9f637d7fdd730 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;rhs)</td></tr>
+<tr class="memdesc:ade89d7fcd2031d2035e9f637d7fdd730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same ordering as operator&lt;, negated and reversed. <br /></td></tr>
 <tr class="memitem:a0f22e12e277cb7bddcbbb505d2795a10" id="r_a0f22e12e277cb7bddcbbb505d2795a10"><td class="memTemplParams" colspan="2">template&lt;typename ValueType&gt; </td></tr>
 <tr class="memitem:a0f22e12e277cb7bddcbbb505d2795a10 template"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Uncertain.html#a0f22e12e277cb7bddcbbb505d2795a10">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; ValueType &gt; &amp;u)</td></tr>
 <tr class="memdesc:a0f22e12e277cb7bddcbbb505d2795a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload stream insertion to print uncertain variable.  <br /></td></tr>
@@ -710,13 +809,20 @@ template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a56035ec9b0d943801f157949b45da232" id="r_a56035ec9b0d943801f157949b45da232"><td class="memTemplParams" colspan="2">template&lt;typename ValueType1, typename ValueType2&gt; </td></tr>
 <tr class="memitem:a56035ec9b0d943801f157949b45da232 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classsigma_1_1Uncertain.html#a56035ec9b0d943801f157949b45da232">operator&gt;=</a> (const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; ValueType1 &gt; &amp;lhs, const <a class="el" href="classsigma_1_1Uncertain.html">Uncertain</a>&lt; ValueType2 &gt; &amp;rhs)</td></tr>
 <tr class="memdesc:a56035ec9b0d943801f157949b45da232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether one uncertain variable is greater than or equal to another.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a6c0d3662ab267bf552fe4147dea36f96" id="r_a6c0d3662ab267bf552fe4147dea36f96"><td class="memTemplParams" colspan="2"><a id="a6c0d3662ab267bf552fe4147dea36f96" name="a6c0d3662ab267bf552fe4147dea36f96"></a>
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a6c0d3662ab267bf552fe4147dea36f96 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><b>is_general_interval_v</b> = <a class="el" href="structsigma_1_1is__general__interval.html">is_general_interval</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:a6c0d3662ab267bf552fe4147dea36f96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience variable for the value of <a class="el" href="structsigma_1_1is__general__interval.html" title="Is T a GeneralInterval? False for everything else.">is_general_interval</a>. <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The primary namespace for the sigma library. </p>
 <p>This is the primary namespace that contains the class used to represent uncertain variables and the functions that act on them. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a503cdf5d87ccd500483119ad06c33df5" name="a503cdf5d87ccd500483119ad06c33df5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a503cdf5d87ccd500483119ad06c33df5">&#9670;&#160;</a></span>abs() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a503cdf5d87ccd500483119ad06c33df5">&#9670;&#160;</a></span>abs() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -767,7 +873,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a7aa388897db29738459ce91208e21409" name="a7aa388897db29738459ce91208e21409"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7aa388897db29738459ce91208e21409">&#9670;&#160;</a></span>abs() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7aa388897db29738459ce91208e21409">&#9670;&#160;</a></span>abs() <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -808,7 +914,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a3ea8a8ec91205acbf995d458fbf19105" name="a3ea8a8ec91205acbf995d458fbf19105"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ea8a8ec91205acbf995d458fbf19105">&#9670;&#160;</a></span>abs() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ea8a8ec91205acbf995d458fbf19105">&#9670;&#160;</a></span>abs() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -853,7 +959,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a17dad268d18998e7e458d1368d1fe758" name="a17dad268d18998e7e458d1368d1fe758"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17dad268d18998e7e458d1368d1fe758">&#9670;&#160;</a></span>abs() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a17dad268d18998e7e458d1368d1fe758">&#9670;&#160;</a></span>abs() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -902,8 +1008,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a739f600b93cce98ecb6fe8bd5600ab3e" name="a739f600b93cce98ecb6fe8bd5600ab3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a739f600b93cce98ecb6fe8bd5600ab3e">&#9670;&#160;</a></span>abs() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::abs </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Absolute value of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The absolute value of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="add954174f373873d59d093ceb3e82af5" name="add954174f373873d59d093ceb3e82af5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add954174f373873d59d093ceb3e82af5">&#9670;&#160;</a></span>abs() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#add954174f373873d59d093ceb3e82af5">&#9670;&#160;</a></span>abs() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -983,7 +1129,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ad0809f56f17a9957e67115e810ef7e59" name="ad0809f56f17a9957e67115e810ef7e59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0809f56f17a9957e67115e810ef7e59">&#9670;&#160;</a></span>acos() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0809f56f17a9957e67115e810ef7e59">&#9670;&#160;</a></span>acos() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1024,7 +1170,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ad50317778c3d0d026d6403893839edb2" name="ad50317778c3d0d026d6403893839edb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad50317778c3d0d026d6403893839edb2">&#9670;&#160;</a></span>acos() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad50317778c3d0d026d6403893839edb2">&#9670;&#160;</a></span>acos() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1064,8 +1210,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a84e4a14499ce3cca2214df57d9efd127" name="a84e4a14499ce3cca2214df57d9efd127"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84e4a14499ce3cca2214df57d9efd127">&#9670;&#160;</a></span>acos() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::acos </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the arccosine of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The arccosine of <code class="param">a</code>, in radians</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a value outside \( [-1, 1] \). Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="af6eeba07517755fde0ced30d9ff56181" name="af6eeba07517755fde0ced30d9ff56181"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6eeba07517755fde0ced30d9ff56181">&#9670;&#160;</a></span>acos() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af6eeba07517755fde0ced30d9ff56181">&#9670;&#160;</a></span>acos() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1105,7 +1291,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a9ebdd1a3eb42e0d52e7f1c951f17322b" name="a9ebdd1a3eb42e0d52e7f1c951f17322b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ebdd1a3eb42e0d52e7f1c951f17322b">&#9670;&#160;</a></span>acosh() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ebdd1a3eb42e0d52e7f1c951f17322b">&#9670;&#160;</a></span>acosh() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1145,7 +1331,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="afe9944336557d5b254dc94b159fd07f4" name="afe9944336557d5b254dc94b159fd07f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe9944336557d5b254dc94b159fd07f4">&#9670;&#160;</a></span>acosh() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afe9944336557d5b254dc94b159fd07f4">&#9670;&#160;</a></span>acosh() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1185,8 +1371,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ae5c9182819093e42a548833107c3d2f4" name="ae5c9182819093e42a548833107c3d2f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5c9182819093e42a548833107c3d2f4">&#9670;&#160;</a></span>acosh() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::acosh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the inverse hyperbolic cosine of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The inverse hyperbolic cosine of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a value below one. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae0468bc7af0c3d24c8ecc0c38d8f2ef6" name="ae0468bc7af0c3d24c8ecc0c38d8f2ef6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0468bc7af0c3d24c8ecc0c38d8f2ef6">&#9670;&#160;</a></span>acosh() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0468bc7af0c3d24c8ecc0c38d8f2ef6">&#9670;&#160;</a></span>acosh() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1226,7 +1452,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ad0095779334db1d59ebd4002b4a383c4" name="ad0095779334db1d59ebd4002b4a383c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0095779334db1d59ebd4002b4a383c4">&#9670;&#160;</a></span>asin() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0095779334db1d59ebd4002b4a383c4">&#9670;&#160;</a></span>asin() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1266,7 +1492,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="aa28bf2018b343c27ea5588f41211187c" name="aa28bf2018b343c27ea5588f41211187c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa28bf2018b343c27ea5588f41211187c">&#9670;&#160;</a></span>asin() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa28bf2018b343c27ea5588f41211187c">&#9670;&#160;</a></span>asin() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1306,8 +1532,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="af2df3429a61932a3eb2e1f2ddcaf9476" name="af2df3429a61932a3eb2e1f2ddcaf9476"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2df3429a61932a3eb2e1f2ddcaf9476">&#9670;&#160;</a></span>asin() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::asin </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the arcsine of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The arcsine of <code class="param">a</code>, in radians</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a value outside \( [-1, 1] \). Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae48df01125f097867cd2144b958f3756" name="ae48df01125f097867cd2144b958f3756"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae48df01125f097867cd2144b958f3756">&#9670;&#160;</a></span>asin() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae48df01125f097867cd2144b958f3756">&#9670;&#160;</a></span>asin() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1347,7 +1613,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="aa16fad9e082b505df0fa9add2ccf9bf2" name="aa16fad9e082b505df0fa9add2ccf9bf2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa16fad9e082b505df0fa9add2ccf9bf2">&#9670;&#160;</a></span>asinh() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa16fad9e082b505df0fa9add2ccf9bf2">&#9670;&#160;</a></span>asinh() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1387,7 +1653,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a42810e5f2ced3176eccb756f7b5180bf" name="a42810e5f2ced3176eccb756f7b5180bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42810e5f2ced3176eccb756f7b5180bf">&#9670;&#160;</a></span>asinh() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a42810e5f2ced3176eccb756f7b5180bf">&#9670;&#160;</a></span>asinh() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1426,8 +1692,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a75a37e701c7ee71f29502cf59d2953a2" name="a75a37e701c7ee71f29502cf59d2953a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75a37e701c7ee71f29502cf59d2953a2">&#9670;&#160;</a></span>asinh() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::asinh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the inverse hyperbolic sine of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The inverse hyperbolic sine of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aad587ce36b20a927d652a01148dc343c" name="aad587ce36b20a927d652a01148dc343c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad587ce36b20a927d652a01148dc343c">&#9670;&#160;</a></span>asinh() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aad587ce36b20a927d652a01148dc343c">&#9670;&#160;</a></span>asinh() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1467,7 +1773,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a9d1f4f923e52dfebb9f4226a0e2df3f9" name="a9d1f4f923e52dfebb9f4226a0e2df3f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d1f4f923e52dfebb9f4226a0e2df3f9">&#9670;&#160;</a></span>atan() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d1f4f923e52dfebb9f4226a0e2df3f9">&#9670;&#160;</a></span>atan() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1507,7 +1813,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ad9f0a5c9f91bac03fad67eb63ec593c9" name="ad9f0a5c9f91bac03fad67eb63ec593c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9f0a5c9f91bac03fad67eb63ec593c9">&#9670;&#160;</a></span>atan() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9f0a5c9f91bac03fad67eb63ec593c9">&#9670;&#160;</a></span>atan() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1546,8 +1852,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a825eaca04583aa3b9ade65331235d75e" name="a825eaca04583aa3b9ade65331235d75e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a825eaca04583aa3b9ade65331235d75e">&#9670;&#160;</a></span>atan() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::atan </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the arctangent of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The arctangent of <code class="param">a</code>, in radians</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a29ac0ccb509ea16a5f8f2d69318af050" name="a29ac0ccb509ea16a5f8f2d69318af050"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29ac0ccb509ea16a5f8f2d69318af050">&#9670;&#160;</a></span>atan() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a29ac0ccb509ea16a5f8f2d69318af050">&#9670;&#160;</a></span>atan() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1724,7 +2070,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a40d4934c558412fd8e23ea6f0526e8b6" name="a40d4934c558412fd8e23ea6f0526e8b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40d4934c558412fd8e23ea6f0526e8b6">&#9670;&#160;</a></span>atanh() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a40d4934c558412fd8e23ea6f0526e8b6">&#9670;&#160;</a></span>atanh() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1765,7 +2111,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="aa45a99b84e7f016c816d77191b751097" name="aa45a99b84e7f016c816d77191b751097"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa45a99b84e7f016c816d77191b751097">&#9670;&#160;</a></span>atanh() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa45a99b84e7f016c816d77191b751097">&#9670;&#160;</a></span>atanh() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1805,8 +2151,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="aaa646d954f65e15bf5f4d37c8ce0bca8" name="aaa646d954f65e15bf5f4d37c8ce0bca8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa646d954f65e15bf5f4d37c8ce0bca8">&#9670;&#160;</a></span>atanh() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::atanh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the inverse hyperbolic tangent of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The inverse hyperbolic tangent of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a value outside \( (-1, 1) \). Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad13293749576a5d73b834c598e2936c6" name="ad13293749576a5d73b834c598e2936c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad13293749576a5d73b834c598e2936c6">&#9670;&#160;</a></span>atanh() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad13293749576a5d73b834c598e2936c6">&#9670;&#160;</a></span>atanh() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2105,7 +2491,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ac04dddcba8ce928923f6cf3a8f3abb39" name="ac04dddcba8ce928923f6cf3a8f3abb39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac04dddcba8ce928923f6cf3a8f3abb39">&#9670;&#160;</a></span>cos() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac04dddcba8ce928923f6cf3a8f3abb39">&#9670;&#160;</a></span>cos() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2146,7 +2532,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a7296e91f14bb74a9a223e420e81b6997" name="a7296e91f14bb74a9a223e420e81b6997"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7296e91f14bb74a9a223e420e81b6997">&#9670;&#160;</a></span>cos() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7296e91f14bb74a9a223e420e81b6997">&#9670;&#160;</a></span>cos() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2186,8 +2572,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ac73c5ddf5a6de803b79a11a78a8e2c8e" name="ac73c5ddf5a6de803b79a11a78a8e2c8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac73c5ddf5a6de803b79a11a78a8e2c8e">&#9670;&#160;</a></span>cos() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::cos </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the cosine of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex, in radians</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The cosine of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a8d0718197bd681b48cfbc005d6629920" name="a8d0718197bd681b48cfbc005d6629920"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d0718197bd681b48cfbc005d6629920">&#9670;&#160;</a></span>cos() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d0718197bd681b48cfbc005d6629920">&#9670;&#160;</a></span>cos() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2227,7 +2653,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a492a1312b07d422ed1c20e83380a5304" name="a492a1312b07d422ed1c20e83380a5304"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a492a1312b07d422ed1c20e83380a5304">&#9670;&#160;</a></span>cosh() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a492a1312b07d422ed1c20e83380a5304">&#9670;&#160;</a></span>cosh() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2268,7 +2694,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="abb7d4d45671e530cc4a07e008b5afd1e" name="abb7d4d45671e530cc4a07e008b5afd1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb7d4d45671e530cc4a07e008b5afd1e">&#9670;&#160;</a></span>cosh() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abb7d4d45671e530cc4a07e008b5afd1e">&#9670;&#160;</a></span>cosh() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2308,8 +2734,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="aca0c48e2338a0c07f1a2bc9b11b63dd5" name="aca0c48e2338a0c07f1a2bc9b11b63dd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca0c48e2338a0c07f1a2bc9b11b63dd5">&#9670;&#160;</a></span>cosh() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::cosh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the hyperbolic cosine of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The hyperbolic cosine of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a8f8ded25467d58703d7ec390526bb2bb" name="a8f8ded25467d58703d7ec390526bb2bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f8ded25467d58703d7ec390526bb2bb">&#9670;&#160;</a></span>cosh() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f8ded25467d58703d7ec390526bb2bb">&#9670;&#160;</a></span>cosh() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2469,7 +2935,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a1f0fc9200525ff76e74575128a9de259" name="a1f0fc9200525ff76e74575128a9de259"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f0fc9200525ff76e74575128a9de259">&#9670;&#160;</a></span>exp() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f0fc9200525ff76e74575128a9de259">&#9670;&#160;</a></span>exp() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2518,7 +2984,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ade1e8570f555998ff7d02ac6c5e84db4" name="ade1e8570f555998ff7d02ac6c5e84db4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade1e8570f555998ff7d02ac6c5e84db4">&#9670;&#160;</a></span>exp() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ade1e8570f555998ff7d02ac6c5e84db4">&#9670;&#160;</a></span>exp() <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2558,7 +3024,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="abd4d114d01f89ba6b65bb6661722e152" name="abd4d114d01f89ba6b65bb6661722e152"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd4d114d01f89ba6b65bb6661722e152">&#9670;&#160;</a></span>exp() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abd4d114d01f89ba6b65bb6661722e152">&#9670;&#160;</a></span>exp() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2598,7 +3064,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a61f5ae228034f0ac76f7af5a0d615fe2" name="a61f5ae228034f0ac76f7af5a0d615fe2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61f5ae228034f0ac76f7af5a0d615fe2">&#9670;&#160;</a></span>exp() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a61f5ae228034f0ac76f7af5a0d615fe2">&#9670;&#160;</a></span>exp() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2639,8 +3105,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ac82478aa9728cddf8975a4f604c1fd22" name="ac82478aa9728cddf8975a4f604c1fd22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac82478aa9728cddf8975a4f604c1fd22">&#9670;&#160;</a></span>exp() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::exp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate Euler's number raised to the power of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex that is the exponent</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Euler's number raised to <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad8957603ced9a2feb2c82973b5bb1da9" name="ad8957603ced9a2feb2c82973b5bb1da9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8957603ced9a2feb2c82973b5bb1da9">&#9670;&#160;</a></span>exp() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8957603ced9a2feb2c82973b5bb1da9">&#9670;&#160;</a></span>exp() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2760,7 +3266,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a791bc74e56cca4cbc40757a60e82d233" name="a791bc74e56cca4cbc40757a60e82d233"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a791bc74e56cca4cbc40757a60e82d233">&#9670;&#160;</a></span>fabs() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a791bc74e56cca4cbc40757a60e82d233">&#9670;&#160;</a></span>fabs() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2801,7 +3307,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a4ca00e8dbab1b033fcb1315fa8cddaeb" name="a4ca00e8dbab1b033fcb1315fa8cddaeb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ca00e8dbab1b033fcb1315fa8cddaeb">&#9670;&#160;</a></span>fabs() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ca00e8dbab1b033fcb1315fa8cddaeb">&#9670;&#160;</a></span>fabs() <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2841,7 +3347,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a1e51b493c47ce761af8c6947bc94ca8b" name="a1e51b493c47ce761af8c6947bc94ca8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e51b493c47ce761af8c6947bc94ca8b">&#9670;&#160;</a></span>fabs() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e51b493c47ce761af8c6947bc94ca8b">&#9670;&#160;</a></span>fabs() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2881,7 +3387,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a65ea82ce6443ead2023dfb42ee279f2b" name="a65ea82ce6443ead2023dfb42ee279f2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65ea82ce6443ead2023dfb42ee279f2b">&#9670;&#160;</a></span>fabs() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a65ea82ce6443ead2023dfb42ee279f2b">&#9670;&#160;</a></span>fabs() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2922,8 +3428,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ada6c9e311647f50f8ac1cca28b1b892f" name="ada6c9e311647f50f8ac1cca28b1b892f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada6c9e311647f50f8ac1cca28b1b892f">&#9670;&#160;</a></span>fabs() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::fabs </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Absolute value of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The absolute value of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac4d519de22722a51cda0bc3c92960e89" name="ac4d519de22722a51cda0bc3c92960e89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac4d519de22722a51cda0bc3c92960e89">&#9670;&#160;</a></span>fabs() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4d519de22722a51cda0bc3c92960e89">&#9670;&#160;</a></span>fabs() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3315,7 +3861,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a6b4cb2eb59313bad642280864499f747" name="a6b4cb2eb59313bad642280864499f747"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b4cb2eb59313bad642280864499f747">&#9670;&#160;</a></span>log() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b4cb2eb59313bad642280864499f747">&#9670;&#160;</a></span>log() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3371,7 +3917,7 @@ y_s &amp;= \alpha * (x_s - a) + \log(a)
 </div>
 </div>
 <a id="a0c36aaf164306254171ac882d8976247" name="a0c36aaf164306254171ac882d8976247"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c36aaf164306254171ac882d8976247">&#9670;&#160;</a></span>log() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c36aaf164306254171ac882d8976247">&#9670;&#160;</a></span>log() <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3412,7 +3958,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a05ed885aa305fef4a9b2a14e5a374b48" name="a05ed885aa305fef4a9b2a14e5a374b48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05ed885aa305fef4a9b2a14e5a374b48">&#9670;&#160;</a></span>log() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a05ed885aa305fef4a9b2a14e5a374b48">&#9670;&#160;</a></span>log() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3453,7 +3999,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="aa8ee4efe0efc3d81db84f8f43a847872" name="aa8ee4efe0efc3d81db84f8f43a847872"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8ee4efe0efc3d81db84f8f43a847872">&#9670;&#160;</a></span>log() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8ee4efe0efc3d81db84f8f43a847872">&#9670;&#160;</a></span>log() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3494,8 +4040,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a741836edcd1cec2a5ef5a2b090379bd9" name="a741836edcd1cec2a5ef5a2b090379bd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a741836edcd1cec2a5ef5a2b090379bd9">&#9670;&#160;</a></span>log() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::log </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the natural logarithm of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex whose logarithm is determined</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The natural logarithm of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a non-positive value. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a52fd9cd9f3190f6cb34b0752b4927b7e" name="a52fd9cd9f3190f6cb34b0752b4927b7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52fd9cd9f3190f6cb34b0752b4927b7e">&#9670;&#160;</a></span>log() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a52fd9cd9f3190f6cb34b0752b4927b7e">&#9670;&#160;</a></span>log() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4535,7 +5121,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a24fe469f5d0da2716b5be3d1ff8d12a3" name="a24fe469f5d0da2716b5be3d1ff8d12a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24fe469f5d0da2716b5be3d1ff8d12a3">&#9670;&#160;</a></span>pow() <span class="overload">[1/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a24fe469f5d0da2716b5be3d1ff8d12a3">&#9670;&#160;</a></span>pow() <span class="overload">[1/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4588,7 +5174,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="ae0129a192138d3b328b3b1d9ed8410dd" name="ae0129a192138d3b328b3b1d9ed8410dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0129a192138d3b328b3b1d9ed8410dd">&#9670;&#160;</a></span>pow() <span class="overload">[2/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0129a192138d3b328b3b1d9ed8410dd">&#9670;&#160;</a></span>pow() <span class="overload">[2/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4634,7 +5220,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ae69ca2a01c6d054da3ba7b59332c9c3b" name="ae69ca2a01c6d054da3ba7b59332c9c3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae69ca2a01c6d054da3ba7b59332c9c3b">&#9670;&#160;</a></span>pow() <span class="overload">[3/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae69ca2a01c6d054da3ba7b59332c9c3b">&#9670;&#160;</a></span>pow() <span class="overload">[3/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4681,7 +5267,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="ac5f7805ba899775b78642bdcf18f0bd7" name="ac5f7805ba899775b78642bdcf18f0bd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5f7805ba899775b78642bdcf18f0bd7">&#9670;&#160;</a></span>pow() <span class="overload">[4/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5f7805ba899775b78642bdcf18f0bd7">&#9670;&#160;</a></span>pow() <span class="overload">[4/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4728,7 +5314,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a35f137fea763cf0d93250a9b758381b3" name="a35f137fea763cf0d93250a9b758381b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35f137fea763cf0d93250a9b758381b3">&#9670;&#160;</a></span>pow() <span class="overload">[5/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a35f137fea763cf0d93250a9b758381b3">&#9670;&#160;</a></span>pow() <span class="overload">[5/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4775,7 +5361,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="a733e3b1bcc4491f206dd708083b90654" name="a733e3b1bcc4491f206dd708083b90654"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a733e3b1bcc4491f206dd708083b90654">&#9670;&#160;</a></span>pow() <span class="overload">[6/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a733e3b1bcc4491f206dd708083b90654">&#9670;&#160;</a></span>pow() <span class="overload">[6/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4826,8 +5412,101 @@ template&lt;typename T, typename U&gt; </div>
 
 </div>
 </div>
+<a id="aba959f9a72742078db54ef102bf207ce" name="aba959f9a72742078db54ef102bf207ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba959f9a72742078db54ef102bf207ce">&#9670;&#160;</a></span>pow() <span class="overload">[7/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::pow </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>exponent</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exponentiation of a triplex by a triplex. </p>
+<p>The bounds are those of the interval overload of pow, which forwards a point exponent to the scalar overload and otherwise requires a positive base. The nominal value is std::pow applied to the two nominal values.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex numbers </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex base </td></tr>
+    <tr><td class="paramname">exponent</td><td>The triplex exponent to raise the base by</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code class="param">a</code> raised to the power <code class="param">exponent</code>. Empty if either argument is.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">exponent</code> has width and <code class="param">a</code> contains a non-positive value. If <code class="param">exponent</code> is a point, throws under the same conditions as the scalar overload instead. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a074be4059e20680dcdeda95feb436bc0" name="a074be4059e20680dcdeda95feb436bc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a074be4059e20680dcdeda95feb436bc0">&#9670;&#160;</a></span>pow() <span class="overload">[8/12]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType, typename U&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::pow </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const U &amp;</td>          <td class="paramname"><span class="paramname"><em>exp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exponentiation of a triplex by a scalar. </p>
+<p>The nominal value is std::pow applied to the nominal value of <code class="param">a</code> and to <code class="param">exp</code>.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+    <tr><td class="paramname">U</td><td>The numeric type of the exponent </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex base </td></tr>
+    <tr><td class="paramname"><a class="el" href="#a1f0fc9200525ff76e74575128a9de259" title="Calculate the exponential of an affine form.">exp</a></td><td>The exponent to raise the base by</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code class="param">a</code> raised to the power <code class="param">exp</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">exp</code> is negative and <code class="param">a</code> contains zero, or if <code class="param">exp</code> is not an integer and <code class="param">a</code> contains a negative value. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac240ea50be68f2eb2ee4b6abf0d063c7" name="ac240ea50be68f2eb2ee4b6abf0d063c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac240ea50be68f2eb2ee4b6abf0d063c7">&#9670;&#160;</a></span>pow() <span class="overload">[7/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac240ea50be68f2eb2ee4b6abf0d063c7">&#9670;&#160;</a></span>pow() <span class="overload">[9/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4873,7 +5552,7 @@ template&lt;typename T, typename U&gt; </div>
 </div>
 </div>
 <a id="a0b3162c4a58cc30e72f7c4ddf3dfc1f6" name="a0b3162c4a58cc30e72f7c4ddf3dfc1f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b3162c4a58cc30e72f7c4ddf3dfc1f6">&#9670;&#160;</a></span>pow() <span class="overload">[8/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b3162c4a58cc30e72f7c4ddf3dfc1f6">&#9670;&#160;</a></span>pow() <span class="overload">[10/12]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5039,7 +5718,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a75eaae474ad407ef62a7eeeb0fd18c56" name="a75eaae474ad407ef62a7eeeb0fd18c56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75eaae474ad407ef62a7eeeb0fd18c56">&#9670;&#160;</a></span>sin() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a75eaae474ad407ef62a7eeeb0fd18c56">&#9670;&#160;</a></span>sin() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5080,7 +5759,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ac6640bdeacf0caa40230b25787f033cf" name="ac6640bdeacf0caa40230b25787f033cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6640bdeacf0caa40230b25787f033cf">&#9670;&#160;</a></span>sin() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6640bdeacf0caa40230b25787f033cf">&#9670;&#160;</a></span>sin() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5120,8 +5799,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ae8e37969ec3ead639e3d3d219bd2d596" name="ae8e37969ec3ead639e3d3d219bd2d596"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8e37969ec3ead639e3d3d219bd2d596">&#9670;&#160;</a></span>sin() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::sin </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the sine of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex, in radians</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The sine of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a174b5d94bc2a10f4a256eab8ee5a342d" name="a174b5d94bc2a10f4a256eab8ee5a342d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a174b5d94bc2a10f4a256eab8ee5a342d">&#9670;&#160;</a></span>sin() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a174b5d94bc2a10f4a256eab8ee5a342d">&#9670;&#160;</a></span>sin() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5161,7 +5880,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="adff5d65a6b356a26c6ba302870c1f7a6" name="adff5d65a6b356a26c6ba302870c1f7a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adff5d65a6b356a26c6ba302870c1f7a6">&#9670;&#160;</a></span>sinh() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#adff5d65a6b356a26c6ba302870c1f7a6">&#9670;&#160;</a></span>sinh() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5201,7 +5920,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a99aa192b7a9a760854b2e9a080d15bd1" name="a99aa192b7a9a760854b2e9a080d15bd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99aa192b7a9a760854b2e9a080d15bd1">&#9670;&#160;</a></span>sinh() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a99aa192b7a9a760854b2e9a080d15bd1">&#9670;&#160;</a></span>sinh() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5240,8 +5959,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a2b616f32dd3b1d67b81cfc7f8c2bf529" name="a2b616f32dd3b1d67b81cfc7f8c2bf529"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b616f32dd3b1d67b81cfc7f8c2bf529">&#9670;&#160;</a></span>sinh() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::sinh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the hyperbolic sine of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The hyperbolic sine of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a2e4a33ee5b89ddb9a1f023d6341d75a3" name="a2e4a33ee5b89ddb9a1f023d6341d75a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e4a33ee5b89ddb9a1f023d6341d75a3">&#9670;&#160;</a></span>sinh() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e4a33ee5b89ddb9a1f023d6341d75a3">&#9670;&#160;</a></span>sinh() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5281,7 +6040,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a7f1f2cb573fe5fb6c76bb32c204c0c7a" name="a7f1f2cb573fe5fb6c76bb32c204c0c7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f1f2cb573fe5fb6c76bb32c204c0c7a">&#9670;&#160;</a></span>sqrt() <span class="overload">[1/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f1f2cb573fe5fb6c76bb32c204c0c7a">&#9670;&#160;</a></span>sqrt() <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5331,7 +6090,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a42dc57d9880dccd1df9d125c498266c1" name="a42dc57d9880dccd1df9d125c498266c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42dc57d9880dccd1df9d125c498266c1">&#9670;&#160;</a></span>sqrt() <span class="overload">[2/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a42dc57d9880dccd1df9d125c498266c1">&#9670;&#160;</a></span>sqrt() <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5371,7 +6130,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="ae6ce659ec97fb6dcb2e582be33e059a1" name="ae6ce659ec97fb6dcb2e582be33e059a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6ce659ec97fb6dcb2e582be33e059a1">&#9670;&#160;</a></span>sqrt() <span class="overload">[3/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6ce659ec97fb6dcb2e582be33e059a1">&#9670;&#160;</a></span>sqrt() <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5412,7 +6171,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a7601224e60827cd8ca210b648fd88534" name="a7601224e60827cd8ca210b648fd88534"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7601224e60827cd8ca210b648fd88534">&#9670;&#160;</a></span>sqrt() <span class="overload">[4/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7601224e60827cd8ca210b648fd88534">&#9670;&#160;</a></span>sqrt() <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5453,8 +6212,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a76a3b9f6be6bb2c8c41e3ea0ffab003d" name="a76a3b9f6be6bb2c8c41e3ea0ffab003d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76a3b9f6be6bb2c8c41e3ea0ffab003d">&#9670;&#160;</a></span>sqrt() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::sqrt </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the square root of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex whose square root is computed</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The square root of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains a negative value. Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a18639ffce7e2664f8f6cc4ca85213fd1" name="a18639ffce7e2664f8f6cc4ca85213fd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18639ffce7e2664f8f6cc4ca85213fd1">&#9670;&#160;</a></span>sqrt() <span class="overload">[5/7]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a18639ffce7e2664f8f6cc4ca85213fd1">&#9670;&#160;</a></span>sqrt() <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5494,7 +6293,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="afe33d93ff64a08247f708229e3b59c8a" name="afe33d93ff64a08247f708229e3b59c8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe33d93ff64a08247f708229e3b59c8a">&#9670;&#160;</a></span>tan() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afe33d93ff64a08247f708229e3b59c8a">&#9670;&#160;</a></span>tan() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5535,7 +6334,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a050257d9cf405664f386bdcf9ae56ed3" name="a050257d9cf405664f386bdcf9ae56ed3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a050257d9cf405664f386bdcf9ae56ed3">&#9670;&#160;</a></span>tan() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a050257d9cf405664f386bdcf9ae56ed3">&#9670;&#160;</a></span>tan() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5576,8 +6375,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="a5325613a427b7bafd33154871eb7298e" name="a5325613a427b7bafd33154871eb7298e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5325613a427b7bafd33154871eb7298e">&#9670;&#160;</a></span>tan() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::tan </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the tangent of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex, in radians</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The tangent of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::domain_error</td><td>if <code class="param">a</code> contains, or cannot be shown to exclude, an odd multiple of \( \pi/2 \). Strong throw guarantee. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac02929276a036dc441d88bf47027fbde" name="ac02929276a036dc441d88bf47027fbde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac02929276a036dc441d88bf47027fbde">&#9670;&#160;</a></span>tan() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac02929276a036dc441d88bf47027fbde">&#9670;&#160;</a></span>tan() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5617,7 +6456,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a41320fb24398e0f4f5a6f1a7989f97c4" name="a41320fb24398e0f4f5a6f1a7989f97c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41320fb24398e0f4f5a6f1a7989f97c4">&#9670;&#160;</a></span>tanh() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a41320fb24398e0f4f5a6f1a7989f97c4">&#9670;&#160;</a></span>tanh() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5657,7 +6496,7 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a id="a243bebeea5d479fc5ddb0519de76b221" name="a243bebeea5d479fc5ddb0519de76b221"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a243bebeea5d479fc5ddb0519de76b221">&#9670;&#160;</a></span>tanh() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a243bebeea5d479fc5ddb0519de76b221">&#9670;&#160;</a></span>tanh() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -5696,8 +6535,48 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="ae2bbf24a26160916c46bd596f5227e9d" name="ae2bbf24a26160916c46bd596f5227e9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2bbf24a26160916c46bd596f5227e9d">&#9670;&#160;</a></span>tanh() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename IntervalType&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; sigma::tanh </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsigma_1_1Triplex.html">Triplex</a>&lt; IntervalType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate the hyperbolic tangent of a triplex. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IntervalType</td><td>The interval type of the triplex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The triplex</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The hyperbolic tangent of <code class="param">a</code> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">none</td><td>No throw guarantee </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aa5a3cb36953c116658b16ddc790db42d" name="aa5a3cb36953c116658b16ddc790db42d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5a3cb36953c116658b16ddc790db42d">&#9670;&#160;</a></span>tanh() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5a3cb36953c116658b16ddc790db42d">&#9670;&#160;</a></span>tanh() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

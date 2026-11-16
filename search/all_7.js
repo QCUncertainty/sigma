@@ -14,9 +14,10 @@ var searchData=
   ['derivative_11',['derivative',['../classsigma_1_1Taylor.html#aabe629eecdff32ee12b84d7c66f33884',1,'sigma::Taylor']]],
   ['design_12',['design',['../md_docs_2affine.html#class-design',1,'Class design'],['../md_docs_2general__interval.html#class-design-1',1,'Class design'],['../md_docs_2interval.html#class-design-2',1,'Class design'],['../md_docs_2triplex.html#class-design-3',1,'Class design']]],
   ['design_20of_20the_20taylor_20class_13',['Design of the &lt;span class=&quot;tt&quot;&gt;Taylor&lt;/span&gt; class',['../md_docs_2taylor.html#design-of-the-taylor-class',1,'']]],
-  ['detail_5f_3a_3asetter_14',['Setter',['../classsigma_1_1Uncertain.html#a7591e2d7ef0c929d5e9b38697c7c8f4f',1,'sigma::Uncertain']]],
-  ['deviation_5ft_15',['deviation_t',['../classsigma_1_1Taylor.html#ae666cb21016383a591784ac4362ec1ec',1,'sigma::Taylor::deviation_t'],['../classsigma_1_1TaylorModel.html#a8ab485f7589dbc20abdcce043850c5c1',1,'sigma::TaylorModel::deviation_t']]],
-  ['documentation_16',['Building the Documentation',['../md_docs_2README.html',1,'']]],
-  ['documentation_17',['Building the documentation',['../md_docs_2README.html#building-the-documentation-1',1,'']]],
-  ['dominated_20and_20fast_20bounders_18',['Dominated and fast bounders',['../md_docs_2taylor.html#dominated-and-fast-bounders',1,'']]]
+  ['detail_5f_3a_3amake_5ftriplex_5f_14',['make_triplex_',['../classsigma_1_1Triplex.html#a8733b6fe9423c2b0e20b42c5a55f76fa',1,'sigma::Triplex']]],
+  ['detail_5f_3a_3asetter_15',['Setter',['../classsigma_1_1Uncertain.html#a7591e2d7ef0c929d5e9b38697c7c8f4f',1,'sigma::Uncertain']]],
+  ['deviation_5ft_16',['deviation_t',['../classsigma_1_1Taylor.html#ae666cb21016383a591784ac4362ec1ec',1,'sigma::Taylor::deviation_t'],['../classsigma_1_1TaylorModel.html#a8ab485f7589dbc20abdcce043850c5c1',1,'sigma::TaylorModel::deviation_t']]],
+  ['documentation_17',['Building the Documentation',['../md_docs_2README.html',1,'']]],
+  ['documentation_18',['Building the documentation',['../md_docs_2README.html#building-the-documentation-1',1,'']]],
+  ['dominated_20and_20fast_20bounders_19',['Dominated and fast bounders',['../md_docs_2taylor.html#dominated-and-fast-bounders',1,'']]]
 ];
