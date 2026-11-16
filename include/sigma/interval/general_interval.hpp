@@ -6,6 +6,7 @@
 #include <limits>
 #include <stdexcept>
 #include <string>
+#include <tuple>
 #include <type_traits>
 #include <utility>
 
@@ -765,23 +766,30 @@ bool operator!=(const GeneralInterval<T1>& lhs,
 }
 
 /** @relates GeneralInterval
- *  @brief Orders two intervals by their median.
+ *  @brief Orders two intervals, primarily by their median.
  *
  *  The same deliberately weak, total ordering as for Interval, meant only for
  *  consumers that need *some* consistent ordering to sort by and not a rigorous
- *  enclosure relation. The empty interval sorts before every non-empty one.
+ *  enclosure relation: the closures are compared first. Intervals with the
+ *  same closure are then ordered by the openness of the lower bound and then
+ *  of the upper bound, with a closed bound before an open one, so that, as for
+ *  Interval, neither of two intervals precedes the other exactly when they are
+ *  equal. The empty interval sorts before every non-empty one.
  *
  *  @tparam T The numerical type of the bounds
  *  @param lhs The first interval
  *  @param rhs The second interval
  *
- *  @return Whether @p lhs's median precedes @p rhs's.
+ *  @return Whether @p lhs precedes @p rhs.
  *
  *  @throw none No throw guarantee
  */
 template<typename T>
 bool operator<(const GeneralInterval<T>& lhs, const GeneralInterval<T>& rhs) {
-    return lhs.closure() < rhs.closure();
+    if(lhs.closure() < rhs.closure()) { return true; }
+    if(rhs.closure() < lhs.closure()) { return false; }
+    return std::make_tuple(lhs.left_open(), lhs.right_open()) <
+           std::make_tuple(rhs.left_open(), rhs.right_open());
 }
 
 /// @relates GeneralInterval
@@ -803,6 +811,36 @@ bool operator<=(const GeneralInterval<T>& lhs, const GeneralInterval<T>& rhs) {
 template<typename T>
 bool operator>=(const GeneralInterval<T>& lhs, const GeneralInterval<T>& rhs) {
     return !(lhs < rhs);
+}
+
+/** @relates GeneralInterval
+ *  @brief Widens an interval just enough to contain a point.
+ *
+ *  As for widen(const Interval<T>&, T), except that @p point may also lie on
+ *  an open bound of @p a. Either way, the bound that @p point moves or lands on
+ *  is closed.
+ *
+ *  @tparam T The numerical type of the bounds
+ *  @param a The interval to widen
+ *  @param point The value the result must contain. An infinite or NaN value is
+ *               never a member of an interval, so for one of those the result
+ *               cannot contain @p point.
+ *
+ *  @return @p a if it already contains @p point. Otherwise @p a with the bound
+ *          on the side of @p point moved to @p point and closed; the
+ *          degenerate interval [@p point, @p point] if @p a is empty.
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+GeneralInterval<T> widen(const GeneralInterval<T>& a,
+                         typename GeneralInterval<T>::value_t point) {
+    if(a.empty()) { return GeneralInterval<T>(point); }
+    if(a.contains(point)) { return a; }
+    if(point <= a.lower()) {
+        return GeneralInterval<T>(point, a.upper(), false, a.right_open());
+    }
+    return GeneralInterval<T>(a.lower(), point, a.left_open(), false);
 }
 
 /// Typedef for a general interval of floats

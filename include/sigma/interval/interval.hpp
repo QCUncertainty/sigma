@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iostream>
 #include <optional>
+#include <tuple>
 #include <type_traits>
 
 /** @file interval.hpp
@@ -500,21 +501,24 @@ bool operator!=(const Interval<T1>& lhs, const Interval<T2>& rhs) {
 }
 
 /** @relates Interval
- *  @brief Orders two intervals by their median.
+ *  @brief Orders two intervals, primarily by their median.
  *
  *  Interval containment does not give a total order (overlapping intervals
  *  are neither less than, greater than, nor equal to one another under it),
  *  so this comparison is a deliberately weaker, total one, meant only for
  *  consumers that need *some* consistent ordering to sort by and not a rigorous
- *  enclosure relation. The empty interval sorts before every non-empty one
- *  and is equal only to itself.
+ *  enclosure relation. Intervals are compared lexicographically by median,
+ *  then lower bound, then upper bound. The tie-breaks make the order
+ *  consistent with operator==: neither of two intervals precedes the other
+ *  exactly when they are equal, so, e.g., [0, 2] and [-1, 3] are ordered even
+ *  though they share a median, and intervals can be keys of ordered
+ *  containers. The empty interval sorts before every non-empty one.
  *
  *  @tparam T The numerical type of the bounds
  *  @param lhs The first interval
  *  @param rhs The second interval
  *
- *  @return Whether @p lhs's median precedes @p rhs's, treating the empty
- *          interval as less than every non-empty one.
+ *  @return Whether @p lhs precedes @p rhs.
  *
  *  @throw none No throw guarantee
  */
@@ -522,7 +526,8 @@ template<typename T>
 bool operator<(const Interval<T>& lhs, const Interval<T>& rhs) {
     if(rhs.empty()) { return false; }
     if(lhs.empty()) { return true; }
-    return lhs.median() < rhs.median();
+    return std::make_tuple(lhs.median(), lhs.lower(), lhs.upper()) <
+           std::make_tuple(rhs.median(), rhs.lower(), rhs.upper());
 }
 
 /// @relates Interval
@@ -544,6 +549,29 @@ bool operator<=(const Interval<T>& lhs, const Interval<T>& rhs) {
 template<typename T>
 bool operator>=(const Interval<T>& lhs, const Interval<T>& rhs) {
     return !(lhs < rhs);
+}
+
+/** @relates Interval
+ *  @brief Widens an interval just enough to contain a point.
+ *
+ *  @tparam T The numerical type of the bounds
+ *  @param a The interval to widen
+ *  @param point The value the result must contain. An infinite or NaN value is
+ *               never a member of an interval, so for one of those the result
+ *               cannot contain @p point.
+ *
+ *  @return @p a if it already contains @p point. Otherwise @p a with the bound
+ *          on the side of @p point moved to @p point; the degenerate interval
+ *          [@p point, @p point] if @p a is empty.
+ *
+ *  @throw none No throw guarantee
+ */
+template<typename T>
+Interval<T> widen(const Interval<T>& a, typename Interval<T>::value_t point) {
+    if(a.empty()) { return Interval<T>(point); }
+    if(point < a.lower()) { return Interval<T>(point, a.upper()); }
+    if(point > a.upper()) { return Interval<T>(a.lower(), point); }
+    return a;
 }
 
 // -- Arithmetic free functions ------------------------------------------------

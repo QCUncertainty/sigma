@@ -212,7 +212,9 @@ The interface is `Interval`'s, plus openness:
   overloads, with the openness rules above.
 - **Comparison and hashing.** `==` compares the bounds and their openness,
   so \f$ [a, b] \neq \lbrack a, b) \f$. The ordering operators order by median,
-  as `Interval`'s do, and the `std::hash` specialization includes the openness.
+  as `Interval`'s do, breaking ties by the bounds and then their openness so
+  that two intervals are equivalent under the ordering exactly when `==` says
+  they are equal. The `std::hash` specialization includes the openness.
 - **Output.** `print_interval_form` prints a parenthesis in place of the
   bracket for an open bound. Stream insertion prints the median and radius, as
   it does for `Interval`.
@@ -230,6 +232,6 @@ and the convenience typedefs are `GIFloat` and `GIDouble`.
 
 Representations built on intervals choose which one they need. `Affine` and
 `Taylor` use intervals only to bound ranges, never produce an open bound, and
-use `Interval`. The planned [Triplex](./triplex.md) numbers are templated on
+use `Interval`. [Triplex](./triplex.md) numbers are templated on
 their interval type, so the same class provides both a closed and a general
 triplex.
