@@ -34,6 +34,7 @@ cmaize_option_list(
     DOCS_FAIL_ON_WARNING OFF
     "Should the documentation build fail from warnings?"
     ENABLE_EIGEN_SUPPORT ON "Include Eigen compatibility headers?"
+    BUILD_PYBIND11_BINDINGS OFF "Should we build the Python bindings?"
 )
 
 # Docs
@@ -90,6 +91,36 @@ if("${ENABLE_EIGEN_SUPPORT}")
     )
 endif()
 
+# Python bindings
+if("${BUILD_PYBIND11_BINDINGS}")
+    # pybind11 v3 builds extensions via python_add_library, which comes from
+    # FindPython's Development.Module component.
+    find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+
+    # Keep this tag in sync with NWXCMake's cmake/dependencies/pybind11.cmake.
+    # pybind11 keys its type registry on PYBIND11_INTERNALS_VERSION, so sigma's
+    # types can only be passed to and from the NWChemEx modules if every module
+    # is built against the same pybind11.
+    include(FetchContent)
+    FetchContent_Declare(
+        pybind11
+        GIT_REPOSITORY https://github.com/pybind/pybind11
+        GIT_TAG v3.1.0
+    )
+    FetchContent_MakeAvailable(pybind11)
+
+    file(GLOB_RECURSE _sigma_python_sources CONFIGURE_DEPENDS
+         "${${PROJECT_NAME}_SOURCE_DIR}/python/export_*.cpp"
+    )
+    pybind11_add_module(${PROJECT_NAME}_python ${_sigma_python_sources})
+    # Linking the sigma target is what gives the module the rounding-mode flag
+    # (see above), without which the bounds it computes are not enclosures.
+    target_link_libraries(${PROJECT_NAME}_python PRIVATE ${PROJECT_NAME})
+    set_target_properties(
+        ${PROJECT_NAME}_python PROPERTIES OUTPUT_NAME ${PROJECT_NAME}
+    )
+endif()
+
 # Build tests
 if("${BUILD_TESTING}")
     # Find or build dependencies for tests
@@ -108,6 +139,19 @@ if("${BUILD_TESTING}")
         DEPENDS Catch2 eigen ${PROJECT_NAME}
     )
 
+    if("${BUILD_PYBIND11_BINDINGS}")
+        add_test(
+            NAME py_${PROJECT_NAME}
+            COMMAND
+                "${Python_EXECUTABLE}"
+                "${${PROJECT_NAME}_TESTS_DIR}/python/unit_tests/test_${PROJECT_NAME}.py"
+        )
+        set_tests_properties(
+            py_${PROJECT_NAME}
+            PROPERTIES ENVIRONMENT
+                       "PYTHONPATH=$<TARGET_FILE_DIR:${PROJECT_NAME}_python>"
+        )
+    endif()
 endif()
 
 # Add package
