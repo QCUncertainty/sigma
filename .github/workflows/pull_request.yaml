@@ -32,6 +32,10 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ssciwr/doxygen-install@v2
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
       - name: Install boost
         uses: MarkusJx/install-boost@v2
         id: install-boost
@@ -44,9 +48,9 @@ jobs:
         run: |
           toolchain=${PWD}/.github/workflow_toolchains/${{matrix.toolset}}.cmake
           if [ "$RUNNER_OS" == "Windows" ]; then
-            cmake -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -B "build" -G "Visual Studio 17 2022" -T host=x64 -A x64 -D${{matrix.eigen}}
+            cmake -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -B "build" -G "Visual Studio 17 2022" -T host=x64 -A x64 -D${{matrix.eigen}} -DBUILD_PYBIND11_BINDINGS=ON
           else
-            cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -D${{matrix.eigen}}
+            cmake -Bbuild -H. -GNinja -DCMAKE_TOOLCHAIN_FILE="${toolchain}" -D${{matrix.eigen}} -DBUILD_PYBIND11_BINDINGS=ON
           fi
           cmake --build build --parallel
           cd build

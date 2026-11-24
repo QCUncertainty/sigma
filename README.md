@@ -76,6 +76,28 @@ ctest -VV
 cmake --build build --target install
 ```
 
+### Python Bindings
+The interval and triplex classes are also available from Python, as
+`sigma.IFloat`, `sigma.IDouble`, `sigma.TPFloat`, and `sigma.TPDouble`, along
+with the mathematical functions that act on them. Building the bindings
+requires Python and fetches [pybind11](https://github.com/pybind/pybind11).
+
+```Bash
+cmake -Bbuild -H. -DBUILD_PYBIND11_BINDINGS=ON
+cmake --build build --target sigma_python
+export PYTHONPATH=${PWD}/build:${PYTHONPATH}
+```
+
+```Python
+import sigma
+
+x = sigma.TPDouble(1.0, 2.0, 5.0)  # lower bound, nominal value, upper bound
+print(sigma.sqrt(x * sigma.TPDouble(2.0)))
+```
+
+With `BUILD_TESTING=ON` as well, `ctest` also runs the Python tests in
+`tests/python/unit_tests`.
+
 ## Contributing
 
 - [Contributor Guidelines](./docs/contributing.md)
