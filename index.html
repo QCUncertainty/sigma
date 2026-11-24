@@ -166,7 +166,20 @@ Installation</h1>
 <div class="line"> </div>
 <div class="line"># -- Install Library --</div>
 <div class="line">cmake --build build --target install</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="contributing"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="python-bindings"></a>
+Python Bindings</h2>
+<p>The interval and triplex classes are also available from Python, as <span class="tt"><a class="el" href="namespacesigma.html#a39fce2e2c854ce7cafbc61b57c1e90a6" title="Typedef for an interval of floats.">sigma.IFloat</a></span>, <span class="tt"><a class="el" href="namespacesigma.html#ab126639cc3e0c6982521627290a6139d" title="Typedef for an interval of doubles.">sigma.IDouble</a></span>, <span class="tt"><a class="el" href="namespacesigma.html#adf4a94ab590d9640510943833e262c5e" title="Typedef for a triplex with closed float bounds.">sigma.TPFloat</a></span>, and <span class="tt"><a class="el" href="namespacesigma.html#a3c5592290c91e4c054777ae94d93dadb" title="Typedef for a triplex with closed double bounds.">sigma.TPDouble</a></span>, along with the mathematical functions that act on them. Building the bindings requires Python and fetches <a href="https://github.com/pybind/pybind11">pybind11</a>.</p>
+<div class="fragment"><div class="line">cmake -Bbuild -H. -DBUILD_PYBIND11_BINDINGS=ON</div>
+<div class="line">cmake --build build --target sigma_python</div>
+<div class="line">export PYTHONPATH=${PWD}/build:${PYTHONPATH}</div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">import</span> sigma</div>
+<div class="line"> </div>
+<div class="line">x = <a class="code hl_class" href="classsigma_1_1Triplex.html">sigma.TPDouble</a>(1.0, 2.0, 5.0)  <span class="comment"># lower bound, nominal value, upper bound</span></div>
+<div class="line">print(<a class="code hl_function" href="namespacesigma.html#a7f1f2cb573fe5fb6c76bb32c204c0c7a">sigma.sqrt</a>(x * <a class="code hl_class" href="classsigma_1_1Triplex.html">sigma.TPDouble</a>(2.0)))</div>
+<div class="ttc" id="aclasssigma_1_1Triplex_html"><div class="ttname"><a href="classsigma_1_1Triplex.html">sigma::Triplex&lt; Interval&lt; double &gt; &gt;</a></div></div>
+<div class="ttc" id="anamespacesigma_html_a7f1f2cb573fe5fb6c76bb32c204c0c7a"><div class="ttname"><a href="namespacesigma.html#a7f1f2cb573fe5fb6c76bb32c204c0c7a">sigma::sqrt</a></div><div class="ttdeci">Affine&lt; T &gt; sqrt(const Affine&lt; T &gt; &amp;a)</div><div class="ttdoc">Calculate the square root of an affine form.</div><div class="ttdef"><b>Definition</b> exponents.ipp:9</div></div>
+</div><!-- fragment --><p>With <span class="tt">BUILD_TESTING=ON</span> as well, <span class="tt">ctest</span> also runs the Python tests in <span class="tt">tests/python/unit_tests</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="contributing"></a>
 Contributing</h1>
 <ul>
 <li><a class="el" href="md_docs_2contributing.html" title="Contributor Guidelines">Contributor Guidelines</a></li>

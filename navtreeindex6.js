@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"structsigma_1_1Taylor_1_1Order.html#ac9bf39c30569712b3d8b2e99a5912afa":[16,0,1,7,0,0],
 "structsigma_1_1ThresholdedAffine_1_1Threshold.html":[15,0,1,2,0],
 "structsigma_1_1ThresholdedAffine_1_1Threshold.html":[16,0,1,2,0],
 "structsigma_1_1ThresholdedAffine_1_1Threshold.html#a4b2ced2712819f1f39154982631b74e4":[15,0,1,2,0,0],

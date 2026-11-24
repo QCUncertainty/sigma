@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"md_docs_2affine.html#next":[5,9],
 "md_docs_2affine.html#the-affine-form":[5,1],
 "md_docs_2affine.html#thresholding":[5,7],
 "md_docs_2affine.html#what-is-gained-and-what-remains":[5,6],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "namespacesigma_1_1detail__.html":[15,0,1,0],
 "namespacesigma_1_1detail__.html#a2127a1e80405345582076c546dc41820":[15,0,1,0,8],
 "namespacesigma_1_1detail__.html#a2ba8c119561a96410b163dfac31822e7":[15,0,1,0,10],
-"namespacesigma_1_1detail__.html#a3ea5a6bce19f65926a6f0c61060fa1bd":[15,0,1,0,7],
-"namespacesigma_1_1detail__.html#a4e48194c53c819def570c7a273145903":[15,0,1,0,4]
+"namespacesigma_1_1detail__.html#a3ea5a6bce19f65926a6f0c61060fa1bd":[15,0,1,0,7]
 };

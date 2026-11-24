@@ -27,7 +27,9 @@ var NAVTREE =
   [ "sigma", "index.html", [
     [ "Statement of Need", "index.html#statement-of-need", null ],
     [ "Features", "index.html#features", null ],
-    [ "Installation", "index.html#installation", null ],
+    [ "Installation", "index.html#installation", [
+      [ "Python Bindings", "index.html#python-bindings", null ]
+    ] ],
     [ "Contributing", "index.html#contributing", null ],
     [ "Acknowledgments", "index.html#acknowledgments", null ],
     [ "Affine Arithmetic", "md_docs_2affine.html", [
@@ -162,9 +164,9 @@ var NAVTREEINDEX =
 "classsigma_1_1Interval.html#a54bad4aa3d1f32b65398c9e6108d302c",
 "classsigma_1_1TaylorModel.html#a516fb5942e99ea63325f608ad392d0a1",
 "classsigma_1_1Triplex.html#a839e1eba5abca0c05b6e3374413c6e92",
-"md_docs_2affine.html#the-affine-form",
-"namespacesigma_1_1detail__.html#a4e7bb3552d85f228e20613973d6f101b",
-"structsigma_1_1ThresholdedAffine_1_1Threshold.html"
+"md_docs_2affine.html#next",
+"namespacesigma_1_1detail__.html#a4e48194c53c819def570c7a273145903",
+"structsigma_1_1Taylor_1_1Order.html#ac9bf39c30569712b3d8b2e99a5912afa"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

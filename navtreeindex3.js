@@ -202,6 +202,7 @@ var NAVTREEINDEX3 =
 "index.html#contributing":[3],
 "index.html#features":[1],
 "index.html#installation":[2],
+"index.html#python-bindings":[2,0],
 "index.html#statement-of-need":[0],
 "interval_2eigen__compat_8hpp.html":[17,0,0,0,2,3],
 "interval_2eigen__compat_8hpp.html#a2114fb487bb7536a305a98fddb64fefc":[17,0,0,0,2,3,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "md_docs_2affine.html#class-design":[5,8],
 "md_docs_2affine.html#constructing-the-transform":[5,5],
 "md_docs_2affine.html#exact-operations":[5,3],
-"md_docs_2affine.html#motivation":[5,0],
-"md_docs_2affine.html#next":[5,9]
+"md_docs_2affine.html#motivation":[5,0]
 };
